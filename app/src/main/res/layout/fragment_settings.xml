@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/colorBackgroundProfileScreen">
+
+    <!-- Profile Info -->
+
+    <LinearLayout
+        android:id="@+id/ll_profile_info_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/img_pi"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="148dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="149dp"/>
+
+        <TextView
+            android:id="@+id/txt_pi_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:text="@string/profile_username"
+            android:textColor="@color/colorAccent"
+            android:textSize="17sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_pi" />
+
+        <TextView
+            android:id="@+id/txt_pi_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="18dp"
+            android:text="@string/profile_email"
+            android:textColor="@color/colorBlack"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_pi_name" />
+
+
+    </LinearLayout>
+
+    <!-- Notifications Button -->
+
+    <LinearLayout
+        android:id="@+id/ll_notifications_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_profile_info_container">
+
+        <TextView
+            android:id="@+id/txvEnableNotifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
+            android:text="@string/profile_notifications_off"
+            android:textColor="@color/colorBlackTwo"
+            android:textSize="15sp" />
+
+        <Switch
+            android:id="@+id/switchNotifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="18dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:thumb="@drawable/round_switch"
+            android:track="@drawable/round_track" />
+
+
+    </LinearLayout>
+
+
+    <!-- -->
+
+    <!-- Help Button -->
+
+    <LinearLayout
+        android:id="@+id/ll_help_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_notifications_button_container">
+
+        <TextView
+            android:id="@+id/txt_hb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
+            android:text="@string/profile_help"
+            android:textColor="@color/colorBlackTwo"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </LinearLayout>
+
+
+    <!-- -->
+
+    <!-- LogOut Button -->
+
+    <LinearLayout
+        android:id="@+id/ll_logout_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_help_button_container">
+
+        <TextView
+            android:id="@+id/txt_lb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
+            android:text="@string/profile_logout"
+            android:textColor="@color/colorBlackTwo"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_help_button_container" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

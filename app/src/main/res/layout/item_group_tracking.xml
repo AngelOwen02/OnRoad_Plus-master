@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:layout_marginBottom="2dp"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/img_item_group_tracking"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="12dp"
+        android:src="@drawable/pikachu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:layout_weight="1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <HorizontalScrollView
+            android:layout_weight="2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+            <TextView
+                android:id="@+id/txt_name_item_group_tracking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto_medium"
+                android:text="Group Name"
+                android:textColor="@color/colorBlack"
+                android:textSize="15sp"
+                app:layout_constraintStart_toEndOf="@+id/img_item_group_tracking"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </HorizontalScrollView>
+
+
+
+        <TextView
+            android:id="@+id/txt_number_item_group_tracking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/roboto_regular"
+            android:text="Vehicles Number"
+            android:textColor="@color/colorBlack70"
+            android:textSize="13sp"
+            app:layout_constraintStart_toEndOf="@+id/img_item_group_tracking"
+            app:layout_constraintTop_toBottomOf="@+id/txt_name_item_group_tracking" />
+
+    </LinearLayout>
+
+
+
+    <Switch
+
+        android:id="@+id/switch_item_group_tracking"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="17dp"
+        android:layout_weight="0"
+        android:padding="10dp"
+        android:thumb="@drawable/round_switch"
+        android:track="@drawable/round_track"
+        android:focusable="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</LinearLayout>

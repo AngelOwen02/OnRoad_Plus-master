@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite">
+
+    <View
+        android:id="@+id/viewTop"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/textLightColor"
+        app:layout_constraintBottom_toTopOf="@id/txvTo"
+        app:layout_constraintStart_toStartOf="@+id/txvTo"
+        app:layout_constraintEnd_toEndOf="@+id/edtEmailSupport"/>
+
+    <TextView
+        android:id="@+id/txvTo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:fontFamily=""
+        android:text="@string/textTo"
+        android:textColor="@color/textAccentColor"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/edtEmailSupport"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:text="@string/textEmailSupport"
+        android:textColor="@color/textAccentColor"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txvTo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txvTo"
+        app:layout_constraintTop_toTopOf="@+id/txvTo" />
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/textLightColor"
+        app:layout_constraintEnd_toEndOf="@+id/edtEmailSupport"
+        app:layout_constraintStart_toStartOf="@+id/txvTo"
+        app:layout_constraintTop_toBottomOf="@+id/txvTo" />
+
+    <TextView
+        android:id="@+id/txvCopy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/textCopy"
+        android:textColor="@color/textAccentColor"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view" />
+
+    <EditText
+        android:id="@+id/edtCopy"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/textAccentColor"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txvCopy"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txvCopy"
+        app:layout_constraintTop_toTopOf="@+id/txvCopy" />
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/textLightColor"
+        app:layout_constraintEnd_toEndOf="@+id/edtCopy"
+        app:layout_constraintStart_toStartOf="@+id/txvCopy"
+        app:layout_constraintTop_toBottomOf="@+id/txvCopy" />
+
+    <TextView
+        android:id="@+id/txvSubject"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/textSubject"
+        android:textColor="@color/textAccentColor"
+        android:textSize="15dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view3" />
+
+    <EditText
+        android:id="@+id/edtSubject"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@android:color/transparent"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textColor="@color/textAccentColor"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/txvSubject"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/txvSubject"
+        app:layout_constraintTop_toTopOf="@+id/txvSubject" />
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:background="@color/textLightColor"
+        app:layout_constraintEnd_toEndOf="@+id/edtSubject"
+        app:layout_constraintStart_toStartOf="@+id/txvSubject"
+        app:layout_constraintTop_toBottomOf="@+id/txvSubject" />
+
+    <EditText
+        android:id="@+id/edtMessageEmail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@android:color/transparent"
+        android:gravity="top|left"
+        android:inputType="textMultiLine"
+        android:isScrollContainer="true"
+        android:lines="100"
+        android:overScrollMode="always"
+        android:padding="16dp"
+        android:scrollbarStyle="insideInset"
+        android:scrollbars="vertical"
+        android:textColor="@color/textAccentColor"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnSendEmail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view4" />
+
+    <!--<com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:visibility="gone"
+        android:id="@+id/btnSendEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_arrow_right"
+        app:backgroundTint="@color/colorWhite"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="565dp" />-->
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btnSendEmail"
+        android:layout_width="326dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="25dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="42dp"
+        app:cardBackgroundColor="@color/colorOrangeYellow"
+        app:cardCornerRadius="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="Enviar mensaje"
+                android:textColor="@color/white"
+                android:textSize="17sp" />
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

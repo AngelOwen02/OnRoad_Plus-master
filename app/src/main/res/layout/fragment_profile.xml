@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroundProfileScreen">
+
+    <include
+        android:id="@+id/toolbar_profile"
+        layout="@layout/default_toolbar"/>
+
+    <!-- Profile Info  -->
+
+    <LinearLayout
+        android:id="@+id/ll_profile_info_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:background="@color/colorWhite"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar_profile">
+
+        <ImageView
+            android:id="@+id/img_pi"
+            android:src="@drawable/ic_profile_default"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="148dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="149dp"/>
+
+
+
+        <TextView
+            android:id="@+id/txt_pi_names"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:text="@string/profile_username"
+            style="@style/Toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_pi" />
+
+        <TextView
+            android:id="@+id/txt_pi_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="18dp"
+            android:text="@string/profile_email"
+            style="@style/ItemUniTimeBody"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txt_pi_names" />
+
+
+    </LinearLayout>
+
+    <!-- Notifications Button -->
+
+    <LinearLayout
+        android:id="@+id/ll_notifications_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:background="@color/colorWhite"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_profile_info_container">
+
+        <TextView
+            android:id="@+id/txvEnableNotifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
+            android:text="@string/profile_notifications_off"
+            style="@style/PerfilList" />
+
+        <Switch
+            android:id="@+id/switchNotifications"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="18dp"
+            android:layout_weight="1"
+            android:padding="10dp"
+            android:thumb="@drawable/round_switch"
+            android:track="@drawable/round_track" />
+
+
+    </LinearLayout>
+
+
+    <!-- -->
+
+    <!-- Help Button -->
+
+    <LinearLayout
+        android:id="@+id/ll_help_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_notifications_button_container">
+
+        <TextView
+            android:id="@+id/txt_hb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
+            android:text="@string/profile_help"
+            style="@style/PerfilList"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+    </LinearLayout>
+
+
+    <!-- -->
+
+    <!-- LogOut Button -->
+
+    <LinearLayout
+        android:id="@+id/ll_logout_button_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="1dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ll_help_button_container">
+
+        <TextView
+            android:id="@+id/txt_lb"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="18dp"
+            android:layout_marginBottom="18dp"
+            android:text="@string/profile_logout"
+            style="@style/PerfilList"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_help_button_container" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="409dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_logout_button_container"
+        tools:ignore="MissingConstraints">
+
+        <TextView
+            android:id="@+id/versionCode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            android:layout_marginEnd="28dp"
+            android:layout_marginTop="10dp"
+            android:gravity="end"></TextView>
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

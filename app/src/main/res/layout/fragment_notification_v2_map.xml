@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/white"
+    android:id="@+id/constraintMap"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.google.android.gms.maps.MapView
+        android:id="@+id/notificationsMap"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintNotificationInfo"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:background="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/imgvItemCarNotification"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/colorWhite"
+            android:src="@drawable/car"
+            android:stateListAnimator="@null"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="2dp"
+            app:layout_constraintBottom_toTopOf="@+id/view9"
+            app:layout_constraintEnd_toStartOf="@+id/guideline53"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="137dp"
+    android:layout_height="wrap_content"
+    tools:ignore="MissingConstraints"
+    android:id="@+id/myfristConstrain"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="16dp"
+    app:layout_constraintStart_toStartOf="@+id/guideline53"
+    app:layout_constraintTop_toTopOf="parent" >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:orientation="horizontal"
+            android:paddingEnd="50dp">
+
+            <TextView
+                android:id="@+id/txvVehicleNameItemNotification"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:textAlignment="textStart"
+                android:textColor="@color/textAccentColor"
+                android:singleLine="true"
+                android:textSize="18dp" />
+
+        </LinearLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <TextView
+            android:id="@+id/txvNotificationNameItemNotification"
+            android:layout_width="292dp"
+            android:layout_height="36dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="2dp"
+            android:textColor="@color/textAccentColor"
+            android:textSize="12dp"
+            app:layout_constraintStart_toStartOf="@+id/guideline53"
+            app:layout_constraintTop_toBottomOf="@+id/myfristConstrain" />
+
+        <TextView
+            android:id="@+id/txvDateNotificationItemNotification"
+            android:layout_width="150dp"
+            android:layout_height="19dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            android:textAlignment="textEnd"
+            android:textSize="12dp"
+            app:layout_constraintBottom_toTopOf="@+id/txvNotificationNameItemNotification"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/myfristConstrain" />
+
+        <View
+            android:id="@+id/view9"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline53"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.25" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:id="@+id/imgvGoogle"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="8dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/g_pick"
+        app:layout_anchorGravity="left"
+        app:layout_constraintBottom_toTopOf="@+id/constraintNotificationInfo"
+        app:layout_constraintStart_toStartOf="@+id/constraintNotificationInfo"
+        app:layout_constraintTop_toTopOf="@+id/constraintNotificationInfo" />
+
+    <LinearLayout
+        android:id="@+id/topnotificationlayout"
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_height="44dp"
+
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp">
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imgvBackButtonNotificationMap"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/ic_back"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

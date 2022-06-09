@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/bottomSheet"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:background="@drawable/round_bottom_shet"
+    app:behavior_peekHeight="120dp"
+    app:layout_behavior="@string/bottom_sheet_behavior">
+
+    <!--Lista de vehiculos-->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollViewVehiclesList"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvVehiclesV2Map"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_weight="1"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+    <!--Header-->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintMainHeader"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.pnla.onroadplus.z_version2.fragments.mapV2.components.ComponentVehicleHeader
+            android:id="@+id/vehicleDataHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!--    BotonInfo       -->
+        <!-- <androidx.constraintlayout.widget.ConstraintLayout
+             android:id="@+id/constraintVehicleInfo"
+             android:layout_width="25dp"
+             android:layout_height="25dp"
+             android:layout_marginStart="8dp"
+             android:layout_marginTop="8dp"
+             android:layout_marginEnd="8dp"
+             android:layout_marginBottom="8dp"
+             android:background="@drawable/custom_border"
+             android:elevation="3dp"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="@+id/guideline86"
+             app:layout_constraintTop_toTopOf="@+id/vehicleDataHeader">
+
+             <ImageView
+                 android:id="@+id/iconInfo"
+                 android:layout_width="18dp"
+                 android:layout_height="18dp"
+                 android:layout_marginStart="9dp"
+                 android:layout_marginTop="9dp"
+                 android:layout_marginEnd="9dp"
+                 android:layout_marginBottom="9dp"
+                 android:src="@drawable/icon_info"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent" />
+
+         </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+        <!--    BotonComando    -->
+        <!-- <androidx.constraintlayout.widget.ConstraintLayout
+             android:id="@+id/constraintVehicleCommand"
+             android:layout_width="25dp"
+             android:layout_height="25dp"
+             android:layout_marginStart="8dp"
+             android:layout_marginTop="8dp"
+             android:layout_marginEnd="8dp"
+             android:layout_marginBottom="8dp"
+             android:background="@drawable/custom_border"
+             android:elevation="3dp"
+             app:layout_constraintBottom_toBottomOf="@+id/vehicleDataHeader"
+             app:layout_constraintEnd_toEndOf="parent"
+             app:layout_constraintStart_toStartOf="@+id/guideline86">
+
+             <ImageView
+                 android:id="@+id/iconCommand"
+                 android:layout_width="18dp"
+                 android:layout_height="18dp"
+                 android:layout_marginStart="9dp"
+                 android:layout_marginTop="9dp"
+                 android:layout_marginEnd="9dp"
+                 android:layout_marginBottom="9dp"
+                 android:src="@drawable/ic_black_command"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 app:layout_constraintEnd_toEndOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintTop_toTopOf="parent" />
+
+         </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+
+
+        <View
+            android:id="@+id/view12334"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/textLightColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vehicleDataHeader" />
+
+
+
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/ll_main_container_notifications"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="9dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toBottomOf="@id/view12334"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_viajes"
+                android:layout_width="173dp"
+                android:layout_height="30dp"
+                android:layout_marginStart="16dp"
+                android:background="@drawable/btn_06"
+                app:layout_constraintEnd_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/btn_trip_container"
+                    android:layout_width="169dp"
+                    android:layout_height="26dp"
+                    android:layout_gravity="center"
+                    android:background="@color/colorOrangeYellow"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints">
+
+                    <TextView
+                        android:id="@+id/btn_trip_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:text="Viajes"
+                        android:textColor="@color/colorWhite"
+                        android:textSize="15sp" />
+
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/btn_informacion"
+                android:layout_width="173dp"
+                android:layout_height="30dp"
+                android:background="@drawable/btn_info2"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent">
+
+                <LinearLayout
+                    android:id="@+id/btn_info_container"
+                    android:layout_width="169dp"
+                    android:layout_height="26dp"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="2dp"
+                    android:background="@color/colorWhite"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="MissingConstraints">
+
+                    <TextView
+                        android:id="@+id/btn_info_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:fontFamily="@font/roboto_medium"
+                        android:gravity="center"
+                        android:text="Información"
+                        android:textColor="@color/colorOrangeYellow"
+                        android:textSize="15sp" />
+
+                </LinearLayout>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <View
+            android:id="@+id/view123"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/textLightColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ll_main_container_notifications" />
+
+
+
+        <!--    Lista de fechas -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDates"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+
+            app:layout_constraintStart_toStartOf="@+id/view123"
+            app:layout_constraintTop_toBottomOf="@+id/view123" />
+        <!--    Separador   -->
+        <View
+            android:id="@+id/view12"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/textLightColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvDates" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvDates">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.pnla.onroadplus.z_version2.fragments.mapV2.components.ComponentVehicleCustomFields
+                    android:id="@+id/componentVehicleCustomFields"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvEvents"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/componentVehicleCustomFields" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.core.widget.NestedScrollView>
+
+        <!--
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline86"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="350dp" />-->
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline85"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

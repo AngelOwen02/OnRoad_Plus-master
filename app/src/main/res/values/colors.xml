@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#DADADA</color>
+    <color name="transparent">#97000000</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorBackgroundMenu">#333741</color>
+    <color name="colorRed">#fa0000</color>
+
+    <color name="textLightColor">#DADADA</color>
+    <color name="textAccentColor">#707070</color>
+    <color name="colorborderEditText">#DADADA</color>
+    <color name="green">#219653</color>
+    <color name="colorBlueCircle">#88dcdc</color>
+    <color name="colorSeparator">#464a53</color>
+    <color name="colorBorderCarGreen">#68CE66</color>
+    <color name="colorBorderCarOrange">#FFA400</color>
+    <color name="colorBorderCarRed">#FF2626</color>
+    <color name="colorBorderCarBlue">#57CBFF</color>
+    <color name="colorBorderCarGray">#AAAAAA</color>
+
+    <color name="backgroundCarItem">#33FFFFFF</color>
+    <color name="backgroundSwitchOn">#3C4CD964</color>
+    <color name="backgroundSwitchOff">#B8B8B8</color>
+    <color name="backgroundViewPager">#383838</color>
+
+    <!-- Redesign Colors -->
+    <color name="colorOrangeYellow">#ffa400</color>
+    <color name="colorBlackTwo">#212121</color>
+    <color name="colorBottomItemsOff">#999999</color>
+    <color name="colorBottomItemsOn">#ffa400</color>
+    <color name="colorBackgroundProfileScreen">#efeff4</color>
+    <color name="colorBlack70">#212121</color>
+    <color name="colorSearch">#8e8e93</color>
+    <color name="colorGrayBC">#EBEBEB</color>
+    <color name="colorGray">#9B9B9B</color>
+
+</resources>

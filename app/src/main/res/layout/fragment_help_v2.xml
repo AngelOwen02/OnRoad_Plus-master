@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/backgroundViewPager"
+    android:elevation="25dp">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPagerConteiner"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/txvBtnNext"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgvStep"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:src="@drawable/dots_step_1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txvBtnSkip"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/textOmitHelp"
+        android:paddingLeft="30dp"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/imgvStep"
+        app:layout_constraintEnd_toStartOf="@+id/guideline70"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/txvBtnNext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        android:paddingRight="30dp"
+        android:text="@string/textContinueHelp"
+        android:paddingBottom="3dp"
+        android:paddingTop="3dp"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toTopOf="@+id/imgvStep"
+        app:layout_constraintEnd_toEndOf="@+id/imgvStep"
+        app:layout_constraintStart_toStartOf="@+id/guideline70" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline70"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

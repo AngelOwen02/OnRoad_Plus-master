@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Onroad + </string>
+
+    <!--  Package GoogleMaps, Waze-->
+    <string name="googleMapsPackage">com.google.android.apps.maps</string>
+    <string name="googleMapsPlayStore">https://play.google.com/store/apps/details?id=com.google.android.apps.maps</string>
+    <string name="wazePackage">com.waze</string>
+    <string name="wazePlayStore">https://play.google.com/store/apps/details?id=com.waze</string>
+
+    <!--  Permissions  -->
+    <string name="requestToEnableGps">Habilita el gps para utilizar esta funcionalidad</string>
+    <string name="requestToEnableLocationPermission">Activa el permiso de ubicación para poder obtener la ruta</string>
+
+    <!--    Google Maps-->
+    <string name="keyGoogleMaps">AIzaSyCwwjEoCqflYm9MHMAfBQfVFwDFNsPj8x4</string>
+    <!--<string name="iconStaticMaps">markers=icon:https://cdn.zeplin.io/5d51a93546e50e9b42934a50/assets/C06FE264-944C-421A-8E01-68646B10D08F.png|label:s|</string>-->
+    <!-- Generics -->
+    <string name="textEmptyResponse">Error, el servidor no pudo responder de forma adecuada</string>
+
+    <!--     **************************************************     -->
+    <!--     **************************************************     -->
+    <!--                    SplashScreenActivity                    -->
+    <!--     **************************************************     -->
+    <!--     **************************************************     -->
+
+
+    <!--     **************************************************     -->
+    <!--     **************************************************     -->
+    <!--                      LoginActivity                         -->
+    <!--     **************************************************     -->
+    <!--     **************************************************     -->
+
+    <!--    FragmentLogin    -->
+    <string name="titleLogin">¡Bienvenido!</string>
+    <string name="textUser">Usuario</string>
+    <string name="textPassword">Contraseña</string>
+    <string name="textForgetPassword">¿Olvidó su contraseña?</string>
+    <string name="textEmptyDataLogin">Nombre de usuario o contraseña incorrectos. Intenta de nuevo.</string>
+    <string name="textEmptyDataResponse">Error, no se encontraron datos del usuario</string>
+
+    <!--    RestorePasword    -->
+    <string name="textRestorePassword">Restablecer\ncontraseña</string>
+    <string name="textReturnToLogin">Regresar</string>
+    <string name="textEmail">Correo electrónico</string>
+    <string name="textEmptyEmail">Es necesario ingresar su correo electrónico</string>
+    <string name="textNotFoundEmail">No existe una cuenta asociada con la dirección de correo proporcionada.</string>
+    <string name="textInvalidEmailFormat">El correo electrónico que ingresó no tiene un formato válido</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!--    FragmentChangePassword  -->
+    <string name="textErrorDataGroupsEmptyHA">Ocurrio un error, se obtuvo una respuesta del servidor sin datos</string>
+    <string name="textGetEmptyUserData">Error, no se obtuvo información suficiente para cambiar la contraseña</string>
+    <string name="textDifferentPasswords">Las contraseñas tienen que coincidir</string>
+    <string name="textEmptyPasswordsFields">Es necesario que llenes ambos campos para cambiar tu contraseña</string>
+
+    <!--     **************************************************     -->
+    <!--     **************************************************     -->
+    <!--                      HomeActivity                          -->
+    <!--     **************************************************     -->
+    <!--     **************************************************     -->
+    <string name="textErrorFragmentHA">Ocurrió un error al mostrar información</string>
+    <string name="textErrorEmptyDataUserHA">Ocurrio un error, no se pudo obtener información suficiente del usuario para cerrar sesión</string>
+    <string name="textErrorEmptyDataGroupsHA">Error, no se pudo obtener los grupos de unidades</string>
+    <string name="textErrorEmptyDataUser">Error, no se pudo obtener la información del usuario</string>
+    <string name="textSessionExpired">La sesión ha expirado</string>
+    <string name="textItemGroups">Grupos</string>
+    <string name="textItemCommands">Comandos</string>
+    <string name="textItemDashboard">Dashboard</string>
+    <string name="textItemCars">Unidades</string>
+    <string name="textItemNotifications">Notificaciones</string>
+    <string name="textItemContact">Contacto</string>
+    <string name="textItemAllGroups">Todos</string>
+    <string name="textItemSelectGroup">Seleccionar grupo</string>
+    <string name="textItemCloseSession">Cerrar sesión</string>
+    <string name="textItemSettings">Configuración</string>
+    <string name="textItemHelp">Ayuda</string>
+    <string name="textErrorToDrawRoute">Ocurrio un error, no se pudo dibujar la ruta</string>
+    <string name="textErrorWithoutVehicles">no cuenta con unidades</string>
+    <string name="textSelectGroupWithVehicles">Selecciona al menos un grupo que tenga unidades para vizualizarlas en el mapa</string>
+    <string name="textSelectGroupOrVehicle">Selecciona un grupo o unidad para vizualizar en el mapa</string>
+    <string name="textSelectOneVehicle">Necesitas seleccionar al menos 1 unidad para visualizarla en el mapa</string>
+    <string name="textSelectOneGroup">Selecciona al menos un grupo que tenga unidades para vizualizarlas en el mapa</string>
+    <string name="textWrongUserDataLogin">Nombre de usuario o contraseña incorrectos. Intenta de nuevo.</string>
+    <string name="errorEmptyLogoutResponse" translatable="false">Error, se obtuvo una respuesta sin datos desde el servidor</string>
+    <!--    FragmentCars-->
+    <string name="textEmptyCarsResponse">Error, no se encontró información suficiente para mostrar las unidades</string>
+    <string name="textEmptyGroupsResponse">Error, no se encontró información suficiente para mostrar los grupos</string>
+    <string name="textVehicle">unidad</string>
+    <string name="textVehicles">unidades</string>
+    <string name="textWithoutVehicles">sin unidades</string>
+    <string name="textWithoutGroups">No se encontraron grupos</string>
+
+    <!--    Fragment Contact    -->
+    <string name="textTo">Para:</string>
+    <string name="textCopy">De:</string>
+    <string name="textSubject">Asunto:</string>
+    <string name="textEmailSupport">support@gpsphoenix.com</string>
+    <string name="textEmptyDataContact">No se pudo <ob></ob>tener información del usuario para enviar el correo electrónico</string>
+    <string name="textBabSupportEmail">Error, el correo electrónico de sorporte técnico tiene un formato inválido</string>
+    <string name="textEmptyFieldsContact">Error, es necesario que escribas asunto y mensaje</string>
+
+    <!--Fragment Dashboard  -->
+    <string name="textErrorShareDashboardFail">No se pudo compartir el dashboard</string>
+    <string name="textErrorWithOutGroups">No se encontraron grupos</string>
+    <string name="textErrorDrawGraphic">Ocurrio un error, no se pudo graficar</string>
+    <string name="textErrorDataEmptyDashboard">Ocurrio un error, se obtuvo una respuesta del servidor sin datos</string>
+    <string name="textShareWith">Compartir Dashboard vía</string>
+    <string name="textSearch">Buscar...</string>
+    <string name="textCar">Unidad</string>
+    <string name="textGroup">Grupo</string>
+    <string name="textEmptyVehiclesList">Error, no se encontraron vehiculos disponibles.</string>
+    <string name="textErrorEmptyVehiclesSelected">Ocurrio un error al obtener la lista de unidades seleccionadas</string>
+
+    <!-- Fragment Map-->
+    <string name="textErrorEmptyVehiclesList">Error no se encontraron unidades disponibles</string>
+    <string name="textErrorDataEmptyMap">Ocurrio un error, se obtuvo una respuesta del servidor sin datos</string>
+    <string name="textDetail">Detalle</string>
+    <string name="textGetInfo">Info</string>
+    <string name="textReport">Informe</string>
+    <string name="textSendCommand">Enviar comando</string>
+    <string name="textLastMessage">Último mensaje</string>
+    <string name="textAddress">Dirección</string>
+    <string name="textSatelite">Satélite</string>
+    <string name="textAltitude">Altitud</string>
+    <string name="textCustomFields">Campos personalizados</string>
+    <string name="textDescription">Descripción</string>
+    <string name="textModel">Modelo</string>
+    <string name="textVehiclePlate">Placa</string>
+    <string name="textVehicleVin">Serie</string>
+    <string name="textInsurance">Aseguradora</string>
+    <string name="textBrand">Marca</string>
+    <string name="textPolicyNumber">Póliza</string>
+    <string name="textTelephone">Teléfono</string>
+    <string name="textOpenRoute">¿Qué aplicación deseas utilizar para trazar una ruta?</string>
+    <string name="textEmptyTrips">No se encontraron viajes para la unidad seleccionada</string>
+    <string name="textNotFoundTrip">No se encontró viaje</string>
+    <string name="textRequestToEnabledGps">Habilita el gps para que la app funcione de forma correcta</string>
+    <string name="textTrip">Viaje</string>
+    <string name="textErrorWithoutInfo">No se encontro información del vehículo</string>
+
+    <!-- Fragment Notifications-->
+    <string name="textErrorDataEmptyNotifications">Ocurrio un error, se obtuvo una respuesta del servidor sin datos</string>
+    <string name="textErrorEmptyNotificationsDate">No se encontraron notificaciones el día</string>
+    <string name="textErrorEmptyDataNotification">Ocurrio un error al obtener los datos de la notificación</string>
+    <string name="textByVehicle">Unidad</string>
+    <string name="textAllVehicles">Todas</string>
+    <string name="textErrorNotifications">Ocurrió un error, no se pudo obtener las notificaciones</string>
+
+    <!-- FragmentChangePassword -->
+    <string name="textTitleChangePassword">Por seguridad cambia tu contraseña</string>
+    <string name="textNewPassword">Nueva contraseña</string>
+    <string name="textConfirmnewPassword">Confirmar contrasña</string>
+    <string name="textChangePassword">Restablecer contraseña</string>
+
+    <!-- FragmentCommands-->
+    <string name="textErrorEmptyDataCommands">Ocurrio un error, no se pudo obtener los comandos</string>
+    <string name="textErrorEmptyVehicleData">Error, no se pudo obtener los datos de la unidad</string>
+
+    <!-- FragmentMainHelp-->
+    <string name="textContinueHelp">Continuar</string>
+    <string name="textOmitHelp">Omitir</string>
+
+    <!--  FragmentHelpStep1-->
+    <string name="textFoundYourVehiclesHelp1">Localiza tus unidades</string>
+    <string name="textDescriptionHelp1">Descubre si tus unidades están encendidas, en movimiento, su velocidad y su ubicación en tiempo real.</string>
+
+    <!--  FragmentHelpStep2-->
+    <string name="textInMovementHelp2">En movimiento</string>
+    <string name="textDescriptionHelp2">Sí una unidad está encendida y en movimiento verás el círculo de color verde.</string>
+
+    <!--  FragmentHelpStep3-->
+    <string name="textRalentiHelp3">Ralentí </string>
+    <string name="textDescriptionHelp3">Sí una unidad está encendida pero se encuentra detenida verás el círculo de color amarillo.</string>
+
+    <!--  FragmentHelpStep4a-->
+    <string name="textIgnitionOffHelp4">Apagado</string>
+    <string name="textDescriptionHelp4">Sí una unidad está apagada verás el círculo de color rojo.</string>
+    <!--VERDE-->
+    <string name="textNecessaryHelp5">Sólo lo necesario</string>
+    <string name="textIgnitionMotionDescription">Selecciona sólo las unidades que deseas ver en el mapa. Buscalas por grupo o por unidad.</string>
+    <!--AMARILLO-->
+    <string name="textTripHistoryHelp6">Históricos de viajes</string>
+    <string name="textIgnitionWithoutMotionDescriptionHelp4">Revisa recorridos de las unidades, distancias recorridas, etc. Todo a la palma de tu mano.</string>
+    <!--ROJO-->
+    <string name="textActionHelp7">Toma acción</string>
+    <string name="textOffDescriptionHelp4">Puedes detener una unidad o activar un comando desde la aplicación.</string>
+
+    <!--  FragmentHelpStep5-->
+    <string name="textContactHelp8">Contáctanos</string>
+    <string name="textDescriptionHelp5">Selecciona las unidades que necesitas en el mapa, búscalas por grupo o por unidad.</string>
+    <!--  FragmentHelpStep6-->
+    <string name="textNotificationHelp9">Notificaciones</string>
+    <string name="textDescriptionHelp6">Habilita o deshabilita las notificaciones desde la pantalla de perfil.</string>
+
+    <!--  FragmentSettings-->
+    <string name="textNotificacionesTitleSettings">NOTIFICACIONES</string>
+    <string name="textEnableNotifications">Habilitar notificaciones
+    </string>
+    <string name="textDisableNotifications">Inhabilitar notificaciones</string>
+
+
+    <!--    Retrofit validations    -->
+    <string name="wrongSyntax">Error, la solicitud contiene sintaxis errónea</string>
+    <string name="unauthorizedRequest">Error, solicitud no autorizada</string>
+    <string name="resourceNotFound">Error, recurso no encontrado</string>
+    <string name="serverError">Error, se ha producido un error en la conexión con el servidor, intente más tarde</string>
+    <string name="unknownError">Error desconocido</string>
+    <string name="internetConection">Error, verifica tu conexión a internet</string>
+    <string name="invalidateFormatResponse">Error, la respuesta contiene un formato que no se puede leer</string>
+    <string name="unknownError1">Ocurrió un error desconocido</string>
+    <string name="title_activity_online_v2">ActivityOnlineV2</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_tools">Tools</string>
+    <string name="menu_share">Share</string>
+    <string name="menu_send">Send</string>
+
+    <!-- Bottom Navigation Menu -->
+    <string name="title_units">Unidades</string>
+    <string name="title_tracking">Rastreo</string>
+    <string name="title_notifications">Notificaciones</string>
+    <string name="title_contact">Contacto</string>
+    <string name="title_profile">Perfil</string>
+
+    <!-- Profile -->
+    <string name="toolbar_item_title_search">Buscar</string>
+    <string name="toolbar_item_title_calendar">Calendario</string>
+
+    <!-- Toolbar Items -->
+    <string name="profile_username">Nombre de Usuario</string>
+    <string name="profile_email">nombre_usuario@correo.com</string>
+    <string name="profile_notifications_off">Habilitar notificaciones</string>
+    <string name="profile_notifications_on">Deshabilitar notificaciones</string>
+    <string name="profile_help">Ayuda</string>
+    <string name="profile_logout">Cerrar sesión</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_bottom_menu_container">BottomMenuContainerActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+
+    <!-- Logout Dialog -->
+    <string name="logout_dialog_message">¿Estas seguro que quieres cerrar tu sesión?</string>
+    <string name="logout_dialog_btn_ok">Aceptar</string>
+    <string name="logout_dialog_btn_cancel">Cancelar</string>
+
+
+</resources>

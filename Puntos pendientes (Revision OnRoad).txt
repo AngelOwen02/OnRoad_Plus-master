@@ -1,0 +1,29 @@
+4.-  Corregido
+5.-  Corregido
+6.-  Corregido
+7.-  Corregido
+8.-  Corregido
+9.-  Corregido
+12.- Corregido
+13.- Corregido
+14.- Corregido
+16.-
+24.- Corregido
+29.- Corregido
+32.- Corregido
+34.- Corregido
+42.- ---Arturo---
+43.- Corregido
+49.- Corregido
+51.- ---Arturo---
+58.- Corregido
+60.-
+61.-
+63.-
+72.- Corregido
+73.- ---Arturo---
+74.- ---Arturo---
+75.- "icono mapa"
+
+usuario: TestAndroid
+pass: 12345678

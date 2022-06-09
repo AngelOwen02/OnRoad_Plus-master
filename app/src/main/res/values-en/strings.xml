@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">Onroad</string>
+
+    <!--  Package GoogleMaps, Waze-->
+    <string name="googleMapsPackage">com.google.android.apps.maps</string>
+    <string name="googleMapsPlayStore">https://play.google.com/store/apps/details?id=com.google.android.apps.maps</string>
+    <string name="wazePackage">com.waze</string>
+    <string name="wazePlayStore">https://play.google.com/store/apps/details?id=com.waze</string>
+
+    <!--  Permissions  -->
+    <string name="requestToEnableGps">Enable the gps to use this functionality</string>
+    <string name="requestToEnableLocationPermission">Activate the location permission to get the route</string>
+
+    <!--    Google Maps-->
+    <string name="keyGoogleMaps">AIzaSyCwwjEoCqflYm9MHMAfBQfVFwDFNsPj8x4</string>
+    <string name="iconStaticMaps">coloca la imagen de fin de recorrido con una bandera</string>
+    <!-- Generics -->
+    <string name="textEmptyResponse">Error, the server could not respond properly</string>
+
+    <!--     **************************************************     -->
+    <!--     **************************************************     -->
+    <!--                    SplashScreenActivity                    -->
+    <!--     **************************************************     -->
+    <!--     **************************************************     -->
+
+
+    <!--     **************************************************     -->
+    <!--     **************************************************     -->
+    <!--                      LoginActivity                         -->
+    <!--     **************************************************     -->
+    <!--     **************************************************     -->
+
+    <!--    FragmentLogin    -->
+    <string name="titleLogin">LogIn</string>
+    <string name="textUser">User</string>
+    <string name="textPassword">Password</string>
+    <string name="textForgetPassword">Forgot password?</string>
+    <string name="textEmptyDataLogin">It is necessary to enter your username and password</string>
+    <string name="textEmptyDataResponse">Error, no user data was found</string>
+
+    <!--    RestorePasword    -->
+    <string name="textRestorePassword">Recover password</string>
+    <string name="textReturnToLogin">Back</string>
+    <string name="textEmail">Email</string>
+    <string name="textEmptyEmail">It is necessary to enter your email</string>
+    <string name="textNotFoundEmail">The email provided was not found</string>
+    <string name="textInvalidEmailFormat">The email you entered does not have a valid format</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <!--    FragmentChangePassword  -->
+    <string name="textErrorDataGroupsEmptyHA">An error occurred, a response was obtained from the server without data</string>
+    <string name="textGetEmptyUserData">Error, not enough information was obtained to change the password</string>
+    <string name="textDifferentPasswords">Error, passwords have to be the same</string>
+    <string name="textEmptyPasswordsFields">You need to fill both fields to change your password</string>
+
+    <!--     **************************************************     -->
+    <!--     **************************************************     -->
+    <!--                      HomeActivity                          -->
+    <!--     **************************************************     -->
+    <!--     **************************************************     -->
+    <string name="textErrorFragmentHA">An error occurred while displaying information</string>
+    <string name="textErrorEmptyDataUserHA">An error occurred, could not get user information to log out</string>
+    <string name="textErrorEmptyDataGroupsHA">Error, unit groups could not be obtained</string>
+    <string name="textErrorEmptyDataUser">Error, user information could not be obtained</string>
+    <string name="textSessionExpired">The session has expired</string>
+    <string name="textItemGroups">Groups</string>
+    <string name="textItemCommands">Commands</string>
+    <string name="textItemDashboard">Dashboard</string>
+    <string name="textItemCars">Vehicles</string>
+    <string name="textItemNotifications">Notifications</string>
+    <string name="textItemContact">Contact</string>
+    <string name="textItemAllGroups">All</string>
+    <string name="textItemSelectGroup">Select group</string>
+    <string name="textItemCloseSession">Log out</string>
+    <string name="textItemSettings">Configuration</string>
+    <string name="textItemHelp">Help</string>
+    <string name="textErrorToDrawRoute">An error occurred, the route could not be drawn</string>
+    <string name="textErrorWithoutVehicles">does not have units</string>
+    <string name="textSelectGroupWithVehicles">Select at least one group that has units to visualize them on the map</string>
+    <string name="textSelectGroupOrVehicle">Select a group or vehicle to visualize on the map</string>
+    <string name="textSelectOneVehicle">You need to select at least 1 vehicle to visualize it on the map</string>
+    <string name="textSelectOneGroup">Select at least one group that has vehicles to visualize them on the map</string>
+    <string name="textWrongUserDataLogin">user\'s data is incorrect</string>
+
+    <!--    FragmentCars-->
+    <string name="textEmptyCarsResponse">Error, not enough information was found to show the vehicles</string>
+    <string name="textEmptyGroupsResponse">Error, not enough information was found to show the groups</string>
+    <string name="textVehicle">vehicle</string>
+    <string name="textVehicles">vehicles</string>
+    <string name="textWithoutVehicles">without vehicles</string>
+    <string name="textWithoutGroups">without groups</string>
+
+    <!--    Fragment Contact    -->
+    <string name="textTo">To:</string>
+    <string name="textCopy">From:</string>
+    <string name="textSubject">Subject:</string>
+    <string name="textEmailSupport">support@gpsphoenix.com</string>
+    <string name="textEmptyDataContact">Unable to obtain user information to send the email</string>
+    <string name="textBabSupportEmail">Error, technical support email has an invalid format</string>
+    <string name="textEmptyFieldsContact">Error, you need to write subject and message</string>
+
+    <!--Fragment Dashboard  -->
+    <string name="textErrorShareDashboardFail">The dashboard could not be shared</string>
+    <string name="textErrorWithOutGroups">There were no groups found</string>
+    <string name="textErrorDrawGraphic">An error occurred, could not be graphed</string>
+    <string name="textErrorDataEmptyDashboard">An error occurred, a response was obtained from the server without data</string>
+    <string name="textShareWith">Share Dashboard</string>
+    <string name="textSearch">Search...</string>
+    <string name="textCar">Vehicle</string>
+    <string name="textGroup">Group</string>
+    <string name="textEmptyVehiclesList">Error, no vehicles were found</string>
+    <string name="textErrorEmptyVehiclesSelected">An error occurred when obtaining the list of selected vehicles</string>
+
+    <!-- Fragment Map-->
+    <string name="textErrorEmptyVehiclesList">Error, no vehicles were found</string>
+    <string name="textErrorDataEmptyMap">An error occurred, a response was obtained from the server without data</string>
+    <string name="textDetail">Detail</string>
+    <string name="textGetInfo">Information</string>
+    <string name="textReport">Report</string>
+    <string name="textSendCommand">Send command</string>
+    <string name="textLastMessage">Last message</string>
+    <string name="textAddress">Address</string>
+    <string name="textSatelite">Satelite</string>
+    <string name="textAltitude">Altitude</string>
+    <string name="textCustomFields">Custom fields</string>
+    <string name="textDescription">Description</string>
+    <string name="textModel">Model</string>
+    <string name="textVehiclePlate">Vehicle plate</string>
+    <string name="textVehicleVin">Serie</string>
+    <string name="textInsurance">Insurance</string>
+    <string name="textBrand">Brand</string>
+    <string name="textPolicyNumber">Policy number</string>
+    <string name="textTelephone">Telephone</string>
+    <string name="textOpenRoute">Which application do you want to use to \"Get route\"?</string>
+    <string name="textEmptyTrips">No trips found for the selected vehicle</string>
+    <string name="textNotFoundTrip">No trip found</string>
+    <string name="textRequestToEnabledGps">Enable the gps so that the app works correctly</string>
+    <string name="textTrip">Trip</string>
+    <string name="textErrorWithoutInfo">Could not find vehicle information</string>
+
+    <!-- Fragment Notifications-->
+    <string name="textErrorDataEmptyNotifications">An error occurred, a response was obtained from the server without data</string>
+    <string name="textErrorEmptyNotificationsDate">No notifications were found on the day</string>
+    <string name="textErrorEmptyDataNotification">An error occurred when obtaining the notification data</string>
+    <string name="textByVehicle">Vehicle</string>
+    <string name="textAllVehicles">All</string>
+    <string name="textErrorNotifications">An error occurred, notifications could not be obtained</string>
+
+    <!-- FragmentChangePassword -->
+    <string name="textTitleChangePassword">for security change your password</string>
+
+    <!-- FragmentCommands-->
+    <string name="textErrorEmptyDataCommands">An error occurred, the commands could not be obtained</string>
+    <string name="textErrorEmptyVehicleData">Error, the vehicle data could not be obtained</string>
+
+    <!-- FragmentMainHelp-->
+    <string name="textContinueHelp">Continue</string>
+    <string name="textOmitHelp">Omit</string>
+
+    <!--  FragmentHelpStep1-->
+    <string name="textTrackingHelp1">Track</string>
+    <string name="textFoundYourVehiclesHelp1">Locate your vehicles</string>
+    <string name="textDescriptionHelp1">Discover if your vehicles are on, in move, their speed and location in real time.</string>
+
+    <!--  FragmentHelpStep2-->
+    <string name="textTitleChooseHelp2">Choose</string>
+    <string name="textSubtitleChooseHelp2">Only  the necessary</string>
+    <string name="textDescriptionHelp2">Select the vehicles you need on the map, look for them by name or group.</string>
+
+    <!--  FragmentHelpStep3-->
+    <string name="textTitleHelp3">follow</string>
+    <string name="textSubtitleHelp3">Historical in your hand</string>
+    <string name="textDescriptionHelp3">Check routes of your vehicles, timetable of use, distances traveled, everything from the palm of your hand.</string>
+
+    <!--  FragmentHelpStep4a-->
+    <string name="textTitleHelp4">Ignition</string>
+    <string name="textsubtitleHelp4">Know the state of ignition of the vehicle</string>
+    <string name="textDescriptionHelp4">When a device or vehicle is on you will see the green circle.</string>
+    <!--VERDE-->
+    <string name="textIgnitionMotion">Ignition in motion</string>
+    <string name="textIgnitionMotionDescription">When a device or vehicle is on you will see the green circle.</string>
+    <!--AMARILLO-->
+    <string name="textIgnitionWithoutMotionHelp4">Ralentí</string>
+    <string name="textIgnitionWithoutMotionDescriptionHelp4">When a device or vehicle is on but is stopped you will see the yellow circle.</string>
+    <!--ROJO-->
+    <string name="textOffHelp4">Off</string>
+    <string name="textOffDescriptionHelp4">When a device or vehicle is turned off you will see the red circle.</string>
+
+    <!--  FragmentHelpStep5-->
+    <string name="textTitleHelp5">Notifications</string>
+    <string name="textSubtitleHelp5">Solo lo importante</string>
+    <string name="textDescriptionHelp5">Habilita las notificaciones en el menú y podrás recibir todas las alertas en tu móvil.</string>
+
+    <!--  FragmentHelpStep6-->
+    <string name="textTitleHelp6">Commands</string>
+    <string name="textSubtitleHelp6">Toma acción</string>
+    <string name="textDescriptionHelp6">Si necesitas detener tu vehículo o enviar un comando, desde la aplicación lo puedes hacer.</string>
+
+    <!--  FragmentHelpStep7-->
+    <string name="textTitleHelp7">Contact us</string>
+    <string name="textSubtitleHelp7">Contact us</string>
+    <string name="textDescriptionHelp7">We are waiting for your comments and doubts that you have with the application.</string>
+
+    <!--  FragmentSettings-->
+    <string name="textNotificacionesTitleSettings">NOTIFICATIONS</string>
+    <string name="textEnableNotifications">Enable</string>
+    <string name="textDisableNotifications">Disable</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!--    Retrofit validations    -->
+    <string name="wrongSyntax">Error, la solicitud contiene sintaxis errónea</string>
+    <string name="unauthorizedRequest">Error, solicitud no autorizada</string>
+    <string name="resourceNotFound">Error, recurso no encontrado</string>
+    <string name="serverError">Error, se ha producido un error en la conexión con el servidor, intente más tarde</string>
+    <string name="unknownError">Error desconocido</string>
+    <string name="internetConection">Error, verifica tu conexión a internet</string>
+    <string name="invalidateFormatResponse">Error, la respuesta contiene un formato que no se puede leer</string>
+    <string name="unknownError1">Ocurrió un error desconocido</string>
+
+
+</resources>

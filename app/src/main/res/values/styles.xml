@@ -1,0 +1,168 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="titleTextColor">@color/textLightColor</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="BottomNavigationView" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="BottomNavigationView.Active" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="android:colorAccent">#ffa400</item>
+    </style>
+
+    <style name="spinner_style">
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:dropDownWidth">140dp</item>
+        <item name="android:showDividers">none</item>
+        <item name="android:dividerHeight">0dp</item>
+       <!-- <item name="android:popupBackground">@drawable/new_bg</item>-->
+        <item name="android:dropDownHeight">40dp</item>
+        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
+        <item name="android:dropDownSelector">@android:color/white</item>
+    </style>
+    ///////////////////////////////////////////////////////////////////////////////////////////////
+
+    <style name="HelpHeader" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:color">@color/colorBlack</item>
+    </style>
+
+    <style name="HelpBody" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/sfprotext_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:color">@color/colorBlack</item>
+    </style>
+
+    <style name="LoginHeader" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">34sp</item>
+        <item name="android:color">@color/colorBlackTwo</item>
+    </style>
+
+    <style name="LoginText" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:color">@color/colorBlack70</item>
+    </style>
+
+    <style name="LoginHint" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/sfprotext_regular</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:color">@color/colorGray</item>
+    </style>
+
+    <style name="Toolbar" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:color">@color/colorBlackTwo</item>
+    </style>
+
+    <style name="ItemUnitHeader" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:color">@color/colorBlackTwo</item>
+    </style>
+
+    <style name="ItemUnitMainBody" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:color">@color/colorBlack</item>
+    </style>
+
+    <style name="ItemUnitSecondaryBody" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:color">@color/colorBlack70</item>
+    </style>
+
+    <style name="ItemUniTimeBody" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:color">@color/colorWhite</item>
+    </style>
+
+    <style name="UnitMapMarker" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:color">@color/colorBlack</item>
+    </style>
+
+    <style name="UnitMapTravelButton" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:color">@color/colorBlack</item>
+    </style>
+
+    <style name="NotificationAdress" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:color">@color/colorBlackTwo</item>
+    </style>
+
+
+    <style name="UnitMapInformationButton" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:color">@color/colorOrangeYellow</item>
+    </style>
+
+    <style name="UnitMapDates" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:color">@color/colorGray</item>
+    </style>
+
+    <style name="UnitMapInformationHeader" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:color">@color/colorBlack</item>
+    </style>
+
+    <style name="CommandList" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:color">@color/colorBlack</item>
+    </style>
+
+    <style name="NotificationUnit" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:color">@color/colorBlackTwo</item>
+    </style>
+
+    <style name="NotificationTimeHeader" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/sfprotext_semibold</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:color">@color/colorBlackTwo</item>
+    </style>
+
+    <style name="PerfilList" parent="android:style/Theme">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:color">@color/colorBlackTwo</item>
+    </style>
+
+
+</resources>

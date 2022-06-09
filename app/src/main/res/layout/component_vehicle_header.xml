@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintVehicleHeader"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:background="@color/colorWhite"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_vehicle_header"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="9dp"
+        android:background="@color/colorWhite"
+        android:elevation="3dp"
+        android:src="@drawable/car"
+        android:stateListAnimator="@null"
+        app:civ_border_color="@color/colorWhite"
+        app:civ_border_width="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardview_vehicle_header_time_container"
+        android:layout_width="57dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="11dp"
+        app:cardBackgroundColor="@color/colorBlack70"
+        app:cardCornerRadius="2dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/img_vehicle_header">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_vehicle_header_last_send_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="5 hrs"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/roboto_regular"
+                android:textSize="12sp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+    <TextView
+        android:id="@+id/txt_vehicle_header_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:fontFamily="@font/roboto_medium"
+        android:text="Vehicle Name"
+        android:textColor="@color/colorBlackTwo"
+        android:textSize="14sp"
+        app:layout_constraintStart_toEndOf="@+id/img_vehicle_header"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/img_vehicle_header_speed"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/maximum_speed"
+        app:layout_constraintStart_toEndOf="@+id/img_vehicle_header"
+        app:layout_constraintTop_toBottomOf="@+id/txt_vehicle_header_name" />
+
+    <TextView
+        android:id="@+id/txt_vehicle_header_speed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="10dp"
+        android:text="Vehicle Speed"
+        android:textColor="@color/colorBlackTwo"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/img_vehicle_header_speed"
+        app:layout_constraintTop_toBottomOf="@+id/txt_vehicle_header_name" />
+
+    <ImageView
+        android:id="@+id/img_vehicle_header_hour"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/icon_hour"
+        app:layout_constraintStart_toEndOf="@+id/txt_vehicle_header_speed"
+        app:layout_constraintTop_toBottomOf="@+id/txt_vehicle_header_name" />
+
+    <TextView
+        android:id="@+id/txt_vehicle_header_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="Vehicle Hour"
+        android:textColor="@color/colorBlackTwo"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/img_vehicle_header_hour"
+        app:layout_constraintTop_toBottomOf="@+id/txt_vehicle_header_name" />
+
+    <ImageView
+        android:id="@+id/img_vehicle_header_km"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/distance"
+        app:layout_constraintStart_toEndOf="@+id/txt_vehicle_header_hour"
+        app:layout_constraintTop_toBottomOf="@+id/txt_vehicle_header_name" />
+
+    <TextView
+        android:id="@+id/txt_vehicle_header_km"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="10dp"
+        android:text="Vehicle km"
+        android:textColor="@color/colorBlackTwo"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/img_vehicle_header_km"
+        app:layout_constraintTop_toBottomOf="@+id/txt_vehicle_header_name" />
+
+    <TextView
+        android:id="@+id/txt_vehicle_header_adress"
+        android:layout_width="245dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="9dp"
+        android:gravity="left"
+        android:text="Vehicle Adress"
+        android:textColor="@color/colorBlackTwo"
+        android:fontFamily="@font/roboto_regular"
+        android:textSize="12sp"
+        android:visibility="visible"
+        app:layout_constraintStart_toEndOf="@+id/cardview_vehicle_header_time_container"
+        app:layout_constraintTop_toBottomOf="@+id/img_vehicle_header_hour" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
