@@ -238,7 +238,11 @@ public class NotificationsViewImpl extends Fragment implements SearchView.OnQuer
                 txvDateNotification.setVisibility(View.VISIBLE);
                 imgvCalendar.setVisibility(View.VISIBLE);
                 imgvCalendar1.setVisibility(View.VISIBLE);
-                Toast.makeText(getContext(),  "back", Toast.LENGTH_SHORT).show();
+                //Quitamos la vista de Todas las notificaciones
+                rvNotifications.setVisibility(View.GONE);
+                //Quitamos la vista de Las notificaciones vacias
+                constraintLayout2.setVisibility(View.GONE);
+                //Toast.makeText(getContext(),  "back", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
@@ -259,6 +263,7 @@ public class NotificationsViewImpl extends Fragment implements SearchView.OnQuer
         txtButtonAll.setTextColor(getResources().getColor(R.color.colorOrangeYellow));
         toolbarImgBack.setVisibility(View.GONE);
         llContainerAll.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+        constraintLayout2.setVisibility(View.GONE);
         a=false;
         b=true;
         checkEnableButtons();
@@ -381,7 +386,8 @@ public class NotificationsViewImpl extends Fragment implements SearchView.OnQuer
         List<Vehicles> vehicleV2s = new ArrayList<>();      /**Aqui lo importante es setear la clave de vehiculo,*/
         vehicleV2s.add(new Vehicles("", vehicleName, vehicleImage, 0.0, 0.0, true, vehicleCve, 0));//se realiza la peticion de las notificaciones por nombre
         presenter.getAllNotification(vehicleV2s, txvDateNotification.getText().toString(), getContext());
-
+        //Aqui estoy haciendo visible la vista para las notificaciones de Todas
+        rvNotifications.setVisibility(View.VISIBLE);
     }
     private void itmeCount()//esto se ejecuta al dar click en el boton por unidad¡
     {
@@ -624,10 +630,10 @@ public class NotificationsViewImpl extends Fragment implements SearchView.OnQuer
         ViewCompat.setElevation(btnNotificationByVehicle, 6);   /**Se marca el boton porVehiculo                    */
         ViewCompat.setElevation(btnAllNotifications, 0);        /**Se desmarca el boton todos                       */
         imgvSearchVehicleNotification.setVisibility(View.VISIBLE);      /**Se muestra boton para visualizar el searchView   */
-        constraintLayout2.setVisibility(View.GONE);
+        constraintLayout2.setVisibility(View.GONE);                       /** Esconden el layout que tiene el icono de notificaciones vacias  */
         searchViewNotifications.setQuery("", false);            /**Limpiamos el serchView                  */
         rvVehicles.setVisibility(View.VISIBLE);                         /**Se muestran todos los vehiculos                  */
-
+        rvNotifications.setVisibility(View.GONE);                        /** Se esconde la vista de Todas las notificaciones  */
 
         //cleaListNotifications();
         isinunits=true;
@@ -649,6 +655,7 @@ public class NotificationsViewImpl extends Fragment implements SearchView.OnQuer
         constraintSearchViewNotifications.setVisibility(View.GONE);          /**Escondemos el searchView                */
         searchViewNotifications.setQuery("", false);            /**Limpiamos el serchView                  */
         rvVehicles.setVisibility(View.GONE);                                 /**Escondemos toda la lista de vehiculos   */
+        rvNotifications.setVisibility(View.VISIBLE);                         /** Hacemos visible la lista de Todas las notificaciones  */
         cleaListNotifications();
         isinunits=false;
         showLoader();
