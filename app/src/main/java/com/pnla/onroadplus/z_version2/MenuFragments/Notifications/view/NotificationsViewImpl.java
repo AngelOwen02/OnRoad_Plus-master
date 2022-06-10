@@ -294,6 +294,7 @@ public class NotificationsViewImpl extends Fragment implements SearchView.OnQuer
         if (adapterVehicles != null) {       //query filtro notificaciones por unitdades
             List<Vehicles> listaFiltradaGroup = filterListGroup(vehicles, newText);
             adapterVehicles.setFilter(listaFiltradaGroup);
+
         }
         if(adapterNotificationsV2 != null) {//query filtro notificaciones por todas las notificaciones
             List<NotificationsOnroad> filterListNotifications=filterListNotifications(notifications,newText);
