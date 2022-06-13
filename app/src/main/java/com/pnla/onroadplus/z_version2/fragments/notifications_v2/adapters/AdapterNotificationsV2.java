@@ -66,7 +66,6 @@ public class AdapterNotificationsV2 extends RecyclerView.Adapter<AdapterNotifica
             public void onClick(View v) {
                 if (listener != null) {
                     listener.onClickNotification(notifications.get(position));
-
                 }
             }
         });
