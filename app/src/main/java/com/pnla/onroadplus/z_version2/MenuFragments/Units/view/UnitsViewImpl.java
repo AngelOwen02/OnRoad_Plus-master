@@ -344,7 +344,6 @@ import java.util.List;
 
                         for (int k = 0; k < names.size(); k++) //  for(int k=0;k<names.size();k++)
                         {
-
                             cvesalternos.add(names.get(k));
                         }
                    // }
