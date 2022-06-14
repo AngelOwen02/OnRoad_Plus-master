@@ -201,7 +201,6 @@ public class NotificationsViewImpl extends Fragment implements SearchView.OnQuer
                     showLoader();
                 }
                 else{
-
                 }
                 showVehicles();
                 break;
@@ -410,7 +409,6 @@ public class NotificationsViewImpl extends Fragment implements SearchView.OnQuer
         rvVehicles.setLayoutManager(layoutManager);
         rvVehicles.setAdapter(adapterVehicles);
         presenter.getAllNotification(vehicles, txvDateNotification.getText().toString(), getContext());//esto es el fragment de las notificaciones por unidad
-
     }
 
     private void checkAllNotifications()
