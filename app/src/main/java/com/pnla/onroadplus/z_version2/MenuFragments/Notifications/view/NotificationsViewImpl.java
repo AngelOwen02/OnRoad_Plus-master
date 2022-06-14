@@ -149,7 +149,7 @@ public class NotificationsViewImpl extends Fragment implements SearchView.OnQuer
 
         initThemeConfig();
 
-        //Setee la condicion para que no se pueda presionar otra  vez el boton de todas al abrir el Fragment
+        //Llamada al metodo para que no se pueda presionar otra vez el boton de todas al abrir el Fragment
         illuminateAllNot();
         return view;
     }
@@ -191,7 +191,6 @@ public class NotificationsViewImpl extends Fragment implements SearchView.OnQuer
         switch (v.getId()) {
             //En caso de presionar el Boton Por Unidad
             case R.id.btnNotificationByVehicle:
-
                 illuminateAllVehicles();
                 /**llContainerUnits.setBackgroundColor(getResources().getColor(R.color.colorOrangeYellow));
                 txtButtonUnits.setTextColor(getResources().getColor(R.color.colorWhite));
