@@ -5,11 +5,13 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.container.UnitAssignSupportContainer;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.model.SupportService;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.UnitAssignSupportPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.GroupTrackingAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.UnitTrackingAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.interactor.UnitTrackingInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.model.TrackingService;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.model.SupportService;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.FinalGroupDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.TemporalGroupDB;
@@ -36,7 +38,8 @@ import retrofit2.Retrofit;
 public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInteractor {
 
     private UnitAssignSupportPresenter presenter;
-    private TrackingService service;
+    //private TrackingService service;
+    private SupportService service;
     private Context context;
     private List<GroupvehicleInsideData> groupvehicleInsideData;
     private List<String> gruposdata = new ArrayList<>();
@@ -48,7 +51,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
     }
     private void initRetrofit() {
         Retrofit retrofitClient = RetrofitClientV2.getRetrofitInstance();
-        service = retrofitClient.create(TrackingService.class);
+        service = retrofitClient.create(SupportService.class);
     }
 
     @Override
