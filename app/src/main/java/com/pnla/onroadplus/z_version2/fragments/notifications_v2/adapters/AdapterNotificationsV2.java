@@ -75,6 +75,7 @@ public class AdapterNotificationsV2 extends RecyclerView.Adapter<AdapterNotifica
     public int getItemCount() {
         return notifications.size();
     }
+
     public void setFilter(List<NotificationV2OnRoad>listaNotas) {//metodo de filtro de notificacion
         this.notifications = new ArrayList<>();
         this.notifications.addAll(listaNotas);

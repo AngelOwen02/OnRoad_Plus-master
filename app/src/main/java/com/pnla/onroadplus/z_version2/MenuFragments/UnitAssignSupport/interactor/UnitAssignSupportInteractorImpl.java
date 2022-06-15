@@ -4,14 +4,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
-import com.pnla.onroadplus.z_version2.Containers.UnitTrackingContainer;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.container.UnitAssignSupportContainer;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.UnitAssignSupportPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.GroupTrackingAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.UnitTrackingAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.interactor.UnitTrackingInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.model.TrackingService;
-import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.presenter.UnitTrackingPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.FinalGroupDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.TemporalGroupDB;
@@ -116,7 +114,6 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
                 //Log.e("unitsthaticansaw","validate : "+ t.toString());
             }
         });
-
     }
 
     private void validateGroupsVehiclesCode(Response<GroupvehicleInsideResponse> response){
@@ -130,7 +127,6 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
     /**reques de grupos**/
     private void getGrupsDataVhicles(Response<GroupvehicleInsideResponse> response )
     {
-
         GroupvehicleInsideResponse groupResponse = response.body();
         if (groupResponse != null) {
             int responseCode = groupResponse.getResponseCode();
