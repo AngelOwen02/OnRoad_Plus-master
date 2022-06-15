@@ -81,8 +81,6 @@ public class GroupTracking extends RealmObject {
         this.positionItem = positionItem;
     }
 
-
-
     public void setVehicles(RealmList<VehicleTracking> vehicles) {
         this.vehicles = vehicles;
     }
