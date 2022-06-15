@@ -200,7 +200,6 @@ import java.util.List;
             {
                 for(int k=0;k<vehicles.size();k++)
                 {
-
                     cvesalternos.add( vehicles.get(k).getCveVehicle());
                 }
             }
