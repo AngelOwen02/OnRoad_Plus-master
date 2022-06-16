@@ -33,12 +33,11 @@ public class GroupTrackingAdapter extends RecyclerView.Adapter<GroupTrackingAdap
     public  static List<Boolean> togglesList1=new ArrayList<>();
     private UnitTrackingPresenter presenter;
     public static int intforrequest;
-public static boolean request=false;
+    public static boolean request=false;
     public static  List<String> dataofvehiclesgroupsnames2=new ArrayList<>();
     public GroupTrackingAdapter(List<Group> groups, Context context) {
         this.groupTrackings = groups;
         this.context = context;
-
     }
 
     @NonNull
