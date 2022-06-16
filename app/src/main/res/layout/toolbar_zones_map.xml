@@ -28,7 +28,6 @@
 
     </androidx.cardview.widget.CardView>
 
-    <!--
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
         android:layout_width="32dp"
@@ -49,7 +48,6 @@
             app:srcCompat="@drawable/ic_camion" />
 
     </androidx.cardview.widget.CardView>
-    -->
 
   <!--  <androidx.cardview.widget.CardView
         android:id="@+id/geocercaCardView"

@@ -75,7 +75,7 @@ public class zonesFragment  extends Fragment implements OnMapReadyCallback,zones
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tracking_zones, container, false);
         bindViews(view);
-        //bindViews2(view);
+        bindViews2(view);
         initTrackingMapFragment(view,savedInstanceState);
        // Log.e("pointZoneAdapter","points= "+pointInZone);
         return view;
@@ -101,7 +101,7 @@ public class zonesFragment  extends Fragment implements OnMapReadyCallback,zones
     }
 
     //Cuando presionemos el boton de asignacion de apoyos
-    /**private void bindViews2(View view){
+    private void bindViews2(View view){
         mView = view.findViewById(R.id.map_view_zones);
         ImageView toolbar = view.findViewById(R.id.eye_zones2);//ojo
         progressDialog = new ProgressDialog(getActivity());
@@ -115,7 +115,7 @@ public class zonesFragment  extends Fragment implements OnMapReadyCallback,zones
                 //positionGreenDots.clear();
             }
         });
-    }*/
+    }
 
     //Esto es para enviar al fragmento de Asignacion de Apoyos
     private void asignarUnidadImp(){
