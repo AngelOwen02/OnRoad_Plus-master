@@ -183,7 +183,6 @@ import java.util.List;
         //rvUnits.setOnFlingListener(null);
         //snapHelper.attachToRecyclerView(rvUnits);
 
-
         unitAdapter = new UnitAdapter(vehicles,getContext());
         rvUnits.setAdapter(unitAdapter);
         hideProgressDialog();
