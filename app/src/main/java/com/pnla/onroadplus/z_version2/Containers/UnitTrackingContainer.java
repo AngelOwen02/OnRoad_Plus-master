@@ -6,6 +6,8 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -54,6 +56,8 @@ public class UnitTrackingContainer extends AppCompatActivity implements UnitTrac
 
     private SharedPreferences pref;
 
+    private boolean a,b;
+
     private Handler handler = new Handler();
     public Runnable runnable;
     public static int integervalueforrequest;
@@ -62,7 +66,7 @@ public class UnitTrackingContainer extends AppCompatActivity implements UnitTrac
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_unit_tracking_view_impl);
         initUnitTrackingViewImpl();
-
+        IlluminateUnits();
     }
 
     private void initUnitTrackingViewImpl() {
@@ -230,30 +234,25 @@ public class UnitTrackingContainer extends AppCompatActivity implements UnitTrac
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.toolbar_unit_tracking_img_back:
-
               /*  SharedPreferences userDetails = getApplicationContext().getSharedPreferences("Haha", MODE_PRIVATE);
                 SharedPreferences.Editor edit = userDetails.edit();
                 edit.clear();
                 edit.putBoolean("Refresh",true);
                 edit.apply();
-
                 super.onBackPressed();*/
-
               showTrackingMap();
-
-
-
-
                 // getActivity().onBackPressed();
                 break;
             case R.id.toolbar_unit_tracking_img_search:
                 searchView.setVisibility(View.VISIBLE);
                 break;
             case R.id.container_btn_unit_tracking_unit:
+                IlluminateUnits();
                 onClickUnitButton();
                 handler.removeCallbacks(runnable);
                 break;
             case R.id.container_btn_unit_tracking_groups:
+                IlluminateGroup();
                 onClickGroupButton();
                 handler.postDelayed(runnable = new Runnable() {
                     @Override
@@ -265,6 +264,36 @@ public class UnitTrackingContainer extends AppCompatActivity implements UnitTrac
                     }
                 },500);
                 break;
+        }
+    }
+
+    private void IlluminateUnits(){
+        unitButton.setBackgroundColor(getResources().getColor(R.color.colorOrangeYellow));
+        groupButton.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+        unitTextButton.setTextColor(getResources().getColor(R.color.colorWhite));
+        groupTextButton.setTextColor(getResources().getColor(R.color.colorOrangeYellow));
+        a=true;
+        b=false;
+        checkEnableButtons();
+    }
+
+    private void IlluminateGroup(){
+        groupButton.setBackgroundColor(getResources().getColor(R.color.colorOrangeYellow));
+        unitButton.setBackgroundColor(getResources().getColor(R.color.colorWhite));
+        groupTextButton.setTextColor(getResources().getColor(R.color.colorWhite));
+        unitTextButton.setTextColor(getResources().getColor(R.color.colorOrangeYellow));
+        a=false;
+        b=true;
+        checkEnableButtons();
+    }
+
+    private void checkEnableButtons(){
+        if(a==true&&b==false){
+            unitButton.setEnabled(false);
+            groupButton.setEnabled(true);
+        }else if(a==false&&b==true){
+            unitButton.setEnabled(true);
+            groupButton.setEnabled(false);
         }
     }
 
@@ -299,8 +328,6 @@ public class UnitTrackingContainer extends AppCompatActivity implements UnitTrac
         rvVehicles.setVisibility(View.VISIBLE);
         rvGroups.setVisibility(View.GONE);
         emptyGroupsImage.setVisibility(View.GONE);
-
-
     }
 
     private void onClickGroupButton() {
@@ -313,9 +340,6 @@ public class UnitTrackingContainer extends AppCompatActivity implements UnitTrac
 
         rvGroups.setVisibility(View.VISIBLE);
         rvVehicles.setVisibility(View.GONE);
-
-
-
     }
 
     @Override

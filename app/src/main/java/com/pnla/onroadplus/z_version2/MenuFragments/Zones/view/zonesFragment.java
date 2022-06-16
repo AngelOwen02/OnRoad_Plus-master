@@ -496,7 +496,6 @@ public class zonesFragment  extends Fragment implements OnMapReadyCallback,zones
     }
 
 
-
     private void drawAllZones( List<String> lats, List<String> longs,List<String> Colors) {
         isdraw=true;
 
@@ -591,7 +590,4 @@ public class zonesFragment  extends Fragment implements OnMapReadyCallback,zones
         progressDialog.setCancelable(false);
         progressDialog.show();
     }
-
 }
-
-
