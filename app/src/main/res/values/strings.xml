@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Onroad + </string>
+    <string name="app_name">Onroad+ </string>
 
     <!--  Package GoogleMaps, Waze-->
     <string name="googleMapsPackage">com.google.android.apps.maps</string>
