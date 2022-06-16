@@ -195,7 +195,6 @@ public static boolean request=false;
                             for(int i=0;i<GroupDB.getActiveGroupList().size();i++)
                             {
                                 namesinlist.add( GroupDB.getActiveGroupList().get(i).getCve_vehicle_group());
-
                             }
                             integerList1.clear();
                             integerList1=namesinlist;
@@ -218,9 +217,7 @@ public static boolean request=false;
         } else {
             holder.txtVehiclesNumber.setText("" + context.getString(R.string.textWithoutVehicles));
         }
-
         Glide.with(context).load(R.drawable.car).into(holder.imgGroup);
-
     }
 
 
