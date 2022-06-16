@@ -84,5 +84,4 @@ public class GroupSupport extends RealmObject {
     public void setVehicles(RealmList<VehicleTracking> vehicles) {
         this.vehicles = vehicles;
     }
-
 }
