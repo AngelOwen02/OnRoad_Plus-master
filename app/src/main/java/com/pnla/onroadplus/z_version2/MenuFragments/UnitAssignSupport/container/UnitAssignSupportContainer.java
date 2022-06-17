@@ -38,10 +38,6 @@ import java.util.List;
 public class UnitAssignSupportContainer extends AppCompatActivity implements UnitAssignSupportView, View.OnClickListener {
 
     private UnitAssignSupportPresenter presenter;
-    private LinearLayout unitButton;
-    private LinearLayout groupButton;
-    private TextView unitTextButton;
-    private TextView groupTextButton;
     private List<Unit> vehicless;
     private RecyclerView rvVehicles;
     private UnitAssignSupportAdapter adapterVehicles;

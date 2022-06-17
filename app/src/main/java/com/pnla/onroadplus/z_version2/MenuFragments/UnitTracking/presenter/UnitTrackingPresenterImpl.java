@@ -104,7 +104,6 @@ public class UnitTrackingPresenterImpl implements UnitTrackingPresenter {
     }
 
 
-
     @Override
     public void sessionExpired(String message) {
         if (view != null) {

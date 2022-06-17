@@ -59,7 +59,6 @@ public class UnitAssignSupportPresenterImpl implements UnitAssignSupportPresente
         }
     }
 
-
     @Override
     public void showProgressBar() {
         if (view != null) {
@@ -80,7 +79,6 @@ public class UnitAssignSupportPresenterImpl implements UnitAssignSupportPresente
             view.showErrorMessage(message);
         }
     }
-
 
     @Override
     public void setMessageToView(String message) {

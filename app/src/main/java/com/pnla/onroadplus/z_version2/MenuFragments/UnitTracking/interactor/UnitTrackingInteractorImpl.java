@@ -66,9 +66,7 @@ public class UnitTrackingInteractorImpl implements UnitTrackingInteractor {
 
     @Override
     public void getGroups(Context context) {
-
         presenter.setGroupsList(getGroupList());
-
     }
 
     @Override
