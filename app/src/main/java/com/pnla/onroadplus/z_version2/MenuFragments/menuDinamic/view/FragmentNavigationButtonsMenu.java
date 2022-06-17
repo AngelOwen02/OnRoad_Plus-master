@@ -264,7 +264,6 @@ public class FragmentNavigationButtonsMenu extends Fragment implements View.OnCl
     }
 
 
-
     private void MessageFragment() {
 
         FragmentManager manager = getActivity().getSupportFragmentManager();
