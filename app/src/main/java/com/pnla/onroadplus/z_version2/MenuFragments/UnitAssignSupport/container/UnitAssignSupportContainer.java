@@ -88,8 +88,6 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
         presenter.setView(this);
         presenter.getVehicles(this);
         //presenter.getGroups(this);
-
-
     }
 
     @Override

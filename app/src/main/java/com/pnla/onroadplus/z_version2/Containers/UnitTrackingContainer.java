@@ -94,8 +94,6 @@ public class UnitTrackingContainer extends AppCompatActivity implements UnitTrac
         presenter.setView(this);
         presenter.getVehicles(this);
         presenter.getGroups(this);
-
-
     }
 
     @Override
