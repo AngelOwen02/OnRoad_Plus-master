@@ -151,7 +151,7 @@ public class AdapterVehicleNotifications extends RecyclerView.Adapter<AdapterVeh
                     listener.onClickVehicle(v, CommonVehicleNotifications.currentItem.getCveVehicle(), CommonVehicleNotifications.currentItem.getVehicleName(), CommonVehicleNotifications.currentItem.getVehicleImage());
                     notifyDataSetChanged();
                     listener.onClickHide(v);
-                    Toast.makeText(v.getContext(), "AQUIIII", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(v.getContext(), "AQUIIII", Toast.LENGTH_LONG).show();
                 }
 
             }
