@@ -279,12 +279,8 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
                 Intent intent = new Intent(context, UnitMapContainer.class);
                 intent.putExtras(vehicleBundle);
                 context.startActivity(intent);
-
             }
         });
-
-
-
     }
 
     @Override
@@ -292,15 +288,14 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
         //return groupList.size();
         return unitList.size();
     }
-    public int getadapterviewsize()
-    {
+    public int getadapterviewsize() {
         return lastitem;
     }
-    public void getAdress(List<String> from)
-    {
 
+    public void getAdress(List<String> from) {
         textaddres=from;
     }
+
     public int getGroupcCount(){
         return groupList.size();
     }

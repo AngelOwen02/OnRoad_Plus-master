@@ -24,6 +24,8 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 import com.pnla.onroadplus.z_version2.SplashScreenActivity;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +35,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
     private Context context;
     public static List<Integer> integerList = new ArrayList<>();
     public  static List<Boolean> togglesList=new ArrayList<>();
+    public List<String> textaddres= new ArrayList<>();
 
     public UnitAssignSupportAdapter(List<Unit> vehicleList, Context context) {
         this.vehicleList = vehicleList;
@@ -136,10 +139,21 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         }
 
         //Aqui es donde mostramos los datos en la vista
-        holder.unitTitle.setText(vehicle.getVehicleName());
-        holder.unitRute.setText("4.01");
-        //holder.unitRealPercent.setText(vehicle.getTimeElapsed());
-        //holder.txtUnitMaxSpeed.setText(unitList.get(position).getCurrentSpeed() + "km/h");
+        //Manera corta
+        //holder.unitTitle.setText(vehicle.getVehicleName());
+
+        //Para revisar que el nombre si exista y lo colocamos (Manera larga)
+        if (vehicleList.get(position).getVehicleName() != null){
+            if (vehicleList.get(position).getVehicleName().equals("")){
+                holder.unitTitle.setText("----");
+            } else {
+                holder.unitTitle.setText(vehicleList.get(position).getVehicleName());
+            }
+        }else {
+            holder.unitTitle.setText("----");
+        }
+
+        //holder.unitRute.setText("4.01");
         holder.unitRealPercent.setText("35%");
         holder.unitObjPercent.setText("75%");
         holder.unitDifference.setText("-5%");
@@ -149,6 +163,39 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         //Aqui va el color
         holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
         //holder.unitStatus.setTextColor(0xffa400);
+
+        //holder.unitGeoExample.setText(vehicle.getGeoreference());
+        //holder.unitGeoExample.setText(vehicle.getGeoreference() + " si");
+        //holder.unitGeoExample.setText("Ejemploooooooooooooooooo");
+
+        if(textaddres!=null)
+        {
+            // Log.e("bloquesdeunides","list String :   "+textaddres.get(position));
+
+            //  if(textaddres.get(position).equals(""))
+            //   {
+            //     holder.txtUnitGeoReference.setText("---- ---- ---- ----");
+            //   }
+            //       else{
+            //    holder.txtUnitGeoReference.setText();
+            for(String name:textaddres)
+            {
+                if(name.contains(vehicleList.get(position).getVehicleName()))
+
+                {
+                    String[] parts1 = name.split(":::");
+                    String part1 = parts1[0];
+                    String part2 = parts1[1];
+                    holder.unitGeoExample.setText(part2 + " si");      /**puedes vrificar que las direcciones coincidan con los items introduciendo part 1 en el campo part2*/
+                }
+            }
+
+            //  }
+
+        }else
+        {
+            holder.unitGeoExample.setText("---- ---- ---- ----");
+        }
     }
 
     @Override
@@ -168,6 +215,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         TextView unitObjPercent;
         TextView unitDifference;
         TextView unitStatus;
+        TextView unitGeoExample;
         //Switch unitSwicth;
 
 
@@ -180,6 +228,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             unitObjPercent = itemView.findViewById(R.id.txt_unit_objective);
             unitDifference = itemView.findViewById(R.id.txt_unit_difference);
             unitStatus = itemView.findViewById(R.id.txt_unit_status);
+            unitGeoExample = itemView.findViewById(R.id.txt_unit_geo_example);
             //unitSwicth = itemView.findViewById(R.id.unit_tracking_swicth);
         }
     }
@@ -193,5 +242,9 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
     @Override
     public int getItemViewType(int position) {
         return position;
+    }
+
+    public void getAdress(List<String> from) {
+        textaddres=from;
     }
 }
