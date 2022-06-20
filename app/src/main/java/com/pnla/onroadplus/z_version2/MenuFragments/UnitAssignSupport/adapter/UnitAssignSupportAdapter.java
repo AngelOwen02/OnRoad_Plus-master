@@ -175,6 +175,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
     public int getItemCount() {
         return vehicleList.size();
     }
+
     public void  booleanList(List<Boolean> toggles)
     {
         togglesList=toggles;
