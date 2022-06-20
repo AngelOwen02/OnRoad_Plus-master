@@ -154,6 +154,8 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         }
 
         //holder.unitRute.setText("4.01");
+        holder.unitRute.setText(vehicle.getDescModel());
+
         holder.unitRealPercent.setText("35%");
         holder.unitObjPercent.setText("75%");
         holder.unitDifference.setText("-5%");
