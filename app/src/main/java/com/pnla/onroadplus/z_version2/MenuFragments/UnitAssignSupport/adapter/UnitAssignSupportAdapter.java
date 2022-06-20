@@ -50,7 +50,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final UnitAssignSupportAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final Unit vehicle = vehicleList.get(position);
         //Log.e("unitsthaticansaw3",""+ UnitDB.getUnitListActive());
         //Log.e("unitsthaticansaw3",""+ integerList);
