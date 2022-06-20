@@ -168,36 +168,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
         //holder.unitGeoExample.setText(vehicle.getGeoreference());
         //holder.unitGeoExample.setText(vehicle.getGeoreference() + " si");
-        //holder.unitGeoExample.setText("Ejemploooooooooooooooooo");
-
-        if(textaddres!=null)
-        {
-            // Log.e("bloquesdeunides","list String :   "+textaddres.get(position));
-
-            //  if(textaddres.get(position).equals(""))
-            //   {
-            //     holder.txtUnitGeoReference.setText("---- ---- ---- ----");
-            //   }
-            //       else{
-            //    holder.txtUnitGeoReference.setText();
-            for(String name:textaddres)
-            {
-                if(name.contains(vehicleList.get(position).getVehicleName()))
-
-                {
-                    String[] parts1 = name.split(":::");
-                    String part1 = parts1[0];
-                    String part2 = parts1[1];
-                    holder.unitGeoExample.setText(part2 + " si");      /**puedes vrificar que las direcciones coincidan con los items introduciendo part 1 en el campo part2*/
-                }
-            }
-
-            //  }
-
-        }else
-        {
-            holder.unitGeoExample.setText("---- ---- ---- ----");
-        }
+        holder.unitGeoExample.setText("Ejemploooooooooooooooooo");
     }
 
     @Override
