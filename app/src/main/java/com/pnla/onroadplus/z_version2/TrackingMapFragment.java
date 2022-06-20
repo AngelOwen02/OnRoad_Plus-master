@@ -138,7 +138,7 @@ public class TrackingMapFragment extends Fragment implements OnMapReadyCallback,
 
         readytorefreh=false;
 
-//pref  = ggetShared.getPreferences(Context.MODE_PRIVATE);
+        //pref  = ggetShared.getPreferences(Context.MODE_PRIVATE);
         return view;
     }
 
