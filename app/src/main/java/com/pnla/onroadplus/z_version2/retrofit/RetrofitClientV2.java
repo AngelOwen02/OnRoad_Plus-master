@@ -26,6 +26,4 @@ public class RetrofitClientV2 {
         }
         return retrofit;
     }
-
-
 }
