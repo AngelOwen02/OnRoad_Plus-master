@@ -51,7 +51,9 @@ public class Unit extends RealmObject {
 
     }
 
-    public Unit(boolean vehicleStatus, int cveVehicle, int vehicleSwitch, String vehicleName, String vehicleImage, String sendTime, String descBrand, String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, String georeference, String timeTravel, String timeElapsed, double latitude, double longitude, double mileage, double kmTravel, double currentSpeed, double maxSpeed) {
+    public Unit(boolean vehicleStatus, int cveVehicle, int vehicleSwitch, String vehicleName, String vehicleImage, String sendTime, String descBrand,
+                String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, String georeference, String timeTravel, String timeElapsed,
+                double latitude, double longitude, double mileage, double kmTravel, double currentSpeed, double maxSpeed) {
         this.id = BaseRealmApplication.UNIT_ID.incrementAndGet();
         this.vehicleStatus = vehicleStatus;
         this.cveVehicle = cveVehicle;

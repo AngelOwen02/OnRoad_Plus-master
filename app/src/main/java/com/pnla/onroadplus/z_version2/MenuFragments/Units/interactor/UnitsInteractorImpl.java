@@ -670,13 +670,17 @@ public class UnitsInteractorImpl implements UnitsInteractor {
 
     private void createUnitListDB(List<Unit> unitList) {
         for (Unit unit : unitList) {
-            UnitDB.createNewUnit(unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(), unit.getSendTime(), unit.getDescBrand(), unit.getDescModel(), unit.getVehicleYear(), unit.getVehicleVin(), unit.getVehiclePlate(), unit.getGeoreference(), unit.getTimeTravel(), unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(), unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed());
+            UnitDB.createNewUnit(unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(), unit.getSendTime(),
+                    unit.getDescBrand(), unit.getDescModel(), unit.getVehicleYear(), unit.getVehicleVin(), unit.getVehiclePlate(), unit.getGeoreference(), unit.getTimeTravel(),
+                    unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(), unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed());
         }
     }
 
     private void createFinalUnitListDB(List<Unit> unitList) {
         for (Unit unit : unitList) {
-            FinalUnitDB.createNewUnit(unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(), unit.getSendTime(), unit.getDescBrand(), unit.getDescModel(), unit.getVehicleYear(), unit.getVehicleVin(), unit.getVehiclePlate(), unit.getGeoreference(), unit.getTimeTravel(), unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(), unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed());
+            FinalUnitDB.createNewUnit(unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(), unit.getSendTime(),
+                    unit.getDescBrand(), unit.getDescModel(), unit.getVehicleYear(), unit.getVehicleVin(), unit.getVehiclePlate(), unit.getGeoreference(), unit.getTimeTravel(),
+                    unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(), unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed());
         }
     }
 
@@ -686,7 +690,8 @@ public class UnitsInteractorImpl implements UnitsInteractor {
 
     private void createGroupListDB(List<Group> groupList) {
         for (Group group : groupList) {
-            GroupDB.createNewGroup(group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(), group.isSelected(), group.getPositionItem(), group.getVehicles());
+            GroupDB.createNewGroup(group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(), group.isSelected(),
+                    group.getPositionItem(), group.getVehicles());
         }
     }
 

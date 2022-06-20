@@ -268,25 +268,33 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
 
     private void createTemporalUnitDB(List<Unit> unitList) {
         for (Unit unit : unitList) {
-            TemporalUnitDB.createNewUnit(unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(), unit.getSendTime(), unit.getDescBrand(), unit.getDescModel(), unit.getVehicleYear(), unit.getVehicleVin(), unit.getVehiclePlate(), unit.getGeoreference(), unit.getTimeTravel(), unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(), unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed());
+            TemporalUnitDB.createNewUnit(unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(),
+                    unit.getSendTime(), unit.getDescBrand(), unit.getDescModel(), unit.getVehicleYear(), unit.getVehicleVin(), unit.getVehiclePlate(),
+                    unit.getGeoreference(), unit.getTimeTravel(), unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(), unit.getMileage(), unit.getKmTravel(),
+                    unit.getCurrentSpeed(), unit.getMaxSpeed());
         }
     }
 
     private void createTemporalGroupDB(List<Group> groupList) {
         for (Group group : groupList) {
-            TemporalGroupDB.createNewGroup(group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(), group.isSelected(), group.getPositionItem(), group.getVehicles());
+            TemporalGroupDB.createNewGroup(group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(),
+                    group.isSelected(), group.getPositionItem(), group.getVehicles());
         }
     }
 
     private void updateTemporalUnitDB(List<Unit> unitList) {
         for (Unit unit : unitList) {
-            TemporalUnitDB.updateUnits(unit.getId(),unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(), unit.getSendTime(), unit.getDescBrand(), unit.getDescModel(), unit.getVehicleYear(), unit.getVehicleVin(), unit.getVehiclePlate(), unit.getGeoreference(), unit.getTimeTravel(), unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(), unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed());
+            TemporalUnitDB.updateUnits(unit.getId(),unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(),
+                    unit.getVehicleImage(), unit.getSendTime(), unit.getDescBrand(), unit.getDescModel(), unit.getVehicleYear(), unit.getVehicleVin(),
+                    unit.getVehiclePlate(), unit.getGeoreference(), unit.getTimeTravel(), unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(),
+                    unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed());
         }
     }
 
     private void updateTemporalGroupDB(List<Group> groupList) {
         for (Group group : groupList) {
-            TemporalGroupDB.updateGroups(group.getId(),group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(), group.isSelected(), group.getPositionItem(), group.getVehicles());
+            TemporalGroupDB.updateGroups(group.getId(),group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(),
+                    group.isSelected(), group.getPositionItem(), group.getVehicles());
         }
     }
 
@@ -310,25 +318,33 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
 
     private void createFinalUnitDB(List<Unit> unitList) {
         for (Unit unit : unitList) {
-            FinalUnitDB.createNewUnit(unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(), unit.getSendTime(), unit.getDescBrand(), unit.getDescModel(), unit.getVehicleYear(), unit.getVehicleVin(), unit.getVehiclePlate(), unit.getGeoreference(), unit.getTimeTravel(), unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(), unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed());
+            FinalUnitDB.createNewUnit(unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(),
+                    unit.getSendTime(), unit.getDescBrand(), unit.getDescModel(), unit.getVehicleYear(), unit.getVehicleVin(), unit.getVehiclePlate(),
+                    unit.getGeoreference(), unit.getTimeTravel(), unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(), unit.getMileage(),
+                    unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed());
         }
     }
 
     private void createFinalGroupDB(List<Group> groupList) {
         for (Group group : groupList) {
-            FinalGroupDB.createNewGroup(group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(), group.isSelected(), group.getPositionItem(), group.getVehicles());
+            FinalGroupDB.createNewGroup(group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(),
+                    group.isSelected(), group.getPositionItem(), group.getVehicles());
         }
     }
 
     private void updateFinalUnitDB(List<Unit> unitList) {
         for (Unit unit : unitList) {
-            FinalUnitDB.updateUnits(unit.getId(),unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(), unit.getSendTime(), unit.getDescBrand(), unit.getDescModel(), unit.getVehicleYear(), unit.getVehicleVin(), unit.getVehiclePlate(), unit.getGeoreference(), unit.getTimeTravel(), unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(), unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed());
+            FinalUnitDB.updateUnits(unit.getId(),unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(),
+                    unit.getVehicleImage(), unit.getSendTime(), unit.getDescBrand(), unit.getDescModel(), unit.getVehicleYear(), unit.getVehicleVin(),
+                    unit.getVehiclePlate(), unit.getGeoreference(), unit.getTimeTravel(), unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(),
+                    unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed());
         }
     }
 
     private void updateFinalGroupDB(List<Group> groupList) {
         for (Group group : groupList) {
-            FinalGroupDB.updateGroups(group.getId(),group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(), group.isSelected(), group.getPositionItem(), group.getVehicles());
+            FinalGroupDB.updateGroups(group.getId(),group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(),
+                    group.isSelected(), group.getPositionItem(), group.getVehicles());
         }
     }
 

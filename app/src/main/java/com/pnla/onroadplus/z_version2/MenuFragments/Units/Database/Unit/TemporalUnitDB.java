@@ -16,10 +16,14 @@ public class TemporalUnitDB {
         this.realm = realm;
     }
 
-    public static void createNewUnit(boolean vehicleStatus, int cveVehicle, int vehicleSwitch, String vehicleName, String vehicleImage, String sendTime, String descBrand, String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, String georeference, String timeTravel, String timeElapsed, double latitude, double longitude, double mileage, double kmTravel, double currentSpeed, double maxSpeed){
+    public static void createNewUnit(boolean vehicleStatus, int cveVehicle, int vehicleSwitch, String vehicleName, String vehicleImage,
+                                     String sendTime, String descBrand, String descModel, String vehicleYear, String vehicleVin, String vehiclePlate,
+                                     String georeference, String timeTravel, String timeElapsed, double latitude, double longitude, double mileage,
+                                     double kmTravel, double currentSpeed, double maxSpeed){
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
-        Unit unit = new Unit(vehicleStatus,cveVehicle,vehicleSwitch,vehicleName,vehicleImage,sendTime,descBrand,descModel,vehicleYear,vehicleVin,vehiclePlate,georeference,timeTravel,timeElapsed,latitude,longitude,mileage,kmTravel,currentSpeed,maxSpeed);
+        Unit unit = new Unit(vehicleStatus,cveVehicle,vehicleSwitch,vehicleName,vehicleImage,sendTime,descBrand,descModel,vehicleYear,vehicleVin,
+                vehiclePlate,georeference,timeTravel,timeElapsed,latitude,longitude,mileage,kmTravel,currentSpeed,maxSpeed);
         List<Unit> unitList = new ArrayList<>();
         unitList.add(unit);
         realm.copyToRealm(unitList);
@@ -36,7 +40,10 @@ public class TemporalUnitDB {
         return unitList;
     }
 
-    public static void updateUnits(int id,boolean vehicleStatus, int cveVehicle, int vehicleSwitch, String vehicleName, String vehicleImage, String sendTime, String descBrand, String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, String georeference, String timeTravel, String timeElapsed, double latitude, double longitude, double mileage, double kmTravel, double currentSpeed, double maxSpeed){
+    public static void updateUnits(int id,boolean vehicleStatus, int cveVehicle, int vehicleSwitch, String vehicleName, String vehicleImage, String sendTime,
+                                   String descBrand, String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, String georeference,
+                                   String timeTravel, String timeElapsed, double latitude, double longitude, double mileage, double kmTravel,
+                                   double currentSpeed, double maxSpeed){
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         Unit unit = realm.where(Unit.class).equalTo("id", id).findFirst();
