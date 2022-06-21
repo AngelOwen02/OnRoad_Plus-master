@@ -328,7 +328,6 @@ import java.util.List;
                     names2.add(filterUnitList.get(ñ).getVehicleName());
                 }
 
-
                 /***/
                 cvesalternos.clear();
                 if(names!=null||names.size()!=0) {
