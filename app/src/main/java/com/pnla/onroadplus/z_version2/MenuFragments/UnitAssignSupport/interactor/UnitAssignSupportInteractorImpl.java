@@ -38,7 +38,6 @@ import retrofit2.Retrofit;
 public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInteractor {
 
     private UnitAssignSupportPresenter presenter;
-    //private TrackingService service;
     private SupportService service;
     private Context context;
     private List<GroupvehicleInsideData> groupvehicleInsideData;
