@@ -34,4 +34,7 @@ public interface UnitService {
 
     @POST(RetrofitEndPointsV2.GET_MENUOBJECT)
     Call<geoCercasResponse> hideShowgeoCercas(@Body gecercasRequest request);
+
+    @POST(RetrofitEndPointsV2.GET_SUPPORTROUTES)
+    Call<SupportUnitResponse> getFullSupportUnits(@Body SupportUnitRequest request);
 }
