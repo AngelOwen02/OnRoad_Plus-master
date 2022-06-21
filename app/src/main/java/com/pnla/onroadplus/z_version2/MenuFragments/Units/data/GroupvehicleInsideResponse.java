@@ -40,6 +40,4 @@ public class GroupvehicleInsideResponse {
     public void setData(List<GroupvehicleInsideData> data) {
         this.data = data;
     }
-
-
 }

@@ -9,6 +9,7 @@ public class SupportUnitResponse {
     private List<GroupvehicleInsideData> data;
 
     public SupportUnitResponse(int responseCode, String message, List<GroupvehicleInsideData> data) {
+        super();
         this.responseCode = responseCode;
         this.message = message;
         this.data = data;
