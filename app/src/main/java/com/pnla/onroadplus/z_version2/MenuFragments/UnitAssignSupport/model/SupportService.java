@@ -17,5 +17,5 @@ public interface SupportService {
 
     //Este es el de Unidades de Soporte
     //@POST(RetrofitEndPointsV2.GET_SUPPORTROUTES)
-    //Call<SupportUnitResponse> getFullSupportUnits(@Body SupportUnitRequest request);
+    //Call<SupportUnitResponse> getSupportUnits(@Body SupportUnitRequest request);
 }
