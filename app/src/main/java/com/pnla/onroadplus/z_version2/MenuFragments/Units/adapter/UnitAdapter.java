@@ -183,7 +183,6 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
                 }
 
           //  }
-
         }else
         {
             holder.txtUnitGeoReference.setText("---- ---- ---- ----");
