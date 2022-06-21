@@ -81,6 +81,7 @@ public class UnitsInteractorImpl implements UnitsInteractor {
     //   public static boolean firstime;
     private int sizeoflistgeoreference;
     List<String> adress=new ArrayList<>();
+
     public UnitsInteractorImpl(UnitsPresenter presenter, Context context) {
         this.context = context;
         this.presenter = presenter;
