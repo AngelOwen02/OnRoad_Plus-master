@@ -194,15 +194,15 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             holder.unitGeoExample.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
             //cardViewUnitContainer.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorBorderCarGreen));
             //imgUnitCircle.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGreen));
-        } else if (vehicleList.get(position).getDescBrand() == "Nissan") {
+        } else if (vehicleList.get(position).getDescBrand().equals("Nissan")) {
             holder.unitGeoExample.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
             //cardViewUnitContainer.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorBorderCarOrange));
             //imgUnitCircle.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarOrange));
-        } else if (vehicleList.get(position).getDescBrand() == "Otra") {
+        } else if (vehicleList.get(position).getDescBrand().equals("Otra")) {
             holder.unitGeoExample.setTextColor(ContextCompat.getColor(context,R.color.green));
             //cardViewUnitContainer.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorBorderCarRed));
             //imgUnitCircle.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarRed));
-        } else if (vehicleList.get(position).getDescBrand() == "Mitsubishi"){
+        } else if (vehicleList.get(position).getDescBrand().equals("Mitsubishi")) {
             holder.unitGeoExample.setTextColor(ContextCompat.getColor(context,R.color.colorBorderCarBlue));
             //cardViewUnitContainer.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorBlack));
             //imgUnitCircle.setBorderColor(getContext().getResources().getColor(R.color.colorBlack));
