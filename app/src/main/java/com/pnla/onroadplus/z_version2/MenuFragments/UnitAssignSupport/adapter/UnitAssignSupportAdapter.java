@@ -188,6 +188,29 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         //holder.unitGeoExample.setText(vehicle.getGeoreference()+ " si");
         //holder.unitGeoExample.setText(vehicle.getGeoreference() + " si");
         //holder.unitGeoExample.setText("Ejemploooooooooooooooooo");
+
+        //Esto servira para el texto, imagenes y lo que tenga que cambiar el color
+        if (vehicleList.get(position).getDescBrand().equals("Kenworth")) {
+            holder.unitGeoExample.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
+            //cardViewUnitContainer.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorBorderCarGreen));
+            //imgUnitCircle.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGreen));
+        } else if (vehicleList.get(position).getDescBrand() == "Nissan") {
+            holder.unitGeoExample.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
+            //cardViewUnitContainer.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorBorderCarOrange));
+            //imgUnitCircle.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarOrange));
+        } else if (vehicleList.get(position).getDescBrand() == "Otra") {
+            holder.unitGeoExample.setTextColor(ContextCompat.getColor(context,R.color.green));
+            //cardViewUnitContainer.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorBorderCarRed));
+            //imgUnitCircle.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarRed));
+        } else if (vehicleList.get(position).getDescBrand() == "Mitsubishi"){
+            holder.unitGeoExample.setTextColor(ContextCompat.getColor(context,R.color.colorBorderCarBlue));
+            //cardViewUnitContainer.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorBlack));
+            //imgUnitCircle.setBorderColor(getContext().getResources().getColor(R.color.colorBlack));
+        } else {
+            //cardViewUnitContainer.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorBorderCarGray));
+            //imgUnitCircle.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGray));
+            holder.unitGeoExample.setTextColor(ContextCompat.getColor(context,R.color.colorBlack));
+        }
     }
 
     @Override
