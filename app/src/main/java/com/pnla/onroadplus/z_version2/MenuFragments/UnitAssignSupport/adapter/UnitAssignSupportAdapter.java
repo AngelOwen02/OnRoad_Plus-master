@@ -167,8 +167,25 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
         //holder.unitStatus.setTextColor(0xffa400);
 
+        /**if (vehicleList.get(position).getGeoreference().equals("")||vehicleList.get(position).getGeoreference()==null){
+            holder.unitGeoExample.setText("---- ---- ---- ----");
+
+        }else {
+            holder.unitGeoExample.setText(vehicle.getGeoreference());
+        }*/
+
+        if (vehicleList.get(position).getDescBrand() != null){
+            if (vehicleList.get(position).getDescBrand().equals("")){
+                holder.unitGeoExample.setText("----");
+            } else {
+                holder.unitGeoExample.setText(vehicleList.get(position).getDescBrand());
+            }
+        }else {
+            holder.unitGeoExample.setText("----");
+        }
+
         //holder.unitGeoExample.setText(vehicle.getDescBrand());
-        holder.unitGeoExample.setText(vehicle.getGeoreference()+ " si");
+        //holder.unitGeoExample.setText(vehicle.getGeoreference()+ " si");
         //holder.unitGeoExample.setText(vehicle.getGeoreference() + " si");
         //holder.unitGeoExample.setText("Ejemploooooooooooooooooo");
     }
