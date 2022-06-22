@@ -19,11 +19,11 @@ public class TemporalUnitDB {
     public static void createNewUnit(boolean vehicleStatus, int cveVehicle, int vehicleSwitch, String vehicleName, String vehicleImage,
                                      String sendTime, String descBrand, String descModel, String vehicleYear, String vehicleVin, String vehiclePlate,
                                      String georeference, String timeTravel, String timeElapsed, double latitude, double longitude, double mileage,
-                                     double kmTravel, double currentSpeed, double maxSpeed){
+                                     double kmTravel, double currentSpeed, double maxSpeed, String desc_layer){
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         Unit unit = new Unit(vehicleStatus,cveVehicle,vehicleSwitch,vehicleName,vehicleImage,sendTime,descBrand,descModel,vehicleYear,vehicleVin,
-                vehiclePlate,georeference,timeTravel,timeElapsed,latitude,longitude,mileage,kmTravel,currentSpeed,maxSpeed);
+                vehiclePlate,georeference,timeTravel,timeElapsed,latitude,longitude,mileage,kmTravel,currentSpeed,maxSpeed,desc_layer);
         List<Unit> unitList = new ArrayList<>();
         unitList.add(unit);
         realm.copyToRealm(unitList);
@@ -43,7 +43,7 @@ public class TemporalUnitDB {
     public static void updateUnits(int id,boolean vehicleStatus, int cveVehicle, int vehicleSwitch, String vehicleName, String vehicleImage, String sendTime,
                                    String descBrand, String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, String georeference,
                                    String timeTravel, String timeElapsed, double latitude, double longitude, double mileage, double kmTravel,
-                                   double currentSpeed, double maxSpeed){
+                                   double currentSpeed, double maxSpeed, String desc_layer){
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         Unit unit = realm.where(Unit.class).equalTo("id", id).findFirst();
@@ -70,6 +70,7 @@ public class TemporalUnitDB {
             units.setKmTravel(kmTravel);
             units.setCurrentSpeed(currentSpeed);
             units.setMaxSpeed(maxSpeed);
+            units.setDesc_layer(desc_layer);
         }
         realm.commitTransaction();
     }

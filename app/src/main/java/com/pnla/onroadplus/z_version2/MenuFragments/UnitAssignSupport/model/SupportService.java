@@ -11,9 +11,12 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface SupportService {
-    @POST(RetrofitEndPointsV2.GET_VEHICLES_GROUP_LIST_VEHICLES)
-    Call<GroupvehicleInsideResponse> getVehiclesInGroups(@Body GroupvehicleInsideRequest request);
+    /**@POST(RetrofitEndPointsV2.GET_VEHICLES_GROUP_LIST_VEHICLES)
+    Call<GroupvehicleInsideResponse> getVehiclesInGroups(@Body GroupvehicleInsideRequest request);*/
     //Call<SupportUnitResponse> getVehiclesInGroups(@Body SupportUnitRequest request);
+
+    @POST(RetrofitEndPointsV2.GET_SUPPORTROUTES)
+    Call<GroupvehicleInsideResponse> getVehiclesInGroups(@Body GroupvehicleInsideRequest request);
 
     //Este es el de Unidades de Soporte
     //@POST(RetrofitEndPointsV2.GET_SUPPORTROUTES)

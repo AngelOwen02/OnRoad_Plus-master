@@ -46,6 +46,9 @@ public class Unit extends RealmObject {
     @SerializedName("max_speed")
     private double maxSpeed;
 
+    @SerializedName("desc_layer")
+    private String desc_layer;
+
     public Unit()
     {
 
@@ -53,7 +56,7 @@ public class Unit extends RealmObject {
 
     public Unit(boolean vehicleStatus, int cveVehicle, int vehicleSwitch, String vehicleName, String vehicleImage, String sendTime, String descBrand,
                 String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, String georeference, String timeTravel, String timeElapsed,
-                double latitude, double longitude, double mileage, double kmTravel, double currentSpeed, double maxSpeed) {
+                double latitude, double longitude, double mileage, double kmTravel, double currentSpeed, double maxSpeed, String desc_layer) {
         this.id = BaseRealmApplication.UNIT_ID.incrementAndGet();
         this.vehicleStatus = vehicleStatus;
         this.cveVehicle = cveVehicle;
@@ -75,6 +78,7 @@ public class Unit extends RealmObject {
         this.kmTravel = kmTravel;
         this.currentSpeed = currentSpeed;
         this.maxSpeed = maxSpeed;
+        this.desc_layer = desc_layer;
     }
 
 
@@ -240,5 +244,13 @@ public class Unit extends RealmObject {
 
     public void setMaxSpeed(double maxSpeed) {
         this.maxSpeed = maxSpeed;
+    }
+
+    public String getDesc_layer(){
+        return desc_layer;
+    }
+
+    public void setDesc_layer(String desc_layer){
+        this.desc_layer = desc_layer;
     }
 }

@@ -167,7 +167,8 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
         //holder.unitStatus.setTextColor(0xffa400);
 
-        holder.unitGeoExample.setText(vehicle.getDescBrand());
+        //holder.unitGeoExample.setText(vehicle.getDescBrand());
+        holder.unitGeoExample.setText(vehicle.getGeoreference()+ " si");
         //holder.unitGeoExample.setText(vehicle.getGeoreference() + " si");
         //holder.unitGeoExample.setText("Ejemploooooooooooooooooo");
     }
