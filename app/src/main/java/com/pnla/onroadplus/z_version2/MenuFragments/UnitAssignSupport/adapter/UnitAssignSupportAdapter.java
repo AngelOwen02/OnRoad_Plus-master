@@ -127,6 +127,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             }
 
         });*/
+
         Log.e("doitonce", "" + integerList);
         if (vehicleList.get(position).getVehicleImage() == null) {
             Glide.with(context).load(R.drawable.sedan).into(holder.unitImage);
