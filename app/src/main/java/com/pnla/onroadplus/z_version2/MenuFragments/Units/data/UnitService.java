@@ -29,11 +29,11 @@ public interface UnitService {
     @POST(RetrofitEndPointsV2.GET_VEHICLE_GROUP_LIST)
     Call<GroupResponse> getGroups(@Body GroupRequest request);
 
-    /**@POST(RetrofitEndPointsV2.GET_VEHICLES_GROUP_LIST_VEHICLES)
-    Call<GroupvehicleInsideResponse> getVehiclesInGroups(@Body GroupvehicleInsideRequest request);*/
-
-    @POST(RetrofitEndPointsV2.GET_SUPPORTROUTES)
+    @POST(RetrofitEndPointsV2.GET_VEHICLES_GROUP_LIST_VEHICLES)
     Call<GroupvehicleInsideResponse> getVehiclesInGroups(@Body GroupvehicleInsideRequest request);
+
+    /**@POST(RetrofitEndPointsV2.GET_SUPPORTROUTES)
+    Call<GroupvehicleInsideResponse> getVehiclesInGroups(@Body GroupvehicleInsideRequest request);*/
 
     @POST(RetrofitEndPointsV2.GET_MENUOBJECT)
     Call<geoCercasResponse> hideShowgeoCercas(@Body gecercasRequest request);
