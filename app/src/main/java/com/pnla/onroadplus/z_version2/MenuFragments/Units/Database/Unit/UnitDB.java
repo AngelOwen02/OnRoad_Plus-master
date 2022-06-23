@@ -1,6 +1,5 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit;
 
-
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 
 import java.util.ArrayList;
