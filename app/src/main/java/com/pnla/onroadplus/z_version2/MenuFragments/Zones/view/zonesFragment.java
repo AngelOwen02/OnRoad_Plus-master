@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.core.graphics.ColorUtils;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -34,6 +35,8 @@ import com.google.android.gms.maps.model.PolygonOptions;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.UnitAssignSupportFragment;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.container.UnitAssignSupportContainer;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Zones.model.pointsData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Zones.model.visitedData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Zones.model.zonesData;
@@ -119,8 +122,13 @@ public class zonesFragment  extends Fragment implements OnMapReadyCallback,zones
 
     //Esto es para enviar al fragmento de Asignacion de Apoyos
     private void asignarUnidadImp(){
-        Intent intent = new Intent(getContext(), UnitAssignSupportContainer.class);
-        startActivity(intent);
+        /**Intent intent = new Intent(getContext(), UnitAssignSupportContainer.class);
+        startActivity(intent);*/
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        UnitAssignSupportViewImpl unidades = new UnitAssignSupportViewImpl();//transaction.addToBackStack(UnitsViewImpl.TAG);
+        transaction.replace(R.id.conteinerMainFragments, unidades, UnitAssignSupportViewImpl.TAG).commit();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     }
 
     private void geoZonasViewImpl() {

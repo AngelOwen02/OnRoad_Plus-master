@@ -2,6 +2,7 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Units.presenter;
 
 import android.content.Context;
 
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
@@ -62,6 +63,11 @@ public class UnitsPresenterImpl implements UnitsPresenter {
 
     @Override
     public void setView(UnitsViewImpl view) {
+        this.view = view;
+    }
+
+    @Override
+    public void setView2(UnitAssignSupportViewImpl view){
         this.view = view;
     }
 

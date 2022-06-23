@@ -1,5 +1,6 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Units.presenter;
 
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
 
@@ -9,6 +10,8 @@ import java.util.List;
 public interface UnitsPresenter {
 
     void setView(UnitsViewImpl view);
+
+    void setView2(UnitAssignSupportViewImpl view);
 
     void getFullVehicles();
   //  void getvehiclesINgroups();
