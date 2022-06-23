@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.UnitAssignSupportFragment;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.adapter.UnitAssignSupportAdapter;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractor;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.UnitAssignSupportPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.UnitAssignSupportPresenterImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportView;
@@ -29,6 +31,8 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.UnitTra
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.presenter.UnitTrackingPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.presenter.UnitTrackingPresenterImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.Group;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractor;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 
