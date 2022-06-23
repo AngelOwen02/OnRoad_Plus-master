@@ -20,6 +20,8 @@ import com.bumptech.glide.Glide;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.UnitTrackingAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.UnitDB;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractor;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 import com.pnla.onroadplus.z_version2.SplashScreenActivity;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
@@ -174,11 +176,11 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             holder.unitGeoExample.setText(vehicle.getGeoreference());
         }*/
 
-        if (vehicleList.get(position).getDescBrand() != null){
-            if (vehicleList.get(position).getDescBrand().equals("")){
+        if (vehicleList.get(position).getGeoreference() != null){
+            if (vehicleList.get(position).getGeoreference().equals("")){
                 holder.unitGeoExample.setText("----");
             } else {
-                holder.unitGeoExample.setText(vehicleList.get(position).getDescBrand());
+                holder.unitGeoExample.setText(vehicleList.get(position).getGeoreference());
             }
         }else {
             holder.unitGeoExample.setText("----");
