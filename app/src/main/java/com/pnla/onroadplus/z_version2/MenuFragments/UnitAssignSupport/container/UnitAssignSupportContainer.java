@@ -141,7 +141,7 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
             names.add(vehicless.get(i).getVehicleName());
         }
         Log.e("groupsitems","im in units"+ names );
-        adapterVehicles.booleanList(mytoogles);
+        //adapterVehicles.booleanList(mytoogles);
     }
 
     @Override

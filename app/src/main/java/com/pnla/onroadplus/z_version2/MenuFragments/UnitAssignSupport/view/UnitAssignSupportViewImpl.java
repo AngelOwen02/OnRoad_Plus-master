@@ -27,7 +27,8 @@ import com.pnla.onroadplus.R;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.GroupTrackingAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.UnitDB;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.adapter.UnitAdapter;
+//import com.pnla.onroadplus.z_version2.MenuFragments.Units.adapter.UnitAdapter;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.adapter.UnitAssignSupportAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.Group;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
@@ -47,7 +48,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
     public static final String TAG = UnitsViewImpl.class.getSimpleName();
     private SearchView searchView;
     private RecyclerView rvUnits;
-    private UnitAdapter unitAdapter;
+    //private UnitAdapter unitAdapter;
+    private UnitAssignSupportAdapter unitAssignSupportAdapter;
     private CardView searchViewContainer;
     private List<Unit> vehicles;
     private List<Unit> undredlist=new ArrayList<>();
@@ -71,6 +73,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_units_impl, container, false);
+        //View view = inflater.inflate(R.layout.fragment_unit_assign_support_view_impl, container, false);
 
         initUnitsViewImpl(view);
         update();
@@ -185,8 +188,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
         //rvUnits.setOnFlingListener(null);
         //snapHelper.attachToRecyclerView(rvUnits);
 
-        unitAdapter = new UnitAdapter(vehicles,getContext());
-        rvUnits.setAdapter(unitAdapter);
+        unitAssignSupportAdapter = new UnitAssignSupportAdapter(vehicles,getContext());
+        rvUnits.setAdapter(unitAssignSupportAdapter);
         hideProgressDialog();
         if( vehicles.size()!=0)
         {
@@ -197,7 +200,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
             // Log.e("bloquesdeunides2","------"+ unitAdapter.getItemCount());
             //if(vehicles.size()>12){
 
-            if(unitAdapter.getItemCount()<7)
+            if(unitAssignSupportAdapter.getItemCount()<7)
             {
                 for(int k=0;k<vehicles.size();k++)
                 {
@@ -219,8 +222,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
             position=cvesalternos.size();
             presenter.georeferenceformAPI(cvesalternos);
 
-            unitAdapter.getAdress(directions);
-            unitAdapter.notifyDataSetChanged();
+            unitAssignSupportAdapter.getAdress(directions);
+            unitAssignSupportAdapter.notifyDataSetChanged();
 
         }
         rvUnits.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -230,11 +233,11 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
                 //    Log.e("filterlog",""+cvesalternos);
                 //    Log.e("bloquesdeunides11",""+allcves);
 
-                if (position < unitAdapter.getadapterviewsize()) {
+                if (position < unitAssignSupportAdapter.getadapterviewsize()) {
                     if ( searchViewContainer.getVisibility()==View.GONE)
                     {
                         cvesalternos.clear();
-                        for (int k = 0; k < unitAdapter.getadapterviewsize(); k++) {
+                        for (int k = 0; k < unitAssignSupportAdapter.getadapterviewsize(); k++) {
 
                             cvesalternos.add(vehicles.get(k).getCveVehicle());
                         }
@@ -246,10 +249,10 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                        unitAdapter.getAdress(directions);
+                        unitAssignSupportAdapter.getAdress(directions);
                     }
                 }
-                unitAdapter.notifyDataSetChanged();
+                unitAssignSupportAdapter.notifyDataSetChanged();
                 //Log.e("bloquesdeunides8", "///////" + directions.size());
                 //Log.e("bloquesdeunides8", "///////" + directions);
             }
@@ -263,7 +266,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
         // Log.e("unitsthaticansaw2"," : "+UnitsInteractorImpl.dataofvehiclesgroupscve);
      /*   if(!UnitsInteractorImpl.dataofvehiclesgroupscve.isEmpty())
         {            // Log.e("unitsthaticansaw2"," data is here ");            if(doitonce==false)            {                interactorbridge();            }            else            {            }        }        else        {            // Log.e("unitsthaticansaw2"," mepty ");            // Log.e("unitsthaticansaw2"," : "+UnitsInteractorImpl.dataofvehiclesgroupscve);        }*/
-        unitAdapter.notifyDataSetChanged();
+        unitAssignSupportAdapter.notifyDataSetChanged();
     }
 
     @Override
@@ -317,7 +320,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
     public boolean onQueryTextChange(String newText) {
         List<Unit> filterUnitList = filterUnits(vehicles, newText);
         if (vehicles!=null){
-            unitAdapter.setFilter(filterUnitList);
+            unitAssignSupportAdapter.setFilter(filterUnitList);
             if(filterUnitList!=null)
             {
                 List<String> names2=new ArrayList<>();
@@ -354,8 +357,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
                     }
                     //  Log.e("filterlog", "estoy filtrando" + names);
                     //  Log.e("filterlog", "estoy filtrando" + names2);
-                    unitAdapter.getAdress(directions);
-                    unitAdapter.notifyDataSetChanged();
+                    unitAssignSupportAdapter.getAdress(directions);
+                    unitAssignSupportAdapter.notifyDataSetChanged();
                 }
                 /***/
 
