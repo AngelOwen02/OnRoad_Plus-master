@@ -1,18 +1,15 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Units.data;
 
-import java.util.List;
-
 public class SupportUnitResponse {
 
     private int responseCode;
     private String message;
-    private List<GroupvehicleInsideData> data;
+    private SupportUnitData supportUnitData;
 
-    public SupportUnitResponse(int responseCode, String message, List<GroupvehicleInsideData> data) {
-        super();
+    public SupportUnitResponse(int responseCode, String message, SupportUnitData supportUnitData) {
         this.responseCode = responseCode;
         this.message = message;
-        this.data = data;
+        this.supportUnitData = supportUnitData;
     }
 
     public int getResponseCode() {
@@ -31,11 +28,11 @@ public class SupportUnitResponse {
         this.message = message;
     }
 
-    public List<GroupvehicleInsideData> getData() {
-        return data;
+    public SupportUnitData getData() {
+        return supportUnitData;
     }
 
-    public void setData(List<GroupvehicleInsideData> data){
-        this.data = data;
+    public void setData(SupportUnitData supportUnitData) {
+        this.supportUnitData = supportUnitData;
     }
 }

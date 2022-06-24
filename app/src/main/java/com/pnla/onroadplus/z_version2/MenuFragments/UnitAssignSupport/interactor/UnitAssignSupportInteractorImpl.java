@@ -43,6 +43,9 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.GroupResponse;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.GroupvehicleInsideData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.GroupvehicleInsideRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.GroupvehicleInsideResponse;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitData;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitRequest;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitResponse;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.UnitData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.UnitRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.UnitResponse;
@@ -242,12 +245,15 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         if(token!=null)
         {
             UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);
+            //SupportUnitRequest request = new SupportUnitRequest(token, typeRequest, vehiclesCves);
             Log.e("token",""+token);
             // Log.e("checkinguser",token+"  "+typeRequest+"  "+vehiclesCves);
             //presenter.showProgressDialog();
             unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
+            //unitService.getFullVehiclesSupport(request).enqueue(new Callback<SupportUnitResponse>() {
                 @Override
                 public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
+                //public void onResponse(Call<SupportUnitResponse> call, Response<SupportUnitResponse> response) {
                     try {
                         validateCode(response, context);
                     } catch (IOException e) {
@@ -257,6 +263,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
 
                 @Override
                 public void onFailure(Call<UnitResponse> call, Throwable t) {
+                //public void onFailure(Call<SupportUnitResponse> call, Throwable t) {
                     // Log.e("onFailure",t.getLocalizedMessage());
                     Toast.makeText(context,  "sesion expirada", Toast.LENGTH_LONG).show();
 
@@ -267,6 +274,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
     }
 
     private void validateCode(Response<UnitResponse> response, Context context) throws IOException {
+    //private void validateCode(Response<SupportUnitResponse> response, Context context) throws IOException {
         //  Log.e("LAPRINCESS", String.valueOf(response.body().getResponseCode()));
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getVehiclesData(response, context);
@@ -277,13 +285,20 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
     }
 
     private void getVehiclesData(Response<UnitResponse> response, Context context) throws IOException {
+    //private void getVehiclesData(Response<SupportUnitResponse> response, Context context) throws IOException {
         UnitResponse unitResponse = response.body();
+        //SupportUnitResponse supportUnitResponse = response.body();
         if (unitResponse != null) {
+        //if (supportUnitResponse != null) {
             int responseCode = unitResponse.getResponseCode();
+            //int responseCode = supportUnitResponse.getResponseCode();
             if (responseCode == GeneralConstantsV2.RESPONSE_CODE_OK) {
                 UnitData data = unitResponse.getData();
+                //SupportUnitData supportUnitData = supportUnitResponse.getData();
                 if (data != null) {
+                //if (supportUnitData != null) {
                     List<Unit> unitList = data.getUnitList();
+                    //List<Unit> unitList = supportUnitData.getUnitList();
                     //   Log.e("checkinguser",String.valueOf(unitList.size()));
                     if (unitList.isEmpty()){
                         Toast.makeText(context, "No cuentas con unidades disponibles para visualizar", Toast.LENGTH_SHORT).show();

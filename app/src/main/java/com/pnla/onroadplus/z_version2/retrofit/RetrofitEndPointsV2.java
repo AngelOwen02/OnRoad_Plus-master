@@ -49,6 +49,6 @@ public class RetrofitEndPointsV2 {
     public static final String POST_SETZONES="geofences/setZones";
 
     //Nuevo(s) EndPoints
-    public static final String GET_SUPPORTROUTES="getSoportRoutes";
+    public static final String GET_SUPPORTROUTES="geofences/getSupportRoutes";
 
 }
