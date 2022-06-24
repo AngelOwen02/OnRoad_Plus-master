@@ -25,27 +25,36 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.dynatrace.android.agent.Dynatrace;
 import com.pnla.onroadplus.R;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.GroupTrackingAdapter;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
+//import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractor;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractorImpl;
+
+//import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.UnitDB;
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.adapter.UnitAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.adapter.UnitAssignSupportAdapter;
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.Group;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractor;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
+//import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractor;
+//import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
+//import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.presenter.UnitsPresenter;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.presenter.UnitsPresenterImpl;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsView;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
+//import com.pnla.onroadplus.z_version2.MenuFragments.Units.presenter.UnitsPresenter;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.UnitAssignSupportPresenter;
+//import com.pnla.onroadplus.z_version2.MenuFragments.Units.presenter.UnitsPresenterImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.UnitAssignSupportPresenterImpl;
+//import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsView;
+//import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportView;
+//import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
+//import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, SearchView.OnQueryTextListener, ImageView.OnClickListener {
+public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSupportView, SearchView.OnQueryTextListener, ImageView.OnClickListener {
 
-    public static final String TAG = UnitsViewImpl.class.getSimpleName();
+    //public static final String TAG = UnitsViewImpl.class.getSimpleName();
+    public static final String TAG = UnitAssignSupportViewImpl.class.getSimpleName();
     private SearchView searchView;
     private RecyclerView rvUnits;
     //private UnitAdapter unitAdapter;
@@ -60,7 +69,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
     final Handler handler = new Handler();
     private Runnable runnable;
     private Parcelable state;
-    private UnitsPresenter presenter;
+    //private UnitsPresenter presenter;
+    private UnitAssignSupportPresenter presenter;
     //private GroupTrackingAdapter groupTrackingAdapter;
     //private List<Group> unitGroup;
     private List<Unit> unidades;
@@ -76,7 +86,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
         //View view = inflater.inflate(R.layout.fragment_unit_assign_support_view_impl, container, false);
 
         initUnitsViewImpl(view);
-        update();
+        //update();
         return view;
     }
 
@@ -96,7 +106,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
         searchViewContainer = view.findViewById(R.id.units_search_view_container);
         searchView = view.findViewById(R.id.search_view_units);
         progressDialog = new ProgressDialog(getActivity());
-        txtToolbar.setText("Unidades");
+        txtToolbar.setText("Unidades 2");
 
 //        Dynatrace.applyUserPrivacyOptions(UserPrivacyOptions.builder()
 //                .withDataCollectionLevel(DataCollectionLevel.USER_BEHAVIOR)
@@ -111,8 +121,9 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
     }
 
     private void initPresenter() {
-        presenter = new UnitsPresenterImpl(getContext());
-        presenter.setView2(this);
+        //presenter = new UnitsPresenterImpl(getContext());
+        presenter = new UnitAssignSupportPresenterImpl(getContext());
+        presenter.setView(this);
 
 //        DTXAction processUnits= Dynatrace.enterAction("processUnits");//
 //        processUnits.getRequestTag();
@@ -124,7 +135,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
 
     }
 
-    private void update(){
+    /**private void update(){
         //final UnitsPresenter presenter = new UnitsPresenterImpl(getContext());
         //  presenter.setView(this);
 
@@ -132,15 +143,17 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
             @Override
             public void run() {
                 //presenter.getFullVehicles();
-                UnitsInteractor unitsInteractor = new UnitsInteractorImpl(presenter,getContext());
-                unitsInteractor.getAllVehiclesFromAPI();
+                //UnitsInteractor unitsInteractor = new UnitsInteractorImpl(presenter,getContext());
+                UnitAssignSupportInteractor unitAssignSupportInteractor = new UnitAssignSupportInteractorImpl(presenter,getContext());
+                //unitsInteractor.getAllVehiclesFromAPI();
+                unitAssignSupportInteractor.getGeoreferencefromAPI();
                 presenter.hideProgressDialog();
                 searchViewContainer.setVisibility(View.GONE);
                 handler.postDelayed(this,60000);
             }
         },60000);
 
-    }
+    }*/
 
     private void initOnClickListeners() {
         searchView.setOnQueryTextListener(this);
@@ -280,9 +293,11 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
     {
         //  Log.e("unitsthaticansaw2"," : "+UnitsInteractorImpl.dataofvehiclesgroupscve);
         // Log.e("unitsthaticansaw2"," N: "+UnitsInteractorImpl.cveofgroup);
-        for(int i=0;i<UnitsInteractorImpl.dataofvehiclesgroupscve.size();i++)
+        //for(int i=0;i<UnitsInteractorImpl.dataofvehiclesgroupscve.size();i++)
+        for(int i=0;i<UnitAssignSupportInteractorImpl.dataofvehiclesgroupscve.size();i++)
         {
-            UnitsInteractorImpl.cveofgroup=Integer.parseInt( UnitsInteractorImpl.dataofvehiclesgroupscve.get(i));
+            //UnitsInteractorImpl.cveofgroup=Integer.parseInt( UnitsInteractorImpl.dataofvehiclesgroupscve.get(i));
+            UnitAssignSupportInteractorImpl.cveofgroup = Integer.parseInt(UnitAssignSupportInteractorImpl.dataofvehiclesgroupscve.get(i));
             // Log.e("unitsthaticansaw2"," N: "+UnitsInteractorImpl.cveofgroup);
             //    presenter.getvehiclesINgroups();
         }

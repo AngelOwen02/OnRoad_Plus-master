@@ -3,17 +3,16 @@ package com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.Group;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface UnitAssignSupportView {
 
-    //void showProgressBar();
-    void vehiclesinsiderequest();
-    //void hideProgressBar();
+    void setUnitList(List<Unit> vehicles) throws IOException;
+    void adressList(List<String> adress);
+    void failureResponse(String message);
 
-    void showErrorMessage(String message);
+    void showProgressDialog();
 
-    void fillVehiclesList(List<Unit> vehicles);
-
-    void fillGroupsList(List<Group> groups);
+    void hideProgressDialog();
 }

@@ -11,7 +11,7 @@ public interface UnitsPresenter {
 
     void setView(UnitsViewImpl view);
 
-    void setView2(UnitAssignSupportViewImpl view);
+    //void setView2(UnitAssignSupportViewImpl view);
 
     void getFullVehicles();
   //  void getvehiclesINgroups();

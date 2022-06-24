@@ -7,43 +7,21 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.view.UnitTracki
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.Group;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface UnitAssignSupportPresenter {
 
     void setView(UnitAssignSupportView view);
 
-    //requestDataToInteractor
-    void getVehicles(Context context);
+    void getFullVehicles();
+    //  void getvehiclesINgroups();
+    void georeferenceformAPI(List<Integer> values) throws IOException;
+    void setVehiclesListToView(List<Unit> unitList) throws IOException;
+    void setdirectionsToView(List<String> addresList);
+    void failureResponse(String message);
 
-    void getGroups(Context context);
-    void getVehiclesinGroups(Context context);
-    void doiteverytime();
-    //setDataToView
-    void showProgressBar();
+    void showProgressDialog();
 
-    void hideProgressBar();
-
-    void showErrorMessage(String message);
-
-    void setMessageToView(String message);
-
-    void setVehicleList(List<Unit> vehicles);
-
-    void setGroupsList(List<Group> groups);
-
-    void sessionExpired(String message);
-
-    /**void hideUnitRV();
-
-    void showUnitRV();
-
-    void hideGroupRV();
-
-    void showGroupRV();
-
-
-    void hideEmptyGroupsImage();
-
-    void showEmptyGroupsImage();*/
+    void hideProgressDialog();
 }

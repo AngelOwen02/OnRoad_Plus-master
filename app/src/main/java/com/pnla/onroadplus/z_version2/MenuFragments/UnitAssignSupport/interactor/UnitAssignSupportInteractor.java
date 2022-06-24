@@ -1,14 +1,13 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor;
 
 import android.content.Context;
+import java.io.IOException;
+import java.util.List;
 
 public interface UnitAssignSupportInteractor {
 
-    void getVehiclesAnGroups(Context context);
+    void getAllVehiclesFromAPI();
+    //void getGroupsVehicles();
 
-    void getVehicles(Context context);
-    void getGroups(Context context);
-    //void onClickGroups();
-
-    void getUnitsfromgroups(Context context);
+    void getGeoreferencefromAPI(List<Integer> cves) throws IOException;
 }

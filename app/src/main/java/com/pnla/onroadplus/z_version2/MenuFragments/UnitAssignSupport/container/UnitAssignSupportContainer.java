@@ -36,6 +36,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsIntera
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -88,10 +89,10 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
         //toolbarImgSearch.setOnClickListener(this);
         //searchViewTracking.setOnQueryTextListener(this);
 
-        presenter = new UnitAssignSupportPresenterImpl();
+        /**presenter = new UnitAssignSupportPresenterImpl();
         presenter.setView(this);
         presenter.getVehicles(this);
-        //presenter.getGroups(this);
+        //presenter.getGroups(this);*/
     }
 
     @Override
@@ -117,13 +118,13 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
         progressBar.setVisibility(View.VISIBLE);
     }*/
 
-    @Override
+    /**@Override
     public void vehiclesinsiderequest() {
         Log.e("dothetogles1","soy el handler" +integervalueforrequest+"<");
         presenter.getVehiclesinGroups(getBaseContext());
-    }
+    }*/
 
-    @Override
+    /**@Override
     public void showErrorMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
@@ -142,9 +143,9 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
         }
         Log.e("groupsitems","im in units"+ names );
         //adapterVehicles.booleanList(mytoogles);
-    }
+    }*/
 
-    @Override
+    /**@Override
     public void fillGroupsList(List<Group> groups) {
         this.groupss = groups;
         //  Log.e("unitsthaticansaw3"," toogles adapter: " +groupss.size());
@@ -169,7 +170,7 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
            presenter.getVehiclesinGroups(getBaseContext());
           Log.e("dothetogles","ima doing once");
         }//*/
-    }
+    //}
 
     private void fillVehicles() {
         adapterVehicles = new UnitAssignSupportAdapter(vehicless, this);
@@ -219,5 +220,30 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
     @Override
     public void onBackPressed() {
         goBackintomenu();
+    }
+
+    @Override
+    public void setUnitList(List<Unit> vehicles) throws IOException {
+
+    }
+
+    @Override
+    public void adressList(List<String> adress) {
+
+    }
+
+    @Override
+    public void failureResponse(String message) {
+
+    }
+
+    @Override
+    public void showProgressDialog() {
+
+    }
+
+    @Override
+    public void hideProgressDialog() {
+
     }
 }

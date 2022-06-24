@@ -66,10 +66,10 @@ public class UnitsPresenterImpl implements UnitsPresenter {
         this.view = view;
     }
 
-    @Override
+    /**@Override
     public void setView2(UnitAssignSupportViewImpl view){
         this.view = view;
-    }
+    }*/
 
 
     @Override
