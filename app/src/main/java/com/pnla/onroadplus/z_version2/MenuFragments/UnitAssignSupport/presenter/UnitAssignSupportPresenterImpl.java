@@ -73,8 +73,6 @@ public class UnitAssignSupportPresenterImpl implements UnitAssignSupportPresente
         }
     }
 
-
-
     /**@Override
     public void setView(UnitsViewImpl view) {
         this.view = view;
