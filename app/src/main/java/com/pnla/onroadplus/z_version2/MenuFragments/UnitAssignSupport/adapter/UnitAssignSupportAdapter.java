@@ -331,7 +331,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.txtUnitName.setText("----");
             }
 
-            //holder.txtUnitMaxSpeed.setText(unitList.get(position).getCurrentSpeed() + "km/h");
+            holder.txtUnitMaxSpeed.setText(unitList.get(position).getCurrentSpeed() + "km/h");
 
 
             if (unitList.get(position).getTimeTravel() != null){

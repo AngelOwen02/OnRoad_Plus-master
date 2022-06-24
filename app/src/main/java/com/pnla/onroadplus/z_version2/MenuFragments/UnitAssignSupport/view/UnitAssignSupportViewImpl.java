@@ -29,7 +29,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.UnitDB;
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.adapter.UnitAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.adapter.UnitAssignSupportAdapter;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.Group;
+//import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.Group;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
@@ -62,7 +62,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
     private Parcelable state;
     private UnitsPresenter presenter;
     //private GroupTrackingAdapter groupTrackingAdapter;
-    private List<Group> unitGroup;
+    //private List<Group> unitGroup;
     private List<Unit> unidades;
     int position;
     //   private boolean doitonce=false;
@@ -157,7 +157,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
 
         List<Unit> allUnitsList = UnitDB.getUnitList();
         List<Unit> activeUnitsList = UnitDB.getUnitListActive();
-        List<Group> activeGroupslist = GroupDB.getActiveGroupList();
+        //List<Group> activeGroupslist = GroupDB.getActiveGroupList();
         this.vehicles = unitList;
         //  Log.e("partsrequestvehicles",""+vehicles.size());
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
