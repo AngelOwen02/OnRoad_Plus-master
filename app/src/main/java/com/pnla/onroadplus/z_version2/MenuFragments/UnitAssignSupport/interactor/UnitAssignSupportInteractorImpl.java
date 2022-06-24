@@ -294,7 +294,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
             //int responseCode = supportUnitResponse.getResponseCode();
             if (responseCode == GeneralConstantsV2.RESPONSE_CODE_OK) {
                 UnitData data = unitResponse.getData();
-                //SupportUnitData supportUnitData = supportUnitResponse.getData();
+                //SupportUnitData data = supportUnitResponse.getData();
                 if (data != null) {
                 //if (supportUnitData != null) {
                     List<Unit> unitList = data.getUnitList();
