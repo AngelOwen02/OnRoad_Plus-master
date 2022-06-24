@@ -4,12 +4,12 @@ public class SupportUnitResponse {
 
     private int responseCode;
     private String message;
-    private SupportUnitData supportUnitData;
+    private SupportUnitData data;
 
-    public SupportUnitResponse(int responseCode, String message, SupportUnitData supportUnitData) {
+    public SupportUnitResponse(int responseCode, String message, SupportUnitData data) {
         this.responseCode = responseCode;
         this.message = message;
-        this.supportUnitData = supportUnitData;
+        this.data = data;
     }
 
     public int getResponseCode() {
@@ -29,10 +29,10 @@ public class SupportUnitResponse {
     }
 
     public SupportUnitData getData() {
-        return supportUnitData;
+        return data;
     }
 
-    public void setData(SupportUnitData supportUnitData) {
-        this.supportUnitData = supportUnitData;
+    public void setData(SupportUnitData data) {
+        this.data = data;
     }
 }

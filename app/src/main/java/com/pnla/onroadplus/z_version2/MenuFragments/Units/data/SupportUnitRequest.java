@@ -5,13 +5,13 @@ import java.util.List;
 public class SupportUnitRequest {
 
     private String token;
-    private int boolList;
+    //private int boolList;
     private List<Integer> vehicleList = null;
 
     public SupportUnitRequest(String token, int boolList, List<Integer> vehicleList) {
         super();
         this.token = token;
-        this.boolList = boolList;
+        //this.boolList = boolList;
         this.vehicleList = vehicleList;
     }
 
@@ -23,13 +23,13 @@ public class SupportUnitRequest {
         this.token = token;
     }
 
-    public int getBoolList() {
+    /**public int getBoolList() {
         return boolList;
     }
 
     public void setBoolList(int boolList) {
         this.boolList = boolList;
-    }
+    }*/
 
     public List<Integer> getVehicleList() {
         return vehicleList;
