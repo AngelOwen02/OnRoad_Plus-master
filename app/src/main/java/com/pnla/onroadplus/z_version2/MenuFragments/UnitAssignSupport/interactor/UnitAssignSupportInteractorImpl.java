@@ -244,7 +244,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
             UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);
             Log.e("token",""+token);
             // Log.e("checkinguser",token+"  "+typeRequest+"  "+vehiclesCves);
-            presenter.showProgressDialog();
+            //presenter.showProgressDialog();
             unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
                 @Override
                 public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {

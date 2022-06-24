@@ -69,8 +69,8 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
     @NonNull
     @Override
     public UnitAssignSupportAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        final View view = LayoutInflater.from(context).inflate(R.layout.item_unit, parent, false);
-        //final View view = LayoutInflater.from(context).inflate(R.layout.unit_support, parent, false);
+        //final View view = LayoutInflater.from(context).inflate(R.layout.item_unit, parent, false);
+        final View view = LayoutInflater.from(context).inflate(R.layout.unit_support, parent, false);
         return new UnitAssignSupportAdapter.ViewHolder(view);
     }
 
@@ -323,18 +323,18 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
             if (unitList.get(position).getVehicleName() != null){
                 if (unitList.get(position).getVehicleName().equals("")){
-                    holder.txtUnitName.setText("----");
+                    holder.unitTitle.setText("----");
                 } else {
-                    holder.txtUnitName.setText(unitList.get(position).getVehicleName());
+                    holder.unitTitle.setText(unitList.get(position).getVehicleName());
                 }
             }else {
-                holder.txtUnitName.setText("----");
+                holder.unitTitle.setText("----");
             }
 
-            holder.txtUnitMaxSpeed.setText(unitList.get(position).getCurrentSpeed() + "km/h");
+            //holder.txtUnitMaxSpeed.setText(unitList.get(position).getCurrentSpeed() + "km/h");
 
 
-            if (unitList.get(position).getTimeTravel() != null){
+            /**if (unitList.get(position).getTimeTravel() != null){
                 if (unitList.get(position).getTimeTravel().equals("")){
                     holder.txtHour.setText("--");
                 } else {
@@ -343,7 +343,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 }
             } else {
                 holder.txtHour.setText("--");
-            }
+            }*/
 
             if(textaddres!=null)
             {
@@ -363,14 +363,14 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                         String[] parts1 = name.split(":::");
                         String part1 = parts1[0];
                         String part2 = parts1[1];
-                        holder.txtUnitGeoReference.setText(part2);      /**puedes vrificar que las direcciones coincidan con los items introduciendo part 1 en el campo part2*/
+                        holder.unitGeoExample.setText(part2);      /**puedes vrificar que las direcciones coincidan con los items introduciendo part 1 en el campo part2*/
                     }
                 }
 
                 //  }
             }else
             {
-                holder.txtUnitGeoReference.setText("---- ---- ---- ----");
+                holder.unitGeoExample.setText("---- ---- ---- ----");
             }
     /*    if (unitList.get(position).getGeoreference() != null){
             if (unitList.get(position).getGeoreference().equals("")){
@@ -382,13 +382,13 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             holder.txtUnitGeoReference.setText("---- ---- ---- ----");
         }*/
 
-            DecimalFormat decimalFormat = new DecimalFormat("###,###.00");
+            /**DecimalFormat decimalFormat = new DecimalFormat("###,###.00");
             decimalFormat.format(unitList.get(position).getKmTravel());
             String decimalUnitKMTravel = decimalFormat.format(unitList.get(position).getKmTravel()) + "km";
-            holder.txtUnitKmTravel.setText(decimalUnitKMTravel);
+            holder.txtUnitKmTravel.setText(decimalUnitKMTravel);*/
 
             /**Status*/
-            if (unitList.get(position).getVehicleSwitch() == 1) {
+            /**if (unitList.get(position).getVehicleSwitch() == 1) {
                 holder.cardViewUnitContainer.setCardBackgroundColor(context.getResources().getColor(R.color.colorBorderCarGreen));
                 holder.imgUnitCircle.setBorderColor(context.getResources().getColor(R.color.colorBorderCarGreen));
             } else if (unitList.get(position).getVehicleSwitch() == 2) {
@@ -403,27 +403,27 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             } else if (unitList.get(position).getVehicleSwitch()== 0){
                 holder.cardViewUnitContainer.setCardBackgroundColor(context.getResources().getColor(R.color.colorBorderCarGray));
                 holder.imgUnitCircle.setBorderColor(context.getResources().getColor(R.color.colorBorderCarGray));
-            }
+            }*/
 
             if (unitList.get(position).getVehicleImage() == null) {
-                Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.imgUnitCircle);
+                Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
             } else if (unitList.get(position).getVehicleImage().equals("string")) {
-                Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.imgUnitCircle);
+                Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
             } else if (unitList.get(position).getVehicleImage().equals(GeneralConstantsV2.NO_IMAGE)) {
-                Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.imgUnitCircle);
+                Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
             } else {
-                Glide.with(context).load(unitList.get(position).getVehicleImage()) .thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.imgUnitCircle);
+                Glide.with(context).load(unitList.get(position).getVehicleImage()) .thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
             }
 
 
             /**MaxSpeedImage*/
-            Glide.with(context).load(R.drawable.ic_item_unit_max).into(holder.imgMaxSpeed);
+            //Glide.with(context).load(R.drawable.ic_item_unit_max).into(holder.imgMaxSpeed);
 
             /**DistanceImage*/
-            Glide.with(context).load(R.drawable.ic_item_unit_distance).into(holder.imgDistance);
+            //Glide.with(context).load(R.drawable.ic_item_unit_distance).into(holder.imgDistance);
 
             /**ShapeImage*/
-            Glide.with(context).load(R.drawable.ic_item_unit_shape).into(holder.imgShape);
+            //Glide.with(context).load(R.drawable.ic_item_unit_shape).into(holder.imgShape);
 
             /**OnClick*/
 //        holder.llMainContainer.setOnClickListener(new View.OnClickListener() {
@@ -435,7 +435,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 //            }
 //        });
 
-            holder.llMainContainer.setOnClickListener(new View.OnClickListener() {
+            /**holder.llMainContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Bundle vehicleBundle = new Bundle();
@@ -464,7 +464,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                     intent.putExtras(vehicleBundle);
                     context.startActivity(intent);
                 }
-            });
+            });*/
         }
 
 
@@ -478,6 +478,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         togglesList=toggles;
         notifyDataSetChanged();
     }
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView unitImage;
         TextView unitTitle;
@@ -532,7 +533,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         void onClickVehiclesMap(int position);
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    /**public class ViewHolder extends RecyclerView.ViewHolder {
 
         CircleImageView imgUnitCircle;
         CardView cardViewUnitContainer;
@@ -567,6 +568,32 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             imgShape = itemView.findViewById(R.id.img_unit_item_shape);
             imgDistance = itemView.findViewById(R.id.img_unit_item_distance);
 
+        }
+    }*/
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        ImageView unitImage;
+        TextView unitTitle;
+        TextView unitRute;
+        TextView unitRealPercent;
+        TextView unitObjPercent;
+        TextView unitDifference;
+        TextView unitStatus;
+        TextView unitGeoExample;
+        //Switch unitSwicth;
+
+
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            unitImage = itemView.findViewById(R.id.unit_tracking_img2);
+            unitTitle = itemView.findViewById(R.id.unit_tracking_title2);
+            unitRute = itemView.findViewById(R.id.txt_unit_rute);
+            unitRealPercent = itemView.findViewById(R.id.txt_unit_real);
+            unitObjPercent = itemView.findViewById(R.id.txt_unit_objective);
+            unitDifference = itemView.findViewById(R.id.txt_unit_difference);
+            unitStatus = itemView.findViewById(R.id.txt_unit_status);
+            unitGeoExample = itemView.findViewById(R.id.txt_unit_geo_example);
+            //unitSwicth = itemView.findViewById(R.id.unit_tracking_swicth);
         }
     }
 

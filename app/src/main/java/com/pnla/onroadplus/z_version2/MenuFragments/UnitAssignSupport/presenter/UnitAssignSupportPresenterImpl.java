@@ -62,7 +62,7 @@ public class UnitAssignSupportPresenterImpl implements UnitAssignSupportPresente
     @Override
     public void showProgressDialog() {
         if (view != null){
-            view.showProgressDialog();
+            //view.showProgressDialog();
         }
     }
 

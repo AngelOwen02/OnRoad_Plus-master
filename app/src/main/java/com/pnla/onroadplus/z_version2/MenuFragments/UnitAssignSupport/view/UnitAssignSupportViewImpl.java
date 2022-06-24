@@ -2,6 +2,7 @@ package com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +27,7 @@ import com.dynatrace.android.agent.Dynatrace;
 import com.pnla.onroadplus.R;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.GroupTrackingAdapter;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractor;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.container.UnitAssignSupportContainer;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractorImpl;
 
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
@@ -45,6 +47,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportView;
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 import java.io.IOException;
@@ -56,7 +59,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
     //public static final String TAG = UnitsViewImpl.class.getSimpleName();
     public static final String TAG = UnitAssignSupportViewImpl.class.getSimpleName();
     private SearchView searchView;
-    private RecyclerView rvUnits;
+    //private RecyclerView rvUnits;
+    private RecyclerView rvVehicles;
     //private UnitAdapter unitAdapter;
     private UnitAssignSupportAdapter unitAssignSupportAdapter;
     private CardView searchViewContainer;
@@ -64,6 +68,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
     private List<Unit> undredlist=new ArrayList<>();
     private ProgressBar progressBar;
     private ImageView toolbarItem;
+    private ImageView toolbarImgBack;
     private TextView txtToolbar;
     private ProgressDialog progressDialog;
     final Handler handler = new Handler();
@@ -82,8 +87,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_units_impl, container, false);
-        //View view = inflater.inflate(R.layout.fragment_unit_assign_support_view_impl, container, false);
+        //View view = inflater.inflate(R.layout.fragment_units_impl, container, false);
+        View view = inflater.inflate(R.layout.fragment_unit_assign_support_view_impl, container, false);
 
         initUnitsViewImpl(view);
         //update();
@@ -99,14 +104,18 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
     }
 
     private void initViewID(View view) {
-        toolbarItem = view.findViewById(R.id.search_toolbar_item);
+        /**toolbarItem = view.findViewById(R.id.search_toolbar_item);
         txtToolbar = view.findViewById(R.id.search_toolbar_title);
         rvUnits = view.findViewById(R.id.recycler_view_units);
         progressBar = view.findViewById(R.id.units_view_progress_bar);
         searchViewContainer = view.findViewById(R.id.units_search_view_container);
         searchView = view.findViewById(R.id.search_view_units);
         progressDialog = new ProgressDialog(getActivity());
-        txtToolbar.setText("Unidades 2");
+        txtToolbar.setText("Unidades 2");*/
+
+        toolbarImgBack = view.findViewById(R.id.back);
+        rvVehicles = view.findViewById(R.id.recycler_view_unit_tracking2);
+        progressBar = view.findViewById(R.id.progress_bar_unit_tracking);
 
 //        Dynatrace.applyUserPrivacyOptions(UserPrivacyOptions.builder()
 //                .withDataCollectionLevel(DataCollectionLevel.USER_BEHAVIOR)
@@ -156,8 +165,9 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
     }*/
 
     private void initOnClickListeners() {
-        searchView.setOnQueryTextListener(this);
-        toolbarItem.setOnClickListener(this);
+        //searchView.setOnQueryTextListener(this);
+        //toolbarItem.setOnClickListener(this);
+        toolbarImgBack.setOnClickListener(this);
     }
 
     @Override
@@ -174,7 +184,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
         this.vehicles = unitList;
         //  Log.e("partsrequestvehicles",""+vehicles.size());
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        rvUnits.setLayoutManager(linearLayoutManager);
+        //rvUnits.setLayoutManager(linearLayoutManager);
+        rvVehicles.setLayoutManager(linearLayoutManager);
         List<Integer> allcves=new ArrayList<>();
         if(vehicles!=null)
         {
@@ -202,8 +213,9 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
         //snapHelper.attachToRecyclerView(rvUnits);
 
         unitAssignSupportAdapter = new UnitAssignSupportAdapter(vehicles,getContext());
-        rvUnits.setAdapter(unitAssignSupportAdapter);
-        hideProgressDialog();
+        //rvUnits.setAdapter(unitAssignSupportAdapter);
+        rvVehicles.setAdapter(unitAssignSupportAdapter);
+        //hideProgressDialog();
         if( vehicles.size()!=0)
         {
             //directions.get(0).contains(String.valueOf( vehicles.get(0).getCveVehicle()));
@@ -239,7 +251,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
             unitAssignSupportAdapter.notifyDataSetChanged();
 
         }
-        rvUnits.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        //rvUnits.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        /**rvVehicles.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
                 super.onScrollStateChanged(recyclerView, newState);
@@ -269,7 +282,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
                 //Log.e("bloquesdeunides8", "///////" + directions.size());
                 //Log.e("bloquesdeunides8", "///////" + directions);
             }
-        });
+        });*/
 
         //rvUnits.getChildLayoutPosition(rvUnits.getFocusedChild());
         // Log.e("bloquesdeunides2",""+ rvUnits.getChildLayoutPosition(rvUnits.getFocusedChild()));
@@ -314,16 +327,16 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
     @Override
     public void showProgressDialog() {
         // progressBar.setVisibility(View.VISIBLE);
-        progressDialog.setMessage("Cargando Unidades");
+        /**progressDialog.setMessage("Cargando Unidades");
         progressDialog.setCancelable(false);
-        progressDialog.show();
+        progressDialog.show();*/
 
     }
 
     @Override
     public void hideProgressDialog() {
         // progressBar.setVisibility(View.INVISIBLE);
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
     }
 
     @Override
@@ -400,7 +413,11 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.search_toolbar_item:
+            case R.id.back:
+                goBackintomenu();
+                break;
+
+            /**case R.id.search_toolbar_item:
                 //searchView.setVisibility(View.VISIBLE);
                 if(searchViewContainer.getVisibility()==View.VISIBLE) {
                     searchViewContainer.setVisibility(View.GONE);
@@ -408,9 +425,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
                 else{
                     searchViewContainer.setVisibility(View.VISIBLE);
                 }
-                break;
+                break;*/
         }
-
 
     /* if(searchViewContainer.getVisibility()==View.VISIBLE)
         {
@@ -418,6 +434,18 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
 
             searchViewContainer.setVisibility(View.GONE);
         }*/
+    }
+
+    private void goBackintomenu()
+    {
+        /**Bundle bndl = new Bundle();
+        bndl.putString("nav", "ZONES");
+        Intent intent = new Intent(UnitAssignSupportViewImpl.this,  menuViewImpl.class);//MainMenuContainerActivity.class);
+        intent.putExtras(bndl);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();*/
+        Toast.makeText(getContext(), "ATRASSSSS", Toast.LENGTH_LONG).show();
     }
 
     @Override
