@@ -24,7 +24,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dynatrace.android.agent.Dynatrace;
 import com.pnla.onroadplus.R;
-import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.GroupTrackingAdapter;
+//import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.GroupTrackingAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.UnitDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.adapter.UnitAdapter;
@@ -59,7 +59,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitsView, Se
     private Runnable runnable;
     private Parcelable state;
     private UnitsPresenter presenter;
-    private GroupTrackingAdapter groupTrackingAdapter;
+    //private GroupTrackingAdapter groupTrackingAdapter;
     private List<Group> unitGroup;
     private List<Unit> unidades;
     int position;
