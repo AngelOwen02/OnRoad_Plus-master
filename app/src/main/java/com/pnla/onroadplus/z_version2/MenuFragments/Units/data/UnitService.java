@@ -17,8 +17,8 @@ public interface UnitService {
     @POST(RetrofitEndPointsV2.GET_FULL_VEHICLES)
     Call<UnitResponse> getFullVehicles(@Body UnitRequest request);
 
-    /**@POST(RetrofitEndPointsV2.GET_SUPPORTROUTES)
-    Call<SupportUnitResponse> getFullSupportUnits(@Body SupportUnitRequest request);*/
+    @POST(RetrofitEndPointsV2.GET_SUPPORTROUTES)
+    Call<SupportUnitResponse> getFullVehiclesSupport(@Body SupportUnitRequest request);
 
     @POST(RetrofitEndPointsV2.GET_FULL_GEOREFERENCE)
     Call<GeoreferenceResponse> getFullGeoReference(@Body GeoreferenceRequest request);
