@@ -6,13 +6,13 @@ public class SupportUnitRequest {
 
     private String token;
     //private int boolList;
-    private List<Integer> vehicleList = null;
+    //private List<Integer> vehicleList = null;
 
     public SupportUnitRequest(String token, int boolList, List<Integer> vehicleList) {
         super();
         this.token = token;
         //this.boolList = boolList;
-        this.vehicleList = vehicleList;
+        //this.vehicleList = vehicleList;
     }
 
     public String getToken() {
@@ -31,11 +31,11 @@ public class SupportUnitRequest {
         this.boolList = boolList;
     }*/
 
-    public List<Integer> getVehicleList() {
+    /**public List<Integer> getVehicleList() {
         return vehicleList;
     }
 
     public void setVehicleList(List<Integer> vehicleList) {
         this.vehicleList = vehicleList;
-    }
+    }*/
 }
