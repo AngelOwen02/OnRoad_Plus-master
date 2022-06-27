@@ -239,14 +239,13 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         }
     }
 
-    //private void startVehiclesRequest(int typeRequest, List<Integer> vehiclesCves, final Context context) {
     private void startVehiclesRequest(int typeRequest, List<Integer> vehiclesCves, final Context context) {
+    //private void startVehiclesRequest(int typeRequest, List<Integer> vehiclesCves, final Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-        if(token!=null)
-        {
+        if(token!=null) {
             UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);
-            //SupportUnitRequest request = new SupportUnitRequest(token, typeRequest, vehiclesCves);
+            //SupportUnitRequest request = new SupportUnitRequest(token);
             Log.e("token",""+token);
             // Log.e("checkinguser",token+"  "+typeRequest+"  "+vehiclesCves);
             //presenter.showProgressDialog();
@@ -266,7 +265,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
                 public void onFailure(Call<UnitResponse> call, Throwable t) {
                 //public void onFailure(Call<SupportUnitResponse> call, Throwable t) {
                     // Log.e("onFailure",t.getLocalizedMessage());
-                    Toast.makeText(context,  "sesion expirada", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,  "sesion expirada2", Toast.LENGTH_LONG).show();
 
                 }
             });
@@ -281,7 +280,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
             getVehiclesData(response, context);
         } else {
             presenter.failureResponse(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
-            Toast.makeText(context,  "sesion expirada", Toast.LENGTH_LONG).show();
+            Toast.makeText(context,  "sesion expirada3", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -297,9 +296,9 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
                 UnitData data = unitResponse.getData();
                 //SupportUnitData data = supportUnitResponse.getData();
                 if (data != null) {
-                //if (supportUnitData != null) {
+                //if (data != null) {
                     List<Unit> unitList = data.getUnitList();
-                    //List<Unit> unitList = supportUnitData.getUnitList();
+                    //List<Unit> unitList = data.getUnitList();
                     //   Log.e("checkinguser",String.valueOf(unitList.size()));
                     if (unitList.isEmpty()){
                         Toast.makeText(context, "No cuentas con unidades disponibles para visualizar", Toast.LENGTH_SHORT).show();
