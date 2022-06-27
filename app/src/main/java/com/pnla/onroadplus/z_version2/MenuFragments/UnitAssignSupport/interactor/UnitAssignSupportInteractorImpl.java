@@ -108,22 +108,6 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
     @Override
     public void getAllVehiclesFromAPI() {
         List<Integer> noCves = new ArrayList<>();
-        //
-        //  firstime=true;
-
-        //  Log.e("doitonce", "" + UnitTrackingAdapter.integerList);
-       /* if(!UnitDB.getUnitListActive().isEmpty())
-        {
-            List<Integer> cveList=new ArrayList<>();
-
-            for(int i=0;i<UnitDB.getUnitListActive().size();i++)
-            {
-                cveList.add(UnitDB.getUnitListActive().get(i).getCveVehicle());
-            }
-            Log.e("vehiclecve","qwewqewq"+cveList);
-            noCves.clear();
-            noCves=cveList;
-        }*/
         if(!UnitTrackingAdapter.integerList.isEmpty())
         {
             List<Integer> cveList=new ArrayList<>();
@@ -160,8 +144,6 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
 //        Log.e("UnitDB", UnitDB.getUnitList().toString());
 //        Log.e("FinalUnitDB", FinalUnitDB.getUnitList().toString());
 //        Log.e("TemporalUnitDB", TemporalUnitDB.getUnitList().toString());
-
-
     }
 
     @Override
@@ -249,7 +231,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         if(mytoken!=null) {
             //UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);
             SupportUnitRequest request = new SupportUnitRequest(mytoken);
-            Log.e("token",""+mytoken);
+            //Log.e("token",""+mytoken);
             // Log.e("checkinguser",token+"  "+typeRequest+"  "+vehiclesCves);
             //presenter.showProgressDialog();
             //unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
