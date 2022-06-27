@@ -239,6 +239,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         }
     }
 
+    //private void startVehiclesRequest(int typeRequest, List<Integer> vehiclesCves, final Context context) {
     private void startVehiclesRequest(int typeRequest, List<Integer> vehiclesCves, final Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);

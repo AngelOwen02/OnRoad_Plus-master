@@ -8,7 +8,7 @@ public class SupportUnitRequest {
     //private int boolList;
     //private List<Integer> vehicleList = null;
 
-    public SupportUnitRequest(String token, int boolList, List<Integer> vehicleList) {
+    public SupportUnitRequest(String token) {
         super();
         this.token = token;
         //this.boolList = boolList;
