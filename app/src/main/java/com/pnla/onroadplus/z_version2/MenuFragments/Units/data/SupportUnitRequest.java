@@ -1,7 +1,5 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Units.data;
 
-import java.util.List;
-
 public class SupportUnitRequest {
 
     private String token;
