@@ -136,10 +136,13 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         {
             noCves.add(0);
         }
-        //startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context);
-        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-        startVehiclesRequest(token, context);
+        startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context);
+        //startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, context);
+
+        //SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        //String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        //startVehiclesRequest(token, context);
+        //Toast.makeText(context, token, Toast.LENGTH_SHORT).show();
 
 //        Log.e("UnitDB", UnitDB.getUnitList().toString());
 //        Log.e("FinalUnitDB", FinalUnitDB.getUnitList().toString());
@@ -224,22 +227,25 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         }
     }
 
-    //private void startVehiclesRequest(int typeRequest, List<Integer> vehiclesCves, final Context context) {
-    private void startVehiclesRequest(String mytoken, final Context context) {
-        //SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-        //String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-        if(mytoken!=null) {
-            //UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);
-            SupportUnitRequest request = new SupportUnitRequest(mytoken);
+    private void startVehiclesRequest(int typeRequest, List<Integer> vehiclesCves, final Context context) {
+    //private void startVehiclesRequest(String mytoken, final Context context) {
+    //private void startVehiclesRequest( int typeRequest, final Context context) {
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        if(token!=null) {
+        //if(mytoken!=null) {
+            UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);
+            //SupportUnitRequest request = new SupportUnitRequest(mytoken);
             //Log.e("token",""+mytoken);
             // Log.e("checkinguser",token+"  "+typeRequest+"  "+vehiclesCves);
             //presenter.showProgressDialog();
-            //unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
-            unitService.getFullVehiclesSupport(request).enqueue(new Callback<SupportUnitResponse>() {
+            unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
+            //unitService.getFullVehiclesSupport(request).enqueue(new Callback<SupportUnitResponse>() {
                 @Override
-                //public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
-                public void onResponse(Call<SupportUnitResponse> call, Response<SupportUnitResponse> response) {
+                public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
+                //public void onResponse(Call<SupportUnitResponse> call, Response<SupportUnitResponse> response) {
                     try {
+                        //Toast.makeText(context, "Paso por aqui", Toast.LENGTH_SHORT).show();
                         validateCode(response, context);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -247,19 +253,18 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
                 }
 
                 @Override
-                //public void onFailure(Call<UnitResponse> call, Throwable t) {
-                public void onFailure(Call<SupportUnitResponse> call, Throwable t) {
+                public void onFailure(Call<UnitResponse> call, Throwable t) {
+                //public void onFailure(Call<SupportUnitResponse> call, Throwable t) {
                     // Log.e("onFailure",t.getLocalizedMessage());
                     Toast.makeText(context,  "sesion expirada2", Toast.LENGTH_LONG).show();
-
                 }
             });
         }
 
     }
 
-    //private void validateCode(Response<UnitResponse> response, Context context) throws IOException {
-    private void validateCode(Response<SupportUnitResponse> response, Context context) throws IOException {
+    private void validateCode(Response<UnitResponse> response, Context context) throws IOException {
+    //private void validateCode(Response<SupportUnitResponse> response, Context context) throws IOException {
         //  Log.e("LAPRINCESS", String.valueOf(response.body().getResponseCode()));
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getVehiclesData(response, context);
@@ -269,21 +274,19 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         }
     }
 
-    //private void getVehiclesData(Response<UnitResponse> response, Context context) throws IOException {
-    private void getVehiclesData(Response<SupportUnitResponse> response, Context context) throws IOException {
-        //UnitResponse unitResponse = response.body();
-        SupportUnitResponse supportUnitResponse = response.body();
-        //if (unitResponse != null) {
-        if (supportUnitResponse != null) {
-            //int responseCode = unitResponse.getResponseCode();
-            int responseCode = supportUnitResponse.getResponseCode();
+    private void getVehiclesData(Response<UnitResponse> response, Context context) throws IOException {
+    //private void getVehiclesData(Response<SupportUnitResponse> response, Context context) throws IOException {
+        UnitResponse unitResponse = response.body();
+        //SupportUnitResponse supportUnitResponse = response.body();
+        if (unitResponse != null) {
+        //if (supportUnitResponse != null) {
+            int responseCode = unitResponse.getResponseCode();
+            //int responseCode = supportUnitResponse.getResponseCode();
             if (responseCode == GeneralConstantsV2.RESPONSE_CODE_OK) {
-                //UnitData data = unitResponse.getData();
-                SupportUnitData data = supportUnitResponse.getData();
-                //if (data != null) {
+                UnitData data = unitResponse.getData();
+                //SupportUnitData data = supportUnitResponse.getData();
                 if (data != null) {
                     List<Unit> unitList = data.getUnitList();
-                    //List<Unit> unitList = data.getUnitList();
                     //   Log.e("checkinguser",String.valueOf(unitList.size()));
                     if (unitList.isEmpty()){
                         Toast.makeText(context, "No cuentas con unidades disponibles para visualizar", Toast.LENGTH_SHORT).show();
