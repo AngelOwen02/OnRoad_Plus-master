@@ -141,6 +141,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
 
         //SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         //String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        //String token = "7042b63634e5aab50029d64d1c802e4b";
         //startVehiclesRequest(token, context);
         //Toast.makeText(context, token, Toast.LENGTH_SHORT).show();
 
@@ -227,11 +228,12 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         }
     }
 
-    private void startVehiclesRequest(int typeRequest, List<Integer> vehiclesCves, final Context context) {
+    private void startVehiclesRequest(final int typeRequest, List<Integer> vehiclesCves, final Context context) {
     //private void startVehiclesRequest(String mytoken, final Context context) {
     //private void startVehiclesRequest( int typeRequest, final Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        //Toast.makeText(context, mytoken, Toast.LENGTH_SHORT).show();
         if(token!=null) {
         //if(mytoken!=null) {
             UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);
