@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SupportUnitData {
 
-    @SerializedName("vehicles")
+    @SerializedName("data")
     private List<Unit> unitList = null;
 
     public SupportUnitData (List<Unit> unitList){
