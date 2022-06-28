@@ -459,15 +459,15 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
     }
 
     /**reques de grupos**/
-    //  @Override
-    public void getGroupsVehicles(){
+    //@Override
+    /**public void getGroupsVehicles(){
         if(!dataofvehiclesgroupscve.isEmpty()) {
 
             //Log.e("unitsthaticansaw", "" + dataofvehiclesgroupscve);// [x,x,x] grupos cve de vehiculos existentes
             SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
             String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
             //cveofgroup = 53;
-            startGroupsRequestVehicles(cveofgroup, token);
+            startGroupsRequestVehicles(cveofgroup, token);*/
                /* for(int i=0;i<dataofvehiclesgroupscve.size();i++)
                 {
                     cveofgroup= Integer.parseInt( dataofvehiclesgroupscve.get(i));
@@ -475,11 +475,11 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
 
                 }*/
 
-        }
-    }
+        /**}
+    }*/
 
     /**reques de grupos**/
-    private void startGroupsRequestVehicles(int cve,String token){
+    //private void startGroupsRequestVehicles(int cve,String token){
     /*    GroupvehicleInsideRequest request = new GroupvehicleInsideRequest(cve,token);
         Log.e("unitsthaticansaw", "response" +  cve+ " " + token);
           unitService.getVehiclesInGroups(request).enqueue(new Callback<GroupvehicleInsideResponse>() {
@@ -497,7 +497,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
               }
           });*/
 
-        GroupvehicleInsideRequest requestG=new GroupvehicleInsideRequest(cve,token);
+        /**GroupvehicleInsideRequest requestG=new GroupvehicleInsideRequest(cve,token);
         Call<GroupvehicleInsideResponse> call=unitService.getVehiclesInGroups(requestG);
         call.enqueue(new Callback<GroupvehicleInsideResponse>() {
             @Override
@@ -512,18 +512,18 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
             }
         });
 
-    }
+    }*/
     /**reques de grupos**/
-    private void validateGroupsVehiclesCode(Response<GroupvehicleInsideResponse> response){
+    /**private void validateGroupsVehiclesCode(Response<GroupvehicleInsideResponse> response){
         // Log.e("validategroups","validate : "+ String.valueOf(response.body().getResponseCode()));
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
 
             getGrupsDataVhicles(response);
         }
 
-    }
+    }*/
     /**reques de grupos**/
-    private void getGrupsDataVhicles(Response<GroupvehicleInsideResponse> response )
+    /**private void getGrupsDataVhicles(Response<GroupvehicleInsideResponse> response )
     {
 
         GroupvehicleInsideResponse groupResponse = response.body();
@@ -536,14 +536,14 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
                 //Log.e("infogrupos",""+groupvehicleInsideData.toString());
                 if (groupvehicleInsideData != null){
                     //  List<String> gruposdata = new ArrayList<>();
-                    gruposdata.clear();
+                    gruposdata.clear();*/
                     // dataofvehiclesgroupsnames.clear();
                     /*for (GroupvehicleInsideData data : groupvehicleInsideData){
                         //gruposdata.add(String.valueOf(data.getCve_vehicle()));
                         gruposdata.add(String.valueOf(data.getVehicle_name()));
 
                     }*/
-                    for (int i=0;i<groupvehicleInsideData.size();i++)
+                    /**for (int i=0;i<groupvehicleInsideData.size();i++)
                     {
                         gruposdata.add(String.valueOf(groupvehicleInsideData.get(i).getCve_vehicle()));
                         //   Log.e("unitsthaticansaw2",""+i);
@@ -559,7 +559,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         }
 
 
-    }
+    }*/
 
     //Grupos get
     private void getGroups(Context context) {
