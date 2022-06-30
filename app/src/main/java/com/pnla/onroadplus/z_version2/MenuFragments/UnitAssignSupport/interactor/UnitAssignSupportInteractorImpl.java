@@ -51,7 +51,6 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.UnitService;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.georeference;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
-import com.pnla.onroadplus.z_version2.MenuFragments.Zones.model.pointsData;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 import com.pnla.onroadplus.z_version2.realmOnRoad.RealmUserData;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitClientV2;
@@ -81,7 +80,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
     public static List<String> dataofvehiclesgroupscve=new ArrayList<>();/***/
     public static  List<String> dataofvehiclesgroupsnames=new ArrayList<>();
     private List<String> gruposdata = new ArrayList<>();
-    private List<GroupvehicleInsideData> groupvehicleInsideData;
+    //private List<GroupvehicleInsideData> groupvehicleInsideData;
     private Retrofit retrofitClient;
 
     public static List<String> dataphotoofvehicles=new ArrayList<>();
@@ -107,7 +106,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
     @Override
     public void getAllVehiclesFromAPI() {
         List<Integer> noCves = new ArrayList<>();
-        if(!UnitTrackingAdapter.integerList.isEmpty())
+        /**if(!UnitTrackingAdapter.integerList.isEmpty())
         {
             List<Integer> cveList=new ArrayList<>();
 
@@ -134,14 +133,16 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         else
         {
             noCves.add(0);
-        }
-        //startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context);
+        }*/
+
+
+        startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context);
         //startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, context);
 
-        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        //SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        //String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         //String token = "7042b63634e5aab50029d64d1c802e4b";
-        startVehiclesRequest(token, context);
+        //startVehiclesRequest(token, context);
         //Toast.makeText(context, token, Toast.LENGTH_SHORT).show();
 
 //        Log.e("UnitDB", UnitDB.getUnitList().toString());
@@ -227,27 +228,26 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         }
     }
 
-    //private void startVehiclesRequest(final int typeRequest, List<Integer> vehiclesCves, final Context context) {
-    private void startVehiclesRequest(String mytoken, final Context context) {
+    private void startVehiclesRequest(final int typeRequest, List<Integer> vehiclesCves, final Context context) {
+    //private void startVehiclesRequest(String mytoken, final Context context) {
     //private void startVehiclesRequest( int typeRequest, final Context context) {
-        //SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-        //String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         //Toast.makeText(context, mytoken, Toast.LENGTH_SHORT).show();
-        //if(token!=null) {
-        if(mytoken!=null) {
-            //UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);
-            SupportUnitRequest request = new SupportUnitRequest(mytoken);
+        if(token!=null) {
+        //if(mytoken!=null) {
+            UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);
+            //SupportUnitRequest request = new SupportUnitRequest(mytoken);
             //Log.e("token",""+mytoken);
             // Log.e("checkinguser",token+"  "+typeRequest+"  "+vehiclesCves);
             //presenter.showProgressDialog();
-            //unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
-            unitService.getFullVehiclesSupport(request).enqueue(new Callback<SupportUnitResponse>() {
+            unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
+            //unitService.getFullVehiclesSupport(request).enqueue(new Callback<SupportUnitResponse>() {
                 @Override
-                //public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
-                public void onResponse(Call<SupportUnitResponse> call, Response<SupportUnitResponse> response) {
+                public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
+                //public void onResponse(Call<SupportUnitResponse> call, Response<SupportUnitResponse> response) {
                     try {
                         //Toast.makeText(context, "Paso por aqui", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(context, response.toString(), Toast.LENGTH_SHORT).show();
                         validateCode(response, context);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -255,8 +255,8 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
                 }
 
                 @Override
-                //public void onFailure(Call<UnitResponse> call, Throwable t) {
-                public void onFailure(Call<SupportUnitResponse> call, Throwable t) {
+                public void onFailure(Call<UnitResponse> call, Throwable t) {
+                //public void onFailure(Call<SupportUnitResponse> call, Throwable t) {
                     // Log.e("onFailure",t.getLocalizedMessage());
                     Toast.makeText(context,  "sesion expirada2", Toast.LENGTH_LONG).show();
                 }
@@ -265,32 +265,30 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
 
     }
 
-    //private void validateCode(Response<UnitResponse> response, Context context) throws IOException {
-    private void validateCode(Response<SupportUnitResponse> response, Context context) throws IOException {
+    private void validateCode(Response<UnitResponse> response, Context context) throws IOException {
+    //private void validateCode(Response<SupportUnitResponse> response, Context context) throws IOException {
         //  Log.e("LAPRINCESS", String.valueOf(response.body().getResponseCode()));
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
-            //getVehiclesData(response, context);
+            getVehiclesData(response, context);
         } else {
             presenter.failureResponse(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
             Toast.makeText(context,  "sesion expirada3", Toast.LENGTH_LONG).show();
         }
     }
 
-    //private void getVehiclesData(Response<UnitResponse> response, Context context) throws IOException {
-    /**private void getVehiclesData(Response<SupportUnitResponse> response, Context context) throws IOException {
-        //UnitResponse unitResponse = response.body();
-        SupportUnitResponse supportUnitResponse = response.body();
-        //if (unitResponse != null) {
-        if (supportUnitResponse != null) {
-            //int responseCode = unitResponse.getResponseCode();
-            int responseCode = supportUnitResponse.getResponseCode();
+    private void getVehiclesData(Response<UnitResponse> response, Context context) throws IOException {
+    //private void getVehiclesData(Response<SupportUnitResponse> response, Context context) throws IOException {
+        UnitResponse unitResponse = response.body();
+        //SupportUnitResponse supportUnitResponse = response.body();
+        if (unitResponse != null) {
+        //if (supportUnitResponse != null) {
+            int responseCode = unitResponse.getResponseCode();
+            //int responseCode = supportUnitResponse.getResponseCode();
             if (responseCode == GeneralConstantsV2.RESPONSE_CODE_OK) {
-                //UnitData data = unitResponse.getData();
+                UnitData data = unitResponse.getData();
                 //SupportUnitData data = supportUnitResponse.getData();
-                //SupportUnitResponse data = supportUnitResponse.getData();
-                List<SupportUnitData> data= response.body().getData();
                 if (data != null) {
-                    List<SupportUnitData> unitList = data.getUnit();
+                    List<Unit> unitList = data.getUnitList();
                     //   Log.e("checkinguser",String.valueOf(unitList.size()));
                     if (unitList.isEmpty()){
                         Toast.makeText(context, "No cuentas con unidades disponibles para visualizar", Toast.LENGTH_SHORT).show();
@@ -361,7 +359,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
 
                     }
 
-                    getGroups(context);
+                    //getGroups(context);
                 } else {
                     presenter.failureResponse(context.getString(R.string.textEmptyCarsResponse));
                 }
@@ -388,7 +386,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         } else {
             presenter.failureResponse(context.getString(R.string.textEmptyResponse));
         }
-    }*/
+    }
 
     private void dialog(){
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -460,222 +458,6 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
             }
         });
 
-    }
-
-    /**reques de grupos**/
-    //@Override
-    /**public void getGroupsVehicles(){
-        if(!dataofvehiclesgroupscve.isEmpty()) {
-
-            //Log.e("unitsthaticansaw", "" + dataofvehiclesgroupscve);// [x,x,x] grupos cve de vehiculos existentes
-            SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-            String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-            //cveofgroup = 53;
-            startGroupsRequestVehicles(cveofgroup, token);*/
-               /* for(int i=0;i<dataofvehiclesgroupscve.size();i++)
-                {
-                    cveofgroup= Integer.parseInt( dataofvehiclesgroupscve.get(i));
-                     startGroupsRequestVehicles(cveofgroup, token);
-
-                }*/
-
-        /**}
-    }*/
-
-    /**reques de grupos**/
-    //private void startGroupsRequestVehicles(int cve,String token){
-    /*    GroupvehicleInsideRequest request = new GroupvehicleInsideRequest(cve,token);
-        Log.e("unitsthaticansaw", "response" +  cve+ " " + token);
-          unitService.getVehiclesInGroups(request).enqueue(new Callback<GroupvehicleInsideResponse>() {
-              @Override
-              public void onResponse(Call<GroupvehicleInsideResponse> call, Response<GroupvehicleInsideResponse> response) {
-                  validateGroupsVehiclesCode(response);
-                  Log.e("unitsthaticansaw", "onresponse: " +   response);
-                  Log.e("unitsthaticansaw", "onresponse: " +   call.request().toString());
-              }
-
-              @Override
-              public void onFailure(Call<GroupvehicleInsideResponse> call, Throwable t) {
-                      Log.e("unitsthaticansaw","validate : "+ call.request().toString());
-                  Log.e("unitsthaticansaw","validate : "+ t.toString());
-              }
-          });*/
-
-        /**GroupvehicleInsideRequest requestG=new GroupvehicleInsideRequest(cve,token);
-        Call<GroupvehicleInsideResponse> call=unitService.getVehiclesInGroups(requestG);
-        call.enqueue(new Callback<GroupvehicleInsideResponse>() {
-            @Override
-            public void onResponse(Call<GroupvehicleInsideResponse> call, Response<GroupvehicleInsideResponse> response) {
-                //    Log.e("unitsthaticansaw", "onresponse: " +   response);
-                validateGroupsVehiclesCode(response);
-            }
-
-            @Override
-            public void onFailure(Call<GroupvehicleInsideResponse> call, Throwable t) {
-                //Log.e("unitsthaticansaw","validate : "+ t.toString());
-            }
-        });
-
-    }*/
-    /**reques de grupos**/
-    /**private void validateGroupsVehiclesCode(Response<GroupvehicleInsideResponse> response){
-        // Log.e("validategroups","validate : "+ String.valueOf(response.body().getResponseCode()));
-        if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
-
-            getGrupsDataVhicles(response);
-        }
-
-    }*/
-    /**reques de grupos**/
-    /**private void getGrupsDataVhicles(Response<GroupvehicleInsideResponse> response )
-    {
-
-        GroupvehicleInsideResponse groupResponse = response.body();
-        if (groupResponse != null) {
-            int responseCode = groupResponse.getResponseCode();
-            if (responseCode == GeneralConstantsV2.RESPONSE_CODE_OK) {
-                //List<GroupvehicleInsideData> data = groupResponse.getData();
-                groupvehicleInsideData = new ArrayList<>();
-                groupvehicleInsideData = groupResponse.getData();
-                //Log.e("infogrupos",""+groupvehicleInsideData.toString());
-                if (groupvehicleInsideData != null){
-                    //  List<String> gruposdata = new ArrayList<>();
-                    gruposdata.clear();*/
-                    // dataofvehiclesgroupsnames.clear();
-                    /*for (GroupvehicleInsideData data : groupvehicleInsideData){
-                        //gruposdata.add(String.valueOf(data.getCve_vehicle()));
-                        gruposdata.add(String.valueOf(data.getVehicle_name()));
-
-                    }*/
-                    /**for (int i=0;i<groupvehicleInsideData.size();i++)
-                    {
-                        gruposdata.add(String.valueOf(groupvehicleInsideData.get(i).getCve_vehicle()));
-                        //   Log.e("unitsthaticansaw2",""+i);
-
-                    }
-
-                    dataofvehiclesgroupsnames.add(String.valueOf( gruposdata));
-//                    Log.e("unitsthaticansaw2",""+dataofvehiclesgroupsnames);
-//
-//                    Log.e("unitsthaticansaw",""+gruposdata.size());
-                }
-            }
-        }
-
-
-    }*/
-
-    //Grupos get
-    private void getGroups(Context context) {
-        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-        startGroupsRequest(token, context);
-    }
-    //Grupos request
-    private void startGroupsRequest(String token, final Context context) {
-        GroupRequest request = new GroupRequest(token);
-        // presenter.showLoaderFromInteractor();
-        unitService.getGroups(request).enqueue(new Callback<GroupResponse>()  {
-            @Override
-            public void onResponse(Call<GroupResponse> call, Response<GroupResponse> response) {
-                validateGroupsCode(response, context);
-            }
-
-            @Override
-            public void onFailure(Call<GroupResponse> call, Throwable t) {
-                //   Log.e("jjjj", t.getLocalizedMessage());
-
-                // presenter.setMessageToView(RetrofitValidationsV2.getOnFailureResponse(t, context));
-
-            }
-        });
-    }
-
-
-    //Grupos
-    private void validateGroupsCode(Response<GroupResponse> response, Context context) {
-        if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
-            getGroupsData(response, context);
-        } else {
-//            Log.e("jjjj", "rrrr");
-
-            // presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
-        }
-    }
-
-    private void getGroupsData(Response<GroupResponse> response, Context context) {
-        GroupResponse groupResponse = response.body();
-        // Log.e("jjjj", groupResponse.toString());
-
-        if (groupResponse != null) {
-            int responseCode = groupResponse.getResponseCode();
-            if (responseCode == GeneralConstantsV2.RESPONSE_CODE_OK) {
-                GroupData groupData = groupResponse.getData();
-                if (groupData != null) {
-                    List<Group> groups = groupData.getVehicleGroups();
-                    String dataN;
-                    String dataÑ;
-                    dataofvehiclesgroups.clear();
-                    dataofvehiclesgroupscve.clear();
-
-                    for(int i=0;i <groups.size();i++) {
-
-                        dataN= String.valueOf( groups.get(i).getVehicle_group());
-                        dataÑ=String.valueOf( groups.get(i).getCve_vehicle_group());
-                        //dataM.add(String.valueOf(unitList.get(i).getVehicleName()));
-                        dataofvehiclesgroups.add(dataN);
-                        dataofvehiclesgroupscve.add(dataÑ);
-                    }
-
-
-                    //    Log.e("groupsizes",""+dataofvehiclesgroups);
-                    /*if(!dataofvehiclesgroupscve.isEmpty())
-
-                    {
-                        //Log.e("unitsthaticansaw",""+dataofvehiclesgroupscve);
-
-                       for(int i=0 ;i <dataofvehiclesgroupscve.size();i++)
-                        {
-                            cveofgroup=Integer.parseInt(dataofvehiclesgroupscve.get(i));
-
-                        }
-                        getGroupsVehicles();
-                    }*/
-
-                    if (groups != null && groups.size() > 0) {
-                        RealmList groupRealmList = new RealmList();
-                        groupRealmList.addAll(groups);
-                        if (groupDBIsEmpty()) {
-                            changeGroupStatusToFalse(groups);
-                            createGroupListDB(groups);
-                        }
-
-                    } else {
-                        //presenter.setMessageToView("No se encotraron grupos");
-                    }
-                } else {
-                    // presenter.setMessageToView(context.getString(R.string.textEmptyCarsResponse));
-                }
-            } else if (responseCode == GeneralConstantsV2.RESPONSE_CODE_SESSION_EXPIRED) {
-                UnitDB.deleteDB();
-                GroupDB.deleteDB();
-                RealmUserData.deleteDB();
-
-                Bundle bndl = new Bundle();
-                bndl.putBoolean("HelpStatus", true);
-
-                Intent intent = new Intent(context, LoginContainerActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtras(bndl);
-                context.startActivity(intent);
-
-                presenter.failureResponse(context.getString(R.string.textSessionExpired));
-            } else {
-                //presenter.setMessageToView(groupV2Response.getMessage());
-            }
-        } else {
-            // presenter.setMessageToView(context.getString(R.string.textEmptyResponse));
-        }
     }
 
     private boolean unitDBIsEmpty() {

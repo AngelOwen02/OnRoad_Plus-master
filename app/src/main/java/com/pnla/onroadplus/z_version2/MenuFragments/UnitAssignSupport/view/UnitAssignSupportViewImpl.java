@@ -78,7 +78,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
     private UnitAssignSupportPresenter presenter;
     //private GroupTrackingAdapter groupTrackingAdapter;
     //private List<Group> unitGroup;
-    private List<Unit> unidades;
+    //private List<Unit> unidades;
     int position;
     //   private boolean doitonce=false;
     private List<String> directions;
@@ -178,8 +178,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
         unitAdapter = new UnitAdapter(vehicles, getContext());
         rvUnits.setAdapter(unitAdapter);*/
 
-        List<Unit> allUnitsList = UnitDB.getUnitList();
-        List<Unit> activeUnitsList = UnitDB.getUnitListActive();
+        //List<Unit> allUnitsList = UnitDB.getUnitList();
+        //List<Unit> activeUnitsList = UnitDB.getUnitListActive();
         //List<Group> activeGroupslist = GroupDB.getActiveGroupList();
         this.vehicles = unitList;
         //  Log.e("partsrequestvehicles",""+vehicles.size());
