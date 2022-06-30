@@ -76,10 +76,10 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
     private UnitService unitService;
     private Context context;
     public static List<String> dataofvehicles=new ArrayList<>();
-    public static List<String> dataofvehiclesgroups=new ArrayList<>();
+    //public static List<String> dataofvehiclesgroups=new ArrayList<>();
     public static List<String> dataofvehiclesgroupscve=new ArrayList<>();/***/
-    public static  List<String> dataofvehiclesgroupsnames=new ArrayList<>();
-    private List<String> gruposdata = new ArrayList<>();
+    //public static  List<String> dataofvehiclesgroupsnames=new ArrayList<>();
+    //private List<String> gruposdata = new ArrayList<>();
     //private List<GroupvehicleInsideData> groupvehicleInsideData;
     private Retrofit retrofitClient;
 
@@ -329,8 +329,8 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
 
 
                     if (unitDBIsEmpty()) {
-                        unitSelectedFalse();
-                        groupSelectedFalse();
+                        //unitSelectedFalse();
+                        //groupSelectedFalse();
                         firstLoginTrue();
                         dialog();
                         changeUnitStatusToFalse(unitList);
@@ -366,7 +366,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
             } else if (responseCode == GeneralConstantsV2.RESPONSE_CODE_SESSION_EXPIRED) {
 
                 UnitDB.deleteDB();
-                GroupDB.deleteDB();
+                //GroupDB.deleteDB();
                 RealmUserData.deleteDB();
 
                 Bundle bndl = new Bundle();
@@ -480,26 +480,9 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         }
     }
 
-    private boolean groupDBIsEmpty() {
-        return GroupDB.getGroupList().isEmpty();
-    }
-
-    private void createGroupListDB(List<Group> groupList) {
-        for (Group group : groupList) {
-            GroupDB.createNewGroup(group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(), group.isSelected(),
-                    group.getPositionItem(), group.getVehicles());
-        }
-    }
-
     private void changeUnitStatusToFalse(List<Unit> vehicleList) {
         for (Unit vehicles : vehicleList) {
             vehicles.setVehicleStatus(false);
-        }
-    }
-
-    private void changeGroupStatusToFalse(List<Group> groupList) {
-        for (Group group : groupList) {
-            group.setSelected(false);
         }
     }
 
@@ -514,20 +497,6 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         SharedPreferences prefs = context.getSharedPreferences("Login:FirstTime", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("isFirst", false);
-        editor.commit();
-    }
-
-    private void unitSelectedFalse() {
-        SharedPreferences prefs = context.getSharedPreferences("TrackingUnit:Selected", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("isSelected", false);
-        editor.commit();
-    }
-
-    private void groupSelectedFalse() {
-        SharedPreferences prefs = context.getSharedPreferences("TrackingGroup:Selected", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("isSelected", false);
         editor.commit();
     }
 

@@ -58,22 +58,22 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
 
     //public static final String TAG = UnitsViewImpl.class.getSimpleName();
     public static final String TAG = UnitAssignSupportViewImpl.class.getSimpleName();
-    private SearchView searchView;
+    //private SearchView searchView;
     //private RecyclerView rvUnits;
     private RecyclerView rvVehicles;
     //private UnitAdapter unitAdapter;
     private UnitAssignSupportAdapter unitAssignSupportAdapter;
-    private CardView searchViewContainer;
+    //private CardView searchViewContainer;
     private List<Unit> vehicles;
-    private List<Unit> undredlist=new ArrayList<>();
+    //private List<Unit> undredlist=new ArrayList<>();
     private ProgressBar progressBar;
     private ImageView toolbarItem;
     private ImageView toolbarImgBack;
-    private TextView txtToolbar;
+    //private TextView txtToolbar;
     private ProgressDialog progressDialog;
     final Handler handler = new Handler();
     private Runnable runnable;
-    private Parcelable state;
+    //private Parcelable state;
     //private UnitsPresenter presenter;
     private UnitAssignSupportPresenter presenter;
     //private GroupTrackingAdapter groupTrackingAdapter;
@@ -83,7 +83,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
     //   private boolean doitonce=false;
     private List<String> directions;
     private List<Integer> cvesalternos=new ArrayList<>();
-    private List<String> itemgeosList;
+    //private List<String> itemgeosList;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -302,21 +302,6 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
 
     }
 
-    public void interactorbridge()
-    {
-        //  Log.e("unitsthaticansaw2"," : "+UnitsInteractorImpl.dataofvehiclesgroupscve);
-        // Log.e("unitsthaticansaw2"," N: "+UnitsInteractorImpl.cveofgroup);
-        //for(int i=0;i<UnitsInteractorImpl.dataofvehiclesgroupscve.size();i++)
-        for(int i=0;i<UnitAssignSupportInteractorImpl.dataofvehiclesgroupscve.size();i++)
-        {
-            //UnitsInteractorImpl.cveofgroup=Integer.parseInt( UnitsInteractorImpl.dataofvehiclesgroupscve.get(i));
-            UnitAssignSupportInteractorImpl.cveofgroup = Integer.parseInt(UnitAssignSupportInteractorImpl.dataofvehiclesgroupscve.get(i));
-            // Log.e("unitsthaticansaw2"," N: "+UnitsInteractorImpl.cveofgroup);
-            //    presenter.getvehiclesINgroups();
-        }
-        //    doitonce=true;
-    }
-
     @Override
     public void failureResponse(String message) {
         if(message!=null) {
@@ -346,68 +331,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        List<Unit> filterUnitList = filterUnits(vehicles, newText);
-        if (vehicles!=null){
-            unitAssignSupportAdapter.setFilter(filterUnitList);
-            if(filterUnitList!=null)
-            {
-                List<String> names2=new ArrayList<>();
-                List<Integer> names=new ArrayList<>();
-                names.clear();
-                names2.clear();
-                for(int ñ=0;ñ<filterUnitList.size();ñ++)
-                {
-                    names.add(filterUnitList.get(ñ).getCveVehicle());
-                    names2.add(filterUnitList.get(ñ).getVehicleName());
-                }
-
-                /***/
-                cvesalternos.clear();
-                if(names!=null||names.size()!=0) {
-                  /*  if (names.size() < 6) {
-                        for (int k = 0; k < 6; k++) {
-
-                            cvesalternos.add(names.get(k));
-                        }
-                    } else {*/
-
-
-                    for (int k = 0; k < names.size(); k++) //  for(int k=0;k<names.size();k++)
-                    {
-                        cvesalternos.add(names.get(k));
-                    }
-                    // }
-
-                    try {
-                        presenter.georeferenceformAPI(cvesalternos);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                    //  Log.e("filterlog", "estoy filtrando" + names);
-                    //  Log.e("filterlog", "estoy filtrando" + names2);
-                    unitAssignSupportAdapter.getAdress(directions);
-                    unitAssignSupportAdapter.notifyDataSetChanged();
-                }
-                /***/
-
-
-            }
-        }
-        return true;
-    }
-
-    private List<Unit> filterUnits(List<Unit> vehicles, String text) {
-        List<Unit> filteredList = new ArrayList<>();
-        text = text.toLowerCase();
-        if(vehicles!=null) {
-            for (Unit vehicle : vehicles) {
-                String vehicleName = vehicle.getVehicleName().toLowerCase();
-                if (vehicleName.contains(text)) {
-                    filteredList.add(vehicle);
-                }
-            }
-        }
-        return filteredList;
+        return false;
     }
 
     @Override
@@ -427,13 +351,6 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
                 }
                 break;*/
         }
-
-    /* if(searchViewContainer.getVisibility()==View.VISIBLE)
-        {
-          //  filterUnits(vehicles).clear();
-
-            searchViewContainer.setVisibility(View.GONE);
-        }*/
     }
 
     private void goBackintomenu()
