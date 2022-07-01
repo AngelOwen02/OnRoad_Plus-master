@@ -120,14 +120,14 @@
                 <LinearLayout
                     android:layout_weight="1"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:orientation="horizontal" >
 
                     <TextView
                         android:text="Sin datos"
                         android:id="@+id/unit_tracking_title2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_marginStart="4dp"
                         style="@style/ItemUnitMainBody"/>
 
@@ -252,8 +252,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="4dp"
-                        style="@style/ItemUnitMainBody"
-                        />
+                        style="@style/ItemUnitMainBody" />
 
                 </LinearLayout>
 
