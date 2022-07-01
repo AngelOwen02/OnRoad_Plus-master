@@ -321,15 +321,6 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
 
-                    <!--
-                    <ImageView
-                        android:src="@drawable/ic_item_unit_shape"
-                        android:id="@+id/img_unit_item_shape"
-                        android:layout_gravity="center"
-                        android:layout_width="13dp"
-                        android:layout_height="13dp"/>
-                        -->
-
                     <TextView
                         android:text="Sin datos"
                         android:id="@+id/txt_unit_status"
