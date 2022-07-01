@@ -6,8 +6,6 @@ import java.util.List;
 
 public interface UnitAssignSupportInteractor {
 
-    void getAllVehiclesFromAPI();
-    //void getGroupsVehicles();
-
-    void getGeoreferencefromAPI(List<Integer> cves) throws IOException;
+    void requestSoportes();
+    //void getGeoreferencefromAPI(List<Integer> cves) throws IOException;
 }

@@ -20,37 +20,17 @@ import com.pnla.onroadplus.z_version2.Containers.ModelVersion.Version;
 import com.pnla.onroadplus.z_version2.Containers.ModelVersion.VersionRequest;
 import com.pnla.onroadplus.z_version2.Containers.ModelVersion.VersionResponse;
 import com.pnla.onroadplus.z_version2.Containers.ModelVersion.VersionService;
-import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.container.UnitAssignSupportContainer;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.UnitAssignSupportPresenter;
-import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.GroupTrackingAdapter;
-import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.UnitTrackingAdapter;
-import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.interactor.UnitTrackingInteractorImpl;
-import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.model.TrackingService;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.FinalGroupDB;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.TemporalGroupDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.FinalUnitDB;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.TemporalUnitDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.UnitDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.GeoreferenceRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.GeoreferenceResponse;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.Group;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.GroupData;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.GroupRequest;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.GroupResponse;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.GroupvehicleInsideData;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.GroupvehicleInsideRequest;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.GroupvehicleInsideResponse;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitResponse;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.UnitData;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.UnitRequest;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.UnitResponse;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.UnitService;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.georeference;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.UnitSupport;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 import com.pnla.onroadplus.z_version2.realmOnRoad.RealmUserData;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitClientV2;
@@ -75,35 +55,51 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
     //private SupportService service;
     private UnitService unitService;
     private Context context;
-    public static List<String> dataofvehicles=new ArrayList<>();
+    //public static List<String> dataofvehicles=new ArrayList<>();
     //public static List<String> dataofvehiclesgroups=new ArrayList<>();
-    public static List<String> dataofvehiclesgroupscve=new ArrayList<>();/***/
+    //public static List<String> dataofvehiclesgroupscve=new ArrayList<>();/***/
     //public static  List<String> dataofvehiclesgroupsnames=new ArrayList<>();
     //private List<String> gruposdata = new ArrayList<>();
     //private List<GroupvehicleInsideData> groupvehicleInsideData;
     private Retrofit retrofitClient;
 
-    public static List<String> dataphotoofvehicles=new ArrayList<>();
-    public static int cveofgroup;
+    //public static List<String> dataphotoofvehicles=new ArrayList<>();
+    //public static int cveofgroup;
 
     public Version version;
     private String name = "OnRoad";
     private List<String> versiones;
     //   public static boolean firstime;
     private int sizeoflistgeoreference;
-    List<String> adress=new ArrayList<>();
+    //List<String> adress=new ArrayList<>();
 
     public UnitAssignSupportInteractorImpl(UnitAssignSupportPresenter presenter, Context context) {
         this.context = context;
         this.presenter = presenter;
         initRetrofit();
+        requestSoportes();
     }
     private void initRetrofit() {
         Retrofit retrofitClient = RetrofitClientV2.getRetrofitInstance();
         unitService = retrofitClient.create(UnitService.class);
+        //Toast.makeText(context, "paso por aqui retrofit", Toast.LENGTH_LONG).show();
     }
 
     @Override
+    public void requestSoportes(){
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        Toast.makeText(context, "paso por aqui request1", Toast.LENGTH_LONG).show();
+        //String token = "7042b63634e5aab50029d64d1c802e4b";
+        if(token!=null) {
+            Toast.makeText(context, "paso por aqui y reviso el token, todo bien", Toast.LENGTH_LONG).show();
+            //startVehiclesRequest(token);
+            requestSoportes(token);
+        }
+
+    }
+
+    /**@Override
     public void getAllVehiclesFromAPI() {
         List<Integer> noCves = new ArrayList<>();
         /**if(!UnitTrackingAdapter.integerList.isEmpty())
@@ -136,21 +132,21 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         }*/
 
 
-        startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context);
+        //startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context);
         //startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, context);
 
-        //SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-        //String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        /**SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         //String token = "7042b63634e5aab50029d64d1c802e4b";
-        //startVehiclesRequest(token, context);
+        startVehiclesRequest(token);*/
         //Toast.makeText(context, token, Toast.LENGTH_SHORT).show();
 
 //        Log.e("UnitDB", UnitDB.getUnitList().toString());
 //        Log.e("FinalUnitDB", FinalUnitDB.getUnitList().toString());
 //        Log.e("TemporalUnitDB", TemporalUnitDB.getUnitList().toString());
-    }
+    //}
 
-    @Override
+    /**@Override
     public void getGeoreferencefromAPI(List<Integer> noCves) throws IOException {
 
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -158,7 +154,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         int extracves=sizeoflistgeoreference-noCves.size();
 
         int tipodeRequest=1;
-        if(token!=null) {
+        /**if(token!=null) {
             // Log.e("bloquesdeunides11",""+noCves+ "   "+token+"   "+tipodeRequest);
             GeoreferenceRequest request = new GeoreferenceRequest(token, tipodeRequest, noCves);
             //presenter.showProgressDialog();
@@ -225,27 +221,28 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
                 }
             });
             processUnits.leaveAction();
-        }
-    }
+        }*/
+    //}
 
-    private void startVehiclesRequest(final int typeRequest, List<Integer> vehiclesCves, final Context context) {
-    //private void startVehiclesRequest(String mytoken, final Context context) {
+    //private void startVehiclesRequest(final int typeRequest, List<Integer> vehiclesCves, final Context context) {
+    private void requestSoportes(String token) {
     //private void startVehiclesRequest( int typeRequest, final Context context) {
-        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        //SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        //String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         //Toast.makeText(context, mytoken, Toast.LENGTH_SHORT).show();
+        SupportUnitRequest request = new SupportUnitRequest(token);
         if(token!=null) {
         //if(mytoken!=null) {
-            UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);
-            //SupportUnitRequest request = new SupportUnitRequest(mytoken);
+            //UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);
+            //SupportUnitRequest request = new SupportUnitRequest(token);
             //Log.e("token",""+mytoken);
             // Log.e("checkinguser",token+"  "+typeRequest+"  "+vehiclesCves);
             //presenter.showProgressDialog();
-            unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
-            //unitService.getFullVehiclesSupport(request).enqueue(new Callback<SupportUnitResponse>() {
+            //unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
+            unitService.getFullVehiclesSupport(request).enqueue(new Callback<SupportUnitResponse>() {
                 @Override
-                public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
-                //public void onResponse(Call<SupportUnitResponse> call, Response<SupportUnitResponse> response) {
+                //public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
+                public void onResponse(Call<SupportUnitResponse> call, Response<SupportUnitResponse> response) {
                     try {
                         //Toast.makeText(context, "Paso por aqui", Toast.LENGTH_SHORT).show();
                         validateCode(response, context);
@@ -255,136 +252,46 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
                 }
 
                 @Override
-                public void onFailure(Call<UnitResponse> call, Throwable t) {
-                //public void onFailure(Call<SupportUnitResponse> call, Throwable t) {
+                //public void onFailure(Call<UnitResponse> call, Throwable t) {
+                public void onFailure(Call<SupportUnitResponse> call, Throwable t) {
                     // Log.e("onFailure",t.getLocalizedMessage());
-                    Toast.makeText(context,  "sesion expirada2", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(context,  "sesion expirada2", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, t.toString(), Toast.LENGTH_LONG).show();
                 }
             });
         }
 
     }
 
-    private void validateCode(Response<UnitResponse> response, Context context) throws IOException {
-    //private void validateCode(Response<SupportUnitResponse> response, Context context) throws IOException {
+    //private void validateCode(Response<UnitResponse> response, Context context) throws IOException {
+    private void validateCode(Response<SupportUnitResponse> response, Context context) throws IOException {
         //  Log.e("LAPRINCESS", String.valueOf(response.body().getResponseCode()));
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
-            getVehiclesData(response, context);
+            //getVehiclesData(response, context);
+            getSupportData(response, context);
+            //Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
         } else {
             presenter.failureResponse(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
             Toast.makeText(context,  "sesion expirada3", Toast.LENGTH_LONG).show();
         }
     }
 
-    private void getVehiclesData(Response<UnitResponse> response, Context context) throws IOException {
-    //private void getVehiclesData(Response<SupportUnitResponse> response, Context context) throws IOException {
-        UnitResponse unitResponse = response.body();
-        //SupportUnitResponse supportUnitResponse = response.body();
-        if (unitResponse != null) {
-        //if (supportUnitResponse != null) {
-            int responseCode = unitResponse.getResponseCode();
-            //int responseCode = supportUnitResponse.getResponseCode();
+    //private void getVehiclesData(Response<UnitResponse> response, Context context) throws IOException {
+    private void getSupportData(Response<SupportUnitResponse> response, Context context) {
+        //UnitResponse unitResponse = response.body();
+        SupportUnitResponse supportUnitResponse = response.body();
+        //if (unitResponse != null) {
+        if (supportUnitResponse != null) {
+            //int responseCode = unitResponse.getResponseCode();
+            int responseCode = supportUnitResponse.getResponseCode();
             if (responseCode == GeneralConstantsV2.RESPONSE_CODE_OK) {
-                UnitData data = unitResponse.getData();
+                //UnitData data = unitResponse.getData();
                 //SupportUnitData data = supportUnitResponse.getData();
-                if (data != null) {
-                    List<Unit> unitList = data.getUnitList();
-                    //   Log.e("checkinguser",String.valueOf(unitList.size()));
-                    if (unitList.isEmpty()){
-                        Toast.makeText(context, "No cuentas con unidades disponibles para visualizar", Toast.LENGTH_SHORT).show();
-                    }
-                    List<Unit> filteredList = new ArrayList<>();
-                    String dataN;
-                    String dataM;
-                    dataofvehicles.clear();
-                    dataphotoofvehicles.clear();
-                    for(int i=0;i <unitList.size();i++) {
-
-                        dataN= String.valueOf( unitList.get(i).getVehicleName());
-                        dataM= String.valueOf( unitList.get(i).getVehicleImage());
-                        //dataM.add(String.valueOf(unitList.get(i).getVehicleName()));
-                        dataofvehicles.add(dataN);
-                        dataphotoofvehicles.add(dataM);
-                    }
-
-                    //  Log.e("ArrayDataM",""+dataofvehicles);
-                    RealmList unitRealmList = new RealmList();
-
-                    for (Unit unit: unitList){
-                        if (unit.getLatitude() == 0 && unit.getLongitude() == 0){
-
-                        }else {
-
-                            unitRealmList.add(unit);
-                        }
-                    }
-
-//                    Log.e("HHHHH", unitRealmList.toString());
-//                    Log.e("bloquesdeunides10", "unitlist"+String.valueOf(unitRealmList.size()));
-                    sizeoflistgeoreference=unitRealmList.size();
-                    presenter.setVehiclesListToView(unitRealmList);
-                    // presenter.hideProgressDialog();
-
-
-
-
-                    if (unitDBIsEmpty()) {
-                        //unitSelectedFalse();
-                        //groupSelectedFalse();
-                        firstLoginTrue();
-                        dialog();
-                        changeUnitStatusToFalse(unitList);
-                        createUnitListDB(unitRealmList);
-                    }else {
-                        //updateUnits(unitRealmList);
-
-                        SharedPreferences unitPrefs = context.getSharedPreferences("TrackingUnit:Selected", Context.MODE_PRIVATE);
-                        boolean isUnitSelected = unitPrefs.getBoolean("isSelected", true);
-//                        Log.e("Unit Selected?", String.valueOf(isUnitSelected));
-
-                        SharedPreferences groupPrefs = context.getSharedPreferences("TrackingGroup:Selected", Context.MODE_PRIVATE);
-                        boolean isGroupSelected = groupPrefs.getBoolean("isSelected", true);
-//                        Log.e("Group Selected?", String.valueOf(isGroupSelected));
-//
-
-                        if (isUnitSelected){
-                            firstLoginFalse();
-
-                        } else if (isGroupSelected){
-                            firstLoginFalse();
-
-                        }else {
-                            firstLoginTrue();
-                        }
-
-                    }
-
-                    //getGroups(context);
-                } else {
-                    presenter.failureResponse(context.getString(R.string.textEmptyCarsResponse));
-                }
-            } else if (responseCode == GeneralConstantsV2.RESPONSE_CODE_SESSION_EXPIRED) {
-
-                UnitDB.deleteDB();
-                //GroupDB.deleteDB();
-                RealmUserData.deleteDB();
-
-                Bundle bndl = new Bundle();
-                bndl.putBoolean("HelpStatus", true);
-
-                Intent intent = new Intent(context, LoginContainerActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtras(bndl);
-                context.startActivity(intent);
-
-
-
-                //   presenter.failureResponse(context.getString(R.string.textSessionExpired));
-            } else {
-                presenter.failureResponse("Error");
+                //Toast.makeText(context, "paso por aqui", Toast.LENGTH_LONG).show();
+                List<SupportUnitData> data = supportUnitResponse.getData();
+                presenter.setSoportes(data);
+                //Toast.makeText(context, data.toString(), Toast.LENGTH_LONG).show();
             }
-        } else {
-            presenter.failureResponse(context.getString(R.string.textEmptyResponse));
         }
     }
 
@@ -458,51 +365,6 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
             }
         });
 
-    }
-
-    private boolean unitDBIsEmpty() {
-        return UnitDB.getUnitList().isEmpty();
-    }
-
-    private void createUnitListDB(List<Unit> unitList) {
-        for (Unit unit : unitList) {
-            UnitDB.createNewUnit(unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(), unit.getSendTime(),
-                    unit.getDescBrand(), unit.getDescModel(), unit.getVehicleYear(), unit.getVehicleVin(), unit.getVehiclePlate(), unit.getGeoreference(), unit.getTimeTravel(),
-                    unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(), unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed(), unit.getDesc_layer());
-        }
-    }
-
-    private void createFinalUnitListDB(List<Unit> unitList) {
-        for (Unit unit : unitList) {
-            FinalUnitDB.createNewUnit(unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(), unit.getSendTime(),
-                    unit.getDescBrand(), unit.getDescModel(), unit.getVehicleYear(), unit.getVehicleVin(), unit.getVehiclePlate(), unit.getGeoreference(), unit.getTimeTravel(),
-                    unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(), unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed(), unit.getDesc_layer());
-        }
-    }
-
-    private void changeUnitStatusToFalse(List<Unit> vehicleList) {
-        for (Unit vehicles : vehicleList) {
-            vehicles.setVehicleStatus(false);
-        }
-    }
-
-    private void firstLoginTrue() {
-        SharedPreferences prefs = context.getSharedPreferences("Login:FirstTime", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("isFirst", true);
-        editor.commit();
-    }
-
-    private void firstLoginFalse() {
-        SharedPreferences prefs = context.getSharedPreferences("Login:FirstTime", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-        editor.putBoolean("isFirst", false);
-        editor.commit();
-    }
-
-    private void updateUnits(List<Unit> unitList){
-        UnitDB.deleteDB();
-        createUnitListDB(unitList);
     }
 
 }

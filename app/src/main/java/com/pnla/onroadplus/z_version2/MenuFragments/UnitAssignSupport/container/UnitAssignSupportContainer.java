@@ -31,9 +31,11 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.UnitTra
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.presenter.UnitTrackingPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.presenter.UnitTrackingPresenterImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.Group;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.UnitSupport;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 
 import java.io.IOException;
@@ -172,14 +174,14 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
         }//*/
     //}
 
-    private void fillVehicles() {
+    /**private void fillVehicles() {
         adapterVehicles = new UnitAssignSupportAdapter(vehicless, this);
         rvVehicles.setAdapter(adapterVehicles);
         layoutManagerVehicles = new LinearLayoutManager(this);
         rvVehicles.setLayoutManager(layoutManagerVehicles);
         //Log.e("unitsthaticansaw","im in units");
         //adapterVehiclesV2.setVehicleAndGroupSelectedListener(FragmentVehiclesV2.this);
-    }
+    }*/
 
     private void fillGroups() {
         groupAdapter = new GroupTrackingAdapter(groupss, this);
@@ -222,28 +224,18 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
         goBackintomenu();
     }
 
-    @Override
-    public void setUnitList(List<Unit> vehicles) throws IOException {
+    /**@Override
+    public void setUnidadesSoporte(List<SupportUnitData> data) {
 
-    }
+    }*/
 
     @Override
-    public void adressList(List<String> adress) {
+    public void setSoportes(List<SupportUnitData> data) {
 
     }
 
     @Override
     public void failureResponse(String message) {
-
-    }
-
-    @Override
-    public void showProgressDialog() {
-
-    }
-
-    @Override
-    public void hideProgressDialog() {
 
     }
 }

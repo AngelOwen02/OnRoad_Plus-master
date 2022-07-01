@@ -29,9 +29,11 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.UnitTra
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.UnitDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.adapter.UnitAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.Group;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.UnitSupport;
 import com.pnla.onroadplus.z_version2.SplashScreenActivity;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
@@ -46,16 +48,18 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSupportAdapter.ViewHolder> {
 
-    private List<Unit> unitList;
+    //private List<Unit> unitList;
+    private List<SupportUnitData> data;
     //private List<Group> groupList;
     private Context context;
     //private UnitAdapter.OnClickVehiclesMapListener listener;
     //private Handler handler;
-    public static  int lastitem;
+    //public static  int lastitem;
     public List<String> textaddres= new ArrayList<>();
 
-    public UnitAssignSupportAdapter(List<Unit> unitList, Context context) {
-        this.unitList = unitList;
+    //public UnitAssignSupportAdapter(List<Unit> unitList, Context context) {
+    public UnitAssignSupportAdapter(List<SupportUnitData> data, Context context) {
+        this.data = data;
         this.context = context;
     }
 
@@ -68,9 +72,9 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
     @NonNull
     @Override
-    public UnitAssignSupportAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //final View view = LayoutInflater.from(context).inflate(R.layout.item_unit, parent, false);
-        final View view = LayoutInflater.from(context).inflate(R.layout.unit_support, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.unit_support, parent, false);
         return new UnitAssignSupportAdapter.ViewHolder(view);
     }
 
@@ -239,12 +243,12 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
     }*/
 
         @Override
-        public void onBindViewHolder(@NonNull UnitAssignSupportAdapter.ViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 //        holder.itemView.findFocus().getScrollBarSize();
-            String sendTime = unitList.get(position).getSendTime();
+            //String sendTime = unitList.get(position).getSendTime();
             // Log.e("bloquesdeunides",""+holder.getAdapterPosition() +"   LP "+unitList.get(position).getCveVehicle());//+holder.getLayoutPosition()+"  ");
-            lastitem=holder.getAdapterPosition();
-            Log.e("bloquesdeunides",""+lastitem);
+            //lastitem=holder.getAdapterPosition();
+            //Log.e("bloquesdeunides",""+lastitem);
             /**if (sendTime != null) {
                 Calendar calendar = Calendar.getInstance();
                 String[] sendTimeformat = sendTime.split(" ");
@@ -321,15 +325,39 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
             /**SetData*/
 
-            if (unitList.get(position).getVehicleName() != null){
-                if (unitList.get(position).getVehicleName().equals("")){
+            if (data.get(position).getVehicle_Name() != null){
+                if (data.get(position).getVehicle_Name().equals("")){
                     holder.unitTitle.setText("----");
                 } else {
-                    holder.unitTitle.setText(unitList.get(position).getVehicleName());
+                    holder.unitTitle.setText(data.get(position).getVehicle_Name());
                 }
             }else {
                 holder.unitTitle.setText("----");
             }
+
+            holder.unitRute.setText(data.get(position).getDesc_Layer());
+
+            String PercentComplete = new String(String.valueOf(data.get(position).getPercent_Complete()));
+            PercentComplete.equals(data.get(position).getPercent_Complete());
+            holder.unitRealPercent.setText(PercentComplete + "%");
+
+            String ControlPoint = new String(String.valueOf(data.get(position).getControl_Point()));
+            ControlPoint.equals(data.get(position).getControl_Point());
+            holder.unitObjPercent.setText(ControlPoint + "%");
+
+            String PercentHelp = new String(String.valueOf(data.get(position).getPercentToHelp()));
+            PercentHelp.equals(data.get(position).getPercentToHelp());
+            holder.unitDifference.setText(PercentHelp + "%");
+
+            String Status = new String(String.valueOf(data.get(position).getStatus()));
+            Status.equals(data.get(position).getStatus());
+            holder.unitStatus.setText(Status);
+
+            /**if(data.get(position).getHelp_State() == 1){
+                holder.unitImage.setImageResource();
+            }*/
+
+            //holder.unitStatus.setText(data.get(position).getStatus());
 
             //holder.txtUnitMaxSpeed.setText(unitList.get(position).getCurrentSpeed() + "km/h");
 
@@ -361,7 +389,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 //    holder.txtUnitGeoReference.setText();
                 for(String name:textaddres )
                 {
-                    if(name.contains(unitList.get(position).getVehicleName()))
+                    if(name.contains(data.get(position).getVehicle_Name()))
 
                     {
                         String[] parts1 = name.split(":::");
@@ -409,15 +437,15 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.imgUnitCircle.setBorderColor(context.getResources().getColor(R.color.colorBorderCarGray));
             }*/
 
-            if (unitList.get(position).getVehicleImage() == null) {
-                Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
-            } else if (unitList.get(position).getVehicleImage().equals("string")) {
-                Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
-            } else if (unitList.get(position).getVehicleImage().equals(GeneralConstantsV2.NO_IMAGE)) {
-                Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
-            } else {
-                Glide.with(context).load(unitList.get(position).getVehicleImage()) .thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
-            }
+            //if (unitList.get(position).getVehicleImage() == null) {
+            //    Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
+            //} else if (unitList.get(position).getVehicleImage().equals("string")) {
+            //    Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
+            //} else if (unitList.get(position).getVehicleImage().equals(GeneralConstantsV2.NO_IMAGE)) {
+            //    Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
+            //} else {
+            //    Glide.with(context).load(unitList.get(position).getVehicleImage()) .thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
+            //}
 
 
             /**MaxSpeedImage*/
@@ -522,20 +550,16 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
     @Override
     public int getItemCount() {
-        //return groupList.size();
-        return unitList.size();
-    }
-    public int getadapterviewsize() {
-        return lastitem;
+        return data.size();
     }
 
     public void getAdress(List<String> from) {
         textaddres=from;
     }
 
-    public interface OnClickVehiclesMapListener {
+    /**public interface OnClickVehiclesMapListener {
         void onClickVehiclesMap(int position);
-    }
+    }*/
 
     /**public class ViewHolder extends RecyclerView.ViewHolder {
 
@@ -601,9 +625,15 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         }
     }
 
-    public void setFilter(List<Unit> unitList) {
+    /**public void setFilter(List<Unit> unitList) {
         this.unitList = new ArrayList<>();
         this.unitList.addAll(unitList);
         notifyDataSetChanged();
-    }
+    }*/
+
+    /**public void setFilter(List<SupportUnitData> unitList) {
+        this.data = new ArrayList<>();
+        this.data.addAll(unitList);
+        notifyDataSetChanged();
+    }*/
 }

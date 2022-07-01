@@ -2,7 +2,7 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Units.data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.pnla.onroadplus.z_version2.MenuFragments.Zones.model.pointsData;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.UnitSupport;
 
 import java.util.List;
 
@@ -16,8 +16,10 @@ public class SupportUnitResponse {
     @SerializedName("data")
     @Expose
     private List<SupportUnitData> data = null;
+    //private SupportUnitData data;
 
     public SupportUnitResponse(int responseCode, String message, List<SupportUnitData> data) {
+    //public SupportUnitResponse(int responseCode, String message, SupportUnitData data) {
         this.responseCode = responseCode;
         this.message = message;
         this.data = data;

@@ -10,7 +10,9 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.interactor.Unit
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.interactor.UnitTrackingInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.view.UnitTrackingView;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.Group;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.UnitSupport;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
 
 import java.io.IOException;
@@ -32,25 +34,47 @@ public class UnitAssignSupportPresenterImpl implements UnitAssignSupportPresente
         this.view = view;
     }
 
+    @Override
+    public void requestVehicles() {
+        if(view!=null){
+            interactor.requestSoportes();
+        }
+    }
+
+    @Override
+    public void setSoportes(List<SupportUnitData> data) {
+        if(view!=null){
+            view.setSoportes(data);
+        }
+    }
+
     /**@Override
     public void setView(UnitAssignSupportViewImpl view){
     this.view = view;
     }*/
 
-    @Override
+    /**@Override
     public void getFullVehicles() {
         if (view != null){
-
-            interactor.getAllVehiclesFromAPI();
+            //interactor.getAllVehiclesFromAPI();
         }
-    }
+    }*/
 
-    @Override
+    /**@Override
+    //public void setVehiclesListToView(List<Unit> unitList) throws IOException {
+    public void setUnidadesSoporte(List<SupportUnitData> data){
+        if (view != null) {
+            //view.showProgressDialog();
+            view.setUnidadesSoporte(data);
+        }
+    }*/
+
+    /**@Override
     public void georeferenceformAPI(List<Integer> values) throws IOException {
         if (view != null){
             interactor.getGeoreferencefromAPI(values);
         }
-    }
+    }*/
 
     // @Override
     //  public void getvehiclesINgroups() {
@@ -59,19 +83,19 @@ public class UnitAssignSupportPresenterImpl implements UnitAssignSupportPresente
     //      }
     //  }
 
-    @Override
+    /**@Override
     public void showProgressDialog() {
         if (view != null){
             //view.showProgressDialog();
         }
-    }
+    }*/
 
-    @Override
+    /**@Override
     public void hideProgressDialog() {
         if (view != null){
             //   view.hideProgressDialog();
         }
-    }
+    }*/
 
     /**@Override
     public void setView(UnitsViewImpl view) {
@@ -83,20 +107,13 @@ public class UnitAssignSupportPresenterImpl implements UnitAssignSupportPresente
         this.view = view;
     }*/
 
-    @Override
-    public void setVehiclesListToView(List<Unit> unitList) throws IOException {
-        if (view != null) {
-            view.showProgressDialog();
-            view.setUnitList(unitList);
-        }
-    }
 
-    @Override
+    /**@Override
     public void setdirectionsToView(List<String> addresList) {
         if (view != null) {
             view.adressList(addresList);
         }
-    }
+    }*/
 
     @Override
     public void failureResponse(String message) {

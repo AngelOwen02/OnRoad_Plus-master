@@ -12,11 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -38,6 +40,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.adapter.Un
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractor;
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractorImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.presenter.UnitsPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.UnitAssignSupportPresenter;
@@ -47,6 +50,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportView;
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.UnitSupport;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
@@ -54,7 +58,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSupportView, SearchView.OnQueryTextListener, ImageView.OnClickListener {
+public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSupportView, ImageView.OnClickListener {
 
     //public static final String TAG = UnitsViewImpl.class.getSimpleName();
     public static final String TAG = UnitAssignSupportViewImpl.class.getSimpleName();
@@ -64,7 +68,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
     //private UnitAdapter unitAdapter;
     private UnitAssignSupportAdapter unitAssignSupportAdapter;
     //private CardView searchViewContainer;
-    private List<Unit> vehicles;
+    //private List<Unit> vehicles;
+    private List<SupportUnitData> soportes;
     //private List<Unit> undredlist=new ArrayList<>();
     private ProgressBar progressBar;
     private ImageView toolbarItem;
@@ -85,6 +90,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
     private List<Integer> cvesalternos=new ArrayList<>();
     //private List<String> itemgeosList;
 
+    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //View view = inflater.inflate(R.layout.fragment_units_impl, container, false);
@@ -136,7 +142,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
 
 //        DTXAction processUnits= Dynatrace.enterAction("processUnits");//
 //        processUnits.getRequestTag();
-        presenter.getFullVehicles();
+        //presenter.getFullVehicles();
         //     processUnits.leaveAction();
 
         // presenter.getvehiclesINgroups();
@@ -170,8 +176,9 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
         toolbarImgBack.setOnClickListener(this);
     }
 
-    @Override
-    public void setUnitList(List<Unit> unitList) throws IOException {
+    /**@Override
+    //public void setUnitList(List<Unit> unitList) throws IOException {
+    public void setUnitList(List<SupportUnitData> unitList) throws IOException {
         /*this.vehicles = unitList;
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvUnits.setLayoutManager(linearLayoutManager);
@@ -181,7 +188,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
         //List<Unit> allUnitsList = UnitDB.getUnitList();
         //List<Unit> activeUnitsList = UnitDB.getUnitListActive();
         //List<Group> activeGroupslist = GroupDB.getActiveGroupList();
-        this.vehicles = unitList;
+        /**this.vehicles = unitList;
         //  Log.e("partsrequestvehicles",""+vehicles.size());
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         //rvUnits.setLayoutManager(linearLayoutManager);
@@ -191,7 +198,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
         {
             for(int y=0;y<vehicles.size();y++)
             {
-                allcves.add(vehicles.get(y).getCveVehicle());
+                //allcves.add(vehicles.get(y).getCveVehicle());
+                allcves.add(vehicles.get(y).getCveLayer());
             }
         }
 
@@ -212,7 +220,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
         //rvUnits.setOnFlingListener(null);
         //snapHelper.attachToRecyclerView(rvUnits);
 
-        unitAssignSupportAdapter = new UnitAssignSupportAdapter(vehicles,getContext());
+       /** unitAssignSupportAdapter = new UnitAssignSupportAdapter(vehicles,getContext());
         //rvUnits.setAdapter(unitAssignSupportAdapter);
         rvVehicles.setAdapter(unitAssignSupportAdapter);
         //hideProgressDialog();
@@ -229,7 +237,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
             {
                 for(int k=0;k<vehicles.size();k++)
                 {
-                    cvesalternos.add( vehicles.get(k).getCveVehicle());
+                    //cvesalternos.add( vehicles.get(k).getCveVehicle());
+                    cvesalternos.add( vehicles.get(k).getCveLayer());
                 }
             }
             else
@@ -237,7 +246,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
                 for(int k=0;k<6;k++)
                 {
 
-                    cvesalternos.add( vehicles.get(k).getCveVehicle());
+                    //cvesalternos.add( vehicles.get(k).getCveVehicle());
+                    cvesalternos.add( vehicles.get(k).getCveLayer());
                 }
             }
 
@@ -292,14 +302,22 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
         // Log.e("unitsthaticansaw2"," : "+UnitsInteractorImpl.dataofvehiclesgroupscve);
      /*   if(!UnitsInteractorImpl.dataofvehiclesgroupscve.isEmpty())
         {            // Log.e("unitsthaticansaw2"," data is here ");            if(doitonce==false)            {                interactorbridge();            }            else            {            }        }        else        {            // Log.e("unitsthaticansaw2"," mepty ");            // Log.e("unitsthaticansaw2"," : "+UnitsInteractorImpl.dataofvehiclesgroupscve);        }*/
-        unitAssignSupportAdapter.notifyDataSetChanged();
-    }
+        /**unitAssignSupportAdapter.notifyDataSetChanged();
+    }*/
 
     @Override
-    public void adressList(List<String> adress) {
-        this.directions=adress;
-        // Log.e("bloquesdeunides9",""+directions);
+    public void setSoportes(List<SupportUnitData> data) {
+        this.soportes = data;
+        if(soportes!=null){
+            fillSoportes(soportes);
+        }
+    }
 
+    private void fillSoportes(List<SupportUnitData> soportes){
+        unitAssignSupportAdapter = new UnitAssignSupportAdapter(soportes,getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        rvVehicles.setLayoutManager(layoutManager);
+        rvVehicles.setAdapter(unitAssignSupportAdapter);
     }
 
     @Override
@@ -307,31 +325,6 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
         if(message!=null) {
             Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
         }
-    }
-
-    @Override
-    public void showProgressDialog() {
-        // progressBar.setVisibility(View.VISIBLE);
-        /**progressDialog.setMessage("Cargando Unidades");
-        progressDialog.setCancelable(false);
-        progressDialog.show();*/
-
-    }
-
-    @Override
-    public void hideProgressDialog() {
-        // progressBar.setVisibility(View.INVISIBLE);
-        //progressDialog.dismiss();
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String query) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String newText) {
-        return false;
     }
 
     @Override
