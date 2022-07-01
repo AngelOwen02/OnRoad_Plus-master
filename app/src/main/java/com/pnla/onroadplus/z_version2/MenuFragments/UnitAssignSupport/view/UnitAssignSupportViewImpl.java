@@ -22,6 +22,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -51,6 +53,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.UnitSupport;
+import com.pnla.onroadplus.z_version2.MenuFragments.Zones.view.zonesFragment;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
@@ -356,6 +359,11 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
         startActivity(intent);
         finish();*/
         Toast.makeText(getContext(), "ATRASSSSS", Toast.LENGTH_LONG).show();
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        zonesFragment zones = new zonesFragment();//transaction.addToBackStack(UnitsViewImpl.TAG);
+        transaction.replace(R.id.conteinerMainFragments, zones, zonesFragment.TAG).commit();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     }
 
     @Override
