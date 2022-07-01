@@ -58,7 +58,7 @@
 
                 <LinearLayout
                     android:layout_weight="1"
-                    android:layout_width="210dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
 
@@ -66,9 +66,8 @@
                         android:text="Ruta: "
                         android:id="@+id/txt_unit_rute2"
                         android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginTop="3dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
                         android:gravity="center_vertical"
                         style="@style/ItemUnitHeader"
                         android:paddingBottom="5dp"
@@ -80,17 +79,16 @@
 
                 <LinearLayout
                     android:layout_weight="1"
-                    android:layout_width="210dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
 
                     <TextView
                         android:text="Sin datos"
                         android:id="@+id/txt_unit_rute"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="4dp"
                         android:gravity="center_vertical"
                         style="@style/ItemUnitHeader"
                         android:paddingBottom="5dp"
@@ -99,21 +97,26 @@
 
                 </LinearLayout>
 
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="9dp"
+                android:orientation="horizontal" >
 
                 <LinearLayout
                     android:layout_weight="1"
-                    android:layout_width="215dp"
+                    android:layout_width="120dp"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal" >
 
                     <TextView
                         android:text="Unidad: "
                         android:id="@+id/txt_unit_name2"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="4dp"
                         android:gravity="center_vertical"
                         style="@style/ItemUnitHeader"
                         android:paddingBottom="5dp"
@@ -132,10 +135,9 @@
                     <TextView
                         android:text="Sin datos"
                         android:id="@+id/unit_tracking_title2"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="8dp"
-                        android:layout_marginTop="3dp"
+                        android:layout_marginStart="4dp"
                         android:gravity="center_vertical"
                         style="@style/ItemUnitHeader"
                         android:paddingBottom="5dp"
@@ -143,6 +145,8 @@
                         android:maxLines="1" />
 
                 </LinearLayout>
+
+
 
             </LinearLayout>
 

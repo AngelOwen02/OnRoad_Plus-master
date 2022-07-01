@@ -325,6 +325,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
             /**SetData*/
 
+            //Esto es del nombre del vehiculo
             if (data.get(position).getVehicle_Name() != null){
                 if (data.get(position).getVehicle_Name().equals("")){
                     holder.unitTitle.setText("----");
@@ -335,48 +336,50 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.unitTitle.setText("----");
             }
 
+            //Ruta del vehiculo
             holder.unitRute.setText(data.get(position).getDesc_Layer());
 
+            //Porcentaje completado del vehiculo
             String PercentComplete = new String(String.valueOf(data.get(position).getPercent_Complete()));
             PercentComplete.equals(data.get(position).getPercent_Complete());
             holder.unitRealPercent.setText(PercentComplete + "%");
 
+            //Porcentaje Objetivo del vehiculo
             String ControlPoint = new String(String.valueOf(data.get(position).getControl_Point()));
             ControlPoint.equals(data.get(position).getControl_Point());
             holder.unitObjPercent.setText(ControlPoint + "%");
 
+            //Diferencia del vehiculo (En Porcentaje)
             String PercentHelp = new String(String.valueOf(data.get(position).getPercentToHelp()));
             PercentHelp.equals(data.get(position).getPercentToHelp());
             holder.unitDifference.setText(PercentHelp + "%");
 
+            //Estatus actual del vehiculo
             String Status = new String(String.valueOf(data.get(position).getStatus()));
             Status.equals(data.get(position).getStatus());
             holder.unitStatus.setText(Status);
 
-            /**if(data.get(position).getHelp_State() == 1){
-                holder.unitImage.setImageResource();
-            }*/
+            //Para que aparezca el texto dependiendo el resultado del Json
+            if(data.get(position).getStatus() == 1){
+                holder.unitStatus.setText("Avanzado");
+            } else if (data.get(position).getStatus() == 2){
+                holder.unitStatus.setText("A tiempo");
+            } else if (data.get(position).getStatus() == 3){
+                holder.unitStatus.setText("Atrasado");
+            } else if (data.get(position).getStatus() == 0){
+                holder.unitStatus.setText("Sin Estatus");
+            }
 
-            //holder.unitStatus.setText(data.get(position).getStatus());
+            //Para que aparezca el icono del camion dependiendo el Json
+            if(data.get(position).getHelp_State() == 1){
+                holder.unitImage.setImageResource(R.drawable.ic_camion_verde);
+            } else if (data.get(position).getHelp_State() == 2){
+                //nada
+            } else if (data.get(position).getHelp_State() == 0){
+                holder.unitImage.setImageResource(R.drawable.ic_camion_gris);
+            }
 
-            //holder.txtUnitMaxSpeed.setText(unitList.get(position).getCurrentSpeed() + "km/h");
-
-            //holder.unitRute.setText("4.01");
-            //holder.unitRute.setText(unitList.get(position).getDesc_layer()+ "si");
-
-            //holder.unitRealPercent.setText(unitList.get(position).getDescModel());
-
-            /**if (unitList.get(position).getTimeTravel() != null){
-                if (unitList.get(position).getTimeTravel().equals("")){
-                    holder.txtHour.setText("--");
-                } else {
-                    holder.txtHour.setText(unitList.get(position).getTimeTravel());
-                    //holder.txtHour.setText(unitList.get(position).getSendTime());
-                }
-            } else {
-                holder.txtHour.setText("--");
-            }*/
-
+            //Ubicacion
             if(textaddres!=null)
             {
                 // Log.e("bloquesdeunides","list String :   "+textaddres.get(position));
@@ -446,16 +449,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             //} else {
             //    Glide.with(context).load(unitList.get(position).getVehicleImage()) .thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
             //}
-
-
-            /**MaxSpeedImage*/
-            //Glide.with(context).load(R.drawable.ic_item_unit_max).into(holder.imgMaxSpeed);
-
-            /**DistanceImage*/
-            //Glide.with(context).load(R.drawable.ic_item_unit_distance).into(holder.imgDistance);
-
-            /**ShapeImage*/
-            //Glide.with(context).load(R.drawable.ic_item_unit_shape).into(holder.imgShape);
 
             /**OnClick*/
 //        holder.llMainContainer.setOnClickListener(new View.OnClickListener() {
