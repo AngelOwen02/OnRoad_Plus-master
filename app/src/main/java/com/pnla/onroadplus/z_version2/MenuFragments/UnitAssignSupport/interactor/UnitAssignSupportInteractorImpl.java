@@ -89,10 +89,10 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
     public void requestSoportes(){
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-        Toast.makeText(context, "paso por aqui request1", Toast.LENGTH_LONG).show();
+        //Toast.makeText(context, "paso por aqui request1", Toast.LENGTH_LONG).show();
         //String token = "7042b63634e5aab50029d64d1c802e4b";
         if(token!=null) {
-            Toast.makeText(context, "paso por aqui y reviso el token, todo bien", Toast.LENGTH_LONG).show();
+            //Toast.makeText(context, "paso por aqui y reviso el token, all bien", Toast.LENGTH_LONG).show();
             //startVehiclesRequest(token);
             requestSoportes(token);
         }
