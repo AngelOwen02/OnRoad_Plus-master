@@ -20,4 +20,6 @@ public interface UnitAssignSupportPresenter {
     void setSoportes(List<SupportUnitData> data);
     void requestVehicles();
     void failureResponse(String message);
+    void showProgressDialog();
+    void hideProgressDialog();
 }

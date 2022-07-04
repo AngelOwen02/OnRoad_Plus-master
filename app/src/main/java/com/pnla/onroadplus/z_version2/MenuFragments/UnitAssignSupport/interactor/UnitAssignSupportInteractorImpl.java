@@ -87,10 +87,10 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
 
     @Override
     public void requestSoportes(){
-        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        //SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        //String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         //Toast.makeText(context, "paso por aqui request1", Toast.LENGTH_LONG).show();
-        //String token = "7042b63634e5aab50029d64d1c802e4b";
+        String token = "1e46c9f13b07dc4ffb93602fa3f8824f";
         if(token!=null) {
             //Toast.makeText(context, "paso por aqui y reviso el token, all bien", Toast.LENGTH_LONG).show();
             //startVehiclesRequest(token);
@@ -231,6 +231,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         //String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         //Toast.makeText(context, mytoken, Toast.LENGTH_SHORT).show();
         SupportUnitRequest request = new SupportUnitRequest(token);
+        presenter.showProgressDialog();
         if(token!=null) {
         //if(mytoken!=null) {
             //UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);

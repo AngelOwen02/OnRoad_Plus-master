@@ -75,7 +75,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
     //private List<Unit> vehicles;
     private List<SupportUnitData> soportes;
     //private List<Unit> undredlist=new ArrayList<>();
-    private ProgressBar progressBar;
+    //private ProgressBar progressBar;
     private ImageView toolbarItem;
     private ImageView toolbarImgBack;
     //private TextView txtToolbar;
@@ -110,7 +110,6 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_unit_assign_support_view_impl);
         initUnitsViewImpl();
-
     }
 
     private void initUnitsViewImpl() {
@@ -127,12 +126,11 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         progressBar = view.findViewById(R.id.units_view_progress_bar);
         searchViewContainer = view.findViewById(R.id.units_search_view_container);
         searchView = view.findViewById(R.id.search_view_units);
-        progressDialog = new ProgressDialog(getActivity());
         txtToolbar.setText("Unidades 2");*/
 
         toolbarImgBack = findViewById(R.id.back);
         rvVehicles = findViewById(R.id.recycler_view_unit_tracking2);
-        progressBar = findViewById(R.id.progress_bar_unit_tracking);
+        progressDialog = new ProgressDialog(getApplicationContext());
 
 //        Dynatrace.applyUserPrivacyOptions(UserPrivacyOptions.builder()
 //                .withDataCollectionLevel(DataCollectionLevel.USER_BEHAVIOR)
@@ -357,6 +355,23 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         }
     }
 
+    @Override
+    public void hideProgressDialog(){
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void showProgressDialog(){
+        progressDialog.setMessage("Cargando Unidades");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        goBackintomenu();
+    }
+
     private void goBackintomenu()
     {
         Bundle bndl = new Bundle();
@@ -366,7 +381,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         finish();
-        Toast.makeText(getApplicationContext(), "ATRASSSSS", Toast.LENGTH_LONG).show();
+        //Toast.makeText(getApplicationContext(), "ATRASSSSS", Toast.LENGTH_LONG).show();
         /**FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         zonesFragment zones = new zonesFragment();//transaction.addToBackStack(UnitsViewImpl.TAG);

@@ -352,7 +352,21 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             //Diferencia del vehiculo (En Porcentaje)
             String PercentHelp = new String(String.valueOf(data.get(position).getPercentToHelp()));
             PercentHelp.equals(data.get(position).getPercentToHelp());
-            holder.unitDifference.setText(PercentHelp + "%");
+            //holder.unitDifference.setText(PercentHelp + "%");
+
+            //Para que aparezca el color dependiendo el Porcentaje de Diferencia
+            if (data.get(position).getPercent_Complete() >= 0 && data.get(position).getPercent_Complete() <= 100){
+                //Toast.makeText(context, "Esta dentro del rango", Toast.LENGTH_LONG).show();
+                if(data.get(position).getPercent_Complete() <= 4){
+                    //Aqui ingresamos el texto que nos llega del EndPoint
+                    holder.unitDifference.setText(PercentHelp + "%");
+                } else if(data.get(position).getPercent_Complete() <= 98) {
+                    //Aqui ingresamos el texto que nos llega del EndPoint
+                    holder.unitDifference.setText(PercentHelp + "%");
+                    holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
+                    holder.unitImage.setImageResource(R.drawable.ic_camion_verde);
+                }
+            }
 
             //Estatus actual del vehiculo
             String Status = new String(String.valueOf(data.get(position).getStatus()));
@@ -361,23 +375,26 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
             //Para que aparezca el texto dependiendo el resultado del Json
             if(data.get(position).getStatus() == 1){
-                holder.unitStatus.setText("Avanzado");
+                holder.unitStatus.setText("Atrasado");
+                holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
             } else if (data.get(position).getStatus() == 2){
                 holder.unitStatus.setText("A tiempo");
+                holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
             } else if (data.get(position).getStatus() == 3){
-                holder.unitStatus.setText("Atrasado");
+                holder.unitStatus.setText("Avanzado");
+                holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.green));
             } else if (data.get(position).getStatus() == 0){
                 holder.unitStatus.setText("Sin Estatus");
             }
 
             //Para que aparezca el icono del camion dependiendo el Json
-            if(data.get(position).getHelp_State() == 1){
+            /**if(data.get(position).getHelp_State() == 1){
                 holder.unitImage.setImageResource(R.drawable.ic_camion_verde);
             } else if (data.get(position).getHelp_State() == 2){
                 //nada
             } else if (data.get(position).getHelp_State() == 0){
                 holder.unitImage.setImageResource(R.drawable.ic_camion_gris);
-            }
+            }*/
 
             //Ubicacion
             if(textaddres!=null)

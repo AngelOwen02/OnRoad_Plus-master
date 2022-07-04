@@ -14,5 +14,7 @@ public interface UnitAssignSupportView {
     //void setUnitList(List<SupportUnitData> data) throws IOException;
     void setSoportes(List<SupportUnitData> data);
     void failureResponse(String message);
+    void showProgressDialog();
+    void hideProgressDialog();
 
 }

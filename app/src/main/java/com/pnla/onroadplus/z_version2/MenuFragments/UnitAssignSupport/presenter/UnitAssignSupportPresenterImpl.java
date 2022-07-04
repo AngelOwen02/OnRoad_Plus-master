@@ -44,6 +44,7 @@ public class UnitAssignSupportPresenterImpl implements UnitAssignSupportPresente
     @Override
     public void setSoportes(List<SupportUnitData> data) {
         if(view!=null){
+            //view.showProgressDialog();
             view.setSoportes(data);
         }
     }
@@ -83,19 +84,19 @@ public class UnitAssignSupportPresenterImpl implements UnitAssignSupportPresente
     //      }
     //  }
 
-    /**@Override
+    @Override
     public void showProgressDialog() {
         if (view != null){
-            //view.showProgressDialog();
+            view.showProgressDialog();
         }
-    }*/
+    }
 
-    /**@Override
+    @Override
     public void hideProgressDialog() {
         if (view != null){
-            //   view.hideProgressDialog();
+            view.hideProgressDialog();
         }
-    }*/
+    }
 
     /**@Override
     public void setView(UnitsViewImpl view) {

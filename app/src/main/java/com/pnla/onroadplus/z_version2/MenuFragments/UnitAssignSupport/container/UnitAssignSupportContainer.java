@@ -238,4 +238,14 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
     public void failureResponse(String message) {
 
     }
+
+    @Override
+    public void showProgressDialog() {
+
+    }
+
+    @Override
+    public void hideProgressDialog() {
+
+    }
 }
