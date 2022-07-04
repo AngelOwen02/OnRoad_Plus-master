@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
@@ -61,7 +62,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSupportView, ImageView.OnClickListener {
+public class UnitAssignSupportViewImpl extends AppCompatActivity implements UnitAssignSupportView, ImageView.OnClickListener {
 
     //public static final String TAG = UnitsViewImpl.class.getSimpleName();
     public static final String TAG = UnitAssignSupportViewImpl.class.getSimpleName();
@@ -93,7 +94,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
     private List<Integer> cvesalternos=new ArrayList<>();
     //private List<String> itemgeosList;
 
-    @Nullable
+    /**@Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         //View view = inflater.inflate(R.layout.fragment_units_impl, container, false);
@@ -102,16 +103,24 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
         initUnitsViewImpl(view);
         //update();
         return view;
+    }*/
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.fragment_unit_assign_support_view_impl);
+        initUnitsViewImpl();
+
     }
 
-    private void initUnitsViewImpl(View view) {
-        initViewID(view);
+    private void initUnitsViewImpl() {
+        initViewID();
         initPresenter();
         initOnClickListeners();
         //UnitsInteractorImpl.dataofvehiclesgroupsnames.clear();
     }
 
-    private void initViewID(View view) {
+    private void initViewID() {
         /**toolbarItem = view.findViewById(R.id.search_toolbar_item);
         txtToolbar = view.findViewById(R.id.search_toolbar_title);
         rvUnits = view.findViewById(R.id.recycler_view_units);
@@ -121,16 +130,16 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
         progressDialog = new ProgressDialog(getActivity());
         txtToolbar.setText("Unidades 2");*/
 
-        toolbarImgBack = view.findViewById(R.id.back);
-        rvVehicles = view.findViewById(R.id.recycler_view_unit_tracking2);
-        progressBar = view.findViewById(R.id.progress_bar_unit_tracking);
+        toolbarImgBack = findViewById(R.id.back);
+        rvVehicles = findViewById(R.id.recycler_view_unit_tracking2);
+        progressBar = findViewById(R.id.progress_bar_unit_tracking);
 
 //        Dynatrace.applyUserPrivacyOptions(UserPrivacyOptions.builder()
 //                .withDataCollectionLevel(DataCollectionLevel.USER_BEHAVIOR)
 //                .withCrashReportingOptedIn(true)
 //                .build());
 
-        SharedPreferences preferences = getContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String userName = preferences.getString(GeneralConstantsV2.USER_PREFERENCES, null);
         // String test="TestDynatraceusername";
         Dynatrace.identifyUser( userName);
@@ -139,7 +148,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
 
     private void initPresenter() {
         //presenter = new UnitsPresenterImpl(getContext());
-        presenter = new UnitAssignSupportPresenterImpl(getContext());
+        presenter = new UnitAssignSupportPresenterImpl(getApplicationContext());
         presenter.setView(this);
 
 //        DTXAction processUnits= Dynatrace.enterAction("processUnits");//
@@ -316,8 +325,8 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
     }
 
     private void fillSoportes(List<SupportUnitData> soportes){
-        unitAssignSupportAdapter = new UnitAssignSupportAdapter(soportes,getContext());
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        unitAssignSupportAdapter = new UnitAssignSupportAdapter(soportes,getApplicationContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         rvVehicles.setLayoutManager(layoutManager);
         rvVehicles.setAdapter(unitAssignSupportAdapter);
     }
@@ -325,7 +334,7 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
     @Override
     public void failureResponse(String message) {
         if(message!=null) {
-            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -350,19 +359,19 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
 
     private void goBackintomenu()
     {
-        /**Bundle bndl = new Bundle();
+        Bundle bndl = new Bundle();
         bndl.putString("nav", "ZONES");
         Intent intent = new Intent(UnitAssignSupportViewImpl.this,  menuViewImpl.class);//MainMenuContainerActivity.class);
         intent.putExtras(bndl);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();*/
-        Toast.makeText(getContext(), "ATRASSSSS", Toast.LENGTH_LONG).show();
-        FragmentManager manager = getActivity().getSupportFragmentManager();
+        finish();
+        Toast.makeText(getApplicationContext(), "ATRASSSSS", Toast.LENGTH_LONG).show();
+        /**FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         zonesFragment zones = new zonesFragment();//transaction.addToBackStack(UnitsViewImpl.TAG);
         transaction.replace(R.id.conteinerMainFragments, zones, zonesFragment.TAG).commit();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);*/
     }
 
     @Override
