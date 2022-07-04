@@ -262,6 +262,13 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
+                    <ImageView
+                        android:src="@drawable/gray_dot"
+                        android:id="@+id/img_dot_color"
+                        android:layout_gravity="center"
+                        android:layout_width="8dp"
+                        android:layout_height="8dp"/>
+
                     <TextView
                         android:text="Sin datos"
                         android:id="@+id/txt_unit_difference"
@@ -334,6 +341,7 @@
                 android:stateListAnimator="@null"
                 app:civ_border_color="@color/colorBorderCarGreen"
                 app:civ_border_width="2dp"
+                android:src="@drawable/ic_camion_gris"
                 />
         </LinearLayout>
 

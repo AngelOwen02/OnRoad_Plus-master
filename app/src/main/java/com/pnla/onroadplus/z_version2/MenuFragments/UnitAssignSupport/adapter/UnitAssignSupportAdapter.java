@@ -352,10 +352,10 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             //Diferencia del vehiculo (En Porcentaje)
             String PercentHelp = new String(String.valueOf(data.get(position).getPercentToHelp()));
             PercentHelp.equals(data.get(position).getPercentToHelp());
-            //holder.unitDifference.setText(PercentHelp + "%");
+            holder.unitDifference.setText(PercentHelp + "%");
 
             //Para que aparezca el color dependiendo el Porcentaje de Diferencia
-            if (data.get(position).getPercent_Complete() >= 0 && data.get(position).getPercent_Complete() <= 100){
+            /**if (data.get(position).getPercent_Complete() >= 0 && data.get(position).getPercent_Complete() <= 100){
                 //Toast.makeText(context, "Esta dentro del rango", Toast.LENGTH_LONG).show();
                 if(data.get(position).getPercent_Complete() <= 4){
                     //Aqui ingresamos el texto que nos llega del EndPoint
@@ -364,19 +364,22 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                     //Aqui ingresamos el texto que nos llega del EndPoint
                     holder.unitDifference.setText(PercentHelp + "%");
                     holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
-                    holder.unitImage.setImageResource(R.drawable.ic_camion_verde);
+                    //holder.unitImage.setImageResource(R.drawable.ic_camion_verde);
                 }
-            }
+            }*/
 
             //Estatus actual del vehiculo
             String Status = new String(String.valueOf(data.get(position).getStatus()));
             Status.equals(data.get(position).getStatus());
-            holder.unitStatus.setText(Status);
+            //holder.unitStatus.setText(Status);
 
             //Para que aparezca el texto dependiendo el resultado del Json
             if(data.get(position).getStatus() == 1){
                 holder.unitStatus.setText("Atrasado");
                 holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
+                holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
+                holder.unitImage.setImageResource(R.drawable.ic_camion_verde);
+                holder.dotColor.setImageResource(R.drawable.red_dot);
             } else if (data.get(position).getStatus() == 2){
                 holder.unitStatus.setText("A tiempo");
                 holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
@@ -611,6 +614,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView unitImage;
+        ImageView dotColor;
         TextView unitTitle;
         TextView unitRute;
         TextView unitRealPercent;
@@ -624,6 +628,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             unitImage = itemView.findViewById(R.id.unit_tracking_img2);
+            dotColor = itemView.findViewById(R.id.img_dot_color);
             unitTitle = itemView.findViewById(R.id.unit_tracking_title2);
             unitRute = itemView.findViewById(R.id.txt_unit_rute);
             unitRealPercent = itemView.findViewById(R.id.txt_unit_real);
