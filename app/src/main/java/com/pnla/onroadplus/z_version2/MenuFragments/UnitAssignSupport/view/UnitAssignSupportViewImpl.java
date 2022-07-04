@@ -104,7 +104,6 @@ public class UnitAssignSupportViewImpl extends Fragment implements UnitAssignSup
         return view;
     }
 
-
     private void initUnitsViewImpl(View view) {
         initViewID(view);
         initPresenter();
