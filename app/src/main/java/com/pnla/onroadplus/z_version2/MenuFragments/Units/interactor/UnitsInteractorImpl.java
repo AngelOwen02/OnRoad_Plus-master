@@ -11,8 +11,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 
-import com.dynatrace.android.agent.DTXAction;
-import com.dynatrace.android.agent.Dynatrace;
+/**import com.dynatrace.android.agent.DTXAction;
+import com.dynatrace.android.agent.Dynatrace;*/
 import com.pnla.onroadplus.BuildConfig;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.Containers.LoginContainer.view.LoginContainerActivity;
@@ -162,9 +162,9 @@ public class UnitsInteractorImpl implements UnitsInteractor {
             GeoreferenceRequest request = new GeoreferenceRequest(token, tipodeRequest, noCves);
             //presenter.showProgressDialog();
 
-         final DTXAction processUnits= Dynatrace.enterAction("processUnits");//
+         /**final DTXAction processUnits= Dynatrace.enterAction("processUnits");//
          processUnits.reportValue("Token",token);//ListaCVEs
-            processUnits.reportValue("ListaCVEs",String.valueOf(noCves));
+            processUnits.reportValue("ListaCVEs",String.valueOf(noCves));*/
          Call<GeoreferenceResponse> call=   unitService.getFullGeoReference(request);
          String url1=call.request().url().toString();
          URL url = new URL(url1);
@@ -178,9 +178,9 @@ public class UnitsInteractorImpl implements UnitsInteractor {
                     {
                         Log.e("urltag",call.request().url().toString());//perfect
 
-                          processUnits.getRequestTag();
+                          /**processUnits.getRequestTag();
                           processUnits.getRequestTagHeader();
-                          processUnits.tagRequest(connection);
+                          processUnits.tagRequest(connection);*/
 
 
                         adress.clear();
@@ -223,7 +223,7 @@ public class UnitsInteractorImpl implements UnitsInteractor {
                     Log.e("bloquesdeunides3",""+t.getMessage());
                 }
             });
-    processUnits.leaveAction();
+    //processUnits.leaveAction();
         }
     }
 

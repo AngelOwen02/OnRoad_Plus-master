@@ -17,8 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.dynatrace.android.agent.DTXAction;
-import com.dynatrace.android.agent.Dynatrace;
+/**import com.dynatrace.android.agent.DTXAction;
+import com.dynatrace.android.agent.Dynatrace;*/
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.Contact.view.ContactViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Notifications.view.NotificationsViewImpl;
@@ -186,34 +186,34 @@ public class FragmentNavigationButtonsMenu extends Fragment implements View.OnCl
         public void onClick (View v){
             switch (v.getId()) {
                 case R.id.camion1:
-                    DTXAction menuButton_Units= Dynatrace.enterAction("menuButton_Units");
+                    //DTXAction menuButton_Units= Dynatrace.enterAction("menuButton_Units");
                     UnitsFragment();
-                    menuButton_Units.leaveAction();
+                    //menuButton_Units.leaveAction();
                     break;
                 case R.id.rastreoB:
-                    DTXAction menuButton_Tracking= Dynatrace.enterAction("menuButton_Tracking");
+                    //DTXAction menuButton_Tracking= Dynatrace.enterAction("menuButton_Tracking");
                     TrackingFragment();
-                    menuButton_Tracking.leaveAction();
+                    //menuButton_Tracking.leaveAction();
                     break;
                 case R.id.notificacionesB:
-                    DTXAction menuButton_Notifications= Dynatrace.enterAction("menuButton_Notifications");
+                    //DTXAction menuButton_Notifications= Dynatrace.enterAction("menuButton_Notifications");
                     NotificationsFragment();
-                    menuButton_Notifications.leaveAction();
+                    //menuButton_Notifications.leaveAction();
                     break;
                 case R.id. zonesimage:
-                    DTXAction menuButton_Zones= Dynatrace.enterAction("menuButton_Zones");
+                    //DTXAction menuButton_Zones= Dynatrace.enterAction("menuButton_Zones");
                     ZonesFragment();
-                    menuButton_Zones.leaveAction();
+                    //menuButton_Zones.leaveAction();
                     break;
                 case R.id.mensajes:
-                    DTXAction menuButton_Contact= Dynatrace.enterAction("menuButton_Contact");
+                    //DTXAction menuButton_Contact= Dynatrace.enterAction("menuButton_Contact");
                     MessageFragment();
-                    menuButton_Contact.leaveAction();
+                    //menuButton_Contact.leaveAction();
                     break;
                 case R.id.perfilicon:
-                    DTXAction menuButton_Profile= Dynatrace.enterAction("menuButton_Profile");
+                    //DTXAction menuButton_Profile= Dynatrace.enterAction("menuButton_Profile");
                     profileFragment();
-                    menuButton_Profile.leaveAction();
+                    //menuButton_Profile.leaveAction();
                     break;
             }
         }

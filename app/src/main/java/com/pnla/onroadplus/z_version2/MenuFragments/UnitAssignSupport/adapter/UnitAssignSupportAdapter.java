@@ -378,7 +378,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.unitStatus.setText("Atrasado");
                 holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
                 holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
-                holder.unitImage.setImageResource(R.drawable.ic_camion_verde);
+                holder.unitImage.setImageResource(R.drawable.ic_camion_azul);
                 holder.dotColor.setImageResource(R.drawable.red_dot);
             } else if (data.get(position).getStatus() == 2){
                 holder.unitStatus.setText("A tiempo");
@@ -386,6 +386,8 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             } else if (data.get(position).getStatus() == 3){
                 holder.unitStatus.setText("Avanzado");
                 holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.green));
+                holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.green));
+                holder.dotColor.setImageResource(R.drawable.green_dot);
             } else if (data.get(position).getStatus() == 0){
                 holder.unitStatus.setText("Sin Estatus");
             }

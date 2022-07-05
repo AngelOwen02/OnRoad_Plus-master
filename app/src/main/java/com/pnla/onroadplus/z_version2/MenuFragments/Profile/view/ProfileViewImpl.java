@@ -16,7 +16,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.dynatrace.android.agent.Dynatrace;
+//import com.dynatrace.android.agent.Dynatrace;
 import com.pnla.onroadplus.BuildConfig;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.Containers.LoginContainer.view.LoginContainerActivity;
@@ -156,7 +156,7 @@ public class ProfileViewImpl extends Fragment implements ProfileView, CompoundBu
             case R.id.ll_logout_button_container:
                 presenter.logout();
                 PersistenceUtilities.cleanAllValues(getContext());
-                Dynatrace.endVisit();
+                //Dynatrace.endVisit();
               //UserDataDB.deleteDB();
                 break;
         }

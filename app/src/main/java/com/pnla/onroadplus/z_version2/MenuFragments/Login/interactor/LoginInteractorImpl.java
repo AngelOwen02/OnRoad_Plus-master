@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.dynatrace.android.agent.Dynatrace;
+//import com.dynatrace.android.agent.Dynatrace;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.AuditTrail;
 import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.responseAuditTrail;
@@ -74,7 +74,7 @@ public class LoginInteractorImpl implements LoginInteractor {
         }
         if (resultValidation.equals(GeneralConstantsV2.SUCCESS)) {
             startLoginRequest(user, password);
-            Dynatrace.identifyUser( String.valueOf(user));
+            //Dynatrace.identifyUser( String.valueOf(user));
             Log.e("dynatracelog", "info conparativa   " + user);
 
         } else {
@@ -163,7 +163,7 @@ public class LoginInteractorImpl implements LoginInteractor {
 
                     String nameuser=userData.getUser_cve();
                     Log.e("dynatracelog", "info conparativa   " + nameuser);
-                    Dynatrace.identifyUser( nameuser);
+                    //Dynatrace.identifyUser( nameuser);
                     Log.e("checkinguser", "info conparativa   " + user+":"+nameuser );
                   if(UserDataDB.getUserData()!=null) {
 

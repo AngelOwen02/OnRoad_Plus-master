@@ -28,7 +28,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dynatrace.android.agent.Dynatrace;
+//import com.dynatrace.android.agent.Dynatrace;
 import com.pnla.onroadplus.R;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.GroupTrackingAdapter;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractor;
@@ -140,7 +140,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String userName = preferences.getString(GeneralConstantsV2.USER_PREFERENCES, null);
         // String test="TestDynatraceusername";
-        Dynatrace.identifyUser( userName);
+        //Dynatrace.identifyUser( userName);
         Log.e("dynatracelog", "units user dynatrace   " + userName);
     }
 
