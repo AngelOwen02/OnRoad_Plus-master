@@ -24,8 +24,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+
         <activity android:name="com.pnla.onroadplus.z_version2.SplashScreen"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait">
+        </activity>
         <activity android:name="com.pnla.onroadplus.z_version2.Containers.UnitTrackingContainer"
             android:screenOrientation="portrait"/>
         <activity android:name="com.pnla.onroadplus.z_version2.MenuFragments.geocercas.view.geoCercasMainContainer"
