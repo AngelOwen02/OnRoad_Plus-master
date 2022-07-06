@@ -243,7 +243,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
     }*/
 
         @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
 //        holder.itemView.findFocus().getScrollBarSize();
             //String sendTime = unitList.get(position).getSendTime();
             // Log.e("bloquesdeunides",""+holder.getAdapterPosition() +"   LP "+unitList.get(position).getCveVehicle());//+holder.getLayoutPosition()+"  ");
@@ -483,6 +483,24 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 //
 //            }
 //        });
+
+            holder.unitImage.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Bundle vehicleBundle = new Bundle();
+                    vehicleBundle.putInt("cve_layer", data.get(position).getCveLayer());
+                    vehicleBundle.putString("cve_vehicle", data.get(position).getCve_Vehicle());
+                    vehicleBundle.putString("vehicle_name", data.get(position).getVehicle_Name());
+                    vehicleBundle.putString("desc_layer", data.get(position).getDesc_Layer());
+                    vehicleBundle.putInt("percent_complete", data.get(position).getPercent_Complete());
+                    vehicleBundle.putInt("control_point", data.get(position).getControl_Point());
+                    vehicleBundle.putInt("percent_to_help", data.get(position).getPercentToHelp());
+                    vehicleBundle.putInt("status", data.get(position).getStatus());
+                    vehicleBundle.putInt("help_state", data.get(position).getHelp_State());
+
+                    Toast.makeText(context, vehicleBundle.toString(), Toast.LENGTH_LONG).show();
+                }
+            });
 
             /**holder.llMainContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
