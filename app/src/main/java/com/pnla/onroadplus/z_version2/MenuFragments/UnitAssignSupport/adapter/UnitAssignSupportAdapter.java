@@ -384,7 +384,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.unitStatus.setText("A tiempo");
                 holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
                 holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
-                holder.dotColor.setImageResource(R.drawable.black_dot);
+                holder.dotColor.setImageResource(R.drawable.yellow_dot);
             } else if (data.get(position).getStatus() == 3){
                 holder.unitStatus.setText("Avanzado");
                 holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.green));
