@@ -484,6 +484,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 //            }
 //        });
 
+            //Al dar clic en la imagen del camion
             holder.unitImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
