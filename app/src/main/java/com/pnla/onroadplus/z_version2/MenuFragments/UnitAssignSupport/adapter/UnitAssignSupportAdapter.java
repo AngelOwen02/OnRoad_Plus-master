@@ -394,6 +394,8 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.unitStatus.setText("Sin Estatus");
             }
 
+            holder.unitGeoExample.setText(data.get(position).getGeoReference());
+
             //Para que aparezca el icono del camion dependiendo el Json
             /**if(data.get(position).getHelp_State() == 1){
                 holder.unitImage.setImageResource(R.drawable.ic_camion_verde);
@@ -403,34 +405,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.unitImage.setImageResource(R.drawable.ic_camion_gris);
             }*/
 
-            //Ubicacion
-            if(textaddres!=null)
-            {
-                // Log.e("bloquesdeunides","list String :   "+textaddres.get(position));
-
-                //  if(textaddres.get(position).equals(""))
-                //   {
-                //     holder.txtUnitGeoReference.setText("---- ---- ---- ----");
-                //   }
-                //       else{
-                //    holder.txtUnitGeoReference.setText();
-                for(String name:textaddres )
-                {
-                    if(name.contains(data.get(position).getVehicle_Name()))
-
-                    {
-                        String[] parts1 = name.split(":::");
-                        String part1 = parts1[0];
-                        String part2 = parts1[1];
-                        holder.unitGeoExample.setText(part2);      /**puedes vrificar que las direcciones coincidan con los items introduciendo part 1 en el campo part2*/
-                    }
-                }
-
-                //  }
-            }else
-            {
-                holder.unitGeoExample.setText("---- ---- ---- ----");
-            }
     /*    if (unitList.get(position).getGeoreference() != null){
             if (unitList.get(position).getGeoreference().equals("")){
                 holder.txtUnitGeoReference.setText("---- ---- ---- ----");

@@ -52,11 +52,15 @@ public class SupportUnitData {
     @SerializedName("help_state")
     @Expose
     private int help_State;
+    @SerializedName("georeference")
+    @Expose
+    private String geoReference;
 
     public SupportUnitData(){
     }
 
-    public SupportUnitData(int cveLayer, String cve_Vehicle, String vehicle_Name, String desc_Layer, int percent_Complete, int control_Point, int percentToHelp, int status, int help_State) {
+    public SupportUnitData(int cveLayer, String cve_Vehicle, String vehicle_Name, String desc_Layer, int percent_Complete, int control_Point, int percentToHelp, int status, int help_State,
+                           String geoReference) {
         super();
         this.cveLayer = cveLayer;
         this.cve_Vehicle = cve_Vehicle;
@@ -67,6 +71,7 @@ public class SupportUnitData {
         this.percentToHelp = percentToHelp;
         this.status = status;
         this.help_State = help_State;
+        this.geoReference = geoReference;
     }
 
     public int getCveLayer() {
@@ -139,5 +144,13 @@ public class SupportUnitData {
 
     public void setHelp_State(int help_State) {
         this.help_State = help_State;
+    }
+
+    public String getGeoReference() {
+        return geoReference;
+    }
+
+    public void setGeoReference(String geoReference) {
+        this.geoReference = geoReference;
     }
 }
