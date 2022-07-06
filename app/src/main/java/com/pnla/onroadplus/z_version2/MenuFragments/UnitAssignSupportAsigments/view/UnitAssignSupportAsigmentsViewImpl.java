@@ -1,5 +1,6 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.view;
 
+import android.content.Intent;
 import android.graphics.text.LineBreaker;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.pnla.onroadplus.R;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
 
 public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implements ImageView.OnClickListener {
 
@@ -85,6 +87,9 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     }
 
     private void goBackintomenu(){
-        Toast.makeText(getApplicationContext(), "Atras", Toast.LENGTH_LONG).show();
+        Intent intent = new Intent(UnitAssignSupportAsigmentsViewImpl.this, UnitAssignSupportViewImpl.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        //Toast.makeText(getApplicationContext(), "Atras", Toast.LENGTH_LONG).show();
     }
 }
