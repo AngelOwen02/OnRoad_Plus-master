@@ -394,7 +394,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.unitStatus.setText("Sin Estatus");
             }
 
-            holder.unitGeoExample.setText(data.get(position).getGeoReference());
+            //holder.unitGeoExample.setText(data.get(position).getGeoReference());
 
             //Para que aparezca el icono del camion dependiendo el Json
             /**if(data.get(position).getHelp_State() == 1){
@@ -472,6 +472,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                     vehicleBundle.putInt("percent_to_help", data.get(position).getPercentToHelp());
                     vehicleBundle.putInt("status", data.get(position).getStatus());
                     vehicleBundle.putInt("help_state", data.get(position).getHelp_State());
+                    vehicleBundle.putString("georeference", data.get(position).getGeoReference());
 
                     Toast.makeText(context, vehicleBundle.toString(), Toast.LENGTH_LONG).show();
                 }
@@ -632,7 +633,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             unitObjPercent = itemView.findViewById(R.id.txt_unit_objective);
             unitDifference = itemView.findViewById(R.id.txt_unit_difference);
             unitStatus = itemView.findViewById(R.id.txt_unit_status);
-            unitGeoExample = itemView.findViewById(R.id.txt_unit_geo_example);
+            //unitGeoExample = itemView.findViewById(R.id.txt_unit_geo_example);
             //unitSwicth = itemView.findViewById(R.id.unit_tracking_swicth);
         }
     }
