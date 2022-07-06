@@ -24,6 +24,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.pnla.onroadplus.R;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.view.UnitAssignSupportAsigmentsViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.UnitMapContainer;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.UnitTrackingAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.UnitDB;
@@ -104,58 +106,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
 
         //Log.e("unitsthaticansaw",""+integerList);
-
-        /**holder.unitSwicth.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked){
-                    firstLoginFalse();
-                    unitSelected();
-                    UnitDB.updateCheckedStatus(vehicle.getVehicleName(),true);
-
-                    if(vehicleList.size()==togglesList.size())
-                    {
-
-                        togglesList.get(position).equals(true);
-                        if(integerList.contains((Integer.valueOf(vehicle.getCveVehicle()))))
-                        {
-
-                        }else {
-                            integerList.add(vehicleList.get(position).getCveVehicle());
-                        }
-                    }
-                    Log.e("groupsitems","n "+integerList);
-                }else{
-                    UnitDB.updateCheckedStatus(vehicle.getVehicleName(),false);
-
-
-                    if(integerList.contains((Integer.valueOf(vehicle.getCveVehicle()))))
-                    {
-                        integerList.remove(Integer.valueOf(vehicle.getCveVehicle()));
-                        if( UnitDB.getUnitListActive().isEmpty())
-                        {
-                            integerList.clear();
-                        }
-                        else{
-                            List<Integer> namesinlist=new ArrayList<>();
-                            for(int i=0;i<UnitDB.getUnitListActive().size();i++)
-                            {
-                                namesinlist.add( UnitDB.getUnitListActive().get(i).getCveVehicle());
-
-                            }
-                            integerList.clear();
-                            integerList=namesinlist;
-                        }
-                    }
-
-
-                    Log.e("groupsitems","iL   "+integerList);
-                    Log.e("groupsitems","cveActive  "+ UnitDB.getUnitListActive());
-                    //integerList.remove(vehicle.getCveVehicle());
-                }
-            }
-
-        });*/
 
         /**Log.e("doitonce", "" + integerList);
         if (vehicleList.get(position).getVehicleImage() == null) {
@@ -249,79 +199,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             // Log.e("bloquesdeunides",""+holder.getAdapterPosition() +"   LP "+unitList.get(position).getCveVehicle());//+holder.getLayoutPosition()+"  ");
             //lastitem=holder.getAdapterPosition();
             //Log.e("bloquesdeunides",""+lastitem);
-            /**if (sendTime != null) {
-                Calendar calendar = Calendar.getInstance();
-                String[] sendTimeformat = sendTime.split(" ");
-                String date = sendTimeformat[0];
-                String time = sendTimeformat[1];
-
-                String[] dateFormat = date.split("-");
-                String year = dateFormat[0];
-                String month = dateFormat[1];
-                String day = dateFormat[2];
-
-                int deviceDay = calendar.get(Calendar.DAY_OF_MONTH);
-                int deviceMonth = calendar.get(Calendar.MONTH);
-                int deviceYear = calendar.get(Calendar.YEAR);
-
-                int deviceMonthDF = deviceMonth + 1;
-                int dayResult = deviceDay - Integer.valueOf(day);
-                int monthResult = deviceMonthDF - Integer.valueOf(month);
-                int yearResult = deviceYear - Integer.valueOf(year);
-
-
-                String[] timeformat = time.split(":");
-                String hour = timeformat[0];
-                String minute = timeformat[1];
-                String second = timeformat[2];
-
-                int deviceHour = calendar.get(Calendar.HOUR_OF_DAY);
-                int deviceMinutes = calendar.get(Calendar.MINUTE);
-                int deviceSeconds = calendar.get(Calendar.SECOND);
-
-                int wsHour = Integer.valueOf(hour);
-                int wsMinute = Integer.valueOf(minute);
-                int wsSecond = Integer.valueOf(second);
-
-                int hourResult = deviceHour - wsHour;
-                int minuteResult = deviceMinutes - wsMinute;
-                Log.e("debugthesendtime",""+unitList.get(position).getVehicleName()+": "+sendTime+" Y:"+yearResult+"  M:"+monthResult+"  D:"+dayResult+"  H:"+hourResult+" M:"+minuteResult);
-                if (yearResult == 0) {
-                    if (monthResult == 0) {
-                        if (dayResult == 0) {
-                            if (hourResult == 0) {
-                                if (minuteResult <= 14) {
-                                    holder.txtLastSendTime.setText("0" + minuteResult + " min");
-                                } else {
-                                    holder.txtLastSendTime.setText(minuteResult + " min");
-                                }
-                            } else {
-                                if (hourResult <= 6) {
-                                    holder.txtLastSendTime.setText(hourResult + " hr");
-                                } else {
-                                    holder.txtLastSendTime.setText(hourResult + " hrs");
-                                }
-                            }
-                        } else {
-                            if (dayResult >= -1) {
-                                holder.txtLastSendTime.setText(dayResult + " día");
-                            } else {
-                                holder.txtLastSendTime.setText(dayResult + " días");
-                            }
-                        }
-                    }else{
-                        if  (monthResult >= 1) {
-                            holder.txtLastSendTime.setText(monthResult + " M");
-                        } else {
-                            holder.txtLastSendTime.setText(monthResult + " M");
-                        }
-                    }
-                }
-
-            } else {
-                holder.txtLastSendTime.setText("----");
-
-            }*/
 
             /**SetData*/
 
@@ -384,6 +261,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.unitStatus.setText("A tiempo");
                 holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
                 holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
+                holder.unitImage.setImageResource(R.drawable.ic_camion_azul);
                 holder.dotColor.setImageResource(R.drawable.yellow_dot);
             } else if (data.get(position).getStatus() == 3){
                 holder.unitStatus.setText("Avanzado");
@@ -474,7 +352,17 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                     vehicleBundle.putInt("help_state", data.get(position).getHelp_State());
                     vehicleBundle.putString("georeference", data.get(position).getGeoReference());
 
-                    Toast.makeText(context, vehicleBundle.toString(), Toast.LENGTH_LONG).show();
+                    //Toast.makeText(context, vehicleBundle.toString(), Toast.LENGTH_LONG).show();
+
+                    //Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
+                    //intent.putExtras(vehicleBundle);
+                    //context.startActivity(intent);
+
+                    Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    context.startActivity(intent);
+
+
                 }
             });
 

@@ -63,6 +63,9 @@
         <activity android:name=".z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl"
             android:screenOrientation="portrait" />
 
+        <activity android:name=".z_version2.MenuFragments.UnitAssignSupportAsigments.view.UnitAssignSupportAsigmentsViewImpl"
+            android:screenOrientation="portrait" />
+
         <uses-library
             android:name="org.apache.http.legacy"
             android:required="false" />

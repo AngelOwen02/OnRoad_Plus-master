@@ -33,6 +33,7 @@ import com.pnla.onroadplus.R;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.GroupTrackingAdapter;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.container.UnitAssignSupportContainer;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractorImpl;
 
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
@@ -110,6 +111,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_unit_assign_support_view_impl);
         initUnitsViewImpl();
+        //update();
     }
 
     private void initUnitsViewImpl() {
@@ -159,7 +161,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
 
     }
 
-    /**private void update(){
+    private void update(){
         //final UnitsPresenter presenter = new UnitsPresenterImpl(getContext());
         //  presenter.setView(this);
 
@@ -168,16 +170,17 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
             public void run() {
                 //presenter.getFullVehicles();
                 //UnitsInteractor unitsInteractor = new UnitsInteractorImpl(presenter,getContext());
-                UnitAssignSupportInteractor unitAssignSupportInteractor = new UnitAssignSupportInteractorImpl(presenter,getContext());
+                UnitAssignSupportInteractor unitAssignSupportInteractor = new UnitAssignSupportInteractorImpl(presenter,getBaseContext());
                 //unitsInteractor.getAllVehiclesFromAPI();
-                unitAssignSupportInteractor.getGeoreferencefromAPI();
-                presenter.hideProgressDialog();
-                searchViewContainer.setVisibility(View.GONE);
+                //unitAssignSupportInteractor.getGeoreferencefromAPI();
+                unitAssignSupportInteractor.requestSoportes();
+                //presenter.hideProgressDialog();
+                //searchViewContainer.setVisibility(View.GONE);
                 handler.postDelayed(this,60000);
             }
         },60000);
 
-    }*/
+    }
 
     private void initOnClickListeners() {
         //searchView.setOnQueryTextListener(this);
