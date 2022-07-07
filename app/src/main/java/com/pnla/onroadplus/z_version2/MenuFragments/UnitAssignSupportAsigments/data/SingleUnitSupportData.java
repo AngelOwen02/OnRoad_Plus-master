@@ -1,16 +1,39 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class SingleUnitSupportData {
 
+    @SerializedName("cve_layer")
+    @Expose
     private int cveLayer;
+    @SerializedName("cve_vehicle")
+    @Expose
     private String cveVehicle;
+    @SerializedName("vehicle_name")
+    @Expose
     private String VehicleName;
+    @SerializedName("desc_layer")
+    @Expose
     private String DescLayer;
+    @SerializedName("percent_complete")
+    @Expose
     private int PercentComplete;
+    @SerializedName("control_point")
+    @Expose
     private int ControlPoint;
+    @SerializedName("percent_to_help")
+    @Expose
     private int PercentToHelp;
+    @SerializedName("status")
+    @Expose
     private int Status;
+    @SerializedName("help_state")
+    @Expose
     private int HelpState;
+    @SerializedName("georeference")
+    @Expose
     private String GeoReference;
 
     public SingleUnitSupportData(){

@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.SingleUnitSupportData;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.view.UnitAssignSupportAsigmentsViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.UnitMapContainer;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.UnitTrackingAdapter;
@@ -52,6 +53,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
     //private List<Unit> unitList;
     private List<SupportUnitData> data;
+    private SingleUnitSupportData singleData;
     //private List<Group> groupList;
     private Context context;
     //private UnitAdapter.OnClickVehiclesMapListener listener;
