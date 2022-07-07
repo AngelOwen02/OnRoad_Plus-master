@@ -1,24 +1,33 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.view;
 
 import android.content.Intent;
-import android.graphics.text.LineBreaker;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.adapter.UnitAssignSupportAsigmentsAdapter;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.SingleUnitSupportData;
+
+import java.util.List;
 
 public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implements ImageView.OnClickListener {
 
+    private UnitAssignSupportAsigmentsAdapter unitAssignSupportAsigmentsAdapter;
+    private List<SingleUnitSupportData> data;
+    final Handler handler = new Handler();
+    //private UnitAssignSupportAsigmentsPresenter presenter;
     private ImageView toolbarImgBack;
     TextView unitGeoReference;
+    SingleUnitSupportData singleUnitSupportData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
@@ -31,6 +40,10 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         initViewID();
         initBundle();
         initOnClickListener();
+
+        //SingleUnitSupportData data = singleUnitSupportData;
+        //unitGeoReference.setText(vehiclename + "Si");
+        //Toast.makeText(getApplicationContext(), data.toString(), Toast.LENGTH_LONG).show();
     }
 
     private void initBundle(){
@@ -70,7 +83,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
     private void initViewID(){
         toolbarImgBack = findViewById(R.id.back);
-        unitGeoReference = findViewById(R.id.txt_unit_geo_reference);
+        unitGeoReference = findViewById(R.id.txt_unit_geo_reference_single);
     }
 
     private void initOnClickListener(){
@@ -84,6 +97,11 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
                 goBackintomenu();
                 break;
         }
+    }
+
+    @Override
+    public void onBackPressed(){
+        goBackintomenu();
     }
 
     private void goBackintomenu(){
