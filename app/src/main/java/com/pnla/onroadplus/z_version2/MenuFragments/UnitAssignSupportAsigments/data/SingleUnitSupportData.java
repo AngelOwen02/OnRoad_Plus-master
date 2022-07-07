@@ -1,9 +1,10 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data;
 
+import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SingleUnitSupportData {
+public class SingleUnitSupportData extends AppCompatActivity {
 
     @SerializedName("cve_layer")
     @Expose

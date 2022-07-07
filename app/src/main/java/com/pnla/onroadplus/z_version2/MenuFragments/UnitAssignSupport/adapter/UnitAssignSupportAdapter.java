@@ -53,7 +53,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
     //private List<Unit> unitList;
     private List<SupportUnitData> data;
-    private SingleUnitSupportData singleData;
+    //private List<SingleUnitSupportData> singleData;
     //private List<Group> groupList;
     private Context context;
     //private UnitAdapter.OnClickVehiclesMapListener listener;
@@ -360,10 +360,10 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                     //intent.putExtras(vehicleBundle);
                     //context.startActivity(intent);
 
-                    Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
+                    /**Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
                     intent.putExtras(vehicleBundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    context.startActivity(intent);
+                    context.startActivity(intent);*/
 
 
                 }
