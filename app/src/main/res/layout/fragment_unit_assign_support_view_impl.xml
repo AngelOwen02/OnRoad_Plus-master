@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/graySpaceRV"
     tools:context="com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl">
 
     <include
@@ -28,7 +29,7 @@
         android:layout_height="wrap_content"
         android:paddingBottom="60dp"
         android:clipToPadding="false"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_unit_tracking" />
