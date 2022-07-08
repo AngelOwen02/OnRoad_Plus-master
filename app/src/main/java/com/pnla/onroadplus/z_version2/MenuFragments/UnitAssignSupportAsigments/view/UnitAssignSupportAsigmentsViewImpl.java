@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.adapter.UnitAssignSupportAsigmentsAdapter;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.Guardar;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.SingleUnitSupportData;
 
 import java.util.List;
@@ -44,6 +46,11 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         //SingleUnitSupportData singleUnitSupportData = new SingleUnitSupportData();
         //String vehiclename = singleUnitSupportData.getVehicleName();
         //Toast.makeText(getApplicationContext(), data.toString(), Toast.LENGTH_LONG).show();
+
+        /**String nombre = "";
+        Guardar guardar = (Guardar) getApplicationContext().getApplicationContext();
+        nombre = guardar.getVehicleName();
+        Toast.makeText(getApplicationContext(), nombre, Toast.LENGTH_LONG).show();*/
 
         /**String address = "";
         String dg = "";
