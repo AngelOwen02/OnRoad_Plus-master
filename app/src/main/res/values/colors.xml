@@ -37,4 +37,7 @@
     <color name="colorGrayBC">#EBEBEB</color>
     <color name="colorGray">#9B9B9B</color>
 
+    <!-- New colors  -->
+    <color name="graySpaceRV">#CDCDCD</color>
+
 </resources>
