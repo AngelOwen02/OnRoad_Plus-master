@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.Guardar;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.SingleUnitSupportData;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.view.UnitAssignSupportAsigmentsViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.UnitMapContainer;
@@ -354,18 +355,24 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                     vehicleBundle.putInt("help_state", data.get(position).getHelp_State());
                     vehicleBundle.putString("georeference", data.get(position).getGeoReference());
 
-                    //Toast.makeText(context, vehicleBundle.toString(), Toast.LENGTH_LONG).show();
+                    /**String address = data.get(position).getVehicle_Name();
+                    Guardar guardar = new Guardar(address);
+                    guardar.setAddress(address);*/
 
-                    //Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
+                    /**SingleUnitSupportData singleUnitSupportData = new SingleUnitSupportData();
+                    String nombre = data.get(position).getVehicle_Name();
+                    singleUnitSupportData.setVehicleName(nombre);
+                    Guardar guardar = new Guardar(nombre);
+                    //guardar.vehicleName =  singleUnitSupportData.getVehicleName();
+                    guardar.setVehicleName(nombre);*/
+                    //Toast.makeText(context, singleUnitSupportData.getVehicleName(), Toast.LENGTH_LONG).show();
+
+                    //Toast.makeText(context, address, Toast.LENGTH_LONG).show();
+
+                    Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
                     //intent.putExtras(vehicleBundle);
-                    //context.startActivity(intent);
-
-                    /**Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
-                    intent.putExtras(vehicleBundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    context.startActivity(intent);*/
-
-
+                    context.startActivity(intent);
                 }
             });
 

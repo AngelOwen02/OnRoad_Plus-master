@@ -69,6 +69,7 @@
                         android:layout_marginStart="4dp"
                         style="@style/ItemUnitHeader"
                         android:textStyle="bold"
+                        android:textAlignment="center"
                         android:textSize="12dp"/>
 
                 </LinearLayout>
@@ -87,7 +88,8 @@
                         android:layout_marginStart="4dp"
                         android:gravity="center_vertical"
                         style="@style/ItemUnitMainBody"
-                        android:paddingBottom="5dp" />
+                        android:paddingBottom="5dp"
+                        android:textSize="12dp"/>
 
                 </LinearLayout>
 

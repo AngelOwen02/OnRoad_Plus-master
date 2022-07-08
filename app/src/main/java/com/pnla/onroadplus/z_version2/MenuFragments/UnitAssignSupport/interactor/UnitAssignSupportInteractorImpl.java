@@ -50,21 +50,10 @@ import retrofit2.Retrofit;
 
 public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInteractor {
 
-    //private UnitAssignSupportPresenter presenter;
     private UnitAssignSupportPresenter presenter;
-    //private SupportService service;
     private UnitService unitService;
     private Context context;
-    //public static List<String> dataofvehicles=new ArrayList<>();
-    //public static List<String> dataofvehiclesgroups=new ArrayList<>();
-    //public static List<String> dataofvehiclesgroupscve=new ArrayList<>();/***/
-    //public static  List<String> dataofvehiclesgroupsnames=new ArrayList<>();
-    //private List<String> gruposdata = new ArrayList<>();
-    //private List<GroupvehicleInsideData> groupvehicleInsideData;
     private Retrofit retrofitClient;
-
-    //public static List<String> dataphotoofvehicles=new ArrayList<>();
-    //public static int cveofgroup;
 
     public Version version;
     private String name = "OnRoad";
@@ -98,40 +87,6 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         }
 
     }
-
-    /**@Override
-    public void getAllVehiclesFromAPI() {
-        List<Integer> noCves = new ArrayList<>();
-        /**if(!UnitTrackingAdapter.integerList.isEmpty())
-        {
-            List<Integer> cveList=new ArrayList<>();
-
-            for(int i=0;i<UnitTrackingAdapter.integerList.size();i++)
-            {
-                cveList.add(UnitTrackingAdapter.integerList.get(i));
-            }
-            //  Log.e("vehiclecve","qwewqewq"+cveList);
-            noCves.clear();
-            noCves=cveList;
-        }
-        else if(!UnitDB.getUnitListActive().isEmpty())
-        {
-            List<Integer> cveList=new ArrayList<>();
-
-            for(int i=0;i<UnitDB.getUnitListActive().size();i++)
-            {
-                cveList.add(UnitDB.getUnitListActive().get(i).getCveVehicle());
-            }
-            // Log.e("vehiclecve","qwewqewq"+cveList);
-            noCves.clear();
-            noCves=cveList;
-        }
-        else
-        {
-            noCves.add(0);
-        }*/
-
-
         //startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context);
         //startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, context);
 
@@ -144,84 +99,6 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
 //        Log.e("UnitDB", UnitDB.getUnitList().toString());
 //        Log.e("FinalUnitDB", FinalUnitDB.getUnitList().toString());
 //        Log.e("TemporalUnitDB", TemporalUnitDB.getUnitList().toString());
-    //}
-
-    /**@Override
-    public void getGeoreferencefromAPI(List<Integer> noCves) throws IOException {
-
-        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-        int extracves=sizeoflistgeoreference-noCves.size();
-
-        int tipodeRequest=1;
-        /**if(token!=null) {
-            // Log.e("bloquesdeunides11",""+noCves+ "   "+token+"   "+tipodeRequest);
-            GeoreferenceRequest request = new GeoreferenceRequest(token, tipodeRequest, noCves);
-            //presenter.showProgressDialog();
-
-            final DTXAction processUnits= Dynatrace.enterAction("processUnits");//
-            processUnits.reportValue("Token",token);//ListaCVEs
-            processUnits.reportValue("ListaCVEs",String.valueOf(noCves));
-            Call<GeoreferenceResponse> call=   unitService.getFullGeoReference(request);
-            String url1=call.request().url().toString();
-            URL url = new URL(url1);
-            final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-
-
-            call.enqueue(new Callback<GeoreferenceResponse>() {
-                @Override
-                public void onResponse(Call<GeoreferenceResponse> call, Response<GeoreferenceResponse> response) {
-                    if(response.code()==200)
-                    {
-                        Log.e("urltag",call.request().url().toString());//perfect
-
-                        processUnits.getRequestTag();
-                        processUnits.getRequestTagHeader();
-                        processUnits.tagRequest(connection);
-
-
-                        adress.clear();
-                        int extraItems=0;
-                        int i=0;
-                        GeoreferenceResponse myresponse=response.body();
-                        //  Log.e("bloquesdeunides3",""+ myresponse.getData().getUnitList().get(0).getGeoreference());
-                        // Log.e("bloquesdeunides8",""+ cves);
-
-                        for (com.pnla.onroadplus.z_version2.MenuFragments.Units.data.georeference georeference: myresponse.getData().getUnitList()){
-                            if (georeference.getGeoreference().equals("cero")){
-
-                            }else {
-
-                                adress.add(georeference.getVehicleName()+" :::"+georeference.getGeoreference());
-                            }
-                        }
-
-                        for(i=0;i<myresponse.getData().getUnitList().size();i=i+1)
-                        {
-                            // adress.add(i,i+"  "+myresponse.getData().getUnitList().get(i).getVehicleName()+"|||"+myresponse.getData().getUnitList().get(i).getGeoreference());
-
-                        }
-
-                        extraItems=sizeoflistgeoreference-myresponse.getData().getUnitList().size();
-                        for(int j=0;j<extraItems;j++)
-                        {
-                            adress.add("");
-                        }
-                        //  Log.e("bloquesdeunides11",""+ adress);
-//                        Log.e("bloquesdeunides14",""+ adress);
-//                        Log.e("bloquesdeunides4",""+  sizeoflistgeoreference);
-                        presenter.setdirectionsToView(adress);
-
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<GeoreferenceResponse> call, Throwable t) {
-                    Log.e("bloquesdeunides3",""+t.getMessage());
-                }
-            });
-            processUnits.leaveAction();
-        }*/
     //}
 
     //private void startVehiclesRequest(final int typeRequest, List<Integer> vehiclesCves, final Context context) {

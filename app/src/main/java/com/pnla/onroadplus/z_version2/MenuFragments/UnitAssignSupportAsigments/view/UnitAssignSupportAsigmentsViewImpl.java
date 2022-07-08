@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.adapter.UnitAssignSupportAsigmentsAdapter;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.Guardar;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.SingleUnitSupportData;
 
 import java.util.List;
@@ -23,11 +24,13 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
     private UnitAssignSupportAsigmentsAdapter unitAssignSupportAsigmentsAdapter;
     private List<SingleUnitSupportData> data;
+    private SingleUnitSupportData singleUnitSupportData;
     final Handler handler = new Handler();
+    //private Guardar guardar;
     //private UnitAssignSupportAsigmentsPresenter presenter;
     private ImageView toolbarImgBack;
     TextView unitGeoReference;
-    SingleUnitSupportData singleUnitSupportData;
+    //SingleUnitSupportData singleUnitSupportData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){
@@ -38,12 +41,20 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
     private void initUnitsViewImpl(){
         initViewID();
-        initBundle();
+        //initBundle();
         initOnClickListener();
 
-        //SingleUnitSupportData data = singleUnitSupportData;
-        //unitGeoReference.setText(vehiclename + "Si");
+        //SingleUnitSupportData singleUnitSupportData = new SingleUnitSupportData();
+        //String vehiclename = singleUnitSupportData.getVehicleName();
         //Toast.makeText(getApplicationContext(), data.toString(), Toast.LENGTH_LONG).show();
+
+        /**String address = "";
+        String dg = "";
+        Guardar guardar = new Guardar(address);
+        guardar.setAddress(address);*/
+
+        //unitGeoReference.setText(guardar.GetAddress() + "Si");
+        //Toast.makeText(getApplicationContext(), dg.toString(), Toast.LENGTH_SHORT).show();
     }
 
     private void initBundle(){

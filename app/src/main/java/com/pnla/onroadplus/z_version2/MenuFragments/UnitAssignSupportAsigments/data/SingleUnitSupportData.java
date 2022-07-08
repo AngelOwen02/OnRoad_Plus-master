@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class SingleUnitSupportData extends AppCompatActivity {
+public class SingleUnitSupportData {
 
     @SerializedName("cve_layer")
     @Expose
