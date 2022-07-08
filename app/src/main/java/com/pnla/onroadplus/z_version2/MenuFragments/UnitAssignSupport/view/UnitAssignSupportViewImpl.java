@@ -76,7 +76,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
     //private List<Unit> vehicles;
     private List<SupportUnitData> soportes;
     //private List<Unit> undredlist=new ArrayList<>();
-    //private ProgressBar progressBar;
+    private ProgressBar progressBar;
     private ImageView toolbarItem;
     private ImageView toolbarImgBack;
     //private TextView txtToolbar;
@@ -125,14 +125,14 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         /**toolbarItem = view.findViewById(R.id.search_toolbar_item);
         txtToolbar = view.findViewById(R.id.search_toolbar_title);
         rvUnits = view.findViewById(R.id.recycler_view_units);
-        progressBar = view.findViewById(R.id.units_view_progress_bar);
         searchViewContainer = view.findViewById(R.id.units_search_view_container);
         searchView = view.findViewById(R.id.search_view_units);
         txtToolbar.setText("Unidades 2");*/
 
+        progressBar = findViewById(R.id.units_view_progress_bar);
         toolbarImgBack = findViewById(R.id.back);
         rvVehicles = findViewById(R.id.recycler_view_unit_tracking2);
-        progressDialog = new ProgressDialog(getApplicationContext());
+        progressDialog = new ProgressDialog(this);
 
 //        Dynatrace.applyUserPrivacyOptions(UserPrivacyOptions.builder()
 //                .withDataCollectionLevel(DataCollectionLevel.USER_BEHAVIOR)
@@ -323,6 +323,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         if(soportes!=null){
             fillSoportes(soportes);
         }
+        progressDialog.dismiss();
     }
 
     private void fillSoportes(List<SupportUnitData> soportes){

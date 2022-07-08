@@ -32,6 +32,7 @@ public class UnitAssignSupportPresenterImpl implements UnitAssignSupportPresente
     @Override
     public void setView(UnitAssignSupportView view) {
         this.view = view;
+        view.showProgressDialog();
     }
 
     @Override
@@ -49,41 +50,6 @@ public class UnitAssignSupportPresenterImpl implements UnitAssignSupportPresente
         }
     }
 
-    /**@Override
-    public void setView(UnitAssignSupportViewImpl view){
-    this.view = view;
-    }*/
-
-    /**@Override
-    public void getFullVehicles() {
-        if (view != null){
-            //interactor.getAllVehiclesFromAPI();
-        }
-    }*/
-
-    /**@Override
-    //public void setVehiclesListToView(List<Unit> unitList) throws IOException {
-    public void setUnidadesSoporte(List<SupportUnitData> data){
-        if (view != null) {
-            //view.showProgressDialog();
-            view.setUnidadesSoporte(data);
-        }
-    }*/
-
-    /**@Override
-    public void georeferenceformAPI(List<Integer> values) throws IOException {
-        if (view != null){
-            interactor.getGeoreferencefromAPI(values);
-        }
-    }*/
-
-    // @Override
-    //  public void getvehiclesINgroups() {
-    // if (view != null){
-    //         interactor.getGroupsVehicles();
-    //      }
-    //  }
-
     @Override
     public void showProgressDialog() {
         if (view != null){
@@ -98,28 +64,8 @@ public class UnitAssignSupportPresenterImpl implements UnitAssignSupportPresente
         }
     }
 
-    /**@Override
-    public void setView(UnitsViewImpl view) {
-        this.view = view;
-    }*/
-
-    /**@Override
-    public void setView(UnitAssignSupportViewImpl view){
-        this.view = view;
-    }*/
-
-
-    /**@Override
-    public void setdirectionsToView(List<String> addresList) {
-        if (view != null) {
-            view.adressList(addresList);
-        }
-    }*/
-
     @Override
     public void failureResponse(String message) {
         view.failureResponse(message);
     }
-
-
 }

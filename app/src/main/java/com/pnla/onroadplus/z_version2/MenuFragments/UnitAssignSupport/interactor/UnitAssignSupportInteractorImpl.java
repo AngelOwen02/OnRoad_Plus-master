@@ -108,7 +108,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         //String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         //Toast.makeText(context, mytoken, Toast.LENGTH_SHORT).show();
         SupportUnitRequest request = new SupportUnitRequest(token);
-        presenter.showProgressDialog();
+        //presenter.showProgressDialog();
         if(token!=null) {
         //if(mytoken!=null) {
             //UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);

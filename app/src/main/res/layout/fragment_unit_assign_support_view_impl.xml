@@ -13,7 +13,7 @@
         layout="@layout/toolbar_unit_assign" />
 
     <ProgressBar
-        android:id="@+id/units_view_progress_bar"
+        android:id="@+id/units_support_view_progress_bar"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:visibility="gone"
