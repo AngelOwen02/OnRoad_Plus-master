@@ -118,7 +118,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         initViewID();
         initPresenter();
         initOnClickListeners();
-        //UnitsInteractorImpl.dataofvehiclesgroupsnames.clear();
+        update();
     }
 
     private void initViewID() {
@@ -168,6 +168,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         handler.postDelayed(runnable = new Runnable() {
             @Override
             public void run() {
+                progressDialog.show();
                 //presenter.getFullVehicles();
                 //UnitsInteractor unitsInteractor = new UnitsInteractorImpl(presenter,getContext());
                 UnitAssignSupportInteractor unitAssignSupportInteractor = new UnitAssignSupportInteractorImpl(presenter,getBaseContext());
