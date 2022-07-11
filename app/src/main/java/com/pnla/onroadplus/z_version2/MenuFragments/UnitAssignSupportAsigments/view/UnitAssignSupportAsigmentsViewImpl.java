@@ -40,7 +40,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
     private void initUnitsViewImpl(){
         initViewID();
-        //initBundle();
+        initBundle();
         initOnClickListener();
 
         //SingleUnitSupportData singleUnitSupportData = new SingleUnitSupportData();
