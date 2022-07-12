@@ -91,6 +91,9 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
         unitRuteVehicleRv.setText("Apoyo disponible para "+vehicleName);
 
+        String nombre = Guardar.getDefaultsPreference("usuario", this);
+        Toast.makeText(getApplicationContext(), nombre, Toast.LENGTH_LONG).show();
+
         //Toast.makeText(getApplicationContext(), geoReference,Toast.LENGTH_LONG).show();
 
         Bundle bndlSupp;

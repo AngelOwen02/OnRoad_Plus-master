@@ -368,6 +368,10 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
                     //Toast.makeText(context, address, Toast.LENGTH_LONG).show();
 
+                    String nombre = data.get(position).getVehicle_Name();
+                    Guardar.setDefaultsPreference("usuario",nombre,v.getContext());
+                    //Toast.makeText(context, nombre, Toast.LENGTH_SHORT).show();
+
                     Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
                     intent.putExtras(vehicleBundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
