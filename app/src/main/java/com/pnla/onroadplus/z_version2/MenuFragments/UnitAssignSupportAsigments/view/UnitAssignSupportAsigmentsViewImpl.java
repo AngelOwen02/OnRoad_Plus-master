@@ -46,23 +46,6 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         initViewID();
         initBundle();
         initOnClickListener();
-
-        //SingleUnitSupportData singleUnitSupportData = new SingleUnitSupportData();
-        //String vehiclename = singleUnitSupportData.getVehicleName();
-        //Toast.makeText(getApplicationContext(), data.toString(), Toast.LENGTH_LONG).show();
-
-        /**String nombre = "";
-        Guardar guardar = (Guardar) getApplicationContext().getApplicationContext();
-        nombre = guardar.getVehicleName();
-        Toast.makeText(getApplicationContext(), nombre, Toast.LENGTH_LONG).show();*/
-
-        /**String address = "";
-        String dg = "";
-        Guardar guardar = new Guardar(address);
-        guardar.setAddress(address);*/
-
-        //unitGeoReference.setText(guardar.GetAddress() + "Si");
-        //Toast.makeText(getApplicationContext(), dg.toString(), Toast.LENGTH_SHORT).show();
     }
 
     private void initBundle(){
