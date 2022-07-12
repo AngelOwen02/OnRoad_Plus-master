@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
@@ -33,6 +34,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     TextView unitRuteVehicle;
     TextView unitPercentVehicle;
     TextView unitRuteVehicleRv;
+    private RecyclerView rvVehiclesSupp;
     //SingleUnitSupportData singleUnitSupportData;
 
     @Override
@@ -102,6 +104,11 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         unitRuteVehicle = findViewById(R.id.txt_unit_rute_single);
         unitPercentVehicle = findViewById(R.id.txt_unit_objetive_percent_single);
         unitRuteVehicleRv = findViewById(R.id.txt_unit_rute_title_single_rv);
+        rvVehiclesSupp = findViewById(R.id.recycler_view_unit_supports_cl);
+    }
+
+    private void initPresenter() {
+
     }
 
     private void initOnClickListener(){

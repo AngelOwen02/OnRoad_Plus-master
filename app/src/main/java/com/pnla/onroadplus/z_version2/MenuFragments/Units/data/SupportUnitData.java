@@ -5,22 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class SupportUnitData {
 
-    /**@SerializedName("data")
-    private List<UnitSupport> unitList = null;
-
-    public SupportUnitData (List<UnitSupport> unitList){
-        super();
-        this.unitList = unitList;
-    }
-
-    public List<UnitSupport> getUnitList() {
-        return unitList;
-    }
-
-    public void setUnitList(List<UnitSupport> unitList) {
-        this.unitList = unitList;
-    }*/
-
     @SerializedName("cve_layer")
     @Expose
     private int cveLayer;
