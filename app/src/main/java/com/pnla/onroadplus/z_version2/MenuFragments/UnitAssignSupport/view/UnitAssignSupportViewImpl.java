@@ -110,7 +110,6 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_unit_assign_support_view_impl);
         initUnitsViewImpl();
-        //update();
     }
 
     private void initUnitsViewImpl() {
