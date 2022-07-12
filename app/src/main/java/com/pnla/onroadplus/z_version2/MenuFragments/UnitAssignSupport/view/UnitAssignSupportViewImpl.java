@@ -54,7 +54,6 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportView;
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.UnitSupport;
 import com.pnla.onroadplus.z_version2.MenuFragments.Zones.view.zonesFragment;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;

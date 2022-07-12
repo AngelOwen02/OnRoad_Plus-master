@@ -12,7 +12,6 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.view.UnitTracki
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.Group;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.UnitSupport;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
 
 import java.io.IOException;

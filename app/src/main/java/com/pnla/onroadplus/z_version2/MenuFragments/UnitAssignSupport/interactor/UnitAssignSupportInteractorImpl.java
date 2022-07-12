@@ -30,7 +30,6 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitReques
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitResponse;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.UnitService;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.UnitSupport;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 import com.pnla.onroadplus.z_version2.realmOnRoad.RealmUserData;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitClientV2;

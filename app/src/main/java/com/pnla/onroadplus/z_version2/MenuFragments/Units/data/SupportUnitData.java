@@ -2,10 +2,6 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Units.data;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.UnitSupport;
-
-import java.util.List;
 
 public class SupportUnitData {
 

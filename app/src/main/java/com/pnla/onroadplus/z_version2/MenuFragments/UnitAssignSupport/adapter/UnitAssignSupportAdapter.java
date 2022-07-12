@@ -37,7 +37,6 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.UnitSupport;
 import com.pnla.onroadplus.z_version2.SplashScreenActivity;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
