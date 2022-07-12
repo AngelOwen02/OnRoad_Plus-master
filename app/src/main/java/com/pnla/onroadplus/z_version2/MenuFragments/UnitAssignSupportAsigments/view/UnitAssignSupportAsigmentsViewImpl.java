@@ -29,6 +29,10 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     //private UnitAssignSupportAsigmentsPresenter presenter;
     private ImageView toolbarImgBack;
     TextView unitGeoReference;
+    TextView unitNameVehicle;
+    TextView unitRuteVehicle;
+    TextView unitPercentVehicle;
+    TextView unitRuteVehicleRv;
     //SingleUnitSupportData singleUnitSupportData;
 
     @Override
@@ -76,7 +80,16 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         int helpState = bndle.getInt("help_state");
         String geoReference = bndle.getString("georeference");
 
+        unitNameVehicle.setText(vehicleName);
+
+        String PercentHelp = new String(String.valueOf(percenttoHelp));
+        PercentHelp.equals(percenttoHelp);
+        unitPercentVehicle.setText(percenttoHelp+"%");
+
+        unitRuteVehicle.setText(descLayer);
         unitGeoReference.setText(geoReference);
+
+        unitRuteVehicleRv.setText("Apoyo disponible para "+vehicleName);
 
         //Toast.makeText(getApplicationContext(), geoReference,Toast.LENGTH_LONG).show();
 
@@ -99,6 +112,10 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     private void initViewID(){
         toolbarImgBack = findViewById(R.id.back);
         unitGeoReference = findViewById(R.id.txt_unit_geo_reference_single);
+        unitNameVehicle = findViewById(R.id.txt_unit_name_single);
+        unitRuteVehicle = findViewById(R.id.txt_unit_rute_single);
+        unitPercentVehicle = findViewById(R.id.txt_unit_objetive_percent_single);
+        unitRuteVehicleRv = findViewById(R.id.txt_unit_rute_title_single_rv);
     }
 
     private void initOnClickListener(){
