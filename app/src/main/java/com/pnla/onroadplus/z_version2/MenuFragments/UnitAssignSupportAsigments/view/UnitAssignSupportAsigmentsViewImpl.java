@@ -1,5 +1,6 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.view;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -41,6 +42,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     private RecyclerView rvVehiclesSupp;
     private UnitAssignSupportAsigmentsPresenter presenter;
     private int cveLayer;
+    private ProgressDialog progressDialog;
     //SingleUnitSupportData singleUnitSupportData;
 
     @Override
@@ -117,6 +119,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         unitPercentVehicle = findViewById(R.id.txt_unit_objetive_percent_single);
         unitRuteVehicleRv = findViewById(R.id.txt_unit_rute_title_single_rv);
         rvVehiclesSupp = findViewById(R.id.recycler_view_unit_supports_cl);
+        progressDialog = new ProgressDialog(this);
     }
 
     private void initPresenter() {
@@ -154,6 +157,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         if(soportes!=null){
             fillSoportes(soportes);
         }
+        progressDialog.dismiss();
     }
 
     private void fillSoportes(List<SingleSupportUnitData> soportes) {
@@ -168,5 +172,17 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         if(message!=null){
             Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void hideProgressDialog(){
+        progressDialog.dismiss();
+    }
+
+    @Override
+    public void showProgressDialog(){
+        progressDialog.setMessage("Cargando Unidades");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
     }
 }

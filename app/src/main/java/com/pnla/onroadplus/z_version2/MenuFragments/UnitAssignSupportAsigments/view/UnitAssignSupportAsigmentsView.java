@@ -8,4 +8,6 @@ public interface UnitAssignSupportAsigmentsView {
 
     void setSoportes(List<SingleSupportUnitData> data);
     void failureResponse(String message);
+    void showProgressDialog();
+    void hideProgressDialog();
 }

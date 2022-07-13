@@ -8,4 +8,6 @@ public interface UnitAssignSupportAsigmentsPresenter {
 
     void setSoportes(List<SingleSupportUnitData> data);
     void getSoportes(int cveLayer);
+    void showProgressDialog();
+    void hideProgressDialog();
 }

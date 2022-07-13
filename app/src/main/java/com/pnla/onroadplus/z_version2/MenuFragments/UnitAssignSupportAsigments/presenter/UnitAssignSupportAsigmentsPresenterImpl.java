@@ -32,6 +32,21 @@ public class UnitAssignSupportAsigmentsPresenterImpl implements UnitAssignSuppor
     public void getSoportes(int cveLayer) {
         if(view!=null){
             interactor.requestSoportes(cveLayer);
+            view.showProgressDialog();
+        }
+    }
+
+    @Override
+    public void showProgressDialog() {
+        if(view!=null){
+            view.showProgressDialog();
+        }
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        if(view!=null){
+            view.hideProgressDialog();
         }
     }
 }
