@@ -20,6 +20,9 @@ public interface UnitService {
     @POST(RetrofitEndPointsV2.GET_SUPPORTROUTES)
     Call<SupportUnitResponse> getFullVehiclesSupport(@Body SupportUnitRequest request);
 
+    @POST(RetrofitEndPointsV2.GET_SUPPORTVEHICLES)
+    Call<SingleSupportUnitResponse> getFullSingleVehiclesSupport(@Body SingleSupportUnitRequest request);
+
     @POST(RetrofitEndPointsV2.GET_FULL_GEOREFERENCE)
     Call<GeoreferenceResponse> getFullGeoReference(@Body GeoreferenceRequest request);
 
@@ -34,9 +37,6 @@ public interface UnitService {
 
     @POST(RetrofitEndPointsV2.GET_VEHICLES_GROUP_LIST_VEHICLES)
     Call<GroupvehicleInsideResponse> getVehiclesInGroups(@Body GroupvehicleInsideRequest request);
-
-    /**@POST(RetrofitEndPointsV2.GET_SUPPORTROUTES)
-    Call<GroupvehicleInsideResponse> getVehiclesInGroups(@Body GroupvehicleInsideRequest request);*/
 
     @POST(RetrofitEndPointsV2.GET_MENUOBJECT)
     Call<geoCercasResponse> hideShowgeoCercas(@Body gecercasRequest request);

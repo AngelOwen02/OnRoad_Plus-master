@@ -368,9 +368,12 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
                     //Toast.makeText(context, address, Toast.LENGTH_LONG).show();
 
-                    String nombre = data.get(position).getVehicle_Name();
-                    Guardar.setDefaultsPreference("usuario",nombre,v.getContext());
-                    //Toast.makeText(context, nombre, Toast.LENGTH_SHORT).show();
+                    //String nombre = data.get(position).getVehicle_Name();
+                    //String cveLayer = new String(String.valueOf(data.get(position).getCveLayer()));
+                    //int cveLayer =
+                    //cveLayer.equals(data.get(position).getControl_Point());
+                    //Guardar.setDefaultsPreference(1,cveLayer,v.getContext());
+                    //Toast.makeText(context, cveLayer, Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
                     intent.putExtras(vehicleBundle);

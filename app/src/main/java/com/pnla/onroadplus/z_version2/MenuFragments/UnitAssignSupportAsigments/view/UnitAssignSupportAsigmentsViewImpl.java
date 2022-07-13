@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pnla.onroadplus.R;
@@ -17,13 +18,16 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitA
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.adapter.UnitAssignSupportAsigmentsAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.Guardar;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.SingleUnitSupportData;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.presenter.UnitAssignSupportAsigmentsPresenter;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.presenter.UnitAssignSupportAsigmentsPresenterImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SingleSupportUnitData;
 
 import java.util.List;
 
-public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implements ImageView.OnClickListener {
+public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implements ImageView.OnClickListener, UnitAssignSupportAsigmentsView {
 
     private UnitAssignSupportAsigmentsAdapter unitAssignSupportAsigmentsAdapter;
-    private List<SingleUnitSupportData> data;
+    private List<SingleSupportUnitData> soportes;
     private SingleUnitSupportData singleUnitSupportData;
     final Handler handler = new Handler();
     //private Guardar guardar;
@@ -35,6 +39,8 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     TextView unitPercentVehicle;
     TextView unitRuteVehicleRv;
     private RecyclerView rvVehiclesSupp;
+    private UnitAssignSupportAsigmentsPresenter presenter;
+    private int cveLayer;
     //SingleUnitSupportData singleUnitSupportData;
 
     @Override
@@ -47,14 +53,16 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     private void initUnitsViewImpl(){
         initViewID();
         initBundle();
+        initPresenter();
         initOnClickListener();
+        presenter.getSoportes(cveLayer);
     }
 
     private void initBundle(){
         Bundle bndle;
         bndle = getIntent().getExtras();
 
-        int cveLayer = bndle.getInt("cve_layer");
+        cveLayer = bndle.getInt("cve_layer");
         String cveVehicle = bndle.getString("cve_vehicle");
         String vehicleName = bndle.getString("vehicle_name");
         String descLayer = bndle.getString("desc_layer");
@@ -76,10 +84,14 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
         unitRuteVehicleRv.setText("Apoyo disponible para "+vehicleName);
 
-        String nombre = Guardar.getDefaultsPreference("usuario", this);
-        Toast.makeText(getApplicationContext(), nombre, Toast.LENGTH_LONG).show();
 
-        //Toast.makeText(getApplicationContext(), geoReference,Toast.LENGTH_LONG).show();
+        /**String nombreLayer = Guardar.getDefaultsPreference("usuario", this);
+        int numerolayer = Integer.parseInt(nombreLayer);
+        //Integer.parseInt(nombreLayer);
+
+        Toast.makeText(this, numerolayer, Toast.LENGTH_SHORT).show();*/
+
+        //Toast.makeText(getApplicationContext(), numerolayer, Toast.LENGTH_LONG).show();
 
         Bundle bndlSupp;
         bndlSupp = new Bundle();
@@ -108,7 +120,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     }
 
     private void initPresenter() {
-
+        presenter = new UnitAssignSupportAsigmentsPresenterImpl(this,getApplicationContext());
     }
 
     private void initOnClickListener(){
@@ -134,5 +146,27 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
         //Toast.makeText(getApplicationContext(), "Atras", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void setSoportes(List<SingleSupportUnitData> data) {
+        this.soportes = data;
+        if(soportes!=null){
+            fillSoportes(soportes);
+        }
+    }
+
+    private void fillSoportes(List<SingleSupportUnitData> soportes) {
+        unitAssignSupportAsigmentsAdapter = new UnitAssignSupportAsigmentsAdapter(soportes, getApplicationContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        rvVehiclesSupp.setLayoutManager(layoutManager);
+        rvVehiclesSupp.setAdapter(unitAssignSupportAsigmentsAdapter);
+    }
+
+    @Override
+    public void failureResponse(String message) {
+        if(message!=null){
+            Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        }
     }
 }

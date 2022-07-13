@@ -50,5 +50,6 @@ public class RetrofitEndPointsV2 {
 
     //Nuevo(s) EndPoints
     public static final String GET_SUPPORTROUTES="geofences/getSupportRoutes";
+    public static final String GET_SUPPORTVEHICLES="geofences/getSupportVehicles";
 
 }

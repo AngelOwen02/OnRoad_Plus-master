@@ -23,8 +23,8 @@
             <ImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/unit_tracking_img2"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
                 android:layout_gravity="center"
                 android:layout_marginTop="9dp"
                 android:stateListAnimator="@null"
@@ -37,7 +37,8 @@
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:layout_marginEnd="16dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -145,7 +146,8 @@
                         android:layout_height="match_parent"
                         style="@style/ItemUnitMainBody"
                         android:textAlignment="center"
-                        android:textSize="12dp"/>
+                        android:textSize="12dp"
+                        android:layout_marginBottom="12dp"/>
 
                 </LinearLayout>
 
