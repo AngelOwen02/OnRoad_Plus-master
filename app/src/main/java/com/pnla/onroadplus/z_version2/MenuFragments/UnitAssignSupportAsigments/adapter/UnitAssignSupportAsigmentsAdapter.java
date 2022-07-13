@@ -16,6 +16,8 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.adapter.Un
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.SingleUnitSupportData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SingleSupportUnitData;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +48,11 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         PercentHelp.equals(data.get(position).getPercentToHelp());
         holder.unitPercent.setText(PercentHelp + "%");
 
+        //Distancia
+        String Distance = new String(String.valueOf(data.get(position).getDistance()));
+        Distance.equals(data.get(position).getPercentToHelp());
+        holder.unitDistance.setText(Distance + " Km.");
+
         //Ubicacion
         holder.unitGeo.setText(data.get(position).getGeoReference());
     }
@@ -58,6 +65,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
     public class ViewHolder extends RecyclerView.ViewHolder{
         //TextViews, etc
         TextView unitPercent;
+        TextView unitDistance;
         TextView unitGeo;
 
 
@@ -65,6 +73,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             super(itemView);
             //Referencias a la vista xml
             unitPercent = itemView.findViewById(R.id.txt_percent_single_rv);
+            unitDistance = itemView.findViewById(R.id.txt_unit_distance_single_rv);
             unitGeo = itemView.findViewById(R.id.txt_unit_geo_reference_single_rv);
         }
     }
