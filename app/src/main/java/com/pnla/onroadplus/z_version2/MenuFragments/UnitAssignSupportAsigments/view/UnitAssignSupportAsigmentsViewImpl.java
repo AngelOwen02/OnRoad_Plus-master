@@ -15,10 +15,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pnla.onroadplus.R;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractor;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.adapter.UnitAssignSupportAsigmentsAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.Guardar;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.SingleUnitSupportData;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.interactor.UnitAssignSupportAsigmentsInteractor;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.interactor.UnitAssignSupportAsigmentsInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.presenter.UnitAssignSupportAsigmentsPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.presenter.UnitAssignSupportAsigmentsPresenterImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SingleSupportUnitData;
@@ -43,6 +47,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     private UnitAssignSupportAsigmentsPresenter presenter;
     private int cveLayer;
     private ProgressDialog progressDialog;
+    private Runnable runnable;
     //SingleUnitSupportData singleUnitSupportData;
 
     @Override
@@ -58,6 +63,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         initPresenter();
         initOnClickListener();
         presenter.getSoportes(cveLayer);
+        //update();
     }
 
     private void initBundle(){
@@ -124,6 +130,28 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
     private void initPresenter() {
         presenter = new UnitAssignSupportAsigmentsPresenterImpl(this,getApplicationContext());
+    }
+
+    private void update(){
+        //final UnitsPresenter presenter = new UnitsPresenterImpl(getContext());
+        //  presenter.setView(this);
+
+        handler.postDelayed(runnable = new Runnable() {
+            @Override
+            public void run() {
+                progressDialog.show();
+                //presenter.getFullVehicles();
+                //UnitsInteractor unitsInteractor = new UnitsInteractorImpl(presenter,getContext());
+                UnitAssignSupportAsigmentsInteractor unitAssignSupportAsigmentsInteractor = new UnitAssignSupportAsigmentsInteractorImpl(presenter,getBaseContext());
+                //unitsInteractor.getAllVehiclesFromAPI();
+                //unitAssignSupportInteractor.getGeoreferencefromAPI();
+                unitAssignSupportAsigmentsInteractor.requestSoportes(cveLayer);
+                //presenter.hideProgressDialog();
+                //searchViewContainer.setVisibility(View.GONE);
+                handler.postDelayed(this,60000);
+            }
+        },60000);
+
     }
 
     private void initOnClickListener(){

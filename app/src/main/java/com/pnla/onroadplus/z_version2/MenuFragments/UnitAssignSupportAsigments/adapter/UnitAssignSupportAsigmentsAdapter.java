@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,7 +19,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SingleSupportUnit
 import java.util.ArrayList;
 import java.util.List;
 
-public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<UnitAssignSupportAsigmentsAdapter.ViewHolder>{
+public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<UnitAssignSupportAsigmentsAdapter.ViewHolder> implements View.OnClickListener{
 
     private List<SingleSupportUnitData> data;
     private Context context;
@@ -66,6 +67,11 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             unitPercent = itemView.findViewById(R.id.txt_percent_single_rv);
             unitGeo = itemView.findViewById(R.id.txt_unit_geo_reference_single_rv);
         }
+    }
+
+    @Override
+    public void onClick(View view){
+        Toast.makeText(view.getContext(), "Si funciona", Toast.LENGTH_SHORT).show();
     }
 
 }
