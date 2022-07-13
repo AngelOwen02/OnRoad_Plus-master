@@ -42,6 +42,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, final int position){
         //Set Data
+        //Pagina para poner la visibilidad de los botones dependiendo el estado que se va a implementar https://parzibyte.me/blog/2019/09/10/ocultar-mostrar-elementos-android/
 
         //Diferencia del vehiculo (En Porcentaje)
         String PercentHelp = new String(String.valueOf(data.get(position).getPercentToHelp()));
