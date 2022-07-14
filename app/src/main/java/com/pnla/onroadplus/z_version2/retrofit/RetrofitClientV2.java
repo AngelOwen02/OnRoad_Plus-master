@@ -9,9 +9,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClientV2 {
     private static Retrofit retrofit;
     //BASE_URL al Servidor Produccion
-    //private static final String BASE_URL = RetrofitEndPointsV2.URL_SERVER;  //  private static final String URL_MAP_API2 = RetrofitEndPointsV2.URL_MAP_API;
+    private static final String BASE_URL = RetrofitEndPointsV2.URL_SERVER;  //  private static final String URL_MAP_API2 = RetrofitEndPointsV2.URL_MAP_API;
     //BASE_URL al Servidor Test
-    private static final String BASE_URL = RetrofitEndPointsV2.URL_SERVER_TEST;
+    //private static final String BASE_URL = RetrofitEndPointsV2.URL_SERVER_TEST;
     private static OkHttpClient okHttpClient;
 
     public static Retrofit getRetrofitInstance() {

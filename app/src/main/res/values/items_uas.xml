@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="optionsUnitAsignmentsArray2">
+        <item> Asignar otra unidad</item>
+        <item> Eliminar</item>
+    </string-array>
+</resources>

@@ -4,11 +4,15 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pnla.onroadplus.R;
@@ -40,7 +44,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position){
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position){
         //Set Data
         //Pagina para poner la visibilidad de los botones dependiendo el estado que se va a implementar https://parzibyte.me/blog/2019/09/10/ocultar-mostrar-elementos-android/
 
@@ -56,6 +60,19 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
 
         //Ubicacion
         holder.unitGeo.setText(data.get(position).getGeoReference());
+
+        holder.spinnerOptions.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {/**esto son los tres puntos de la tarjeta*/
+                if(holder.fakespinner.getVisibility()==View.GONE)
+                {
+                    holder.fakespinner.setVisibility(View.VISIBLE);
+                }else
+                {
+                    holder.fakespinner.setVisibility(View.GONE);
+                }
+            }
+        });
     }
 
     @Override
@@ -65,9 +82,11 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         //TextViews, etc
-        TextView unitPercent;
-        TextView unitDistance;
+        TextView unitPercent, unitDistance, fakeAssign, fakeErase;
         TextView unitGeo;
+        ImageView spinnerOptions;
+        Spinner myspinnerOptions;
+        CardView fakespinner;
 
 
         public ViewHolder(@NonNull View itemView){
@@ -76,6 +95,18 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             unitPercent = itemView.findViewById(R.id.txt_percent_single_rv);
             unitDistance = itemView.findViewById(R.id.txt_unit_distance_single_rv);
             unitGeo = itemView.findViewById(R.id.txt_unit_geo_reference_single_rv);
+
+            spinnerOptions = itemView.findViewById(R.id.optionspoints);
+            myspinnerOptions = itemView.findViewById(R.id.spinnerUnitAsingmentOptions);
+
+            //ArrayAdapter<CharSequence> adapterOptions = ArrayAdapter.createFromResource(context,R.array.optionsUnitAsignmentsArray2, android.R.layout.simple_spinner_item);
+            ArrayAdapter<CharSequence> adapterOptions = ArrayAdapter.createFromResource(context, R.array.optionsUnitAsignmentsArray2, android.R.layout.simple_spinner_item);
+            adapterOptions.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            fakespinner = itemView.findViewById(R.id.constrainUnitSpinnerfake);
+            fakeAssign = itemView.findViewById(R.id.editUnitfakespinner);
+            fakeErase = itemView.findViewById(R.id.eraseUnitfakespinner);
+
+            myspinnerOptions.setAdapter(adapterOptions);
         }
     }
 
