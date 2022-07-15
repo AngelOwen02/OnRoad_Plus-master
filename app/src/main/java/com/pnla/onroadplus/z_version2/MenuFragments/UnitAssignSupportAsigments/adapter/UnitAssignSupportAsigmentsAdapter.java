@@ -40,13 +40,13 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         View view = LayoutInflater.from(context).inflate(R.layout.unit_support_cl, parent, false);
+        //View view = LayoutInflater.from(context).inflate(R.layout.unit_support_cl_2, parent, false);
         return new UnitAssignSupportAsigmentsAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position){
         //Set Data
-        //Pagina para poner la visibilidad de los botones dependiendo el estado que se va a implementar https://parzibyte.me/blog/2019/09/10/ocultar-mostrar-elementos-android/
 
         //Diferencia del vehiculo (En Porcentaje)
         String PercentHelp = new String(String.valueOf(data.get(position).getPercentToHelp()));
@@ -61,10 +61,10 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         //Ubicacion
         holder.unitGeo.setText(data.get(position).getGeoReference());
 
-        holder.spinnerOptions.setOnClickListener(new View.OnClickListener() {
+        /**holder.spinnerOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {/**esto son los tres puntos de la tarjeta*/
-                if(holder.fakespinner.getVisibility()==View.GONE)
+                /**if(holder.fakespinner.getVisibility()==View.GONE)
                 {
                     holder.fakespinner.setVisibility(View.VISIBLE);
                 }else
@@ -72,7 +72,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
                     holder.fakespinner.setVisibility(View.GONE);
                 }
             }
-        });
+        });*/
     }
 
     @Override
@@ -96,17 +96,18 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             unitDistance = itemView.findViewById(R.id.txt_unit_distance_single_rv);
             unitGeo = itemView.findViewById(R.id.txt_unit_geo_reference_single_rv);
 
-            spinnerOptions = itemView.findViewById(R.id.optionspoints);
+            /**spinnerOptions = itemView.findViewById(R.id.optionspoints);
             myspinnerOptions = itemView.findViewById(R.id.spinnerUnitAsingmentOptions);
 
             //ArrayAdapter<CharSequence> adapterOptions = ArrayAdapter.createFromResource(context,R.array.optionsUnitAsignmentsArray2, android.R.layout.simple_spinner_item);
             ArrayAdapter<CharSequence> adapterOptions = ArrayAdapter.createFromResource(context, R.array.optionsUnitAsignmentsArray2, android.R.layout.simple_spinner_item);
             adapterOptions.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
             fakespinner = itemView.findViewById(R.id.constrainUnitSpinnerfake);
             fakeAssign = itemView.findViewById(R.id.editUnitfakespinner);
             fakeErase = itemView.findViewById(R.id.eraseUnitfakespinner);
 
-            myspinnerOptions.setAdapter(adapterOptions);
+            myspinnerOptions.setAdapter(adapterOptions);*/
         }
     }
 
