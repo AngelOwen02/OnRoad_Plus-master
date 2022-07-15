@@ -39,8 +39,8 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
-        View view = LayoutInflater.from(context).inflate(R.layout.unit_support_cl, parent, false);
-        //View view = LayoutInflater.from(context).inflate(R.layout.unit_support_cl_2, parent, false);
+        //View view = LayoutInflater.from(context).inflate(R.layout.unit_support_cl, parent, false);
+        View view = LayoutInflater.from(context).inflate(R.layout.unit_support_cl_2, parent, false);
         return new UnitAssignSupportAsigmentsAdapter.ViewHolder(view);
     }
 

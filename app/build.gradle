@@ -82,7 +82,7 @@ dependencies {
 
     implementation 'com.squareup.okhttp3:okhttp:3.9.0'
     /**nueva*/
-    compile('com.github.bumptech.glide:okhttp3-integration:1.4.0') {
+    implementation('com.github.bumptech.glide:okhttp3-integration:1.4.0') {
         exclude group: 'glide-parent'
 
     }

@@ -15,86 +15,132 @@
         android:stateListAnimator="@null"
         app:civ_border_color="@color/colorBorderCarGreen"
         app:civ_border_width="2dp"
-        android:layout_marginStart="16dp"
         android:layout_marginTop="21dp"
         android:layout_marginBottom="21dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guidelineusc3"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txt_unit_name_single_rv"
-        android:textColor="@color/blackUI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="13dp"
         android:text="Sin datos"
+        android:textColor="@color/blackUI"
+
+
         app:layout_constraintStart_toEndOf="@+id/unit_tracking_img2"
         app:layout_constraintTop_toTopOf="parent">
-
     </TextView>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="98dp"
+        android:layout_height="69dp"
+        tools:layout_editor_absoluteX="264dp"
+        tools:layout_editor_absoluteY="57dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+           />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelineusc5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent=".5" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
+
         android:id="@+id/txt_unit_rute_single_rv"
-        android:textColor="@color/blackUI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="132dp"
         android:layout_marginTop="13dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="30dp"
         android:text="Sin datos"
+
+        android:textColor="@color/blackUI"
+        app:layout_constraintBottom_toTopOf="@+id/txt_unit_geo_reference_single_rv"
         app:layout_constraintEnd_toStartOf="@+id/guidelineusc"
         app:layout_constraintStart_toEndOf="@+id/txt_unit_name_single_rv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txt_percent_single_rv"
-        android:textColor="@color/blackUI"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="26dp"
+        android:layout_height="14dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
-        android:text="Sin datos"
+        android:text="0"
+        android:textColor="@color/blackUI"
+        android:gravity="center"
+
         app:layout_constraintStart_toEndOf="@+id/unit_tracking_img2"
         app:layout_constraintTop_toBottomOf="@+id/txt_unit_name_single_rv" />
 
     <TextView
         android:id="@+id/txt_unit_distance_single_rv"
-        android:textColor="@color/blackUI"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginBottom="6dp"
         android:text="Sin datos"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/txt_percent_single_rv"
-        app:layout_constraintTop_toBottomOf="@+id/txt_unit_rute_single_rv"/>
+        android:textColor="@color/blackUI"
+
+        app:layout_constraintBottom_toTopOf="@+id/txt_unit_geo_reference_single_rv"
+        app:layout_constraintStart_toEndOf="@+id/unit_tracking_img2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txt_unit_geo_reference_single_rv"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginStart="80dp"
+        android:layout_width="247dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="59dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="12dp"
         android:gravity="center"
-        android:lines="3"
+        android:lines="4"
         android:text="Sin datos"
         android:textColor="@color/blackUI"
-        app:layout_constraintBottom_toTopOf="@+id/guidelineusc2"
+
+        app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toStartOf="@+id/guidelineusc"
-        app:layout_constraintStart_toStartOf="@+id/guidelineusc3"
-        app:layout_constraintTop_toBottomOf="@+id/txt_unit_distance_single_rv" />
+        app:layout_constraintStart_toEndOf="@+id/unit_tracking_img2"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/optionspoints"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="351dp"
         android:layout_gravity="center"
-        android:layout_marginTop="46dp"
         android:background="@drawable/ic_icn_masopciones"
+        android:layout_marginStart="24dp"
+
+
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guidelineusc"
-        app:layout_constraintStart_toStartOf="@+id/guidelineusc3"
+        app:layout_constraintStart_toEndOf="@+id/txt_unit_geo_reference_single_rv"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -102,20 +148,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="1"/>
+        app:layout_constraintGuide_end="18dp" />
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineusc2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="1" />
+
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineusc3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent=".0" />
+        app:layout_constraintGuide_begin="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
