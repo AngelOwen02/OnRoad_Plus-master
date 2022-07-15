@@ -38,7 +38,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="98dp"
         android:layout_height="69dp"
-        tools:layout_editor_absoluteX="264dp"
+        tools:layout_editor_absoluteX="265dp"
         tools:layout_editor_absoluteY="57dp">
 
         <TextView
