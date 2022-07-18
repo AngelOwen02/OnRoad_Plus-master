@@ -10,4 +10,8 @@ public interface UnitAssignSupportAsigmentsView {
     void failureResponse(String message);
     void showProgressDialog();
     void hideProgressDialog();
+
+    void AssignmentSupportSuccess();
+
+    void deleteUnitAssign();
 }

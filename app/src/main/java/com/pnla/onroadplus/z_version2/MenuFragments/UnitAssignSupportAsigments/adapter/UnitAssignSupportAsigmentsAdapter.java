@@ -1,6 +1,8 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.adapter.UnitAssignSupportAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.SingleUnitSupportData;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.view.UnitAssignSupportAsigmentsViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SingleSupportUnitData;
 
 import org.w3c.dom.Text;
@@ -29,10 +32,12 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
 
     private List<SingleSupportUnitData> data;
     private Context context;
+    private UnitAssignSupportAsigmentsViewImpl myView;
 
-    public UnitAssignSupportAsigmentsAdapter(List<SingleSupportUnitData> data, Context context){
+    public UnitAssignSupportAsigmentsAdapter(UnitAssignSupportAsigmentsViewImpl myView, List<SingleSupportUnitData> data, Context context){
         this.data = data;
         this.context = context;
+        this.myView = myView;
     }
 
     @NonNull
@@ -44,7 +49,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position){
+    public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position){
         //Set Data
 
         //Diferencia del vehiculo (En Porcentaje)
@@ -72,6 +77,21 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
                 }
             }
         });
+
+        holder.editUnitfakespinner2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myView.editunitspinner(data.get(position).getCveLayer(), data.get(position).getCve_Vehicle());
+                Log.e("assistencesupport", "" + data.get(position).getCve_Vehicle() + "     " + data.get(position).getCveLayer() );
+            }
+        });
+
+        holder.eraseUnitfakespinner2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                myView.eraseunitfromsupport(data.get(position).getCveLayer(), data.get(position).getCve_Vehicle());
+            }
+        });
     }
 
     @Override
@@ -82,7 +102,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
     public class ViewHolder extends RecyclerView.ViewHolder{
         //TextViews, etc
         TextView unitPercent, unitDistance, fakeAssign, fakeErase;
-        TextView unitGeo;
+        TextView unitGeo, editUnitfakespinner2, eraseUnitfakespinner2;
         ImageView spinnerOptions;
         Spinner myspinnerOptions;
         CardView fakespinner;
@@ -95,6 +115,9 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             unitDistance = itemView.findViewById(R.id.txt_unit_distance_single_rv);
             unitGeo = itemView.findViewById(R.id.txt_unit_geo_reference_single_rv);
 
+            editUnitfakespinner2 = itemView.findViewById(R.id.editUnitfakespinner2);
+            eraseUnitfakespinner2 = itemView.findViewById(R.id.eraseUnitfakespinner2);
+
             //spinnerOptions = itemView.findViewById(R.id.optionspoints);
             spinnerOptions = itemView.findViewById(R.id.optionspoints2);
             myspinnerOptions = itemView.findViewById(R.id.spinnerUnitAsingmentOptions2);
@@ -103,7 +126,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             ArrayAdapter<CharSequence> adapterOptions = ArrayAdapter.createFromResource(context, R.array.optionsUnitAsignmentsArray2, android.R.layout.simple_spinner_item);
             adapterOptions.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-            fakespinner = itemView.findViewById(R.id.constrainUnitSpinnerfake);
+            fakespinner = itemView.findViewById(R.id.constrainUnitSpinnerfake2);
             fakeAssign = itemView.findViewById(R.id.editUnitfakespinner);
             fakeErase = itemView.findViewById(R.id.eraseUnitfakespinner);
 

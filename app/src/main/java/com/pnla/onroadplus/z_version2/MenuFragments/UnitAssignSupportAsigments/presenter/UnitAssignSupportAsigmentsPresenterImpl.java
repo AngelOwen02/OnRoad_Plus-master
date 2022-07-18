@@ -49,4 +49,32 @@ public class UnitAssignSupportAsigmentsPresenterImpl implements UnitAssignSuppor
             view.hideProgressDialog();
         }
     }
+
+    @Override
+    public void requestSetAssignSupport(int cveLayer, String cve_vehicle) {
+        if(view!=null){
+            interactor.setAssignSupport(cveLayer, cve_vehicle);
+        }
+    }
+
+    @Override
+    public void setUnitAssignSupport(String data) {
+        if(view!=null){
+            view.AssignmentSupportSuccess();
+        }
+    }
+
+    @Override
+    public void deleteUnitAssign(int cveLayer, String cve_vehicle) {
+        if(view!=null){
+            interactor.deleteUnitAssign(cveLayer, cve_vehicle);
+        }
+    }
+
+    @Override
+    public void deleteSuccess(String data) {
+        if(view!=null){
+            view.deleteUnitAssign();
+        }
+    }
 }

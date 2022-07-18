@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -189,7 +190,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     }
 
     private void fillSoportes(List<SingleSupportUnitData> soportes) {
-        unitAssignSupportAsigmentsAdapter = new UnitAssignSupportAsigmentsAdapter(soportes, getApplicationContext());
+        unitAssignSupportAsigmentsAdapter = new UnitAssignSupportAsigmentsAdapter(this ,soportes, getApplicationContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         rvVehiclesSupp.setLayoutManager(layoutManager);
         rvVehiclesSupp.setAdapter(unitAssignSupportAsigmentsAdapter);
@@ -208,9 +209,39 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     }
 
     @Override
+    public void AssignmentSupportSuccess() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                onBackPressed();
+            }
+        }, 2000);
+        //Todo verificar ciclo de Handler
+    }
+
+    @Override
+    public void deleteUnitAssign() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                onBackPressed();
+            }
+        }, 2000);
+        //Todo verificar ciclo de Handler
+    }
+
+    @Override
     public void showProgressDialog(){
         progressDialog.setMessage("Cargando Unidades");
         progressDialog.setCancelable(false);
         progressDialog.show();
+    }
+
+    public void editunitspinner(int cveLayer, String cve_vehicle) {
+        presenter.requestSetAssignSupport(cveLayer, cve_vehicle);
+    }
+
+    public void eraseunitfromsupport(int cveLayer, String cve_vehicle) {
+        presenter.deleteUnitAssign(cveLayer, cve_vehicle);
     }
 }

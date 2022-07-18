@@ -20,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -195,7 +196,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
     }*/
 
         @Override
-        public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+        public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 //        holder.itemView.findFocus().getScrollBarSize();
             //String sendTime = unitList.get(position).getSendTime();
             // Log.e("bloquesdeunides",""+holder.getAdapterPosition() +"   LP "+unitList.get(position).getCveVehicle());//+holder.getLayoutPosition()+"  ");
@@ -337,6 +338,13 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 //
 //            }
 //        });
+
+            holder.ll_main_unit_item_assign_container.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Log.e("helpstate" , "" + data.get(position).getHelp_State());
+                }
+            });
 
             //Al dar clic en la imagen del camion
             holder.unitImage.setOnClickListener(new View.OnClickListener() {
@@ -524,6 +532,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         TextView unitDifference;
         TextView unitStatus;
         TextView unitGeoExample;
+        LinearLayout ll_main_unit_item_assign_container;
         //Switch unitSwicth;
 
 
@@ -537,6 +546,10 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             unitObjPercent = itemView.findViewById(R.id.txt_unit_objective);
             unitDifference = itemView.findViewById(R.id.txt_unit_difference);
             unitStatus = itemView.findViewById(R.id.txt_unit_status);
+            ll_main_unit_item_assign_container = itemView.findViewById(R.id.ll_main_unit_item_assign_container);
+
+
+
             //unitGeoExample = itemView.findViewById(R.id.txt_unit_geo_example);
             //unitSwicth = itemView.findViewById(R.id.unit_tracking_swicth);
         }

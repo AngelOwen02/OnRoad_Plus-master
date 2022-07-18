@@ -2,6 +2,10 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Units.data;
 
 import com.pnla.onroadplus.z_version2.MenuFragments.TrackingV2.model.gecercasRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.TrackingV2.model.geoCercasResponse;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.Models.DeleteUnitAssignRequest;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.Models.DeleteUnitAssignResponse;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.Models.UnitAssignRequest;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.Models.UnitAssignResponse;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.models.trips.TripsV2Request;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.models.trips.TripsV2Response;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.models.vehicleDescription.VehicleDescriptionRequest;
@@ -16,12 +20,6 @@ public interface UnitService {
 
     @POST(RetrofitEndPointsV2.GET_FULL_VEHICLES)
     Call<UnitResponse> getFullVehicles(@Body UnitRequest request);
-
-    @POST(RetrofitEndPointsV2.GET_SUPPORTROUTES)
-    Call<SupportUnitResponse> getFullVehiclesSupport(@Body SupportUnitRequest request);
-
-    @POST(RetrofitEndPointsV2.GET_SUPPORTVEHICLES)
-    Call<SingleSupportUnitResponse> getFullSingleVehiclesSupport(@Body SingleSupportUnitRequest request);
 
     @POST(RetrofitEndPointsV2.GET_FULL_GEOREFERENCE)
     Call<GeoreferenceResponse> getFullGeoReference(@Body GeoreferenceRequest request);
@@ -40,4 +38,17 @@ public interface UnitService {
 
     @POST(RetrofitEndPointsV2.GET_MENUOBJECT)
     Call<geoCercasResponse> hideShowgeoCercas(@Body gecercasRequest request);
+
+    //Todo mover a util de Assignment
+    @POST(RetrofitEndPointsV2.GET_SUPPORTROUTES)
+    Call<SupportUnitResponse> getFullVehiclesSupport(@Body SupportUnitRequest request);
+
+    @POST(RetrofitEndPointsV2.GET_SUPPORTVEHICLES)
+    Call<SingleSupportUnitResponse> getFullSingleVehiclesSupport(@Body SingleSupportUnitRequest request);
+
+    @POST(RetrofitEndPointsV2.SET_ASSIGNSUPPORT)
+    Call<UnitAssignResponse> setUnitAssignSupport(@Body UnitAssignRequest request);
+
+    @POST(RetrofitEndPointsV2.SET_CANCELSUPPORT)
+    Call<DeleteUnitAssignResponse> deleteAssignSupport(@Body DeleteUnitAssignRequest request);
 }
