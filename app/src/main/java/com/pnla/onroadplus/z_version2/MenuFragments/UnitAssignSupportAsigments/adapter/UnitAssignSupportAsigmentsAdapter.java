@@ -1,7 +1,9 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.adapter;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -89,6 +91,28 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         holder.eraseUnitfakespinner2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                /**AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context.getApplicationContext());
+
+                // Configura el titulo.
+                alertDialogBuilder.setTitle("Mi Dialogo");
+
+                // Configura el mensaje.
+                alertDialogBuilder
+                        .setMessage("¿Desea borrar la unidad " + data.get(position).getCve_Vehicle() + " a la ruta " + data.get(position).getCveLayer())
+                        .setCancelable(false)
+                        .setPositiveButton("Si",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                //Si la respuesta es afirmativa aquí agrega tu función a realizar.
+                                myView.eraseunitfromsupport(data.get(position).getCveLayer(), data.get(position).getCve_Vehicle());
+                            }
+                        })
+                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                dialog.cancel();
+                            }
+                        }).create().show();*/
+
                 myView.eraseunitfromsupport(data.get(position).getCveLayer(), data.get(position).getCve_Vehicle());
             }
         });
