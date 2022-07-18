@@ -29,7 +29,6 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
 
     private List<SingleSupportUnitData> data;
     private Context context;
-    public List<String> textaddres= new ArrayList<>();
 
     public UnitAssignSupportAsigmentsAdapter(List<SingleSupportUnitData> data, Context context){
         this.data = data;
@@ -61,10 +60,10 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         //Ubicacion
         holder.unitGeo.setText(data.get(position).getGeoReference());
 
-        /**holder.spinnerOptions.setOnClickListener(new View.OnClickListener() {
+        holder.spinnerOptions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {/**esto son los tres puntos de la tarjeta*/
-                /**if(holder.fakespinner.getVisibility()==View.GONE)
+                if(holder.fakespinner.getVisibility()==View.GONE)
                 {
                     holder.fakespinner.setVisibility(View.VISIBLE);
                 }else
@@ -72,7 +71,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
                     holder.fakespinner.setVisibility(View.GONE);
                 }
             }
-        });*/
+        });
     }
 
     @Override
@@ -96,8 +95,9 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             unitDistance = itemView.findViewById(R.id.txt_unit_distance_single_rv);
             unitGeo = itemView.findViewById(R.id.txt_unit_geo_reference_single_rv);
 
-            /**spinnerOptions = itemView.findViewById(R.id.optionspoints);
-            myspinnerOptions = itemView.findViewById(R.id.spinnerUnitAsingmentOptions);
+            //spinnerOptions = itemView.findViewById(R.id.optionspoints);
+            spinnerOptions = itemView.findViewById(R.id.optionspoints2);
+            myspinnerOptions = itemView.findViewById(R.id.spinnerUnitAsingmentOptions2);
 
             //ArrayAdapter<CharSequence> adapterOptions = ArrayAdapter.createFromResource(context,R.array.optionsUnitAsignmentsArray2, android.R.layout.simple_spinner_item);
             ArrayAdapter<CharSequence> adapterOptions = ArrayAdapter.createFromResource(context, R.array.optionsUnitAsignmentsArray2, android.R.layout.simple_spinner_item);
@@ -107,7 +107,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             fakeAssign = itemView.findViewById(R.id.editUnitfakespinner);
             fakeErase = itemView.findViewById(R.id.eraseUnitfakespinner);
 
-            myspinnerOptions.setAdapter(adapterOptions);*/
+            myspinnerOptions.setAdapter(adapterOptions);
         }
     }
 

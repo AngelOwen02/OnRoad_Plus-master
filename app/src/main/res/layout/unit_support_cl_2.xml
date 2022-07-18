@@ -35,36 +35,52 @@
         app:layout_constraintTop_toTopOf="parent">
     </TextView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="98dp"
-        android:layout_height="69dp"
-        tools:layout_editor_absoluteX="265dp"
-        tools:layout_editor_absoluteY="57dp">
+    <androidx.cardview.widget.CardView
+        android:id="@+id/constrainUnitSpinnerfake"
+        android:layout_width="174dp"
+        android:layout_height="76dp"
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+        android:visibility="gone"
+        style="@style/spinner_style2"
+        app:layout_constraintEnd_toStartOf="@+id/optionspoints2"
+        app:layout_constraintTop_toTopOf="@+id/optionspoints2">
+        <androidx.constraintlayout.widget.ConstraintLayout
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-           />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guidelineusc5"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent=".5" />
+            >
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/editUnitfakespinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Asignar otra unidad"
+                android:textColor="@color/blackUI"
+                android:textSize="13dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </TextView>
+
+            <TextView
+                android:id="@+id/eraseUnitfakespinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="20dp"
+                android:text="Eliminar"
+                android:textColor="@color/blackUI"
+                android:textSize="13dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editUnitfakespinner">
+
+            </TextView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
 
     <TextView
 
@@ -130,7 +146,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/optionspoints"
+        android:id="@+id/optionspoints2"
         android:layout_width="20dp"
         android:layout_height="20dp"
         android:layout_gravity="center"
@@ -142,6 +158,18 @@
         app:layout_constraintEnd_toStartOf="@+id/guidelineusc"
         app:layout_constraintStart_toEndOf="@+id/txt_unit_geo_reference_single_rv"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinnerUnitAsingmentOptions2"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:background="#FFFFFF"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@+id/optionspoints"
+        app:layout_constraintTop_toTopOf="@+id/optionspoints">
+
+    </Spinner>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelineusc"
