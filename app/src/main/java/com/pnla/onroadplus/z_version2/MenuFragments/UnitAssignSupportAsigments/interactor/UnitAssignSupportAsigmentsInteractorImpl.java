@@ -20,6 +20,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SingleSupportUnit
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitResponse;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.UnitService;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitClientV2;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitValidationsV2;
@@ -36,7 +37,8 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
 
     private Context context;
     private UnitAssignSupportAsigmentsPresenter presenter;
-    private UnitService unitService;
+    //private UnitService unitService;
+    private UnitAssignService unitAssignService;
 
     public UnitAssignSupportAsigmentsInteractorImpl(UnitAssignSupportAsigmentsPresenter presenter, Context context) {
         this.presenter = presenter;
@@ -46,7 +48,8 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
 
     private void initRetrofit() {
         Retrofit retrofitClient = RetrofitClientV2.getRetrofitInstance();
-        unitService = retrofitClient.create(UnitService.class);
+        //unitService = retrofitClient.create(UnitService.class);
+        unitAssignService = retrofitClient.create(UnitAssignService.class);
         //Toast.makeText(context, "paso por aqui retrofit", Toast.LENGTH_LONG).show();
     }
 
@@ -84,7 +87,8 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
 
     private void deleteSupport(int cveLayer, String cve_vehicle, String token) {
         DeleteUnitAssignRequest request = new DeleteUnitAssignRequest(cveLayer, Integer.valueOf(cve_vehicle), token);
-        unitService.deleteAssignSupport(request).enqueue(new Callback<DeleteUnitAssignResponse>() {
+        //unitService.deleteAssignSupport(request).enqueue(new Callback<DeleteUnitAssignResponse>() {
+        unitAssignService.deleteAssignSupport(request).enqueue(new Callback<DeleteUnitAssignResponse>() {
             @Override
             public void onResponse(Call<DeleteUnitAssignResponse> call, Response<DeleteUnitAssignResponse> response) {
                 validateCodeDelete(response, context);
@@ -121,7 +125,8 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
 
     private void requesAssignSupport(int cveLayer, int cveLayer1, String cve_vehicle, String token) {
          final UnitAssignRequest request = new UnitAssignRequest(cveLayer, cveLayer, Integer.valueOf(cve_vehicle), token);
-         unitService.setUnitAssignSupport(request).enqueue(new Callback<UnitAssignResponse>() {
+         //unitService.setUnitAssignSupport(request).enqueue(new Callback<UnitAssignResponse>() {
+        unitAssignService.setUnitAssignSupport(request).enqueue(new Callback<UnitAssignResponse>() {
              @Override
              public void onResponse(Call<UnitAssignResponse> call, Response<UnitAssignResponse> response) {
                  validateCodeAssignent(response, context);
@@ -158,7 +163,8 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
 
     private void requestUnidades(String token, int cveLayer) {
         SingleSupportUnitRequest request = new SingleSupportUnitRequest(cveLayer, token);
-        unitService.getFullSingleVehiclesSupport(request).enqueue(new Callback<SingleSupportUnitResponse>() {
+        //unitService.getFullSingleVehiclesSupport(request).enqueue(new Callback<SingleSupportUnitResponse>() {
+        unitAssignService.getFullSingleVehiclesSupport(request).enqueue(new Callback<SingleSupportUnitResponse>() {
             @Override
             public void onResponse(Call<SingleSupportUnitResponse> call, Response<SingleSupportUnitResponse> response) {
                 validateCode(response, context);

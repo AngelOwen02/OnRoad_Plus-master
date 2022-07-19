@@ -40,15 +40,4 @@ public interface UnitService {
     Call<geoCercasResponse> hideShowgeoCercas(@Body gecercasRequest request);
 
     //Todo mover a util de Assignment
-    @POST(RetrofitEndPointsV2.GET_SUPPORTROUTES)
-    Call<SupportUnitResponse> getFullVehiclesSupport(@Body SupportUnitRequest request);
-
-    @POST(RetrofitEndPointsV2.GET_SUPPORTVEHICLES)
-    Call<SingleSupportUnitResponse> getFullSingleVehiclesSupport(@Body SingleSupportUnitRequest request);
-
-    @POST(RetrofitEndPointsV2.SET_ASSIGNSUPPORT)
-    Call<UnitAssignResponse> setUnitAssignSupport(@Body UnitAssignRequest request);
-
-    @POST(RetrofitEndPointsV2.SET_CANCELSUPPORT)
-    Call<DeleteUnitAssignResponse> deleteAssignSupport(@Body DeleteUnitAssignRequest request);
 }
