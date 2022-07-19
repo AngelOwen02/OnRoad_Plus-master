@@ -376,50 +376,12 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
                     //Toast.makeText(context, address, Toast.LENGTH_LONG).show();
 
-                    //String nombre = data.get(position).getVehicle_Name();
-                    //String cveLayer = new String(String.valueOf(data.get(position).getCveLayer()));
-                    //int cveLayer =
-                    //cveLayer.equals(data.get(position).getControl_Point());
-                    //Guardar.setDefaultsPreference(1,cveLayer,v.getContext());
-                    //Toast.makeText(context, cveLayer, Toast.LENGTH_SHORT).show();
-
                     Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
                     intent.putExtras(vehicleBundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(intent);
                 }
             });
-
-            /**holder.llMainContainer.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Bundle vehicleBundle = new Bundle();
-
-                    vehicleBundle.putInt("vehicleCve", unitList.get(position).getCveVehicle());
-                    vehicleBundle.putInt("vehicleSwitch", unitList.get(position).getVehicleSwitch());
-                    vehicleBundle.putString("vehicleName", unitList.get(position).getVehicleName());
-                    vehicleBundle.putString("vehicleImage", unitList.get(position).getVehicleImage());
-                    vehicleBundle.putString("vehicleSendTime", unitList.get(position).getSendTime());
-                    vehicleBundle.putString("vehicleDescBrand", unitList.get(position).getDescBrand());
-                    vehicleBundle.putString("vehicleDescModel", unitList.get(position).getDescModel());
-                    vehicleBundle.putString("vehicleYear", unitList.get(position).getVehicleYear());
-                    vehicleBundle.putString("vehicleVin", unitList.get(position).getVehicleVin());
-                    vehicleBundle.putString("vehiclePlate", unitList.get(position).getVehiclePlate());
-                    vehicleBundle.putString("vehicleGeoreference", unitList.get(position).getGeoreference());
-                    vehicleBundle.putString("vehicleTimeTravel", unitList.get(position).getTimeTravel());
-                    vehicleBundle.putString("vehicleTimeElapsed", unitList.get(position).getTimeElapsed());
-                    vehicleBundle.putDouble("vehicleLatitude", unitList.get(position).getLatitude());
-                    vehicleBundle.putDouble("vehicleLongitude", unitList.get(position).getLongitude());
-                    vehicleBundle.putString("vehicleMileage", unitList.get(position).getVehicleName());
-                    vehicleBundle.putDouble("vehicleKmTravel", unitList.get(position).getKmTravel());
-                    vehicleBundle.putDouble("vehicleCurrentSpeed", unitList.get(position).getCurrentSpeed());
-                    vehicleBundle.putDouble("vehicleMaxSpeed", unitList.get(position).getMaxSpeed());
-
-                    Intent intent = new Intent(context, UnitMapContainer.class);
-                    intent.putExtras(vehicleBundle);
-                    context.startActivity(intent);
-                }
-            });*/
         }
 
 

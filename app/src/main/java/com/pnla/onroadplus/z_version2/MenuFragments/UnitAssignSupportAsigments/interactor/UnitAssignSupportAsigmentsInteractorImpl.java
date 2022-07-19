@@ -67,7 +67,7 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
         if(token!=null) {
 
             requesAssignSupport(cveLayer, cveLayer, cve_vehicle, token);
-            Log.e("assistencesupport" , "" + cveLayer + "   " +  cveLayer + "  "+ cve_vehicle + "   "+ token);
+            //Log.e("assistencesupport" , "" + cveLayer + "   " +  cveLayer + "  "+ cve_vehicle + "   "+ token);
         }
     }
 
