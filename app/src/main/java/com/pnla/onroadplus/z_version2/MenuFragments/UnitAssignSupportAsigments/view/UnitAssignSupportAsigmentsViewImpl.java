@@ -93,13 +93,6 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
         unitRuteVehicleRv.setText("Apoyo disponible para "+vehicleName);
 
-
-        /**String nombreLayer = Guardar.getDefaultsPreference("usuario", this);
-        int numerolayer = Integer.parseInt(nombreLayer);
-        //Integer.parseInt(nombreLayer);
-
-        Toast.makeText(this, numerolayer, Toast.LENGTH_SHORT).show();*/
-
         //Toast.makeText(getApplicationContext(), numerolayer, Toast.LENGTH_LONG).show();
 
         Bundle bndlSupp;
