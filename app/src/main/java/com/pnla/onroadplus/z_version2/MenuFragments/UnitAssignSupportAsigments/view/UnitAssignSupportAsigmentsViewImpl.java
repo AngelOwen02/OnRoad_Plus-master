@@ -236,8 +236,6 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     }
 
     public void editunitspinner(int cveLayer, String cve_vehicle) {
-        //presenter.requestSetAssignSupport(cveLayer, cve_vehicle);
-
         androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
         //builder.setTitle("Hay una nueva versión disponible de OnRoad");
         builder.setMessage("¿Desea asignar la unidad " + cve_vehicle + " a la Ruta " + cveLayer);
@@ -252,6 +250,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
+                        //presenter.requestSetAssignSupport(cveLayer, cve_vehicle);
                     }
                 });
         builder.create();
