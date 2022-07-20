@@ -1,7 +1,9 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.view;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -11,11 +13,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pnla.onroadplus.BuildConfig;
 import com.pnla.onroadplus.R;
+import com.pnla.onroadplus.z_version2.Containers.MainMenuContainerActivity;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
@@ -236,5 +241,50 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
     public void eraseunitfromsupport(int cveLayer, String cve_vehicle) {
         presenter.deleteUnitAssign(cveLayer, cve_vehicle);
+    }
+
+    public void alertBuilder(final String cve_vehicle, final int cveLayer){
+        /**androidx.appcompat.app.AlertDialog.Builder alertDialogBuilder = new androidx.appcompat.app.AlertDialog.Builder(getApplicationContext(), R.style.AlertDialogCustom);
+
+        // Configura el titulo.
+        alertDialogBuilder.setTitle("Mi Dialogo");
+
+        // Configura el mensaje.
+        alertDialogBuilder
+                .setMessage("¿Desea borrar la unidad " + cve_vehicle + " a la ruta " + cveLayer)
+                .setCancelable(false)
+                .setPositiveButton("Si",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        //Si la respuesta es afirmativa aquí agrega tu función a realizar.
+                        //myView.eraseunitfromsupport(data.get(position).getCveLayer(), data.get(position).getCve_Vehicle());
+                        //eraseunitfromsupport(cveLayer, cve_vehicle);
+                    }
+                })
+                .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog,int id) {
+                        dialog.cancel();
+                    }
+                });
+                alertDialogBuilder.create();
+                alertDialogBuilder.show();*/
+
+        androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
+        //builder.setTitle("Hay una nueva versión disponible de OnRoad");
+        builder.setMessage("¿Desea borrar la unidad " + cve_vehicle + " a la Ruta " + cveLayer);
+        builder.setCancelable(true);
+        builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        })
+                .setNegativeButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
+                    }
+                });
+        builder.create();
+        builder.show();
     }
 }

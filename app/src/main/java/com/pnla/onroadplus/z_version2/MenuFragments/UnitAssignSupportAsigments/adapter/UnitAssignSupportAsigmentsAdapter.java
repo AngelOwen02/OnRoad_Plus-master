@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -92,28 +93,9 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             @Override
             public void onClick(View v) {
 
-                /**AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context.getApplicationContext());
-
-                // Configura el titulo.
-                alertDialogBuilder.setTitle("Mi Dialogo");
-
-                // Configura el mensaje.
-                alertDialogBuilder
-                        .setMessage("¿Desea borrar la unidad " + data.get(position).getCve_Vehicle() + " a la ruta " + data.get(position).getCveLayer())
-                        .setCancelable(false)
-                        .setPositiveButton("Si",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                //Si la respuesta es afirmativa aquí agrega tu función a realizar.
-                                myView.eraseunitfromsupport(data.get(position).getCveLayer(), data.get(position).getCve_Vehicle());
-                            }
-                        })
-                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog,int id) {
-                                dialog.cancel();
-                            }
-                        }).create().show();*/
-
-                myView.eraseunitfromsupport(data.get(position).getCveLayer(), data.get(position).getCve_Vehicle());
+                //corregir cuando ya tenga el nombre dle vehiculo
+                myView.alertBuilder(data.get(position).getCve_Vehicle(), data.get(position).getCveLayer());
+                //myView.eraseunitfromsupport(data.get(position).getCveLayer(), data.get(position).getCve_Vehicle());
             }
         });
     }

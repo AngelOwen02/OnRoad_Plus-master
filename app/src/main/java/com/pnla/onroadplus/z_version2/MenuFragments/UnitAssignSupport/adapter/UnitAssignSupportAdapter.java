@@ -68,13 +68,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         this.context = context;
     }
 
-    /**@NonNull
-    @Override
-    public UnitAssignSupportAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(context).inflate(R.layout.unit_support, parent, false);
-        return new UnitAssignSupportAdapter.ViewHolder(view);
-    }*/
-
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -362,20 +355,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                     vehicleBundle.putInt("help_state", data.get(position).getHelp_State());
                     vehicleBundle.putString("georeference", data.get(position).getGeoReference());
 
-                    /**String address = data.get(position).getVehicle_Name();
-                    Guardar guardar = new Guardar(address);
-                    guardar.setAddress(address);*/
-
-                    /**SingleUnitSupportData singleUnitSupportData = new SingleUnitSupportData();
-                    String nombre = data.get(position).getVehicle_Name();
-                    singleUnitSupportData.setVehicleName(nombre);
-                    Guardar guardar = new Guardar(nombre);
-                    //guardar.vehicleName =  singleUnitSupportData.getVehicleName();
-                    guardar.setVehicleName(nombre);*/
-                    //Toast.makeText(context, singleUnitSupportData.getVehicleName(), Toast.LENGTH_LONG).show();
-
-                    //Toast.makeText(context, address, Toast.LENGTH_LONG).show();
-
+                    //Aqui mandamos los datos del Bundle que creamos
                     Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
                     intent.putExtras(vehicleBundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -510,22 +490,8 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             unitStatus = itemView.findViewById(R.id.txt_unit_status);
             ll_main_unit_item_assign_container = itemView.findViewById(R.id.ll_main_unit_item_assign_container);
 
-
-
             //unitGeoExample = itemView.findViewById(R.id.txt_unit_geo_example);
             //unitSwicth = itemView.findViewById(R.id.unit_tracking_swicth);
         }
     }
-
-    /**public void setFilter(List<Unit> unitList) {
-        this.unitList = new ArrayList<>();
-        this.unitList.addAll(unitList);
-        notifyDataSetChanged();
-    }*/
-
-    /**public void setFilter(List<SupportUnitData> unitList) {
-        this.data = new ArrayList<>();
-        this.data.addAll(unitList);
-        notifyDataSetChanged();
-    }*/
 }
