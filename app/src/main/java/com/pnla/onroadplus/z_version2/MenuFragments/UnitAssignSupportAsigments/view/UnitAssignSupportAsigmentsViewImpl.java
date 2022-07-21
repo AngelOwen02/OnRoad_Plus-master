@@ -15,6 +15,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -35,6 +36,8 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SingleSupportUnit
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implements ImageView.OnClickListener, UnitAssignSupportAsigmentsView {
 
     private UnitAssignSupportAsigmentsAdapter unitAssignSupportAsigmentsAdapter;
@@ -43,6 +46,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     final Handler handler = new Handler();
     //private Guardar guardar;
     //private UnitAssignSupportAsigmentsPresenter presenter;
+    CircleImageView imgUnitCircle;
     private ImageView toolbarImgBack;
     TextView unitGeoReference;
     TextView unitNameVehicle;
@@ -98,6 +102,18 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
         unitRuteVehicleRv.setText("Apoyo disponible para "+vehicleName);
 
+        /**Status*/
+        if (Status == 1) {
+            imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarRed));
+            unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarRed));
+        } else if (Status == 2) {
+            imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorOrangeYellow));
+            unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorOrangeYellow));
+        } else if (Status == 3) {
+            imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarGreen));
+            unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarGreen));
+        }
+
         //Toast.makeText(getApplicationContext(), numerolayer, Toast.LENGTH_LONG).show();
 
         Bundle bndlSupp;
@@ -118,6 +134,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
     private void initViewID(){
         toolbarImgBack = findViewById(R.id.back);
+        imgUnitCircle = findViewById(R.id.img_unit_support);
         unitGeoReference = findViewById(R.id.txt_unit_geo_reference_single);
         unitNameVehicle = findViewById(R.id.txt_unit_name_single);
         unitRuteVehicle = findViewById(R.id.txt_unit_rute_single);
