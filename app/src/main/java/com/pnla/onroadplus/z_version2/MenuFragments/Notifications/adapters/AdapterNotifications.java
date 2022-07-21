@@ -1,5 +1,6 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Notifications.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -45,7 +46,7 @@ public class AdapterNotifications extends RecyclerView.Adapter<AdapterNotificati
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final NotificationsOnroad notification = notifications.get(position);
         holder.txvVehicleName.setTypeface(latoBold);
         holder.txvNotificationName.setTypeface(latoRegular);

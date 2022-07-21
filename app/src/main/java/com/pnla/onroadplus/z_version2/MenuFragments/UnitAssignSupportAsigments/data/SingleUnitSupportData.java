@@ -41,7 +41,8 @@ public class SingleUnitSupportData {
 
     }
 
-    public SingleUnitSupportData(int cveLayer, String cveVehicle, String vehicleName, String descLayer, int percentComplete, int controlPoint, int percentToHelp, int status, int helpState, String geoReference) {
+    public SingleUnitSupportData(int cveLayer, String cveVehicle, String vehicleName, String descLayer, int percentComplete, int controlPoint, int percentToHelp, int status, int helpState,
+                                 String geoReference) {
         this.cveLayer = cveLayer;
         this.cveVehicle = cveVehicle;
         VehicleName = vehicleName;

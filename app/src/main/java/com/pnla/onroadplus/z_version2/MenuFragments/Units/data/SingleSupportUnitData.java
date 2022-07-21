@@ -45,7 +45,7 @@ public class SingleSupportUnitData {
         return url_Image;
     }
 
-    public void setUrl_Image(String url_Image) {
+    public void setUrlImage(String url_Image) {
         this.url_Image = url_Image;
     }
 

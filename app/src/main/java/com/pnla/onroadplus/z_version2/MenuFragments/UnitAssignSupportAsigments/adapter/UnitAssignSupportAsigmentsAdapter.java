@@ -18,18 +18,23 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.adapter.UnitAssignSupportAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.SingleUnitSupportData;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.view.UnitAssignSupportAsigmentsViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SingleSupportUnitData;
+import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<UnitAssignSupportAsigmentsAdapter.ViewHolder> implements View.OnClickListener{
 
@@ -54,7 +59,6 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position){
         //Set Data
-
         //Diferencia del vehiculo (En Porcentaje)
         String PercentHelp = new String(String.valueOf(data.get(position).getPercentToHelp()));
         PercentHelp.equals(data.get(position).getPercentToHelp());
@@ -67,6 +71,30 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
 
         //Ubicacion
         holder.unitGeo.setText(data.get(position).getGeoReference());
+
+        //Status de la Imagen
+        Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
+        holder.imgUnitCircle.setBorderColor(ContextCompat.getColor(context, R.color.colorBorderCarRed));
+
+        /**if (data.get(position).getUrl_Image() == null) {
+            Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
+        }
+        else if (data.get(position).getUrl_Image().equals("string")) {
+            Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
+        } else if (data.get(position).getUrl_Image().equals(GeneralConstantsV2.NO_IMAGE)) {
+            Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
+        }
+        else {
+            Glide.with(context).load(data.get(position).getUrl_Image()).into(holder.imgUnitCircle);
+        }*/
+
+        //Toast.makeText(context, data.get(position).getUrl_Image(), Toast.LENGTH_SHORT).show();
+
+        /**if (data.get(position).getUrlImage() != null) {
+         Glide.with(context).load(data.get(position).getUrlImage()).into(holder.imgUnitCircle);
+         } else {
+         Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
+         }*/
 
         holder.spinnerOptions.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,18 +133,20 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         return  data.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public class ViewHolder extends RecyclerView.ViewHolder {
         //TextViews, etc
         TextView unitPercent, unitDistance, fakeAssign, fakeErase;
         TextView unitGeo, editUnitfakespinner2, eraseUnitfakespinner2;
         ImageView spinnerOptions;
         Spinner myspinnerOptions;
         CardView fakespinner;
+        CircleImageView imgUnitCircle;
 
 
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             //Referencias a la vista xml
+            imgUnitCircle = itemView.findViewById(R.id.unit_tracking_img2);
             unitPercent = itemView.findViewById(R.id.txt_percent_single_rv);
             unitDistance = itemView.findViewById(R.id.txt_unit_distance_single_rv);
             unitGeo = itemView.findViewById(R.id.txt_unit_geo_reference_single_rv);
@@ -144,5 +174,4 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
     public void onClick(View view){
         Toast.makeText(view.getContext(), "Si funciona", Toast.LENGTH_SHORT).show();
     }
-
 }
