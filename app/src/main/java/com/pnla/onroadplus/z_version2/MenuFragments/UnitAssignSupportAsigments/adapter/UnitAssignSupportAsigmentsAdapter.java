@@ -31,8 +31,11 @@ import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 import org.w3c.dom.Text;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.xml.datatype.DatatypeConfigurationException;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -59,6 +62,12 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position){
         //Set Data
+        //Nombre del vehiculo
+        holder.unitName.setText(data.get(position).getVehicle_Name());
+
+        //Nombre de la Ruta
+        holder.unitRute.setText(data.get(position).getDesc_Layer());
+
         //Diferencia del vehiculo (En Porcentaje)
         String PercentHelp = new String(String.valueOf(data.get(position).getPercentToHelp()));
         PercentHelp.equals(data.get(position).getPercentToHelp());
@@ -67,7 +76,8 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         //Distancia
         String Distance = new String(String.valueOf(data.get(position).getDistance()));
         Distance.equals(data.get(position).getPercentToHelp());
-        holder.unitDistance.setText(Distance + " Km.");
+        //String result = String.format("%.2f", Distance);
+        holder.unitDistance.setText(Distance+ " Km.");
 
         //Ubicacion
         holder.unitGeo.setText(data.get(position).getGeoReference());
@@ -135,7 +145,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         //TextViews, etc
-        TextView unitPercent, unitDistance, fakeAssign, fakeErase;
+        TextView unitName, unitRute, unitPercent, unitDistance, fakeAssign, fakeErase;
         TextView unitGeo, editUnitfakespinner2, eraseUnitfakespinner2;
         ImageView spinnerOptions;
         Spinner myspinnerOptions;
@@ -146,6 +156,8 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             //Referencias a la vista xml
+            unitName = itemView.findViewById(R.id.txt_unit_name_single_rv);
+            unitRute = itemView.findViewById(R.id.txt_unit_rute_single_rv);
             imgUnitCircle = itemView.findViewById(R.id.unit_tracking_img2);
             unitPercent = itemView.findViewById(R.id.txt_percent_single_rv);
             unitDistance = itemView.findViewById(R.id.txt_unit_distance_single_rv);
