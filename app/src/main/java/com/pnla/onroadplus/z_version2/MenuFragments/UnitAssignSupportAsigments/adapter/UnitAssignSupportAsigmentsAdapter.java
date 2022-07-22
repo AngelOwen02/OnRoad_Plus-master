@@ -74,10 +74,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         holder.unitPercent.setText(PercentHelp + "%");
 
         //Distancia
-        String Distance = new String(String.valueOf(data.get(position).getDistance()));
-        Distance.equals(data.get(position).getPercentToHelp());
-        //String result = String.format("%.2f", Distance);
-        holder.unitDistance.setText(Distance+ " Km.");
+        holder.unitDistance.setText(String.format("%.2f", data.get(position).getDistance()) + " Km.");
 
         //Ubicacion
         holder.unitGeo.setText(data.get(position).getGeoReference());
