@@ -56,6 +56,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     private RecyclerView rvVehiclesSupp;
     private UnitAssignSupportAsigmentsPresenter presenter;
     private int cveLayer;
+    private String descLayer;
     private ProgressDialog progressDialog;
     private Runnable runnable;
     //SingleUnitSupportData singleUnitSupportData;
@@ -83,7 +84,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         cveLayer = bndle.getInt("cve_layer");
         String cveVehicle = bndle.getString("cve_vehicle");
         String vehicleName = bndle.getString("vehicle_name");
-        String descLayer = bndle.getString("desc_layer");
+        descLayer = bndle.getString("desc_layer");
         int percentComplete = bndle.getInt("percent_complete");
         int controlPoint = bndle.getInt("control_point");
         int percenttoHelp = bndle.getInt("percent_to_help");
@@ -205,7 +206,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     }
 
     private void fillSoportes(List<SingleSupportUnitData> soportes) {
-        unitAssignSupportAsigmentsAdapter = new UnitAssignSupportAsigmentsAdapter(this ,soportes, getApplicationContext());
+        unitAssignSupportAsigmentsAdapter = new UnitAssignSupportAsigmentsAdapter(this ,soportes, descLayer, getApplicationContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         rvVehiclesSupp.setLayoutManager(layoutManager);
         rvVehiclesSupp.setAdapter(unitAssignSupportAsigmentsAdapter);

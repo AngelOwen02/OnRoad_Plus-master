@@ -42,11 +42,13 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<UnitAssignSupportAsigmentsAdapter.ViewHolder> implements View.OnClickListener{
 
     private List<SingleSupportUnitData> data;
+    private String descLayer;
     private Context context;
     private UnitAssignSupportAsigmentsViewImpl myView;
 
-    public UnitAssignSupportAsigmentsAdapter(UnitAssignSupportAsigmentsViewImpl myView, List<SingleSupportUnitData> data, Context context){
+    public UnitAssignSupportAsigmentsAdapter(UnitAssignSupportAsigmentsViewImpl myView, List<SingleSupportUnitData> data, String descLayer, Context context){
         this.data = data;
+        this.descLayer = descLayer;
         this.context = context;
         this.myView = myView;
     }
@@ -66,7 +68,8 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         holder.unitName.setText(data.get(position).getVehicle_Name());
 
         //Nombre de la Ruta
-        holder.unitRute.setText(data.get(position).getDesc_Layer());
+        //holder.unitRute.setText(data.get(position).getDesc_Layer());
+        holder.unitRute.setText(descLayer);
 
         //Diferencia del vehiculo (En Porcentaje)
         String PercentHelp = new String(String.valueOf(data.get(position).getPercentToHelp()));
