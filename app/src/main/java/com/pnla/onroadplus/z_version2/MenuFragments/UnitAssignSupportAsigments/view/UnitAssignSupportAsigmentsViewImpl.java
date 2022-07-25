@@ -78,6 +78,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     }
 
     private void initBundle(){
+        //Set Bundle
         Bundle bndle;
         bndle = getIntent().getExtras();
 
@@ -92,6 +93,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         int helpState = bndle.getInt("help_state");
         String geoReference = bndle.getString("georeference");
 
+        //Set Data Bundle
         //Nombre de la Unidad en la parte superior de la ventana
         unitNameVehicle.setText(vehicleName);
 
