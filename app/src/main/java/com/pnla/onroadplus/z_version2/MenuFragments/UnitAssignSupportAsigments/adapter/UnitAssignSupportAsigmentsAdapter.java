@@ -122,7 +122,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         holder.editUnitfakespinner2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myView.editunitspinner(data.get(position).getCveLayer(), data.get(position).getCve_Vehicle());
+                myView.editunitspinner(data.get(position).getVehicle_Name(), descLayer);
                 Log.e("assistencesupport", "" + data.get(position).getCve_Vehicle() + "     " + data.get(position).getCveLayer() );
             }
         });
@@ -132,7 +132,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             public void onClick(View v) {
 
                 //corregir cuando ya tenga el nombre dle vehiculo
-                myView.alertBuilder(data.get(position).getCve_Vehicle(), data.get(position).getCveLayer());
+                myView.alertBuilder(data.get(position).getVehicle_Name(), descLayer);
                 //myView.eraseunitfromsupport(data.get(position).getCveLayer(), data.get(position).getCve_Vehicle());
             }
         });

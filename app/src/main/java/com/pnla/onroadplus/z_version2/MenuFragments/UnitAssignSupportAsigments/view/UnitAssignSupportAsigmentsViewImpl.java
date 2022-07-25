@@ -253,10 +253,10 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         progressDialog.show();
     }
 
-    public void editunitspinner(int cveLayer, String cve_vehicle) {
+    public void editunitspinner(String vehicleName, String descLayer) {
         androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
         //builder.setTitle("Hay una nueva versión disponible de OnRoad");
-        builder.setMessage("¿Desea asignar la unidad " + cve_vehicle + " a la Ruta " + cveLayer);
+        builder.setMessage("¿Desea asignar la unidad " + vehicleName + " a la Ruta " + descLayer + "?");
         builder.setCancelable(true);
         builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
@@ -280,10 +280,10 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         presenter.deleteUnitAssign(cveLayer, cve_vehicle);
     }
 
-    public void alertBuilder(final String cve_vehicle, final int cveLayer){
+    public void alertBuilder(final String vehicleName, final String descLayer){
         androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
         //builder.setTitle("Hay una nueva versión disponible de OnRoad");
-        builder.setMessage("¿Desea borrar la unidad " + cve_vehicle + " a la Ruta " + cveLayer);
+        builder.setMessage("¿Desea borrar la unidad " + vehicleName + " a la Ruta " + descLayer + "?");
         builder.setCancelable(true);
         builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
