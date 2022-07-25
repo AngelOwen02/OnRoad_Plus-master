@@ -92,15 +92,21 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         int helpState = bndle.getInt("help_state");
         String geoReference = bndle.getString("georeference");
 
+        //Nombre de la Unidad en la parte superior de la ventana
         unitNameVehicle.setText(vehicleName);
 
+        //Porcentaje recorrido de la unidad en la parte superior de la ventana
         String PercentHelp = new String(String.valueOf(percenttoHelp));
         PercentHelp.equals(percenttoHelp);
         unitPercentVehicle.setText(percenttoHelp+"%");
 
+        //Ruta de la unidad en la parte superior de la ventana
         unitRuteVehicle.setText(descLayer);
+
+        //Locacizacion de la unidad en la parte superior de la ventana
         unitGeoReference.setText(geoReference);
 
+        //Texto que divide la parte superior con el RecyclerView
         unitRuteVehicleRv.setText("Apoyo disponible para "+vehicleName);
 
         /**Status*/
