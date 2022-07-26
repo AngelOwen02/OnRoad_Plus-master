@@ -254,9 +254,12 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
                 holder.unitImage.setImageResource(R.drawable.ic_camion_azul);
                 holder.dotColor.setImageResource(R.drawable.red_dot);
-                holder.ll_main_unit_item_assign_container.setEnabled(false);
+
+                //Esto es para desactivar los campos cuando esten bien los datos del EndPoint
+                /**holder.ll_main_unit_item_assign_container.setEnabled(false);
                 holder.unitImage.setEnabled(false);
-                holder.alfashadow.setVisibility(View.VISIBLE);
+                holder.alfashadow.setVisibility(View.VISIBLE);*/
+
             } else if (data.get(position).getStatus() == 2){
                 holder.unitStatus.setText("A tiempo");
                 holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
