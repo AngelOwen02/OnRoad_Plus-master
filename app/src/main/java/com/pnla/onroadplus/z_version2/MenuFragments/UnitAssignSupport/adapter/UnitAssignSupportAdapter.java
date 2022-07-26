@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -253,6 +254,9 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
                 holder.unitImage.setImageResource(R.drawable.ic_camion_azul);
                 holder.dotColor.setImageResource(R.drawable.red_dot);
+                holder.ll_main_unit_item_assign_container.setEnabled(false);
+                holder.unitImage.setEnabled(false);
+                holder.alfashadow.setVisibility(View.VISIBLE);
             } else if (data.get(position).getStatus() == 2){
                 holder.unitStatus.setText("A tiempo");
                 holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
@@ -480,6 +484,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         TextView unitStatus;
         TextView unitGeoExample;
         LinearLayout ll_main_unit_item_assign_container;
+        ConstraintLayout alfashadow;
         //Switch unitSwicth;
 
 
@@ -494,6 +499,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             unitDifference = itemView.findViewById(R.id.txt_unit_difference);
             unitStatus = itemView.findViewById(R.id.txt_unit_status);
             ll_main_unit_item_assign_container = itemView.findViewById(R.id.ll_main_unit_item_assign_container);
+            alfashadow = itemView.findViewById(R.id.alfashadow);
 
             //unitGeoExample = itemView.findViewById(R.id.txt_unit_geo_example);
             //unitSwicth = itemView.findViewById(R.id.unit_tracking_swicth);

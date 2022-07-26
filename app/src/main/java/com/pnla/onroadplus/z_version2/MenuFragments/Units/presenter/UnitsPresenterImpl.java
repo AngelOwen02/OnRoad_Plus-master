@@ -66,12 +66,6 @@ public class UnitsPresenterImpl implements UnitsPresenter {
         this.view = view;
     }
 
-    /**@Override
-    public void setView2(UnitAssignSupportViewImpl view){
-        this.view = view;
-    }*/
-
-
     @Override
     public void setVehiclesListToView(List<Unit> unitList) throws IOException {
         if (view != null) {

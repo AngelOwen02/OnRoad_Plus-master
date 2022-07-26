@@ -336,4 +336,12 @@
 
     </LinearLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/alfashadow"
+        android:layout_width="match_parent"
+        android:layout_height="106dp"
+        android:background="@color/alfashadow"
+        android:visibility="gone">
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
