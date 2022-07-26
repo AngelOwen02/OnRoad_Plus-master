@@ -57,6 +57,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     private UnitAssignSupportAsigmentsPresenter presenter;
     private int cveLayer;
     private String descLayer;
+    private String cveVehicle;
     private ProgressDialog progressDialog;
     private Runnable runnable;
     //SingleUnitSupportData singleUnitSupportData;
@@ -83,7 +84,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         bndle = getIntent().getExtras();
 
         cveLayer = bndle.getInt("cve_layer");
-        String cveVehicle = bndle.getString("cve_vehicle");
+        cveVehicle = bndle.getString("cve_vehicle");
         String vehicleName = bndle.getString("vehicle_name");
         descLayer = bndle.getString("desc_layer");
         int percentComplete = bndle.getInt("percent_complete");
@@ -275,8 +276,9 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
                 .setNegativeButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
-                        //presenter.requestSetAssignSupport(cveLayer, cve_vehicle);
+                        //Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
+                        presenter.requestSetAssignSupport(cveLayer, cveVehicle);
+                        //presenter.showProgressDialog();
                     }
                 });
         builder.create();
@@ -303,6 +305,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
+                        //eraseunitfromsupport(cveLayer, cveVehicle);
                     }
                 });
         builder.create();
