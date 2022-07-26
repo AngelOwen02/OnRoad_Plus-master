@@ -263,9 +263,14 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.unitStatus.setText("Avanzado");
                 holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.green));
                 holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.green));
+                holder.unitImage.setImageResource(R.drawable.ic_camion_azul);
                 holder.dotColor.setImageResource(R.drawable.green_dot);
             } else if (data.get(position).getStatus() == 0){
                 holder.unitStatus.setText("Sin Estatus");
+                holder.unitStatus.setTextColor(ContextCompat.getColor(context, R.color.colorBlack));
+                holder.unitDifference.setTextColor(ContextCompat.getColor(context, R.color.colorBlack));
+                holder.unitImage.setImageResource(R.drawable.ic_camion_gris);
+                holder.dotColor.setImageResource(R.drawable.black_dot);
             }
 
             //holder.unitGeoExample.setText(data.get(position).getGeoReference());
