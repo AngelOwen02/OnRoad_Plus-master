@@ -181,7 +181,6 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
                 handler.postDelayed(this,60000);
             }
         },60000);
-
     }
 
     private void initOnClickListener(){
