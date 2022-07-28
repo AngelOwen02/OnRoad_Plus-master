@@ -110,18 +110,22 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         unitGeoReference.setText(geoReference);
 
         //Texto que divide la parte superior con el RecyclerView
-        unitRuteVehicleRv.setText("Apoyo disponible para "+vehicleName);
+        unitRuteVehicleRv.setText("Apoyo disponible para "+ vehicleName);
 
         /**Status*/
-        if (Status == 1) {
+        //Para que se ilumine el aro dependiendo el Status
+        if (Status == 0) {
+            imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarRed));
+            unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarRed));
+        } else if (Status == 1) {
             imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorOrangeYellow));
             unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorOrangeYellow));
         } else if (Status == 2) {
-            imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarRed));
-            unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarRed));
-        } else if (Status == 3) {
             imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarGreen));
             unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarGreen));
+        } else if (Status == 3) {
+            imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBlack));
+            unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBlack));
         }
 
         //Toast.makeText(getApplicationContext(), numerolayer, Toast.LENGTH_LONG).show();
