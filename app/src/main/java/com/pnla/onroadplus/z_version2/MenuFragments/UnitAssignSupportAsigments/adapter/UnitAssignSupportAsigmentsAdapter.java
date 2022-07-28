@@ -18,6 +18,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -86,17 +87,12 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
         holder.imgUnitCircle.setBorderColor(ContextCompat.getColor(context, R.color.colorBorderCarRed));
 
-        /**if (data.get(position).getUrl_Image() == null) {
-            Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
+        if (data.get(position).getHelp_State() == 1){
+            //Esto es para desactivar los campos cuando esten bien los datos del EndPoint
+            holder.ll_main_unit_item_assign_container.setEnabled(false);
+             //holder.unitImage.setEnabled(false);
+             holder.alfashadow.setVisibility(View.VISIBLE);
         }
-        else if (data.get(position).getUrl_Image().equals("string")) {
-            Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
-        } else if (data.get(position).getUrl_Image().equals(GeneralConstantsV2.NO_IMAGE)) {
-            Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
-        }
-        else {
-            Glide.with(context).load(data.get(position).getUrl_Image()).into(holder.imgUnitCircle);
-        }*/
 
         //Toast.makeText(context, data.get(position).getUrl_Image(), Toast.LENGTH_SHORT).show();
 
@@ -122,18 +118,27 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         holder.editUnitfakespinner2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myView.editunitspinner(data.get(position).getVehicle_Name(), descLayer);
-                Log.e("assistencesupport", "" + data.get(position).getCve_Vehicle() + "     " + data.get(position).getCveLayer() );
+                if(data.get(position).getHelp_State() == 0){
+                    //Toast.makeText(context.getApplicationContext(), "Proceso de agregar", Toast.LENGTH_LONG).show();
+                    myView.editunitspinner(data.get(position).getVehicle_Name(), descLayer);
+                    Log.e("assistencesupport", "" + data.get(position).getCve_Vehicle() + "     " + data.get(position).getCveLayer() );
+                } else if(data.get(position).getHelp_State() == 1){
+                    Toast.makeText(context.getApplicationContext(), "No se puede.", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
         holder.eraseUnitfakespinner2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                //corregir cuando ya tenga el nombre dle vehiculo
-                myView.alertBuilder(data.get(position).getVehicle_Name(), descLayer);
-                //myView.eraseunitfromsupport(data.get(position).getCveLayer(), data.get(position).getCve_Vehicle());
+                if(data.get(position).getHelp_State() == 0){
+                    Toast.makeText(context.getApplicationContext(), "Esta unidad no esta asignada como apoyo.", Toast.LENGTH_LONG).show();
+                } else if(data.get(position).getHelp_State() == 1) {
+                    //corregir cuando ya tenga el nombre dle vehiculo
+                    //Toast.makeText(context.getApplicationContext(), "Proceso de eliminar", Toast.LENGTH_LONG).show();
+                    myView.alertBuilder(data.get(position).getVehicle_Name(), descLayer);
+                    //myView.eraseunitfromsupport(data.get(position).getCveLayer(), data.get(position).getCve_Vehicle());
+                }
             }
         });
     }
@@ -151,6 +156,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         Spinner myspinnerOptions;
         CardView fakespinner;
         CircleImageView imgUnitCircle;
+        ConstraintLayout ll_main_unit_item_assign_container, alfashadow;
 
 
         public ViewHolder(@NonNull View itemView){
@@ -162,6 +168,8 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             unitPercent = itemView.findViewById(R.id.txt_percent_single_rv);
             unitDistance = itemView.findViewById(R.id.txt_unit_distance_single_rv);
             unitGeo = itemView.findViewById(R.id.txt_unit_geo_reference_single_rv);
+            ll_main_unit_item_assign_container = itemView.findViewById(R.id.ll_main_unit_item_assign_container2);
+            alfashadow = itemView.findViewById(R.id.alfashadow2);
 
             editUnitfakespinner2 = itemView.findViewById(R.id.editUnitfakespinner2);
             eraseUnitfakespinner2 = itemView.findViewById(R.id.eraseUnitfakespinner2);

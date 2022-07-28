@@ -114,11 +114,11 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
         /**Status*/
         if (Status == 1) {
-            imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarRed));
-            unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarRed));
-        } else if (Status == 2) {
             imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorOrangeYellow));
             unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorOrangeYellow));
+        } else if (Status == 2) {
+            imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarRed));
+            unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarRed));
         } else if (Status == 3) {
             imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarGreen));
             unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarGreen));
@@ -304,8 +304,8 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
                 .setNegativeButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
-                        //eraseunitfromsupport(cveLayer, cveVehicle);
+                        //Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
+                        eraseunitfromsupport(cveLayer, cveVehicle);
                     }
                 });
         builder.create();

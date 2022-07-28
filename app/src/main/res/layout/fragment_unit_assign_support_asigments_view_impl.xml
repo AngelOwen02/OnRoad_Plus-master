@@ -11,7 +11,8 @@
 
     <include
         android:id="@+id/toolbar_unit_tracking"
-        layout="@layout/toolbar_unit_assign" />
+        layout="@layout/toolbar_unit_assign"
+        android:background="@color/graySpaceRV" />
 
     <ProgressBar
         android:id="@+id/units_support_asigment_view_progress_bar"

@@ -249,11 +249,11 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
             //Para que aparezca el texto dependiendo el resultado del Json
             if(data.get(position).getStatus() == 1){
-                holder.unitStatus.setText("Atrasado");
-                holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
-                holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
-                holder.unitImage.setImageResource(R.drawable.ic_camion_azul);
-                holder.dotColor.setImageResource(R.drawable.red_dot);
+                holder.unitStatus.setText("A tiempo");
+                holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
+                holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
+                //holder.unitImage.setImageResource(R.drawable.ic_camion_azul);
+                holder.dotColor.setImageResource(R.drawable.yellow_dot);
 
                 //Esto es para desactivar los campos cuando esten bien los datos del EndPoint
                 /**holder.ll_main_unit_item_assign_container.setEnabled(false);
@@ -261,50 +261,43 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.alfashadow.setVisibility(View.VISIBLE);*/
 
             } else if (data.get(position).getStatus() == 2){
-                holder.unitStatus.setText("A tiempo");
-                holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
-                holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
-                holder.unitImage.setImageResource(R.drawable.ic_camion_azul);
-                holder.dotColor.setImageResource(R.drawable.yellow_dot);
-            } else if (data.get(position).getStatus() == 3){
                 holder.unitStatus.setText("Avanzado");
                 holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.green));
                 holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.green));
-                holder.unitImage.setImageResource(R.drawable.ic_camion_azul);
+                //holder.unitImage.setImageResource(R.drawable.ic_camion_azul);
                 holder.dotColor.setImageResource(R.drawable.green_dot);
-            } else if (data.get(position).getStatus() == 0){
+            } else if (data.get(position).getStatus() == 3){
                 holder.unitStatus.setText("Sin Estatus");
                 holder.unitStatus.setTextColor(ContextCompat.getColor(context, R.color.colorBlack));
                 holder.unitDifference.setTextColor(ContextCompat.getColor(context, R.color.colorBlack));
-                holder.unitImage.setImageResource(R.drawable.ic_camion_gris);
+                //holder.unitImage.setImageResource(R.drawable.ic_camion_gris);
                 holder.dotColor.setImageResource(R.drawable.black_dot);
+            } else if (data.get(position).getStatus() == 0){
+                holder.unitStatus.setText("Atrasado");
+                holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
+                holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
+                //holder.unitImage.setImageResource(R.drawable.ic_camion_azul);
+                holder.dotColor.setImageResource(R.drawable.red_dot);
             }
 
             //holder.unitGeoExample.setText(data.get(position).getGeoReference());
 
             //Para que aparezca el icono del camion dependiendo el Json
-            /**if(data.get(position).getHelp_State() == 1){
-                holder.unitImage.setImageResource(R.drawable.ic_camion_verde);
-            } else if (data.get(position).getHelp_State() == 2){
-                //nada
-            } else if (data.get(position).getHelp_State() == 0){
-                holder.unitImage.setImageResource(R.drawable.ic_camion_gris);
-            }*/
-
-    /*    if (unitList.get(position).getGeoreference() != null){
-            if (unitList.get(position).getGeoreference().equals("")){
-                holder.txtUnitGeoReference.setText("---- ---- ---- ----");
-            } else {
-                holder.txtUnitGeoReference.setText(unitList.get(position).getGeoreference());
+            //Azul: Ya tiene al menos un apoyo asignado
+            //help_state= 1
+            if(data.get(position).getHelp_State() == 1){
+                holder.unitImage.setImageResource(R.drawable.ic_camion_azul);
             }
-        }else {
-            holder.txtUnitGeoReference.setText("---- ---- ---- ----");
-        }*/
-
-            /**DecimalFormat decimalFormat = new DecimalFormat("###,###.00");
-            decimalFormat.format(unitList.get(position).getKmTravel());
-            String decimalUnitKMTravel = decimalFormat.format(unitList.get(position).getKmTravel()) + "km";
-            holder.txtUnitKmTravel.setText(decimalUnitKMTravel);*/
+            //Verde: No necesita apoyo la ruta, manda mensaje de “La ruta no requiere apoyo”
+            //help_state= 2
+            else if (data.get(position).getHelp_State() == 2){
+                holder.unitImage.setImageResource(R.drawable.ic_camion_verde_check);
+            }
+            //Gris: Necesita apoyo la ruta y no hay apoyo asignado
+            //help_state= 0
+            else if (data.get(position).getHelp_State() == 0){
+                holder.unitImage.setImageResource(R.drawable.ic_camion_gris_2);
+            }
 
             /**Status*/
             /**if (unitList.get(position).getVehicleSwitch() == 1) {
@@ -355,7 +348,54 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             holder.unitImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Bundle vehicleBundle = new Bundle();
+                    if (data.get(position).getStatus() == 0){
+                        //Esto es para el color rojo
+                        Bundle vehicleBundle = new Bundle();
+                        vehicleBundle.putInt("cve_layer", data.get(position).getCveLayer());
+                        vehicleBundle.putString("cve_vehicle", data.get(position).getCve_Vehicle());
+                        vehicleBundle.putString("vehicle_name", data.get(position).getVehicle_Name());
+                        vehicleBundle.putString("desc_layer", data.get(position).getDesc_Layer());
+                        vehicleBundle.putInt("percent_complete", data.get(position).getPercent_Complete());
+                        vehicleBundle.putInt("control_point", data.get(position).getControl_Point());
+                        vehicleBundle.putInt("percent_to_help", data.get(position).getPercentToHelp());
+                        vehicleBundle.putInt("status", data.get(position).getStatus());
+                        vehicleBundle.putInt("help_state", data.get(position).getHelp_State());
+                        vehicleBundle.putString("georeference", data.get(position).getGeoReference());
+
+                        //Aqui mandamos los datos del Bundle que creamos
+                        Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
+                        intent.putExtras(vehicleBundle);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        context.startActivity(intent);
+
+                    } else if(data.get(position).getStatus() == 1){
+                        //Esto es para unidades color amarillo
+                        Bundle vehicleBundle = new Bundle();
+                        vehicleBundle.putInt("cve_layer", data.get(position).getCveLayer());
+                        vehicleBundle.putString("cve_vehicle", data.get(position).getCve_Vehicle());
+                        vehicleBundle.putString("vehicle_name", data.get(position).getVehicle_Name());
+                        vehicleBundle.putString("desc_layer", data.get(position).getDesc_Layer());
+                        vehicleBundle.putInt("percent_complete", data.get(position).getPercent_Complete());
+                        vehicleBundle.putInt("control_point", data.get(position).getControl_Point());
+                        vehicleBundle.putInt("percent_to_help", data.get(position).getPercentToHelp());
+                        vehicleBundle.putInt("status", data.get(position).getStatus());
+                        vehicleBundle.putInt("help_state", data.get(position).getHelp_State());
+                        vehicleBundle.putString("georeference", data.get(position).getGeoReference());
+
+                        //Aqui mandamos los datos del Bundle que creamos
+                        Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
+                         intent.putExtras(vehicleBundle);
+                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                         context.startActivity(intent);
+
+                    } else if (data.get(position).getStatus() == 2){
+                        //Esto es para unidades color verde
+                        Toast.makeText(context, "La ruta no requiere apoyo", Toast.LENGTH_LONG).show();
+                    }
+
+
+                    //Esto es para mandarlo directo
+                    /**Bundle vehicleBundle = new Bundle();
                     vehicleBundle.putInt("cve_layer", data.get(position).getCveLayer());
                     vehicleBundle.putString("cve_vehicle", data.get(position).getCve_Vehicle());
                     vehicleBundle.putString("vehicle_name", data.get(position).getVehicle_Name());
@@ -371,7 +411,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                     Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
                     intent.putExtras(vehicleBundle);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    context.startActivity(intent);
+                    context.startActivity(intent);*/
                 }
             });
         }

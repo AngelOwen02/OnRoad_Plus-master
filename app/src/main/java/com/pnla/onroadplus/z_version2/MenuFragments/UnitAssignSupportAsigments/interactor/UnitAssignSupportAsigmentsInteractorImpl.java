@@ -118,7 +118,8 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
             if(responseCode == GeneralConstantsV2.RESPONSE_CODE_OK){
                 presenter.deleteSuccess(data);
             } else {
-                Toast.makeText(context, response.code(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, response.code(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
         }
     }
