@@ -255,6 +255,11 @@ public class MainMenuContainerActivity extends AppCompatActivity implements Bott
         navigationView.getMenu().getItem(id).setEnabled(true);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
+
     private void enabledItemFalse(BottomNavigationView navigationView, int id){
         navigationView.getMenu().getItem(id).setEnabled(false);
     }

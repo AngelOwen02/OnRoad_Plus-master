@@ -20,6 +20,7 @@ import androidx.fragment.app.FragmentTransaction;
 /**import com.dynatrace.android.agent.DTXAction;
 import com.dynatrace.android.agent.Dynatrace;*/
 import com.pnla.onroadplus.R;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Contact.view.ContactViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Notifications.view.NotificationsViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Profile.view.ProfileViewImpl;
@@ -268,8 +269,8 @@ public class FragmentNavigationButtonsMenu extends Fragment implements View.OnCl
 
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
-        ContactViewImpl contacto = new ContactViewImpl();//transaction.addToBackStack(UnitsViewImpl.TAG);
-        transaction.replace(R.id.conteinerMainFragments, contacto, FragmentContactV2.TAG).commit();
+        CheckListViewImpl contacto = new CheckListViewImpl();//transaction.addToBackStack(UnitsViewImpl.TAG);
+        transaction.replace(R.id.conteinerMainFragments, contacto, CheckListViewImpl.TAG).commit();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         /**aqui se deben iluminar y desabilitar los botones para los menus para que puedan ser oprimidos solo en una ocacion*///iluminate3();
         illuminateContact();
@@ -292,7 +293,7 @@ public class FragmentNavigationButtonsMenu extends Fragment implements View.OnCl
         menu2.setImageResource(R.drawable.ic_tracking_off);
         menu3.setImageResource(R.drawable.ic_notificacionesoff);
         menu4.setImageResource(R.drawable.ic_zonasoff);
-        menu5.setImageResource(R.drawable.ic_contact_off);
+        menu5.setImageResource(R.drawable.ic_checklist_off);
         menu6.setImageResource(R.drawable.ic_profile_off);
         a=true;
         b=false;
@@ -310,7 +311,7 @@ public class FragmentNavigationButtonsMenu extends Fragment implements View.OnCl
         menu2.setImageResource(R.drawable.ic_tracking_on);
         menu3.setImageResource(R.drawable.ic_notificacionesoff);
         menu4.setImageResource(R.drawable.ic_zonasoff);
-        menu5.setImageResource(R.drawable.ic_contact_off);
+        menu5.setImageResource(R.drawable.ic_checklist_off);
         menu6.setImageResource(R.drawable.ic_profile_off);
         a=false;
         b=true;
@@ -326,7 +327,7 @@ public class FragmentNavigationButtonsMenu extends Fragment implements View.OnCl
         menu2.setImageResource(R.drawable.ic_tracking_off);
         menu3.setImageResource(R.drawable.ic_icono_notificaciones__1_);
         menu4.setImageResource(R.drawable.ic_zonasoff);
-        menu5.setImageResource(R.drawable.ic_contact_off);
+        menu5.setImageResource(R.drawable.ic_checklist_off);
         menu6.setImageResource(R.drawable.ic_profile_off);
         a=false;
         b=false;
@@ -342,7 +343,7 @@ public class FragmentNavigationButtonsMenu extends Fragment implements View.OnCl
         menu2.setImageResource(R.drawable.ic_tracking_off);
         menu3.setImageResource(R.drawable.ic_notificacionesoff);
         menu4.setImageResource(R.drawable.ic_icono_zonas__1_);
-        menu5.setImageResource(R.drawable.ic_contact_off);
+        menu5.setImageResource(R.drawable.ic_checklist_off);
         menu6.setImageResource(R.drawable.ic_profile_off);
         a=false;
         b=false;
@@ -359,7 +360,7 @@ public class FragmentNavigationButtonsMenu extends Fragment implements View.OnCl
         menu2.setImageResource(R.drawable.ic_tracking_off);
         menu3.setImageResource(R.drawable.ic_notificacionesoff);
         menu4.setImageResource(R.drawable.ic_zonasoff);
-        menu5.setImageResource(R.drawable.ic_contact_on);
+        menu5.setImageResource(R.drawable.ic_checklist);
         menu6.setImageResource(R.drawable.ic_profile_off);
         a=false;
         b=false;
@@ -376,7 +377,7 @@ public class FragmentNavigationButtonsMenu extends Fragment implements View.OnCl
         menu2.setImageResource(R.drawable.ic_tracking_off);
         menu3.setImageResource(R.drawable.ic_notificacionesoff);
         menu4.setImageResource(R.drawable.ic_zonasoff);
-        menu5.setImageResource(R.drawable.ic_contact_off);
+        menu5.setImageResource(R.drawable.ic_checklist_off);
         menu6.setImageResource(R.drawable.ic_profile_on);
         a=false;
         b=false;

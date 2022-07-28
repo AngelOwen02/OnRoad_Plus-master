@@ -53,4 +53,7 @@ public class RetrofitEndPointsV2 {
     public static final String GET_SUPPORTVEHICLES="geofences/getSupportVehicles";
     public static final String SET_ASSIGNSUPPORT="geofences/setAssignSupport";
     public static final String SET_CANCELSUPPORT="geofences/setCancelSupport";
+
+    public static final String GET_CHECKLIST = "logistic/getListSections";
+    public static final String GET_HISTORIC ="dashboard/getHistoricTrips" ;
 }

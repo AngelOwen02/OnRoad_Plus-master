@@ -263,7 +263,7 @@ public class UnitsInteractorImpl implements UnitsInteractor {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getVehiclesData(response, context);
         } else {
-            presenter.failureResponse(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
+           // presenter.failureResponse(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
             Toast.makeText(context,  "sesion expirada", Toast.LENGTH_LONG).show();
         }
     }

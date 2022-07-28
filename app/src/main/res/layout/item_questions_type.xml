@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/switchanswer"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/roboto_black"
+            android:gravity="center"
+            android:text="Placas visibles y frontal trasera"
+            android:textAlignment="textStart"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline19"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlCompat">
+
+        </TextView>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_menu_camera"
+            android:backgroundTint="@color/grayUI"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline28"
+            app:layout_constraintStart_toStartOf="@+id/guideline19"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+
+        <Switch
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="13dp"
+            android:layout_marginBottom="17dp"
+            android:layout_weight="0"
+            android:focusable="false"
+            android:padding="10dp"
+            android:thumb="@drawable/round_switch"
+            android:track="@drawable/round_track"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline28"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </Switch>
+
+        <View
+            android:id="@+id/view7"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="@color/textLightColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints">
+
+        </View>
+
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline19"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.65">
+
+        </androidx.constraintlayout.widget.Guideline>
+
+        <androidx.constraintlayout.widget.Guideline
+
+            android:id="@+id/guideline28"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.82">
+
+        </androidx.constraintlayout.widget.Guideline>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/optionanswer"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textView16"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="5dp"
+            android:fontFamily="@font/roboto_black"
+            android:gravity="center"
+            android:text="Placas visibles y frontal trasera"
+            android:textAlignment="textStart"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout13"
+            app:layout_constraintEnd_toStartOf="@+id/guidelinequestion1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlCompat">
+
+        </TextView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout13"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guidelinequestion212">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardView4"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/shape_checklist_cardview"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:layout_width="15dp"
+            android:layout_height="22dp"
+            android:layout_marginEnd="5dp"
+            android:background="@drawable/arrow_right"
+            android:backgroundTint="@color/blackUI"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView16"
+            app:layout_constraintTop_toTopOf="@+id/guidelinequestion212">
+
+        </ImageView>
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_menu_camera"
+            android:backgroundTint="@color/colorOrangeYellow"
+            app:layout_constraintBottom_toTopOf="@+id/guidelinequestion212"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView16"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+        <View
+            android:id="@+id/view72"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="@color/textLightColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints">
+
+        </View>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelinequestion21"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.65">
+
+        </androidx.constraintlayout.widget.Guideline>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelinequestion212"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45">
+
+        </androidx.constraintlayout.widget.Guideline>
+
+        <androidx.constraintlayout.widget.Guideline
+
+            android:id="@+id/guidelinequestion1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.82">
+
+        </androidx.constraintlayout.widget.Guideline>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
