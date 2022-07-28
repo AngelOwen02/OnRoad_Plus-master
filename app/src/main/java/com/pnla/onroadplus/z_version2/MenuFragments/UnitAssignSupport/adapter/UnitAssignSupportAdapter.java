@@ -299,24 +299,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.unitImage.setImageResource(R.drawable.ic_camion_gris_2);
             }
 
-            /**Status*/
-            /**if (unitList.get(position).getVehicleSwitch() == 1) {
-                holder.cardViewUnitContainer.setCardBackgroundColor(context.getResources().getColor(R.color.colorBorderCarGreen));
-                holder.imgUnitCircle.setBorderColor(context.getResources().getColor(R.color.colorBorderCarGreen));
-            } else if (unitList.get(position).getVehicleSwitch() == 2) {
-                holder.cardViewUnitContainer.setCardBackgroundColor(context.getResources().getColor(R.color.colorBorderCarOrange));
-                holder.imgUnitCircle.setBorderColor(context.getResources().getColor(R.color.colorBorderCarOrange));
-            } else if (unitList.get(position).getVehicleSwitch() == 3) {
-                holder.cardViewUnitContainer.setCardBackgroundColor(context.getResources().getColor(R.color.colorBorderCarRed));
-                holder.imgUnitCircle.setBorderColor(context.getResources().getColor(R.color.colorBorderCarRed));
-            }else if (unitList.get(position).getVehicleSwitch() == 4) {
-                holder.cardViewUnitContainer.setCardBackgroundColor(context.getResources().getColor(R.color.colorBlack));
-                holder.imgUnitCircle.setBorderColor(context.getResources().getColor(R.color.colorBlack));
-            } else if (unitList.get(position).getVehicleSwitch()== 0){
-                holder.cardViewUnitContainer.setCardBackgroundColor(context.getResources().getColor(R.color.colorBorderCarGray));
-                holder.imgUnitCircle.setBorderColor(context.getResources().getColor(R.color.colorBorderCarGray));
-            }*/
-
             //if (unitList.get(position).getVehicleImage() == null) {
             //    Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
             //} else if (unitList.get(position).getVehicleImage().equals("string")) {
