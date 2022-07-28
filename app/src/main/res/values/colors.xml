@@ -39,5 +39,6 @@
 
     <!-- New colors  -->
     <color name="graySpaceRV">#CDCDCD</color>
+    <color name="alfashadow">#9AFFFFFF</color>
 
 </resources>

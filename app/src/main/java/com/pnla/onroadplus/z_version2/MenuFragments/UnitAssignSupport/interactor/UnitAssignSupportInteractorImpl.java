@@ -21,6 +21,7 @@ import com.pnla.onroadplus.z_version2.Containers.ModelVersion.VersionRequest;
 import com.pnla.onroadplus.z_version2.Containers.ModelVersion.VersionResponse;
 import com.pnla.onroadplus.z_version2.Containers.ModelVersion.VersionService;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.UnitAssignSupportPresenter;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.Utils.UnitAssignService;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.FinalUnitDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.UnitDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.GeoreferenceRequest;
@@ -50,7 +51,8 @@ import retrofit2.Retrofit;
 public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInteractor {
 
     private UnitAssignSupportPresenter presenter;
-    private UnitService unitService;
+    //private UnitService unitService;
+    private UnitAssignService unitAssignService;
     private Context context;
     private Retrofit retrofitClient;
 
@@ -69,7 +71,8 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
     }
     private void initRetrofit() {
         Retrofit retrofitClient = RetrofitClientV2.getRetrofitInstance();
-        unitService = retrofitClient.create(UnitService.class);
+        //unitService = retrofitClient.create(UnitService.class);
+        unitAssignService = retrofitClient.create(UnitAssignService.class);
         //Toast.makeText(context, "paso por aqui retrofit", Toast.LENGTH_LONG).show();
     }
 
@@ -78,7 +81,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         //Toast.makeText(context, "paso por aqui request1", Toast.LENGTH_LONG).show();
-        //String token = "1e46c9f13b07dc4ffb93602fa3f8824f";
+        //String token = "306788ddf2ff9ba2e00d69f46e27e6bf";
         if(token!=null) {
             //Toast.makeText(context, "paso por aqui y reviso el token, all bien", Toast.LENGTH_LONG).show();
             //startVehiclesRequest(token);
@@ -116,7 +119,8 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
             // Log.e("checkinguser",token+"  "+typeRequest+"  "+vehiclesCves);
             //presenter.showProgressDialog();
             //unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
-            unitService.getFullVehiclesSupport(request).enqueue(new Callback<SupportUnitResponse>() {
+            //unitService.getFullVehiclesSupport(request).enqueue(new Callback<SupportUnitResponse>() {
+            unitAssignService.getFullVehiclesSupport(request).enqueue(new Callback<SupportUnitResponse>() {
                 @Override
                 //public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
                 public void onResponse(Call<SupportUnitResponse> call, Response<SupportUnitResponse> response) {

@@ -1,7 +1,9 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.view;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
@@ -11,11 +13,15 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.pnla.onroadplus.BuildConfig;
 import com.pnla.onroadplus.R;
+import com.pnla.onroadplus.z_version2.Containers.MainMenuContainerActivity;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
@@ -30,6 +36,8 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SingleSupportUnit
 
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implements ImageView.OnClickListener, UnitAssignSupportAsigmentsView {
 
     private UnitAssignSupportAsigmentsAdapter unitAssignSupportAsigmentsAdapter;
@@ -38,6 +46,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     final Handler handler = new Handler();
     //private Guardar guardar;
     //private UnitAssignSupportAsigmentsPresenter presenter;
+    CircleImageView imgUnitCircle;
     private ImageView toolbarImgBack;
     TextView unitGeoReference;
     TextView unitNameVehicle;
@@ -47,6 +56,8 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     private RecyclerView rvVehiclesSupp;
     private UnitAssignSupportAsigmentsPresenter presenter;
     private int cveLayer;
+    private String descLayer;
+    private String cveVehicle;
     private ProgressDialog progressDialog;
     private Runnable runnable;
     //SingleUnitSupportData singleUnitSupportData;
@@ -68,13 +79,14 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     }
 
     private void initBundle(){
+        //Set Bundle
         Bundle bndle;
         bndle = getIntent().getExtras();
 
         cveLayer = bndle.getInt("cve_layer");
-        String cveVehicle = bndle.getString("cve_vehicle");
+        cveVehicle = bndle.getString("cve_vehicle");
         String vehicleName = bndle.getString("vehicle_name");
-        String descLayer = bndle.getString("desc_layer");
+        descLayer = bndle.getString("desc_layer");
         int percentComplete = bndle.getInt("percent_complete");
         int controlPoint = bndle.getInt("control_point");
         int percenttoHelp = bndle.getInt("percent_to_help");
@@ -82,23 +94,39 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         int helpState = bndle.getInt("help_state");
         String geoReference = bndle.getString("georeference");
 
+        //Set Data Bundle
+        //Nombre de la Unidad en la parte superior de la ventana
         unitNameVehicle.setText(vehicleName);
 
+        //Porcentaje recorrido de la unidad en la parte superior de la ventana
         String PercentHelp = new String(String.valueOf(percenttoHelp));
         PercentHelp.equals(percenttoHelp);
         unitPercentVehicle.setText(percenttoHelp+"%");
 
+        //Ruta de la unidad en la parte superior de la ventana
         unitRuteVehicle.setText(descLayer);
+
+        //Locacizacion de la unidad en la parte superior de la ventana
         unitGeoReference.setText(geoReference);
 
-        unitRuteVehicleRv.setText("Apoyo disponible para "+vehicleName);
+        //Texto que divide la parte superior con el RecyclerView
+        unitRuteVehicleRv.setText("Apoyo disponible para "+ vehicleName);
 
-
-        /**String nombreLayer = Guardar.getDefaultsPreference("usuario", this);
-        int numerolayer = Integer.parseInt(nombreLayer);
-        //Integer.parseInt(nombreLayer);
-
-        Toast.makeText(this, numerolayer, Toast.LENGTH_SHORT).show();*/
+        /**Status*/
+        //Para que se ilumine el aro dependiendo el Status
+        if (Status == 0) {
+            imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarRed));
+            unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarRed));
+        } else if (Status == 1) {
+            imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorOrangeYellow));
+            unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorOrangeYellow));
+        } else if (Status == 2) {
+            imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarGreen));
+            unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBorderCarGreen));
+        } else if (Status == 3) {
+            imgUnitCircle.setBorderColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBlack));
+            unitPercentVehicle.setTextColor(ContextCompat.getColor(getApplicationContext(), R.color.colorBlack));
+        }
 
         //Toast.makeText(getApplicationContext(), numerolayer, Toast.LENGTH_LONG).show();
 
@@ -120,6 +148,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
     private void initViewID(){
         toolbarImgBack = findViewById(R.id.back);
+        imgUnitCircle = findViewById(R.id.img_unit_support);
         unitGeoReference = findViewById(R.id.txt_unit_geo_reference_single);
         unitNameVehicle = findViewById(R.id.txt_unit_name_single);
         unitRuteVehicle = findViewById(R.id.txt_unit_rute_single);
@@ -190,7 +219,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     }
 
     private void fillSoportes(List<SingleSupportUnitData> soportes) {
-        unitAssignSupportAsigmentsAdapter = new UnitAssignSupportAsigmentsAdapter(this ,soportes, getApplicationContext());
+        unitAssignSupportAsigmentsAdapter = new UnitAssignSupportAsigmentsAdapter(this ,soportes, descLayer, getApplicationContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         rvVehiclesSupp.setLayoutManager(layoutManager);
         rvVehiclesSupp.setAdapter(unitAssignSupportAsigmentsAdapter);
@@ -221,12 +250,14 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
     @Override
     public void deleteUnitAssign() {
-        handler.postDelayed(new Runnable() {
+        //showProgressDialog();
+        onBackPressed();
+        /**handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 onBackPressed();
             }
-        }, 2000);
+        }, 2000);*/
         //Todo verificar ciclo de Handler
     }
 
@@ -237,11 +268,53 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         progressDialog.show();
     }
 
-    public void editunitspinner(int cveLayer, String cve_vehicle) {
-        presenter.requestSetAssignSupport(cveLayer, cve_vehicle);
+    public void editunitspinner(String vehicleName, String descLayer) {
+        androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
+        //builder.setTitle("Hay una nueva versión disponible de OnRoad");
+        builder.setMessage("¿Desea asignar la unidad " + vehicleName + " a la Ruta " + descLayer + "?");
+        builder.setCancelable(true);
+        builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.cancel();
+                    }
+                })
+                .setNegativeButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
+                        presenter.requestSetAssignSupport(cveLayer, cveVehicle);
+                        presenter.showProgressDialog();
+                    }
+                });
+        builder.create();
+        builder.show();
     }
 
     public void eraseunitfromsupport(int cveLayer, String cve_vehicle) {
         presenter.deleteUnitAssign(cveLayer, cve_vehicle);
+    }
+
+    public void alertBuilder(final String vehicleName, final String descLayer){
+        androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
+        //builder.setTitle("Hay una nueva versión disponible de OnRoad");
+        builder.setMessage("¿Desea borrar la unidad " + vehicleName + " a la Ruta " + descLayer + "?");
+        builder.setCancelable(true);
+        builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.cancel();
+            }
+        })
+                .setNegativeButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
+                        eraseunitfromsupport(cveLayer, cveVehicle);
+                        presenter.showProgressDialog();
+                    }
+                });
+        builder.create();
+        builder.show();
     }
 }
