@@ -250,12 +250,14 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
     @Override
     public void deleteUnitAssign() {
-        handler.postDelayed(new Runnable() {
+        //showProgressDialog();
+        onBackPressed();
+        /**handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 onBackPressed();
             }
-        }, 2000);
+        }, 2000);*/
         //Todo verificar ciclo de Handler
     }
 
@@ -282,7 +284,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
                     public void onClick(DialogInterface dialog, int which) {
                         //Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
                         presenter.requestSetAssignSupport(cveLayer, cveVehicle);
-                        //presenter.showProgressDialog();
+                        presenter.showProgressDialog();
                     }
                 });
         builder.create();
@@ -310,6 +312,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
                     public void onClick(DialogInterface dialog, int which) {
                         //Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
                         eraseunitfromsupport(cveLayer, cveVehicle);
+                        presenter.showProgressDialog();
                     }
                 });
         builder.create();
