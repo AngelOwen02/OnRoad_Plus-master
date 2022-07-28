@@ -289,7 +289,6 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
                 });
         builder.create();
         builder.show();
-
     }
 
     public void eraseunitfromsupport(int cveLayer, String cve_vehicle) {
