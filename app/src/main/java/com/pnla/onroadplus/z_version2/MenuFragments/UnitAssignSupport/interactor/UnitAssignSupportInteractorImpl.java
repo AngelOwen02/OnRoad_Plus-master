@@ -78,6 +78,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
 
     @Override
     public void requestSoportes(){
+        //AQUI ESTA LO DEL TOKEN -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         //Toast.makeText(context, "paso por aqui request1", Toast.LENGTH_LONG).show();
