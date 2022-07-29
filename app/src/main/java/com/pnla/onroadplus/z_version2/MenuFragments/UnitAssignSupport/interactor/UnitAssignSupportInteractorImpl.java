@@ -140,7 +140,6 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
                 }
             });
         }
-
     }
 
     //private void validateCode(Response<UnitResponse> response, Context context) throws IOException {
