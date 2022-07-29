@@ -142,7 +142,6 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         bndlSupp.putInt("status", Status);
         bndlSupp.putInt("help_state", helpState);
         bndlSupp.putString("georeference", geoReference);
-
     }
 
     private void initViewID(){
