@@ -299,23 +299,12 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.unitImage.setImageResource(R.drawable.ic_camion_gris_2);
             }
 
-            //if (unitList.get(position).getVehicleImage() == null) {
-            //    Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
-            //} else if (unitList.get(position).getVehicleImage().equals("string")) {
-            //    Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
-            //} else if (unitList.get(position).getVehicleImage().equals(GeneralConstantsV2.NO_IMAGE)) {
-            //    Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
-            //} else {
-            //    Glide.with(context).load(unitList.get(position).getVehicleImage()) .thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
-            //}
-
             /**OnClick*/
 //        holder.llMainContainer.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
 //                Intent intent = new Intent(context, UnitMapContainer.class);
 //                context.startActivity(intent);
-//
 //            }
 //        });
 
