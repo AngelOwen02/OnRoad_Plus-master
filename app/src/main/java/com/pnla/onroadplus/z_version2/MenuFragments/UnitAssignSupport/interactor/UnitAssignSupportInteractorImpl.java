@@ -87,7 +87,6 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
             //startVehiclesRequest(token);
             requestSoportes(token);
         }
-
     }
         //startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context);
         //startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, context);
