@@ -6,5 +6,5 @@ public interface UnitAssignSupportAsigmentsInteractor {
 
     void setAssignSupport(Integer layer, int cveLayer, String cve_vehicle);
 
-    void deleteUnitAssign(int cveLayer, String cve_vehicle);
+    void deleteUnitAssign(int cveLayer, String cve_vehicle, int cve_layer_support);
 }

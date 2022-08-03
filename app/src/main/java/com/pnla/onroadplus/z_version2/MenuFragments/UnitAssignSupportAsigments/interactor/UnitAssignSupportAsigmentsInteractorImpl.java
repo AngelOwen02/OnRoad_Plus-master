@@ -67,12 +67,12 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
     }
 
     @Override
-    public void deleteUnitAssign(int cveLayer, String cve_vehicle) {
+    public void deleteUnitAssign(int cveLayer, String cve_vehicle, int cve_layer_support) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         if(token!=null) {
 
-            deleteSupport(cveLayer, cve_vehicle, token);
+            deleteSupport(cve_layer_support, cve_vehicle, token);
             //Log.e("assistencesupport" , "" + cveLayer + "   " +  cveLayer + "  "+ cve_vehicle + "   "+ token);
         }
     }

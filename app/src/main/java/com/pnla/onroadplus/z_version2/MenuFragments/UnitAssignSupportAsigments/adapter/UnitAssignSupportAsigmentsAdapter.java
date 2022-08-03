@@ -124,6 +124,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         holder.editUnitfakespinner2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Toast.makeText(context.getApplicationContext(), "s " + data.get(position).getCve_layer_Support(), Toast.LENGTH_LONG).show();
                 if(data.get(position).getHelp_State() == 0){
                     //Toast.makeText(context.getApplicationContext(), "Proceso de agregar", Toast.LENGTH_LONG).show();
                     myView.editunitspinner(data.get(position).getVehicle_Name(), data.get(position).getCve_Vehicle(), descLayer, data.get(position).getCveLayer());
@@ -142,7 +143,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
                 } else if(data.get(position).getCve_layer_Support() >= 1) {
                     //corregir cuando ya tenga el nombre dle vehiculo
                     //Toast.makeText(context.getApplicationContext(), "Proceso de eliminar", Toast.LENGTH_LONG).show();
-                    myView.alertBuilder(data.get(position).getVehicle_Name(), descLayer);
+                    myView.alertBuilder(data.get(position).getVehicle_Name(), descLayer, data.get(position).getCve_layer_Support(), data.get(position).getCve_Vehicle());
                     //myView.eraseunitfromsupport(data.get(position).getCveLayer(), data.get(position).getCve_Vehicle());
                 }
             }

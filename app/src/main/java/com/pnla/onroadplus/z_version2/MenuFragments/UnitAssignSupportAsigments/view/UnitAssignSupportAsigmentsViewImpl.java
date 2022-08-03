@@ -288,11 +288,11 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         builder.show();
     }
 
-    public void eraseunitfromsupport(int cveLayer, String cve_vehicle) {
-        presenter.deleteUnitAssign(cveLayer, cve_vehicle);
+    public void eraseunitfromsupport(int cveLayer, String cve_vehicle, int cve_layer_support) {
+        presenter.deleteUnitAssign(cveLayer, cve_vehicle, cve_layer_support);
     }
 
-    public void alertBuilder(final String vehicleName, final String descLayer){
+    public void alertBuilder(final String vehicleName, final String descLayer, final int cve_layer_support, final String cve_vehicle){
         androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
         //builder.setTitle("Hay una nueva versión disponible de OnRoad");
         builder.setMessage("¿Desea borrar la unidad " + vehicleName + " a la Ruta " + descLayer + "?");
@@ -307,7 +307,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
-                        eraseunitfromsupport(cveLayer, cveVehicle);
+                        eraseunitfromsupport(cveLayer, cve_vehicle, cve_layer_support);
                         //presenter.showProgressDialog();
                     }
                 });
