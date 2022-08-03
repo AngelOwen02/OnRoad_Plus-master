@@ -265,10 +265,10 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         progressDialog.show();
     }
 
-    public void editunitspinner(String vehicleName, String descLayer) {
+    public void editunitspinner(final String vehicle_name, final String cve_V, final String descLayer, final int cveLayerf) {
         androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
         //builder.setTitle("Hay una nueva versión disponible de OnRoad");
-        builder.setMessage("¿Desea asignar la unidad " + vehicleName + " a la Ruta " + descLayer + "?");
+        builder.setMessage("¿Desea asignar la unidad " + vehicle_name + " a la Ruta " + descLayer + "?");
         builder.setCancelable(true);
         builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
                     @Override
@@ -280,7 +280,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         //Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
-                        presenter.requestSetAssignSupport(cveLayer, cveVehicle);
+                        presenter.requestSetAssignSupport(cveLayer, cveLayerf, cve_V);
                         presenter.showProgressDialog();
                     }
                 });
@@ -308,7 +308,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
                     public void onClick(DialogInterface dialog, int which) {
                         //Toast.makeText(getApplicationContext(), "Ok", Toast.LENGTH_LONG).show();
                         eraseunitfromsupport(cveLayer, cveVehicle);
-                        presenter.showProgressDialog();
+                        //presenter.showProgressDialog();
                     }
                 });
         builder.create();

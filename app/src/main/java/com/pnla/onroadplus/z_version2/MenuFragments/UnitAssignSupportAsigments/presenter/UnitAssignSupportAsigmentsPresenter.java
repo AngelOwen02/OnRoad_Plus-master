@@ -11,7 +11,7 @@ public interface UnitAssignSupportAsigmentsPresenter {
     void showProgressDialog();
     void hideProgressDialog();
 
-    void requestSetAssignSupport(int cveLayer, String cve_vehicle);
+    void requestSetAssignSupport(Integer layer, int cveLayer, String cve_vehicle);
 
     void setUnitAssignSupport(String data);
 

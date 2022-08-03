@@ -42,9 +42,6 @@ public class SingleSupportUnitData {
     @Expose
     private String desc_Layer;
 
-    public SingleSupportUnitData(){
-    }
-
     public SingleSupportUnitData(String url_Image, String cve_Vehicle, int cveLayer, int percentToHelp, double distance, String geoReference, int orden, int status, int help_State, int cve_layer_Support,
                                  String vehicle_Name, String desc_Layer) {
         super();

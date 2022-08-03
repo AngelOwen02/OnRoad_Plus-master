@@ -51,9 +51,9 @@ public class UnitAssignSupportAsigmentsPresenterImpl implements UnitAssignSuppor
     }
 
     @Override
-    public void requestSetAssignSupport(int cveLayer, String cve_vehicle) {
+    public void requestSetAssignSupport(Integer layer, int cveLayer, String cve_vehicle) {
         if(view!=null){
-            interactor.setAssignSupport(cveLayer, cve_vehicle);
+            interactor.setAssignSupport(layer, cveLayer, cve_vehicle);
         }
     }
 

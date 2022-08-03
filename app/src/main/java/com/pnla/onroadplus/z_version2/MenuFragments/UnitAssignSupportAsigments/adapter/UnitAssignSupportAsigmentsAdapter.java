@@ -87,11 +87,17 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
         holder.imgUnitCircle.setBorderColor(ContextCompat.getColor(context, R.color.colorBorderCarRed));
 
-        if (data.get(position).getHelp_State() == 1){
+        /**if (data.get(position).getHelp_State() == 1){
             //Esto es para desactivar los campos cuando esten bien los datos del EndPoint
             holder.ll_main_unit_item_assign_container.setEnabled(false);
              //holder.unitImage.setEnabled(false);
              holder.alfashadow.setVisibility(View.VISIBLE);
+        }*/
+
+        if(data.get(position).getCve_layer_Support() >= 1){
+            holder.ll_main_unit_item_assign_container.setEnabled(false);
+            //holder.unitImage.setEnabled(false);
+            holder.alfashadow.setVisibility(View.VISIBLE);
         }
 
         //Toast.makeText(context, data.get(position).getUrl_Image(), Toast.LENGTH_SHORT).show();
@@ -120,7 +126,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             public void onClick(View v) {
                 if(data.get(position).getHelp_State() == 0){
                     //Toast.makeText(context.getApplicationContext(), "Proceso de agregar", Toast.LENGTH_LONG).show();
-                    myView.editunitspinner(data.get(position).getVehicle_Name(), descLayer);
+                    myView.editunitspinner(data.get(position).getVehicle_Name(), data.get(position).getCve_Vehicle(), descLayer, data.get(position).getCveLayer());
                     Log.e("assistencesupport", "" + data.get(position).getCve_Vehicle() + "     " + data.get(position).getCveLayer() );
                 } else if(data.get(position).getHelp_State() == 1){
                     Toast.makeText(context.getApplicationContext(), "No se puede.", Toast.LENGTH_LONG).show();
@@ -131,9 +137,9 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         holder.eraseUnitfakespinner2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(data.get(position).getHelp_State() == 0){
+                if(data.get(position).getCve_layer_Support() == 0){
                     Toast.makeText(context.getApplicationContext(), "Esta unidad no esta asignada como apoyo.", Toast.LENGTH_LONG).show();
-                } else if(data.get(position).getHelp_State() == 1) {
+                } else if(data.get(position).getCve_layer_Support() >= 1) {
                     //corregir cuando ya tenga el nombre dle vehiculo
                     //Toast.makeText(context.getApplicationContext(), "Proceso de eliminar", Toast.LENGTH_LONG).show();
                     myView.alertBuilder(data.get(position).getVehicle_Name(), descLayer);
