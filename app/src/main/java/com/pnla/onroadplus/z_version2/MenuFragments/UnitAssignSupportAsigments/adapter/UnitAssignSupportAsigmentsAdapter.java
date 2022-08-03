@@ -114,8 +114,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
                 if(holder.fakespinner.getVisibility()==View.GONE)
                 {
                     holder.fakespinner.setVisibility(View.VISIBLE);
-                }else
-                {
+                }else {
                     holder.fakespinner.setVisibility(View.GONE);
                 }
             }
