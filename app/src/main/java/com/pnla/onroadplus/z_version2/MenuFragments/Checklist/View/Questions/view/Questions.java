@@ -1,5 +1,6 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.view;
 
+import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,7 +14,6 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -23,23 +23,30 @@ import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.pnla.onroadplus.R;
-import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter.QuestionsAdapter;
-import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter.checkListAdapter1;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter.sectionsAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListViewImpl;
-import com.pnla.onroadplus.z_version2.fragments.contactV2.view.FragmentContactV2;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.mquestions;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.sections.dataSections;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.presenter.questionPresenter;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.presenter.questionsPresenterImpl;
 
-public class Questions  extends Fragment implements View.OnClickListener{
+import java.util.List;
+
+public class Questions  extends Fragment implements View.OnClickListener ,questionView{
     public static final String TAG = Questions.class.getSimpleName();
     private sectionsAdapter adapterQuestionary;
  //   private CardView cardView;
     private ViewPager pager;
     private PagerAdapter pAdapter;
     private LinearLayout dotslayout;
-
-
-      private int sizeArange;
+    private int sizeArange;
     private Button buttongochecklist;
+    private ProgressDialog progressDialog;
+    private List<dataSections> dataSections;
+    private List<mquestions> dataQuestions;
+    private questionPresenter presenter;
+    private boolean isfirsttime=false;
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -59,14 +66,17 @@ public class Questions  extends Fragment implements View.OnClickListener{
         dotslayout = view.findViewById(R.id.dots_layout);
         buttongochecklist=view.findViewById(R.id.buttongochecklist);
         buttongochecklist.setOnClickListener(this);
-        sizeArange=6;
+        progressDialog = new ProgressDialog(getActivity());
+        presenter=new questionsPresenterImpl(this,getContext());
+        presenter.getpSections();
+        sizeArange=1;
         movedots(0);
-        filldataAdapter();
+
     }
 
     void filldataAdapter()//pager
     {
-        pAdapter = new sectionsAdapter(sizeArange,this, getContext());//(getChildFragmentManager(), fulldata.get(companyIndex).getBanner(),getContext());
+        pAdapter = new sectionsAdapter(dataQuestions,sizeArange,this, getContext());//(getChildFragmentManager(), fulldata.get(companyIndex).getBanner(),getContext());
         pager.setAdapter(pAdapter);
 
         pAdapter.notifyDataSetChanged();
@@ -81,8 +91,11 @@ public class Questions  extends Fragment implements View.OnClickListener{
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onPageSelected(int position) {
-                Log.e("bannerPos",""+position);
+                Log.e("bannerPos",""+position);// TODO revisar error
                 movedots(position);
+                if(position!=0) {
+                    presenter.getpQuestions(dataSections.get(position).getCveTripMgmSection());
+                }
                 if(position==sizeArange-1)
                 {
                     buttongochecklist.setVisibility(View.VISIBLE);
@@ -143,6 +156,10 @@ public class Questions  extends Fragment implements View.OnClickListener{
             if(i==position)
             {
                 dots[i].setImageDrawable(getContext().getDrawable(R.drawable.black_dot_svg));
+                if(dataQuestions!=null)
+                {
+                   fillnewdata();
+                }
             }else
             {
                 dots[i].setImageDrawable(getContext().getDrawable(R.drawable.gray_dot_svg));
@@ -152,6 +169,66 @@ public class Questions  extends Fragment implements View.OnClickListener{
             dotslayout.addView(dots[i],linearLayout);
         }
     }
+
+    private void fillnewdata() {
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @Override
+    public void setSections(List<dataSections> data) {
+        this.dataSections=data;
+        if(dataSections!=null)
+        {
+//            for(int i=0;i<data.size();i++)
+//            {
+//
+//            }
+            sizeArange= dataSections.size();
+            //presenter.getpQuestions(dataSections.get(0).getCveTripMgmSection());
+
+            if(isfirsttime==false)
+            {
+                presenter.getpQuestions(dataSections.get(0).getCveTripMgmSection());
+                isfirsttime=true;
+            }else
+            {
+                Log.e("checklist","pass to next");
+            }
+            movedots(0);
+            filldataAdapter();
+        }
+    }
+
+    @Override
+    public void setQuestions(List<mquestions> data) {
+        this.dataQuestions=data;
+        if(dataQuestions!=null)
+        {
+
+
+            Log.e("questionsConf",""+ dataQuestions.size());
+           // filldataAdapter();
+            for (int i=0;i<dataQuestions.size();i++)
+            {
+                Log.e("questionsConf","nRespuestas: "+dataQuestions.get(i).getAnswers().size());
+            }
+
+        }
+
+    }
+    @Override
+    public void showDialog() {
+        progressDialog.setMessage("Cargando preguntas");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideDialog() {
+        progressDialog.dismiss();
+    }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()){
