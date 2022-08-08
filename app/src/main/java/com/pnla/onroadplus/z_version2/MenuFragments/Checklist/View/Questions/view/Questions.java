@@ -1,5 +1,6 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.view;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.os.Build;
 import android.os.Bundle;
@@ -48,7 +49,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     private boolean isfirsttime=false;
 
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @SuppressLint("NewApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -59,7 +60,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         return view;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @SuppressLint("NewApi")
     private void initContactView(View view) {
        // cardView=view.findViewById(R.id.cardviewitem);
         pager = (ViewPager) view.findViewById(R.id.cardviewitem);
@@ -79,7 +80,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         pAdapter = new sectionsAdapter(dataQuestions,sizeArange,this, getContext());//(getChildFragmentManager(), fulldata.get(companyIndex).getBanner(),getContext());
         pager.setAdapter(pAdapter);
 
-        pAdapter.notifyDataSetChanged();
+
 
 
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -88,10 +89,10 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
 
             }
 
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+            @SuppressLint("NewApi")
             @Override
             public void onPageSelected(int position) {
-                Log.e("bannerPos",""+position);// TODO revisar error
+                Log.e("questionsConf",""+position);// TODO revisar error
                 movedots(position);
                 if(position!=0) {
                     presenter.getpQuestions(dataSections.get(position).getCveTripMgmSection());
@@ -105,11 +106,13 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
                 {
                     buttongochecklist.setVisibility(View.GONE);
                 }
+
+
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
-
+                //Log.e("questionsConf","onPageScrollStateChanged "+state);
             }
         });
     }
@@ -144,7 +147,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         });
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    @SuppressLint("NewApi")
     public void movedots(int position) {
         if(dotslayout.getChildCount()>0)
         {
@@ -173,7 +176,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     private void fillnewdata() {
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
     @Override
     public void setSections(List<dataSections> data) {
         this.dataSections=data;
@@ -183,34 +186,39 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
 //            {
 //
 //            }
+
             sizeArange= dataSections.size();
             //presenter.getpQuestions(dataSections.get(0).getCveTripMgmSection());
 
             if(isfirsttime==false)
             {
+
                 presenter.getpQuestions(dataSections.get(0).getCveTripMgmSection());
+                movedots(0);
                 isfirsttime=true;
             }else
             {
                 Log.e("checklist","pass to next");
             }
-            movedots(0);
             filldataAdapter();
         }
     }
 
+    @SuppressLint("NewApi")
     @Override
     public void setQuestions(List<mquestions> data) {
         this.dataQuestions=data;
         if(dataQuestions!=null)
         {
 
+           // filldataAdapter();
+            pAdapter.notifyDataSetChanged();
 
-            Log.e("questionsConf",""+ dataQuestions.size());
+            Log.e("questionsConf","dataQuestions: "+ dataQuestions.size());
            // filldataAdapter();
             for (int i=0;i<dataQuestions.size();i++)
             {
-                Log.e("questionsConf","nRespuestas: "+dataQuestions.get(i).getAnswers().size());
+          //      Log.e("questionsConf","nRespuestas: "+dataQuestions.get(i).getAnswers().size());
             }
 
         }

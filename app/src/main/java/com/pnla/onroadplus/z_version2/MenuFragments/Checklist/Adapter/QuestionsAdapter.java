@@ -26,7 +26,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     public QuestionsAdapter(List<mquestions> data, Questions myview, Context context) {
     this.myview=myview;
         this.context=context;
-       // this.mquestions=mquestions;
+        this.data=data;
     }
 
     @NonNull
@@ -50,7 +50,15 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
     @Override
     public int getItemCount() {
-        return 0;
+        if(data!=null)
+        {
+            return data.size();
+        }else
+        {
+            Log.e("questionsConf","valor en null data");
+            return 0;
+        }
+
     }
     public class ViewHolder extends RecyclerView.ViewHolder {
     ConstraintLayout switchanswer,optionanswer;

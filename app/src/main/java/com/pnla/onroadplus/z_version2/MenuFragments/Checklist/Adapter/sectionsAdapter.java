@@ -1,5 +1,6 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -51,7 +52,14 @@ public class sectionsAdapter extends PagerAdapter {
     public int getItemPosition(@NonNull Object object) {
         return super.getItemPosition(object);
     }
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
+    @Override
+    public void notifyDataSetChanged() {
+        super.notifyDataSetChanged();
+        adapter.notifyDataSetChanged();
+    }
+
+    @SuppressLint("NewApi")
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View itemView=layoutInflater.inflate(R.layout.item_pager_questions,container,false);
