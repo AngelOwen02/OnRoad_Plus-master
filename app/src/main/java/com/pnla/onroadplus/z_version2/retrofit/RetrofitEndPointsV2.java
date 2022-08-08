@@ -56,4 +56,7 @@ public class RetrofitEndPointsV2 {
 
     public static final String GET_CHECKLIST = "logistic/getListSections";
     public static final String GET_HISTORIC ="dashboard/getHistoricTrips" ;
+
+    public static final String GET_SECTIONS = "logistic/getListSections";
+    public static final String GET_QUESTIONS = "logistic/getListQuestions";
 }

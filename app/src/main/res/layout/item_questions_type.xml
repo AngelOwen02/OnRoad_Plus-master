@@ -12,7 +12,11 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+<<<<<<< HEAD
+  
+=======
  
+>>>>>>> master
         <TextView
             android:id="@+id/textView15"
             android:layout_width="0dp"
@@ -60,7 +64,7 @@
 
         </Switch>
 
-        <View
+     <!--   <View
             android:id="@+id/view7"
             android:layout_width="0dp"
             android:layout_height="1dp"
@@ -69,7 +73,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="MissingConstraints">
 
-        </View>
+        </View>-->
 
 
 
@@ -170,7 +174,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
         </ImageView>
-        <View
+        <!--<View
             android:id="@+id/view72"
             android:layout_width="0dp"
             android:layout_height="1dp"
@@ -179,7 +183,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             tools:ignore="MissingConstraints">
 
-        </View>
+        </View>-->
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guidelinequestion21"
