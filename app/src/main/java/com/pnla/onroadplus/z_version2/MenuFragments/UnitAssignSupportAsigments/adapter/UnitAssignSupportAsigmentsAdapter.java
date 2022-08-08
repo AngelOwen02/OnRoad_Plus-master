@@ -94,10 +94,31 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
              holder.alfashadow.setVisibility(View.VISIBLE);
         }*/
 
+        holder.ll_main_unit_item_assign_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(context.getApplicationContext(), "Funciona", Toast.LENGTH_LONG).show();
+                myView.editunitspinner(data.get(position).getVehicle_Name(), data.get(position).getCve_Vehicle(), descLayer, data.get(position).getCveLayer());
+            }
+        });
+
+        //Esto es para desactivar y poner en gris las unidades que ya tienen apoyo
         if(data.get(position).getCve_layer_Support() >= 1){
             holder.ll_main_unit_item_assign_container.setEnabled(false);
             //holder.unitImage.setEnabled(false);
             holder.alfashadow.setVisibility(View.VISIBLE);
+        }
+
+        //Esto es para desactivar los 3 puntos en las unidades que no tengan apoyo
+        if(data.get(position).getCve_layer_Support() <= 0){
+            holder.spinnerOptions.setEnabled(false);
+            holder.spinnerOptions.setVisibility(View.INVISIBLE);
+        }
+
+        //Esto es para activar los 3 puntos a las unidades que tengan apoyo
+        if(data.get(position).getCve_layer_Support() >= 1){
+            holder.spinnerOptions.setEnabled(true);
+            holder.spinnerOptions.setVisibility(View.VISIBLE);
         }
 
         //Toast.makeText(context, data.get(position).getUrl_Image(), Toast.LENGTH_SHORT).show();
@@ -120,7 +141,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             }
         });
 
-        holder.editUnitfakespinner2.setOnClickListener(new View.OnClickListener() {
+        /**holder.editUnitfakespinner2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(context.getApplicationContext(), "s " + data.get(position).getCve_layer_Support(), Toast.LENGTH_LONG).show();
@@ -132,7 +153,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
                     Toast.makeText(context.getApplicationContext(), "No se puede.", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
 
         holder.eraseUnitfakespinner2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,7 +198,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             ll_main_unit_item_assign_container = itemView.findViewById(R.id.ll_main_unit_item_assign_container2);
             alfashadow = itemView.findViewById(R.id.alfashadow2);
 
-            editUnitfakespinner2 = itemView.findViewById(R.id.editUnitfakespinner2);
+            //editUnitfakespinner2 = itemView.findViewById(R.id.editUnitfakespinner2);
             eraseUnitfakespinner2 = itemView.findViewById(R.id.eraseUnitfakespinner2);
 
             //spinnerOptions = itemView.findViewById(R.id.optionspoints);
