@@ -299,15 +299,11 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.unitImage.setImageResource(R.drawable.ic_camion_gris_2);
             }
 
-            //if (unitList.get(position).getVehicleImage() == null) {
-            //    Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
-            //} else if (unitList.get(position).getVehicleImage().equals("string")) {
-            //    Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
-            //} else if (unitList.get(position).getVehicleImage().equals(GeneralConstantsV2.NO_IMAGE)) {
-            //    Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
-            //} else {
-            //    Glide.with(context).load(unitList.get(position).getVehicleImage()) .thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.unitImage);
-            //}
+            /**if(data.get(position).getCve_layer_Support() >= 1){
+                holder.ll_main_unit_item_assign_container.setEnabled(false);
+                //holder.unitImage.setEnabled(false);
+                holder.alfashadow.setVisibility(View.VISIBLE);
+            }*/
 
             /**OnClick*/
 //        holder.llMainContainer.setOnClickListener(new View.OnClickListener() {
@@ -315,7 +311,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 //            public void onClick(View v) {
 //                Intent intent = new Intent(context, UnitMapContainer.class);
 //                context.startActivity(intent);
-//
 //            }
 //        });
 
@@ -398,55 +393,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             });
         }
 
-
-    /**@Override
-    public int getItemCount() {
-        return vehicleList.size();
-    }
-
-    public void  booleanList(List<Boolean> toggles)
-    {
-        togglesList=toggles;
-        notifyDataSetChanged();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView unitImage;
-        TextView unitTitle;
-        TextView unitRute;
-        TextView unitRealPercent;
-        TextView unitObjPercent;
-        TextView unitDifference;
-        TextView unitStatus;
-        TextView unitGeoExample;
-        //Switch unitSwicth;
-
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            unitImage = itemView.findViewById(R.id.unit_tracking_img2);
-            unitTitle = itemView.findViewById(R.id.unit_tracking_title2);
-            unitRute = itemView.findViewById(R.id.txt_unit_rute);
-            unitRealPercent = itemView.findViewById(R.id.txt_unit_real);
-            unitObjPercent = itemView.findViewById(R.id.txt_unit_objective);
-            unitDifference = itemView.findViewById(R.id.txt_unit_difference);
-            unitStatus = itemView.findViewById(R.id.txt_unit_status);
-            unitGeoExample = itemView.findViewById(R.id.txt_unit_geo_example);
-            //unitSwicth = itemView.findViewById(R.id.unit_tracking_swicth);
-        }
-    }
-
-    public void setFilter(List<Unit> vehicles) {
-        this.vehicleList = new ArrayList<>();
-        this.vehicleList.addAll(vehicles);
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-        return position;
-    }*/
-
     @Override
     public int getItemCount() {
         return data.size();
@@ -455,48 +401,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
     public void getAdress(List<String> from) {
         textaddres=from;
     }
-
-    /**public interface OnClickVehiclesMapListener {
-        void onClickVehiclesMap(int position);
-    }*/
-
-    /**public class ViewHolder extends RecyclerView.ViewHolder {
-
-        CircleImageView imgUnitCircle;
-        CardView cardViewUnitContainer;
-        TextView txtUnitName;
-        TextView txtUnitMaxSpeed;
-        TextView txtUnitGeoReference;
-        TextView txtUnitKmTravel;
-        TextView txtLastSendTime;
-        TextView txtHour;
-        ImageView imgMaxSpeed;
-        ImageView imgShape;
-        ImageView imgDistance;
-        LinearLayout llMainContainer;
-
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-
-
-            llMainContainer = itemView.findViewById(R.id.ll_main_unit_item_container);
-            imgUnitCircle = itemView.findViewById(R.id.img_unit);
-            cardViewUnitContainer = itemView.findViewById(R.id.cardview_unit_container);
-
-            txtUnitName = itemView.findViewById(R.id.txt_unit_name);
-            txtUnitMaxSpeed = itemView.findViewById(R.id.txt_unit_max_speed);
-            txtUnitGeoReference = itemView.findViewById(R.id.txt_unit_geo_reference);
-            txtUnitKmTravel = itemView.findViewById(R.id.txt_unit_km_travel);
-            txtLastSendTime = itemView.findViewById(R.id.txt_last_send_time);
-            txtHour = itemView.findViewById(R.id.txt_unit_hour);
-
-
-            imgMaxSpeed = itemView.findViewById(R.id.img_unit_item_max_speed);
-            imgShape = itemView.findViewById(R.id.img_unit_item_shape);
-            imgDistance = itemView.findViewById(R.id.img_unit_item_distance);
-
-        }
-    }*/
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView unitImage;

@@ -5,27 +5,19 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.pnla.onroadplus.z_version2.Containers.ModelVersion.Version;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.Models.DeleteUnitAssignRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.Models.DeleteUnitAssignResponse;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.Models.UnitAssignRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.Models.UnitAssignResponse;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.Utils.UnitAssignService;
-import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.Guardar;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.presenter.UnitAssignSupportAsigmentsPresenter;
-import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.presenter.UnitAssignSupportAsigmentsPresenterImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SingleSupportUnitData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SingleSupportUnitRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SingleSupportUnitResponse;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitRequest;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitResponse;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.UnitService;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitClientV2;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitValidationsV2;
 
-import java.io.IOException;
 import java.util.List;
 
 import retrofit2.Call;
@@ -64,23 +56,23 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
     }
 
     @Override
-    public void setAssignSupport(int cveLayer, String cve_vehicle) {
+    public void setAssignSupport(Integer layer, int cveLayer, String cve_vehicle) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         if(token!=null) {
-
-            requesAssignSupport(cveLayer, cveLayer, cve_vehicle, token);
+            Log.e("TokenAssigmentSupport", "" + token);
+            requesAssignSupport(layer, cveLayer, cve_vehicle, token);
             //Log.e("assistencesupport" , "" + cveLayer + "   " +  cveLayer + "  "+ cve_vehicle + "   "+ token);
         }
     }
 
     @Override
-    public void deleteUnitAssign(int cveLayer, String cve_vehicle) {
+    public void deleteUnitAssign(int cveLayer, String cve_vehicle, int cve_layer_support) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         if(token!=null) {
 
-            deleteSupport(cveLayer, cve_vehicle, token);
+            deleteSupport(cve_layer_support, cve_vehicle, token);
             //Log.e("assistencesupport" , "" + cveLayer + "   " +  cveLayer + "  "+ cve_vehicle + "   "+ token);
         }
     }
@@ -125,7 +117,7 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
     }
 
     private void requesAssignSupport(int cveLayer, int cveLayer1, String cve_vehicle, String token) {
-         final UnitAssignRequest request = new UnitAssignRequest(cveLayer, cveLayer, Integer.valueOf(cve_vehicle), token);
+         final UnitAssignRequest request = new UnitAssignRequest(cveLayer1, cveLayer, Integer.valueOf(cve_vehicle), token);
          //unitService.setUnitAssignSupport(request).enqueue(new Callback<UnitAssignResponse>() {
         unitAssignService.setUnitAssignSupport(request).enqueue(new Callback<UnitAssignResponse>() {
              @Override
@@ -157,7 +149,8 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
             if(responseCode == GeneralConstantsV2.RESPONSE_CODE_OK){
                 presenter.setUnitAssignSupport(data);
             } else {
-                Toast.makeText(context, response.code(), Toast.LENGTH_LONG).show();
+                Toast.makeText(context, ""+response.code(), Toast.LENGTH_LONG).show();
+                //Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
         }
     }

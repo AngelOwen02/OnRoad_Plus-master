@@ -135,7 +135,7 @@
     <TextView
         android:id="@+id/txt_percent_single_rv"
         android:layout_width="26dp"
-        android:layout_height="14dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:text="0"
@@ -199,8 +199,8 @@
         android:layout_marginEnd="10dp"
         android:background="#FFFFFF"
         android:visibility="gone"
-        app:layout_constraintEnd_toStartOf="@+id/optionspoints"
-        app:layout_constraintTop_toTopOf="@+id/optionspoints">
+        app:layout_constraintEnd_toStartOf="@+id/optionspoints2"
+        app:layout_constraintTop_toTopOf="@+id/optionspoints2">
 
     </Spinner>
 
@@ -223,10 +223,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/alfashadow2"
-        android:layout_width="325dp"
+        android:layout_width="wrap_content"
         android:layout_height="150dp"
         android:background="@color/alfashadow"
-        android:visibility="gone">
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/optionspoints2">
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
