@@ -370,7 +370,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                         Toast.makeText(context, "La ruta no requiere apoyo", Toast.LENGTH_LONG).show();
                     }
 
-
                     //Esto es para mandarlo directo
                     /**Bundle vehicleBundle = new Bundle();
                     vehicleBundle.putInt("cve_layer", data.get(position).getCveLayer());
@@ -415,7 +414,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         LinearLayout ll_main_unit_item_assign_container;
         ConstraintLayout alfashadow;
         //Switch unitSwicth;
-
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);

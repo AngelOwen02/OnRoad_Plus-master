@@ -178,7 +178,6 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
                 handler.postDelayed(this,60000);
             }
         },60000);
-
     }
 
     private void initOnClickListeners() {
@@ -187,139 +186,18 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         toolbarImgBack.setOnClickListener(this);
     }
 
-    /**@Override
-    //public void setUnitList(List<Unit> unitList) throws IOException {
-    public void setUnitList(List<SupportUnitData> unitList) throws IOException {
-        /*this.vehicles = unitList;
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        rvUnits.setLayoutManager(linearLayoutManager);
-        unitAdapter = new UnitAdapter(vehicles, getContext());
-        rvUnits.setAdapter(unitAdapter);*/
-
-        //List<Unit> allUnitsList = UnitDB.getUnitList();
-        //List<Unit> activeUnitsList = UnitDB.getUnitListActive();
-        //List<Group> activeGroupslist = GroupDB.getActiveGroupList();
-        /**this.vehicles = unitList;
-        //  Log.e("partsrequestvehicles",""+vehicles.size());
-        final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        //rvUnits.setLayoutManager(linearLayoutManager);
-        rvVehicles.setLayoutManager(linearLayoutManager);
-        List<Integer> allcves=new ArrayList<>();
-        if(vehicles!=null)
-        {
-            for(int y=0;y<vehicles.size();y++)
-            {
-                //allcves.add(vehicles.get(y).getCveVehicle());
-                allcves.add(vehicles.get(y).getCveLayer());
-            }
-        }
-
-        //   Log.e("bloquesdeunides11",""+allcves);
-        /***SnapHelper snapHelper= new PagerSnapHelper();
-         rvUnits.setOnFlingListener(null);
-         snapHelper.attachToRecyclerView(rvUnits);
-         */
-       /* if(vehicles.size()>100)
-        {
-            for(int i=0;i<)
-            undredlist
-        }else
-        {
-
-        }*/
-        // SnapHelper snapHelper = new PagerSnapHelper();
-        //rvUnits.setOnFlingListener(null);
-        //snapHelper.attachToRecyclerView(rvUnits);
-
-       /** unitAssignSupportAdapter = new UnitAssignSupportAdapter(vehicles,getContext());
-        //rvUnits.setAdapter(unitAssignSupportAdapter);
-        rvVehicles.setAdapter(unitAssignSupportAdapter);
-        //hideProgressDialog();
-        if( vehicles.size()!=0)
-        {
-            //directions.get(0).contains(String.valueOf( vehicles.get(0).getCveVehicle()));
-
-            cvesalternos.clear();
-            // Log.e("bloquesdeunides2","------"+ unitAdapter.getadapterviewsize());
-            // Log.e("bloquesdeunides2","------"+ unitAdapter.getItemCount());
-            //if(vehicles.size()>12){
-
-            if(unitAssignSupportAdapter.getItemCount()<7)
-            {
-                for(int k=0;k<vehicles.size();k++)
-                {
-                    //cvesalternos.add( vehicles.get(k).getCveVehicle());
-                    cvesalternos.add( vehicles.get(k).getCveLayer());
-                }
-            }
-            else
-            {
-                for(int k=0;k<6;k++)
-                {
-
-                    //cvesalternos.add( vehicles.get(k).getCveVehicle());
-                    cvesalternos.add( vehicles.get(k).getCveLayer());
-                }
-            }
-
-
-            // Log.e("bloquesdeunides2","cve ::: "+cvesalternos.get(0));
-            //}
-            position=cvesalternos.size();
-            presenter.georeferenceformAPI(cvesalternos);
-
-            unitAssignSupportAdapter.getAdress(directions);
-            unitAssignSupportAdapter.notifyDataSetChanged();
-
-        }
-        //rvUnits.addOnScrollListener(new RecyclerView.OnScrollListener() {
-        /**rvVehicles.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-                //    Log.e("filterlog",""+cvesalternos);
-                //    Log.e("bloquesdeunides11",""+allcves);
-
-                if (position < unitAssignSupportAdapter.getadapterviewsize()) {
-                    if ( searchViewContainer.getVisibility()==View.GONE)
-                    {
-                        cvesalternos.clear();
-                        for (int k = 0; k < unitAssignSupportAdapter.getadapterviewsize(); k++) {
-
-                            cvesalternos.add(vehicles.get(k).getCveVehicle());
-                        }
-
-                        //}
-
-                        try {
-                            presenter.georeferenceformAPI(cvesalternos);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        unitAssignSupportAdapter.getAdress(directions);
-                    }
-                }
-                unitAssignSupportAdapter.notifyDataSetChanged();
-                //Log.e("bloquesdeunides8", "///////" + directions.size());
-                //Log.e("bloquesdeunides8", "///////" + directions);
-            }
-        });*/
-
-        //rvUnits.getChildLayoutPosition(rvUnits.getFocusedChild());
-        // Log.e("bloquesdeunides2",""+ rvUnits.getChildLayoutPosition(rvUnits.getFocusedChild()));
-        //  unitAdapter.notifyDataSetChanged();
-        // Log.e("bloquesdeunides2",""+ rvUnits.getLayoutManager().getChildCount());//+holder.getLayoutPosition()+"  ");
-        // unitAdapter.getadapterviewsize();
-        // Log.e("unitsthaticansaw2"," : "+UnitsInteractorImpl.dataofvehiclesgroupscve);
-     /*   if(!UnitsInteractorImpl.dataofvehiclesgroupscve.isEmpty())
-        {            // Log.e("unitsthaticansaw2"," data is here ");            if(doitonce==false)            {                interactorbridge();            }            else            {            }        }        else        {            // Log.e("unitsthaticansaw2"," mepty ");            // Log.e("unitsthaticansaw2"," : "+UnitsInteractorImpl.dataofvehiclesgroupscve);        }*/
-        /**unitAssignSupportAdapter.notifyDataSetChanged();
-    }*/
-
     @Override
     public void setSoportes(List<SupportUnitData> data) {
-        this.soportes = data;
+
         if(soportes!=null){
+
+            if (soportes==data){
+            } else {
+                this.soportes = data;
+                unitAssignSupportAdapter.notifyDataSetChanged();
+            }
+        } else {
+            this.soportes = data;
             fillSoportes(soportes);
         }
         progressDialog.dismiss();

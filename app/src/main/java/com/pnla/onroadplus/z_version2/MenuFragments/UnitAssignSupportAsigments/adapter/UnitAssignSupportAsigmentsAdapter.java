@@ -99,15 +99,16 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             public void onClick(View v) {
                 //Toast.makeText(context.getApplicationContext(), "Funciona", Toast.LENGTH_LONG).show();
                 myView.editunitspinner(data.get(position).getVehicle_Name(), data.get(position).getCve_Vehicle(), descLayer, data.get(position).getCveLayer());
+                Log.e("supportlayer" , "" + data.get(position).getCve_layer_Support());
             }
         });
 
         //Esto es para desactivar y poner en gris las unidades que ya tienen apoyo
-        if(data.get(position).getCve_layer_Support() >= 1){
+        /**if(data.get(position).getCve_layer_Support() >= 1){
             holder.ll_main_unit_item_assign_container.setEnabled(false);
             //holder.unitImage.setEnabled(false);
             holder.alfashadow.setVisibility(View.VISIBLE);
-        }
+        }*/
 
         //Esto es para desactivar los 3 puntos en las unidades que no tengan apoyo
         if(data.get(position).getCve_layer_Support() <= 0){
@@ -119,6 +120,10 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         if(data.get(position).getCve_layer_Support() >= 1){
             holder.spinnerOptions.setEnabled(true);
             holder.spinnerOptions.setVisibility(View.VISIBLE);
+
+            holder.ll_main_unit_item_assign_container.setEnabled(false);
+            //holder.unitImage.setEnabled(false);
+            holder.alfashadow.setVisibility(View.VISIBLE);
         }
 
         //Toast.makeText(context, data.get(position).getUrl_Image(), Toast.LENGTH_SHORT).show();
