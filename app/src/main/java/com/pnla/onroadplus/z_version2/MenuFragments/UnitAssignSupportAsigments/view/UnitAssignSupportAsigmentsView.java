@@ -12,6 +12,5 @@ public interface UnitAssignSupportAsigmentsView {
     void hideProgressDialog();
 
     void AssignmentSupportSuccess();
-
     void deleteUnitAssign();
 }

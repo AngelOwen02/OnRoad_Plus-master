@@ -94,6 +94,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
              holder.alfashadow.setVisibility(View.VISIBLE);
         }*/
 
+        //Agregar la unidad de apoyo a la que seleccionemos del EndPoint
         holder.ll_main_unit_item_assign_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,6 +147,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             }
         });
 
+        //Este es para el boton de agregar (ya no se ocupa{?})
         /**holder.editUnitfakespinner2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,6 +162,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             }
         });*/
 
+        //Este es el boton de eliminar
         holder.eraseUnitfakespinner2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

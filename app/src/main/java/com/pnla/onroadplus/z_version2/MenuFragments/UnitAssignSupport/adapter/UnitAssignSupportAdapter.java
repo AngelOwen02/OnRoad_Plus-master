@@ -53,14 +53,8 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSupportAdapter.ViewHolder> {
 
-    //private List<Unit> unitList;
     private List<SupportUnitData> data;
-    //private List<SingleUnitSupportData> singleData;
-    //private List<Group> groupList;
     private Context context;
-    //private UnitAdapter.OnClickVehiclesMapListener listener;
-    //private Handler handler;
-    //public static  int lastitem;
     public List<String> textaddres= new ArrayList<>();
 
     //public UnitAssignSupportAdapter(List<Unit> unitList, Context context) {
@@ -72,131 +66,12 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        //final View view = LayoutInflater.from(context).inflate(R.layout.item_unit, parent, false);
         View view = LayoutInflater.from(context).inflate(R.layout.unit_support, parent, false);
         return new UnitAssignSupportAdapter.ViewHolder(view);
     }
 
-    /**@Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
-        final Unit vehicle = vehicleList.get(position);
-        //Log.e("unitsthaticansaw3",""+ UnitDB.getUnitListActive());
-        //Log.e("unitsthaticansaw3",""+ integerList);
-        if(!UnitDB.getUnitListActive().isEmpty()) {
-            Log.e("unitsfirstscreen","size db"+ UnitDB.getUnitListActive().size());
-            for(int i=0;i<UnitDB.getUnitListActive().size();i++)
-            {
-
-                Log.e("unitsfirstscreen",""+ i);
-                integerList.add(UnitDB.getUnitListActive().get(i).getCveVehicle());// integerList.add(UnitDB.getUnitListActive().get(i).getCveVehicle());
-            }
-            SplashScreenActivity.datapersistance=UnitDB.getUnitListActive();
-        }
-        /**if (integerList.contains(Integer.valueOf( vehicle.getCveVehicle()))) {
-            holder.unitSwicth.setChecked(true);
-            UnitDB.updateCheckedStatus(vehicle.getVehicleName(),true);
-        } else {
-            holder.unitSwicth.setChecked(false);
-            UnitDB.updateCheckedStatus(vehicle.getVehicleName(),false);
-
-        }*/
-
-
-        //Log.e("unitsthaticansaw",""+integerList);
-
-        /**Log.e("doitonce", "" + integerList);
-        if (vehicleList.get(position).getVehicleImage() == null) {
-            Glide.with(context).load(R.drawable.sedan).into(holder.unitImage);
-        } else if (vehicleList.get(position).getVehicleImage().equals("string")) {
-            Glide.with(context).load(R.drawable.sedan).into(holder.unitImage);
-        } else if (vehicleList.get(position).getVehicleImage().equals(GeneralConstantsV2.NO_IMAGE)) {
-            Glide.with(context).load(R.drawable.sedan).into(holder.unitImage);
-        } else {
-            Glide.with(context).load(vehicleList.get(position).getVehicleImage()).into(holder.unitImage);
-        }
-
-        //Aqui es donde mostramos los datos en la vista
-        //Manera corta
-        //holder.unitTitle.setText(vehicle.getVehicleName());
-
-        //Para revisar que el nombre si exista y lo colocamos (Manera larga)
-        if (vehicleList.get(position).getVehicleName() != null){
-            if (vehicleList.get(position).getVehicleName().equals("")){
-                holder.unitTitle.setText("----");
-            } else {
-                holder.unitTitle.setText(vehicleList.get(position).getVehicleName());
-            }
-        }else {
-            holder.unitTitle.setText("----");
-        }
-
-        //holder.unitRute.setText("4.01");
-        holder.unitRute.setText(vehicle.getDescModel());
-
-        holder.unitRealPercent.setText("35%");
-        holder.unitObjPercent.setText("75%");
-        holder.unitDifference.setText("-5%");
-        holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
-        //holder.unitDifference.setTextColor(Color.YELLOW);
-        holder.unitStatus.setText("A tiempo");
-        //Aqui va el color
-        holder.unitStatus.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
-        //holder.unitStatus.setTextColor(0xffa400);
-
-        /**if (vehicleList.get(position).getGeoreference().equals("")||vehicleList.get(position).getGeoreference()==null){
-            holder.unitGeoExample.setText("---- ---- ---- ----");
-
-        }else {
-            holder.unitGeoExample.setText(vehicle.getGeoreference());
-        }*/
-
-        /**if (vehicleList.get(position).getGeoreference() != null){
-            if (vehicleList.get(position).getGeoreference().equals("")){
-                holder.unitGeoExample.setText("----");
-            } else {
-                holder.unitGeoExample.setText(vehicleList.get(position).getGeoreference());
-            }
-        }else {
-            holder.unitGeoExample.setText("----");
-        }
-
-        //holder.unitGeoExample.setText(vehicle.getDescBrand());
-        //holder.unitGeoExample.setText(vehicle.getGeoreference()+ " si");
-        //holder.unitGeoExample.setText(vehicle.getGeoreference() + " si");
-        //holder.unitGeoExample.setText("Ejemploooooooooooooooooo");
-
-        //Esto servira para el texto, imagenes y lo que tenga que cambiar el color
-        if (vehicleList.get(position).getDescBrand().equals("Kenworth")) {
-            holder.unitGeoExample.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
-            //cardViewUnitContainer.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorBorderCarGreen));
-            //imgUnitCircle.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGreen));
-        } else if (vehicleList.get(position).getDescBrand().equals("Nissan")) {
-            holder.unitGeoExample.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
-            //cardViewUnitContainer.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorBorderCarOrange));
-            //imgUnitCircle.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarOrange));
-        } else if (vehicleList.get(position).getDescBrand().equals("Otra")) {
-            holder.unitGeoExample.setTextColor(ContextCompat.getColor(context,R.color.green));
-            //cardViewUnitContainer.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorBorderCarRed));
-            //imgUnitCircle.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarRed));
-        } else if (vehicleList.get(position).getDescBrand().equals("Mitsubishi")) {
-            holder.unitGeoExample.setTextColor(ContextCompat.getColor(context,R.color.colorBorderCarBlue));
-            //cardViewUnitContainer.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorBlack));
-            //imgUnitCircle.setBorderColor(getContext().getResources().getColor(R.color.colorBlack));
-        } else {
-            //cardViewUnitContainer.setCardBackgroundColor(getContext().getResources().getColor(R.color.colorBorderCarGray));
-            //imgUnitCircle.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGray));
-            holder.unitGeoExample.setTextColor(ContextCompat.getColor(context,R.color.colorBlack));
-        }
-    }*/
-
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-//        holder.itemView.findFocus().getScrollBarSize();
-            //String sendTime = unitList.get(position).getSendTime();
-            // Log.e("bloquesdeunides",""+holder.getAdapterPosition() +"   LP "+unitList.get(position).getCveVehicle());//+holder.getLayoutPosition()+"  ");
-            //lastitem=holder.getAdapterPosition();
-            //Log.e("bloquesdeunides",""+lastitem);
-
             /**SetData*/
 
             //Esto es del nombre del vehiculo
@@ -314,6 +189,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 //            }
 //        });
 
+            //Al darle clic a la unidad en el RecyclerView
             holder.ll_main_unit_item_assign_container.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

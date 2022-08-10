@@ -44,8 +44,6 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     private List<SingleSupportUnitData> soportes;
     private SingleUnitSupportData singleUnitSupportData;
     final Handler handler = new Handler();
-    //private Guardar guardar;
-    //private UnitAssignSupportAsigmentsPresenter presenter;
     CircleImageView imgUnitCircle;
     private ImageView toolbarImgBack;
     TextView unitGeoReference;
@@ -60,7 +58,6 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     private String cveVehicle;
     private ProgressDialog progressDialog;
     private Runnable runnable;
-    //SingleUnitSupportData singleUnitSupportData;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState){

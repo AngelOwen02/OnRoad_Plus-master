@@ -7,5 +7,4 @@ import java.util.List;
 public interface UnitAssignSupportInteractor {
 
     void requestSoportes();
-    //void getGeoreferencefromAPI(List<Integer> cves) throws IOException;
 }

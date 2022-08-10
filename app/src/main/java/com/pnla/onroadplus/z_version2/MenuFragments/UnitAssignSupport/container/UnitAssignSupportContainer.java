@@ -61,7 +61,7 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
 
     private Handler handler = new Handler();
     public Runnable runnable;
-    public static int integervalueforrequest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,18 +71,8 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
 
     private void initUnitTrackingViewImpl() {
         ImageView toolbarImgBack = findViewById(R.id.back);
-        //ImageView toolbarImgSearch = findViewById(R.id.toolbar_unit_tracking_img_search);
         rvVehicles = findViewById(R.id.recycler_view_unit_tracking2);
-        //rvGroups = findViewById(R.id.recycler_view_group_tracking);
-        //unitButton = findViewById(R.id.container_btn_unit_tracking_unit);
-        //groupButton = findViewById(R.id.container_btn_unit_tracking_groups);
-        //unitTextButton = findViewById(R.id.txt_unit_tracking_unit);
-        //groupTextButton = findViewById(R.id.txt_unit_tracking_group);
-        //emptyGroupsImage = findViewById(R.id.container_empty_groups_image);
         progressBar = findViewById(R.id.progress_bar_unit_tracking);
-        //searchView = findViewById(R.id.tracking_search_view_container);
-        //searchViewTracking = findViewById(R.id.search_view_tracking);
-
 
         //unitButton.setOnClickListener(this);
         //groupButton.setOnClickListener(this);
@@ -114,74 +104,6 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
         handler.postDelayed(runnable,500);
     }
 
-    /**@Override
-    public void showProgressBar() {
-        progressBar.setVisibility(View.VISIBLE);
-    }*/
-
-    /**@Override
-    public void vehiclesinsiderequest() {
-        Log.e("dothetogles1","soy el handler" +integervalueforrequest+"<");
-        presenter.getVehiclesinGroups(getBaseContext());
-    }*/
-
-    /**@Override
-    public void showErrorMessage(String message) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void fillVehiclesList(List<Unit> vehicles) {
-        this.vehicless = vehicles;
-        List<String> names=new ArrayList<>();
-        names.clear();
-        fillVehicles();
-        List<Boolean> mytoogles=new ArrayList<>();
-        for(int i=0; i<vehicless.size();i++)
-        {
-            mytoogles.add(vehicless.get(i).isVehicleStatus());
-            names.add(vehicless.get(i).getVehicleName());
-        }
-        Log.e("groupsitems","im in units"+ names );
-        //adapterVehicles.booleanList(mytoogles);
-    }*/
-
-    /**@Override
-    public void fillGroupsList(List<Group> groups) {
-        this.groupss = groups;
-        //  Log.e("unitsthaticansaw3"," toogles adapter: " +groupss.size());
-        // Log.e("unitsthaticansaw","im in units"+ groups.toString());
-        List<String> names=new ArrayList<>();
-        names.clear();
-        fillGroups();
-        List<Boolean> mytoogles=new ArrayList<>();
-        for(int i =0;i<groupss.size();i++)
-        {
-            mytoogles.add(groupss.get(i).isSelected());
-            names.add(groupss.get(i).getVehicle_group() );
-        }
-        Log.e("groupsitems","im in groups"+ names );
-        groupAdapter.booleanList(mytoogles);
-
-       /* if (GroupTrackingAdapter.request==false) {
-            Log.e("dothetogles1","ima doing once");
-        }
-
-        else{
-           presenter.getVehiclesinGroups(getBaseContext());
-          Log.e("dothetogles","ima doing once");
-        }//*/
-    //}
-
-    /**private void fillVehicles() {
-        adapterVehicles = new UnitAssignSupportAdapter(vehicless, this);
-        rvVehicles.setAdapter(adapterVehicles);
-        layoutManagerVehicles = new LinearLayoutManager(this);
-        rvVehicles.setLayoutManager(layoutManagerVehicles);
-        //Log.e("unitsthaticansaw","im in units");
-        //adapterVehiclesV2.setVehicleAndGroupSelectedListener(FragmentVehiclesV2.this);
-    }*/
-
     private void fillGroups() {
         groupAdapter = new GroupTrackingAdapter(groupss, this);
         rvGroups.setAdapter(groupAdapter);
@@ -207,6 +129,8 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
 
         }
     }
+    
+    //Metodo para regresar a la pantalla anterior
     private void goBackintomenu()
     {
         Bundle bndl = new Bundle();
@@ -222,11 +146,6 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
     public void onBackPressed() {
         goBackintomenu();
     }
-
-    /**@Override
-    public void setUnidadesSoporte(List<SupportUnitData> data) {
-
-    }*/
 
     @Override
     public void setSoportes(List<SupportUnitData> data) {

@@ -9,8 +9,6 @@ import java.util.List;
 
 public interface UnitAssignSupportView {
 
-    //void setUnitList(List<Unit> vehicles) throws IOException;
-    //void setUnitList(List<SupportUnitData> data) throws IOException;
     void setSoportes(List<SupportUnitData> data);
     void failureResponse(String message);
     void showProgressDialog();

@@ -12,10 +12,7 @@ public interface UnitAssignSupportAsigmentsPresenter {
     void hideProgressDialog();
 
     void requestSetAssignSupport(Integer layer, int cveLayer, String cve_vehicle);
-
     void setUnitAssignSupport(String data);
-
     void deleteUnitAssign(int cveLayer, String cve_vehicle, int cve_layer_support);
-
     void deleteSuccess(String data);
 }

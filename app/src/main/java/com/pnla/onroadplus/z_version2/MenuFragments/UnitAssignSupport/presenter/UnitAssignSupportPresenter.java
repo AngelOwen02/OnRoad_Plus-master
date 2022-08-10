@@ -14,8 +14,6 @@ import java.util.List;
 public interface UnitAssignSupportPresenter {
 
     void setView(UnitAssignSupportView view);
-    //void getFullVehicles();
-    //void georeferenceformAPI(List<Integer> values) throws IOException;
     void setSoportes(List<SupportUnitData> data);
     void requestVehicles();
     void failureResponse(String message);
