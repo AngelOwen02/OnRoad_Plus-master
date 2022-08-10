@@ -27,7 +27,6 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.adapter.UnitAssignSupportAsigmentsAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.Guardar;
-import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.SingleUnitSupportData;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.interactor.UnitAssignSupportAsigmentsInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.interactor.UnitAssignSupportAsigmentsInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.presenter.UnitAssignSupportAsigmentsPresenter;
@@ -42,7 +41,6 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
     private UnitAssignSupportAsigmentsAdapter unitAssignSupportAsigmentsAdapter;
     private List<SingleSupportUnitData> soportes;
-    private SingleUnitSupportData singleUnitSupportData;
     final Handler handler = new Handler();
     CircleImageView imgUnitCircle;
     private ImageView toolbarImgBack;
