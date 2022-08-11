@@ -98,9 +98,14 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         holder.ll_main_unit_item_assign_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(context.getApplicationContext(), "Funciona", Toast.LENGTH_LONG).show();
-                myView.editunitspinner(data.get(position).getVehicle_Name(), data.get(position).getCve_Vehicle(), descLayer, data.get(position).getCveLayer());
                 Log.e("supportlayer" , "" + data.get(position).getCve_layer_Support());
+
+                if(data.get(position).getCve_layer_Support() <= 0) {
+                    //Toast.makeText(context.getApplicationContext(), "No tiene apoyo", Toast.LENGTH_SHORT).show();
+                    myView.editunitspinner(data.get(position).getVehicle_Name(), data.get(position).getCve_Vehicle(), descLayer, data.get(position).getCveLayer());
+                } else if (data.get(position).getCve_layer_Support() >= 1){
+                    Toast.makeText(context.getApplicationContext(), "Esta unidad ya esta asignada.", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
@@ -122,7 +127,8 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             holder.spinnerOptions.setEnabled(true);
             holder.spinnerOptions.setVisibility(View.VISIBLE);
 
-            holder.ll_main_unit_item_assign_container.setEnabled(false);
+            //Esto es para desactivar el campo del RecyclerView
+            //holder.ll_main_unit_item_assign_container.setEnabled(false);
             //holder.unitImage.setEnabled(false);
             holder.alfashadow.setVisibility(View.VISIBLE);
         }
