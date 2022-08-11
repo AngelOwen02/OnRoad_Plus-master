@@ -14,6 +14,9 @@ public class SingleSupportUnitData {
     @SerializedName("cve_layer")
     @Expose
     private int cveLayer;
+    @SerializedName("desc_layer")
+    @Expose
+    private String desc_Layer;
     @SerializedName("percent_to_help")
     @Expose
     private int percentToHelp;
@@ -38,16 +41,14 @@ public class SingleSupportUnitData {
     @SerializedName("vehicle_name")
     @Expose
     private String vehicle_Name;
-    @SerializedName("desc_layer")
-    @Expose
-    private String desc_Layer;
 
-    public SingleSupportUnitData(String url_Image, String cve_Vehicle, int cveLayer, int percentToHelp, double distance, String geoReference, int orden, int status, int help_State, int cve_layer_Support,
-                                 String vehicle_Name, String desc_Layer) {
+    public SingleSupportUnitData(String url_Image, String cve_Vehicle, int cveLayer, String desc_Layer, int percentToHelp, double distance, String geoReference, int orden, int status, int help_State,
+                                 int cve_layer_Support, String vehicle_Name) {
         super();
         this.url_Image = url_Image;
         this.cve_Vehicle = cve_Vehicle;
         this.cveLayer = cveLayer;
+        this.desc_Layer = desc_Layer;
         this.percentToHelp = percentToHelp;
         this.distance = distance;
         this.geoReference = geoReference;
@@ -56,7 +57,6 @@ public class SingleSupportUnitData {
         this.help_State = help_State;
         this.cve_layer_Support = cve_layer_Support;
         this.vehicle_Name = vehicle_Name;
-        this.desc_Layer = desc_Layer;
     }
 
     public String getUrl_Image() {
@@ -81,6 +81,14 @@ public class SingleSupportUnitData {
 
     public void setCveLayer(int cveLayer) {
         this.cveLayer = cveLayer;
+    }
+
+    public String getDesc_Layer() {
+        return desc_Layer;
+    }
+
+    public void setDesc_Layer(String desc_Layer) {
+        this.desc_Layer = desc_Layer;
     }
 
     public int getPercentToHelp() {
@@ -145,13 +153,5 @@ public class SingleSupportUnitData {
 
     public void setVehicle_Name(String vehicle_Name) {
         this.vehicle_Name = vehicle_Name;
-    }
-
-    public String getDesc_Layer() {
-        return desc_Layer;
-    }
-
-    public void setDesc_Layer(String desc_Layer) {
-        this.desc_Layer = desc_Layer;
     }
 }

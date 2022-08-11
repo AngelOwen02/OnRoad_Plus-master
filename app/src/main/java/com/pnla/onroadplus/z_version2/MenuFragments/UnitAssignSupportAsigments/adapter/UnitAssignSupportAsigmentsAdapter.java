@@ -69,8 +69,8 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         holder.unitName.setText(data.get(position).getVehicle_Name());
 
         //Nombre de la Ruta
-        //holder.unitRute.setText(data.get(position).getDesc_Layer());
-        holder.unitRute.setText(descLayer);
+        holder.unitRute.setText("Ruta: " + data.get(position).getDesc_Layer());
+        //holder.unitRute.setText(descLayer);
 
         //Diferencia del vehiculo (En Porcentaje)
         String PercentHelp = new String(String.valueOf(data.get(position).getPercentToHelp()));
@@ -98,7 +98,8 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         holder.ll_main_unit_item_assign_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("supportlayer" , "" + data.get(position).getCve_layer_Support());
+                //Log.e("supportlayer" , "" + data.get(position).getCve_layer_Support());
+                Log.e("rutaaaaaa" , "" + data.get(position).getDesc_Layer());
 
                 if(data.get(position).getCve_layer_Support() <= 0) {
                     //Toast.makeText(context.getApplicationContext(), "No tiene apoyo", Toast.LENGTH_SHORT).show();
