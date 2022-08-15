@@ -117,7 +117,7 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
                 //Log.e("supportlayer" , "" + data.get(position).getCve_layer_Support());
                 Log.e("rutaaaaaa" , "" + data.get(position).getDesc_Layer());
 
-                if(data.get(position).getCve_layer_Support() <= 0) {
+                if(data.get(position).getCve_layer_Support() == 0) {
                     //Toast.makeText(context.getApplicationContext(), "No tiene apoyo", Toast.LENGTH_SHORT).show();
                     myView.editunitspinner(data.get(position).getVehicle_Name(), data.get(position).getCve_Vehicle(), descLayer, data.get(position).getCveLayer());
                 } else if (data.get(position).getCve_layer_Support() >= 1){
@@ -134,13 +134,13 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         }*/
 
         //Esto es para desactivar los 3 puntos en las unidades que no tengan apoyo
-        if(data.get(position).getCve_layer_Support() <= 0){
+        if(data.get(position).getCve_layer_Support() == 0){
             holder.spinnerOptions.setEnabled(false);
-            holder.spinnerOptions.setVisibility(View.INVISIBLE);
+            holder.spinnerOptions.setVisibility(View.GONE);
         }
 
         //Esto es para activar los 3 puntos a las unidades que tengan apoyo
-        if(data.get(position).getCve_layer_Support() >= 1){
+        if(!(data.get(position).getCve_layer_Support() == 0)){
             holder.spinnerOptions.setEnabled(true);
             holder.spinnerOptions.setVisibility(View.VISIBLE);
 
@@ -148,6 +148,14 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             //holder.ll_main_unit_item_assign_container.setEnabled(false);
             //holder.unitImage.setEnabled(false);
             holder.alfashadow.setVisibility(View.VISIBLE);
+        } else {
+            holder.spinnerOptions.setEnabled(false);
+            holder.spinnerOptions.setVisibility(View.GONE);
+
+            //Esto es para desactivar el campo del RecyclerView
+            //holder.ll_main_unit_item_assign_container.setEnabled(false);
+            //holder.unitImage.setEnabled(false);
+            holder.alfashadow.setVisibility(View.GONE);
         }
 
         //Toast.makeText(context, data.get(position).getUrl_Image(), Toast.LENGTH_SHORT).show();

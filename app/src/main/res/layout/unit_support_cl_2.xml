@@ -71,7 +71,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/constrainUnitSpinnerfake2"
         android:layout_width="174dp"
-        android:layout_height="28dp"
+        android:layout_height="48dp"
 
         android:visibility="gone"
         style="@style/spinner_style2"
@@ -103,7 +103,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="14dp"
                 android:text="Eliminar"
                 android:textColor="@color/blackUI"
                 android:textSize="13dp"
