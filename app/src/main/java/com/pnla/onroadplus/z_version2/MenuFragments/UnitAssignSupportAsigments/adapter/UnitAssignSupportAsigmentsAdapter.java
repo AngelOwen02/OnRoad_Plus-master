@@ -84,8 +84,24 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         holder.unitGeo.setText(data.get(position).getGeoReference());
 
         //Status de la Imagen
-        Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
-        holder.imgUnitCircle.setBorderColor(ContextCompat.getColor(context, R.color.colorBorderCarRed));
+        //Para que aparezca el texto dependiendo el resultado del Json
+        if(data.get(position).getStatus() == 1){
+            //Unidades que van A tiempo
+            Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
+            holder.imgUnitCircle.setBorderColor(ContextCompat.getColor(context, R.color.colorOrangeYellow));
+        } else if (data.get(position).getStatus() == 2){
+            //Unidades que van Avanzado
+            Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
+            holder.imgUnitCircle.setBorderColor(ContextCompat.getColor(context, R.color.green));
+        } else if (data.get(position).getStatus() == 3){
+            //Unidades que Sin Estatus
+            Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
+            holder.imgUnitCircle.setBorderColor(ContextCompat.getColor(context, R.color.colorBlack));
+        } else if (data.get(position).getStatus() == 0){
+            //Unidades Atrasadas
+            Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
+            holder.imgUnitCircle.setBorderColor(ContextCompat.getColor(context, R.color.colorRed));
+        }
 
         /**if (data.get(position).getHelp_State() == 1){
             //Esto es para desactivar los campos cuando esten bien los datos del EndPoint
