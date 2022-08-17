@@ -23,6 +23,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.google.maps.android.data.Layer;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.adapter.UnitAssignSupportAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.data.SingleUnitSupportData;
@@ -44,12 +45,14 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
 
     private List<SingleSupportUnitData> data;
     private String descLayer;
+    private int cveLayer;
     private Context context;
     private UnitAssignSupportAsigmentsViewImpl myView;
 
-    public UnitAssignSupportAsigmentsAdapter(UnitAssignSupportAsigmentsViewImpl myView, List<SingleSupportUnitData> data, String descLayer, Context context){
+    public UnitAssignSupportAsigmentsAdapter(UnitAssignSupportAsigmentsViewImpl myView, List<SingleSupportUnitData> data, String descLayer, int cveLayer, Context context){
         this.data = data;
         this.descLayer = descLayer;
+        this.cveLayer = cveLayer;
         this.context = context;
         this.myView = myView;
     }
@@ -87,28 +90,32 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         //Para que aparezca el texto dependiendo el resultado del Json
         if(data.get(position).getStatus() == 1){
             //Unidades que van A tiempo
-            Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
+            //Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
             holder.imgUnitCircle.setBorderColor(ContextCompat.getColor(context, R.color.colorOrangeYellow));
         } else if (data.get(position).getStatus() == 2){
             //Unidades que van Avanzado
-            Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
+            //Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
             holder.imgUnitCircle.setBorderColor(ContextCompat.getColor(context, R.color.green));
         } else if (data.get(position).getStatus() == 3){
             //Unidades que Sin Estatus
-            Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
+            //Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
             holder.imgUnitCircle.setBorderColor(ContextCompat.getColor(context, R.color.colorBlack));
         } else if (data.get(position).getStatus() == 0){
             //Unidades Atrasadas
-            Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
+            //Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
             holder.imgUnitCircle.setBorderColor(ContextCompat.getColor(context, R.color.colorRed));
         }
 
-        /**if (data.get(position).getHelp_State() == 1){
-            //Esto es para desactivar los campos cuando esten bien los datos del EndPoint
-            holder.ll_main_unit_item_assign_container.setEnabled(false);
-             //holder.unitImage.setEnabled(false);
-             holder.alfashadow.setVisibility(View.VISIBLE);
-        }*/
+        //Esto es para la imagen
+        if (data.get(position).getUrl_Image() == null) {
+            Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.imgUnitCircle);
+        } else if (data.get(position).getUrl_Image().equals("string")) {
+            Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.imgUnitCircle);
+        } else if (data.get(position).getUrl_Image().equals(GeneralConstantsV2.NO_IMAGE)) {
+            Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.imgUnitCircle);
+        } else {
+            Glide.with(context).load(data.get(position).getUrl_Image()) .thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.imgUnitCircle);
+        }
 
         //Agregar la unidad de apoyo a la que seleccionemos del EndPoint
         holder.ll_main_unit_item_assign_container.setOnClickListener(new View.OnClickListener() {
@@ -126,23 +133,16 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             }
         });
 
-        //Esto es para desactivar y poner en gris las unidades que ya tienen apoyo
-        /**if(data.get(position).getCve_layer_Support() >= 1){
-            holder.ll_main_unit_item_assign_container.setEnabled(false);
-            //holder.unitImage.setEnabled(false);
-            holder.alfashadow.setVisibility(View.VISIBLE);
-        }*/
-
         //Esto es para desactivar los 3 puntos en las unidades que no tengan apoyo
         if(data.get(position).getCve_layer_Support() == 0){
             holder.spinnerOptions.setEnabled(false);
             holder.spinnerOptions.setVisibility(View.GONE);
         }
 
-        //Esto es para activar los 3 puntos a las unidades que tengan apoyo
+        //Esto es para activar los 3 puntos a las unidades que tengan apoyo y no sea el mismo layer
         if(!(data.get(position).getCve_layer_Support() == 0)){
-            holder.spinnerOptions.setEnabled(true);
-            holder.spinnerOptions.setVisibility(View.VISIBLE);
+            /**holder.spinnerOptions.setEnabled(true);
+            holder.spinnerOptions.setVisibility(View.VISIBLE);*/
 
             //Esto es para desactivar el campo del RecyclerView
             //holder.ll_main_unit_item_assign_container.setEnabled(false);
@@ -158,13 +158,29 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
             holder.alfashadow.setVisibility(View.GONE);
         }
 
-        //Toast.makeText(context, data.get(position).getUrl_Image(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context.getApplicationContext(), cveLayer + " s", Toast.LENGTH_SHORT).show();
 
-        /**if (data.get(position).getUrlImage() != null) {
-         Glide.with(context).load(data.get(position).getUrlImage()).into(holder.imgUnitCircle);
-         } else {
-         Glide.with(context).load(R.drawable.sedan).into(holder.imgUnitCircle);
-         }*/
+        //Esto es para activar los 3 puntos cuando el Layer es el mismo en los vehiculos
+        if(data.get(position).getCve_layer_Support() == cveLayer){
+            //Toast.makeText(context.getApplicationContext(), "si hay una unidad", Toast.LENGTH_SHORT).show();
+            holder.spinnerOptions.setEnabled(true);
+            holder.spinnerOptions.setVisibility(View.VISIBLE);
+
+            //Esto es para desactivar el campo del RecyclerView
+            //holder.ll_main_unit_item_assign_container.setEnabled(false);
+            //holder.unitImage.setEnabled(false);
+            holder.alfashadow.setVisibility(View.VISIBLE);
+        } /**else {
+            holder.spinnerOptions.setEnabled(false);
+            holder.spinnerOptions.setVisibility(View.GONE);
+
+            //Esto es para desactivar el campo del RecyclerView
+            //holder.ll_main_unit_item_assign_container.setEnabled(false);
+            //holder.unitImage.setEnabled(false);
+            holder.alfashadow.setVisibility(View.GONE);
+        }*/
+
+        //Toast.makeText(context, data.get(position).getUrl_Image(), Toast.LENGTH_SHORT).show();
 
         holder.spinnerOptions.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -211,7 +211,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     }
 
     private void fillSoportes(List<SingleSupportUnitData> soportes) {
-        unitAssignSupportAsigmentsAdapter = new UnitAssignSupportAsigmentsAdapter(this ,soportes, descLayer, getApplicationContext());
+        unitAssignSupportAsigmentsAdapter = new UnitAssignSupportAsigmentsAdapter(this ,soportes, descLayer, cveLayer, getApplicationContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         rvVehiclesSupp.setLayoutManager(layoutManager);
         rvVehiclesSupp.setAdapter(unitAssignSupportAsigmentsAdapter);
