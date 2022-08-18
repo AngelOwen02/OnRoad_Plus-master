@@ -240,7 +240,6 @@ public class UnitAssignSupportAsigmentsAdapter extends RecyclerView.Adapter<Unit
         CircleImageView imgUnitCircle;
         ConstraintLayout ll_main_unit_item_assign_container, alfashadow;
 
-
         public ViewHolder(@NonNull View itemView){
             super(itemView);
             //Referencias a la vista xml
