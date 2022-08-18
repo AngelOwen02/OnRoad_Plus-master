@@ -5,6 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class SupportUnitData {
 
+    @SerializedName("url_image")
+    @Expose
+    private String url_Image;
     @SerializedName("cve_layer")
     @Expose
     private int cveLayer;
@@ -39,9 +42,10 @@ public class SupportUnitData {
     public SupportUnitData(){
     }
 
-    public SupportUnitData(int cveLayer, String cve_Vehicle, String vehicle_Name, String desc_Layer, int percent_Complete, int control_Point, int percentToHelp, int status, int help_State,
+    public SupportUnitData(String url_Image, int cveLayer, String cve_Vehicle, String vehicle_Name, String desc_Layer, int percent_Complete, int control_Point, int percentToHelp, int status, int help_State,
                            String geoReference) {
         super();
+        this.url_Image = url_Image;
         this.cveLayer = cveLayer;
         this.cve_Vehicle = cve_Vehicle;
         this.vehicle_Name = vehicle_Name;
@@ -52,6 +56,14 @@ public class SupportUnitData {
         this.status = status;
         this.help_State = help_State;
         this.geoReference = geoReference;
+    }
+
+    public String getUrl_Image() {
+        return url_Image;
+    }
+
+    public void setUrl_Image(String url_Image) {
+        this.url_Image = url_Image;
     }
 
     public int getCveLayer() {

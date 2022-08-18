@@ -19,6 +19,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.pnla.onroadplus.BuildConfig;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.Containers.MainMenuContainerActivity;
@@ -32,6 +33,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.i
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.presenter.UnitAssignSupportAsigmentsPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.presenter.UnitAssignSupportAsigmentsPresenterImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SingleSupportUnitData;
+import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 import java.util.List;
 
@@ -78,6 +80,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         Bundle bndle;
         bndle = getIntent().getExtras();
 
+        String urlImage = bndle.getString("url_image");
         cveLayer = bndle.getInt("cve_layer");
         cveVehicle = bndle.getString("cve_vehicle");
         String vehicleName = bndle.getString("vehicle_name");
@@ -107,6 +110,17 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         //Texto que divide la parte superior con el RecyclerView
         unitRuteVehicleRv.setText("Apoyo disponible para "+ vehicleName);
 
+        //Esto es para la imagen
+        if (urlImage == null) {
+            Glide.with(getApplicationContext()).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(imgUnitCircle);
+        } else if (urlImage.equals("string")) {
+            Glide.with(getApplicationContext()).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(imgUnitCircle);
+        } else if (urlImage.equals(GeneralConstantsV2.NO_IMAGE)) {
+            Glide.with(getApplicationContext()).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(imgUnitCircle);
+        } else {
+            Glide.with(getApplicationContext()).load(urlImage).thumbnail(/*sizeMultiplier=*/ 0.05f).into(imgUnitCircle);
+        }
+
         /**Status*/
         //Para que se ilumine el aro dependiendo el Status
         if (Status == 0) {
@@ -127,6 +141,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
         Bundle bndlSupp;
         bndlSupp = new Bundle();
+        bndlSupp.putString("url_image", urlImage);
         bndlSupp.putInt("cve_layer", cveLayer);
         bndlSupp.putString("cve_vehicle", cveVehicle);
         bndlSupp.putString("vehicle_name", vehicleName);

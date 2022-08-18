@@ -204,6 +204,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                     if (data.get(position).getStatus() == 0){
                         //Esto es para el color rojo
                         Bundle vehicleBundle = new Bundle();
+                        vehicleBundle.putString("url_image", data.get(position).getUrl_Image());
                         vehicleBundle.putInt("cve_layer", data.get(position).getCveLayer());
                         vehicleBundle.putString("cve_vehicle", data.get(position).getCve_Vehicle());
                         vehicleBundle.putString("vehicle_name", data.get(position).getVehicle_Name());
@@ -224,6 +225,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                     } else if(data.get(position).getStatus() == 1){
                         //Esto es para unidades color amarillo
                         Bundle vehicleBundle = new Bundle();
+                        vehicleBundle.putString("url_image", data.get(position).getUrl_Image());
                         vehicleBundle.putInt("cve_layer", data.get(position).getCveLayer());
                         vehicleBundle.putString("cve_vehicle", data.get(position).getCve_Vehicle());
                         vehicleBundle.putString("vehicle_name", data.get(position).getVehicle_Name());
