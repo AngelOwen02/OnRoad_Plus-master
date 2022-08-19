@@ -110,7 +110,8 @@ public class MainMenuContainerActivity extends AppCompatActivity implements Bott
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent = new Intent(Intent.ACTION_VIEW);
-                                        intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.newlandapps.onroad"));
+                                        //intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.newlandapps.onroad"));
+                                        intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.pnla.onroadplus"));
                                         intent.setPackage("com.android.vending");
                                         startActivity(intent);
                                     }
