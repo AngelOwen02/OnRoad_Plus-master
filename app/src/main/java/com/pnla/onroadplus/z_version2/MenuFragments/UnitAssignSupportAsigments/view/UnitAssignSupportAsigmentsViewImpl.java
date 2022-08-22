@@ -305,7 +305,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     public void alertBuilder(final String vehicleName, final String descLayer, final int cve_layer_support, final String cve_vehicle){
         androidx.appcompat.app.AlertDialog.Builder builder = new AlertDialog.Builder(this, R.style.AlertDialogCustom);
         //builder.setTitle("Hay una nueva versión disponible de OnRoad");
-        builder.setMessage("¿Desea borrar la unidad " + vehicleName + " a la Ruta " + descLayer + "?");
+        builder.setMessage("¿Desea borrar la unidad " + vehicleName + " de la Ruta " + descLayer + "?");
         builder.setCancelable(true);
         builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
             @Override
