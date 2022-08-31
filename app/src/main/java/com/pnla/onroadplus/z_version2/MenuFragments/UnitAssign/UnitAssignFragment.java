@@ -77,6 +77,7 @@ public class UnitAssignFragment extends AppCompatActivity implements View.OnClic
         //presenter.requestvisitedPoints(zonesFragment.fullZones);
     }
     private void fillTestData(){
+        //TODO order visited points
         adapter= new zonesAdapter(visitedPoints,getApplicationContext());
         //geocercasLayout= new LinearLayoutManager(getApplicationContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);

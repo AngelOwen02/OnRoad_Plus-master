@@ -113,6 +113,9 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
                 //Toast.makeText(context, response.code(), Toast.LENGTH_LONG).show();
                 Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            presenter.hideProgressDialog();
+            Toast.makeText(context, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -149,9 +152,13 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
             if(responseCode == GeneralConstantsV2.RESPONSE_CODE_OK){
                 presenter.setUnitAssignSupport(data);
             } else {
+                presenter.hideProgressDialog();
                 Toast.makeText(context, ""+response.code(), Toast.LENGTH_LONG).show();
                 //Toast.makeText(context, "Error", Toast.LENGTH_SHORT).show();
             }
+        } else {
+            presenter.hideProgressDialog();
+            Toast.makeText(context, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -183,11 +190,14 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
 
     private void getSupportData(Response<SingleSupportUnitResponse> response, Context context) {
         SingleSupportUnitResponse singleSupportUnitResponse = response.body();
-        if(singleSupportUnitResponse != null){
+        if(singleSupportUnitResponse != null) {
             int responseCode = singleSupportUnitResponse.getResponseCode();
             if(responseCode == GeneralConstantsV2.RESPONSE_CODE_OK){
                 List<SingleSupportUnitData> data = singleSupportUnitResponse.getData();
                 presenter.setSoportes(data);
+            } else {
+                presenter.hideProgressDialog();
+                Toast.makeText(context, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }

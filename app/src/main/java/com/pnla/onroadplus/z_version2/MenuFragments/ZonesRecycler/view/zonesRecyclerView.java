@@ -28,8 +28,12 @@ import com.pnla.onroadplus.z_version2.MenuFragments.ZonesRecycler.presenter.pres
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesRecycler.presenter.presenterRecyclerZonesImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 
+import java.text.ParseException;
+import java.text.RuleBasedCollator;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 //import io.fabric.sdk.android.services.common.SafeToast;
@@ -310,7 +314,8 @@ public class zonesRecyclerView  extends AppCompatActivity implements View.OnClic
 
 
 
-    private void fillTestData(){
+    private void fillTestData() {
+        Log.e("listazonas", "" + visitedPoints);
         adapter= new zonesAdapter(visitedPoints,getApplicationContext());
         //geocercasLayout= new LinearLayoutManager(getApplicationContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
@@ -441,6 +446,7 @@ public class zonesRecyclerView  extends AppCompatActivity implements View.OnClic
         progressDialog.dismiss();
         setdataSupervisor();
         fillTestData();//AQUI SE LLENAN LOS DATOS
+
     }
     private void setdataSupervisor()
     {
@@ -472,6 +478,7 @@ public class zonesRecyclerView  extends AppCompatActivity implements View.OnClic
                     if (zoneName != null) {
                         if (zoneName.contains(text)) {
                             visitedDataList.add(zones);
+
                         }
                     }
                 }

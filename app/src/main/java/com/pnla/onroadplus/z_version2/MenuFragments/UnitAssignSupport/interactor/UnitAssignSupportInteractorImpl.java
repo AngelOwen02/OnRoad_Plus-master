@@ -134,6 +134,9 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
                 presenter.setSoportes(data);
                 //Toast.makeText(context, data.toString(), Toast.LENGTH_LONG).show();
             }
+        } else {
+            presenter.hideProgressDialog();
+            Toast.makeText(context, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
 

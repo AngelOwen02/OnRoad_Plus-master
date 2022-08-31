@@ -14,8 +14,8 @@ public class RetrofitExternalApi {
     public static Retrofit getApiMap2() {
         if (retrofit == null) {
             okHttpClient = new OkHttpClient.Builder()//.sslSocketFactory()
-                    .readTimeout(45, TimeUnit.SECONDS)
-                    .connectTimeout(45, TimeUnit.SECONDS)
+                    .readTimeout(150, TimeUnit.SECONDS)
+                    .connectTimeout(150, TimeUnit.SECONDS)
                     .build();
             //SSLContext sslContext=Sslut;
 
