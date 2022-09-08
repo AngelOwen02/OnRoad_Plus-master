@@ -248,25 +248,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                         //Esto es para unidades color verde
                         Toast.makeText(context, "La ruta no requiere apoyo", Toast.LENGTH_LONG).show();
                     }
-
-                    //Esto es para mandarlo directo
-                    /**Bundle vehicleBundle = new Bundle();
-                    vehicleBundle.putInt("cve_layer", data.get(position).getCveLayer());
-                    vehicleBundle.putString("cve_vehicle", data.get(position).getCve_Vehicle());
-                    vehicleBundle.putString("vehicle_name", data.get(position).getVehicle_Name());
-                    vehicleBundle.putString("desc_layer", data.get(position).getDesc_Layer());
-                    vehicleBundle.putInt("percent_complete", data.get(position).getPercent_Complete());
-                    vehicleBundle.putInt("control_point", data.get(position).getControl_Point());
-                    vehicleBundle.putInt("percent_to_help", data.get(position).getPercentToHelp());
-                    vehicleBundle.putInt("status", data.get(position).getStatus());
-                    vehicleBundle.putInt("help_state", data.get(position).getHelp_State());
-                    vehicleBundle.putString("georeference", data.get(position).getGeoReference());
-
-                    //Aqui mandamos los datos del Bundle que creamos
-                    Intent intent = new Intent(context, UnitAssignSupportAsigmentsViewImpl.class);
-                    intent.putExtras(vehicleBundle);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    context.startActivity(intent);*/
                 }
             });
         }
