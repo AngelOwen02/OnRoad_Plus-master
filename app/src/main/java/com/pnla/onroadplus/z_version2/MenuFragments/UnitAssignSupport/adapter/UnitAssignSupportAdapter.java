@@ -56,6 +56,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
     private List<SupportUnitData> data;
     private Context context;
     public List<String> textaddres= new ArrayList<>();
+    private List<String> data2;
 
     //public UnitAssignSupportAdapter(List<Unit> unitList, Context context) {
     public UnitAssignSupportAdapter(List<SupportUnitData> data, Context context) {
@@ -277,6 +278,12 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
 
     public void getAdress(List<String> from) {
         textaddres=from;
+    }
+
+    public void setFilter(List<SupportUnitData> unitList) {
+        this.data = new ArrayList<>();
+        this.data.addAll(unitList);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

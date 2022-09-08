@@ -12,24 +12,22 @@ public class checkListPresenterImpl implements  checkListPresenter{
     private checkListView view;
     private checkListInteractor interactor;
 
-    public checkListPresenterImpl(checkListView view,Context context)
-    {
+    public checkListPresenterImpl(checkListView view,Context context) {
         this.view=view;
         this.context=context;
         this.interactor=new checkListInteractorImpl(this,context);
     }
+
     @Override
     public void requestChecklist() {
-        if(view!=null)
-        {
+        if(view!=null) {
             interactor.requestCheckList();
         }
     }
 
     @Override
     public void setChecList() {
-        if(view!=null)
-        {
+        if(view!=null) {
             view.setCheckList();
         }
     }

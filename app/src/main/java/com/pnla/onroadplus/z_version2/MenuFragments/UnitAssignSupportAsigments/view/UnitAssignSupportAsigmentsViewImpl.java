@@ -45,7 +45,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
     private List<SingleSupportUnitData> soportes;
     final Handler handler = new Handler();
     CircleImageView imgUnitCircle;
-    private ImageView toolbarImgBack;
+    private ImageView toolbarImgBack, toolbarImgSearch;
     TextView unitGeoReference;
     TextView unitNameVehicle;
     TextView unitRuteVehicle;
@@ -156,6 +156,7 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
 
     private void initViewID(){
         toolbarImgBack = findViewById(R.id.back);
+        toolbarImgSearch = findViewById(R.id.search_toolbar_item_us);
         imgUnitCircle = findViewById(R.id.img_unit_support);
         unitGeoReference = findViewById(R.id.txt_unit_geo_reference_single);
         unitNameVehicle = findViewById(R.id.txt_unit_name_single);
@@ -164,6 +165,8 @@ public class UnitAssignSupportAsigmentsViewImpl extends AppCompatActivity implem
         unitRuteVehicleRv = findViewById(R.id.txt_unit_rute_title_single_rv);
         rvVehiclesSupp = findViewById(R.id.recycler_view_unit_supports_cl);
         progressDialog = new ProgressDialog(this);
+
+        toolbarImgSearch.setVisibility(View.GONE);
     }
 
     private void initPresenter() {

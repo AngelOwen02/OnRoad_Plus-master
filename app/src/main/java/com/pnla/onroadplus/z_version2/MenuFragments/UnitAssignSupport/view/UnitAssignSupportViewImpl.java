@@ -6,25 +6,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Parcelable;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,12 +23,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pnla.onroadplus.R;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.GroupTrackingAdapter;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractor;
-import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.container.UnitAssignSupportContainer;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractorImpl;
 
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.UnitDB;
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.adapter.UnitAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.adapter.UnitAssignSupportAdapter;
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.Group;
@@ -45,7 +34,6 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.adapter.Un
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.interactor.UnitAssignSupportInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.SupportUnitData;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.presenter.UnitsPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.UnitAssignSupportPresenter;
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.presenter.UnitsPresenterImpl;
@@ -54,13 +42,12 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.presenter.
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportView;
 //import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
 //import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
-import com.pnla.onroadplus.z_version2.MenuFragments.Zones.view.zonesFragment;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 public class UnitAssignSupportViewImpl extends AppCompatActivity implements UnitAssignSupportView, ImageView.OnClickListener {
 
@@ -70,14 +57,16 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
     private List<SupportUnitData> soportes;
     private ProgressBar progressBar;
     private ImageView toolbarItem;
-    private ImageView toolbarImgBack;
+    private ImageView toolbarImgBack, toolbarSrch;
     private ProgressDialog progressDialog;
     final Handler handler = new Handler();
     private Runnable runnable;
     private UnitAssignSupportPresenter presenter;
     int position;
-    private List<String> directions;
+    private List<String> asingmentdata2;
     private List<Integer> cvesalternos=new ArrayList<>();
+    private CardView searchViewContainer;
+    private SearchView searchViewa;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -96,8 +85,27 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
     private void initViewID() {
         progressBar = findViewById(R.id.units_view_progress_bar);
         toolbarImgBack = findViewById(R.id.back);
+        toolbarSrch = findViewById(R.id.search_toolbar_item_us);
         rvVehicles = findViewById(R.id.recycler_view_unit_tracking2);
         progressDialog = new ProgressDialog(this);
+        searchViewContainer = findViewById(R.id.units_search_view_container_us);
+        searchViewa = (SearchView) this.findViewById(R.id.search_view_units_us);
+        searchViewa.setOnQueryTextListener(new SearchView.OnQueryTextListener(){
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                //List<String> newAsig = filteredUnits(asingmentdata2, newText);
+                List<SupportUnitData> filterUnitList = filteredUnits(soportes, newText);
+                unitAssignSupportAdapter.setFilter(filterUnitList);
+                //Toast.makeText(getApplicationContext(), "Si funciona", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
 
 //        Dynatrace.applyUserPrivacyOptions(UserPrivacyOptions.builder()
 //                .withDataCollectionLevel(DataCollectionLevel.USER_BEHAVIOR)
@@ -148,6 +156,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
 
     private void initOnClickListeners() {
         toolbarImgBack.setOnClickListener(this);
+        toolbarSrch.setOnClickListener(this);
     }
 
     @Override
@@ -173,6 +182,22 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         rvVehicles.setAdapter(unitAssignSupportAdapter);
     }
 
+    //Aqui hace el filtrado de vehiculos por DescLayer
+    private List<SupportUnitData> filteredUnits(List<SupportUnitData> data, String text) {
+
+        List<SupportUnitData> filteredList = new ArrayList<>();
+        text = text.toLowerCase();
+        if(data!=null) {
+            for (SupportUnitData vehicle : data) {
+                String vehicleName = vehicle.getDesc_Layer().toLowerCase();
+                if(vehicleName.contains(text)) {
+                    filteredList.add(vehicle);
+                }
+            }
+        }
+        return filteredList;
+    }
+
     @Override
     public void failureResponse(String message) {
         if(message!=null) {
@@ -187,7 +212,8 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
                 goBackintomenu();
                 break;
 
-            /**case R.id.search_toolbar_item:
+            case R.id.search_toolbar_item_us:
+                //Toast.makeText(this, "Si funciona", Toast.LENGTH_SHORT).show();
                 //searchView.setVisibility(View.VISIBLE);
                 if(searchViewContainer.getVisibility()==View.VISIBLE) {
                     searchViewContainer.setVisibility(View.GONE);
@@ -195,7 +221,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
                 else{
                     searchViewContainer.setVisibility(View.VISIBLE);
                 }
-                break;*/
+                break;
         }
     }
 

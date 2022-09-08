@@ -9,25 +9,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/switchanswer"
         android:layout_width="match_parent"
-        android:layout_height="95dp"
-        android:visibility="visible"
+        android:layout_height="70dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <!--
-<<<<<<< HEAD
-
-=======
-
->>>>>>> master
--->
 
         <TextView
-            android:id="@+id/textView15"
+            android:id="@+id/textbooleanonly"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/roboto_black"
             android:gravity="center"
             android:text="Placas visibles y frontal trasera"
@@ -104,7 +97,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/optionanswer"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="95dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,10 +105,10 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView16"
+            android:id="@+id/textopenquestion"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginStart="5dp"
+            android:layout_marginStart="10dp"
             android:fontFamily="@font/roboto_black"
             android:gravity="center"
             android:text="Placas visibles y frontal trasera"
@@ -151,32 +144,37 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
+                <Spinner
+                    android:id="@+id/spinnerquestionary"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:spinnerMode="dialog"
+                    />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
         <ImageView
-            android:layout_width="15dp"
-            android:layout_height="22dp"
-            android:layout_marginEnd="5dp"
-            android:background="@drawable/arrow_right"
-            android:backgroundTint="@color/blackUI"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:visibility="gone"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_menu_gallery"
+            android:backgroundTint="@color/colorOrangeYellow"
+            app:layout_constraintBottom_toTopOf="@+id/guidelinequestion212"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView16"
-            app:layout_constraintTop_toTopOf="@+id/guidelinequestion212">
-
+            app:layout_constraintStart_toEndOf="@+id/textopenquestion"
+            app:layout_constraintTop_toTopOf="parent">
         </ImageView>
-
         <ImageView
+
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/ic_menu_camera"
             android:backgroundTint="@color/colorOrangeYellow"
             app:layout_constraintBottom_toTopOf="@+id/guidelinequestion212"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView16"
+            app:layout_constraintStart_toEndOf="@+id/textopenquestion"
             app:layout_constraintTop_toTopOf="parent">
 
         </ImageView>

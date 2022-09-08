@@ -35,4 +35,18 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <!-- este script fue remplazado por  search_tolbar.xml   -->
+
+    <ImageView
+        android:id="@+id/search_toolbar_item_us"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_toolbar_search" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

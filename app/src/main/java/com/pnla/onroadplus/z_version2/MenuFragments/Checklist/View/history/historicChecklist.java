@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -16,21 +16,28 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pnla.onroadplus.R;
-import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter.checkListAdapter1;
-import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter.checkListAdapter2;
-import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Presenter.checkListPresenter;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter.historicAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListViewImpl;
-import com.pnla.onroadplus.z_version2.fragments.contactV2.view.FragmentContactV2;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.data.HistoricData;
 
-public class historicChecklist  extends Fragment implements View.OnClickListener,historicChecklitView{
+import java.util.List;
+
+import javax.annotation.Nullable;
+
+public class historicChecklist extends AppCompatActivity implements View.OnClickListener, historicChecklitView{
+
     public static final String TAG = historicChecklist.class.getSimpleName();
     private ImageView historic_checks_back,search_checkList;
-    private checkListAdapter2 adapter;
+    private historicAdapter adapter;
     private RecyclerView rv;
-    private  FragmentManager manager;
+    private FragmentManager manager;
     private FragmentTransaction transaction;
  //   private checkListPresenter presenter;
-    @Override
+
+    private List<HistoricData> historic;
+    private historicAdapter historicAdapter;
+
+    /**@Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_historicchecklist, container, false);
@@ -38,31 +45,39 @@ public class historicChecklist  extends Fragment implements View.OnClickListener
         initView(view);
 
         return view;
+    }*/
+
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstance) {
+        super.onCreate(savedInstance);
+        setContentView(R.layout.fragment_historicchecklist);
+        initView();
     }
 
-    private void initView(View view) {
-        historic_checks_back=view.findViewById(R.id.historic_checks_back);
+    private void initView() {
+        historic_checks_back= findViewById(R.id.historic_checks_back);
         historic_checks_back.setOnClickListener(this);
-        rv=view.findViewById(R.id.recycler_historicTrips);
-        fillAdapter();
+        rv= findViewById(R.id.recycler_historicTrips);
+        fillAdapter(historic);
     }
-    private void fillAdapter()
-    {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+
+    private void fillAdapter(List<HistoricData> historic) {
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         rv.setLayoutManager(layoutManager);
-        adapter=new checkListAdapter2(this,getContext());
+        adapter=new historicAdapter(historic,getApplicationContext());
         rv.setAdapter(adapter);
     }
-    private void menutransition()
-    {
+
+    /**private void menutransition() {
          manager = getActivity().getSupportFragmentManager();
         transaction = manager.beginTransaction();
         CheckListViewImpl checklist = new CheckListViewImpl();
         transaction.replace(R.id.conteinerMainFragments, checklist, CheckListViewImpl.TAG).commit();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
-    }
-    @Override
+    }*/
+
+    /**@Override
     //Pressed return button - returns to the results menu
     public void onResume() {
         super.onResume();
@@ -81,26 +96,54 @@ public class historicChecklist  extends Fragment implements View.OnClickListener
                 return false;
             }
         });
+    }*/
+
+    @Override
+    public void setHistoric(List<HistoricData> data) {
+        if(historic!=null){
+            if(historic==data){
+            } else {
+                this.historic = data;
+                historicAdapter.notifyDataSetChanged();
+            }
+        } else {
+            this.historic = data;
+            fillAdapter(historic);
+        }
+        hideProgressDialog();
     }
-    public void goValidation()/** dialogo*/
-    {
+
+    public void goValidation()/** dialogo*/ {
     }
+
     @Override
     public void requestHistoric() {
 
     }
+
+    @Override
+    public void failureResponse(String message) {
+
+    }
+
+    @Override
+    public void showProgressDialog() {
+
+    }
+
+    @Override
+    public void hideProgressDialog() {
+
+    }
+
     @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
             case R.id.historic_checks_back:
-                menutransition();
-               //Toast.makeText(getContext(), "back", Toast.LENGTH_SHORT).show();
-
+                //menutransition();
+                Toast.makeText(getBaseContext(), "back", Toast.LENGTH_SHORT).show();
                 break;
         }
     }
-
-
-
 }

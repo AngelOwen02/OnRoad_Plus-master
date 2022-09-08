@@ -150,6 +150,9 @@ public class zonesInteractorImpl implements  zonesInteractor {
                     presenter.colorAndCvesZones(zonesAndColors);
                    // presenter.hideProgressDialog();
                 }
+            } else {
+                presenter.hideProgressDialog();
+                Toast.makeText(context, "" + responseinfo.getMessage() + responseinfo.getResponseCode() , Toast.LENGTH_SHORT).show();
             }
         }
 
@@ -236,6 +239,9 @@ public class zonesInteractorImpl implements  zonesInteractor {
                    //
 
                 }
+            } else {
+                presenter.hideProgressDialog();
+                Toast.makeText(context, "" + responseP.getResponseCode() + responseP.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -297,6 +303,9 @@ public class zonesInteractorImpl implements  zonesInteractor {
 
                     presenter.setPointsVisited(dataVisited);
                 }
+            } else {
+                presenter.hideProgressDialog();
+                Toast.makeText(context, " " + responseVisited.getResponseCode() + " " + responseVisited.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }

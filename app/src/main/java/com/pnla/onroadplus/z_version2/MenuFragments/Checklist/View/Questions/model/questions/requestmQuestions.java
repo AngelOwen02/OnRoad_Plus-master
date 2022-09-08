@@ -12,9 +12,9 @@ public class requestmQuestions {
     private String token;
 
 
-    public requestmQuestions(Integer cveSection, String token) {
+    public requestmQuestions( String token) {//Integer cveSection,
         super();
-        this.cveSection = cveSection;
+    //    this.cveSection = cveSection;
         this.token = token;
     }
 

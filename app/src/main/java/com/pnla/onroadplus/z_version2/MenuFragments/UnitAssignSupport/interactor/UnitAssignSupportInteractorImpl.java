@@ -107,7 +107,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
                 public void onFailure(Call<SupportUnitResponse> call, Throwable t) {
                     // Log.e("onFailure",t.getLocalizedMessage());
                     //Toast.makeText(context,  "sesion expirada2", Toast.LENGTH_LONG).show();
-                    Toast.makeText(context, t.toString(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show();
                 }
             });
         }

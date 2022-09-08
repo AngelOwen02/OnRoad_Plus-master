@@ -2,9 +2,9 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Interactor;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Presenter.checkListPresenter;
-import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Util.checkListService;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 public class checkListInteractorImpl implements checkListInteractor{
@@ -12,7 +12,7 @@ public class checkListInteractorImpl implements checkListInteractor{
 
     private Context context;
     private checkListPresenter presenter;
-    private checkListService service;
+ //   private checkListService service;
     public checkListInteractorImpl( checkListPresenter presenter,Context context)
     {
         this.presenter=presenter;
@@ -26,6 +26,7 @@ public class checkListInteractorImpl implements checkListInteractor{
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         if(token!=null)
         {
+            Log.e("questionsConf","token: "+token);
             presenter.setChecList();
         }
     }

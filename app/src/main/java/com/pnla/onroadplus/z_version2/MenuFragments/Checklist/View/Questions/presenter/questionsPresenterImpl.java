@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.interactor.questionsInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.interactor.questionsInteractorImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.dataQuestions;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.mquestions;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.sections.dataSections;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.view.questionView;
@@ -47,7 +48,7 @@ public class questionsPresenterImpl implements  questionPresenter{
     }
 
     @Override
-    public void setQuestions(List<mquestions> data) {
+    public void setQuestions(List<dataQuestions> data) {
         if(view!=null)
         {
             view.setQuestions(data);

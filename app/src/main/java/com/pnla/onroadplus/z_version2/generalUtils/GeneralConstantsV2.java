@@ -1,13 +1,12 @@
 package com.pnla.onroadplus.z_version2.generalUtils;
 
 public class GeneralConstantsV2 {
+
     public static final String SUCCESS = "SUCCESS";
     public static final String FAILTURE = "FAILTURE";
-
     public static final String NO_IMAGE = "NO_IMAGE";
     public static final String EMAIL = "EMAIL";
     public static final String TOKEN = "TOKEN";
-
     public static final String CREDENTIALS_PREFERENCES = "CREDENTIALS_PREFERENCES";
     public static final String USER_PREFERENCES = "USER_PREFERENCES";
     public static final String URL_USER_IMAGE_PREFERENCES = "URL_USER_IMAGE_PREFERENCES";
@@ -17,10 +16,8 @@ public class GeneralConstantsV2 {
     public static final String EMPLOYEE_NAME_PREFERENCES = "EMPLOYEE_NAME_PREFERENCES";
     public static final String CLOSE_SESSION_PREFERENCES = "CLOSE_SESSION_PREFERENCES";
     public static final String NOTIFICATIONS_PREFERENCES = "NOTIFICATIONS";
-
     //ActivityOnlineInteractor
     public static final String JSON_VEHICLES_LIST = "JSON_VEHICLES_LIST";
-
     //settings
     public static final String ACTIVE_NOTIFICATIONS = "1";
     public static final String DISABLED_NOTIFICATIONS = "0";
@@ -65,5 +62,8 @@ public class GeneralConstantsV2 {
 
     //DIALOG_LOCATION
     public static final int LOCATION_PERMISSION = 999;
+
+    //ANSWERS CHECKLIST
+    public static final String CHECKLIST_DATA = "DEFAULT";
 
 }

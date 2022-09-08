@@ -14,9 +14,9 @@ public class responsemQuestions {
     private String message;
     @SerializedName("data")
     @Expose
-    private List<mquestions> data = null;
+    private List<dataQuestions> data = null;
 
-    public responsemQuestions(Integer responseCode, String message, List<mquestions> data) {
+    public responsemQuestions(Integer responseCode, String message, List<dataQuestions> data) {
         super();
         this.responseCode = responseCode;
         this.message = message;
@@ -39,11 +39,11 @@ public class responsemQuestions {
         this.message = message;
     }
 
-    public List<mquestions> getData() {
+    public List<dataQuestions> getData() {
         return data;
     }
 
-    public void setData(List<mquestions> data) {
+    public void setData(List<dataQuestions> data) {
         this.data = data;
     }
 }

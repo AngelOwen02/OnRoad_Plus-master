@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.dataQuestions;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.mquestions;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.requestmQuestions;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.responsemQuestions;
@@ -84,7 +85,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
                             if(data!=null)
                             {
                                 presenter.setSections(data);
-                                presenter.hidepDialog();
+                                //presenter.hidepDialog();
                             }else
                             {
                                 Toast.makeText(context, "vacio:105", Toast.LENGTH_SHORT).show();
@@ -110,13 +111,13 @@ public class questionsInteractorImpl  implements questionsInteractor{
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         if(token!=null)
         {
-            Log.e("questionsConf","token:   "+token);
+            Log.e("question","token:   "+token);
             requestAquestion(dataSections,token);
         }
     }
 
     private void requestAquestion(Integer dataSections, String token) {
-        requestmQuestions request=new requestmQuestions(dataSections,token);
+        requestmQuestions request=new requestmQuestions(token);//dataSections,
         presenter.showpDialog();
         Call<responsemQuestions> call=service.getQuestions(request);
         call.enqueue(new Callback<responsemQuestions>() {
@@ -150,11 +151,11 @@ public class questionsInteractorImpl  implements questionsInteractor{
             String message = respons.getMessage();
             int responseCode = respons.getResponseCode();
             if (responseCode == GeneralConstantsV2.RESPONSE_CODE_OK) {
-                List<mquestions> data=respons.getData();
+                List<dataQuestions> data=respons.getData();
                 if(data!=null)
                 {
-                    presenter.setQuestions(data);
-                    presenter.hidepDialog();
+                   presenter.setQuestions(data);
+                   presenter.hidepDialog();
                 }else
                 {
                     Toast.makeText(context, "vacio:105", Toast.LENGTH_SHORT).show();
