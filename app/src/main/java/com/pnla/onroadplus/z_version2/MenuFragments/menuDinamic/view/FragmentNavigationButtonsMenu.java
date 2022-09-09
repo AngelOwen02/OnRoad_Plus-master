@@ -55,17 +55,17 @@ public class FragmentNavigationButtonsMenu extends Fragment implements View.OnCl
         View view = inflater.inflate(R.layout.menu_bar, container, false);
         initView(view);
         presenter.itemsMenu();
-        handler.postDelayed(runnable = new Runnable() {
+        /**handler.postDelayed(runnable = new Runnable() {
             @Override
             public void run() {
                 presenter.itemsMenu();
                 handler.postDelayed(this,20000);
             }
-        },20000);
+        },20000);*/
         return view;
       }
 
-    @Override
+    /**@Override
     public void onDestroy() {
         super.onDestroy();
         handler.removeCallbacks(runnable);
@@ -81,7 +81,8 @@ public class FragmentNavigationButtonsMenu extends Fragment implements View.OnCl
     public void onResume() {
         super.onResume();
         handler.postDelayed(runnable,10000);
-    }
+    }*/
+
         private void initView(View view) {
        /*     f1= .166f;
             f2=.333f;
