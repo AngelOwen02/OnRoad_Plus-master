@@ -24,10 +24,10 @@ public class questionsPresenterImpl implements  questionPresenter{
     }
 
     @Override
-    public void getpSections() {
+    public void getpSections(Integer checklistN) {
         if(view!=null)
         {
-            interactor.getiSections();
+            interactor.getiSections(checklistN);
         }
     }
 

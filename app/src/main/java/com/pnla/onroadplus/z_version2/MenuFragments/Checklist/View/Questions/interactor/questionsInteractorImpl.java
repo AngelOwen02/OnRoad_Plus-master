@@ -39,16 +39,17 @@ public class questionsInteractorImpl  implements questionsInteractor{
     }
     //region sections
     @Override
-    public void getiSections() {
+    public void getiSections(Integer checklistN) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         if(token!=null) {
-            requestSections(token);
+            Log.e("newchecklistEndpoints","V: "+checklistN+" "+token);
+            requestSections(checklistN,token);
         }
     }
-
-    private void requestSections(String token) {
-        requestmySections request=new requestmySections(token);
+    /** esta metodo trae las secciones*/
+    private void requestSections(Integer checklistN,String token) {
+        requestmySections request=new requestmySections(checklistN,token);
         presenter.showpDialog();
         Call<responseSections> call=service.getSections(request);
         call.enqueue(new Callback<responseSections>() {
@@ -85,7 +86,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
                             if(data!=null)
                             {
                                 presenter.setSections(data);
-                                //presenter.hidepDialog();
+                                presenter.hidepDialog();
                             }else
                             {
                                 Toast.makeText(context, "vacio:105", Toast.LENGTH_SHORT).show();
@@ -117,7 +118,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
     }
 
     private void requestAquestion(Integer dataSections, String token) {
-        requestmQuestions request=new requestmQuestions(token);//dataSections,
+        requestmQuestions request=new requestmQuestions(dataSections,token);//dataSections,
         presenter.showpDialog();
         Call<responsemQuestions> call=service.getQuestions(request);
         call.enqueue(new Callback<responsemQuestions>() {

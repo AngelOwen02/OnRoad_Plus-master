@@ -1,42 +1,35 @@
-package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions;
+package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.fulldataquestions;
 
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 
-public class Answer implements Serializable {
+public class mAnswers  implements Serializable {
 
     @SerializedName("origin_adm")
-
     private Integer originAdm;
-    @SerializedName("cve_trip_mgm_section")
-
+    @SerializedName("origin_adm")
     private Integer cveTripMgmSection;
-    @SerializedName("cve_trip_mgm_question")
-
+    @SerializedName("origin_adm")
     private Integer cveTripMgmQuestion;
-    @SerializedName("cve_trip_mgm_answer")
-
+    @SerializedName("origin_adm")
     private Integer cveTripMgmAnswer;
-    @SerializedName("desc_trip_mgm_answer")
-
+    @SerializedName("origin_adm")
     private String descTripMgmAnswer;
-    @SerializedName("trip_mgm_answer_value")
-
+    @SerializedName("origin_adm")
     private Integer tripMgmAnswerValue;
-    @SerializedName("object_type")
-
+    @SerializedName("object_Type")
     private Integer objectType;
 
-    public Answer(Integer originAdm, Integer cveTripMgmSection, Integer cveTripMgmQuestion, Integer cveTripMgmAnswer, String descTripMgmAnswer, Integer tripMgmAnswerValue, Integer objectType) {
-        super();
-        this.originAdm = originAdm;
-        this.cveTripMgmSection = cveTripMgmSection;
-        this.cveTripMgmQuestion = cveTripMgmQuestion;
-        this.cveTripMgmAnswer = cveTripMgmAnswer;
-        this.descTripMgmAnswer = descTripMgmAnswer;
-        this.tripMgmAnswerValue = tripMgmAnswerValue;
-        this.objectType = objectType;
+    public mAnswers(Integer originAdm,Integer cveTripMgmSection,Integer cveTripMgmQuestion,Integer cveTripMgmAnswer,String descTripMgmAnswer,Integer tripMgmAnswerValue,Integer objectType)
+    {
+        this.originAdm=originAdm;
+        this.cveTripMgmSection=cveTripMgmSection;
+        this.cveTripMgmQuestion=cveTripMgmQuestion;
+        this.cveTripMgmAnswer=cveTripMgmAnswer;
+        this.descTripMgmAnswer=descTripMgmAnswer;
+        this.tripMgmAnswerValue=tripMgmAnswerValue;
+        this.objectType=objectType;
     }
 
     public Integer getOriginAdm() {
@@ -94,4 +87,7 @@ public class Answer implements Serializable {
     public void setObjectType(Integer objectType) {
         this.objectType = objectType;
     }
+
+
+
 }

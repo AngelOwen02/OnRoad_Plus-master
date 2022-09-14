@@ -1,46 +1,60 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.model;
 
+import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 public class Historic {
 
+    @SerializedName("date_insert")
+    @Expose
+    private String date_Insert;
+    @SerializedName("vehicle_name")
+    @Expose
+    private String vehicleName;
+    @SerializedName("score")
+    @Expose
+    private String score;
+    @SerializedName("traffic_light")
+    @Expose
+    private int trafficLight;
 
-    @SerializedName("date")
-    private String date;
-    @SerializedName("economicNumber")
-    private String economicNumber;
-    @SerializedName("status")
-    private String status;
-
-
-    public Historic(String date, String economicNumber, String status) {
+    public Historic(String dateInsert, String vehicleName, String score, int trafficLight) {
         super();
-        this.date = date;
-        this.economicNumber = economicNumber;
-        this.status = status;
+        this.date_Insert = dateInsert;
+        this.vehicleName = vehicleName;
+        this.score = score;
+        this.trafficLight = trafficLight;
     }
 
-    public String getDate() {
-        return date;
+    public String getDate_Insert() {
+        return date_Insert;
     }
 
-    public void setDate(String date) {
-        this.date = date;
+    public void setDate_Insert(String date_Insert) {
+        this.date_Insert = date_Insert;
     }
 
-    public String getEconomicNumber() {
-        return economicNumber;
+    public String getVehicleName() {
+        return vehicleName;
     }
 
-    public void setEconomicNumber(String economicNumber) {
-        this.economicNumber = economicNumber;
+    public void setVehicleName(String vehicleName) {
+        this.vehicleName = vehicleName;
     }
 
-    public String getStatus() {
-        return status;
+    public String getScore() {
+        return score;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setScore(String score) {
+        this.score = score;
+    }
+
+    public int getTrafficLight() {
+        return trafficLight;
+    }
+
+    public void setTrafficLight(int trafficLight) {
+        this.trafficLight = trafficLight;
     }
 }

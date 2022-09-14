@@ -58,16 +58,21 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     private List<dataQuestions> dataQuestions1;
     private questionPresenter presenter;
     private boolean isfirsttime=false;
-    private int posrv;
+    public static int posrv;
     private sectionsAdapter sA;
     private TextView titlefileds;
-
+    private int checklistN;
 
     @SuppressLint("NewApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_questions, container, false);
+        Bundle bundle = this.getArguments();
+
+        if(bundle != null){
+            checklistN= bundle.getInt("cveTripMgmSection");
+        }
         initContactView(view);
 
       // /** esto inicializa la posicion y el numero de puntos del quiestionario*/
@@ -85,25 +90,29 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         buttongochecklist.setOnClickListener(this);
         progressDialog = new ProgressDialog(getActivity());
         presenter=new questionsPresenterImpl(this,getContext());
-        presenter.getpSections();
+        presenter.getpSections(checklistN);
 
 
     }
 
     void filldataAdapter()
     {
-                sA=new sectionsAdapter(posrv,dataQuestions1,sizeArange,this, getContext());
+                sA=new sectionsAdapter(dataQuestions1,sizeArange,this, getContext());
                 pager.setAdapter(sA);
                 pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
                     @Override
                     public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
                         super.onPageScrolled(position, positionOffset, positionOffsetPixels);
                     }
-
                     @Override
-                    public void onPageSelected(int position) {
+                    public void onPageSelected(final int position) {
                         super.onPageSelected(position);
 
+                                posrv=position;
+                                sA.notifyDataSetChanged();
+
+
+                        Log.e("finalcheck",""+position);
                         movedots(position);
                         titlefileds.setText(dataQuestions1.get(position).getDescTripMgmSection());
                         if(position!=0) {
@@ -202,7 +211,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
             if(sizeArange!=0) {
                 if (isfirsttime == false) {
                     posrv=0;
-                    presenter.getpQuestions(dataSections.get(0).getCveTripMgmSection());
+                    presenter.getpQuestions(checklistN);//dataSections.get(0).getCveTripMgmSection());
                    // movedots(0);
 
                     isfirsttime = true;
@@ -224,13 +233,14 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         if(dataQuestions1!=null)
         {
                //Log.e("checklistQuestions","setQuestions: "+"size: "+dataQuestions1.size()+"       " +dataQuestions1.get(4).getQuestions().size()+"   pointspos:"+posrv);//+"  "+dataSections.get(1).getDescTripMgmSection()
-            filldataAdapter();
+
            // movedots(0);
 
            // TODO shared preferences  del array de objetos aqui
 
 
             if(CheckListViewImpl.fulChecklist!=null){//sie el cheklist esta vacio
+                Log.e("fulChecklistF","if case "+CheckListViewImpl.fulChecklist);
                 Log.e("fulChecklistF","if case "+CheckListViewImpl.fulChecklist.size());//TODO esto deberia comprobarse desde shared preferences
             }else                                     //de no estar vacio comprobar con los valores registrados
             {
@@ -258,14 +268,14 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
                                     Log.e("fulChecklistA",""+dataQuestions1.get(i).getQuestions().get(k).getAnswers().get(j).getDescTripMgmAnswer());
                                 }
                             }
-                            Log.e("fulChecklistQ","origin: "+dataQuestions1.get(i).getQuestions().get(k).getOriginAdm()+         //oirigen
+                           /* Log.e("fulChecklistQ","origin: "+dataQuestions1.get(i).getQuestions().get(k).getOriginAdm()+         //oirigen
                                        " section: "+dataQuestions1.get(i).getCveTripMgmSection()+
                                        " cve: "+dataQuestions1.get(i).getQuestions().get(k).getCveTripMgmQuestion()+                        //cve pregunta
                                        " Q: "+dataQuestions1.get(i).getQuestions().get(k).getDescTripMgmQuestion()+                         //pregunta txt
-                                       " A: "+answer);                                                                                      //posibles respuestas
+                                       " A: "+answer);                                                                                      //posibles respuestas*/
 
 
-                            dataChecklist dataChecklist1=new dataChecklist(dataQuestions1.get(i).getOriginAdm(),
+                            dataChecklist dataChecklist1=new dataChecklist(dataQuestions1.get(i).getOriginAdm(),                    //se agregan todos los
                                                                  dataQuestions1.get(i).getQuestions().get(k).getCveTripMgmQuestion(),
                                                                  dataQuestions1.get(i).getQuestions().get(k).getCveTripMgmSection(),0,"");
                             Log.e("fulChecklistF",""+dataQuestions1.get(i).getCveTripMgmSection()+"   "+dataQuestions1.get(i).getQuestions().get(k).getCveTripMgmSection());
@@ -274,7 +284,17 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
                             }
 
                         }
-                      //  Log.e("fulChecklistF",""+dataQuestions1.get(i).getCveTripMgmSection());
+                        List<dataChecklist> fulChecklist2=new ArrayList<>();
+                        fulChecklist2.clear();
+                        for(int o=0;o<fulChecklist.size();o++)
+                        {
+                            if(fulChecklist.get(o).getSection()==dataQuestions1.get(i).getCveTripMgmSection())
+                            {
+                                fulChecklist2.add(fulChecklist.get(o));
+                            }
+                        }
+                        CheckListViewImpl.fulChecklist.add(i,fulChecklist2);
+//  Log.e("fulChecklistF",""+dataQuestions1.get(i).getCveTripMgmSection());
 
 //    private int origin;
 //    private String answerId;
@@ -282,12 +302,12 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
 //    private int answerPos;
 //    private String foto;
 
-                    } /*** TODO eliminar todos los valores del los campos que no pertenezcan al array de las secciones */
-                    CheckListViewImpl.fulChecklist.add(i,fulChecklist);/** este dato se itera 7 veces*/
+                    }
+                  /** este dato se itera 7 veces*/
 
                 }
                 Log.e("fulChecklistF","else case "+ CheckListViewImpl.fulChecklist.size());
-                //TODO aqui deberiamos guardar el valor en shared preferences;
+                //TODO-DONE aqui deberiamos guardar el valor en shared preferences;
                 SharedPreferences preferences = getContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor=preferences.edit();
                 Gson gson = new Gson();
@@ -295,15 +315,11 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
                 editor.putString(GeneralConstantsV2.CHECKLIST_DATA, json);
                 editor.commit();
             }
+            filldataAdapter();
         }
 
     }
-    /**
-     *"origin"        : int
-     *"mesageSecciton": int
-     *"answerValue"   : int
-     *
-     * */
+
 
     @Override
     public void showDialog() {

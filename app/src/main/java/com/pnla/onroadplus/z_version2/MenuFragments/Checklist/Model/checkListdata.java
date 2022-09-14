@@ -4,19 +4,31 @@ import com.google.gson.annotations.SerializedName;
 
 public class checkListdata {
 
-
     @SerializedName("origin_adm")
-     private Integer originAdm;
-    @SerializedName("cve_trip_mgm_section")
+    private Integer originAdm;
+    @SerializedName("cve_trip_mgm_checklist")
     private Integer cveTripMgmSection;
-    @SerializedName("desc_trip_mgm_section")
+    @SerializedName("desc_trip_mgm_checklist")
     private String descTripMgmSection;
+    @SerializedName("approver")
+    private boolean aprobador;
+    @SerializedName("email")
+    private String email;
 
-    public checkListdata(Integer originAdm, Integer cveTripMgmSection, String descTripMgmSection) {
+    //    @SerializedName("origin_adm")
+    //    private Integer originAdm;
+    //    @SerializedName("cve_trip_mgm_section")
+    //    private Integer cveTripMgmSection;
+    //    @SerializedName("desc_trip_mgm_section")
+    //    private String descTripMgmSection;
+
+    public checkListdata(Integer originAdm, Integer cveTripMgmSection, String descTripMgmSection,boolean aprobador,String email) {
         super();
         this.originAdm = originAdm;
         this.cveTripMgmSection = cveTripMgmSection;
         this.descTripMgmSection = descTripMgmSection;
+        this.aprobador=aprobador;
+        this.email=email;
     }
 
     public Integer getOriginAdm() {
@@ -41,5 +53,21 @@ public class checkListdata {
 
     public void setDescTripMgmSection(String descTripMgmSection) {
         this.descTripMgmSection = descTripMgmSection;
+    }
+
+    public boolean isAprobador() {
+        return aprobador;
+    }
+
+    public void setAprobador(boolean aprobador) {
+        this.aprobador = aprobador;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

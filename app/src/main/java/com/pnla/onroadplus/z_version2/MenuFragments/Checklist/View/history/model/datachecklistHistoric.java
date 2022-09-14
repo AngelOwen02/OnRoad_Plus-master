@@ -6,7 +6,6 @@ import java.util.List;
 
 public class datachecklistHistoric {
 
-
     @SerializedName("historic")
 
     private List<Historic> historic = null;
@@ -23,5 +22,4 @@ public class datachecklistHistoric {
     public void setHistoric(List<Historic> historic) {
         this.historic = historic;
     }
-
 }

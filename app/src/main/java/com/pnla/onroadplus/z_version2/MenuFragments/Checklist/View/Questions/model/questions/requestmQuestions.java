@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class requestmQuestions {
 
-    @SerializedName("cve_section")
+    @SerializedName("cve_trip_mgm_checklist")
 
     private Integer cveSection;
     @SerializedName("token")
@@ -12,9 +12,9 @@ public class requestmQuestions {
     private String token;
 
 
-    public requestmQuestions( String token) {//Integer cveSection,
+    public requestmQuestions( Integer cveSection,String token) {//Integer cveSection,
         super();
-    //    this.cveSection = cveSection;
+        this.cveSection = cveSection;
         this.token = token;
     }
 

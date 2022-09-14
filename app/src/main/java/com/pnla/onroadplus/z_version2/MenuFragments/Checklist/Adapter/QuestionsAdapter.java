@@ -29,6 +29,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     private Context context;
     private dataQuestions data;
     private ArrayAdapter<String> spinnerArrayAdapter;
+    private boolean poss=false;
 
     public QuestionsAdapter(dataQuestions dataQuestions, Questions mview, Context context) {
         this.myview=myview;
@@ -36,8 +37,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         this.data=dataQuestions;
 
 
-    }
 
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
@@ -48,7 +49,10 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
     @Override
     public void onBindViewHolder(@NonNull QuestionsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-
+        if(poss==false) {
+            Log.e("finalcheck", "heredada " + Questions.posrv);
+            poss=true;
+        }
 
         if (data.getQuestions().get(position).getAnswers().size()!=2) {//si no son booleanas
             Log.e("multianswerType"," : "+position);
@@ -107,6 +111,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         this.data=ndata;
 
     }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
     ConstraintLayout switchanswer,optionanswer;

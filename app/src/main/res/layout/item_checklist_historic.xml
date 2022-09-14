@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/textView11"
+            android:id="@+id/txt_vehicle_name_his"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="15dp"
@@ -28,12 +28,12 @@
             app:layout_constraintEnd_toStartOf="@+id/guideline18"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="RtlCompat">
+            tools:ignore="RtlCompat" >
 
         </TextView>
 
         <TextView
-            android:id="@+id/textView14"
+            android:id="@+id/txt_date_his"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:fontFamily="@font/roboto_medium"
@@ -42,15 +42,13 @@
             android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="@+id/view7"
             app:layout_constraintEnd_toStartOf="@+id/guideline19"
-            app:layout_constraintStart_toEndOf="@+id/textView11"
+            app:layout_constraintStart_toEndOf="@+id/txt_vehicle_name_his"
             app:layout_constraintTop_toTopOf="parent">
 
         </TextView>
 
-
-
         <ImageView
-            android:id="@+id/imageSemaforo"
+            android:id="@+id/imageSemaforo_his"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:background="@drawable/ic_siga"
@@ -62,7 +60,7 @@
         </ImageView>
 
         <TextView
-            android:id="@+id/textView12"
+            android:id="@+id/txt_score_his"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:fontFamily="@font/roboto_bold"

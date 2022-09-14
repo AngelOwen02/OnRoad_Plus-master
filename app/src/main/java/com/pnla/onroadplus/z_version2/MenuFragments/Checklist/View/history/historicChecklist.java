@@ -1,14 +1,17 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -18,66 +21,134 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter.historicAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListViewImpl;
-import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.data.HistoricData;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.model.Historic;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.presenter.HistoricCheckListPresenter;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.presenter.HistoricCheckListPresenterImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Nullable;
-
-public class historicChecklist extends AppCompatActivity implements View.OnClickListener, historicChecklitView{
+public class historicChecklist extends Fragment implements View.OnClickListener,historicChecklitView{
 
     public static final String TAG = historicChecklist.class.getSimpleName();
     private ImageView historic_checks_back,search_checkList;
+    private ProgressBar progressBar;
+    private ProgressDialog progressDialog;
     private historicAdapter adapter;
     private RecyclerView rv;
     private FragmentManager manager;
     private FragmentTransaction transaction;
+    private CardView searchViewContainer;
+    private SearchView searchViewa;
+    private List<Historic> soportes;
+    private HistoricCheckListPresenter presenter;
  //   private checkListPresenter presenter;
 
-    private List<HistoricData> historic;
-    private historicAdapter historicAdapter;
-
-    /**@Override
+    @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_historicchecklist, container, false);
 
         initView(view);
+        initPresenter();
 
         return view;
-    }*/
+    }
+
+    private void initView(View view) {
+        progressBar = view.findViewById(R.id.units_historic_view_progress_bar);
+        progressDialog = new ProgressDialog(getContext());
+        historic_checks_back = view.findViewById(R.id.historic_checks_back);
+        historic_checks_back.setOnClickListener(this);
+        rv = view.findViewById(R.id.recycler_historicTrips);
+
+        search_checkList = view.findViewById(R.id.search_checkList);
+        search_checkList.setOnClickListener(this);
+        searchViewContainer = view.findViewById(R.id.units_search_view_container_us);
+        searchViewa = (SearchView) view.findViewById(R.id.search_view_units_us);
+        searchViewa.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                List<Historic> filterUnitList = filteredUnits(soportes, newText);
+                adapter.setFilter(filterUnitList);
+                return false;
+            }
+        });
+
+    }
+
+    private void initPresenter() {
+        presenter = new HistoricCheckListPresenterImpl(getContext());
+        presenter.setView(this);
+        presenter.requestHistoric();
+    }
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstance) {
-        super.onCreate(savedInstance);
-        setContentView(R.layout.fragment_historicchecklist);
-        initView();
+    public void setHistoric(List<Historic> data) {
+        this.soportes = data;
+        if(soportes!=null) {
+            fillAdapter(soportes);
+        }
     }
 
-    private void initView() {
-        historic_checks_back= findViewById(R.id.historic_checks_back);
-        historic_checks_back.setOnClickListener(this);
-        rv= findViewById(R.id.recycler_historicTrips);
-        fillAdapter(historic);
+    private List<Historic> filteredUnits(List<Historic> data, String text) {
+
+        List<Historic> filteredList = new ArrayList<>();
+        text = text.toLowerCase();
+        if(data!=null) {
+            for(Historic vehicle : data) {
+                String vehicleName = vehicle.getVehicleName().toLowerCase();
+                if(vehicleName.contains(text)) {
+                    filteredList.add(vehicle);
+                }
+            }
+        }
+        return filteredList;
     }
 
-    private void fillAdapter(List<HistoricData> historic) {
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
+    @Override
+    public void failureResponse(String message) {
+        if(message!=null) {
+            Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
+    public void showProgressDialog() {
+        //Aqui va el metodo para mostrar el ProgressDialog
+        progressDialog.setMessage("Cargando Unidades");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        //Aqui va el metodo para ocultar el ProgressDialog
+        progressDialog.dismiss();
+    }
+
+    private void fillAdapter(List<Historic> soportes) {
+        adapter = new historicAdapter(soportes, this, getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
         rv.setLayoutManager(layoutManager);
-        adapter=new historicAdapter(historic,getApplicationContext());
         rv.setAdapter(adapter);
     }
 
-    /**private void menutransition() {
+    private void menutransition() {
          manager = getActivity().getSupportFragmentManager();
         transaction = manager.beginTransaction();
         CheckListViewImpl checklist = new CheckListViewImpl();
         transaction.replace(R.id.conteinerMainFragments, checklist, CheckListViewImpl.TAG).commit();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+    }
 
-    }*/
-
-    /**@Override
+    @Override
     //Pressed return button - returns to the results menu
     public void onResume() {
         super.onResume();
@@ -96,24 +167,10 @@ public class historicChecklist extends AppCompatActivity implements View.OnClick
                 return false;
             }
         });
-    }*/
-
-    @Override
-    public void setHistoric(List<HistoricData> data) {
-        if(historic!=null){
-            if(historic==data){
-            } else {
-                this.historic = data;
-                historicAdapter.notifyDataSetChanged();
-            }
-        } else {
-            this.historic = data;
-            fillAdapter(historic);
-        }
-        hideProgressDialog();
     }
 
-    public void goValidation()/** dialogo*/ {
+    public void goValidation() /** dialogo*/ {
+
     }
 
     @Override
@@ -122,27 +179,23 @@ public class historicChecklist extends AppCompatActivity implements View.OnClick
     }
 
     @Override
-    public void failureResponse(String message) {
-
-    }
-
-    @Override
-    public void showProgressDialog() {
-
-    }
-
-    @Override
-    public void hideProgressDialog() {
-
-    }
-
-    @Override
     public void onClick(View v) {
 
         switch (v.getId()) {
             case R.id.historic_checks_back:
-                //menutransition();
-                Toast.makeText(getBaseContext(), "back", Toast.LENGTH_SHORT).show();
+                menutransition();
+               //Toast.makeText(getContext(), "back", Toast.LENGTH_SHORT).show();
+                break;
+
+            case R.id.search_checkList:
+                //Toast.makeText(this, "Si funciona", Toast.LENGTH_SHORT).show();
+                //searchView.setVisibility(View.VISIBLE);
+                if(searchViewContainer.getVisibility()==View.VISIBLE) {
+                    searchViewContainer.setVisibility(View.GONE);
+                }
+                else{
+                    searchViewContainer.setVisibility(View.VISIBLE);
+                }
                 break;
         }
     }

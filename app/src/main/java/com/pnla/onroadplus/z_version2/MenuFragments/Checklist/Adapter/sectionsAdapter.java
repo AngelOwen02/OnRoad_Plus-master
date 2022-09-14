@@ -26,10 +26,10 @@ public class sectionsAdapter extends RecyclerView.Adapter<sectionsAdapter.ViewHo
     private  int sizedots;
     private List<dataQuestions> dataQuestions1;
     private QuestionsAdapter adapter;
-    private int posrv;
 
-    public sectionsAdapter(int posrv , List<dataQuestions> data, int size, Questions mview, Context context) {//(FragmentManager childFragmentManager, List<Banners> banners, Context context) {
-        this.posrv=posrv;
+
+    public sectionsAdapter( List<dataQuestions> data, int size, Questions mview, Context context) {//(FragmentManager childFragmentManager, List<Banners> banners, Context context) {
+
         this.context= context;
         this.mview=mview;
         this.dataQuestions1=data;
@@ -46,7 +46,7 @@ public class sectionsAdapter extends RecyclerView.Adapter<sectionsAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull sectionsAdapter.ViewHolder holder, int position) {
-      Log.e("viewpager2new",""+position);
+
       adapter=new QuestionsAdapter(dataQuestions1.get(position),mview, context);//TODO cambiar esto por el iterador
       holder.rv.setAdapter(adapter);
     }
@@ -55,6 +55,8 @@ public class sectionsAdapter extends RecyclerView.Adapter<sectionsAdapter.ViewHo
     public int getItemCount() {
         return dataQuestions1.size();
     }
+
+
     public class ViewHolder extends RecyclerView.ViewHolder {
         public RecyclerView rv;
         public ViewHolder(View view) {

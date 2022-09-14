@@ -7,7 +7,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.mod
 import java.util.List;
 
 public interface questionPresenter {
-    void getpSections();
+    void getpSections(Integer checklistN);
     void getpQuestions(Integer dataSections);
 
     void setSections(List<dataSections> data);

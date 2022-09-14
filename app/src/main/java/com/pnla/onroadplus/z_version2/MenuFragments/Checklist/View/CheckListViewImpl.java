@@ -1,7 +1,7 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View;
 
+import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.activity.OnBackPressedCallback;
+import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -20,28 +21,41 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter.checkListAdapter1;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Model.checkListdata;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Model.dataChecklist;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Model.dataChecklistHistoric;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Presenter.checkListPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Presenter.checkListPresenterImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.view.Questions;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.historicChecklist;
-import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
-import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
 import com.pnla.onroadplus.z_version2.fragments.contactV2.view.FragmentContactV2;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
-public class CheckListViewImpl extends Fragment implements View.OnClickListener, checkListView{
+public class CheckListViewImpl extends Fragment implements View.OnClickListener, checkListView {
+
     public static final String TAG = FragmentContactV2.class.getSimpleName();
     private ImageView historic_checks,search_checkList;
     private ConstraintLayout contrainButton;
     private checkListAdapter1 adapter;
     private RecyclerView rv;
+    private CardView searchViewContainer;
+    private SearchView searchViewa;
     private checkListPresenter presenter;
     public static List<List<dataChecklist>> fulChecklist= null;
+    private List<checkListdata> checklistData;
+    private ProgressDialog progressDialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -55,63 +69,122 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
     private void initContactView(View view) {
         contrainButton=view.findViewById(R.id.contrainButton);
         contrainButton.setOnClickListener(this);
+
         rv=view.findViewById(R.id.recycler_checkList);
         presenter=new checkListPresenterImpl(this,getContext());
+        progressDialog = new ProgressDialog(getActivity());
         presenter.requestChecklist();
-        check_datafromsshared();
 
+        search_checkList = view.findViewById(R.id.search_checkList);
+        search_checkList.setOnClickListener(this);
+
+        searchViewContainer = view.findViewById(R.id.cheklist_search_view_container_us);
+        searchViewa = (SearchView) view.findViewById(R.id.search_view_checkilist_us);
+        searchViewa.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                List<checkListdata> filterCheckList = filteredCheckList(checklistData, newText);
+                adapter.setFilter(filterCheckList);
+                return false;
+            }
+        });
+
+        check_datafromsshared();
     }
 
     private void check_datafromsshared() {
         SharedPreferences npreferences = getContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-        String checklist= npreferences.getString(GeneralConstantsV2.CHECKLIST_DATA, null);
-        Log.e("fulChecklistF","valor shared "+checklist);
-        if(checklist!=null)
-        {
-//               Gson gson = new Gson();
-//               dataChecklist resp = gson.fromJson(checklist, dataChecklist.class);
+        String checklist = npreferences.getString(GeneralConstantsV2.CHECKLIST_DATA, null);
+        Log.e("fulChecklistF", "valor shared " + checklist);
+        if (checklist != null) {
+            Type resultListType = new TypeToken<ArrayList<ArrayList<dataChecklist>>>(){}.getType();
+            List<dataChecklist> resultObj = new Gson().fromJson(checklist, resultListType);
+            Log.e("fulChecklistF",""+  resultObj);
+            fulChecklist=new ArrayList<>();
+            fulChecklist.add(resultObj);
+            //TODO ver por seccion llos datos activos o en 0 o las fotos && llamar on activity result
         }
-
-
-
     }
 
-    private void fillAdapter()
-    {
-      LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
-      rv.setLayoutManager(layoutManager);
-      adapter=new checkListAdapter1(this,getContext());
-      rv.setAdapter(adapter);
+    private void fillAdapter(List<checkListdata> data) {
+        adapter = new checkListAdapter1(data,this,getContext());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        rv.setLayoutManager(layoutManager);
+        rv.setAdapter(adapter);
     }
 
-    private void menutransition()//aqui va el historico
-    {
-        Intent intent = new Intent(getContext(), historicChecklist.class);
-        startActivity(intent);
-
-        /**FragmentManager manager = getActivity().getSupportFragmentManager();
+    private void menutransition() { //aqui va el historico
+        FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         historicChecklist historic = new historicChecklist();//transaction.addToBackStack(UnitsViewImpl.TAG);
         transaction.replace(R.id.conteinerMainFragments, historic, historicChecklist.TAG).commit();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);*/
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     }
 
-    private void questionFragment() {
+    public void goquestionaryFragment(Integer cveTripMgmSection) {
+        //Toast.makeText(getContext(), "ir al cuestionario", Toast.LENGTH_SHORT).show();
+        questionFragment(cveTripMgmSection);
+    }
+
+    private void questionFragment(Integer cveTripMgmSection) {
+        Bundle bundle = new Bundle();
+        bundle.putInt("cveTripMgmSection",cveTripMgmSection); // Put anything what you want
+
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         Questions questions = new Questions();//transaction.addToBackStack(UnitsViewImpl.TAG);
         transaction.replace(R.id.conteinerMainFragments, questions, Questions.TAG).commit();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        questions.setArguments(bundle);
     }
 
-    public void goquestionaryFragment() {
-        //Toast.makeText(getContext(), "ir al cuestionario", Toast.LENGTH_SHORT).show();
-        questionFragment();
+    private List<checkListdata> filteredCheckList(List<checkListdata> data, String text) {
+
+        List<checkListdata> filteredList = new ArrayList<>();
+        text = text.toLowerCase();
+        if(data!=null) {
+            for(checkListdata vehicle : data) {
+                String checklistName = vehicle.getDescTripMgmSection().toLowerCase();
+                if(checklistName.contains(text)) {
+                    filteredList.add(vehicle);
+                }
+            }
+        }
+        return filteredList;
     }
 
     @Override
-    public void setCheckList() {
-        fillAdapter();
+    public void setCheckList(List<checkListdata> data) {
+
+        if(checklistData!=null) {
+            if(checklistData==data) {
+            } else {
+                this.checklistData = data;
+                adapter.notifyDataSetChanged();
+            }
+        } else {
+            this.checklistData = data;
+            fillAdapter(checklistData);
+        }
+        //fillAdapter(data);
+    }
+
+    @Override
+    public void showDialog() {
+        progressDialog.setMessage("Cargando Checklist");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgresDialog() {
+        progressDialog.dismiss();
     }
 
     @Override
@@ -119,6 +192,16 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
         switch (v.getId()) {
             case R.id.contrainButton:
                 menutransition();
+                break;
+
+            case R.id.search_checkList:
+                //Toast.makeText(getContext(), "Si sirve", Toast.LENGTH_SHORT).show();
+                if(searchViewContainer.getVisibility()==View.VISIBLE) {
+                    searchViewContainer.setVisibility(View.GONE);
+                }
+                else {
+                    searchViewContainer.setVisibility(View.VISIBLE);
+                }
                 break;
         }
     }
