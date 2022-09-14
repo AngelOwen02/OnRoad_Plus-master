@@ -71,7 +71,7 @@ public class historicAdapter extends RecyclerView.Adapter<historicAdapter.ViewHo
         SimpleDateFormat dt1 = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         holder.unitDate.setText(dt1.format(date));
 
-        //Imagen
+        //Imagen (Semaforo)
         //Verde: Icono de Siga
         if(data.get(position).getTrafficLight() == 1) {
             holder.unitImageScore.setImageResource(R.drawable.ic_siga);
