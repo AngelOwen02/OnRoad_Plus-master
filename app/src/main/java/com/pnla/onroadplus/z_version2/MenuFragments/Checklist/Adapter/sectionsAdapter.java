@@ -27,7 +27,6 @@ public class sectionsAdapter extends RecyclerView.Adapter<sectionsAdapter.ViewHo
     private List<dataQuestions> dataQuestions1;
     private QuestionsAdapter adapter;
 
-
     public sectionsAdapter( List<dataQuestions> data, int size, Questions mview, Context context) {//(FragmentManager childFragmentManager, List<Banners> banners, Context context) {
 
         this.context= context;
