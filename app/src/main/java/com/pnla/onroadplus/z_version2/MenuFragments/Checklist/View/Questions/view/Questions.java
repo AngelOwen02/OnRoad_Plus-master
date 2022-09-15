@@ -95,8 +95,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
 
     }
 
-    void filldataAdapter()
-    {
+    void filldataAdapter() {
                 sA=new sectionsAdapter(dataQuestions1,sizeArange,this, getContext());
                 pager.setAdapter(sA);
                 pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {

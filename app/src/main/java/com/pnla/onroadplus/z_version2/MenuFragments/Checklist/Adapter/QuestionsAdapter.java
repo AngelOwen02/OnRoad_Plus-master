@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -35,17 +37,14 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         this.myview=myview;
         this.context=context;
         this.data=dataQuestions;
-
-
-
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_questions_type, parent, false);
         return new QuestionsAdapter.ViewHolder(view);
     }
-
 
     @Override
     public void onBindViewHolder(@NonNull QuestionsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
@@ -93,14 +92,24 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                 }
             });
 
-        }else{                                                         //son preguntas abiertas
+        } else {                                                         //switches
             holder.optionanswer.setVisibility(View.GONE);
             holder.switchanswer.setVisibility(View.VISIBLE);
             holder.description2.setText(data.getQuestions().get(position).getDescTripMgmQuestion());
+
+
+            holder.switchquestionary.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                    Log.e("spinnerquestionary", "section : " + data.getQuestions().get(position).getCveTripMgmSection() +
+                            " switchpos: " + position +
+                            " answer: " + b);
+
+                    //   myview.safeValues(position,b,0, 1);
+                }
+            });
         }
-
     }
-
 
     @Override
     public int getItemCount() {
@@ -109,24 +118,22 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
     public void setvalues(dataQuestions ndata) {
         this.data=ndata;
-
     }
+        public class ViewHolder extends RecyclerView.ViewHolder {
+            ConstraintLayout switchanswer,optionanswer;
+            TextView description1,description2;
+            Spinner spinnerquestionary;
+            Switch switchquestionary;
 
+            public ViewHolder(@NonNull View itemView) {
+                super(itemView);
 
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-    ConstraintLayout switchanswer,optionanswer;
-    TextView description1,description2;
-    Spinner spinnerquestionary;
-        public ViewHolder(@NonNull View itemView) {
-            super(itemView);
-            switchanswer=itemView.findViewById(R.id.switchanswer);
-            optionanswer=itemView.findViewById(R.id.optionanswer);
-            description1=itemView.findViewById(R.id.textopenquestion); //open
-            description2=itemView.findViewById(R.id.textbooleanonly);  //bool
-            spinnerquestionary=itemView.findViewById(R.id.spinnerquestionary);
-
-
+                switchquestionary = itemView.findViewById(R.id.switchquestionary);
+                switchanswer = itemView.findViewById(R.id.switchanswer);
+                optionanswer = itemView.findViewById(R.id.optionanswer);
+                description1 = itemView.findViewById(R.id.textopenquestion); //open
+                description2 = itemView.findViewById(R.id.textbooleanonly);  //bool
+                spinnerquestionary = itemView.findViewById(R.id.spinnerquestionary);
+            }
         }
-    }
 }
