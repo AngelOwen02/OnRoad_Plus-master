@@ -194,8 +194,6 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
                     dotslayout.addView(dots[finalI],linearLayout);
                 }
             });
-
-
         }
     }
 
