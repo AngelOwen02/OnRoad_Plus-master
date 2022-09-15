@@ -44,7 +44,8 @@ import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Questions  extends Fragment implements View.OnClickListener ,questionView{
+public class Questions  extends Fragment implements View.OnClickListener ,questionView {
+
     public static final String TAG = Questions.class.getSimpleName();
     private sectionsAdapter adapterQuestionary;
  //   private CardView cardView;
@@ -62,6 +63,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     private sectionsAdapter sA;
     private TextView titlefileds;
     private int checklistN;
+    private ImageView btnSearch;
 
     @SuppressLint("NewApi")
     @Override
@@ -82,6 +84,9 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     @SuppressLint("NewApi")
     private void initContactView(View view) {
        // cardView=view.findViewById(R.id.cardviewitem);
+
+        btnSearch = view.findViewById(R.id.search_checkList);
+        btnSearch.setVisibility(View.INVISIBLE);
 
         pager = (ViewPager2) view.findViewById(R.id.cardviewitem);
         dotslayout = view.findViewById(R.id.dots_layout);
@@ -136,15 +141,14 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
 
     }
 
-    private void menutransition()
-    {
+    private void menutransition() {
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         CheckListViewImpl checklist = new CheckListViewImpl();
         transaction.replace(R.id.conteinerMainFragments, checklist, CheckListViewImpl.TAG).commit();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-
     }
+
     @Override
     //Pressed return button - returns to the results menu
     public void onResume() {
@@ -194,11 +198,8 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
                     dotslayout.addView(dots[finalI],linearLayout);
                 }
             });
-
-
         }
     }
-
 
     @Override
     public void setSections(List<dataSections> data) {
@@ -224,19 +225,16 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         }
     }
 
-
     @SuppressLint("NewApi")
     @Override
     public void setQuestions(List<dataQuestions> data) {
         this.dataQuestions1=data;
-        if(dataQuestions1!=null)
-        {
+        if(dataQuestions1!=null) {
                //Log.e("checklistQuestions","setQuestions: "+"size: "+dataQuestions1.size()+"       " +dataQuestions1.get(4).getQuestions().size()+"   pointspos:"+posrv);//+"  "+dataSections.get(1).getDescTripMgmSection()
 
            // movedots(0);
 
            // TODO shared preferences  del array de objetos aqui
-
 
             if(CheckListViewImpl.fulChecklist!=null){//sie el cheklist esta vacio
                 Log.e("fulChecklistF","if case "+CheckListViewImpl.fulChecklist);
@@ -342,6 +340,4 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
                 break;
         }
     }
-
-
 }
