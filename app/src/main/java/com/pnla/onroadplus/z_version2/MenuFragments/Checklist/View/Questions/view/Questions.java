@@ -314,7 +314,6 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
             }
             filldataAdapter();
         }
-
     }
 
 
