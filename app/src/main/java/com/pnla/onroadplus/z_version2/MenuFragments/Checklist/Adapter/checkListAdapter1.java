@@ -44,6 +44,7 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
 
         holder.textView11.setText(data.get(position).getDescTripMgmSection());
 
+
         holder.buttonquestions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
