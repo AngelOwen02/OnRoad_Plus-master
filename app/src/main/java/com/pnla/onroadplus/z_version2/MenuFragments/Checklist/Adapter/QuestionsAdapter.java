@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
@@ -32,13 +33,17 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     private dataQuestions data;
     private ArrayAdapter<String> spinnerArrayAdapter;
     private boolean poss=false;
-
+    private List<dataChecklist> saved=new ArrayList<>();
+    private int currentSection;
+    private boolean firstspinner=false;
     public QuestionsAdapter(dataQuestions dataQuestions, Questions mview, Context context) {
-        this.myview=myview;
+        this.myview=mview;
         this.context=context;
         this.data=dataQuestions;
-    }
 
+
+
+    }
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
@@ -46,14 +51,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         return new QuestionsAdapter.ViewHolder(view);
     }
 
+
     @Override
     public void onBindViewHolder(@NonNull QuestionsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-        if(poss==false) {
-            Log.e("finalcheck", "heredada " + Questions.posrv);
-            poss=true;
-        }
 
-        if (data.getQuestions().get(position).getAnswers().size()!=2) {//si no son booleanas
+
+        if (data.getQuestions().get(position).getAnswers().size()!=2) {//esto es un spiner
             Log.e("multianswerType"," : "+position);
             holder.optionanswer.setVisibility(View.VISIBLE);
             holder.switchanswer.setVisibility(View.GONE);
@@ -65,25 +68,41 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                 arrayAdapter.add(data.getQuestions().get(position).getAnswers().get(i).getDescTripMgmAnswer());
             }
 
-            arrayAdapter.add(0,"-- Selecciona Una opcion. --");
+            arrayAdapter.add(0,"-- Selecciona una opcion. --");
             spinnerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, arrayAdapter );
             spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             holder.spinnerquestionary.setAdapter(spinnerArrayAdapter);
-            //holder.spinnerquestionary.setPrompt("Selecciona una opcion ");
-  /*         for(int k=0;k<data.getQuestions().get(position).getAnswers().size();k++)
-            {
-                final int finalK = k;
-                data.getQuestions().get(position).getAnswers().get(k).getObjectType()
 
-            }*/
+            if(Questions.fulChecklist!=null) {
+
+              for (int i = 0; i < Questions.fulChecklist.size();i++) {
+                  Log.e("finalCheckdata6"," "+data.getQuestions().get(position).getCveTripMgmQuestion()+"   "+Questions.fulChecklist.get(i).getAnswerId());//Questions.fulChecklist.get(i).getAnswerId()
+                    if(Questions.fulChecklist.get(i).getCveTripMgmQuestion()==data.getQuestions().get(position).getCveTripMgmQuestion())//todo getAnswerPos() es la pregunta cambiar nombre
+                    {
+                       // Log.e("finalCheckdata6"," "+Questions.fulChecklist.get(i).getAnswerPos());
+                        holder.spinnerquestionary.setSelection(Questions.fulChecklist.get(i).getAnswerPos());
+                    }
+
+                }
+            }
+
+          //  holder.spinnerquestionary.setSelection(2);
+
+
             holder.spinnerquestionary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                    /**    */
-                    Log.e("spinnerquestionary"," sectionP :  "+data.getQuestions().get(position).getCveTripMgmSection()+
-                                                         " QuestionP : "+position+
-                                                         " answerP :   "+i);
+                    Log.e("finalCheckdata5", " "+Questions.fulChecklist.size());
+
+                        //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1 ~ switch 2 ~ multiple
+                        Log.e("finalCheckdata4", " sectionP :  " + data.getQuestions().get(position).getCveTripMgmSection() +
+                                " QuestionP : " + position +
+                                " answerP :   " + i);
+                        myview.safeValues(position,false,i,2,data.getQuestions().get(position).getCveTripMgmQuestion());
+
+
+
                 }
 
                 @Override
@@ -92,24 +111,61 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                 }
             });
 
-        } else {                                                         //switches
+        }
+        else{                                                         //switches
             holder.optionanswer.setVisibility(View.GONE);
             holder.switchanswer.setVisibility(View.VISIBLE);
             holder.description2.setText(data.getQuestions().get(position).getDescTripMgmQuestion());
 
+            if(Questions.fulChecklist!=null) {
+
+                for (int i = 0; i < Questions.fulChecklist.size();i++) {
+                    Log.e("finalCheckdata6"," "+data.getQuestions().get(position).getCveTripMgmQuestion()+"   "+Questions.fulChecklist.get(i).getAnswerId());//Questions.fulChecklist.get(i).getAnswerId()
+                    if(Questions.fulChecklist.get(i).getCveTripMgmQuestion()==data.getQuestions().get(position).getCveTripMgmQuestion())//todo getAnswerPos() es la pregunta cambiar nombre
+                    {
+                        // Log.e("finalCheckdata6"," "+Questions.fulChecklist.get(i).getAnswerPos());
+                        if(Questions.fulChecklist.get(i).getAnswerPos()==0) {
+                            holder.switchquestionary.setChecked(false);
+                        }else
+                        {
+                            holder.switchquestionary.setChecked(true);
+                        }
+                    }
+
+                }
+            }
 
             holder.switchquestionary.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                    Log.e("spinnerquestionary", "section : " + data.getQuestions().get(position).getCveTripMgmSection() +
-                            " switchpos: " + position +
-                            " answer: " + b);
-
-                    //   myview.safeValues(position,b,0, 1);
+                Log.e("finalCheckdata4","section : "+ data.getQuestions().get(position).getCveTripMgmSection()+
+                                                     " switchpos: "+position+
+                                                     " answer: "+b);
+                        //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1 ~ switch 2 ~ multiple
+                        if(b==false)
+                        {
+                            myview.safeValues(position,b,0, 1,data.getQuestions().get(position).getCveTripMgmQuestion());
+                        }else{
+                            myview.safeValues(position,b,1, 1,data.getQuestions().get(position).getCveTripMgmQuestion());
+                        }
                 }
             });
+
         }
+        holder.imagephoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myview.takePick(data.getQuestions().get(position).getCveTripMgmQuestion());
+            }
+        });
+        holder.imagephoto2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myview.takePick(data.getQuestions().get(position).getCveTripMgmQuestion());
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {
@@ -118,22 +174,29 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
     public void setvalues(dataQuestions ndata) {
         this.data=ndata;
+
     }
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            ConstraintLayout switchanswer,optionanswer;
-            TextView description1,description2;
-            Spinner spinnerquestionary;
-            Switch switchquestionary;
 
-            public ViewHolder(@NonNull View itemView) {
-                super(itemView);
 
-                switchquestionary = itemView.findViewById(R.id.switchquestionary);
-                switchanswer = itemView.findViewById(R.id.switchanswer);
-                optionanswer = itemView.findViewById(R.id.optionanswer);
-                description1 = itemView.findViewById(R.id.textopenquestion); //open
-                description2 = itemView.findViewById(R.id.textbooleanonly);  //bool
-                spinnerquestionary = itemView.findViewById(R.id.spinnerquestionary);
-            }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+    ConstraintLayout switchanswer,optionanswer;
+    TextView description1,description2;
+    Spinner spinnerquestionary;
+    Switch switchquestionary;
+    private ImageView imagephoto,imagephoto2;
+        public ViewHolder(@NonNull View itemView) {
+            super(itemView);
+            imagephoto2=itemView.findViewById(R.id.imagephoto2);
+            imagephoto=itemView.findViewById(R.id.imagephoto);
+            switchquestionary=itemView.findViewById(R.id.switchquestionary);
+            switchanswer=itemView.findViewById(R.id.switchanswer);
+            optionanswer=itemView.findViewById(R.id.optionanswer);
+            description1=itemView.findViewById(R.id.textopenquestion); //open
+            description2=itemView.findViewById(R.id.textbooleanonly);  //bool
+            spinnerquestionary=itemView.findViewById(R.id.spinnerquestionary);
+
+
         }
+    }
 }

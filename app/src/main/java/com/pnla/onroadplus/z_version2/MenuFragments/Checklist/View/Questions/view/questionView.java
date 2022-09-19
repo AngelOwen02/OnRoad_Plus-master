@@ -12,4 +12,6 @@ public interface questionView {
     void hideDialog();
 
     void setQuestions(List<dataQuestions> data);
+
+    void successetCehcklist();
 }

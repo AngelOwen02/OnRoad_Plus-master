@@ -49,7 +49,7 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
         holder.buttonquestions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                myview.goquestionaryFragment(data.get(position).getCveTripMgmSection());
+                myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(),position);
                 //Toast.makeText(context, data.get(position).getDescTripMgmSection(), Toast.LENGTH_SHORT).show();
             }
         });

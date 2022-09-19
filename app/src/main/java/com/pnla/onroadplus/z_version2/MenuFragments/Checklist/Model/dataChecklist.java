@@ -8,13 +8,16 @@ public class dataChecklist  implements Serializable {
     private int section;
     private int answerPos;
     private String foto;
+    private Integer cveTripMgmQuestion;
 
-    public dataChecklist(int origin, int questioId, int section, int answerPos, String foto) {
+
+    public dataChecklist(int origin, int questioId, int section, int answerPos, String foto,Integer cveTripMgmQuestion) {
         this.origin = origin;
         this.questioId = questioId;
         this.section = section;
         this.answerPos = answerPos;
         this.foto = foto;
+        this.cveTripMgmQuestion=cveTripMgmQuestion;
     }
 
 
@@ -58,4 +61,13 @@ public class dataChecklist  implements Serializable {
     public void setFoto(String foto) {
         this.foto = foto;
     }
+
+    public Integer getCveTripMgmQuestion() {
+        return cveTripMgmQuestion;
+    }
+
+    public void setCveTripMgmQuestion(Integer cveTripMgmQuestion) {
+        this.cveTripMgmQuestion = cveTripMgmQuestion;
+    }
+
 }

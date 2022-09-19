@@ -70,4 +70,18 @@ public class questionsPresenterImpl implements  questionPresenter{
             view.hideDialog();
         }
     }
+
+    @Override
+    public void sendfullchecklist() {
+        if(view!=null) {
+        interactor.sendfullCheckList();
+        }
+    }
+
+    @Override
+    public void gotoChecklistAgain() {
+        if(view!=null) {
+            view.successetCehcklist();
+        }
+    }
 }

@@ -141,7 +141,7 @@ public class historicChecklist extends Fragment implements View.OnClickListener,
     }
 
     private void menutransition() {
-         manager = getActivity().getSupportFragmentManager();
+        manager = getActivity().getSupportFragmentManager();
         transaction = manager.beginTransaction();
         CheckListViewImpl checklist = new CheckListViewImpl();
         transaction.replace(R.id.conteinerMainFragments, checklist, CheckListViewImpl.TAG).commit();
