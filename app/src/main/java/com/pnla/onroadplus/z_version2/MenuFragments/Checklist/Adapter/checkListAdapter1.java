@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,6 +53,13 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
                 //Toast.makeText(context, data.get(position).getDescTripMgmSection(), Toast.LENGTH_SHORT).show();
             }
         });
+
+        holder.userChecklist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Si funciona", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override
@@ -68,10 +76,13 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
         ConstraintLayout buttonquestions;
         TextView textView11;
+        ImageView userChecklist;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            buttonquestions=itemView.findViewById(R.id.goQuestions);
-            textView11=itemView.findViewById(R.id.textView11);
+            buttonquestions = itemView.findViewById(R.id.goQuestions);
+            textView11 = itemView.findViewById(R.id.textView11);
+            userChecklist = itemView.findViewById(R.id.ic_user_checklist_rv);
         }
     }
 }

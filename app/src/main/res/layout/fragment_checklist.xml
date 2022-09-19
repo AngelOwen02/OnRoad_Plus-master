@@ -59,6 +59,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:src="@drawable/ic_vehicle_checklist"
+            android:layout_marginStart="63dp"
+            android:layout_marginEnd="37dp"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/search_checkList"
+            app:layout_constraintStart_toEndOf="@+id/toolbar_unit_tracking_txt_title"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
             android:id="@+id/search_checkList"
             android:layout_width="22dp"
             android:layout_height="22dp"
