@@ -45,7 +45,7 @@ import java.util.List;
 public class CheckListViewImpl extends Fragment implements View.OnClickListener, checkListView {
 
     public static final String TAG = FragmentContactV2.class.getSimpleName();
-    private ImageView historic_checks,search_checkList;
+    private ImageView historic_checks, search_checkList, vehicle_checklist;
     private ConstraintLayout contrainButton;
     private checkListAdapter1 adapter;
     private RecyclerView rv;
@@ -92,6 +92,14 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
                 List<checkListdata> filterCheckList = filteredCheckList(checklistData, newText);
                 adapter.setFilter(filterCheckList);
                 return false;
+            }
+        });
+
+        vehicle_checklist = view.findViewById(R.id.ic_vehicle_checklist_rv);
+        vehicle_checklist.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getContext(), "Si funciona", Toast.LENGTH_SHORT).show();
             }
         });
 

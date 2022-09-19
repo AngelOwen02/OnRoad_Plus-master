@@ -59,6 +59,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
+            android:id="@+id/ic_vehicle_checklist_rv"
             android:layout_width="18dp"
             android:layout_height="18dp"
             android:src="@drawable/ic_vehicle_checklist"
