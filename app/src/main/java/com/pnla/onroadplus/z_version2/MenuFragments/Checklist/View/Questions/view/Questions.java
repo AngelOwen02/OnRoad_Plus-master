@@ -80,7 +80,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         buttongochecklist.setOnClickListener(this);
         progressDialog = new ProgressDialog(getActivity());
         presenter=new questionsPresenterImpl(this,getContext());
-        presenter.getpSections(checklistN);
+        presenter.getpSections(Checkl);
 
 
     }
@@ -202,7 +202,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
             if(sizeArange!=0) {
                 if (isfirsttime == false) {
                     posrv=0;
-                    presenter.getpQuestions(checklistN);//dataSections.get(0).getCveTripMgmSection());
+                    presenter.getpQuestions(Checkl);//dataSections.get(0).getCveTripMgmSection());
                    // movedots(0);
                     isfirsttime = true;
                 } else {
