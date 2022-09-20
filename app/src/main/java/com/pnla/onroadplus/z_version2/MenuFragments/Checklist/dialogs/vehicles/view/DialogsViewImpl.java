@@ -10,24 +10,29 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 
 public class DialogsViewImpl extends DialogFragment  implements View.OnClickListener {
+
     public static final String TAG = DialogsViewImpl.class.getSimpleName();
     private Button externalconstraint;
     private ConstraintLayout externalconstraint2;
+    private RecyclerView rv;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_DeviceDefault_Light_NoActionBar);
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.layout_vehicles_dialog, container, false);
-        getDialog().getWindow().setBackgroundDrawableResource(R.color.alfashadow) ;
+        getDialog().getWindow().setBackgroundDrawableResource(R.color.grayBD);
         setCancelable(true);
 
         initDialog(view);
@@ -37,16 +42,20 @@ public class DialogsViewImpl extends DialogFragment  implements View.OnClickList
 
     private void initDialog(View view) {
 
+        rv = view.findViewById(R.id.recycler_checkList_dialog);
+
         externalconstraint = view.findViewById(R.id.externalconstraint);
         externalconstraint.setOnClickListener(this);
 
         externalconstraint2 = view.findViewById(R.id.externalconstraint2);
         externalconstraint2.setOnClickListener(this);
     }
+
     public void closeDialog() {
         this.dismiss();
 
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
