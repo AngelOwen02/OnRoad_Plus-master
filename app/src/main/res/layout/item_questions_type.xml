@@ -35,6 +35,7 @@
         </TextView>
 
         <ImageView
+            android:id="@+id/imagephoto2"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/ic_menu_camera"
@@ -157,6 +158,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
+
             android:visibility="gone"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -169,6 +171,7 @@
         </ImageView>
         <ImageView
 
+            android:id="@+id/imagephoto"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:background="@drawable/ic_menu_camera"
