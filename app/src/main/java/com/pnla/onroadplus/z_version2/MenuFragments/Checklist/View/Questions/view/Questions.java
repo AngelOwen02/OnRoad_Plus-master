@@ -42,6 +42,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     private LinearLayout dotslayout;
     private int sizeArange;
     private Button buttongochecklist;
+    private ImageView searchCheckList;
     private ProgressDialog progressDialog;
     private List<dataSections> dataSections;
     private List<dataQuestions> dataQuestions1;
@@ -73,6 +74,8 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     private void initContactView(View view) {
        // cardView=view.findViewById(R.id.cardviewitem);
 
+        searchCheckList = view.findViewById(R.id.search_checkList);
+        searchCheckList.setVisibility(View.INVISIBLE);
         pager = (ViewPager2) view.findViewById(R.id.cardviewitem);
         dotslayout = view.findViewById(R.id.dots_layout);
         buttongochecklist=view.findViewById(R.id.buttongochecklist);
