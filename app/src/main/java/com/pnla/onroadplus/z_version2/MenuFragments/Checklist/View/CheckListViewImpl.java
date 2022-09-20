@@ -3,6 +3,7 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -31,9 +32,10 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Presenter.checkLis
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Presenter.checkListPresenterImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.view.Questions;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.historicChecklist;
+import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 import com.pnla.onroadplus.z_version2.fragments.contactV2.view.FragmentContactV2;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
-
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.view.*;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -95,11 +97,18 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
             }
         });
 
+
         vehicle_checklist = view.findViewById(R.id.ic_vehicle_checklist_rv);
+//        if(menuViewImpl.selectedVehicle == false) {
+//            vehicle_checklist.setImageTintList(ColorStateList.valueOf(R.color.graySpaceRV));
+//        }
         vehicle_checklist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), "Si funciona", Toast.LENGTH_SHORT).show();
+                DialogsViewImpl externalGPSDialog = new DialogsViewImpl();
+
+                externalGPSDialog.show(getActivity().getSupportFragmentManager(), DialogsViewImpl.TAG);
             }
         });
 

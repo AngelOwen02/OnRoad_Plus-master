@@ -17,6 +17,7 @@ import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Model.checkListdata;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.geocercas.adapter.adapterGeocercas;
+import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,13 +47,20 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
         holder.textView11.setText(data.get(position).getDescTripMgmSection());
 
 
+
         holder.buttonquestions.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(),position);
-                //Toast.makeText(context, data.get(position).getDescTripMgmSection(), Toast.LENGTH_SHORT).show();
+                @Override
+                public void onClick (View v){
+                    if (menuViewImpl.selectedVehicle == false) {
+                        Toast.makeText(context, "Debes seleccionar un vehiculo.", Toast.LENGTH_SHORT).show();
+                    } else {
+
+                        myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position);
+                        //Toast.makeText(context, data.get(position).getDescTripMgmSection(), Toast.LENGTH_SHORT).show();
+                    }
             }
         });
+
 
         holder.userChecklist.setOnClickListener(new View.OnClickListener() {
             @Override
