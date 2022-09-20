@@ -1,8 +1,15 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.view;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -14,12 +21,18 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.pnla.onroadplus.BuildConfig;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter.sectionsAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Model.dataChecklist;
@@ -30,8 +43,13 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.mod
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.presenter.questionPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.presenter.questionsPresenterImpl;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class Questions  extends Fragment implements View.OnClickListener ,questionView{
     public static final String TAG = Questions.class.getSimpleName();
@@ -53,6 +71,16 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     private TextView titlefileds;
     private int checklistN,Checkl;
     public static  List<dataChecklist> fulChecklist= new ArrayList<>();
+
+    //camera
+    public static final int CAMERA_PERM_CODE = 101;
+    public static final int CAMERA_REQUEST_CODE = 102;
+    String currentPhotoPath;
+    private File myimageFile;
+    private Uri imageUri;
+    ImageView imageViewP;
+
+
     @SuppressLint("NewApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -291,15 +319,104 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         }
     }
 
+
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /// prefix /
+                ".jpg",         // suffix /
+                storageDir      // directory /
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = image.getAbsolutePath();
+        return image;
+    }
     @Override
     public void successetCehcklist() {
        menutransition();//todo este metodo viene del presente cuando envia correctamente el checklist
+
+    }
+    private void askCameraPermissions() {//todo pregunta por los permisos si existen va por la camara
+        if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.CAMERA} , CAMERA_PERM_CODE);
+        } else {
+            //Metodo de abrir la Camara
+            //openCamera();
+            dispatchTakePictureIntent();
+        }
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //if(imageUri!=null) {
+        Log.e("imagefromDecode1", "" + resultCode + "  " + imageUri);
+        Log.e("imagefromDecode1", "" + ":   " + "" + myimageFile);
+        String pathImage = String.valueOf(imageUri);
+        String substring = pathImage.substring(1);
+        //urispahts.add(substring);
 
+        if (requestCode == CAMERA_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                File f = new File(currentPhotoPath);
+                imageViewP.setImageURI(Uri.fromFile(f));
+            }else
+            {
 
+                Log.e("imagefromDecode1","error decoding");
+            }
+        }else{
+            Log.e("imagefromDecode1","error decoding2");
+        }
+        //} else {
+
+        //}
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int [] grantResults){//todo este permiso entra despues en caso del que permiso no este declarado
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if(requestCode == CAMERA_PERM_CODE){
+            if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                //Abrir camara
+                //openCamera();
+                dispatchTakePictureIntent();
+            } else {
+                //Alerta cuando sean necesarios los permisos
+                Toast.makeText(getContext(), "Los permisos son necesarios para usar la Camara", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+    private void dispatchTakePictureIntent() {
+        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        // Ensure that there's a camera activity to handle the intent
+        if (takePictureIntent.resolveActivity(getActivity().getPackageManager()) != null) {
+            // Create the File where the photo should go
+            File photoFile = null;
+            try {
+                photoFile = createImageFile();
+            } catch (IOException ex) {
+                // Error occurred while creating the File
+                Toast.makeText(getContext(), ex.toString(), Toast.LENGTH_LONG).show();
+            }
+            // Continue only if the File was successfully created
+            if (photoFile != null) {
+                Uri photoURI = FileProvider.getUriForFile(Objects.requireNonNull(getActivity().getApplicationContext()),
+                        BuildConfig.APPLICATION_ID + ".provider",
+                        photoFile);
+                takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                //imageUri = photoURI;
+                startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
+            }
+        }
+    }
     public void takePick(Integer cveTripMgmQuestion) {
         Log.e("takepic",""+cveTripMgmQuestion);
+        askCameraPermissions();
+
         //todo ... se requiere el intent de la cammara y el extra es el base 64 que va en fulchecklist si el cve en esa lista concide
 
 
