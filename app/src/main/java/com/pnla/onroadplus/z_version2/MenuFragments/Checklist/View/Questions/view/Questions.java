@@ -78,7 +78,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     String currentPhotoPath;
     private File myimageFile;
     private Uri imageUri;
-    ImageView imageView;
+    ImageView imageViewP;
 
 
     @SuppressLint("NewApi")
@@ -319,26 +319,6 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        //if(imageUri!=null) {
-        Log.e("imagefromDecode1", "" + resultCode + "  " + imageUri);
-        Log.e("imagefromDecode1", "" + ":   " + "" + myimageFile);
-        String pathImage = String.valueOf(imageUri);
-        String substring = pathImage.substring(1);
-        //urispahts.add(substring);
-
-        if (requestCode == CAMERA_REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                File f = new File(currentPhotoPath);
-                imageView.setImageURI(Uri.fromFile(f));
-            }
-        }
-        //} else {
-
-        //}
-    }
 
     private File createImageFile() throws IOException {
         // Create an image file name
@@ -369,8 +349,35 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
             dispatchTakePictureIntent();
         }
     }
+
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int [] grantResults){
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        //if(imageUri!=null) {
+        Log.e("imagefromDecode1", "" + resultCode + "  " + imageUri);
+        Log.e("imagefromDecode1", "" + ":   " + "" + myimageFile);
+        String pathImage = String.valueOf(imageUri);
+        String substring = pathImage.substring(1);
+        //urispahts.add(substring);
+
+        if (requestCode == CAMERA_REQUEST_CODE) {
+            if (resultCode == Activity.RESULT_OK) {
+                File f = new File(currentPhotoPath);
+                imageViewP.setImageURI(Uri.fromFile(f));
+            }else
+            {
+
+                Log.e("imagefromDecode1","error decoding");
+            }
+        }else{
+            Log.e("imagefromDecode1","error decoding2");
+        }
+        //} else {
+
+        //}
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int [] grantResults){//todo este permiso entra despues en caso del que permiso no este declarado
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if(requestCode == CAMERA_PERM_CODE){
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
