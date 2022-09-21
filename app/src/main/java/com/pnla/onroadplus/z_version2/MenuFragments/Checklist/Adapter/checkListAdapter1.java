@@ -69,7 +69,7 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
         holder.userChecklist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Si funciona", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Si funciona", Toast.LENGTH_SHORT).show();
             }
         });
     }
