@@ -231,7 +231,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
                 String data=respons.getData();
                 if(data!=null)
                 {
-                    presenter.gotoChecklistAgain();
+                    presenter.gotoChecklistAgain(data);
                     presenter.hidepDialog();
                 }else
                 {

@@ -78,9 +78,9 @@ public class questionsPresenterImpl implements  questionPresenter{
     }
 
     @Override
-    public void gotoChecklistAgain() {
+    public void gotoChecklistAgain(String valueSemaforo) {
         if(view!=null) {
-            view.successetCehcklist();
+            view.successetCehcklist(valueSemaforo);
         }
     }
 }

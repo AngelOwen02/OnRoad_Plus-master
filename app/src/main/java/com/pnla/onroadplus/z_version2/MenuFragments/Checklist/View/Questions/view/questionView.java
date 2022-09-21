@@ -13,5 +13,5 @@ public interface questionView {
 
     void setQuestions(List<dataQuestions> data);
 
-    void successetCehcklist();
+    void successetCehcklist(String valueSemaforo);
 }

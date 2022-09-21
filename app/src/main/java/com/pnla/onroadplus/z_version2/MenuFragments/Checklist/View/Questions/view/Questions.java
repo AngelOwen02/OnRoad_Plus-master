@@ -345,7 +345,8 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         return image;
     }
     @Override
-    public void successetCehcklist() {
+    public void successetCehcklist(String valueSemaforo) {
+
        menutransition();//todo este metodo viene del presente cuando envia correctamente el checklist
 
     }
