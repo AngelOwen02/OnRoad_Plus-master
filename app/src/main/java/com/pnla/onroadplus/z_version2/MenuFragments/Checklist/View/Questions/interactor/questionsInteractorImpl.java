@@ -165,7 +165,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
         Log.e("senderdatacehcklist",""+Questions.fulChecklist);
         Log.e("senderdatacehcklist",""+Questions.fulChecklist);
         int finalscoore=0;
-        List<mfQuestion> finalQ=new ArrayList<>();
+        List<mfQuestion> finalQ=new ArrayList<>();  //todo esto es pal json
         finalQ.clear();
 
         for(int i=0;i<Questions.fulChecklist.size();i++)
@@ -188,6 +188,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
         image.add(new Image(2,imagabase64));
 
         requestFullCheckList request=new requestFullCheckList(true,cve_checklist,13756,0,email,null,null,Questions.fulChecklist.get(0).getOrigin(),finalscoore,token);
+       //  ejemplo      requestFullCheckList request=new requestFullCheckList(true,28,13756,0,"efren@newlandapps.com",image,json,1,2,token);
         presenter.showpDialog();
         Call<responseFullCheckList> call=service.setQuestions(request);
         call.enqueue(new Callback<responseFullCheckList>() {
