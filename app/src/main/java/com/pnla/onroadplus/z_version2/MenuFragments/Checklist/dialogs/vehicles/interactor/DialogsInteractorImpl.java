@@ -82,11 +82,11 @@ public class DialogsInteractorImpl implements DialogsInteractor {
                     presenter.hideDialog();
                 } else {
                     presenter.hideDialog();
-                    //Toast.makeText("" + responseD.getMessage() + " " + responseD.getResponseCode(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "" + responseD.getMessage() + " " + responseD.getResponseCode(), Toast.LENGTH_SHORT).show();
                 }
             } else {
                 presenter.hideDialog();
-                //Toast.makeText("" + responseD.getMessage() + " " + responseD.getResponseCode(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "" + responseD.getMessage() + " " + responseD.getResponseCode(), Toast.LENGTH_SHORT).show();
             }
         } else {
             presenter.hideDialog();

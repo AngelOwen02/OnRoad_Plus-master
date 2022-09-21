@@ -5,14 +5,21 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.view.*;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.model.*;
+import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHolder> {
@@ -31,24 +38,80 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_vehicle_dialog, parent, false);
-        return null;
+        return new DialogsAdapter.ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DialogsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull final DialogsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
+        //Nombre del Vehiculo
+        holder.txtUnitDialog.setText(data.get(position).getVehicleName());
+
+        if(menuViewImpl.selectedVehicle == false) {
+            holder.checkBoxDialog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked==true) {
+                        Toast.makeText(context, data.get(position).getCveVehicle().toString(), Toast.LENGTH_SHORT).show();
+                        menuViewImpl.selectedVehicle = true;
+                        myview.closeDialog();
+                        //holder.checkBoxDialog.setActivated(false);
+                        //notifyDataSetChanged();
+                    }
+                }
+            });
+        } else {
+            holder.checkBoxDialog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                @Override
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                    if(isChecked==true) {
+                        Toast.makeText(context, data.get(position).getCveVehicle().toString(), Toast.LENGTH_SHORT).show();
+                        menuViewImpl.selectedVehicle = true;
+                        myview.closeDialog();
+                        //holder.checkBoxDialog.setActivated(false);
+                        //notifyDataSetChanged();
+                    }
+                }
+            });
+        }
+
+        /**if(menuViewImpl.selectedVehicle == true) {
+            holder.checkBoxDialog.setEnabled(false);
+        }*/
+
+        //checkCB();
+        //notifyDataSetChanged();
+    }
+
+    public void checkCB() {
+        //if()
+        //notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        return data.size();
+        //return 4;
+    }
+
+    public void setFilter(List<DialogsData> dialogData) {
+        this.data = new ArrayList<>();
+        this.data.addAll(dialogData);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
+        ImageView imgUnitDialog;
+        TextView txtUnitDialog;
+        CheckBox checkBoxDialog;
 
         public ViewHolder(@NonNull View itemview) {
             super(itemview);
+
+            imgUnitDialog = itemview.findViewById(R.id.img_unit_dialog);
+            txtUnitDialog = itemview.findViewById(R.id.txt_unit_name_dialog);
+
+            checkBoxDialog = (CheckBox) itemview.findViewById(R.id.checkbox_dialog);
         }
     }
 }

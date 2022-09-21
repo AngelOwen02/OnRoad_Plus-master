@@ -6,12 +6,12 @@ import java.util.List;
 
 public class DialogsResponse {
 
-    @SerializedName("response")
+    @SerializedName("responseCode")
     private Integer responseCode;
 
     @SerializedName("message")
     private String message;
-
+    @SerializedName("data")
     private List<DialogsData> data = null;
 
     public DialogsResponse(Integer responseCode, String message, List<DialogsData> data) {
