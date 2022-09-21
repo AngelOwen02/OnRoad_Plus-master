@@ -50,20 +50,26 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
                 @Override
                 public void onClick (View v){
                     if (menuViewImpl.selectedVehicle == false) {
-                       // Toast.makeText(context, "Debes seleccionar un vehiculo.", Toast.LENGTH_SHORT).show();
-                        myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position);
+                     Toast.makeText(context, "Debes seleccionar un vehiculo.", Toast.LENGTH_SHORT).show();
+                      //  myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position);
                     } else {
 
-                     //   myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position);
+                      myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position);
                         //Toast.makeText(context, data.get(position).getDescTripMgmSection(), Toast.LENGTH_SHORT).show();
                     }
             }
         });
 
+        if(data.get(position).isAprobador() == true){
+            holder.userChecklist.setVisibility(View.VISIBLE);
+        } else {
+            holder.userChecklist.setVisibility(View.GONE);
+        }
+
         holder.userChecklist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "Si funciona", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Si funciona", Toast.LENGTH_SHORT).show();
             }
         });
     }
