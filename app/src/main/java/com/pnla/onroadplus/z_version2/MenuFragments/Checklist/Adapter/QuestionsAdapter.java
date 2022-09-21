@@ -99,7 +99,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                         Log.e("finalCheckdata4", " sectionP :  " + data.getQuestions().get(position).getCveTripMgmSection() +
                                 " QuestionP : " + position +
                                 " answerP :   " + i);
-                        myview.safeValues(position,false,i,2,data.getQuestions().get(position).getCveTripMgmQuestion());
+                        if(i==0)
+                        {
+                            myview.safeValues(position,false,i,2,data.getQuestions().get(position).getCveTripMgmQuestion(),0);
+                        }else{
+                            myview.safeValues(position,false,i,2,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(i-1).getTripMgmAnswerValue());
+                        }
 
 
 
@@ -144,9 +149,9 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                         //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1 ~ switch 2 ~ multiple
                         if(b==false)
                         {
-                            myview.safeValues(position,b,0, 1,data.getQuestions().get(position).getCveTripMgmQuestion());
+                            myview.safeValues(position,b,0, 1,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(1).getTripMgmAnswerValue());
                         }else{
-                            myview.safeValues(position,b,1, 1,data.getQuestions().get(position).getCveTripMgmQuestion());
+                            myview.safeValues(position,b,1, 1,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue());
                         }
                 }
             });

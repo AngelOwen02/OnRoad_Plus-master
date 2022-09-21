@@ -12,6 +12,7 @@ public class GeneralConstantsV2 {
     public static final String URL_USER_IMAGE_PREFERENCES = "URL_USER_IMAGE_PREFERENCES";
     public static final String TOKEN_PREFERENCES = "TOKEN_PREFERENCES";
     public static final String EMAIL_PREFERENCES = "EMAIL_PREFERENCES";
+    public static final String ORIGIN_PREFERENCES = "ORIGIN_PREFERENCES";
     public static final String PASSWORD_PREFERENCES = "PASSWORD_PREFERENCES";
     public static final String EMPLOYEE_NAME_PREFERENCES = "EMPLOYEE_NAME_PREFERENCES";
     public static final String CLOSE_SESSION_PREFERENCES = "CLOSE_SESSION_PREFERENCES";

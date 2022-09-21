@@ -245,7 +245,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
 
         }
     }
-    public void safeValues(int position, boolean b, int value, int i, Integer cveTripMgmQuestion)
+    public void safeValues(int position, boolean b, int value, int i, Integer cveTripMgmQuestion,Integer score)
     {
         Log.e("finalCheckdata3"," "+position+" "+b+" "+value+" "+i); //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1 ~ switch 2 ~ multiple
         String h = null;
@@ -262,6 +262,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         Log.e("finalCheckdata4","index "+fulChecklist.get(iterator).getAnswerPos());
         //After
         fulChecklist.get(iterator).setAnswerPos(value);
+        fulChecklist.get(iterator).setScore(score);
         Log.e("finalCheckdata4","index "+fulChecklist.get(iterator).getAnswerPos());
     }
 
@@ -271,7 +272,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         this.dataQuestions1=data;
         if(dataQuestions1!=null)
         {
-           Log.e("finalCheckdata3","inpect questions: "+dataQuestions1.size()+"   fulChecklist: "+fulChecklist.size());//+"  "+dataSections.get(1).getDescTripMgmSection() // movedots(0);
+           Log.e("finalChecklistdata","inpect questions: "+dataQuestions1.size()+"   fulChecklist: "+fulChecklist.size());//+"  "+dataSections.get(1).getDescTripMgmSection() // movedots(0);
             List<mquestions> mquestion=new ArrayList<>();
             mquestion.clear();
             for(int i=0;i<dataQuestions1.size();i++) {
@@ -286,10 +287,10 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
             if(mquestion!=null) {
                 for (int j=0;j< mquestion.size();j++)
                 {
-                    fulChecklist.add(new dataChecklist(mquestion.get(j).getOriginAdm(),mquestion.get(j).getCveTripMgmQuestion(),mquestion.get(j).getCveTripMgmSection(),0,"",mquestion.get(j).getCveTripMgmQuestion()));
+                    fulChecklist.add(new dataChecklist(mquestion.get(j).getOriginAdm(),mquestion.get(j).getCveTripMgmQuestion(),mquestion.get(j).getCveTripMgmSection(),0,"",mquestion.get(j).getCveTripMgmQuestion(),0));
                 }
             }
-            Log.e("finalCheckdata3", " T fulChecklist" +fulChecklist.size());
+            Log.e("finalChecklistdata", " T fulChecklist" +fulChecklist.size());
             // TODO shared preferences  del array de objetos aqui
             filldataAdapter();
         }
@@ -313,7 +314,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttongochecklist:
-                presenter.sendfullchecklist();
+                presenter.sendfullchecklist(Checkl);
                 Toast.makeText(getContext(), "mandar Valor de preguntas", Toast.LENGTH_SHORT).show();
                 break;
         }
