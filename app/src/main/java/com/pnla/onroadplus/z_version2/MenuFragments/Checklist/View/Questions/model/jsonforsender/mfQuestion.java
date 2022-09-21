@@ -3,35 +3,35 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.mo
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Question {
+public class mfQuestion {
 
 
     @SerializedName("cve_trip_mgm_question")
     @Expose
-    private String cveTripMgmQuestion;
+    private Integer cveTripMgmQuestion;
     @SerializedName("cve_trip_mgm_answer")
     @Expose
-    private String cveTripMgmAnswer;
+    private Integer cveTripMgmAnswer;
 
-    public Question(String cveTripMgmQuestion, String cveTripMgmAnswer) {
+    public mfQuestion(Integer cveTripMgmQuestion, Integer cveTripMgmAnswer) {
         super();
         this.cveTripMgmQuestion = cveTripMgmQuestion;
         this.cveTripMgmAnswer = cveTripMgmAnswer;
     }
 
-    public String getCveTripMgmQuestion() {
+    public Integer getCveTripMgmQuestion() {
         return cveTripMgmQuestion;
     }
 
-    public void setCveTripMgmQuestion(String cveTripMgmQuestion) {
+    public void setCveTripMgmQuestion(Integer cveTripMgmQuestion) {
         this.cveTripMgmQuestion = cveTripMgmQuestion;
     }
 
-    public String getCveTripMgmAnswer() {
+    public Integer getCveTripMgmAnswer() {
         return cveTripMgmAnswer;
     }
 
-    public void setCveTripMgmAnswer(String cveTripMgmAnswer) {
+    public void setCveTripMgmAnswer(Integer cveTripMgmAnswer) {
         this.cveTripMgmAnswer = cveTripMgmAnswer;
     }
 

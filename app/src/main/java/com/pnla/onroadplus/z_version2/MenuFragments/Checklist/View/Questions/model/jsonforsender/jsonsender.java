@@ -10,18 +10,18 @@ public class jsonsender {
 
     @SerializedName("Questions")
     @Expose
-    private List<Question> questions = null;
+    private List<mfQuestion> questions = null;
 
-    public jsonsender(List<Question> questions) {
+    public jsonsender(List<mfQuestion> questions) {
         super();
         this.questions = questions;
     }
 
-    public List<Question> getQuestions() {
+    public List<mfQuestion> getQuestions() {
         return questions;
     }
 
-    public void setQuestions(List<Question> questions) {
+    public void setQuestions(List<mfQuestion> questions) {
         this.questions = questions;
     }
 

@@ -101,9 +101,9 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                                 " answerP :   " + i);
                         if(i==0)
                         {
-                            myview.safeValues(position,false,i,2,data.getQuestions().get(position).getCveTripMgmQuestion(),0);
+                            myview.safeValues(position,false,i,2,data.getQuestions().get(position).getCveTripMgmQuestion(),0,null);
                         }else{
-                            myview.safeValues(position,false,i,2,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(i-1).getTripMgmAnswerValue());
+                            myview.safeValues(position,false,i,2,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(i-1).getTripMgmAnswerValue(),data.getQuestions().get(position).getAnswers().get(i-1).getCveTripMgmAnswer());
                         }
 
 
@@ -149,9 +149,9 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                         //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1 ~ switch 2 ~ multiple
                         if(b==false)
                         {
-                            myview.safeValues(position,b,0, 1,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(1).getTripMgmAnswerValue());
+                            myview.safeValues(position,b,0, 1,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(1).getTripMgmAnswerValue(),data.getQuestions().get(position).getAnswers().get(1).getCveTripMgmAnswer());
                         }else{
-                            myview.safeValues(position,b,1, 1,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue());
+                            myview.safeValues(position,b,1, 1,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue(),data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer());
                         }
                 }
             });

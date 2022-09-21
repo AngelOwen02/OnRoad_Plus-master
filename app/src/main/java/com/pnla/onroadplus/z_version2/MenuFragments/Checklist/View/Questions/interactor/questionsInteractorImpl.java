@@ -5,7 +5,6 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.jsonforsender.Question;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.dataQuestions;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.requestmQuestions;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.responsemQuestions;
@@ -21,7 +20,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.vie
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitClientV2;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitValidationsV2;
-
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.jsonforsender.mfQuestion;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -166,9 +165,13 @@ public class questionsInteractorImpl  implements questionsInteractor{
         Log.e("senderdatacehcklist",""+Questions.fulChecklist);
         Log.e("senderdatacehcklist",""+Questions.fulChecklist);
         int finalscoore=0;
+        List<mfQuestion> finalQ=new ArrayList<>();
+        finalQ.clear();
+
         for(int i=0;i<Questions.fulChecklist.size();i++)
         {
             finalscoore=finalscoore+Questions.fulChecklist.get(i).getScore();
+            finalQ.add(new mfQuestion(Questions.fulChecklist.get(i).getCveTripMgmQuestion(),Questions.fulChecklist.get(i).getCveTripMgmAnswer()));
         }
 
         //requestFullCheckList request=new requestFullCheckList("","","","","","","","","","");
