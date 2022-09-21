@@ -363,10 +363,10 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
                 File f = new File(currentPhotoPath);
-                imageViewP.setImageURI(Uri.fromFile(f));
+               // imageViewP.setImageURI(Uri.fromFile(f));
             }else
             {
-
+                Toast.makeText(getContext(), "Dispositivo no compatible con la funcionalidad", Toast.LENGTH_SHORT).show();
                 Log.e("imagefromDecode1","error decoding");
             }
         }else{
