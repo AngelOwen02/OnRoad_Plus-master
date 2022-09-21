@@ -71,9 +71,9 @@ public class questionsPresenterImpl implements  questionPresenter{
     }
 
     @Override
-    public void sendfullchecklist(int checkl) {
+    public void sendfullchecklist(int checkl, boolean aproved) {
         if(view!=null) {
-        interactor.sendfullCheckList(checkl);
+        interactor.sendfullCheckList(checkl,aproved);
         }
     }
 

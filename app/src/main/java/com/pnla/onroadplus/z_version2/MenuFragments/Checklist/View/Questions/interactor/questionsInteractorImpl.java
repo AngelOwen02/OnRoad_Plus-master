@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.dataQuestions;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.requestmQuestions;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.responsemQuestions;
@@ -122,23 +123,25 @@ public class questionsInteractorImpl  implements questionsInteractor{
     }
 
     @Override
-    public void sendfullCheckList(int cve_checklist) {
+    public void sendfullCheckList(int cve_checklist, boolean aproved) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String email = preferences.getString(GeneralConstantsV2.EMAIL_PREFERENCES, null);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        String cveV=preferences.getString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, null);
+        String NAMEVE=preferences.getString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE,null);
         if(token!=null)
         {
-            requestSendFullChckelist(cve_checklist,token,email);
+            requestSendFullChckelist(aproved,cve_checklist,cveV,token,email);
         }
     }
 
-    private void requestSendFullChckelist(int cve_checklist,String token,String email) {
+    private void requestSendFullChckelist(boolean aproved, int cve_checklist, String cveV, String token, String email) {
 
         //todo aqui caen los campos
         //region checklist
         /**
          * {
-         * “approvement”:”bool”,               ?
+         * “approvement”:”bool”,               x
          * “cve_trip_mgm_checklist”:integer,   x listo
          * "cve_vehicle": integer,             ?
          * "destination_trip": integer,        x listo
@@ -163,7 +166,6 @@ public class questionsInteractorImpl  implements questionsInteractor{
         //    private Integer cveTripMgmQuestion;
         //endregion
         Log.e("senderdatacehcklist",""+Questions.fulChecklist);
-        Log.e("senderdatacehcklist",""+Questions.fulChecklist);
         int finalscoore=0;
         List<mfQuestion> finalQ=new ArrayList<>();  //todo esto es pal json
         finalQ.clear();
@@ -183,11 +185,15 @@ public class questionsInteractorImpl  implements questionsInteractor{
                 //region json;
         ="{\\\"Questions\\\": [{\\\"cve_trip_mgm_question\\\": 1,\\\"cve_trip_mgm_answer\\\": 1}]}";
         //endregion
+
+        Gson gson = new Gson();
+        String mfjson = gson.toJson(finalQ);
+
         List<Image> image=new ArrayList<>();
         image.clear();
-        image.add(new Image(2,imagabase64));
+        //image.add(new Image(2,imagabase64));
 
-        requestFullCheckList request=new requestFullCheckList(true,cve_checklist,13756,0,email,null,null,Questions.fulChecklist.get(0).getOrigin(),finalscoore,token);
+        requestFullCheckList request=new requestFullCheckList(aproved,cve_checklist, Integer.valueOf(cveV),0,email,image,mfjson,Questions.fulChecklist.get(0).getOrigin(),finalscoore,token);
        //  ejemplo      requestFullCheckList request=new requestFullCheckList(true,28,13756,0,"efren@newlandapps.com",image,json,1,2,token);
         presenter.showpDialog();
         Call<responseFullCheckList> call=service.setQuestions(request);

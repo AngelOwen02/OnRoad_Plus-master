@@ -15,7 +15,7 @@ public interface questionPresenter {
     void showpDialog();
     void hidepDialog();
 
-    void sendfullchecklist(int checkl);
+    void sendfullchecklist(int checkl, boolean aproved);
 
     void gotoChecklistAgain();
 }

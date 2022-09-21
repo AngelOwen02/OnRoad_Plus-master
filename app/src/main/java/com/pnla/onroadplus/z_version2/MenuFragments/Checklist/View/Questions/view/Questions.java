@@ -60,7 +60,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     private LinearLayout dotslayout;
     private int sizeArange;
     private Button buttongochecklist;
-    private ImageView searchCheckList;
+    private ImageView searchCheckList,historic_checks;
     private ProgressDialog progressDialog;
     private List<dataSections> dataSections;
     private List<dataQuestions> dataQuestions1;
@@ -70,6 +70,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     private sectionsAdapter sA;
     private TextView titlefileds;
     private int checklistN,Checkl;
+    private boolean aproved;
     public static  List<dataChecklist> fulChecklist= new ArrayList<>();
 
     //camera
@@ -91,6 +92,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         if(bundle != null){
             checklistN= bundle.getInt("cveTripMgmSection");
             Checkl= bundle.getInt("Section");
+            aproved=bundle.getBoolean("aprobador");
         }
         initContactView(view);
 
@@ -109,6 +111,8 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         buttongochecklist=view.findViewById(R.id.buttongochecklist);
         titlefileds=view.findViewById(R.id.titlefileds);
         buttongochecklist.setOnClickListener(this);
+        historic_checks=view.findViewById(R.id.historic_checks);
+        historic_checks.setOnClickListener(this);
         progressDialog = new ProgressDialog(getActivity());
         presenter=new questionsPresenterImpl(this,getContext());
         presenter.getpSections(Checkl);
@@ -315,8 +319,11 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttongochecklist:
-                presenter.sendfullchecklist(Checkl);
+                presenter.sendfullchecklist(Checkl,aproved);
                 Toast.makeText(getContext(), "mandar Valor de preguntas", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.historic_checks:
+                menutransition();
                 break;
         }
     }
@@ -446,5 +453,9 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         //  "score": 0,                de fullchecklits hacer un for y un add a un int nuevo
         //  "token": "string"         sacara de shared preferecnces
         //}
+    }
+
+    public void showerrormistakeanswers() {
+        Toast.makeText(getContext(), "sin respuestas configuradas en la web", Toast.LENGTH_SHORT).show();
     }
 }

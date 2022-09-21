@@ -16,6 +16,7 @@
         <ImageView
             android:id="@+id/img_unit_dialog"
             android:layout_width="54dp"
+            android:visibility="gone"
             android:layout_height="54dp"
             android:src="@drawable/ic_camion_gris"
 

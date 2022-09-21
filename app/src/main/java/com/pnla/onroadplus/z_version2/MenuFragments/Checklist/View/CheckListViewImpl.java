@@ -144,15 +144,16 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     }
 
-    public void goquestionaryFragment(Integer cveTripMgmSection, Integer tripMgmSection) {
+    public void goquestionaryFragment(Integer cveTripMgmSection, Integer tripMgmSection, boolean aprobador) {
         //Toast.makeText(getContext(), "ir al cuestionario", Toast.LENGTH_SHORT).show();
-        questionFragment(cveTripMgmSection, tripMgmSection);
+        questionFragment(cveTripMgmSection, tripMgmSection,aprobador);
     }
 
-    private void questionFragment(Integer tripMgmSection, Integer cveTripMgmSection) {
+    private void questionFragment(Integer tripMgmSection, Integer cveTripMgmSection, boolean aprobador) {
         Bundle bundle = new Bundle();
         bundle.putInt("cveTripMgmSection",cveTripMgmSection); // Put anything what you want
         bundle.putInt("Section",tripMgmSection);
+        bundle.putBoolean("aprobador",aprobador);
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         Questions questions = new Questions();//transaction.addToBackStack(UnitsViewImpl.TAG);
