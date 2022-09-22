@@ -52,7 +52,7 @@ public class checkListInteractorImpl implements checkListInteractor{
 
     private void requestfullCheckList(String token) {
         checklistRequest request = new checklistRequest(token);
-        presenter.showpDialog();
+        //presenter.showpDialog();
         Call<checkListResponse> call = service.getSCheckLits(request);
         call.enqueue(new Callback<checkListResponse>() {
             @Override
