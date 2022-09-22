@@ -114,6 +114,17 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
             vehicle_checklist.setColorFilter(ContextCompat.getColor(getContext(), R.color.blueCarChecklist), android.graphics.PorterDuff.Mode.SRC_IN);
         }
 
+        SharedPreferences preferences = getContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String vehicleName = preferences.getString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, null);
+
+        //Para persistir el color
+        if(vehicleName!=null) {
+            //Toast.makeText(getContext(), "Si tiene vehiculo", Toast.LENGTH_SHORT).show();
+            vehicle_checklist.setColorFilter(ContextCompat.getColor(getContext(), R.color.blueCarChecklist), android.graphics.PorterDuff.Mode.SRC_IN);
+        } else {
+            vehicle_checklist.setColorFilter(ContextCompat.getColor(getContext(), R.color.grayUI), android.graphics.PorterDuff.Mode.SRC_IN);
+        }
+
         //Al presionar el carro
         vehicle_checklist.setOnClickListener(new View.OnClickListener() {
             @Override

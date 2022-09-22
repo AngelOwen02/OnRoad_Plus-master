@@ -2,6 +2,7 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Model.checkListdat
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.geocercas.adapter.adapterGeocercas;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
+import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -65,8 +67,6 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
                     }
             }
         });
-
-
 
         holder.userChecklist.setOnClickListener(new View.OnClickListener() {
             @Override
