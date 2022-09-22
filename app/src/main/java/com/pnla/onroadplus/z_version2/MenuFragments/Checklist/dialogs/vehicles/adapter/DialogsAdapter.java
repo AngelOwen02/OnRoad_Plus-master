@@ -113,6 +113,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
             holder.checkBoxDialog2.setVisibility(View.VISIBLE);
         } else {
             //Solo quitamos en Dialog2
+            holder.checkBoxDialog.setVisibility(View.VISIBLE);
             holder.checkBoxDialog2.setVisibility(View.GONE);
         }
 
