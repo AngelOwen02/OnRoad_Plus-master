@@ -36,8 +36,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constrainbajo"
             android:visibility="gone"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_height="70dp"
             android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="@+id/taficc_Ligth"
             app:layout_constraintStart_toStartOf="@+id/taficc_Ligth"
@@ -73,6 +73,18 @@
                 app:layout_constraintStart_toEndOf="@+id/textView15bajo"
                 app:layout_constraintTop_toBottomOf="@+id/textView12bajo" />
 
+            <TextView
+                android:id="@+id/aprovementa"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:visibility="gone"
+                android:layout_marginTop="5dp"
+                android:text="Requiere aprobador"
+                android:textColor="@color/colorRed"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15bajo" />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout15bajo"
                 android:layout_width="36dp"
@@ -136,7 +148,18 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/textView15mod"
                 app:layout_constraintTop_toBottomOf="@+id/textView12mod" />
-
+            <TextView
+                android:id="@+id/aprovementb"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginTop="5dp"
+                android:text="Requiere aprobador"
+                android:textColor="@color/colorRed"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15mod" />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout15mod"
                 android:layout_width="75dp"
@@ -200,7 +223,18 @@
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/textView15"
                 app:layout_constraintTop_toBottomOf="@+id/textView12" />
-
+            <TextView
+                android:id="@+id/aprovementc"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:visibility="gone"
+                android:layout_marginTop="5dp"
+                android:text="Requiere aprobador"
+                android:textColor="@color/colorRed"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView15" />
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout15"
                 android:layout_width="65dp"
