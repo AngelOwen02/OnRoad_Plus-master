@@ -79,8 +79,13 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             Log.e("finalCheckdata6", " " + data.getQuestions().get(position).getCveTripMgmQuestion() + "   " + Questions.fulChecklist.get(i).getAnswerId());//Questions.fulChecklist.get(i).getAnswerId()
                             if (Questions.fulChecklist.get(i).getCveTripMgmQuestion() == data.getQuestions().get(position).getCveTripMgmQuestion())//todo getAnswerPos() es la pregunta cambiar nombre
                             {
-                                // Log.e("finalCheckdata6"," "+Questions.fulChecklist.get(i).getAnswerPos());
-                                holder.spinnerquestionary.setSelection(Questions.fulChecklist.get(i).getAnswerPos());
+                                //Log.e("finalCheckdata6"," "+Questions.fulChecklist.get(i).getAnswerPos());
+                                Log.e("finalCheckdata6"," "+ holder.spinnerquestionary.getSelectedItem().toString());
+                                if(holder.spinnerquestionary.getSelectedItem().toString().equals("Selecciona una opción"))
+                                {
+
+                                }else{
+                                holder.spinnerquestionary.setSelection(Questions.fulChecklist.get(i).getAnswerPos());}
                             }
 
                         }
@@ -101,6 +106,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                                     " answerP :   " + i);
                             if (i == 0) {
                                 myview.safeValues(position, false, i, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), 0, null);
+
                             } else {
                                 myview.safeValues(position, false, i, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(i - 1).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(i - 1).getCveTripMgmAnswer());
                             }
