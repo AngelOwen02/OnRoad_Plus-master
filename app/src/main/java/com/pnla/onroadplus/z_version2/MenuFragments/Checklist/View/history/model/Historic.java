@@ -17,13 +17,17 @@ public class Historic {
     @SerializedName("traffic_light")
     @Expose
     private int trafficLight;
+    @SerializedName("is_approvement")
+    @Expose
+    private boolean isApprovement;
 
-    public Historic(String dateInsert, String vehicleName, String score, int trafficLight) {
+    public Historic(String dateInsert, String vehicleName, String score, int trafficLight, boolean isApprovement) {
         super();
         this.date_Insert = dateInsert;
         this.vehicleName = vehicleName;
         this.score = score;
         this.trafficLight = trafficLight;
+        this.isApprovement = isApprovement;
     }
 
     public String getDate_Insert() {
@@ -56,5 +60,13 @@ public class Historic {
 
     public void setTrafficLight(int trafficLight) {
         this.trafficLight = trafficLight;
+    }
+
+    public Boolean getApprovement() {
+        return isApprovement;
+    }
+
+    public void setApprovement(Boolean approvement) {
+        isApprovement = approvement;
     }
 }

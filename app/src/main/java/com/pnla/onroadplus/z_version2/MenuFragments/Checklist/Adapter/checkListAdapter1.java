@@ -45,11 +45,13 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
     public void onBindViewHolder(@NonNull checkListAdapter1.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
         holder.textView11.setText(data.get(position).getDescTripMgmSection());
+
         if(data.get(position).isAprobador() == true){
             holder.userChecklist.setVisibility(View.VISIBLE);
         } else {
             holder.userChecklist.setVisibility(View.GONE);
         }
+
         holder.buttonquestions.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick (View v){

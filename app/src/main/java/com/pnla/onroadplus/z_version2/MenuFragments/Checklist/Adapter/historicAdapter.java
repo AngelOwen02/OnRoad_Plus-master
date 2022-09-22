@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -85,6 +86,13 @@ public class historicAdapter extends RecyclerView.Adapter<historicAdapter.ViewHo
             holder.unitImageScore.setImageResource(R.drawable.ic_stop);
         }
 
+        //Para la imagen del Aprobador
+        if(data.get(position).getApprovement() == true) {
+            holder.unitApproved.setVisibility(View.VISIBLE);
+        } else {
+            holder.unitApproved.setVisibility(View.INVISIBLE);
+        }
+
         //Score del vehiculo
         holder.unitScore.setText(data.get(position).getScore());
     }
@@ -105,7 +113,7 @@ public class historicAdapter extends RecyclerView.Adapter<historicAdapter.ViewHo
      //   ConstraintLayout buttonquestions;
 
         TextView unitName, unitDate, unitScore;
-        ImageView unitImageScore;
+        ImageView unitImageScore, unitApproved;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -114,6 +122,7 @@ public class historicAdapter extends RecyclerView.Adapter<historicAdapter.ViewHo
             unitName = itemView.findViewById(R.id.txt_vehicle_name_his);
             unitDate = itemView.findViewById(R.id.txt_date_his);
             unitImageScore = itemView.findViewById(R.id.imageSemaforo_his);
+            unitApproved = itemView.findViewById(R.id.ic_user_checklist_historic);
             unitScore = itemView.findViewById(R.id.txt_score_his);
         }
     }
