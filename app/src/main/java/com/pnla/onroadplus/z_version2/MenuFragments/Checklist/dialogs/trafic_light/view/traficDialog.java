@@ -44,6 +44,7 @@ public class traficDialog extends DialogFragment implements View.OnClickListener
         buttontraficAcept=view.findViewById(R.id.buttontraficAcept);
         buttontraficAcept.setOnClickListener(this);
     }
+
     public void closeDialog() {
         this.dismiss();
 

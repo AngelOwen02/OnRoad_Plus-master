@@ -330,7 +330,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         switch (v.getId()){
             case R.id.buttongochecklist:
                 presenter.sendfullchecklist(Checkl,aproved);
-                Toast.makeText(getContext(), "mandar Valor de preguntas", Toast.LENGTH_SHORT).show();
+               // Toast.makeText(getContext(), "mandar Valor de preguntas", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.historic_checks:
                 menutransition();
@@ -359,7 +359,11 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
 
             traficDialog trafigAlert = new traficDialog();
             trafigAlert.show(getActivity().getSupportFragmentManager(), traficDialog.TAG);
-
+//            trafigAlert.getActivity().getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
+//                @Override
+//                public void onBackStackChanged() {
+//                    Toast.makeText(getContext(), "listo", Toast.LENGTH_SHORT).show();
+//                }});
 
 
       // menutransition();//todo este metodo viene del presente cuando envia correctamente el checklist

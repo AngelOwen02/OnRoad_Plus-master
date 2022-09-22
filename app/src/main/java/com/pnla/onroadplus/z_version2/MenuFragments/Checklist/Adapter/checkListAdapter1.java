@@ -54,7 +54,7 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
                 @Override
                 public void onClick (View v){
                     if (menuViewImpl.selectedVehicle == false) {
-                     Toast.makeText(context, "Debes seleccionar un vehiculo.", Toast.LENGTH_SHORT).show();
+                     Toast.makeText(context, "Debes seleccionar un vehículo ", Toast.LENGTH_SHORT).show();
                       //  myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position);
                     } else {
 

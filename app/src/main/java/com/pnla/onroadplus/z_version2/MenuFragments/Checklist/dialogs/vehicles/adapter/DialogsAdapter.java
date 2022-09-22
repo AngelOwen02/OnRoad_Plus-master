@@ -83,7 +83,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked==true) {
-                        Toast.makeText(context, data.get(position).getCveVehicle().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Vehiculo: "+data.get(position).getCveVehicle().toString()+" selecionado", Toast.LENGTH_SHORT).show();
                         menuViewImpl.selectedVehicle = true;
                         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();

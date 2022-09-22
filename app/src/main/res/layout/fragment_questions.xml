@@ -67,7 +67,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout14"
         android:layout_width="0dp"
-        android:layout_height="20dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:background="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -77,11 +77,12 @@
         <TextView
             android:id="@+id/titlefileds"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:fontFamily="@font/roboto_black"
             android:gravity="center"
             android:text="Evaluacion de riesgo"
-            android:textSize="15dp"
+            android:textColor="@color/blackUI"
+            android:textSize="22dp"
             tools:ignore="RtlCompat"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" >
@@ -93,13 +94,14 @@
         android:id="@+id/cardviewitem"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@color/white"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
+        android:background="@color/white"
         app:cardCornerRadius="10dp"
         app:layout_constraintBottom_toTopOf="@+id/dots_layout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout14" >
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout14">
 
 
     </androidx.viewpager2.widget.ViewPager2>
