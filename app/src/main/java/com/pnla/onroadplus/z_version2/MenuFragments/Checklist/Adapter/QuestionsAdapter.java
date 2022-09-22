@@ -83,7 +83,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                                 Log.e("finalCheckdata7"," "+ holder.spinnerquestionary.getSelectedItem().toString());
                                 if(holder.spinnerquestionary.getSelectedItem().toString().equals("Selecciona una opción"))
                                 {
-                                    holder.spinnerquestionary.setSelection(0, false);
+                                    holder.spinnerquestionary.setSelection(0, false);//https://stackoverflow.com/questions/2562248/how-to-keep-onitemselected-from-firing-off-on-a-newly-instantiated-spinner
                                 }else{
                                     holder.spinnerquestionary.setSelection(Questions.fulChecklist.get(i).getAnswerPos());
                                 }
