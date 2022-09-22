@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pnla.onroadplus.R;
@@ -84,12 +85,27 @@ public class historicAdapter extends RecyclerView.Adapter<historicAdapter.ViewHo
         //Rojo: Icono de Alto
         else if (data.get(position).getTrafficLight() == 3) {
             holder.unitImageScore.setImageResource(R.drawable.ic_stop);
+        } else {
+            holder.unitImageScore.setVisibility(View.INVISIBLE);
         }
 
         //Para la imagen del Aprobador
-        if(data.get(position).getApprovement() == true) {
+        /**if(data.get(position).getApprovement() == true) {
+            holder.unitApproved.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN);
             holder.unitApproved.setVisibility(View.VISIBLE);
+        } else if (data.get(position).getApprovement() == false){
+            holder.unitApproved.setColorFilter(ContextCompat.getColor(context, R.color.colorGray), android.graphics.PorterDuff.Mode.SRC_IN);
+            holder.unitApproved.setVisibility(View.VISIBLE);
+        } else if (data.get(position).getApprovement() == null){
+            holder.unitApproved.setVisibility(View.GONE);
+        }*/
+
+        if(data.get(position).getApprovement().equals(true)) {
+            holder.unitApproved.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN);
+        } else if (data.get(position).getApprovement().equals(false)) {
+            holder.unitApproved.setColorFilter(ContextCompat.getColor(context, R.color.colorGray), android.graphics.PorterDuff.Mode.SRC_IN);
         } else {
+            Toast.makeText(context, "Vacio", Toast.LENGTH_SHORT).show();
             holder.unitApproved.setVisibility(View.INVISIBLE);
         }
 
