@@ -36,6 +36,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
    private Context context;
  private Retrofit retrofitClient;
  private serviceQuestions service;
+ private int finalscoore;
     public questionsInteractorImpl(questionsPresenterImpl presenter, Context context) {
         this.presenter=presenter;
         this.context=context;
@@ -166,7 +167,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
         //    private Integer cveTripMgmQuestion;
         //endregion
         Log.e("senderdatacehcklist",""+Questions.fulChecklist);
-        int finalscoore=0;
+         finalscoore=0;
         List<mfQuestion> finalQ=new ArrayList<>();  //todo esto es pal json
         finalQ.clear();
 
@@ -231,7 +232,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
                 String data=respons.getData();
                 if(data!=null)
                 {
-                    presenter.gotoChecklistAgain(data);
+                    presenter.gotoChecklistAgain(data,finalscoore);
                     presenter.hidepDialog();
                 }else
                 {

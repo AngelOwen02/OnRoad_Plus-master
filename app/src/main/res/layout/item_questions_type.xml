@@ -9,17 +9,20 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/switchanswer"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="1dp"
+            android:layout_height="70dp"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textbooleanonly"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/roboto_black"
             android:gravity="center"
@@ -102,7 +105,7 @@
         android:id="@+id/optionanswer"
         android:visibility="visible"
         android:layout_width="match_parent"
-        android:layout_height="95dp"
+        android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -110,7 +113,7 @@
         <TextView
             android:id="@+id/textopenquestion"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:fontFamily="@font/roboto_black"
             android:gravity="center"
@@ -128,7 +131,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout13"
             android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_height="52dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

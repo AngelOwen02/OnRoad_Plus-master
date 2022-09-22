@@ -11,6 +11,6 @@ public interface questionView {
     void showDialog();
     void hideDialog();
     void setQuestions(List<dataQuestions> data);
-    void successetCehcklist(String valueSemaforo);
+    void successetCehcklist(String valueSemaforo,int finalscore);
 
 }

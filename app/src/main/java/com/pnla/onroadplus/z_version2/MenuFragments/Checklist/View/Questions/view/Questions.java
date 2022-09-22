@@ -354,15 +354,15 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         return image;
     }
     @Override
-    public void successetCehcklist(String valueSemaforo) {
+    public void successetCehcklist(String valueSemaforo,int finalscore) {
 
+            Bundle args = new Bundle();
+            args.putString("semaforofinal", valueSemaforo);
+            args.putInt("finalscore",finalscore);
             traficDialog trafigAlert = new traficDialog();
+            trafigAlert.setArguments(args);
             trafigAlert.show(getActivity().getSupportFragmentManager(), traficDialog.TAG);
-//            trafigAlert.getActivity().getSupportFragmentManager().addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-//                @Override
-//                public void onBackStackChanged() {
-//                    Toast.makeText(getContext(), "listo", Toast.LENGTH_SHORT).show();
-//                }});
+
 
 
       // menutransition();//todo este metodo viene del presente cuando envia correctamente el checklist
