@@ -33,6 +33,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
+            android:id="@+id/buttontraficAcept"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="20dp"

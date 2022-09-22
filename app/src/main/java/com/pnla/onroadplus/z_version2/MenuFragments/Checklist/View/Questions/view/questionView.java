@@ -10,8 +10,7 @@ public interface questionView {
     void setSections(List<dataSections> data);
     void showDialog();
     void hideDialog();
-
     void setQuestions(List<dataQuestions> data);
-
     void successetCehcklist(String valueSemaforo);
+
 }

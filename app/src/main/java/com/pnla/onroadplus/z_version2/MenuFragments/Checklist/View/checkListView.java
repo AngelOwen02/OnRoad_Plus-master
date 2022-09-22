@@ -9,4 +9,5 @@ public interface checkListView {
 
     void showDialog();
     void hideProgresDialog();
+
 }

@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -42,6 +43,8 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.mod
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.sections.dataSections;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.presenter.questionPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.presenter.questionsPresenterImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.historicChecklist;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.trafic_light.view.traficDialog;
 
 import java.io.File;
 import java.io.IOException;
@@ -80,8 +83,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     private File myimageFile;
     private Uri imageUri;
     ImageView imageViewP;
-
-
+    
     @SuppressLint("NewApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -170,6 +172,14 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         transaction.replace(R.id.conteinerMainFragments, checklist, CheckListViewImpl.TAG).commit();
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
+    }
+    private void gotohistoric()
+    {
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        historicChecklist historic = new historicChecklist();//transaction.addToBackStack(UnitsViewImpl.TAG);
+        transaction.replace(R.id.conteinerMainFragments, historic, historicChecklist.TAG).commit();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     }
     @Override
     //Pressed return button - returns to the results menu
@@ -347,9 +357,18 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     @Override
     public void successetCehcklist(String valueSemaforo) {
 
-       menutransition();//todo este metodo viene del presente cuando envia correctamente el checklist
+            traficDialog trafigAlert = new traficDialog();
+            trafigAlert.show(getActivity().getSupportFragmentManager(), traficDialog.TAG);
+
+
+
+      // menutransition();//todo este metodo viene del presente cuando envia correctamente el checklist
 
     }
+    public void succestraficDialog(){
+        gotohistoric();
+    }
+
     private void askCameraPermissions() {//todo pregunta por los permisos si existen va por la camara
         if(ContextCompat.checkSelfPermission(getContext(), Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.CAMERA} , CAMERA_PERM_CODE);
