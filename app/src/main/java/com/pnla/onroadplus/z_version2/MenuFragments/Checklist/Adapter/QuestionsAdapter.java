@@ -57,7 +57,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
         if(data!=null) {
             if (data.getQuestions().get(position).getAnswers()!=null){
-                if (data.getQuestions().get(position).getAnswers().size() != 2) {//esto es un spiner
+                if (data.getQuestions().get(position).getAnswers().get(0).getObjectType() == 2) {//esto es un spiner
                     Log.e("multianswerType", " : " + position);
                     holder.optionanswer.setVisibility(View.VISIBLE);
                     holder.switchanswer.setVisibility(View.GONE);

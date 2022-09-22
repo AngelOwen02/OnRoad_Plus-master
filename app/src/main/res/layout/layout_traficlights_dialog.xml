@@ -27,7 +27,6 @@
             android:layout_height="150dp"
             android:layout_marginStart="80dp"
             android:layout_marginTop="50dp"
-            android:background="@drawable/ic_siga"
             android:layout_marginEnd="80dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -204,7 +203,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout15"
-                android:layout_width="60dp"
+                android:layout_width="65dp"
                 android:layout_height="19dp"
                 android:background="@color/colorRed"
                 app:layout_constraintBottom_toBottomOf="@+id/textView12"
