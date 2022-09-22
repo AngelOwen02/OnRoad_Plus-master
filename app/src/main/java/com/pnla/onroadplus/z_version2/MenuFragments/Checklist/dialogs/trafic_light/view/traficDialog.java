@@ -31,6 +31,8 @@ public class traficDialog extends DialogFragment implements View.OnClickListener
     private Button buttontraficAcept;
     private String semafor;
     private int scoreF;
+    private boolean raprobe;
+    private  TextView aprovementa,aprovementb,aprovementc;
     private ImageView taficc_Ligth;
     private ConstraintLayout alto,bajo,moderado;
     private TextView scorealt,scorebajo,scoremoderado;
@@ -49,7 +51,7 @@ public class traficDialog extends DialogFragment implements View.OnClickListener
         Bundle mArgs = getArguments();
         semafor = mArgs.getString("semaforofinal");
         scoreF= mArgs.getInt("finalscore");
-
+        raprobe= mArgs.getBoolean("reqaprob");
         initDialog(view);
         //setFonts();
         return view;
@@ -60,6 +62,9 @@ public class traficDialog extends DialogFragment implements View.OnClickListener
     private void initDialog(View view) {
         taficc_Ligth =view.findViewById(R.id.taficc_Ligth);
 
+        aprovementa=view.findViewById(R.id.aprovementa);
+        aprovementb=view.findViewById(R.id.aprovementb);
+        aprovementc=view.findViewById(R.id.aprovementc);
 
         scorebajo=view.findViewById(R.id.scorefbajo);
         scoremoderado=view.findViewById(R.id.scorefmod);
@@ -83,6 +88,12 @@ public class traficDialog extends DialogFragment implements View.OnClickListener
             moderado.setVisibility(View.GONE);
             bajo.setVisibility(View.VISIBLE);
             scorebajo.setText(String.valueOf( scoreF));
+            if(raprobe==true)
+            {
+                aprovementa.setVisibility(View.VISIBLE);
+            }else {
+                aprovementa.setVisibility(View.GONE);
+            }
         }else if(semafor.equals("2"))
         {
             Drawable drawable = getResources().getDrawable(R.drawable.ic_warning);
@@ -91,6 +102,12 @@ public class traficDialog extends DialogFragment implements View.OnClickListener
             moderado.setVisibility(View.VISIBLE);
             bajo.setVisibility(View.GONE);
             scoremoderado.setText(String.valueOf(scoreF));
+            if(raprobe==true)
+            {
+                aprovementb.setVisibility(View.VISIBLE);
+            }else {
+                aprovementb.setVisibility(View.GONE);
+            }
         }else if(semafor.equals("3")){
             Drawable drawable = getResources().getDrawable(R.drawable.ic_stop);
             taficc_Ligth.setImageDrawable(drawable);
@@ -98,6 +115,12 @@ public class traficDialog extends DialogFragment implements View.OnClickListener
             moderado.setVisibility(View.GONE);
             bajo.setVisibility(View.GONE);
             scorealt.setText(String.valueOf(scoreF));
+            if(raprobe==true)
+            {
+                aprovementc.setVisibility(View.VISIBLE);
+            }else {
+                aprovementc.setVisibility(View.GONE);
+            }
         }else{
             Toast.makeText(getContext(), "semaforo fuera de rango", Toast.LENGTH_SHORT).show();
             closeDialog();

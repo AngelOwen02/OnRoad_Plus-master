@@ -37,6 +37,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
  private Retrofit retrofitClient;
  private serviceQuestions service;
  private int finalscoore;
+ private boolean aprobacionR=false;
     public questionsInteractorImpl(questionsPresenterImpl presenter, Context context) {
         this.presenter=presenter;
         this.context=context;
@@ -130,6 +131,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         String cveV=preferences.getString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, null);
         String NAMEVE=preferences.getString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE,null);
+        aprobacionR=aproved;
         if(token!=null)
         {
             requestSendFullChckelist(aproved,cve_checklist,cveV,token,email);
@@ -232,7 +234,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
                 String data=respons.getData();
                 if(data!=null)
                 {
-                    presenter.gotoChecklistAgain(data,finalscoore);
+                    presenter.gotoChecklistAgain(data,finalscoore,aprobacionR);
                     presenter.hidepDialog();
                 }else
                 {

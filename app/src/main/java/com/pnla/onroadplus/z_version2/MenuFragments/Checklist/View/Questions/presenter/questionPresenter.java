@@ -17,5 +17,5 @@ public interface questionPresenter {
 
     void sendfullchecklist(int checkl, boolean aproved);
 
-    void gotoChecklistAgain(String valueSemaforo,int finalscore);
+    void gotoChecklistAgain(String valueSemaforo,int finalscore,boolean aprobacionR);
 }

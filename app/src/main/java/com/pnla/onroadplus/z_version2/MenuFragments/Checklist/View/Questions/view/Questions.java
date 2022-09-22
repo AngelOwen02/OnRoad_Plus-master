@@ -4,7 +4,6 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -354,11 +353,12 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         return image;
     }
     @Override
-    public void successetCehcklist(String valueSemaforo,int finalscore) {
+    public void successetCehcklist(String valueSemaforo, int finalscore, boolean aprobacionR) {
 
             Bundle args = new Bundle();
             args.putString("semaforofinal", valueSemaforo);
             args.putInt("finalscore",finalscore);
+            args.putBoolean("reqaprob",aprobacionR);
             traficDialog trafigAlert = new traficDialog();
             trafigAlert.setArguments(args);
             trafigAlert.show(getActivity().getSupportFragmentManager(), traficDialog.TAG);
