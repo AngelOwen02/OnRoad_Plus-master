@@ -101,7 +101,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             Log.e("finalCheckdata5", " " + Questions.fulChecklist.size());
 
                             //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1 ~ switch 2 ~ multiple
-                            Log.e("finalCheckdata4", " sectionP :  " + data.getQuestions().get(position).getCveTripMgmSection() +
+                            Log.e("finalCheckdata6", " sectionP :  " + data.getQuestions().get(position).getCveTripMgmSection() +
                                     " QuestionP : " + position +
                                     " answerP :   " + i);
                             if (i == 0) {
