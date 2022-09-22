@@ -111,7 +111,7 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
         if(menuViewImpl.selectedVehicle == false) {
             vehicle_checklist.setColorFilter(ContextCompat.getColor(getContext(), R.color.grayUI), android.graphics.PorterDuff.Mode.SRC_IN);
         } else {
-            vehicle_checklist.setColorFilter(ContextCompat.getColor(getContext(), R.color.blackUI), android.graphics.PorterDuff.Mode.SRC_IN);
+            vehicle_checklist.setColorFilter(ContextCompat.getColor(getContext(), R.color.blueCarChecklist), android.graphics.PorterDuff.Mode.SRC_IN);
         }
 
         //Al presionar el carro
