@@ -28,7 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder>{
-   private Questions myview;
+    private Questions myview;
     private Context context;
     private dataQuestions data;
     private ArrayAdapter<String> spinnerArrayAdapter;
@@ -72,7 +72,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                     spinnerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, arrayAdapter);
                     spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     holder.spinnerquestionary.setAdapter(spinnerArrayAdapter);
-
+                    holder.spinnerquestionary.setSelection(0, false);
                     if (Questions.fulChecklist != null) {
 
                         for (int i = 0; i < Questions.fulChecklist.size(); i++) {
@@ -81,12 +81,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             {
                                 //Log.e("finalCheckdata6"," "+Questions.fulChecklist.get(i).getAnswerPos());
                                 Log.e("finalCheckdata7"," "+ holder.spinnerquestionary.getSelectedItem().toString());
-                                if(holder.spinnerquestionary.getSelectedItem().toString().equals("Selecciona una opción"))
-                                {
-                                    holder.spinnerquestionary.setSelection(0, false);//https://stackoverflow.com/questions/2562248/how-to-keep-onitemselected-from-firing-off-on-a-newly-instantiated-spinner
-                                }else{
-                                    holder.spinnerquestionary.setSelection(Questions.fulChecklist.get(i).getAnswerPos());
-                                }
+                                //  if(holder.spinnerquestionary.getSelectedItem().toString().equals("Selecciona una opción"))
+                                //  {
+                                //   holder.spinnerquestionary.setSelection(0, false);//https://stackoverflow.com/questions/2562248/how-to-keep-onitemselected-from-firing-off-on-a-newly-instantiated-spinner
+                                //  }else{
+                                holder.spinnerquestionary.setSelection(Questions.fulChecklist.get(i).getAnswerPos());
+                                // }
                             }
 
                         }
@@ -96,33 +96,33 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
                     holder.spinnerquestionary.post(new Runnable() {
                         public void run() {
-                    holder.spinnerquestionary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                            holder.spinnerquestionary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
-                        @Override
-                        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                            Log.e("finalCheckdata5", " " + Questions.fulChecklist.size());
+                                @Override
+                                public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                                    Log.e("finalCheckdata5", " " + Questions.fulChecklist.size());
 
-                            //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1 ~ switch 2 ~ multiple
-                            Log.e("finalCheckdata7", " sectionP :  " + data.getQuestions().get(position).getCveTripMgmSection() +
-                                    " QuestionP : " + position +
-                                    " answerP :   " + i);
-                            Log.e("finalCheckdata7",""+adapterView.getPositionForView(view));
-                            Log.e("finalCheckdata7",""+adapterView.getPositionForView(view));
-                            if (i == 0) {
-                                myview.safeValues(position, false, i, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), 0, null);
+                                    //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1  switch 2  multiple
+                                    Log.e("finalCheckdata7", " sectionP :  " + data.getQuestions().get(position).getCveTripMgmSection() +
+                                            " QuestionP : " + position +
+                                            " answerP :   " + i);
+                                    Log.e("finalCheckdata7",""+adapterView.getPositionForView(view));
+                                    Log.e("finalCheckdata7",""+adapterView.getPositionForView(view));
+                                    if (i == 0) {
+                                        myview.safeValues(position, false, i, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), 0, null);
 
-                            } else {
-                                myview.safeValues(position, false, i, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(i - 1).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(i - 1).getCveTripMgmAnswer());
-                            }
+                                    } else {
+                                        myview.safeValues(position, false, i, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(i - 1).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(i - 1).getCveTripMgmAnswer());
+                                    }
 
 
-                        }
+                                }
 
-                        @Override
-                        public void onNothingSelected(AdapterView<?> adapterView) {
+                                @Override
+                                public void onNothingSelected(AdapterView<?> adapterView) {
 
-                        }
-                    });
+                                }
+                            });
                         }
                     });
                 } else {                                                         //switches
@@ -139,6 +139,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                                 // Log.e("finalCheckdata6"," "+Questions.fulChecklist.get(i).getAnswerPos());
                                 if (Questions.fulChecklist.get(i).getAnswerPos() == 0) {
                                     holder.switchquestionary.setChecked(false);
+                                    myview.safeValues(position, false, 0, 1, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(1).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(1).getCveTripMgmAnswer());
                                 } else {
                                     holder.switchquestionary.setChecked(true);
                                 }
@@ -153,7 +154,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             Log.e("finalCheckdata4", "section : " + data.getQuestions().get(position).getCveTripMgmSection() +
                                     " switchpos: " + position +
                                     " answer: " + b);
-                            //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1 ~ switch 2 ~ multiple
+                            //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1  switch 2  multiple
                             if (b == false) {
                                 myview.safeValues(position, b, 0, 1, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(1).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(1).getCveTripMgmAnswer());
                             } else {
@@ -196,11 +197,11 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-    ConstraintLayout switchanswer,optionanswer;
-    TextView description1,description2;
-    Spinner spinnerquestionary;
-    Switch switchquestionary;
-    private ImageView imagephoto,imagephoto2;
+        ConstraintLayout switchanswer,optionanswer;
+        TextView description1,description2;
+        Spinner spinnerquestionary;
+        Switch switchquestionary;
+        private ImageView imagephoto,imagephoto2;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imagephoto2=itemView.findViewById(R.id.imagephoto2);
