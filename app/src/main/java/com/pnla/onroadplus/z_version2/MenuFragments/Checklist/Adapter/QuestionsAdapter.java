@@ -68,7 +68,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                         arrayAdapter.add(data.getQuestions().get(position).getAnswers().get(i).getDescTripMgmAnswer());
                     }
 
-                    arrayAdapter.add(0, "Selecciona una opcion");
+                    arrayAdapter.add(0, "Selecciona una opción");
                     spinnerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, arrayAdapter);
                     spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     holder.spinnerquestionary.setAdapter(spinnerArrayAdapter);

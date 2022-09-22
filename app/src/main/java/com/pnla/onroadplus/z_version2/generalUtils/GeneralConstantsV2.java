@@ -35,7 +35,7 @@ public class GeneralConstantsV2 {
     //vehiclesAndGroups
     public static final int REQUEST_ALL_VEHICLES = 1;
     public static final int REQUEST_SPECIFIC_VEHICLES = 0;
-    public static final String CVE_CHECKLIST_VEHICLE ="0" ;
+    public static final String CVE_CHECKLIST_VEHICLE ="0";
     public static final String NAME_CHECKLIST_VEHICLE = "TEST_VEHICLE";
     public static boolean VEHICLES_LIST_VISIBLE = true;
     public static boolean VEHICLES_LIST_NOT_VISIBLE = false;

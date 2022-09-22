@@ -3,6 +3,7 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -61,7 +62,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked==true) {
-                        //Toast.makeText(context, data.get(position).getCveVehicle().toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Vehiculo: "+data.get(position).getVehicleName() +" selecionado", Toast.LENGTH_SHORT).show();
                         String cveVehicle = data.get(position).getCveVehicle().toString();
                         //Toast.makeText(context, cveVehicle, Toast.LENGTH_SHORT).show();
 
@@ -70,6 +71,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, data.get(position).getVehicleName().toString());
                         editor.putString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, data.get(position).getCveVehicle().toString());
+
                         editor.commit();
                         myview.closeDialog();
                         //updateS();
@@ -83,12 +85,13 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked==true) {
-                        Toast.makeText(context, "Vehiculo: "+data.get(position).getCveVehicle().toString()+" selecionado", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "Vehiculo: "+data.get(position).getVehicleName() +" selecionado", Toast.LENGTH_SHORT).show();
                         menuViewImpl.selectedVehicle = true;
                         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, data.get(position).getVehicleName().toString());
                         editor.putString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, data.get(position).getCveVehicle().toString());
+
                         editor.commit();
                         myview.closeDialog();
                         //updateS();
@@ -99,16 +102,25 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
             });
         }
 
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String vehicleName = preferences.getString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, null);
+
+        //Toast.makeText(context, vehicleName, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, data.get(position).getVehicleName() , Toast.LENGTH_SHORT).show();
+
+        if(data.get(position).getVehicleName().equals(vehicleName)){
+            holder.checkBoxDialog.setVisibility(View.GONE);
+            holder.checkBoxDialog2.setVisibility(View.VISIBLE);
+        } else {
+            //Solo quitamos en Dialog2
+            holder.checkBoxDialog2.setVisibility(View.GONE);
+        }
+
         /**if(menuViewImpl.selectedVehicle == true) {
             holder.checkBoxDialog.setEnabled(false);
         }*/
 
         //notifyDataSetChanged();
-    }
-
-    public void updateS() {
-        checkListInteractor checkListInteractor = new checkListInteractorImpl(presenter, myview.getContext());
-        checkListInteractor.requestCheckList();
     }
 
     @Override
@@ -126,7 +138,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView imgUnitDialog;
         TextView txtUnitDialog;
-        CheckBox checkBoxDialog;
+        CheckBox checkBoxDialog, checkBoxDialog2;
 
         public ViewHolder(@NonNull View itemview) {
             super(itemview);
@@ -134,6 +146,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
             imgUnitDialog = itemview.findViewById(R.id.img_unit_dialog);
             txtUnitDialog = itemview.findViewById(R.id.txt_unit_name_dialog);
             checkBoxDialog = (CheckBox) itemview.findViewById(R.id.checkbox_dialog);
+            checkBoxDialog2 = (CheckBox) itemview.findViewById(R.id.checkbox_dialog2);
         }
     }
 }
