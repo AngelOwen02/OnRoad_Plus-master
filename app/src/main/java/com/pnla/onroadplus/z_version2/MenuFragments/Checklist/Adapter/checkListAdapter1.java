@@ -74,6 +74,25 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
                 //Toast.makeText(context, "Si funciona", Toast.LENGTH_SHORT).show();
             }
         });
+
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String vehicleName = preferences.getString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, null);
+        String vehicleCve = preferences.getString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, null);
+
+        if(vehicleName!=null) {
+            //Toast.makeText(context, "Vehiculo guardado: " + vehicleName, Toast.LENGTH_SHORT).show();
+            //myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position,data.get(position).isAprobador());
+            menuViewImpl.selectedVehicle = true;
+            //SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, vehicleName);
+            editor.putString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, vehicleCve);
+
+            editor.commit();
+            //myview.closeDialog();
+        } else {
+
+        }
     }
 
     @Override
