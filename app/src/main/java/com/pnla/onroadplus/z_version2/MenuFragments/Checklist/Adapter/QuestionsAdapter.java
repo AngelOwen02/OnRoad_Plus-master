@@ -53,7 +53,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
 
     @Override
-    public void onBindViewHolder(@NonNull QuestionsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
+    public void onBindViewHolder(@NonNull final QuestionsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
         if(data!=null) {
             if (data.getQuestions().get(position).getAnswers()!=null){
@@ -80,12 +80,13 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             if (Questions.fulChecklist.get(i).getCveTripMgmQuestion() == data.getQuestions().get(position).getCveTripMgmQuestion())//todo getAnswerPos() es la pregunta cambiar nombre
                             {
                                 //Log.e("finalCheckdata6"," "+Questions.fulChecklist.get(i).getAnswerPos());
-                                Log.e("finalCheckdata6"," "+ holder.spinnerquestionary.getSelectedItem().toString());
+                                Log.e("finalCheckdata7"," "+ holder.spinnerquestionary.getSelectedItem().toString());
                                 if(holder.spinnerquestionary.getSelectedItem().toString().equals("Selecciona una opción"))
                                 {
-
+                                    holder.spinnerquestionary.setSelection(0, false);
                                 }else{
-                                holder.spinnerquestionary.setSelection(Questions.fulChecklist.get(i).getAnswerPos());}
+                                    holder.spinnerquestionary.setSelection(Questions.fulChecklist.get(i).getAnswerPos());
+                                }
                             }
 
                         }
@@ -93,7 +94,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
                     //  holder.spinnerquestionary.setSelection(2);
 
-
+                    holder.spinnerquestionary.post(new Runnable() {
+                        public void run() {
                     holder.spinnerquestionary.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                         @Override
@@ -101,9 +103,11 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             Log.e("finalCheckdata5", " " + Questions.fulChecklist.size());
 
                             //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1 ~ switch 2 ~ multiple
-                            Log.e("finalCheckdata6", " sectionP :  " + data.getQuestions().get(position).getCveTripMgmSection() +
+                            Log.e("finalCheckdata7", " sectionP :  " + data.getQuestions().get(position).getCveTripMgmSection() +
                                     " QuestionP : " + position +
                                     " answerP :   " + i);
+                            Log.e("finalCheckdata7",""+adapterView.getPositionForView(view));
+                            Log.e("finalCheckdata7",""+adapterView.getPositionForView(view));
                             if (i == 0) {
                                 myview.safeValues(position, false, i, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), 0, null);
 
@@ -119,7 +123,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
                         }
                     });
-
+                        }
+                    });
                 } else {                                                         //switches
                     holder.optionanswer.setVisibility(View.GONE);
                     holder.switchanswer.setVisibility(View.VISIBLE);
