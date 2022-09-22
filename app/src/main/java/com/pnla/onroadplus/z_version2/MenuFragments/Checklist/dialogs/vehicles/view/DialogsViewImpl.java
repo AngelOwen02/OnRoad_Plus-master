@@ -1,11 +1,13 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.view;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,10 +15,13 @@ import androidx.appcompat.widget.SearchView;
 import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.pnla.onroadplus.R;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.adapter.DialogsAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.model.DialogsData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.presenter.DialogsPresenter;
@@ -27,7 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-public class DialogsViewImpl extends DialogFragment implements View.OnClickListener, DialogsView {
+public class DialogsViewImpl extends DialogFragment implements View.OnClickListener, DialogsView , DialogInterface.OnDismissListener {
 
     public static final String TAG = DialogsViewImpl.class.getSimpleName();
     private Button externalconstraint;
@@ -130,8 +135,18 @@ public class DialogsViewImpl extends DialogFragment implements View.OnClickListe
     }
 
     public void closeDialog() {
+        onDismiss();
         this.dismiss();
 
+    }
+
+    public void onDismiss() {
+        //Toast.makeText(getContext(), "Si", Toast.LENGTH_SHORT).show();
+        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentTransaction transaction = manager.beginTransaction();
+        CheckListViewImpl contacto = new CheckListViewImpl();//transaction.addToBackStack(UnitsViewImpl.TAG);
+        transaction.replace(R.id.conteinerMainFragments, contacto, CheckListViewImpl.TAG).commit();
+        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     }
 
     @Override

@@ -13,6 +13,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.pnla.onroadplus.R;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Interactor.checkListInteractor;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Interactor.checkListInteractorImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Presenter.checkListPresenter;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListViewImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.interactor.DialogsInteractor;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.interactor.DialogsInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.view.*;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.model.*;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
@@ -29,6 +35,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
     private Context context;
     private DialogsViewImpl myview;
     private List<DialogsData> data;
+    private checkListPresenter presenter;
 
     public DialogsAdapter(List<DialogsData> data, DialogsViewImpl myview, Context context) {
         this.myview = myview;
@@ -54,7 +61,10 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked==true) {
-                        Toast.makeText(context, data.get(position).getCveVehicle().toString(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(context, data.get(position).getCveVehicle().toString(), Toast.LENGTH_SHORT).show();
+                        String cveVehicle = data.get(position).getCveVehicle().toString();
+                        //Toast.makeText(context, cveVehicle, Toast.LENGTH_SHORT).show();
+
                         menuViewImpl.selectedVehicle = true;
                         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
@@ -62,6 +72,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
                         editor.putString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, data.get(position).getCveVehicle().toString());
                         editor.commit();
                         myview.closeDialog();
+                        //updateS();
                         //holder.checkBoxDialog.setActivated(false);
                         //notifyDataSetChanged();
                     }
@@ -80,6 +91,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
                         editor.putString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, data.get(position).getCveVehicle().toString());
                         editor.commit();
                         myview.closeDialog();
+                        //updateS();
                         //holder.checkBoxDialog.setActivated(false);
                         //notifyDataSetChanged();
                     }
@@ -91,13 +103,12 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
             holder.checkBoxDialog.setEnabled(false);
         }*/
 
-        //checkCB();
         //notifyDataSetChanged();
     }
 
-    public void checkCB() {
-        //if()
-        //notifyDataSetChanged();
+    public void updateS() {
+        checkListInteractor checkListInteractor = new checkListInteractorImpl(presenter, myview.getContext());
+        checkListInteractor.requestCheckList();
     }
 
     @Override
@@ -122,7 +133,6 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
 
             imgUnitDialog = itemview.findViewById(R.id.img_unit_dialog);
             txtUnitDialog = itemview.findViewById(R.id.txt_unit_name_dialog);
-
             checkBoxDialog = (CheckBox) itemview.findViewById(R.id.checkbox_dialog);
         }
     }

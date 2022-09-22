@@ -36,11 +36,15 @@ public class DialogsPresenterImpl implements DialogsPresenter {
 
     @Override
     public void showDialog() {
-
+        if(view!=null) {
+            view.showDialog();
+        }
     }
 
     @Override
     public void hideDialog() {
-
+        if(view!=null) {
+            view.hideProgressDialog();
+        }
     }
 }

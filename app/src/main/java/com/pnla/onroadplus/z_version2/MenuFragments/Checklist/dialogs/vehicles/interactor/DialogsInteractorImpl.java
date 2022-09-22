@@ -45,7 +45,7 @@ public class DialogsInteractorImpl implements DialogsInteractor {
 
     private void requestfullVehicles(String token, Boolean flagParent) {
         DialogsRequest request = new DialogsRequest(flagParent, token);
-        //presenter.showDialog();
+        presenter.showDialog();
         Call<DialogsResponse> call = service.getVehiclesDialog(request);
         call.enqueue(new Callback<DialogsResponse>() {
             @Override
@@ -90,7 +90,7 @@ public class DialogsInteractorImpl implements DialogsInteractor {
             }
         } else {
             presenter.hideDialog();
-            //Toast.makeText("" + responseD.getMessage() + " " + responseD.getResponseCode(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "" + responseD.getMessage() + " " + responseD.getResponseCode(), Toast.LENGTH_SHORT).show();
         }
     }
 }
