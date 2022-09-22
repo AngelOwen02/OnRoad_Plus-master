@@ -49,7 +49,7 @@ public class traficDialog extends DialogFragment implements View.OnClickListener
         Bundle mArgs = getArguments();
         semafor = mArgs.getString("semaforofinal");
         scoreF= mArgs.getInt("finalscore");
-        Toast.makeText(getContext(), ""+semafor, Toast.LENGTH_SHORT).show();
+
         initDialog(view);
         //setFonts();
         return view;
