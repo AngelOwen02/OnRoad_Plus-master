@@ -2,6 +2,7 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -169,18 +170,29 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                 myview.showerrormistakeanswers();
             }
         }
-        holder.imagephoto.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myview.takePick(data.getQuestions().get(position).getCveTripMgmQuestion());
-            }
-        });
-        holder.imagephoto2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myview.takePick(data.getQuestions().get(position).getCveTripMgmQuestion());
-            }
-        });
+
+        if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.Q) {
+
+            holder.imagephoto2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    myview.takePick(data.getQuestions().get(position).getCveTripMgmQuestion());
+                    Log.e("photoFlow", "take pic");
+                }
+            });
+            holder.imagephoto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    myview.takePick(data.getQuestions().get(position).getCveTripMgmQuestion());
+                    Log.e("photoFlow", "take pic");
+                }
+            });
+        }else
+        {
+            holder.imagephoto.setVisibility(View.GONE);
+            holder.imagephoto2.setVisibility(View.GONE);
+            //myview.errorpic();
+        }
     }
 
 

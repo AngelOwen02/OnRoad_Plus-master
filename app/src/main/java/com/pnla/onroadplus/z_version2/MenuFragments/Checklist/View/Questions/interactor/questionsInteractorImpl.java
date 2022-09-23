@@ -169,6 +169,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
         //    private Integer cveTripMgmQuestion;
         //endregion
         Log.e("senderdatacehcklist",""+Questions.fulChecklist);
+        Log.e("senderdatacehcklist",""+Questions.fulChecklist);
          finalscoore=0;
         List<mfQuestion> finalQ=new ArrayList<>();  //todo esto es pal json
         finalQ.clear();
@@ -195,7 +196,10 @@ public class questionsInteractorImpl  implements questionsInteractor{
         List<Image> image=new ArrayList<>();
         image.clear();
         //image.add(new Image(2,imagabase64));
-
+        for(int j=0;j<Questions.fulChecklist.size();j++)
+        {
+            image.add(new Image(Questions.fulChecklist.get(j).getCveTripMgmQuestion(),Questions.fulChecklist.get(j).getFoto()));
+        }
         requestFullCheckList request=new requestFullCheckList(aproved,cve_checklist, Integer.valueOf(cveV),0,email,image,mfjson,Questions.fulChecklist.get(0).getOrigin(),finalscoore,token);
        //  ejemplo      requestFullCheckList request=new requestFullCheckList(true,28,13756,0,"efren@newlandapps.com",image,json,1,2,token);
         presenter.showpDialog();

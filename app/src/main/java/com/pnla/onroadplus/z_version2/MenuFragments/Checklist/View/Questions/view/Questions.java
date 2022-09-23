@@ -1,15 +1,22 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.view;
 
+import static com.bumptech.glide.load.resource.bitmap.TransformationUtils.rotateImage;
+
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -26,6 +33,7 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
+import androidx.exifinterface.media.ExifInterface;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -45,6 +53,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.pre
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.historicChecklist;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.trafic_light.view.traficDialog;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -82,6 +91,8 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     private File myimageFile;
     private Uri imageUri;
     ImageView imageViewP;
+    Bitmap rotatedBitmap = null;
+    private Integer cvetemp;
     
     @SuppressLint("NewApi")
     @Override
@@ -337,21 +348,6 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     }
 
 
-    private File createImageFile() throws IOException {
-        // Create an image file name
-        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
-        String imageFileName = "JPEG_" + timeStamp + "_";
-        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
-        File image = File.createTempFile(
-                imageFileName,  /// prefix /
-                ".jpg",         // suffix /
-                storageDir      // directory /
-        );
-
-        // Save a file: path for use with ACTION_VIEW intents
-        currentPhotoPath = image.getAbsolutePath();
-        return image;
-    }
     @Override
     public void successetCehcklist(String valueSemaforo, int finalscore, boolean aprobacionR) {
 
@@ -382,24 +378,32 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         }
     }
 
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //if(imageUri!=null) {
-        Log.e("imagefromDecode1", "" + resultCode + "  " + imageUri);
-        Log.e("imagefromDecode1", "" + ":   " + "" + myimageFile);
+        Log.e("photoFlow","rC:   "+requestCode);
+        Log.e("photoFlow","resC: "+resultCode);
+        Log.e("photoFlow","data: "+data);
+    //    Log.e("imagefromDecode1", "" + resultCode + "  " + imageUri);
+       // Log.e("imagefromDecode1", "" + ":   " + "" + myimageFile);
         String pathImage = String.valueOf(imageUri);
         String substring = pathImage.substring(1);
         //urispahts.add(substring);
 
         if (requestCode == CAMERA_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                File f = new File(currentPhotoPath);
+                getBase64();
+               // File f = new File(currentPhotoPath);
+
                // imageViewP.setImageURI(Uri.fromFile(f));
-            }else
+                ErradicatedFiler();
+            }  else
             {
-                Toast.makeText(getContext(), "Dispositivo no compatible con la funcionalidad", Toast.LENGTH_SHORT).show();
-                Log.e("imagefromDecode1","error decoding");
+                //File file =new File(imageUri.getPath());
+
+                ErradicatedFiler();
             }
         }else{
             Log.e("imagefromDecode1","error decoding2");
@@ -408,6 +412,61 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
 
         //}
     }
+
+    private void getBase64() {
+
+
+        Bitmap bitmap1= BitmapFactory.decodeFile(currentPhotoPath);
+        Bitmap bitmap= Bitmap.createScaledBitmap(bitmap1, 460, 460, false);
+        try {
+            ExifInterface exifInterface = new ExifInterface(currentPhotoPath);
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,ExifInterface.ORIENTATION_UNDEFINED);
+
+            switch (orientation){
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    rotatedBitmap = rotateImage(bitmap,90);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    rotatedBitmap = rotateImage(bitmap,180);
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    rotatedBitmap = rotateImage(bitmap,270);
+                    break;
+                case ExifInterface.ORIENTATION_NORMAL:
+                default:
+                    rotatedBitmap = bitmap;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        rotatedBitmap.compress(Bitmap.CompressFormat.PNG, 2, byteArrayOutputStream);
+        byte[] byteArray = byteArrayOutputStream .toByteArray();
+        String encoded = Base64.encodeToString(byteArray, Base64.NO_WRAP);
+        Log.e("photoFlow2",encoded);
+        for(int i=0;i<fulChecklist.size();i++)
+        {
+            if(fulChecklist.get(i).getCveTripMgmQuestion()==cvetemp)
+            {
+                fulChecklist.get(i).setFoto(encoded);
+            }
+        }
+    }
+
+    private void ErradicatedFiler()
+    {
+        if(myimageFile.exists())
+        {
+            try {
+                myimageFile.getCanonicalFile().delete();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if(myimageFile.exists()){
+                getContext().deleteFile(myimageFile.getName());
+            }
+        }
+    }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int [] grantResults){//todo este permiso entra despues en caso del que permiso no este declarado
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -415,12 +474,28 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
             if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                 //Abrir camara
                 //openCamera();
+
                 dispatchTakePictureIntent();
             } else {
                 //Alerta cuando sean necesarios los permisos
                 Toast.makeText(getContext(), "Los permisos son necesarios para usar la Camara", Toast.LENGTH_LONG).show();
             }
         }
+    }
+    private File createImageFile() throws IOException {
+        // Create an image file name
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getActivity().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        myimageFile = File.createTempFile(
+                imageFileName,  /// prefix /
+                ".jpg",         // suffix /
+                storageDir      // directory /
+        );
+
+        // Save a file: path for use with ACTION_VIEW intents
+        currentPhotoPath = myimageFile.getAbsolutePath();
+        return myimageFile;
     }
     private void dispatchTakePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -440,12 +515,15 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
                         BuildConfig.APPLICATION_ID + ".provider",
                         photoFile);
                 takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
-                //imageUri = photoURI;
                 startActivityForResult(takePictureIntent, CAMERA_REQUEST_CODE);
             }
         }
     }
+    public void errorpic() {
+        Toast.makeText(getContext(), "Dispositivo no compatible con la funcionalidad", Toast.LENGTH_SHORT).show();
+    }
     public void takePick(Integer cveTripMgmQuestion) {
+        this.cvetemp=cveTripMgmQuestion;
         Log.e("takepic",""+cveTripMgmQuestion);
         askCameraPermissions();
 
@@ -481,4 +559,6 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     public void showerrormistakeanswers() {
         Toast.makeText(getContext(), "sin respuestas configuradas en la web", Toast.LENGTH_SHORT).show();
     }
+
+
 }

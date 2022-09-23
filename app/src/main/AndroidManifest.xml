@@ -13,9 +13,27 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature
+
         android:glEsVersion="0x00020000"
         android:required="true" />
+    <!-- todo answer https://stackoverflow.com/questions/62535856/intent-resolveactivity-returns-null-in-api-30/64204646#64204646 -->
+    <queries>
+        <!-- Browser -->
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:scheme="http" />
+        </intent>
 
+        <!-- Camera -->
+        <intent>
+            <action android:name="android.media.action.IMAGE_CAPTURE" />
+        </intent>
+
+        <!-- Gallery -->
+        <intent>
+            <action android:name="android.intent.action.GET_CONTENT" />
+        </intent>
+    </queries>
     <application
         android:name="com.pnla.onroadplus.z_version2.realmOnRoad.BaseRealmApplication"
         android:allowBackup="true"

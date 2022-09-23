@@ -38,7 +38,7 @@
         </TextView>
 
         <ImageView
-            android:visibility="gone"
+            android:visibility="visible"
             android:id="@+id/imagephoto2"
             android:layout_width="30dp"
             android:layout_height="30dp"
@@ -177,10 +177,10 @@
 
             android:id="@+id/imagephoto"
             android:layout_width="30dp"
-            android:visibility="gone"
+            android:visibility="visible"
             android:layout_height="30dp"
             android:background="@drawable/ic_menu_camera"
-            android:backgroundTint="@color/colorOrangeYellow"
+            android:backgroundTint="@color/grayUI"
             app:layout_constraintBottom_toTopOf="@+id/guidelinequestion212"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/textopenquestion"
