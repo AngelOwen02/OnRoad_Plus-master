@@ -2,6 +2,7 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,13 +101,13 @@ public class historicAdapter extends RecyclerView.Adapter<historicAdapter.ViewHo
             holder.unitApproved.setVisibility(View.GONE);
         }*/
 
-        if(data.get(position).getApprovement().equals(true)) {
-            holder.unitApproved.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN);
-        } else if (data.get(position).getApprovement().equals(false)) {
-            holder.unitApproved.setColorFilter(ContextCompat.getColor(context, R.color.colorGray), android.graphics.PorterDuff.Mode.SRC_IN);
-        } else {
-            Toast.makeText(context, "Vacio", Toast.LENGTH_SHORT).show();
-            holder.unitApproved.setVisibility(View.INVISIBLE);
+        if(data.get(position).getApprovement()==null) {
+            //Toast.makeText(context, "Vacio", Toast.LENGTH_SHORT).show();
+            holder.unitApproved.setVisibility(View.GONE);
+        } else if (data.get(position).getApprovement()==(false)) {
+            holder.unitApproved.setImageResource(R.drawable.ic_user_checklist);
+        } else if (data.get(position).getApprovement()==(true)){
+            holder.unitApproved.setImageResource(R.drawable.ic_use_checklist);
         }
 
         //Score del vehiculo
@@ -118,7 +119,15 @@ public class historicAdapter extends RecyclerView.Adapter<historicAdapter.ViewHo
         return data.size();
         //return 4;
     }
+    @Override
+    public long getItemId(int position) {
+        return position;
+    }
 
+    @Override
+    public int getItemViewType(int position) {//todo resolved with https://stackoverflow.com/questions/36712704/why-is-my-item-image-in-custom-recyclerview-changing-while-scrolling
+        return position;
+    }
     public void setFilter(List<Historic> unitList) {
         this.data = new ArrayList<>();
         this.data.addAll(unitList);

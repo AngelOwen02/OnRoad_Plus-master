@@ -19,9 +19,9 @@ public class Historic {
     private int trafficLight;
     @SerializedName("is_approvement")
     @Expose
-    private boolean isApprovement;
+    private Boolean isApprovement;
 
-    public Historic(String dateInsert, String vehicleName, String score, int trafficLight, boolean isApprovement) {
+    public Historic(String dateInsert, String vehicleName, String score, int trafficLight, Boolean isApprovement) {
         super();
         this.date_Insert = dateInsert;
         this.vehicleName = vehicleName;
