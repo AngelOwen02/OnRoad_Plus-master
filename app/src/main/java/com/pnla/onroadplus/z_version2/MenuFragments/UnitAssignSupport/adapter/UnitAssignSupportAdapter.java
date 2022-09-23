@@ -58,7 +58,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
     public List<String> textaddres= new ArrayList<>();
     private List<String> data2;
 
-    //public UnitAssignSupportAdapter(List<Unit> unitList, Context context) {
     public UnitAssignSupportAdapter(List<SupportUnitData> data, Context context) {
         this.data = data;
         this.context = context;
@@ -104,20 +103,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             PercentHelp.equals(data.get(position).getPercentToHelp());
             holder.unitDifference.setText(PercentHelp + "%");
 
-            //Para que aparezca el color dependiendo el Porcentaje de Diferencia
-            /**if (data.get(position).getPercent_Complete() >= 0 && data.get(position).getPercent_Complete() <= 100){
-                //Toast.makeText(context, "Esta dentro del rango", Toast.LENGTH_LONG).show();
-                if(data.get(position).getPercent_Complete() <= 4){
-                    //Aqui ingresamos el texto que nos llega del EndPoint
-                    holder.unitDifference.setText(PercentHelp + "%");
-                } else if(data.get(position).getPercent_Complete() <= 98) {
-                    //Aqui ingresamos el texto que nos llega del EndPoint
-                    holder.unitDifference.setText(PercentHelp + "%");
-                    holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorRed));
-                    //holder.unitImage.setImageResource(R.drawable.ic_camion_verde);
-                }
-            }*/
-
             //Estatus actual del vehiculo
             String Status = new String(String.valueOf(data.get(position).getStatus()));
             Status.equals(data.get(position).getStatus());
@@ -130,11 +115,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
                 holder.unitDifference.setTextColor(ContextCompat.getColor(context,R.color.colorOrangeYellow));
                 //holder.unitImage.setImageResource(R.drawable.ic_camion_azul);
                 holder.dotColor.setImageResource(R.drawable.yellow_dot);
-
-                //Esto es para desactivar los campos cuando esten bien los datos del EndPoint
-                /**holder.ll_main_unit_item_assign_container.setEnabled(false);
-                holder.unitImage.setEnabled(false);
-                holder.alfashadow.setVisibility(View.VISIBLE);*/
 
             } else if (data.get(position).getStatus() == 2){
                 holder.unitStatus.setText("Avanzado");
@@ -174,21 +154,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             else if (data.get(position).getHelp_State() == 0){
                 holder.unitImage.setImageResource(R.drawable.ic_camion_gris_2);
             }
-
-            /**if(data.get(position).getCve_layer_Support() >= 1){
-                holder.ll_main_unit_item_assign_container.setEnabled(false);
-                //holder.unitImage.setEnabled(false);
-                holder.alfashadow.setVisibility(View.VISIBLE);
-            }*/
-
-            /**OnClick*/
-//        holder.llMainContainer.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(context, UnitMapContainer.class);
-//                context.startActivity(intent);
-//            }
-//        });
 
             //Al darle clic a la unidad en el RecyclerView
             holder.ll_main_unit_item_assign_container.setOnClickListener(new View.OnClickListener() {
@@ -279,7 +244,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         TextView unitGeoExample;
         LinearLayout ll_main_unit_item_assign_container;
         ConstraintLayout alfashadow;
-        //Switch unitSwicth;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -293,9 +257,6 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
             unitStatus = itemView.findViewById(R.id.txt_unit_status);
             ll_main_unit_item_assign_container = itemView.findViewById(R.id.ll_main_unit_item_assign_container);
             alfashadow = itemView.findViewById(R.id.alfashadow);
-
-            //unitGeoExample = itemView.findViewById(R.id.txt_unit_geo_example);
-            //unitSwicth = itemView.findViewById(R.id.unit_tracking_swicth);
         }
     }
 }

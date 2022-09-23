@@ -40,10 +40,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         this.myview=mview;
         this.context=context;
         this.data=dataQuestions;
-
-
-
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
@@ -51,10 +49,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         return new QuestionsAdapter.ViewHolder(view);
     }
 
-
     @Override
     public void onBindViewHolder(@NonNull final QuestionsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-
         if(data!=null) {
             if (data.getQuestions().get(position).getAnswers()!=null){
                 if (data.getQuestions().get(position).getAnswers().get(0).getObjectType() == 2) {//esto es un spiner
@@ -88,7 +84,6 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                                 holder.spinnerquestionary.setSelection(Questions.fulChecklist.get(i).getAnswerPos());
                                 // }
                             }
-
                         }
                     }
 

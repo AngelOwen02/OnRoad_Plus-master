@@ -52,7 +52,7 @@ public class zonesInteractorImpl implements  zonesInteractor {
         service = retrofitClient.create(serviceZones.class);
     }
 
-
+    //region getZones
     @Override
     public void getZones() {
 
@@ -62,7 +62,9 @@ public class zonesInteractorImpl implements  zonesInteractor {
             getZonesdata(token);/** aqui solo obtendremos los siguientes datos   cve_layer & tab_layer_color      */
         }
     }
+    //endregion getZones
 
+    //region getInterestPoints
     @Override
     public void getInterestPoints(List<Integer> cveZonesfullList) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -71,8 +73,9 @@ public class zonesInteractorImpl implements  zonesInteractor {
             getPointsperZone(cveZonesfullList, token);
         }
     }
+    //endregion getInterestPoints
 
-
+    //region getpointsStatus
     @Override
     public void getpointsStatus(List<Integer> cveZonesfullList) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -81,6 +84,9 @@ public class zonesInteractorImpl implements  zonesInteractor {
             getvisitedPoints(cveZonesfullList,token);
         }
     }
+    //endregion getpointsStatus
+
+    //region getZonesdata
     private void getZonesdata(String token) {
         zonesRequest request = new zonesRequest(token);
         presenter.showProgressDialog();
@@ -98,7 +104,9 @@ public class zonesInteractorImpl implements  zonesInteractor {
         });
 
     }
+    //endregion getZonesdata
 
+    //region validateCode
     private void validateCode(Response<zoneResponse> response, Context context) {
         if (response != null) {
 
@@ -109,7 +117,9 @@ public class zonesInteractorImpl implements  zonesInteractor {
             }
         }
     }
+    //endregion validateCode
 
+    //region getzonesalldata
     private void getzonesalldata(Response<zoneResponse> response, Context context) {
         zoneResponse responseinfo = response.body();
         if (responseinfo != null) {
@@ -158,7 +168,9 @@ public class zonesInteractorImpl implements  zonesInteractor {
 
 
     }
+    //endregion getzonesalldata
 
+    //region getPointsperZone
     private void getPointsperZone(List<Integer> cveZonesfullList, String token) {
         pointsRequest request = new pointsRequest(cveZonesfullList, token);
         //aqui deberia ir un loader/
@@ -176,7 +188,9 @@ public class zonesInteractorImpl implements  zonesInteractor {
             }
         });
     }
+    //endregion getPointsperZone
 
+    //region validateCodezonePoints
     private void validateCodezonePoints(Response<pointsResponse> response, Context context) {
         if (response != null) {
 
@@ -187,7 +201,9 @@ public class zonesInteractorImpl implements  zonesInteractor {
             }
         }
     }
+    //endregion validateCodezonePoints
 
+    //region getPointsZoneData
     private void getPointsZoneData(Response<pointsResponse> response, Context context) {
         pointsResponse responseP=response.body();
 
@@ -245,6 +261,9 @@ public class zonesInteractorImpl implements  zonesInteractor {
             }
         }
     }
+    //endregion getPointsZoneData
+
+    //region getvisitedPoints
     private void getvisitedPoints(List<Integer> cveZonesfullList, String token) {
          visitedRequest request = new visitedRequest(cveZonesfullList,token);
          Call<visitedResponse> call= service.getPointsVisited(request);
@@ -260,6 +279,9 @@ public class zonesInteractorImpl implements  zonesInteractor {
              }
          });
     }
+    //endregion getvisitedPoints
+
+    //region validateCodeVisitedPoints
     private void validateCodeVisitedPoints(Response<visitedResponse> response,Context context) {
         if (response != null) {
             if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
@@ -271,7 +293,9 @@ public class zonesInteractorImpl implements  zonesInteractor {
             }
         }
     }
+    //endregion validateCodeVisitedPoints
 
+    //region getPointsVisited
     private void getPointsVisited(Response<visitedResponse> response, Context context) {
         visitedResponse responseVisited=response.body();
         if (responseVisited!=null)
@@ -309,4 +333,5 @@ public class zonesInteractorImpl implements  zonesInteractor {
             }
         }
     }
+    //endregion getPointsVisited
 }

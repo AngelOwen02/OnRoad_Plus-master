@@ -33,6 +33,7 @@ public class RestorePasswordV2InteractorImpl implements FragmentRestorePasswordV
         services = retrofitClient.create(RestorePasswordV2Services.class);
     }
 
+    //region validateRestorePasswordData
     @Override
     public void validateRestorePasswordData(String email) {
         String resultValidationSize = RestorePasswordV2Validations.validateEmailSize(context, email);
@@ -47,7 +48,9 @@ public class RestorePasswordV2InteractorImpl implements FragmentRestorePasswordV
             presenter.setMessageToView(resultValidationSize);
         }
     }
+    //endregion validateRestorePasswordData
 
+    //region startRestorePasswordRequest
     private void startRestorePasswordRequest(String email) {
         RestorePasswordV2Request request = new RestorePasswordV2Request(email);
         services.restorePasswordService(request).enqueue(new Callback<RestorePasswordV2Response>() {
@@ -62,7 +65,9 @@ public class RestorePasswordV2InteractorImpl implements FragmentRestorePasswordV
             }
         });
     }
+    //endregion startRestorePasswordRequest
 
+    //region validateRestorePasswordCode
     private void validateRestorePasswordCode(Response<RestorePasswordV2Response> response) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             successRestorePassword(response);
@@ -70,7 +75,9 @@ public class RestorePasswordV2InteractorImpl implements FragmentRestorePasswordV
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateRestorePasswordCode
 
+    //region successRestorePassword
     private void successRestorePassword(Response<RestorePasswordV2Response> response) {
         RestorePasswordV2Response restorePasswordV2Response = response.body();
         if (restorePasswordV2Response != null) {
@@ -86,5 +93,5 @@ public class RestorePasswordV2InteractorImpl implements FragmentRestorePasswordV
             presenter.setMessageToView("Ocurrió un error al intentar restaurar la contraseña.");
         }
     }
-
+    //endregion successRestorePassword
 }

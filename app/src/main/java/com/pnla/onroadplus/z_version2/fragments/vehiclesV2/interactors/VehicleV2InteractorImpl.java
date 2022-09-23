@@ -45,13 +45,16 @@ public class VehicleV2InteractorImpl implements VehiclesV2Interactor {
         services = retrofitClient.create(VehiclesAndGroupsServices.class);
     }
 
+    //region getVehiclesAnGroups
     @Override
     public void getVehiclesAnGroups(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         startVehiclesRequest(token, context);
     }
+    //endregion getVehiclesAnGroups
 
+    //region startVehiclesRequest
     private void startVehiclesRequest(String token, final Context context) {
         List<Integer> vehiclesCves = new ArrayList<>();
         vehiclesCves.add(0);
@@ -68,7 +71,9 @@ public class VehicleV2InteractorImpl implements VehiclesV2Interactor {
             }
         });
     }
+    //endregion startVehiclesRequest
 
+    //region validateCode
     private void validateCode(Response<VehicleV2Response> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getVehiclesData(response, context);
@@ -76,7 +81,9 @@ public class VehicleV2InteractorImpl implements VehiclesV2Interactor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateCode
 
+    //region getVehiclesData
     private void getVehiclesData(Response<VehicleV2Response> response, Context context) {
         VehicleV2Response vehicleV2Response = response.body();
         if (vehicleV2Response != null) {
@@ -128,13 +135,17 @@ public class VehicleV2InteractorImpl implements VehiclesV2Interactor {
             presenter.setMessageToView(context.getString(R.string.textEmptyResponse));
         }
     }
+    //endregion getVehiclesData
 
+    //region getGroups
     private void getGroups(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         startGroupsRequest(token, context);
     }
+    //endregion getGroups
 
+    //region startGroupsRequest
     private void startGroupsRequest(String token, final Context context) {
         GroupV2Request request = new GroupV2Request(token);
         presenter.showLoaderFromInteractor();
@@ -150,7 +161,9 @@ public class VehicleV2InteractorImpl implements VehiclesV2Interactor {
             }
         });
     }
+    //endregion startGroupsRequest
 
+    //region validateGroupsCode
     private void validateGroupsCode(Response<GroupV2Response> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getGroupsData(response, context);
@@ -158,7 +171,9 @@ public class VehicleV2InteractorImpl implements VehiclesV2Interactor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateGroupsCode
 
+    //region getGroupsData
     private void getGroupsData(Response<GroupV2Response> response, Context context) {
         GroupV2Response groupV2Response = response.body();
         if (groupV2Response != null) {
@@ -209,6 +224,5 @@ public class VehicleV2InteractorImpl implements VehiclesV2Interactor {
             presenter.setMessageToView(context.getString(R.string.textEmptyResponse));
         }
     }
-
-
+    //endregion getGroupsData
 }

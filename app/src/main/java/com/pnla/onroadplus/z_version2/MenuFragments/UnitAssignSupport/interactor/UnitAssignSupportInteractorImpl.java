@@ -51,7 +51,6 @@ import retrofit2.Retrofit;
 public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInteractor {
 
     private UnitAssignSupportPresenter presenter;
-    //private UnitService unitService;
     private UnitAssignService unitAssignService;
     private Context context;
     private Retrofit retrofitClient;
@@ -68,26 +67,28 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
         initRetrofit();
         requestSoportes();
     }
+
+    //region initRetrofit
     private void initRetrofit() {
         Retrofit retrofitClient = RetrofitClientV2.getRetrofitInstance();
         unitAssignService = retrofitClient.create(UnitAssignService.class);
-        //Toast.makeText(context, "paso por aqui retrofit", Toast.LENGTH_LONG).show();
     }
+    //endregion initRetrofit
 
+    //region requestSoportes
     @Override
     public void requestSoportes(){
         //AQUI ESTA LO DEL TOKEN -----------------------------------------------------------------------------------------------------------------------------------------------------------------------
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-        //Toast.makeText(context, "paso por aqui request1", Toast.LENGTH_LONG).show();
-        //String token = "306788ddf2ff9ba2e00d69f46e27e6bf";
         if(token!=null) {
-            //Toast.makeText(context, "paso por aqui y reviso el token, all bien", Toast.LENGTH_LONG).show();
             //startVehiclesRequest(token);
             requestSoportes(token);
         }
     }
+    //endregion requestSoportes
 
+    //region requestSoportes
     private void requestSoportes(String token) {
         SupportUnitRequest request = new SupportUnitRequest(token);
         //presenter.showProgressDialog();
@@ -96,7 +97,6 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
                 @Override
                 public void onResponse(Call<SupportUnitResponse> call, Response<SupportUnitResponse> response) {
                     try {
-                        //Toast.makeText(context, "Paso por aqui", Toast.LENGTH_SHORT).show();
                         validateCode(response, context);
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -106,40 +106,42 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
                 @Override
                 public void onFailure(Call<SupportUnitResponse> call, Throwable t) {
                     // Log.e("onFailure",t.getLocalizedMessage());
-                    //Toast.makeText(context,  "sesion expirada2", Toast.LENGTH_LONG).show();
                     Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show();
                 }
             });
         }
     }
+    //endregion requestSoportes
 
+    //region validateCode
     private void validateCode(Response<SupportUnitResponse> response, Context context) throws IOException {
         //  Log.e("LAPRINCESS", String.valueOf(response.body().getResponseCode()));
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getSupportData(response, context);
-            //Toast.makeText(context, response.toString(), Toast.LENGTH_LONG).show();
         } else {
             presenter.failureResponse(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
             Toast.makeText(context,  "sesion expirada3", Toast.LENGTH_LONG).show();
         }
     }
+    //endregion validateCode
 
+    //region getSupportData
     private void getSupportData(Response<SupportUnitResponse> response, Context context) {
         SupportUnitResponse supportUnitResponse = response.body();
         if (supportUnitResponse != null) {
             int responseCode = supportUnitResponse.getResponseCode();
             if (responseCode == GeneralConstantsV2.RESPONSE_CODE_OK) {
-                //Toast.makeText(context, "paso por aqui", Toast.LENGTH_LONG).show();
                 List<SupportUnitData> data = supportUnitResponse.getData();
                 presenter.setSoportes(data);
-                //Toast.makeText(context, data.toString(), Toast.LENGTH_LONG).show();
             }
         } else {
             presenter.hideProgressDialog();
             Toast.makeText(context, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+    //endregion getSupportData
 
+    //region dialog
     private void dialog(){
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         final String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
@@ -203,12 +205,11 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
                 }
             }
 
-
             @Override
             public void onFailure(Call<VersionResponse> call, Throwable t) {
 
             }
         });
-
     }
+    //endregion dialog
 }

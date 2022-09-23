@@ -38,13 +38,16 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
         initRetrofit();
     }
 
+    //region initRetrofit
     private void initRetrofit() {
         Retrofit retrofitClient = RetrofitClientV2.getRetrofitInstance();
         //unitService = retrofitClient.create(UnitService.class);
         unitAssignService = retrofitClient.create(UnitAssignService.class);
         //Toast.makeText(context, "paso por aqui retrofit", Toast.LENGTH_LONG).show();
     }
+    //endregion initRetrofit
 
+    //region requestSoportes
     @Override
     public void requestSoportes(int cveLayer) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -54,7 +57,9 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
             requestUnidades(token, cveLayer);
         }
     }
+    //endregion requestSoportes
 
+    //region setAssignSupport
     @Override
     public void setAssignSupport(Integer layer, int cveLayer, String cve_vehicle) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -65,7 +70,9 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
             //Log.e("assistencesupport" , "" + cveLayer + "   " +  cveLayer + "  "+ cve_vehicle + "   "+ token);
         }
     }
+    //endregion setAssignSupport
 
+    //region deleteUnitAssign
     @Override
     public void deleteUnitAssign(int cveLayer, String cve_vehicle, int cve_layer_support) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -76,7 +83,9 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
             //Log.e("assistencesupport" , "" + cveLayer + "   " +  cveLayer + "  "+ cve_vehicle + "   "+ token);
         }
     }
+    //endregion deleteUnitAssign
 
+    //region deleteSupport
     private void deleteSupport(int cveLayer, String cve_vehicle, String token) {
         DeleteUnitAssignRequest request = new DeleteUnitAssignRequest(cveLayer, Integer.valueOf(cve_vehicle), token);
         //unitService.deleteAssignSupport(request).enqueue(new Callback<DeleteUnitAssignResponse>() {
@@ -92,7 +101,9 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
             }
         });
     }
+    //endregion deleteSupport
 
+    //region validateCodeDelete
     private void validateCodeDelete(Response<DeleteUnitAssignResponse> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             deleteSupportAssign(response, context);
@@ -100,7 +111,9 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
             Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
         }
     }
+    //endregion validateCodeDelete
 
+    //region deleteSupportAssign
     private void deleteSupportAssign(Response<DeleteUnitAssignResponse> response, Context context) {
         DeleteUnitAssignResponse response2 = response.body();
         if(response2 !=null){
@@ -118,7 +131,9 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
             Toast.makeText(context, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+    //endregion deleteSupportAssign
 
+    //region requesAssignSupport
     private void requesAssignSupport(int cveLayer, int cveLayer1, String cve_vehicle, String token) {
          final UnitAssignRequest request = new UnitAssignRequest(cveLayer1, cveLayer, Integer.valueOf(cve_vehicle), token);
          //unitService.setUnitAssignSupport(request).enqueue(new Callback<UnitAssignResponse>() {
@@ -134,7 +149,9 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
              }
          });
     }
+    //endregion requesAssignSupport
 
+    //region validateCodeAssignent
     private void validateCodeAssignent(Response<UnitAssignResponse> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             setAssignSupportAssigment(response, context);
@@ -142,7 +159,9 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
             Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
         }
     }
+    //endregion validateCodeAssignent
 
+    //region setAssignSupportAssigment
     private void setAssignSupportAssigment(Response<UnitAssignResponse> response, Context context) {
         UnitAssignResponse response1 = response.body();
         if(response1 != null){
@@ -161,7 +180,9 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
             Toast.makeText(context, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+    //endregion setAssignSupportAssigment
 
+    //region requestUnidades
     private void requestUnidades(String token, int cveLayer) {
         SingleSupportUnitRequest request = new SingleSupportUnitRequest(cveLayer, token);
         //unitService.getFullSingleVehiclesSupport(request).enqueue(new Callback<SingleSupportUnitResponse>() {
@@ -177,7 +198,9 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
             }
         });
     }
+    //endregion requestUnidades
 
+    //region validateCode
     private void validateCode(Response<SingleSupportUnitResponse> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             //getVehiclesData(response, context);
@@ -187,7 +210,9 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
             Toast.makeText(context, response.body().getMessage(), Toast.LENGTH_LONG).show();
         }
     }
+    //endregion validateCode
 
+    //region getSupportData
     private void getSupportData(Response<SingleSupportUnitResponse> response, Context context) {
         SingleSupportUnitResponse singleSupportUnitResponse = response.body();
         if(singleSupportUnitResponse != null) {
@@ -201,4 +226,5 @@ public class UnitAssignSupportAsigmentsInteractorImpl implements UnitAssignSuppo
             }
         }
     }
+    //endregion getSupportData
 }

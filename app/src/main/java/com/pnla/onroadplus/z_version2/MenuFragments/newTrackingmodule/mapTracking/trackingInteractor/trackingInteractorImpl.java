@@ -28,24 +28,30 @@ public class trackingInteractorImpl implements trackingInteractor {
     private Context context;
     private laspositionmapservice service;
 
-    public  trackingInteractorImpl(trackingPresenter presenter,Context context)
-    {
+    public  trackingInteractorImpl(trackingPresenter presenter,Context context) {
         this.context=context;
         this.presenter=presenter;
-        initRetrofit();
 
+        initRetrofit();
     }
+
+    //region initRetrofit
     private void initRetrofit() {
         Retrofit retrofitClient = RetrofitClientV2.getRetrofitInstance();
         service = retrofitClient.create(laspositionmapservice.class);
     }
+    //endregion initRetrofit
 
+    //region getVehiclesFromAPIS
     @Override
     public void getVehiclesFromAPIS() {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         startVehiclesRequest(token, context);
     }
+    //endregion getVehiclesFromAPIS
+
+    //region startVehiclesRequest
     private void startVehiclesRequest(String mytoken,final Context context)
     {
         lasPositionItemRequest request= new lasPositionItemRequest(mytoken);
@@ -62,8 +68,10 @@ public class trackingInteractorImpl implements trackingInteractor {
 
             }
         });
-
     }
+    //endregion startVehiclesRequest
+
+    //region validateCode
     private void validateCode(Response<lastPositionItemResponse> response,Context context)
     {
         if(RetrofitValidationsV2.checkSuccessCode(response.code()))
@@ -76,6 +84,9 @@ public class trackingInteractorImpl implements trackingInteractor {
             Toast.makeText(context,  "sesion expirada", Toast.LENGTH_LONG).show();
         }
     }
+    //endregion validateCode
+
+    //region getlaspositionItems
     private void  getlaspositionItems(Response<lastPositionItemResponse> response , Context context)
     {
         lastPositionItemResponse vehiclesResponse= response.body();
@@ -95,4 +106,5 @@ public class trackingInteractorImpl implements trackingInteractor {
             }
         }
     }
+    //endregion getlaspositionItems
 }

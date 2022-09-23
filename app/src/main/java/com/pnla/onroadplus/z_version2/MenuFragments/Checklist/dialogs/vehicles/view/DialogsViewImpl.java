@@ -141,7 +141,6 @@ public class DialogsViewImpl extends DialogFragment implements View.OnClickListe
     }
 
     public void onDismiss() {
-        //Toast.makeText(getContext(), "Si", Toast.LENGTH_SHORT).show();
         FragmentManager manager = getActivity().getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         CheckListViewImpl contacto = new CheckListViewImpl();//transaction.addToBackStack(UnitsViewImpl.TAG);
@@ -166,5 +165,4 @@ public class DialogsViewImpl extends DialogFragment implements View.OnClickListe
                // break;
         }
     }
-
 }

@@ -61,6 +61,7 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
         service= retrofitClient.create(asignmentService.class);
     }
      //region getAllAsignments
+    //region getAsignments
     @Override
     public void getAsignments(String CveLayer) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -71,8 +72,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             getAsignmentsenpoint(CveLayer,token);
         }
     }
+    //endregion getAsignments
 
-
+    //region getAsignments
     private void getAsignmentsenpoint(String cveLayer,String token)
     {   int cvelay=Integer.valueOf(cveLayer);
         Mcvelayer=cvelay;
@@ -92,6 +94,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
         });
 
     }
+    //endregion getAsignments
+
+    //region validateCodeResponse
     private void validateCodeResponse(Response<asignmentResponse> response,Context context)
     {
         if (response != null) {
@@ -104,6 +109,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             }
         }
     }
+    //endregion validateCodeResponse
+
+    //region showAsigments
     private void showAsigments(Response<asignmentResponse> response,Context context)
     {
         asignmentResponse respn=response.body();
@@ -147,9 +155,11 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             }
         }
     }
+    //endregion showAsigments
 //endregion
 
      //region getFull units
+    //region getFUnits
     @Override
     public void getFUnits() {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -159,6 +169,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             getallUnits(token);
         }
     }
+    //endregion getFUnits
+
+    //region getallUnits
     private void getallUnits(String token)
     {
         requestUnits request= new requestUnits(true,token);
@@ -176,6 +189,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             }
         });
     }
+    //endregion getallUnits
+
+    //region validateCodeUnits
     private void validateCodeUnits( Response<responseUnits> response,Context context)
     {
         if (response != null) {
@@ -187,6 +203,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
          }
          }
     }
+    //endregion validateCodeUnits
+
+    //region catalogUnits
     private void catalogUnits(Response<responseUnits> response, Context context) {
         responseUnits responsU=response.body();
         if(responsU!=null)
@@ -213,12 +232,14 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
                // presenter.hideDialog();
             }
         }
-        }
 
+    }
+    //endregion catalogUnits
 
     //endregion
 
      //region getFull Drivers
+    //region getFDrivers
     @Override
     public void getFDrivers() {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -228,8 +249,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             catolgDrivers(token);
         }
     }
+    //endregion getFDrivers
 
-
+    //region catolgDrivers
     private void catolgDrivers(String token) {
         requestDrivers request= new requestDrivers(true,token);
         presenter.showDialog();
@@ -247,6 +269,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
         });
 
     }
+    //endregion catolgDrivers
+
+    //region validateCodeDrivers
     private void validateCodeDrivers(Response<responsDrivers> response, Context context)    {
         if (response != null) {
 
@@ -257,6 +282,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             }
         }
     }
+    //endregion validateCodeDrivers
+
+    //region catalogDrivers
     private void catalogDrivers(Response<responsDrivers> response, Context context) {
         responsDrivers responsD=response.body();
         if(responsD!=null)
@@ -290,9 +318,11 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
 
         }
     }
+    //endregion catalogDrivers
     //endregion
 
     //region updateAsigments
+    //region updateFData
     @Override
     public void updateFData(List<VehicleDriver> asigments) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -309,7 +339,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             requestUpdateAsignments(Mcvelayer,token,asigments);
         }
     }
+    //endregion updateFData
 
+    //region requestUpdateAsignments
     private void requestUpdateAsignments(int mcvelayer, String token, List<VehicleDriver> asigments) {
         Log.e("tripuFlow23","cvelayer: "+mcvelayer+" token: "+token+"    "+asigments);
         List<VehicleDriver2> newdata=new ArrayList<>();
@@ -343,7 +375,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
         });
 
     }
+    //endregion requestUpdateAsignments
 
+    //region validateCodeUpdate
     private void validateCodeUpdate(Response<responseUpdate> response, Context context) {
          if (response != null) {
              Log.e("tripulantesnewFLOW"," requestUpdateAsigments :  "+response.code());
@@ -356,7 +390,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
                     }
                 }
     }
+    //endregion validateCodeUpdate
 
+    //region responsedataUpdate
     private void responsedataUpdate(Response<responseUpdate> response, Context context) {
         responseUpdate resp=response.body();
         if(resp!=null)
@@ -405,6 +441,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             }
         }
     }
+    //endregion responsedataUpdate
+
+    //region newsetAuditTrail
     @Override
     public void newsetAuditTrail(String name) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -414,6 +453,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             myauditTrail(name,token);
         }
     }
+    //endregion newsetAuditTrail
+
+    //region myauditTrail
     private void myauditTrail(String name ,String token)
     {
         AuditTrail mynewAuditTrail=new AuditTrail("Onroad_Asignaciones","Editar asignaciones",""+name);
@@ -430,7 +472,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             }
         });
     }
+    //endregion myauditTrail
 
+    //region validateCodeauditTrail
     private  void  validateCodeauditTrail(Response<responseAuditTrail> response,Context context)
     {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
@@ -439,6 +483,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateCodeauditTrail
+
+    //region responseSetAuditTrial
     private void responseSetAuditTrial(Response<responseAuditTrail> response,Context context)
     {
         responseAuditTrail auditResponse=response.body();
@@ -453,5 +500,5 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
         }
 
     }
-
+    //endregion responseSetAuditTrial
 }

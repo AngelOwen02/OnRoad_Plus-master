@@ -38,6 +38,7 @@ public class CommandsV2InteractorImpl implements CommandsV2Interactor {
         services = retrofitClient.create(CommandsV2Services.class);
     }
 
+    //region getVehicleData
     @Override
     public void getVehicleData(Bundle bundle) {
         if (bundle != null) {
@@ -48,7 +49,9 @@ public class CommandsV2InteractorImpl implements CommandsV2Interactor {
             presenter.setMessageToView("Error, no se pudo obtener información del vehículo.");
         }
     }
+    //endregion getVehicleData
 
+    //region getCommands
     @Override
     public void getCommands(int vehicleCve, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -60,7 +63,9 @@ public class CommandsV2InteractorImpl implements CommandsV2Interactor {
             presenter.setMessageToView(validation);
         }
     }
+    //endregion getCommands
 
+    //region startCommandsRequest
     private void startCommandsRequest(String token, int vehicleCve, final Context context) {
         CommandsV2Request request = new CommandsV2Request(vehicleCve, token);
         services.getCommands(request).enqueue(new Callback<CommandsV2Response>() {
@@ -75,7 +80,9 @@ public class CommandsV2InteractorImpl implements CommandsV2Interactor {
             }
         });
     }
+    //endregion startCommandsRequest
 
+    //region validateCode
     private void validateCode(Response<CommandsV2Response> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getCommandsData(response, context);
@@ -83,7 +90,9 @@ public class CommandsV2InteractorImpl implements CommandsV2Interactor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateCode
 
+    //region getCommandsData
     private void getCommandsData(Response<CommandsV2Response> response, Context context) {
         CommandsV2Response commandsV2Response = response.body();
         if (commandsV2Response != null) {
@@ -109,7 +118,9 @@ public class CommandsV2InteractorImpl implements CommandsV2Interactor {
             presenter.setMessageToView(context.getString(R.string.textEmptyCarsResponse));
         }
     }
+    //endregion getCommandsData
 
+    //region sendCommand
     @Override
     public void sendCommand(int cveDeviceToSend, int cveRoutineToSend, int vehicleCve, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -121,7 +132,9 @@ public class CommandsV2InteractorImpl implements CommandsV2Interactor {
             presenter.setMessageToView(validation);
         }
     }
+    //endregion sendCommand
 
+    //region startSendCommandRequest
     private void startSendCommandRequest(String token, int cveDeviceToSend, int cveRoutineToSend, int vehicleCve, final Context context) {
         CommandSendV2Request request = new CommandSendV2Request(token, cveDeviceToSend, cveRoutineToSend, vehicleCve);
         services.sendCommand(request).enqueue(new Callback<CommandSendV2Response>() {
@@ -136,7 +149,9 @@ public class CommandsV2InteractorImpl implements CommandsV2Interactor {
             }
         });
     }
+    //endregion startSendCommandRequest
 
+    //region validateCodeSendCommand
     private void validateCodeSendCommand(Response<CommandSendV2Response> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getSendCommandResponse(response, context);
@@ -144,7 +159,9 @@ public class CommandsV2InteractorImpl implements CommandsV2Interactor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateCodeSendCommand
 
+    //region getSendCommandResponse
     private void getSendCommandResponse(Response<CommandSendV2Response> response, Context context) {
         CommandSendV2Response commandSendV2Response = response.body();
         if (commandSendV2Response != null) {
@@ -160,5 +177,5 @@ public class CommandsV2InteractorImpl implements CommandsV2Interactor {
             presenter.setMessageToView("No se recibió respuesta del servidor.");
         }
     }
-
+    //endregion getSendCommandResponse
 }

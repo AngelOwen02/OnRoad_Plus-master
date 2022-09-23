@@ -60,13 +60,16 @@ public class TrackingInteractorImpl implements TrackingInteractor {
         services = retrofitClient.create(TrackingServices.class);
     }
 
+    //region getAllVehiclesFromAPI
     @Override
     public void getAllVehiclesFromAPI() {
         List<Integer> noCves = new ArrayList<>();
         noCves.add(0);
         startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context);
     }
+    //endregion getAllVehiclesFromAPI
 
+    //region startVehiclesRequest
     private void startVehiclesRequest(int typeRequest, List<Integer> vehiclesCves, final Context context) {
 
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -87,7 +90,9 @@ public class TrackingInteractorImpl implements TrackingInteractor {
             }
         });
     }
+    //endregion startVehiclesRequest
 
+    //region validateCode
     private void validateCode(Response<TrackingResponse> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getVehiclesData(response, context);
@@ -95,7 +100,9 @@ public class TrackingInteractorImpl implements TrackingInteractor {
             //presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateCode
 
+    //region getVehiclesData
     private void getVehiclesData(Response<TrackingResponse> response, Context context) {
         TrackingResponse vehicleV2Response = response.body();
         if (vehicleV2Response != null) {
@@ -126,6 +133,7 @@ public class TrackingInteractorImpl implements TrackingInteractor {
             // presenter.setMessageToView(context.getString(R.string.textEmptyResponse));
         }
     }
+    //endregion getVehiclesData
 
     //private void saveVehicleList(List<VehicleTracking> vehicleList){
     //    TrackingRealmHelper.createVehicleList(vehicleList);
@@ -135,14 +143,16 @@ public class TrackingInteractorImpl implements TrackingInteractor {
     // Markers //
     //         //
 
-
+    //region vehicleMarkerSetup
     @Override
     public void vehicleMarkerSetup(double lat, double lng, String title, String image, int vehicleSwitch) {
         presenter.showProgressBar();
             TrackingInteractorImpl.GetVehicleMarkerAsync getVehicleMarkerAsync = new TrackingInteractorImpl.GetVehicleMarkerAsync(lat, lng, title, image, vehicleSwitch);
             getVehicleMarkerAsync.execute();
     }
+    //endregion vehicleMarkerSetup
 
+    //region zoomToVehicle
     @Override
     public void zoomToVehicle(double lat, double lng) {
         if (lat != 0.0 && lng != 0.0) {
@@ -151,9 +161,9 @@ public class TrackingInteractorImpl implements TrackingInteractor {
             presenter.zoomVehicleSetup(latLng, zoom);
         }
     }
+    //endregion zoomToVehicle
 
-
-
+    //region GetVehicleMarkerAsync
     private class GetVehicleMarkerAsync extends AsyncTask<Void, Void, Void> {
 
         private double lat;
@@ -200,7 +210,9 @@ public class TrackingInteractorImpl implements TrackingInteractor {
            presenter.vehicleMarkerSetup(markerOptions);
         }
     }
+    //endregion GetVehicleMarkerAsync
 
+    //region getBitmapFromURL
     private Bitmap getBitmapFromURL(String src) {
         try {
             URL url = new URL(src);
@@ -214,7 +226,9 @@ public class TrackingInteractorImpl implements TrackingInteractor {
             return null;
         }
     }
+    //endregion getBitmapFromURL
 
+    //region createBitmapFromView
     private Bitmap createBitmapFromView(@NonNull View view, int width, int height, Bitmap resource, String name, int vehicleSwitch) {
 
         CircleImageView circleImageView = view.findViewById(R.id.unit_marker_img);
@@ -242,7 +256,9 @@ public class TrackingInteractorImpl implements TrackingInteractor {
         view.draw(canvas);
         return bitmap;
     }
+    //endregion createBitmapFromView
 
+    //region setImageBorderColor
     private void setImageBorderColor(int vehicleSwitch, CircleImageView circleImageView) {
         if (vehicleSwitch == 1) {
             circleImageView.setBorderColor(context.getResources().getColor(R.color.colorBorderCarGreen));
@@ -254,4 +270,5 @@ public class TrackingInteractorImpl implements TrackingInteractor {
             circleImageView.setBorderColor(context.getResources().getColor(R.color.colorBorderCarGray));
         }
     }
+    //endregion setImageBorderColor
 }

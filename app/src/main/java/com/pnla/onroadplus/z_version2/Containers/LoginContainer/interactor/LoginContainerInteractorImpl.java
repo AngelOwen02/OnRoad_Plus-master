@@ -13,6 +13,7 @@ public class LoginContainerInteractorImpl implements LoginContainerInteractor {
         this.presenter = presenter;
     }
 
+    //region existUsers
     @Override
     public void existUsers(Bundle bndl) {
         boolean areThereUsers = RealmUserData.existUsers();
@@ -34,4 +35,5 @@ public class LoginContainerInteractorImpl implements LoginContainerInteractor {
             }
         }
     }
+    //endregion existUsers
 }

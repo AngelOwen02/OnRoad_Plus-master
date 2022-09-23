@@ -46,29 +46,37 @@ public class UnitTrackingInteractorImpl implements UnitTrackingInteractor {
         this.presenter = presenter;
         initRetrofit();
     }
+
+    //region initRetrofit
     private void initRetrofit() {
         Retrofit retrofitClient = RetrofitClientV2.getRetrofitInstance();
         service = retrofitClient.create(TrackingService.class);
     }
+    //endregion initRetrofit
+
+    //region getVehiclesAnGroups
     @Override
-    public void getVehiclesAnGroups(Context context)
-    {
-
-
+    public void getVehiclesAnGroups(Context context) {
 
     }
+    //endregion getVehiclesAnGroups
 
+    //region getVehicles
     @Override
     public void getVehicles(Context context) {
         Log.e("toogleslistn","frafra "+ UnitsInteractorImpl.dataofvehicles);
         presenter.setVehicleList(getUnitList());
     }
+    //endregion getVehicles
 
+    //region getGroups
     @Override
     public void getGroups(Context context) {
         presenter.setGroupsList(getGroupList());
     }
+    //endregion getGroups
 
+    //region onClickGroups
     @Override
     public void onClickGroups() {
         if (groupDBIsEmpty()) {
@@ -80,21 +88,26 @@ public class UnitTrackingInteractorImpl implements UnitTrackingInteractor {
             presenter.setGroupsList(getGroupList());
         }
     }
+    //endregion onClickGroups
 
+    //region getUnitsfromgroups
     @Override
     public void getUnitsfromgroups(Context context) {
-if(UnitTrackingContainer.integervalueforrequest!=0) {
-    SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-    String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-    //cveofgroup = 53;
-    startGroupsRequestVehicles(UnitTrackingContainer.integervalueforrequest, token);
+        if (UnitTrackingContainer.integervalueforrequest != 0) {
+            SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+            String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+            //cveofgroup = 53;
+            startGroupsRequestVehicles(UnitTrackingContainer.integervalueforrequest, token);
 
-}/*else{        if(!UnitTrackingAdapter.integerList.isEmpty()) {
+        }/*else{        if(!UnitTrackingAdapter.integerList.isEmpty()) {
             for (int i = 0; i < UnitTrackingInteractorImpl.groupsdataInteger.size(); i++) {
                 UnitTrackingAdapter.integerList.remove(UnitTrackingInteractorImpl.groupsdataInteger.get(i));
             }
         }}*/
     }
+    //endregion getUnitsfromgroups
+
+    //region startGroupsRequestVehicles
     private void startGroupsRequestVehicles(int cve,String token){
     /*    GroupvehicleInsideRequest request = new GroupvehicleInsideRequest(cve,token);
         Log.e("unitsthaticansaw", "response" +  cve+ " " + token);
@@ -129,7 +142,9 @@ if(UnitTrackingContainer.integervalueforrequest!=0) {
         });
 
     }
+    //endregion startGroupsRequestVehicles
 
+    //region validateGroupsVehiclesCode
     private void validateGroupsVehiclesCode(Response<GroupvehicleInsideResponse> response){
         Log.e("validategroups","validate : "+ String.valueOf(response.body().getResponseCode()));
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
@@ -138,7 +153,10 @@ if(UnitTrackingContainer.integervalueforrequest!=0) {
         }
 
     }
+    //endregion validateGroupsVehiclesCode
+
     /**reques de grupos**/
+    //region getGrupsDataVhicles
     private void getGrupsDataVhicles(Response<GroupvehicleInsideResponse> response )
     {
 
@@ -245,41 +263,58 @@ if(UnitTrackingContainer.integervalueforrequest!=0) {
 
 
     }
+    //endregion getGrupsDataVhicles
 
+    //region unitDBIsEmpty
     private boolean unitDBIsEmpty() {
         return UnitDB.getUnitList().isEmpty();
     }
+    //endregion unitDBIsEmpty
 
+    //region groupDBIsEmpty
     private boolean groupDBIsEmpty() {
         return GroupDB.getGroupList().isEmpty();
     }
+    //endregion groupDBIsEmpty
 
+    //region getUnitList
     private List<Unit> getUnitList() {
         return UnitDB.getUnitList();
     }
+    //endregion getUnitList
 
+    //region getGroupList
     private List<Group> getGroupList() {
         return GroupDB.getGroupList();
     }
+    //endregion getGroupList
 
     // Temporal
-
+    //region temporalUnitDBIsEmpty
     private boolean temporalUnitDBIsEmpty() {
         return TemporalUnitDB.getUnitList().isEmpty();
     }
+    //endregion temporalUnitDBIsEmpty
 
+    //region temporalGroupDBIsEmpty
     private boolean temporalGroupDBIsEmpty() {
         return TemporalGroupDB.getGroupList().isEmpty();
     }
+    //endregion temporalGroupDBIsEmpty
 
+    //region getTemporalUnitList
     private List<Unit> getTemporalUnitList() {
         return TemporalUnitDB.getUnitList();
     }
+    //endregion getTemporalUnitList
 
+    //region getTemporalGroupList
     private List<Group> getTemporalGroupList() {
         return TemporalGroupDB.getGroupList();
     }
+    //endregion getTemporalGroupList
 
+    //region createTemporalUnitDB
     private void createTemporalUnitDB(List<Unit> unitList) {
         for (Unit unit : unitList) {
             TemporalUnitDB.createNewUnit(unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(),
@@ -288,14 +323,18 @@ if(UnitTrackingContainer.integervalueforrequest!=0) {
                     unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed(), unit.getDesc_layer());
         }
     }
+    //endregion createTemporalUnitDB
 
+    //region createTemporalGroupDB
     private void createTemporalGroupDB(List<Group> groupList) {
         for (Group group : groupList) {
             TemporalGroupDB.createNewGroup(group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(),
                     group.isSelected(), group.getPositionItem(), group.getVehicles());
         }
     }
+    //endregion createTemporalGroupDB
 
+    //region updateTemporalUnitDB
     private void updateTemporalUnitDB(List<Unit> unitList) {
         for (Unit unit : unitList) {
             TemporalUnitDB.updateUnits(unit.getId(),unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(),
@@ -304,32 +343,43 @@ if(UnitTrackingContainer.integervalueforrequest!=0) {
                     unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed(), unit.getDesc_layer());
         }
     }
+    //endregion updateTemporalUnitDB
 
+    //region updateTemporalGroupDB
     private void updateTemporalGroupDB(List<Group> groupList) {
         for (Group group : groupList) {
             TemporalGroupDB.updateGroups(group.getId(),group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(),
                     group.isSelected(), group.getPositionItem(), group.getVehicles());
         }
     }
+    //endregion updateTemporalGroupDB
 
     //FInal
-
+    //region finalUnitDBIsEmpty
     private boolean finalUnitDBIsEmpty() {
         return FinalUnitDB.getUnitList().isEmpty();
     }
+    //endregion finalUnitDBIsEmpty
 
+    //region finalGroupDBIsEmpty
     private boolean finalGroupDBIsEmpty() {
         return FinalGroupDB.getGroupList().isEmpty();
     }
+    //endregion finalGroupDBIsEmpty
 
+    //region getFinalUnitList
     private List<Unit> getFinalUnitList() {
         return FinalUnitDB.getUnitList();
     }
+    //endregion getFinalUnitList
 
+    //region getFinalGroupList
     private List<Group> getFinalGroupList() {
         return FinalGroupDB.getGroupList();
     }
+    //endregion getFinalGroupList
 
+    //region createFinalUnitDB
     private void createFinalUnitDB(List<Unit> unitList) {
         for (Unit unit : unitList) {
             FinalUnitDB.createNewUnit(unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(),
@@ -338,14 +388,18 @@ if(UnitTrackingContainer.integervalueforrequest!=0) {
                     unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed(), unit.getDesc_layer());
         }
     }
+    //endregion createFinalUnitDB
 
+    //region createFinalGroupDB
     private void createFinalGroupDB(List<Group> groupList) {
         for (Group group : groupList) {
             FinalGroupDB.createNewGroup(group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(),
                     group.isSelected(), group.getPositionItem(), group.getVehicles());
         }
     }
+    //endregion createFinalGroupDB
 
+    //region updateFinalUnitDB
     private void updateFinalUnitDB(List<Unit> unitList) {
         for (Unit unit : unitList) {
             FinalUnitDB.updateUnits(unit.getId(),unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(),
@@ -354,12 +408,14 @@ if(UnitTrackingContainer.integervalueforrequest!=0) {
                     unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed(), unit.getDesc_layer());
         }
     }
+    //endregion updateFinalUnitDB
 
+    //region updateFinalGroupDB
     private void updateFinalGroupDB(List<Group> groupList) {
         for (Group group : groupList) {
             FinalGroupDB.updateGroups(group.getId(),group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(),
                     group.isSelected(), group.getPositionItem(), group.getVehicles());
         }
     }
-
+    //endregion updateFinalGroupDB
 }

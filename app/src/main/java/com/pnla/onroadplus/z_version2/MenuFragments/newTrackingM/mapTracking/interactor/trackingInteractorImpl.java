@@ -35,8 +35,7 @@ public class trackingInteractorImpl implements trackingInteractor {
     private mapService service;
     private Retrofit retrofitClient;
 
-    public trackingInteractorImpl (trackingPresenter presenter,Context context)
-    {
+    public trackingInteractorImpl (trackingPresenter presenter,Context context) {
         this.presenter=presenter;
         this.context=context;
         retrofitClient = RetrofitClientV2.getRetrofitInstance();
@@ -47,6 +46,8 @@ public class trackingInteractorImpl implements trackingInteractor {
     //region noGeoRequest
     /** this region request all data that come from Units excepting de georeference wich gave us the addres ... what we require for this module is...
      *  the image of the vehicle, the name and the cve of vehicle and the switch which value range is 0 to 3*/
+
+    //region requestNoGeo
     @Override
     public void requestNoGeo() {
 
@@ -56,7 +57,9 @@ public class trackingInteractorImpl implements trackingInteractor {
         noGeoUnits(token);
         }
     }
+    //endregion requestNoGeo
 
+    //region noGeoUnits
     private void noGeoUnits(String token) {
         List<Integer> nocves=new ArrayList<>();
         nocves.add(0);
@@ -76,7 +79,9 @@ public class trackingInteractorImpl implements trackingInteractor {
             }
         });
     }
+    //endregion noGeoUnits
 
+    //region validareCodeSuccesNogeo
     private void validareCodeSuccesNogeo(Response<unitsResponse> response,Context context)
     {
         if(response!=null)
@@ -89,6 +94,9 @@ public class trackingInteractorImpl implements trackingInteractor {
             }
         }
     }
+    //endregion validareCodeSuccesNogeo
+
+    //region getnoGeodata
     private void getnoGeodata(Response<unitsResponse> response,Context context)
     {
         /**request her fullno geo vehicles
@@ -107,12 +115,14 @@ public class trackingInteractorImpl implements trackingInteractor {
          }
         }
     }
+    //endregion getnoGeodata
 
     //endregion
 
     //region vehiclesInGroups
     /**  this region bring us information from the groups an units inside this groups in order to asign  in next module what we would saw in the map*/
 
+    //region requestGroups
     @Override
     public void requestGroups() {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -121,7 +131,9 @@ public class trackingInteractorImpl implements trackingInteractor {
             checkGroups(token);
         }
     }
+    //endregion requestGroups
 
+    //region checkGroups
     private void checkGroups(String token) {
         vehicleGroupRequest request= new vehicleGroupRequest(token);
         Call<vehicleGroupResponse> call=service.getGroupsR(request);
@@ -137,7 +149,9 @@ public class trackingInteractorImpl implements trackingInteractor {
             }
         });
     }
+    //endregion checkGroups
 
+    //region validateCodeGroupsSucces
     private void validateCodeGroupsSucces(Response<vehicleGroupResponse> response,Context context)
     {
           if(response!=null)
@@ -151,7 +165,9 @@ public class trackingInteractorImpl implements trackingInteractor {
                 }
 
     }
+    //endregion validateCodeGroupsSucces
 
+    //region getGroupsData
     private void getGroupsData(Response<vehicleGroupResponse> response, Context context) {
         vehicleGroupResponse grupResponse=response.body();
         if(grupResponse!=null)
@@ -177,7 +193,7 @@ public class trackingInteractorImpl implements trackingInteractor {
         }
 
     }
+    //endregion getGroupsData
+
     //endregion
-
-
 }

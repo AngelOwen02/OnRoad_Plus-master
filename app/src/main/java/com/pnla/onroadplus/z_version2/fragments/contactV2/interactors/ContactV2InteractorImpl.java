@@ -32,6 +32,7 @@ public class ContactV2InteractorImpl implements ContactV2Interactor {
         services = retrofitClient.create(ContactV2Services.class);
     }
 
+    //region getUserEmail
     @Override
     public void getUserEmail(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -39,7 +40,9 @@ public class ContactV2InteractorImpl implements ContactV2Interactor {
         Log.e("EEEE", email);
         presenter.setUserEmail(email);
     }
+    //endregion getUserEmail
 
+    //region validateUserDataToSend
     @Override
     public void validateUserDataToSend(String to, String subject, String message, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -51,7 +54,9 @@ public class ContactV2InteractorImpl implements ContactV2Interactor {
             presenter.setMessageToView(resultValidation);
         }
     }
+    //endregion validateUserDataToSend
 
+    //region startContactRequest
     private void startContactRequest(String to, String subject, String message, String token, final Context context) {
         ContactV2Request request = new ContactV2Request(message, subject, to, token);
         services.sendEmail(request).enqueue(new Callback<ContactV2Response>() {
@@ -66,7 +71,9 @@ public class ContactV2InteractorImpl implements ContactV2Interactor {
             }
         });
     }
+    //endregion startContactRequest
 
+    //region validateCode
     private void validateCode(Response<ContactV2Response> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getContactData(response, context);
@@ -74,7 +81,9 @@ public class ContactV2InteractorImpl implements ContactV2Interactor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateCode
 
+    //region getContactData
     private void getContactData(Response<ContactV2Response> response, Context context) {
         ContactV2Response contactV2Response = response.body();
         if (contactV2Response != null) {
@@ -90,5 +99,5 @@ public class ContactV2InteractorImpl implements ContactV2Interactor {
             presenter.setMessageToView(context.getString(R.string.textEmptyResponse));
         }
     }
-
+    //endregion getContactData
 }

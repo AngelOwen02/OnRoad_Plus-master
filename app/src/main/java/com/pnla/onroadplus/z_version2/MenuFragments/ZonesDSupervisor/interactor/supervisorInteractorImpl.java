@@ -32,14 +32,15 @@ public class supervisorInteractorImpl implements supervisorInteractor {
     private Retrofit retrofitClient;
     private service service;
     public static List<String> namesDrivers=new ArrayList<>();
-    public  supervisorInteractorImpl(supervisorPresenter presenter , Context context)
-    {
+
+    public  supervisorInteractorImpl(supervisorPresenter presenter , Context context) {
         this.presenter=presenter;
         this.context=context;
         retrofitClient = RetrofitClientV2.getRetrofitInstance();
         service = retrofitClient.create(service.class);
     }
 
+    //region requestEployes
     @Override
     public void requestEployes() {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -48,6 +49,9 @@ public class supervisorInteractorImpl implements supervisorInteractor {
             setDriversVehicles(token);
         }
     }
+    //endregion requestEployes
+
+    //region setDriversVehicles
     private void setDriversVehicles(String token) {
         requestDrivers request = new requestDrivers(true, token);
         presenter.showDialog();
@@ -64,55 +68,61 @@ public class supervisorInteractorImpl implements supervisorInteractor {
             }
         });
     }
-        private void validateCodeDrivers(Response<responsDrivers> response, Context context)    {
-            if (response != null) {
+    //endregion setDriversVehicles
 
-                if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
-                    catalogDrivers(response, context);
-                } else {
-                    Toast.makeText(context, "" + RetrofitValidationsV2.getErrorByStatus(response.code(), context), Toast.LENGTH_SHORT).show();
-                }
+    //region validateCodeDrivers
+    private void validateCodeDrivers(Response<responsDrivers> response, Context context) {
+        if (response != null) {
+
+            if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
+                catalogDrivers(response, context);
+            } else {
+                Toast.makeText(context, "" + RetrofitValidationsV2.getErrorByStatus(response.code(), context), Toast.LENGTH_SHORT).show();
             }
         }
-
-        private void catalogDrivers(Response<responsDrivers> response, Context context) {
-            responsDrivers responsD=response.body();
-            if(responsD!=null)
-            {
-                int code=responsD.getResponseCode();
-                String message=responsD.getMessage();
-                List<String> tripulantesdata=new ArrayList<>();
-                tripulantesdata.clear();
-                if(code==GeneralConstantsV2.RESPONSE_CODE_OK)
-                {
-                    List<driversNames> data=responsD.getData();
-                    namesDrivers.clear();
-                    for (int i=0;i<data.size();i++)
-                    {
-                        namesDrivers.add(data.get(i).getEmployeeName()+"/"+data.get(i).getCveEmployee());
-                        Log.e("catalogD",""+data.get(i).getEmployeeName()+"/"+data.get(i).getCveEmployee());
-                        tripulantesdata.add(data.get(i).getEmployeeName()+"/"+data.get(i).getCveEmployee());
-                    }
-                    namesDrivers.add(0,"Elige una opción...");
-                  //  presenter.hideDialog();
-
-                    presenter.getDriversCatalog(namesDrivers);//tripulantesdata //puedes intercambiar si es que quieres que te salga un valor default o no
-                    //Log.e("tripulantes","  data names  "+namesDrivers);
-                }
-
-            }
-        }
-                    
-        @Override
-    public void setZones(int zonecveLayer, int newCveEmploye) {
-            SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-            String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-            if (token != null) {
-                requestSetZones(zonecveLayer,token,newCveEmploye);
-                Log.e("zonesnames&colors15","token "+token);
-            }
     }
+    //endregion validateCodeDrivers
 
+    //region catalogDrivers
+    private void catalogDrivers(Response<responsDrivers> response, Context context) {
+        responsDrivers responsD = response.body();
+        if (responsD != null) {
+            int code = responsD.getResponseCode();
+            String message = responsD.getMessage();
+            List<String> tripulantesdata = new ArrayList<>();
+            tripulantesdata.clear();
+            if (code == GeneralConstantsV2.RESPONSE_CODE_OK) {
+                List<driversNames> data = responsD.getData();
+                namesDrivers.clear();
+                for (int i = 0; i < data.size(); i++) {
+                    namesDrivers.add(data.get(i).getEmployeeName() + "/" + data.get(i).getCveEmployee());
+                    Log.e("catalogD", "" + data.get(i).getEmployeeName() + "/" + data.get(i).getCveEmployee());
+                    tripulantesdata.add(data.get(i).getEmployeeName() + "/" + data.get(i).getCveEmployee());
+                }
+                namesDrivers.add(0, "Elige una opción...");
+                //  presenter.hideDialog();
+
+                presenter.getDriversCatalog(namesDrivers);//tripulantesdata //puedes intercambiar si es que quieres que te salga un valor default o no
+                //Log.e("tripulantes","  data names  "+namesDrivers);
+            }
+
+        }
+    }
+    //endregion catalogDrivers
+
+    //region setZones
+    @Override
+    public void setZones(int zonecveLayer, int newCveEmploye) {
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        if (token != null) {
+            requestSetZones(zonecveLayer, token, newCveEmploye);
+            Log.e("zonesnames&colors15", "token " + token);
+        }
+    }
+    //endregion setZones
+
+    //region requestSetZones
     private void requestSetZones(int zonecveLayer, String token, int newCveEmploye) {
         Zone asignacionNueva=new Zone(newCveEmploye);
         setZone request=new setZone(zonecveLayer,token,asignacionNueva);
@@ -130,7 +140,9 @@ public class supervisorInteractorImpl implements supervisorInteractor {
             }
         });
     }
+    //endregion requestSetZones
 
+    //region validateCodeSetZones
     private void validateCodeSetZones(Response<responseSetZones> response, Context context) {
         if (response != null) {
 
@@ -141,7 +153,9 @@ public class supervisorInteractorImpl implements supervisorInteractor {
             }
         }
     }
+    //endregion validateCodeSetZones
 
+    //region setZonesResp
     private void setZonesResp(Response<responseSetZones> response, Context context) {
         responseSetZones resp=response.body();
         if(resp!=null)
@@ -156,4 +170,5 @@ public class supervisorInteractorImpl implements supervisorInteractor {
             }
         }
     }
+    //endregion setZonesResp
 }

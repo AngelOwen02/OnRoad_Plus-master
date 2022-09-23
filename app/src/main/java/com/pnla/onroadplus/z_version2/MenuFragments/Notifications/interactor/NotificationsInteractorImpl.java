@@ -42,6 +42,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 
 public class NotificationsInteractorImpl implements NotificationsInteractor {
+
     private NotificationsPresenter presenter;
     private NotificationsServices services;
     private Retrofit retrofitClient;
@@ -50,24 +51,30 @@ public class NotificationsInteractorImpl implements NotificationsInteractor {
     private NotificationsUpdate notificationsUpdate;
     final Handler handler = new Handler();
     private Runnable runnable;
+
     public NotificationsInteractorImpl(NotificationsPresenter presenter) {
         this.presenter = presenter;
         retrofitClient = RetrofitClientV2.getRetrofitInstance();
         services = retrofitClient.create(NotificationsServices.class);
     }
 
+    //region getMainDate
     @Override
     public void getMainDate() {
         presenter.setMainDate(NotificationsUtils.getCurrentDate());
     }
+    //endregion getMainDate
 
+    //region getAllVehicles
     @Override
     public void getAllVehicles(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         startVehiclesRequest(token, context);
     }
+    //endregion getAllVehicles
 
+    //region startVehiclesRequest
     private void startVehiclesRequest(String token, final Context context) {
         List<Integer> vehiclesCves = new ArrayList<>();
         vehiclesCves.add(0);
@@ -85,7 +92,9 @@ public class NotificationsInteractorImpl implements NotificationsInteractor {
             }
         });
     }
+    //endregion startVehiclesRequest
 
+    //region validateCode
     private void validateCode(Response<VehiclesResponse> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getVehiclesData(response, context);
@@ -94,7 +103,9 @@ public class NotificationsInteractorImpl implements NotificationsInteractor {
             Toast.makeText(context,  "sesion expirada", Toast.LENGTH_LONG).show();
         }
     }
+    //endregion validateCode
 
+    //region getVehiclesData
     private void getVehiclesData(Response<VehiclesResponse> response, Context context) {
         VehiclesResponse vehicleV2Response = response.body();
         if (vehicleV2Response != null) {
@@ -141,7 +152,9 @@ public class NotificationsInteractorImpl implements NotificationsInteractor {
             presenter.setMessageToView(context.getString(R.string.textEmptyResponse));
         }
     }
+    //endregion getVehiclesData
 
+    //region cancelRequest
     @Override
     public void cancelRequest() {
         //para ya no realizar request de vehiculos son los siguientes 2 if
@@ -151,7 +164,9 @@ public class NotificationsInteractorImpl implements NotificationsInteractor {
             notificationsUpdate = null;
         }
     }
+    //endregion cancelRequest
 
+    //region getAllNotification
     @Override
     public void getAllNotification(List<Vehicles> vehicles, String date, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -159,7 +174,9 @@ public class NotificationsInteractorImpl implements NotificationsInteractor {
         List<Integer> vehicleCves = NotificationsUtils.getCveVehicle(vehicles);
         startNotificationRequest(token, date, vehicleCves, context);
     }
+    //endregion getAllNotification
 
+    //region startNotificationRequest
     private void startNotificationRequest(String token, final String date, final List<Integer> vehicleCves, final Context context) {
         NotificationsRequest request = new NotificationsRequest(vehicleCves, token, date);
         Log.e("notificationsper", ""+"cves:   "+vehicleCves +" date:  "+date+" token: " +token);
@@ -178,7 +195,9 @@ public class NotificationsInteractorImpl implements NotificationsInteractor {
             }
         });
     }
+    //endregion startNotificationRequest
 
+    //region validateNotificationsCode
     private void validateNotificationsCode(Response<NotificationsResponse> response, Context context, List<Integer> vehicleCves, String date) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getNotificationData(response, context, vehicleCves, date);
@@ -186,7 +205,9 @@ public class NotificationsInteractorImpl implements NotificationsInteractor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateNotificationsCode
 
+    //region getNotificationData
     private void getNotificationData(Response<NotificationsResponse> response, Context context, List<Integer> vehicleCves, String date) {
         NotificationsResponse notificationsV2Response = response.body();
         if (notificationsV2Response != null) {
@@ -256,7 +277,9 @@ public class NotificationsInteractorImpl implements NotificationsInteractor {
             presenter.setMessageToView(context.getString(R.string.textEmptyCarsResponse));
         }
     }
+    //endregion getNotificationData
 
+    //region rechargeNotifications
     @Override
     public void rechargeNotifications(List<Vehicles> vehicles, String date, Context context) {
         List<Integer> vehicleCves = NotificationsUtils.getCveVehicle(vehicles);
@@ -280,7 +303,9 @@ public class NotificationsInteractorImpl implements NotificationsInteractor {
         notificationsUpdate = new NotificationsUpdate(vehicleCves, token, date);
         notificationsUpdate.execute();
     }
+    //endregion rechargeNotifications
 
+    //region NotificationsUpdate
     public class NotificationsUpdate extends AsyncTask<Void, Void, Void> {
 
         public Call<NotificationsResponse> call;
@@ -401,6 +426,5 @@ public class NotificationsInteractorImpl implements NotificationsInteractor {
         }
 
     }
-
-
+    //endregion NotificationsUpdate
 }

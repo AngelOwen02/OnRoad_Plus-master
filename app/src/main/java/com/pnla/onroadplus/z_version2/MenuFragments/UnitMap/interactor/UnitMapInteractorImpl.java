@@ -90,7 +90,7 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
     }
 
     // Markers //
-
+    //region vehicleMarkerSetup
     @Override
     public void vehicleMarkerSetup(double lat, double lng, String title, String image, int vehicleSwitch) {
         presenter.showProgressDialog();
@@ -98,8 +98,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
         getVehicleMarkerAsync.execute();
 
     }
+    //endregion vehicleMarkerSetup
 
-
+    //region zoomToVehicle
     @Override
     public void zoomToVehicle(double lat, double lng) {
         if (lat != 0.0 && lng != 0.0) {
@@ -108,7 +109,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             presenter.zoomVehicleSetup(latLng, zoom);
         }
     }
+    //endregion zoomToVehicle
 
+    //region GetVehicleMarkerAsync
     private class GetVehicleMarkerAsync extends AsyncTask<Void, Void, Void> {
 
         private double lat;
@@ -173,7 +176,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
         }
 
     }
+    //endregion GetVehicleMarkerAsync
 
+    //region createBitmapFromView
     private Bitmap createBitmapFromView(@NonNull View view, int width, int height, Bitmap resource, String name, int vehicleSwitch) {
 
         CircleImageView circleImageView = view.findViewById(R.id.unit_marker_img);
@@ -201,7 +206,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
         view.draw(canvas);
         return bitmap;
     }
+    //endregion createBitmapFromView
 
+    //region setImageBorderColor
     private void setImageBorderColor(int vehicleSwitch, CircleImageView circleImageView) {
         if (vehicleSwitch == 1) {
             circleImageView.setBorderColor(context.getResources().getColor(R.color.colorBorderCarGreen));
@@ -219,9 +226,10 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             circleImageView.setBorderColor(context.getResources().getColor(R.color.colorBorderCarGray));
         }
     }
+    //endregion setImageBorderColor
 
     // Dates //
-
+    //region getCurrentDate
     @Override
     public void getCurrentDate() {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
@@ -230,8 +238,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
 
         presenter.setCurrentDate(currentDate);
     }
+    //endregion getCurrentDate
 
-
+    //region getDates
     @Override
     public void getDates() {
         List<DateV2> dates = new ArrayList<>();
@@ -244,8 +253,10 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
         }
         presenter.setDatesToView(dates);
     }
+    //endregion getDates
 
     // Vehicle Description //
+    //region getTripbyDay
     @Override
     public void getTripbyDay(int vehicleCve,String sendime , Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -259,7 +270,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             presenter.setErrorMessage(validation);
         }
     }
+    //endregion getTripbyDay
 
+    //region getTripsbyTime
     public void getTripsbyTime(int vehicleCve,String startTimer,String endtime,Context context)
     {
         //Log.e("dataclocks3",""+startTimer+ "  "+ endtime+"   dssdacw");
@@ -276,9 +289,10 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
                 presenter.setErrorMessage(validation);
             }
         }
-
     }
+    //endregion getTripsbyTime
 
+    //region dataExteralAPI
     @Override
     public void dataExteralAPI(List<List<Double>> correctedDots) {
         List<List<Double>> points=new ArrayList<>();
@@ -307,6 +321,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             }
         });
     }
+    //endregion dataExteralAPI
+
+    //region externalApivoid
     private void externalApivoid(Response<ResponseAPIMAP> response, Context context)
     {
             if(RetrofitValidationsV2.checkSuccessCode(response.code())){
@@ -317,6 +334,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
                 Log.e("externalApimaps","respueta2 : "+RetrofitValidationsV2.getErrorByStatus(response.code(),context));
              }
     }
+    //endregion externalApivoid
+
+    //region getExternalApiDataData
     private void getExternalApiDataData( Response<ResponseAPIMAP> response, Context context)
     {
         ResponseAPIMAP myresponse=response.body();
@@ -362,8 +382,10 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
         }
 
     }
+    //endregion getExternalApiDataData
 
     //region testdata
+    //region startvehicleTripbytimeRequest
     private void  startvehicleTripbytimeRequest(int vehicleCve,String sendtime,String sendtime1,String token,final Context context){
         tripsbyTimeRequest request=new tripsbyTimeRequest(vehicleCve,sendtime,sendtime1,token);
         services.gettripsbytime(request).enqueue(new Callback<tripsbyTimeResponse>() {
@@ -382,7 +404,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
         });
 
     }
+    //endregion startvehicleTripbytimeRequest
 
+    //region startvehicleTripbyDayRequest
     private void startvehicleTripbyDayRequest(int vehicleCve,String sendtime,String token,final Context context) {
         tripsbydayRequest request=new tripsbydayRequest(vehicleCve,sendtime,token);
         services.gettripsbyday(request).enqueue(new Callback<TripByDayResponse>() {
@@ -397,6 +421,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             }
         });
     }
+    //endregion startvehicleTripbyDayRequest
+
+    //region validateTripsbyTimeCode
     private  void validateTripsbyTimeCode(Response<tripsbyTimeResponse> response, Context context)
     {
         if(RetrofitValidationsV2.checkSuccessCode(response.code())){
@@ -406,7 +433,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             presenter.setErrorMessage(RetrofitValidationsV2.getErrorByStatus(response.code(),context));
         }
     }
+    //endregion validateTripsbyTimeCode
 
+    //region validateTripsbyDayCode
     private  void validateTripsbyDayCode(Response<TripByDayResponse> response, Context context)
     {
         if(RetrofitValidationsV2.checkSuccessCode(response.code())){
@@ -416,7 +445,10 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             presenter.setErrorMessage(RetrofitValidationsV2.getErrorByStatus(response.code(),context));
         }
     }
+    //endregion validateTripsbyDayCode
 // endregion testdata
+
+    //region getTipsByTimeData
     private void getTipsByTimeData(Response<tripsbyTimeResponse> response, Context context)
     {
         {
@@ -541,6 +573,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             }
         }
     }
+    //endregion getTipsByTimeData
+
+    //region getTipsByTimeData
     private void getTipsByDayData(Response<TripByDayResponse> response,Context context)
     {
         TripByDayResponse tripbydayResponse=response.body();
@@ -654,6 +689,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             presenter.setErrorMessage(context.getString(R.string.textErrorDataEmptyMap));
         }
     }
+    //endregion getTipsByTimeData
+
+    //region getVehicleDescription
     @Override
     public void getVehicleDescription(int vehicleCve, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -666,7 +704,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             presenter.setErrorMessage(validation);
         }
     }
+    //endregion getVehicleDescription
 
+    //region startVehicleDescriptionRequest
     private void startVehicleDescriptionRequest(String token, int vehicleCve, final Context context) {
         VehicleDescriptionRequest request = new VehicleDescriptionRequest(vehicleCve, token);
         services.getVehicleDescription(request).enqueue(new Callback<VehicleDescriptionResponse>() {
@@ -681,7 +721,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             }
         });
     }
+    //endregion startVehicleDescriptionRequest
 
+    //region validateVehicleDescriptionCode
     private void validateVehicleDescriptionCode(Response<VehicleDescriptionResponse> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getVehicleDescriptionData(response, context);
@@ -689,7 +731,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             presenter.setErrorMessage(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateVehicleDescriptionCode
 
+    //region getVehicleDescriptionData
     private void getVehicleDescriptionData(Response<VehicleDescriptionResponse> response, Context context) {
         VehicleDescriptionResponse vehicleDescriptionResponse = response.body();
         if (vehicleDescriptionResponse != null) {
@@ -728,9 +772,10 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             presenter.setErrorMessage(context.getString(R.string.textEmptyCarsResponse));
         }
     }
+    //endregion getVehicleDescriptionData
 
     // Trips //
-
+    //region getTripsByDate
     @Override
     public void getTripsByDate(int cveVehicle, String date, Context context) {
 
@@ -745,7 +790,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
         } else {
         }
     }
+    //endregion getTripsByDate
 
+    //region startTripsRequest
     private void startTripsRequest(String token, int cveVehicle, String startDate, String endDate, final Context context) {
         TripsV2Request request = new TripsV2Request(cveVehicle, startDate, endDate, token);
         services.getTrips(request).enqueue(new Callback<TripsV2Response>() {
@@ -760,7 +807,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             }
         });
     }
+    //endregion startTripsRequest
 
+    //region validateTripsCode
     private void validateTripsCode(Response<TripsV2Response> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getTripsData(response, context);
@@ -768,7 +817,9 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             presenter.setErrorMessage(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateTripsCode
 
+    //region getTripsData
     private void getTripsData(Response<TripsV2Response> response, Context context) {
         TripsV2Response tripsV2Response = response.body();
         if (tripsV2Response != null) {
@@ -811,4 +862,5 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             presenter.setErrorMessage(context.getString(R.string.textErrorDataEmptyMap));
         }
     }
+    //endregion getTripsData
 }

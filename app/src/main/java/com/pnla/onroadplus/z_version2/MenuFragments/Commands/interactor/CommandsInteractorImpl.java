@@ -38,13 +38,15 @@ public class CommandsInteractorImpl implements CommandsInteractor {
     private Retrofit retrofitClient;
     private String VehicleName;
     private String CommandName;
-private Context context;
+    private Context context;
+
     public CommandsInteractorImpl(CommandsPresenter presenter) {
         this.presenter = presenter;
         retrofitClient = RetrofitClientV2.getRetrofitInstance();
         services = retrofitClient.create(CommandsV2Services.class);
     }
 
+    //region getVehicleData
     @Override
     public void getVehicleData(Bundle bundle) {
         if (bundle != null) {
@@ -56,7 +58,9 @@ private Context context;
             presenter.setMessageToView("Error, no se pudo obtener información del vehículo.");
         }
     }
+    //endregion getVehicleData
 
+    //region getCommands
     @Override
     public void getCommands(int vehicleCve, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -68,9 +72,9 @@ private Context context;
             presenter.setMessageToView(validation);
         }
     }
+    //endregion getCommands
 
-
-
+    //region startCommandsRequest
     private void startCommandsRequest(String token, int vehicleCve, final Context context) {
         CommandsV2Request request = new CommandsV2Request(vehicleCve, token);
         services.getCommands(request).enqueue(new Callback<CommandsV2Response>() {
@@ -85,7 +89,9 @@ private Context context;
             }
         });
     }
+    //endregion startCommandsRequest
 
+    //region validateCode
     private void validateCode(Response<CommandsV2Response> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getCommandsData(response, context);
@@ -93,7 +99,9 @@ private Context context;
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateCode
 
+    //region getCommandsData
     private void getCommandsData(Response<CommandsV2Response> response, Context context) {
         CommandsV2Response commandsV2Response = response.body();
         if (commandsV2Response != null) {
@@ -119,7 +127,9 @@ private Context context;
             presenter.setMessageToView(context.getString(R.string.textEmptyCarsResponse));
         }
     }
+    //endregion getCommandsData
 
+    //region sendCommand
     @Override
     public void sendCommand(String msgRoutine, String uniqueId, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -133,7 +143,9 @@ private Context context;
             presenter.setMessageToView(validation);
         }
     }
+    //endregion sendCommand
 
+    //region startSendCommandRequest
     private void startSendCommandRequest(String cveRoutineToSend,String token, String cveDeviceToSend,  final Context context) {
         CommandSendV2Request request = new CommandSendV2Request(cveRoutineToSend,token, cveDeviceToSend);
         services.sendCommand(request).enqueue(new Callback<CommandSendV2Response>() {
@@ -148,7 +160,9 @@ private Context context;
             }
         });
     }
+    //endregion startSendCommandRequest
 
+    //region validateCodeSendCommand
     private void validateCodeSendCommand(Response<CommandSendV2Response> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getSendCommandResponse(response, context);
@@ -157,7 +171,9 @@ private Context context;
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateCodeSendCommand
 
+    //region getSendCommandResponse
     private void getSendCommandResponse(Response<CommandSendV2Response> response, Context context) {
         CommandSendV2Response commandSendV2Response = response.body();
        Log.e("routinas",""+response.body().getMessage());
@@ -174,7 +190,9 @@ private Context context;
             presenter.setMessageToView("No se recibió respuesta del servidor.");
         }
     }
+    //endregion getSendCommandResponse
 
+    //region newsetAuditTrail
     @Override
     public void newsetAuditTrail(String name) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -184,6 +202,9 @@ private Context context;
             myauditTrail(name,token);
         }
     }
+    //endregion newsetAuditTrail
+
+    //region myauditTrail
     private void myauditTrail(String name ,String token)
     {
         AuditTrail mynewAuditTrail=new AuditTrail("Onroad_Comandos","Envio de Comandos",""+name);
@@ -200,7 +221,9 @@ private Context context;
             }
         });
     }
+    //endregion myauditTrail
 
+    //region validateCodeauditTrail
     private  void  validateCodeauditTrail(Response<responseAuditTrail> response,Context context)
     {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
@@ -209,6 +232,9 @@ private Context context;
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateCodeauditTrail
+
+    //region responseSetAuditTrial
     private void responseSetAuditTrial(Response<responseAuditTrail> response,Context context)
     {
         responseAuditTrail auditResponse=response.body();
@@ -223,4 +249,5 @@ private Context context;
         }
 
     }
+    //endregion responseSetAuditTrial
 }

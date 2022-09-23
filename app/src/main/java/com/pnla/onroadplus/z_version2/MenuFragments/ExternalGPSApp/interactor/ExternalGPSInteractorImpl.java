@@ -29,6 +29,7 @@ public class ExternalGPSInteractorImpl implements LocateVehicleInteractor {
         this.presenter = presenter;
     }
 
+    //region validateAppsInstalled
     @Override
     public void validateAppsInstalled(FragmentActivity activity) {
         String mapsPackage = activity.getString(R.string.googleMapsPackage);
@@ -37,7 +38,9 @@ public class ExternalGPSInteractorImpl implements LocateVehicleInteractor {
         boolean wazeInstalled = DialogLocateVehicleUtils.appInstalledOrNot(wazePackage, activity);
         presenter.setAppsInstalledToView(mapsInstalled, wazeInstalled);
     }
+    //endregion validateAppsInstalled
 
+    //region validateLocationPermission
     @Override
     public void validateLocationPermission(FragmentActivity activity) {
         if (ActivityCompat.checkSelfPermission(activity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
@@ -55,7 +58,9 @@ public class ExternalGPSInteractorImpl implements LocateVehicleInteractor {
         }
 
     }
+    //endregion validateLocationPermission
 
+    //region getLocation
     public void getLocation(FragmentActivity activity) {
         presenter.showLoaderFromInteractor();
         client = LocationServices.getFusedLocationProviderClient(activity);
@@ -90,5 +95,5 @@ public class ExternalGPSInteractorImpl implements LocateVehicleInteractor {
             presenter.setMessageToView("Habilita el GPS para trazar la ruta.");
         }
     }
-
+    //endregion getLocation
 }

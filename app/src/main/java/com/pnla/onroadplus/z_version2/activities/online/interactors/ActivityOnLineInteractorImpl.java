@@ -61,6 +61,7 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
         services = retrofitClient.create(ActivityOnLineServices.class);
     }
 
+    //region getUserDataPreferences
     @Override
     public void getUserDataPreferences(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -73,7 +74,9 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
             presenter.setDefaultEmployeeImage();
         }
     }
+    //endregion getUserDataPreferences
 
+    //region getMenuIcon
     @Override
     public void getMenuIcon() {
         Drawable drawable = context.getResources().getDrawable(R.drawable.icon_menu);
@@ -81,7 +84,9 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
         Drawable newdrawable = new BitmapDrawable(context.getResources(), Bitmap.createScaledBitmap(bitmap, 80, 80, true));
         presenter.setMenuIconToView(newdrawable);
     }
+    //endregion getMenuIcon
 
+    //region getDrawerMenu
     @Override
     public void getDrawerMenu(Context ctx) {
         HashMap<MenuModelV2, List<MenuModelV2>> childList = new HashMap<>();
@@ -170,7 +175,9 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
 
         presenter.setDrawerMenu(headerList, childList);
     }
+    //endregion getDrawerMenu
 
+    //region validateDataToCloseSession
     @Override
     public void validateDataToCloseSession(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -182,7 +189,9 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
             presenter.setMessageToView("Ocurrió un error, no se pudo cerrar sesión");
         }
     }
+    //endregion validateDataToCloseSession
 
+    //region findFragmentByName
     @Override
     public void findFragmentByName(String fragmentName, FragmentManager manager, FragmentTransaction transaction, Context context) {
         transaction = manager.beginTransaction();
@@ -253,7 +262,9 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
             presenter.setFragmentHelp(fragment);
         }
     }
+    //endregion findFragmentByName
 
+    //region validateVehcleList
     @Override
     public void validateVehcleList(List<VehicleV2> vehicles, FragmentManager manager, Context context) {
         /** Si el usuario esta en el fragmentVehicles enviamos los vehiculos que seleccionó al fragment del mapa.   */
@@ -289,7 +300,9 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
             }
         }
     }
+    //endregion validateVehcleList
 
+    //region validateGroupVehicles
     @Override
     public void validateGroupVehicles(List<GroupV2> groups, FragmentManager manager, Context context) {
         if (ActivityOnLineUtils.areThereSelectedGroups(groups)) {
@@ -310,7 +323,9 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
             presenter.setMessageToView("Tienes que seleccionar un grupo para mostrar sus unidades en el mapa.");
         }
     }
+    //endregion validateGroupVehicles
 
+    //region validateVehiclesUserClickedDrawerMenu
     @Override
     public void validateVehiclesUserClickedDrawerMenu(String groupName, int cveGroup, List<GroupV2> groups, FragmentManager manager, Context context) {
         /** Si el usuario seleccióna la opcion "seleccionar grupo" mandamos a la pantalla de vehículos a la seccion de grupos
@@ -339,20 +354,26 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
             }
         }
     }
+    //endregion validateVehiclesUserClickedDrawerMenu
 
+    //region saveGroups
     @Override
     public void saveGroups(List<GroupV2> groups, Context context) {
         RealmGroup.saveGroups(groups, context);
         getDrawerMenu(context);
     }
+    //endregion saveGroups
 
+    //region getGroupsFromAPI
     @Override
     public void getGroupsFromAPI(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         startGroupsRequest(token, context);
     }
+    //endregion getGroupsFromAPI
 
+    //region setVehclesFromGroups
     private void setVehclesFromGroups(List<GroupV2> groups, FragmentManager manager) {
         /**     Obtenemos los vehiculos de cada grupo para enviarlos al mapa    */
         List<VehicleV2> vehicles = ActivityOnLineUtils.getVehiclesFromSelectedGroups(groups);
@@ -369,7 +390,9 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
             presenter.setMessageToView("No se encontraron vehículos.");
         }
     }
+    //endregion setVehclesFromGroups
 
+    //region startGroupsRequest
     private void startGroupsRequest(String token, final Context context) {
         GroupV2Request request = new GroupV2Request(token);
         services.getGroups(request).enqueue(new Callback<GroupV2Response>() {
@@ -384,7 +407,9 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
             }
         });
     }
+    //endregion startGroupsRequest
 
+    //region validateGroupsCode
     private void validateGroupsCode(Response<GroupV2Response> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getGroupsData(response, context);
@@ -392,7 +417,9 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateGroupsCode
 
+    //region getGroupsData
     private void getGroupsData(Response<GroupV2Response> response, Context context) {
         GroupV2Response groupV2Response = response.body();
         if (groupV2Response != null) {
@@ -424,7 +451,9 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
             presenter.setGroupsList(null);
         }
     }
+    //endregion getGroupsData
 
+    //region removeAllFragments
     private void removeAllFragments(FragmentManager manager) {
         int count = manager.getBackStackEntryCount();
         for (int i = 0; i < count; i++) {
@@ -461,7 +490,9 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
             manager.beginTransaction().remove(fragment1).commit();
         }
     }
+    //endregion removeAllFragments
 
+    //region startCloseSessionRequest
     private void startCloseSessionRequest(String token) {
         CloseSessionV2Request request = new CloseSessionV2Request(token);
         services.closeSessionService(request).enqueue(new Callback<CloseSessionV2Response>() {
@@ -476,7 +507,9 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
             }
         });
     }
+    //endregion startCloseSessionRequest
 
+    //region getCloseSessionResponse
     private void getCloseSessionResponse(Response<CloseSessionV2Response> response) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             closeSessionSuccess(response);
@@ -484,7 +517,9 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion getCloseSessionResponse
 
+    //region closeSessionSuccess
     private void closeSessionSuccess(Response<CloseSessionV2Response> response) {
         CloseSessionV2Response closeSessionV2Response = response.body();
         if (closeSessionV2Response != null) {
@@ -502,5 +537,5 @@ public class ActivityOnLineInteractorImpl implements ActivityOnLineInteractor {
             presenter.setMessageToView("Ocurrió un error, no se pudo cerrar sesión");
         }
     }
-
+    //endregion closeSessionSuccess
 }

@@ -33,6 +33,7 @@ public class DialogsInteractorImpl implements DialogsInteractor {
         service = retrofitClient.create(ServiceDialogs.class);
     }
 
+    //region requestVehicles
     @Override
     public void requestVehicles() {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -42,7 +43,9 @@ public class DialogsInteractorImpl implements DialogsInteractor {
             requestfullVehicles(token, flagParent);
         }
     }
+    //endregion
 
+    //region requestFullVehicles
     private void requestfullVehicles(String token, Boolean flagParent) {
         DialogsRequest request = new DialogsRequest(flagParent, token);
         presenter.showDialog();
@@ -59,7 +62,9 @@ public class DialogsInteractorImpl implements DialogsInteractor {
             }
         });
     }
+    //endregion requestFullVehicles
 
+    //region validateCodeVehicles
     private void validateCodeVehicles(Response<DialogsResponse> response, Context context) {
         if(response!=null){
             if(RetrofitValidationsV2.checkSuccessCode(response.code())) {
@@ -69,7 +74,9 @@ public class DialogsInteractorImpl implements DialogsInteractor {
             }
         }
     }
+    //endregion validateCodeVehicles
 
+    //region vehicleList
     private void vehicleList(Response<DialogsResponse> response, Context context) {
         DialogsResponse responseD = response.body();
         if(responseD!=null) {
@@ -93,4 +100,5 @@ public class DialogsInteractorImpl implements DialogsInteractor {
             Toast.makeText(context, "" + responseD.getMessage() + " " + responseD.getResponseCode(), Toast.LENGTH_SHORT).show();
         }
     }
+    //endregion vehicleList
 }

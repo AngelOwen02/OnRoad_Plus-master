@@ -23,16 +23,14 @@ public class checkListPresenterImpl implements  checkListPresenter{
     }
     @Override
     public void requestChecklist() {
-        if(view!=null)
-        {
+        if(view!=null) {
             interactor.requestCheckList();
         }
     }
 
     @Override
     public void setChecList(List<checkListdata> data) {
-        if(view!=null)
-        {
+        if(view!=null) {
             view.setCheckList(data);
         }
     }
@@ -42,7 +40,6 @@ public class checkListPresenterImpl implements  checkListPresenter{
         if(view!=null) {
             view.showDialog();
         }
-
     }
 
     @Override

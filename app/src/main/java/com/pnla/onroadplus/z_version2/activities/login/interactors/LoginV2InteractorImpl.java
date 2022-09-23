@@ -12,6 +12,7 @@ public class LoginV2InteractorImpl implements LoginV2Interactor {
         this.presenter = presenter;
     }
 
+    //region existUsers
     @Override
     public void existUsers() {
         boolean areThereUsers = RealmUserData.existUsers();
@@ -21,5 +22,5 @@ public class LoginV2InteractorImpl implements LoginV2Interactor {
             presenter.showFragmentHelpV2();
         }
     }
-
+    //endregion existUsers
 }
