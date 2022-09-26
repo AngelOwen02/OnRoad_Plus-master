@@ -38,6 +38,7 @@ public class checkListInteractorImpl implements checkListInteractor{
         service = retrofitClient.create(serviceChecklist.class);
     }
 
+    //region requestCheckList
     @Override
     public void requestCheckList() {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -49,7 +50,9 @@ public class checkListInteractorImpl implements checkListInteractor{
             requestfullCheckList(token);
         }
     }
+    //endregion requestCheckist
 
+    //region requestFullCheckList
     private void requestfullCheckList(String token) {
         checklistRequest request = new checklistRequest(token);
         //presenter.showpDialog();
@@ -66,10 +69,11 @@ public class checkListInteractorImpl implements checkListInteractor{
             }
         });
     }
+    //endregion requestFullCheckList
 
+    //region validateCodeCheckList
     private void validateCodeChecklist(Response<checkListResponse> response, Context context) {
         if (response != null) {
-
             if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
                 checkList(response, context);
             } else {
@@ -77,7 +81,9 @@ public class checkListInteractorImpl implements checkListInteractor{
             }
         }
     }
+    //endregion validateCodeCheckList
 
+    //region checkList
     private void checkList(Response<checkListResponse> response, Context context) {
           checkListResponse responsD=response.body();
                 if(responsD!=null) {
@@ -92,16 +98,15 @@ public class checkListInteractorImpl implements checkListInteractor{
                             presenter.hideDialog();
                             Toast.makeText(context, "" + responsD.getMessage() + " " + responsD.getResponseCode(), Toast.LENGTH_SHORT).show();
                         }
-                    }else
-                    {
+                    } else {
                         presenter.hideDialog();
                         Toast.makeText(context, "" + responsD.getMessage() + " " + responsD.getResponseCode(), Toast.LENGTH_SHORT).show();
                     }
-                }else
-                {
+                } else {
                     presenter.hideDialog();
                     Toast.makeText(context, ""+responsD.getMessage()+" "+responsD.getResponseCode(), Toast.LENGTH_SHORT).show();
                 }
     }
+    //endregion checkList
 
 }

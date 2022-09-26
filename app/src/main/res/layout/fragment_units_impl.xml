@@ -8,8 +8,6 @@
     android:orientation="vertical"
     tools:context="com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl">
 
-
-
     <include
         android:id="@+id/toolbar_units"
         layout="@layout/search_toolbar"/>
@@ -56,8 +54,6 @@
                 app:searchIcon="@drawable/ic_search" />
 
         </LinearLayout>
-
-
     </androidx.cardview.widget.CardView>
 
     <androidx.recyclerview.widget.RecyclerView

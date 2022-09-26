@@ -46,8 +46,8 @@ public class NotificationsV2InteractorImpl implements NotificationsV2Interactor 
     private NotificationsV2Presenter presenter;
     private NotificationsV2Services services;
     private Retrofit retrofitClient;
-private int listiterator;
-private int notifications;
+    private int listiterator;
+    private int notifications;
     private NotificationsUpdate notificationsUpdate;
 
     public NotificationsV2InteractorImpl(NotificationsV2Presenter presenter) {
@@ -56,18 +56,23 @@ private int notifications;
         services = retrofitClient.create(NotificationsV2Services.class);
     }
 
+    //region getMainDate
     @Override
     public void getMainDate() {
         presenter.setMainDate(NotificationsV2Utils.getCurrentDate());
     }
+    //endregion getMainDate
 
+    //region getAllVehicles
     @Override
     public void getAllVehicles(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         startVehiclesRequest(token, context);
     }
+    //endregion getAllVehicles
 
+    //region startVehiclesRequest
     private void startVehiclesRequest(String token, final Context context) {
         List<Integer> vehiclesCves = new ArrayList<>();
         vehiclesCves.add(0);
@@ -85,7 +90,9 @@ private int notifications;
             }
         });
     }
+    //endregion startVehiclesRequest
 
+    //region validateCode
     private void validateCode(Response<VehicleV2Response> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getVehiclesData(response, context);
@@ -94,7 +101,9 @@ private int notifications;
             Toast.makeText(context,  "sesion expirada", Toast.LENGTH_LONG).show();
         }
     }
+    //endregion validateCode
 
+    //region getVehiclesData
     private void getVehiclesData(Response<VehicleV2Response> response, Context context) {
         VehicleV2Response vehicleV2Response = response.body();
         if (vehicleV2Response != null) {
@@ -141,7 +150,9 @@ private int notifications;
             presenter.setMessageToView(context.getString(R.string.textEmptyResponse));
         }
     }
+    //endregion getVehiclesData
 
+    //region cancelRequest
     @Override
     public void cancelRequest() {
         //para ya no realizar request de vehiculos son los siguientes 2 if
@@ -151,7 +162,9 @@ private int notifications;
             notificationsUpdate = null;
         }
     }
+    //endregion cancelRequest
 
+    //region getAllNotification
     @Override
     public void getAllNotification(List<VehicleV2> vehicles, String date, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -159,7 +172,9 @@ private int notifications;
         List<Integer> vehicleCves = NotificationsV2Utils.getCveVehicle(vehicles);
         startNotificationRequest(token, date, vehicleCves, context);
     }
+    //endregion getAllNotification
 
+    //region startNotificationRequest
     private void startNotificationRequest(String token, final String date, final List<Integer> vehicleCves, final Context context) {
         NotificationsV2Request request = new NotificationsV2Request(vehicleCves, token, date);
         services.getAllNotifications(request).enqueue(new Callback<NotificationsV2Response>() {
@@ -177,7 +192,9 @@ private int notifications;
             }
         });
     }
+    //endregion startNotificationRequest
 
+    //region validateNotificationsCode
     private void validateNotificationsCode(Response<NotificationsV2Response> response, Context context, List<Integer> vehicleCves, String date) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getNotificationData(response, context, vehicleCves, date);
@@ -185,7 +202,9 @@ private int notifications;
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateNotificationsCode
 
+    //region getNotificationData
     private void getNotificationData(Response<NotificationsV2Response> response, Context context, List<Integer> vehicleCves, String date) {
         NotificationsV2Response notificationsV2Response = response.body();
         if (notificationsV2Response != null) {
@@ -255,7 +274,9 @@ private int notifications;
             presenter.setMessageToView(context.getString(R.string.textEmptyCarsResponse));
         }
     }
+    //endregion getNotificationData
 
+    //region rechargeNotifications
     @Override
     public void rechargeNotifications(List<VehicleV2> vehicles, String date, Context context) {
         List<Integer> vehicleCves = NotificationsV2Utils.getCveVehicle(vehicles);
@@ -276,7 +297,9 @@ private int notifications;
             }
         }
     }
+    //endregion rechargeNotifications
 
+    //region NotificationsUpdate
     public class NotificationsUpdate extends AsyncTask<Void, Void, Void> {
 
         public Call<NotificationsV2Response> call;
@@ -397,6 +420,5 @@ private int notifications;
         }
 
     }
-
-
+    //endregion NotificationsUpdate
 }

@@ -33,7 +33,6 @@ import retrofit2.Retrofit;
 
 public class menuInteractorImpl implements menuInteractor {
 
-
     private menuPresenter presenter;
     private Context context;
     private MenuService service;
@@ -45,14 +44,14 @@ public class menuInteractorImpl implements menuInteractor {
     public List<MenuData> menudata;
     public static List<String> valuesmenues=new ArrayList<>();
 
-    public menuInteractorImpl( menuPresenter presenter,Context context)
-    {
+    public menuInteractorImpl( menuPresenter presenter,Context context) {
         this.presenter=presenter;
         this.context=context;
         retrofitClient = RetrofitClientV2.getRetrofitInstance();
         service = retrofitClient.create(MenuService.class);
     }
 
+    //region getMenuitems
     @Override
     public void getMenuitems() {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -61,9 +60,10 @@ public class menuInteractorImpl implements menuInteractor {
         {
             doitemMenuRequest(1144,token);
         }
-
     }
+    //endregion getMenuitems
 
+    //region getVersionapp
     @Override
     public void getVersionapp() {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -72,7 +72,9 @@ public class menuInteractorImpl implements menuInteractor {
             doversionRequest(token);
         }
     }
+    //endregion getVersionapp
 
+    //region doversionRequest
     private void doversionRequest(String token)
     {
         final VersionRequest request = new VersionRequest(name,token);
@@ -137,7 +139,9 @@ public class menuInteractorImpl implements menuInteractor {
             }
         });
     }
+    //endregion doversionRequest
 
+    //region doitemMenuRequest
     private void doitemMenuRequest(int appcode ,String token){
         MenuRequest menuRequest=new MenuRequest(appcode,token);
         Call<MenuResponse> call=service.getMenu(menuRequest);
@@ -153,6 +157,9 @@ public class menuInteractorImpl implements menuInteractor {
             }
         });
     }
+    //endregion doitemMenuRequest
+
+    //region getMenuResponse
     private void getMenuResponse(Response<MenuResponse> response)
     {
         if (retrofitValidations.checkSuccessCode(response.code())) {
@@ -161,7 +168,9 @@ public class menuInteractorImpl implements menuInteractor {
             presenter.setErrorToView(retrofitValidations.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion getMenuResponse
 
+    //region getMenuSucces
     private void getMenuSucces(Response<MenuResponse> response){
         MenuResponse menuresponse=    response.body();
         if(menuresponse!= null) {
@@ -197,4 +206,5 @@ public class menuInteractorImpl implements menuInteractor {
 
         }
     }
+    //endregion getMenuSucces
 }

@@ -45,6 +45,7 @@ public class LoginInteractorImpl implements LoginInteractor {
         services = retrofitClient.create(LoginServicesV2.class);
     }
 
+    //region getUserDataPreferences
     @Override
     public void getUserDataPreferences() {
 
@@ -64,7 +65,9 @@ public class LoginInteractorImpl implements LoginInteractor {
 
         }
     }
+    //endregion getUserDataPreferences
 
+    //region validateData
     @Override
     public void validateData(String user, String password) {
         String resultValidation = LoginV2Validations.validateUserAndPassword(user, password);
@@ -81,7 +84,9 @@ public class LoginInteractorImpl implements LoginInteractor {
             presenter.setMessageToView(context.getString(R.string.textEmptyDataLogin));
         }
     }
+    //endregion validateData
 
+    //region newsetAuditTrail
     @Override
     public void newsetAuditTrail(String name) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -91,6 +96,9 @@ public class LoginInteractorImpl implements LoginInteractor {
             myauditTrail(name,token);
         }
     }
+    //endregion newsetAuditTrail
+
+    //region myauditTrail
     private void myauditTrail(String name ,String token)
     {
         AuditTrail mynewAuditTrail=new AuditTrail("Onroad_Login","Login","login con "+name);
@@ -107,7 +115,9 @@ public class LoginInteractorImpl implements LoginInteractor {
             }
         });
     }
+    //endregion myauditTrail
 
+    //region validateCodeauditTrail
     private  void  validateCodeauditTrail(Response<responseAuditTrail> response,Context context)
     {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
@@ -116,8 +126,10 @@ public class LoginInteractorImpl implements LoginInteractor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
-    private void responseSetAuditTrial(Response<responseAuditTrail> response,Context context)
-    {
+    //endregion validateCodeauditTrail
+
+    //region responseSetAuditTrial
+    private void responseSetAuditTrial(Response<responseAuditTrail> response,Context context) {
         responseAuditTrail auditResponse=response.body();
         if(auditResponse!=null)
         {
@@ -128,8 +140,10 @@ public class LoginInteractorImpl implements LoginInteractor {
 
             }
         }
-
     }
+    //endregion responseSetAuditTrial
+
+    //region startLoginRequest
     private void startLoginRequest(final String user, final String password) {
         LoginRequestV2 request = new LoginRequestV2(user, password);
         services.login(request).enqueue(new Callback<LoginResponseV2>() {
@@ -144,7 +158,9 @@ public class LoginInteractorImpl implements LoginInteractor {
             }
         });
     }
+    //endregion startLoginRequest
 
+    //region validateCode
     private void validateCode(Response<LoginResponseV2> response, String user, String password) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getUserData(response, user, password);
@@ -152,7 +168,9 @@ public class LoginInteractorImpl implements LoginInteractor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateCode
 
+    //region getUserData
     private void getUserData(Response<LoginResponseV2> response, String user, String password) {
         LoginResponseV2 loginResponse = response.body();
         if (loginResponse != null) {
@@ -237,4 +255,5 @@ public class LoginInteractorImpl implements LoginInteractor {
             presenter.setMessageToView("Error, no se pudo obtener respuesta del servidor.");
         }
     }
+    //endregion getUserData
 }

@@ -34,6 +34,7 @@ public class ChangePasswordV2InteractorImpl implements ChangePasswordV2Interacto
         services = retrofitClient.create(ChangePasswordV2Services.class);
     }
 
+    //region getDataFromBundle
     @Override
     public void getDataFromBundle(Bundle bundle) {
         if (bundle != null) {
@@ -44,7 +45,9 @@ public class ChangePasswordV2InteractorImpl implements ChangePasswordV2Interacto
             presenter.setMessageToView(context.getString(R.string.textGetEmptyUserData));
         }
     }
+    //endregion getDataFromBundle
 
+    //region validateChangePasswordData
     @Override
     public void validateChangePasswordData(String token, String password1, String password2) {
         String resultValidationToken = ChangePasswordV2Validations.validateToken(token, context);
@@ -59,7 +62,9 @@ public class ChangePasswordV2InteractorImpl implements ChangePasswordV2Interacto
             presenter.setMessageToView(resultValidationToken);
         }
     }
+    //endregion validateChangePasswordData
 
+    //region startChangePasswordRequest
     private void startChangePasswordRequest(String token, String newPassword) {
         ChangePasswordV2Request request = new ChangePasswordV2Request(newPassword, token);
         services.changePasswordService(request).enqueue(new Callback<ChangePasswordV2Response>() {
@@ -74,7 +79,9 @@ public class ChangePasswordV2InteractorImpl implements ChangePasswordV2Interacto
             }
         });
     }
+    //endregion startChangePasswordRequest
 
+    //region validateChangePasswordCode
     private void validateChangePasswordCode(Response<ChangePasswordV2Response> response) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getChangePasswordResponse(response);
@@ -82,7 +89,9 @@ public class ChangePasswordV2InteractorImpl implements ChangePasswordV2Interacto
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateChangePasswordCode
 
+    //region getChangePasswordResponse
     private void getChangePasswordResponse(Response<ChangePasswordV2Response> response) {
         ChangePasswordV2Response changePasswordV2Response = response.body();
         if (changePasswordV2Response != null) {
@@ -97,5 +106,5 @@ public class ChangePasswordV2InteractorImpl implements ChangePasswordV2Interacto
             presenter.setMessageToView("Error, no se puedo obtener respuesta del servidor.");
         }
     }
-
+    //endregion getChangePasswordResponse
 }

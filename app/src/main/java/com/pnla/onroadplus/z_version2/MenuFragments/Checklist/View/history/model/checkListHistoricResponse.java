@@ -15,10 +15,8 @@ public class checkListHistoricResponse {
     private String message;
     @SerializedName("data")
     @Expose
-    //private datachecklistHistoric data;
     private List<Historic> data= null;
 
-    //public checkListHistoricResponse(Integer responseCode, String message, datachecklistHistoric data) {
     public checkListHistoricResponse(int responseCode, String message, List<Historic> data) {
         super();
         this.responseCode = responseCode;
@@ -49,12 +47,4 @@ public class checkListHistoricResponse {
     public void setData(List<Historic> data) {
         this.data = data;
     }
-
-    /**public datachecklistHistoric getData() {
-        return data;
-    }
-
-    public void setData(datachecklistHistoric data) {
-        this.data = data;
-    }*/
 }

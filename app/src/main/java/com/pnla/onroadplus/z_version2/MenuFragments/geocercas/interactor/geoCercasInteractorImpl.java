@@ -26,32 +26,28 @@ public class geoCercasInteractorImpl implements geCercasInteractor {
     private geoCercasPresenter presenter;
     private geCercasService service;
     private Retrofit retrofitClient;
-    //private List<Data> data=new ArrayList<>();
- //   List<Geofences> geoCercas=new ArrayList<>();
-    public geoCercasInteractorImpl(geoCercasPresenter presenter, Context context)
-    {
+
+    public geoCercasInteractorImpl(geoCercasPresenter presenter, Context context) {
         this.presenter=presenter;
         this.context=context;
         retrofitClient = RetrofitClientV2.getRetrofitInstance();
         service = retrofitClient.create(geCercasService.class);
     }
 
-
+    //region geoCercasRequest
     @Override
     public void geoCercasRequest() {
 
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-        if(token!=null)
-        {
+        if(token!=null) {
             geoCercasRequestData(token);
         }
-
-
     }
+    //endregion geoCercasRequest
 
-    private void geoCercasRequestData(String token)
-    {
+    //region geoCercasRequestData
+    private void geoCercasRequestData(String token) {
         geoCercasRequest request= new geoCercasRequest(token);
         presenter.showProgressDialog();
         Call<geoCercasModel> call=service.geoCercas(request);
@@ -71,9 +67,10 @@ public class geoCercasInteractorImpl implements geCercasInteractor {
         });
         /**
          Call<cancelOrderResponse> call=service.cancelOrder(request);*/
-
     }
+    //endregion geoCercasRequestData
 
+    //region validateCode
     private void validateCode(Response<geoCercasModel> response, Context context) {
         if(response!=null){
             if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
@@ -84,8 +81,10 @@ public class geoCercasInteractorImpl implements geCercasInteractor {
             }
         }
     }
-    private void getGeoeferences(Response<geoCercasModel> response, Context context)
-    {
+    //endregion validateCode
+
+    //region getGeoeferences
+    private void getGeoeferences(Response<geoCercasModel> response, Context context) {
         geoCercasModel geoCercasModelresponse=response.body();
         if(geoCercasModelresponse!=null)
         {
@@ -112,4 +111,5 @@ public class geoCercasInteractorImpl implements geCercasInteractor {
         }
 
     }
+    //endregion getGeoeferences
 }

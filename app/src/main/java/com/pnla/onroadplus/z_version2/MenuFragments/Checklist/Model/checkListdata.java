@@ -15,13 +15,6 @@ public class checkListdata {
     @SerializedName("email")
     private String email;
 
-    //    @SerializedName("origin_adm")
-    //    private Integer originAdm;
-    //    @SerializedName("cve_trip_mgm_section")
-    //    private Integer cveTripMgmSection;
-    //    @SerializedName("desc_trip_mgm_section")
-    //    private String descTripMgmSection;
-
     public checkListdata(Integer originAdm, Integer cveTripMgmSection, String descTripMgmSection,boolean aprobador,String email) {
         super();
         this.originAdm = originAdm;

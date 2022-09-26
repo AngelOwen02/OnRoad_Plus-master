@@ -4,7 +4,6 @@ import com.google.gson.annotations.SerializedName;
 
 public class checklistHistoricRequest {
 
-    //@SerializedName("token")
     private String token;
 
     public checklistHistoricRequest(String token) {

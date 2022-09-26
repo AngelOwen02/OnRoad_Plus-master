@@ -42,17 +42,13 @@ public class zonesRecyclerInteractorImpl implements  zonesRecyclerInteractor{
 
     private Context context;
     private presenterRecyclerZonesImpl presenter;
-
     private Retrofit retrofitClient;
     private serviceRecyclerZones service;
-
 
     private List<Integer> cvesZone = new ArrayList<>();
     private List<String> colorsZones = new ArrayList<>();
     private List<String> dayAvalable=new ArrayList<>();
-
     private List<String> zonesAndColors = new ArrayList<>();
-
     public static  List<String> adapterCheck=new ArrayList<>();
 
     public zonesRecyclerInteractorImpl(presenterRecyclerZonesImpl presenter, Context context) {
@@ -63,7 +59,7 @@ public class zonesRecyclerInteractorImpl implements  zonesRecyclerInteractor{
 
     }
 
-
+    //region getZones
     @Override
     public void getZones() {
 
@@ -73,7 +69,9 @@ public class zonesRecyclerInteractorImpl implements  zonesRecyclerInteractor{
             getZonesdata(token);/** aqui solo obtendremos los siguientes datos   cve_layer & tab_layer_color      */
         }
     }
+    //endregion getZones
 
+    //region getInterestPoints
     @Override
     public void getInterestPoints(List<Integer> cveZonesfullList) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -82,8 +80,9 @@ public class zonesRecyclerInteractorImpl implements  zonesRecyclerInteractor{
             getPointsperZone(cveZonesfullList, token);
         }
     }
+    //endregion getInterestPoints
 
-
+    //region getpointsStatus
     @Override
     public void getpointsStatus(List<Integer> cveZonesfullList) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -92,6 +91,9 @@ public class zonesRecyclerInteractorImpl implements  zonesRecyclerInteractor{
             getvisitedPoints(cveZonesfullList,token);
         }
     }
+    //endregion getpointsStatus
+
+    //region getZonesdata
     private void getZonesdata(String token) {
         zonesRequest1 request = new zonesRequest1(token);
         presenter.showProgressDialog();
@@ -109,7 +111,9 @@ public class zonesRecyclerInteractorImpl implements  zonesRecyclerInteractor{
         });
 
     }
+    //endregion getZonesdata
 
+    //region validateCode
     private void validateCode(Response<zoneResponse1> response, Context context) {
         if (response != null) {
 
@@ -120,7 +124,9 @@ public class zonesRecyclerInteractorImpl implements  zonesRecyclerInteractor{
             }
         }
     }
+    //endregion validateCode
 
+    //region getzonesalldata
     private void getzonesalldata(Response<zoneResponse1> response, Context context) {
         zoneResponse1 responseinfo = response.body();
         if (responseinfo != null) {
@@ -254,10 +260,10 @@ public class zonesRecyclerInteractorImpl implements  zonesRecyclerInteractor{
                 //   presenter.failureResponse(context.getString(R.string.textSessionExpired));
             }
         }
-
-
     }
+    //endregion getzonesalldata
 
+    //region getPointsperZone
     private void getPointsperZone(List<Integer> cveZonesfullList, String token) {
         pointsRequest1 request = new pointsRequest1(cveZonesfullList, token);
         //aqui deberia ir un loader/
@@ -275,7 +281,9 @@ public class zonesRecyclerInteractorImpl implements  zonesRecyclerInteractor{
             }
         });
     }
+    //endregion getPointsperZone
 
+    //region validateCodezonePoints
     private void validateCodezonePoints(Response<pointsResponse1> response, Context context) {
         if (response != null) {
 
@@ -286,7 +294,9 @@ public class zonesRecyclerInteractorImpl implements  zonesRecyclerInteractor{
             }
         }
     }
+    //endregion validateCodezonePoints
 
+    //region getPointsZoneData
     private void getPointsZoneData(Response<pointsResponse1> response, Context context) {
         pointsResponse1 responseP=response.body();
 
@@ -340,6 +350,9 @@ public class zonesRecyclerInteractorImpl implements  zonesRecyclerInteractor{
             }
         }
     }
+    //endregion getPointsZoneData
+
+    //region getvisitedPoints
     private void getvisitedPoints(List<Integer> cveZonesfullList, String token) {
         visitedRequest1 request = new visitedRequest1(cveZonesfullList,token);
         Call<visitedResponse1> call= service.getPointsVisited(request);
@@ -355,6 +368,9 @@ public class zonesRecyclerInteractorImpl implements  zonesRecyclerInteractor{
             }
         });
     }
+    //endregion getvisitedPoints
+
+    //region validateCodeVisitedPoints
     private void validateCodeVisitedPoints(Response<visitedResponse1> response,Context context) {
         if (response != null) {
             if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
@@ -366,7 +382,9 @@ public class zonesRecyclerInteractorImpl implements  zonesRecyclerInteractor{
             }
         }
     }
+    //endregion validateCodeVisitedPoints
 
+    //region getPointsVisited
     private void getPointsVisited(Response<visitedResponse1> response, Context context) {
         visitedResponse1 responseVisited=response.body();
         if (responseVisited!=null)
@@ -402,5 +420,6 @@ public class zonesRecyclerInteractorImpl implements  zonesRecyclerInteractor{
             }
         }
     }
+    //endregion getPointsVisited
 }
 

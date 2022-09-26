@@ -42,7 +42,6 @@ public class historicChecklist extends Fragment implements View.OnClickListener,
     private SearchView searchViewa;
     private List<Historic> soportes;
     private HistoricCheckListPresenter presenter;
- //   private checkListPresenter presenter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -184,11 +183,9 @@ public class historicChecklist extends Fragment implements View.OnClickListener,
         switch (v.getId()) {
             case R.id.historic_checks_back:
                 menutransition();
-               //Toast.makeText(getContext(), "back", Toast.LENGTH_SHORT).show();
                 break;
 
             case R.id.search_checkList:
-                //Toast.makeText(this, "Si funciona", Toast.LENGTH_SHORT).show();
                 //searchView.setVisibility(View.VISIBLE);
                 if(searchViewContainer.getVisibility()==View.VISIBLE) {
                     searchViewContainer.setVisibility(View.GONE);

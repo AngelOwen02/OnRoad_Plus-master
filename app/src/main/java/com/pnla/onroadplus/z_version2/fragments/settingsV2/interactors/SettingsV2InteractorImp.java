@@ -17,6 +17,7 @@ public class SettingsV2InteractorImp implements SettingsV2Interactor {
         this.presenter = presenter;
     }
 
+    //region getNotifiationsConfiguration
     @Override
     public void getNotifiationsConfiguration(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -35,7 +36,9 @@ public class SettingsV2InteractorImp implements SettingsV2Interactor {
         }
 
     }
+    //endregion getNotifiationsConfiguration
 
+    //region saveUserNotificationState
     @Override
     public void saveUserNotificationState(boolean isActive, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -48,4 +51,5 @@ public class SettingsV2InteractorImp implements SettingsV2Interactor {
         }
 
     }
+    //endregion saveUserNotificationState
 }

@@ -12,7 +12,6 @@ public class dataChecklist  implements Serializable {
     private Integer score;
     private Integer cveTripMgmAnswer;
 
-
     public dataChecklist(int origin, int questioId, int section, int answerPos, String foto,Integer cveTripMgmQuestion,Integer score,Integer cveTripMgmAnswer) {
         this.origin = origin;
         this.questioId = questioId;
@@ -23,8 +22,6 @@ public class dataChecklist  implements Serializable {
         this.score=score;
         this.cveTripMgmAnswer=cveTripMgmAnswer;
     }
-
-
 
     public int getOrigin() {
         return origin;

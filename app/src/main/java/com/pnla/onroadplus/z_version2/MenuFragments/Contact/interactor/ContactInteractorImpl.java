@@ -24,7 +24,6 @@ import retrofit2.Retrofit;
 public class ContactInteractorImpl implements ContactInteractor {
 
     Context context;
-
     private ContactPresenter presenter;
     private ContactV2Services services;
 
@@ -36,19 +35,24 @@ public class ContactInteractorImpl implements ContactInteractor {
         services = retrofitClient.create(ContactV2Services.class);
     }
 
+    //region getUserEmail
     @Override
     public void getUserEmail(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String email = preferences.getString(GeneralConstantsV2.EMAIL_PREFERENCES, null);
         presenter.setUserEmail(email);
     }
+    //endregion getUserEmail
 
+    //region getSupportEmail
     @Override
     public void getSupportEmail() {
         String supportEmail = "support@gpsphoenix.com";
         presenter.setSupportEmail(supportEmail);
     }
+    //endregion getSupportEmail
 
+    //region validateUserDataToSend
     @Override
     public void validateUserDataToSend(String to, String subject, String message, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -71,7 +75,9 @@ public class ContactInteractorImpl implements ContactInteractor {
         }
         presenter.setMessageToView(resultValidation);
     }
+    //endregion validateUserDataToSend
 
+    //region getFonts
     @Override
     public void getFonts() {
         Typeface robotoRegular = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Regular.ttf");
@@ -81,7 +87,9 @@ public class ContactInteractorImpl implements ContactInteractor {
         presenter.setFonts(robotoLight, robotoRegular, robotoMedium);
 
     }
+    //endregion getFonts
 
+    //region startContactRequest
     private void startContactRequest(String to, String subject, String message, String token, final Context context) {
         ContactV2Request request = new ContactV2Request(message, subject, to, token);
         services.sendEmail(request).enqueue(new Callback<ContactV2Response>() {
@@ -96,7 +104,9 @@ public class ContactInteractorImpl implements ContactInteractor {
             }
         });
     }
+    //endregion startContactRequest
 
+    //region validateCode
     private void validateCode(Response<ContactV2Response> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getContactData(response, context);
@@ -104,7 +114,9 @@ public class ContactInteractorImpl implements ContactInteractor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateCode
 
+    //region getSendConfirmationDialog
     public void getSendConfirmationDialog(){
 
         AlertDialog.Builder sendDialog = new AlertDialog.Builder(context, R.style.AlertDialogCustom);
@@ -118,7 +130,9 @@ public class ContactInteractorImpl implements ContactInteractor {
         });
         sendDialog.show();
     }
+    //endregion getSendConfirmationDialog
 
+    //region getContactData
     private void getContactData(Response<ContactV2Response> response, Context context) {
         ContactV2Response contactV2Response = response.body();
         if (contactV2Response != null) {
@@ -134,4 +148,5 @@ public class ContactInteractorImpl implements ContactInteractor {
             presenter.setMessageToView(context.getString(R.string.textEmptyResponse));
         }
     }
+    //endregion getContactData
 }

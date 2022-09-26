@@ -62,8 +62,6 @@
                 app:searchIcon="@drawable/ic_search" />
 
         </LinearLayout>
-
-
     </androidx.cardview.widget.CardView>
 
     <View

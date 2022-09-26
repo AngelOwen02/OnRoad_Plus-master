@@ -91,18 +91,7 @@ public class historicAdapter extends RecyclerView.Adapter<historicAdapter.ViewHo
         }
 
         //Para la imagen del Aprobador
-        /**if(data.get(position).getApprovement() == true) {
-            holder.unitApproved.setColorFilter(ContextCompat.getColor(context, R.color.green), android.graphics.PorterDuff.Mode.SRC_IN);
-            holder.unitApproved.setVisibility(View.VISIBLE);
-        } else if (data.get(position).getApprovement() == false){
-            holder.unitApproved.setColorFilter(ContextCompat.getColor(context, R.color.colorGray), android.graphics.PorterDuff.Mode.SRC_IN);
-            holder.unitApproved.setVisibility(View.VISIBLE);
-        } else if (data.get(position).getApprovement() == null){
-            holder.unitApproved.setVisibility(View.GONE);
-        }*/
-
         if(data.get(position).getApprovement()==null) {
-            //Toast.makeText(context, "Vacio", Toast.LENGTH_SHORT).show();
             holder.unitApproved.setVisibility(View.GONE);
         } else if (data.get(position).getApprovement()==(false)) {
             holder.unitApproved.setImageResource(R.drawable.ic_user_checklist);
@@ -117,8 +106,8 @@ public class historicAdapter extends RecyclerView.Adapter<historicAdapter.ViewHo
     @Override
     public int getItemCount() {
         return data.size();
-        //return 4;
     }
+
     @Override
     public long getItemId(int position) {
         return position;
@@ -135,8 +124,8 @@ public class historicAdapter extends RecyclerView.Adapter<historicAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-     //   ConstraintLayout buttonquestions;
 
+     //   ConstraintLayout buttonquestions;
         TextView unitName, unitDate, unitScore;
         ImageView unitImageScore, unitApproved;
 

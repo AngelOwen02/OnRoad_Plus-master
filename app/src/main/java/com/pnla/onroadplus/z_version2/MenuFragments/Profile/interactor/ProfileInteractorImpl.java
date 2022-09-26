@@ -39,6 +39,8 @@ public class ProfileInteractorImpl implements ProfileInteractor {
         services = retrofitClient.create(ActivityOnLineServices.class);
     }
 // region:notificationconfig
+
+    //region getNotificationsConfiguration
     @Override
     public void getNotificationsConfiguration(Context context) {
 
@@ -58,7 +60,9 @@ public class ProfileInteractorImpl implements ProfileInteractor {
             presenter.disabledNotifications();
         }
     }
+    //endregion getNotificationsConfiguration
 
+    //region saveUserNotificationState
     @Override
     public void saveUserNotificationState(boolean isActive, Context context) {
 
@@ -71,8 +75,9 @@ public class ProfileInteractorImpl implements ProfileInteractor {
             RealmUserNotifications.updateUserNotification(user, isActive);
         }
     }
+    //endregion saveUserNotificationState
 
-
+    //region getUserDataPreferences
     @Override
     public void getUserDataPreferences(Context context) {
 
@@ -81,10 +86,12 @@ public class ProfileInteractorImpl implements ProfileInteractor {
         String email = preferences.getString(GeneralConstantsV2.EMAIL_PREFERENCES, null);
 
         presenter.setUserProfileData(username, email);
-
-
     }
+    //endregion getUserDataPreferences
+
     // endregion:notificationconfig
+
+    //region getUserImageProfile
     @Override
     public void getUserImageProfile(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -96,7 +103,9 @@ public class ProfileInteractorImpl implements ProfileInteractor {
             presenter.setUserImageProfile("");
         }
     }
+    //endregion getUserImageProfile
 
+    //region getFonts
     @Override
     public void getFonts() {
         Typeface robotoRegular = Typeface.createFromAsset(context.getAssets(), "fonts/Roboto-Regular.ttf");
@@ -104,8 +113,9 @@ public class ProfileInteractorImpl implements ProfileInteractor {
 
         presenter.setFonts(robotoRegular, robotoBold);
     }
+    //endregion getFonts
 
-
+    //region validateDataToCloseSession
     @Override
     public void validateDataToCloseSession(Context context) {
 
@@ -119,8 +129,9 @@ public class ProfileInteractorImpl implements ProfileInteractor {
             presenter.setMessageToView("Ocurrió un error, no se pudo cerrar sesión");
         }
     }
+    //endregion validateDataToCloseSession
 
-
+    //region getLogoutConfirmationDialog
     @Override
     public void getLogoutConfirmationDialog() {
 
@@ -141,14 +152,17 @@ public class ProfileInteractorImpl implements ProfileInteractor {
         });
         logoutDialog.show();
     }
+    //endregion getLogoutConfirmationDialog
 
+    //region intentToHelpScreen
     @Override
     public void intentToHelpScreen(Context context) {
         Intent intent = new Intent(context, HelpContainerActivity.class);
         context.startActivity(intent);
     }
+    //endregion intentToHelpScreen
 
-
+    //region startCloseSessionRequest
     private void startCloseSessionRequest(String token) {
         CloseSessionV2Request request = new CloseSessionV2Request(token);
         services.closeSessionService(request).enqueue(new Callback<CloseSessionV2Response>() {
@@ -163,7 +177,9 @@ public class ProfileInteractorImpl implements ProfileInteractor {
             }
         });
     }
+    //endregion startCloseSessionRequest
 
+    //region getCloseSessionResponse
     private void getCloseSessionResponse(Response<CloseSessionV2Response> response) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             closeSessionSuccess(response);
@@ -171,7 +187,9 @@ public class ProfileInteractorImpl implements ProfileInteractor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion getCloseSessionResponse
 
+    //region closeSessionSuccess
     private void closeSessionSuccess(Response<CloseSessionV2Response> response) {
         CloseSessionV2Response closeSessionV2Response = response.body();
         if (closeSessionV2Response != null) {
@@ -196,6 +214,5 @@ public class ProfileInteractorImpl implements ProfileInteractor {
             presenter.setMessageToView("Ocurrió un error, no se pudo cerrar sesión");
         }
     }
-
-
+    //endregion closeSessionSuccess
 }

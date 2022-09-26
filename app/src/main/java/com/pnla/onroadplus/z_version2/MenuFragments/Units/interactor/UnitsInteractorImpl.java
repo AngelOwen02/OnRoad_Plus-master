@@ -88,11 +88,14 @@ public class UnitsInteractorImpl implements UnitsInteractor {
         initRetrofit();
     }
 
+    //region initRetrofit
     private void initRetrofit() {
       retrofitClient = RetrofitClientV2.getRetrofitInstance();
         unitService = retrofitClient.create(UnitService.class);
     }
+    //endregion initRetrofit
 
+    //region getAllVehiclesFromAPI
     @Override
     public void getAllVehiclesFromAPI() {
         List<Integer> noCves = new ArrayList<>();
@@ -148,7 +151,9 @@ public class UnitsInteractorImpl implements UnitsInteractor {
 
 
     }
+    //endregion getAllVehiclesFromAPI
 
+    //region getGeoreferencefromAPI
     @Override
     public void getGeoreferencefromAPI(List<Integer> noCves) throws IOException {
 
@@ -226,8 +231,9 @@ public class UnitsInteractorImpl implements UnitsInteractor {
     //processUnits.leaveAction();
         }
     }
+    //endregion getGeoreferencefromAPI
 
-
+    //region startVehiclesRequest
     private void startVehiclesRequest(int typeRequest, List<Integer> vehiclesCves, final Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
@@ -257,7 +263,9 @@ public class UnitsInteractorImpl implements UnitsInteractor {
         }
 
     }
+    //endregion startVehiclesRequest
 
+    //region validateCode
     private void validateCode(Response<UnitResponse> response, Context context) throws IOException {
       //  Log.e("LAPRINCESS", String.valueOf(response.body().getResponseCode()));
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
@@ -267,7 +275,9 @@ public class UnitsInteractorImpl implements UnitsInteractor {
             Toast.makeText(context,  "sesion expirada", Toast.LENGTH_LONG).show();
         }
     }
+    //endregion validateCode
 
+    //region getVehiclesData
     private void getVehiclesData(Response<UnitResponse> response, Context context) throws IOException {
         UnitResponse unitResponse = response.body();
         if (unitResponse != null) {
@@ -374,7 +384,9 @@ public class UnitsInteractorImpl implements UnitsInteractor {
             presenter.failureResponse(context.getString(R.string.textEmptyResponse));
         }
     }
+    //endregion getVehiclesData
 
+    //region dialog
     private void dialog(){
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         final String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
@@ -445,10 +457,10 @@ public class UnitsInteractorImpl implements UnitsInteractor {
         });
 
     }
-
-
+    //endregion dialog
 
     /**reques de grupos**/
+    //region getGroupsVehicles
     //  @Override
     public void getGroupsVehicles(){
         if(!dataofvehiclesgroupscve.isEmpty()) {
@@ -467,9 +479,10 @@ public class UnitsInteractorImpl implements UnitsInteractor {
 
         }
     }
-
+    //endregion getGroupsVehicles
 
     /**reques de grupos**/
+    //region startGroupsRequestVehicles
     private void startGroupsRequestVehicles(int cve,String token){
     /*    GroupvehicleInsideRequest request = new GroupvehicleInsideRequest(cve,token);
         Log.e("unitsthaticansaw", "response" +  cve+ " " + token);
@@ -504,7 +517,10 @@ public class UnitsInteractorImpl implements UnitsInteractor {
         });
 
     }
+    //endregion startGroupsRequestVehicles
+
     /**reques de grupos**/
+    //region validateGroupsVehiclesCode
     private void validateGroupsVehiclesCode(Response<GroupvehicleInsideResponse> response){
        // Log.e("validategroups","validate : "+ String.valueOf(response.body().getResponseCode()));
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
@@ -513,7 +529,10 @@ public class UnitsInteractorImpl implements UnitsInteractor {
         }
 
     }
+    //endregion validateGroupsVehiclesCode
+
     /**reques de grupos**/
+    //region getGrupsDataVhicles
     private void getGrupsDataVhicles(Response<GroupvehicleInsideResponse> response )
     {
 
@@ -551,14 +570,19 @@ public class UnitsInteractorImpl implements UnitsInteractor {
 
 
     }
+    //endregion getGrupsDataVhicles
 
     //Grupos get
+    //region getGroups
     private void getGroups(Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         startGroupsRequest(token, context);
     }
+    //endregion getGroups
+
     //Grupos request
+    //region startGroupsRequest
     private void startGroupsRequest(String token, final Context context) {
         GroupRequest request = new GroupRequest(token);
         // presenter.showLoaderFromInteractor();
@@ -577,9 +601,10 @@ public class UnitsInteractorImpl implements UnitsInteractor {
             }
         });
     }
-
+    //endregion startGroupsRequest
 
     //Grupos
+    //region validateGroupsCode
     private void validateGroupsCode(Response<GroupResponse> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getGroupsData(response, context);
@@ -589,7 +614,9 @@ public class UnitsInteractorImpl implements UnitsInteractor {
             // presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateGroupsCode
 
+    //region getGroupsData
     private void getGroupsData(Response<GroupResponse> response, Context context) {
         GroupResponse groupResponse = response.body();
        // Log.e("jjjj", groupResponse.toString());
@@ -664,11 +691,15 @@ public class UnitsInteractorImpl implements UnitsInteractor {
             // presenter.setMessageToView(context.getString(R.string.textEmptyResponse));
         }
     }
+    //endregion getGroupsData
 
+    //region unitDBIsEmpty
     private boolean unitDBIsEmpty() {
         return UnitDB.getUnitList().isEmpty();
     }
+    //endregion unitDBIsEmpty
 
+    //region createUnitListDB
     private void createUnitListDB(List<Unit> unitList) {
         for (Unit unit : unitList) {
             UnitDB.createNewUnit(unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(), unit.getSendTime(),
@@ -676,7 +707,9 @@ public class UnitsInteractorImpl implements UnitsInteractor {
                     unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(), unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed(), unit.getDesc_layer());
         }
     }
+    //endregion createUnitListDB
 
+    //region createFinalUnitListDB
     private void createFinalUnitListDB(List<Unit> unitList) {
         for (Unit unit : unitList) {
             FinalUnitDB.createNewUnit(unit.isVehicleStatus(), unit.getCveVehicle(), unit.getVehicleSwitch(), unit.getVehicleName(), unit.getVehicleImage(), unit.getSendTime(),
@@ -684,60 +717,79 @@ public class UnitsInteractorImpl implements UnitsInteractor {
                     unit.getTimeElapsed(), unit.getLatitude(), unit.getLongitude(), unit.getMileage(), unit.getKmTravel(), unit.getCurrentSpeed(), unit.getMaxSpeed(), unit.getDesc_layer());
         }
     }
+    //endregion createFinalUnitListDB
 
+    //region groupDBIsEmpty
     private boolean groupDBIsEmpty() {
         return GroupDB.getGroupList().isEmpty();
     }
+    //endregion groupDBIsEmpty
 
+    //region createGroupListDB
     private void createGroupListDB(List<Group> groupList) {
         for (Group group : groupList) {
             GroupDB.createNewGroup(group.getCve_vehicle_group(), group.getUserGroup(), group.getVehicle_group(), group.getDesc_vehicle_group(), group.isSelected(),
                     group.getPositionItem(), group.getVehicles());
         }
     }
+    //endregion createGroupListDB
 
+    //region changeUnitStatusToFalse
     private void changeUnitStatusToFalse(List<Unit> vehicleList) {
         for (Unit vehicles : vehicleList) {
             vehicles.setVehicleStatus(false);
         }
     }
+    //endregion changeUnitStatusToFalse
 
+    //region changeGroupStatusToFalse
     private void changeGroupStatusToFalse(List<Group> groupList) {
         for (Group group : groupList) {
             group.setSelected(false);
         }
     }
+    //endregion changeGroupStatusToFalse
 
+    //region firstLoginTrue
     private void firstLoginTrue() {
         SharedPreferences prefs = context.getSharedPreferences("Login:FirstTime", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("isFirst", true);
         editor.commit();
     }
+    //endregion firstLoginTrue
 
+    //region firstLoginFalse
     private void firstLoginFalse() {
         SharedPreferences prefs = context.getSharedPreferences("Login:FirstTime", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("isFirst", false);
         editor.commit();
     }
+    //endregion firstLoginFalse
 
+    //region unitSelectedFalse
     private void unitSelectedFalse() {
         SharedPreferences prefs = context.getSharedPreferences("TrackingUnit:Selected", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("isSelected", false);
         editor.commit();
     }
+    //endregion unitSelectedFalse
 
+    //region groupSelectedFalse
     private void groupSelectedFalse() {
         SharedPreferences prefs = context.getSharedPreferences("TrackingGroup:Selected", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefs.edit();
         editor.putBoolean("isSelected", false);
         editor.commit();
     }
+    //endregion groupSelectedFalse
 
+    //region updateUnits
     private void updateUnits(List<Unit> unitList){
         UnitDB.deleteDB();
         createUnitListDB(unitList);
     }
+    //endregion updateUnits
 }

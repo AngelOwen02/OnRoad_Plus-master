@@ -74,9 +74,6 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
 
                         editor.commit();
                         myview.closeDialog();
-                        //updateS();
-                        //holder.checkBoxDialog.setActivated(false);
-                        //notifyDataSetChanged();
                     }
                 }
             });
@@ -94,9 +91,6 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
 
                         editor.commit();
                         myview.closeDialog();
-                        //updateS();
-                        //holder.checkBoxDialog.setActivated(false);
-                        //notifyDataSetChanged();
                     }
                 }
             });
@@ -104,9 +98,6 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
 
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String vehicleName = preferences.getString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, null);
-
-        //Toast.makeText(context, vehicleName, Toast.LENGTH_SHORT).show();
-        //Toast.makeText(context, data.get(position).getVehicleName() , Toast.LENGTH_SHORT).show();
 
         //Para que aparezca el checkbox seleccionado o vacio
         if(data.get(position).getVehicleName().equals(vehicleName)){
@@ -117,18 +108,11 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
             holder.checkBoxDialog.setVisibility(View.VISIBLE);
             holder.checkBoxDialog2.setVisibility(View.GONE);
         }
-
-        /**if(menuViewImpl.selectedVehicle == true) {
-            holder.checkBoxDialog.setEnabled(false);
-        }*/
-
-        //notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
         return data.size();
-        //return 4;
     }
 
     public void setFilter(List<DialogsData> dialogData) {

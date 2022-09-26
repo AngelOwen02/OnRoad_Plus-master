@@ -77,6 +77,7 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
         services = retrofitClient.create(MapV2Services.class);
     }
 
+    //region getDates
     @Override
     public void getDates() {
         List<DateV2> dates = new ArrayList<>();
@@ -89,7 +90,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
         }
         presenter.setDatesToView(dates);
     }
+    //endregion getDates
 
+    //region getVehiclesFromBundleOrRealm
     @Override
     public void getVehiclesFromBundleOrRealm(Bundle bundle, Context context) {
         /**
@@ -132,7 +135,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
         }
 
     }
+    //endregion getVehiclesFromBundleOrRealm
 
+    //region startVehiclesV2MapRequest
     private void startVehiclesV2MapRequest(int typeRequest, List<Integer> vehiclesCves, final Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
@@ -150,7 +155,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             }
         });
     }
+    //endregion startVehiclesV2MapRequest
 
+    //region validateCode
     private void validateCode(Response<VehicleV2MapResponse> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getVehiclesData(response, context);
@@ -158,7 +165,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateCode
 
+    //region getVehiclesData
     private void getVehiclesData(Response<VehicleV2MapResponse> response, Context context) {
         VehicleV2MapResponse vehicleV2MapResponse = response.body();
         if (vehicleV2MapResponse != null) {
@@ -183,12 +192,14 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             presenter.setMessageToView(context.getString(R.string.textEmptyResponse));
         }
     }
+    //endregion getVehiclesData
 
     /**
      * VehiscleDescriptionWebService
      *
      * @param vehicleCve
      */
+    //region getVehicleDescription
     @Override
     public void getVehicleDescription(int vehicleCve, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -200,7 +211,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             presenter.setMessageToView(validation);
         }
     }
+    //endregion getVehicleDescription
 
+    //region startVehicleDescriptionRequest
     private void startVehicleDescriptionRequest(String token, int vehicleCve, final Context context) {
         VehicleDescriptionRequest request = new VehicleDescriptionRequest(vehicleCve, token);
         services.getVehicleDescription(request).enqueue(new Callback<VehicleDescriptionResponse>() {
@@ -215,7 +228,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             }
         });
     }
+    //endregion startVehicleDescriptionRequest
 
+    //region validateVehicleDescriptionCode
     private void validateVehicleDescriptionCode(Response<VehicleDescriptionResponse> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getVehicleDescriptionData(response, context);
@@ -223,7 +238,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateVehicleDescriptionCode
 
+    //region getVehicleDescriptionData
     private void getVehicleDescriptionData(Response<VehicleDescriptionResponse> response, Context context) {
         VehicleDescriptionResponse vehicleDescriptionResponse = response.body();
         if (vehicleDescriptionResponse != null) {
@@ -244,7 +261,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             presenter.setMessageToView(context.getString(R.string.textEmptyCarsResponse));
         }
     }
+    //endregion getVehicleDescriptionData
 
+    //region getTripsByDate
     @Override
     public void getTripsByDate(int cveVehicle, String date, Context context) {
         String startUtcDate = MapV2Utils.getUtcStartDate(date);
@@ -259,7 +278,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             presenter.setMessageToView(validation);
         }
     }
+    //endregion getTripsByDate
 
+    //region startTripsRequest
     private void startTripsRequest(String token, int cveVehicle, String startDate, String endDate, final Context context) {
         TripsV2Request request = new TripsV2Request(cveVehicle, startDate, endDate, token);
         services.getTrips(request).enqueue(new Callback<TripsV2Response>() {
@@ -274,7 +295,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             }
         });
     }
+    //endregion startTripsRequest
 
+    //region validateTripsCode
     private void validateTripsCode(Response<TripsV2Response> response, Context context) {
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getTripsData(response, context);
@@ -282,7 +305,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             presenter.setMessageToView(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
         }
     }
+    //endregion validateTripsCode
 
+    //region getTripsData
     private void getTripsData(Response<TripsV2Response> response, Context context) {
         TripsV2Response tripsV2Response = response.body();
         if (tripsV2Response != null) {
@@ -310,7 +335,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             presenter.setMessageToView(context.getString(R.string.textErrorDataEmptyMap));
         }
     }
+    //endregion getTripsData
 
+    //region getVehiclesMarkers
     @Override
     public void getVehiclesMarkers(List<VehicleV2Map> vehicles) {
         vehiclesSizeList = vehicles.size();
@@ -320,7 +347,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             getBitmapFromURLAsync.execute(i);
         }
     }
+    //endregion getVehiclesMarkers
 
+    //region GetBitmapFromURLAsync
     private class GetBitmapFromURLAsync extends AsyncTask<Integer, Void, Integer> {
         private VehicleV2Map vehicle;
         private Bitmap bitmapMarker;
@@ -372,7 +401,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             }
         }
     }
+    //endregion GetBitmapFromURLAsync
 
+    //region getVehiclesToUpdate
     @Override
     public void getVehiclesToUpdate(List<VehicleV2Map> vehicles, Context context) {
         if (vehicles != null && vehicles.size() > 0) {
@@ -383,7 +414,9 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             vehiclesUpdateClass.execute();
         }
     }
+    //endregion getVehiclesToUpdate
 
+    //region cancelRequest
     @Override
     public void cancelRequest() {
         //para ya no realizar request de vehiculos son los siguientes 2 if
@@ -393,13 +426,17 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             vehiclesUpdateClass = null;
         }
     }
+    //endregion cancelRequest
 
+    //region getLocationUpdatedByVehicleSeledted
     @Override
     public void getLocationUpdatedByVehicleSeledted(VehicleV2Map vehicleSelected, List<VehicleV2Map> vehicles) {
         VehicleV2Map vehicleV2Map = MapV2Utils.findVehicle(vehicles, vehicleSelected);
         presenter.setLocationUpdatedByVehicleSelected(vehicleV2Map.getLatitude(), vehicleV2Map.getLongitude());
     }
+    //endregion getLocationUpdatedByVehicleSeledted
 
+    //region VehiclesUpdate
     public class VehiclesUpdate extends AsyncTask<Void, Void, Void> {
 
         public Call<VehicleV2MapResponse> call;
@@ -510,5 +547,5 @@ public class FragmentMapV2InteractorImpl implements MapV2Interactor {
             }
         }
     }
-
+    //endregion VehiclesUpdate
 }

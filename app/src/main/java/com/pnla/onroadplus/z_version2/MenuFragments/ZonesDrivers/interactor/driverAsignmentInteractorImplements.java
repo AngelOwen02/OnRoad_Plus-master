@@ -57,14 +57,14 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
 
     private  String cveLayer;
 
-    public driverAsignmentInteractorImplements(driverAsignmentPresenter presenter,Context context)
-    {
+    public driverAsignmentInteractorImplements(driverAsignmentPresenter presenter,Context context) {
         this.presenter=presenter;
         this.context=context;
         retrofitClient = RetrofitClientV2.getRetrofitInstance();
         service = retrofitClient.create(asignmentService.class);
     }
 
+    //region checkList
     @Override
     public void checkList(String Asigment) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -74,7 +74,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             requestdata(token);
         }
     }
+    //endregion checkList
 
+    //region requestDrivers
     @Override
     public void requestDrivers() {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -83,7 +85,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             setDriversVehicles(token);
         }
     }
+    //endregion requestDrivers
 
+    //region setDriversVehicles
     private void setDriversVehicles(String token) {
         requestDrivers request= new requestDrivers(true,token);
         presenter.showDialog();
@@ -102,6 +106,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
 
 
     }
+    //endregion setDriversVehicles
+
+    //region validateCodeDrivers
     private void validateCodeDrivers(Response<responsDrivers> response, Context context)    {
         if (response != null) {
 
@@ -112,7 +119,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             }
         }
     }
+    //endregion validateCodeDrivers
 
+    //region catalogDrivers
     private void catalogDrivers(Response<responsDrivers> response, Context context) {
         responsDrivers responsD=response.body();
         if(responsD!=null)
@@ -140,7 +149,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
 
         }
     }
+    //endregion catalogDrivers
 
+    //region requestUnits
     @Override
     public void requestUnits() {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -149,7 +160,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             catolgVehicles(token);
         }
     }
+    //endregion requestUnits
 
+    //region asigmentDrivers
     @Override
     public void asigmentDrivers( List<vehicleZones> zones) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -158,9 +171,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             newAsignment(token,zones);
         }
     }
+    //endregion asigmentDrivers
 
-
-
+    //region savesignments
     @Override
     public void savesignments() {
         //zonesAdapter.cveLayerZone;
@@ -171,8 +184,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
         }
 
     }
+    //endregion savesignments
 
-
+    //region newAsignment
     private void newAsignment(String token,List<vehicleZones> zones) {
 
         List<vehicleZones> vehicleZonesList = new ArrayList<>();
@@ -218,6 +232,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
         });
 
     }
+    //endregion newAsignment
+
+    //region validateCodenewAisgnment
     private void validateCodenewAisgnment(Response<asignmentResponse> response,Context context)
     {
         if (response != null) {
@@ -229,6 +246,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             }
         }
     }
+    //endregion validateCodenewAisgnment
+
+    //region asignmentsCode
     private  void   asignmentsCode(Response<asignmentResponse> response,Context context)
     {
         asignmentResponse reponseCode=response.body();
@@ -244,6 +264,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
 
 
     }
+    //endregion asignmentsCode
+
+    //region updateAsignment
     private void updateAsignment(String token) {
      //asignment request= new asignment(zonesAdapter.cveLayerZone,token,)///
     }
@@ -264,7 +287,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             }
         });
     }
+    //endregion updateAsignment
 
+    //region validateCodeUnits
     private  void validateCodeUnits(Response<responseUnits> response,Context context)
     {
         if (response != null) {
@@ -276,7 +301,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             }
         }
     }
+    //endregion validateCodeUnits
 
+    //region catalogUnits
     private void catalogUnits(Response<responseUnits> response, Context context) {
         responseUnits responsU=response.body();
         if(responsU!=null)
@@ -298,7 +325,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             }
         }
     }
+    //endregion catalogUnits
 
+    //region requestdata
     private void requestdata(String token) {
         requestAsigments request=new  requestAsigments(token);
         presenter.showDialog();
@@ -316,6 +345,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
         });
 
     }
+    //endregion requestdata
+
+    //region validateCode
     private void validateCode(Response<responseAsigment> response, Context context) {
         if (response != null) {
 
@@ -326,7 +358,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             }
         }
     }
+    //endregion validateCode
 
+    //region getzonesalldata
     private void getzonesalldata(Response<responseAsigment> response, Context context) {
         responseAsigment responseInfo=response.body();
         if(responseInfo!=null)
@@ -442,7 +476,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             }
         }
     }
+    //endregion getzonesalldata
 
+    //region requestTripulantes
     @Override
     public void requestTripulantes() {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -455,7 +491,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             getAsignmentsenpoint(CveLayer,token);
         }
     }
+    //endregion requestTripulantes
 
+    //region getAsignmentsenpoint
     private void getAsignmentsenpoint(String cveLayer,String token)
     {
         int cvelay=Integer.valueOf(cveLayer);
@@ -475,6 +513,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             }
         });
     }
+    //endregion getAsignmentsenpoint
+
+    //region validateCodeResponse
     private void validateCodeResponse(Response<asigmentResponse> response,Context context)
     {
         if (response != null) {
@@ -487,6 +528,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             }
         }
     }
+    //endregion validateCodeResponse
+
+    //region showAsigments
     private void showAsigments(Response<asigmentResponse> response,Context context)
     {
         asigmentResponse res=response.body();
@@ -518,6 +562,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             }
         }
     }
+    //endregion showAsigments
+
+    //region newUpdate
     @Override
     public void newUpdate(List<VehicleDriver> vehicleDrivers) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -529,7 +576,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             NEWUPDATE(CveLayer,token,vehicleDrivers);
         }
     }
+    //endregion newUpdate
 
+    //region NEWUPDATE
     private void NEWUPDATE(int cveLayer, String token, List<VehicleDriver> vehicleDrivers) {
         newUpdateAsigments request = new newUpdateAsigments(cveLayer, token, vehicleDrivers);
         presenter.showDialog();
@@ -546,6 +595,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
             }
         });
     }
+    //endregion NEWUPDATE
+
+    //region validateCodeResponsenewUpdate
     private void validateCodeResponsenewUpdate(Response<newUpdateResponse> response,Context context)
     {
         if (response != null) {
@@ -558,6 +610,9 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
                     }
                 }
     }
+    //endregion validateCodeResponsenewUpdate
+
+    //region newUpdate
     private void newUpdate(Response<newUpdateResponse> response,Context context)
     {
         newUpdateResponse resp=response.body();
@@ -571,4 +626,5 @@ public class driverAsignmentInteractorImplements implements  checkAsignement {
 
         }
     }
+    //endregion newUpdate
 }

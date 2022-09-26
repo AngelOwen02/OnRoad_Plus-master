@@ -36,11 +36,14 @@ public class HistoricCheckListInteractorImpl implements HistoricCheckListInterac
         requestHistoric();
     }
 
+    //region initRetrofit
     private void initRetrofit(){
         Retrofit retrofitClient = RetrofitClientV2.getRetrofitInstance();
         histprocService = retrofitClient.create(histprocService.class);
     }
+    //endregion initRetrofit
 
+    //region requestHistoric
     @Override
     public void requestHistoric() {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
@@ -49,7 +52,9 @@ public class HistoricCheckListInteractorImpl implements HistoricCheckListInterac
             requestSoportes(token);
         }
     }
+    //endregion requestHistoric
 
+    //region requestSoportes
     private void requestSoportes(String token) {
         checklistHistoricRequest request = new checklistHistoricRequest(token);
         presenter.showProgressDialog();
@@ -57,7 +62,6 @@ public class HistoricCheckListInteractorImpl implements HistoricCheckListInterac
                 @Override
                 public void onResponse(Call<checkListHistoricResponse> call, Response<checkListHistoricResponse> response) {
                     validateCode(response, context);
-
                 }
 
                 @Override
@@ -65,9 +69,10 @@ public class HistoricCheckListInteractorImpl implements HistoricCheckListInterac
                     Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show();
                 }
             });
-
     }
+    //endregion requestSoportes
 
+    //region validateCode
     private void validateCode(Response<checkListHistoricResponse> response, Context context) {
         if(RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getHistoricData(response, context);
@@ -76,7 +81,9 @@ public class HistoricCheckListInteractorImpl implements HistoricCheckListInterac
             Toast.makeText(context, "sesion expirada3", Toast.LENGTH_SHORT).show();
         }
     }
+    //endregion validateCode
 
+    //region getHistoricData
     private void getHistoricData(Response<checkListHistoricResponse> response, Context context) {
         checkListHistoricResponse checkListHistoricResponse = response.body();
         if(checkListHistoricResponse != null) {
@@ -94,4 +101,5 @@ public class HistoricCheckListInteractorImpl implements HistoricCheckListInterac
             presenter.hideProgressDialog();
         }
     }
+    //endregion getHistoricData
 }
