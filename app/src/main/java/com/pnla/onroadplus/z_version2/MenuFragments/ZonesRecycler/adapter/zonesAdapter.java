@@ -70,24 +70,18 @@ public class zonesAdapter  extends RecyclerView.Adapter<zonesAdapter.ViewHolder>
 
         if (PersistenceUtilities.getSharedPreferences(context).contains(Provide+visitedPoints.get(position).getDescLayer())) {
             holder.unitSwicth.setChecked(PersistenceUtilities.getSharedPreferences(context).getBoolean(Provide + visitedPoints.get(position).getDescLayer(), false));
-            if(holder.unitSwicth.isChecked())
-            {
-                if(zonesFragment.pointInZone.contains(visitedPoints.get(position).getCveLayer()))
-                {
+            if(holder.unitSwicth.isChecked()) {
+                if(zonesFragment.pointInZone.contains(visitedPoints.get(position).getCveLayer())) {
 
-                }
-                else
-                {
+                } else {
                     zonesFragment.pointInZone.add(visitedPoints.get(position).getCveLayer());
                 }
             }
 
-        }else {
+        } else {
             PersistenceUtilities.CreateorEdit(context, Provide + visitedPoints.get(position).getDescLayer(), false);
-            if(!holder.unitSwicth.isChecked())
-            {
-                if(zonesFragment.pointInZone.contains(visitedPoints.get(position).getCveLayer()))
-                {
+            if(!holder.unitSwicth.isChecked()) {
+                if(zonesFragment.pointInZone.contains(visitedPoints.get(position).getCveLayer())) {
                     zonesFragment.pointInZone.remove(visitedPoints.get(position).getCveLayer());
                 }
             }
@@ -158,19 +152,16 @@ public class zonesAdapter  extends RecyclerView.Adapter<zonesAdapter.ViewHolder>
                 holder.unitSwicth.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                        if(isChecked)
-                        {
+                        if(isChecked) {
                             PersistenceUtilities.CreateorEdit(context,Provide+visitedPoints.get(position).getDescLayer(),true);
                             holder.unitSwicth.setChecked(true);
-                            if(zonesFragment.pointInZone.contains(visitedPoints.get(position).getCveLayer()))
-                            {
+                            if(zonesFragment.pointInZone.contains(visitedPoints.get(position).getCveLayer())) {
 
                             }
-                            else
-                            {
+                            else {
                                 zonesFragment.pointInZone.add(visitedPoints.get(position).getCveLayer());
                             }
-                        }else{
+                        } else {
                             PersistenceUtilities.CreateorEdit(context,Provide+visitedPoints.get(position).getDescLayer(),false);
                             holder.unitSwicth.setChecked(false);
 
@@ -210,16 +201,18 @@ public class zonesAdapter  extends RecyclerView.Adapter<zonesAdapter.ViewHolder>
         holder.supervisor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(mirrorList.contains( visitedPoints.get(position)))
-                {
-
+                if(mirrorList.contains( visitedPoints.get(position))) {
                     zonePosition=mirrorList.indexOf(visitedPoints.get(position));
                 }
 
                 Log.e("tripulantes","position :  "+zonePosition);
                 zoneName=visitedPoints.get(position).getDescLayer();//nombre de la zona
+
+                //Zona y nombre de la zona
                 cveLayerZone=Integer.valueOf(visitedPoints.get(position).getCveLayer());
                 cveLayerZoneName=visitedPoints.get(position).getDescLayer();
+
+                //Supervisor y nombre del supervisor
                 supervisorName=visitedPoints.get(position).getSupervisor_name();
                 supervisorCve=visitedPoints.get(position).getCve_employee();
                 Log.e("tripulantes","cveLayerZone :  "+cveLayerZone);/**esto te da la zona a consultar*/

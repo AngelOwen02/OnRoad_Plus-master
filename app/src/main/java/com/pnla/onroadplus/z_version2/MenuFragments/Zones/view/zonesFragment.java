@@ -125,12 +125,6 @@ public class zonesFragment  extends Fragment implements OnMapReadyCallback,zones
         //Esto es para pasar a la Actividad
         Intent intent = new Intent(getContext(), UnitAssignSupportViewImpl.class);
         startActivity(intent);
-        //Esto es para pasar al Fragment
-        /**FragmentManager manager = getActivity().getSupportFragmentManager();
-        FragmentTransaction transaction = manager.beginTransaction();
-        UnitAssignSupportViewImpl unidades = new UnitAssignSupportViewImpl();//transaction.addToBackStack(UnitsViewImpl.TAG);
-        transaction.replace(R.id.conteinerMainFragments, unidades, UnitAssignSupportViewImpl.TAG).commit();
-        transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);*/
     }
 
     private void geoZonasViewImpl() {

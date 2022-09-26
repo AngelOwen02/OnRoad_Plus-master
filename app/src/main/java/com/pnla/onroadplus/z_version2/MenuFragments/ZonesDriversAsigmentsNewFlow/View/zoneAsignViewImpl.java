@@ -378,7 +378,11 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                 Log.e("tripulantesnewFLOW","tripulantesnewFLOW"+position);
                 List<VehicleDriver> newmyasignments=new ArrayList<>();
                 newmyasignments=myAsignments;
-                presenter.auditTrail("Zona: "+cveLayerName+" removio el vehiculo: "+newmyasignments.get(position).getVehicleName()+"|"+newmyasignments.get(position).getCveVehicle());
+
+                //Esta es la sentencia original
+                //presenter.auditTrail("Zona: "+cveLayerName+" removio el vehiculo: "+newmyasignments.get(position).getVehicleName()+"|"+newmyasignments.get(position).getCveVehicle());
+                presenter.auditTrail("Zona: "+cveLayerName+" removio el vehiculo: "+newmyasignments.get(position).getVehicleName()+"|"+newmyasignments.get(position).getCveVehicle()
+                +" Conductor: "+newmyasignments.get(position).getDriverName()+" Tripulantes: "+newmyasignments.get(position).getTripulantes());
                 newmyasignments.remove(position);
 
                 Log.e("tripulantesnewFLOW","tripulantesnewFLOW"+newmyasignments);
@@ -476,7 +480,10 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
 
                     myAsignments.set(posdata, setvehicle);//se tiene que reconstruir el modelo de myasigments a tipi de valor correspondient
 
-                    presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle());
+                    //Esta es la sentencia original
+                    //presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle());
+                    presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle()
+                    +" Conductor: "+myAsignments.get(posdata).getDriverName()+" Tripulantes: "+myAsignments.get(posdata).getTripulantes());
                     presenter.updateAsignments(myAsignments);
 
 
@@ -509,7 +516,6 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                                 Tripulante agregatripulante = new Tripulante(Integer.valueOf(parts[1]), tripulantes.get(l));
                                 tripulantesListEndpointu.add(Integer.valueOf(parts[1]));
                                 nuevetripulacion.add(agregatripulante);
-
                             }
                         }
                     }
@@ -539,13 +545,13 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                     for (int i = 0; i < myAsignments.size(); i++) {
                         Log.e("tripuFlow6", "" + myAsignments.get(i).getTripulantes().size());
                     }
-                    presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle());
+                    //Esta es la sentencia original
+                    //presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle());
+                    presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle()
+                    +" Conductor: "+myAsignments.get(posdata).getDriverName()+" Tripulantes: "+myAsignments.get(posdata).getTripulantes());
                     presenter.updateAsignments(myAsignments);
                     restartActivity();
-
                 }
-
-
 
           //endregion
             /**FIN NEW ITEM**/

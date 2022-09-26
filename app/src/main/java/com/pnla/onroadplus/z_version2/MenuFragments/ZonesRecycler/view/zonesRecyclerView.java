@@ -68,8 +68,7 @@ public class zonesRecyclerView  extends AppCompatActivity implements View.OnClic
             geoZonas.add(myStrings[i]);
         }*/
     }
-    private void initView()
-    {
+    private void initView() {
         ImageView toolbarImgBack = findViewById(R.id.back);
         ImageView toolbarImgSearch = findViewById(R.id.search_zones);
         rv=findViewById(R.id.recycler_viewgeocercas);
@@ -312,8 +311,6 @@ public class zonesRecyclerView  extends AppCompatActivity implements View.OnClic
         //presenter.requestvisitedPoints(zonesFragment.fullZones);
     }
 
-
-
     private void fillTestData() {
         Log.e("listazonas", "" + visitedPoints);
         adapter= new zonesAdapter(visitedPoints,getApplicationContext());
@@ -328,6 +325,7 @@ public class zonesRecyclerView  extends AppCompatActivity implements View.OnClic
 
         }*/
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -347,7 +345,6 @@ public class zonesRecyclerView  extends AppCompatActivity implements View.OnClic
 
                 }
                 break;
-
         }
     }
 
@@ -355,12 +352,13 @@ public class zonesRecyclerView  extends AppCompatActivity implements View.OnClic
     public void hideProgressDialog() {
         progressDialog.dismiss();
     }
+
     @Override
     public void onBackPressed() {
         goBackintomenu();
     }
-    private void goBackintomenu()
-    {
+
+    private void goBackintomenu() {
         Bundle bndl = new Bundle();
         bndl.putString("nav", "ZONES");
         Intent intent = new Intent(zonesRecyclerView.this,  menuViewImpl.class);//MainMenuContainerActivity.class);
@@ -369,6 +367,7 @@ public class zonesRecyclerView  extends AppCompatActivity implements View.OnClic
         startActivity(intent);
         finish();
     }
+
     @Override
     public void getZonesNamesAndColors(zonesData1[] zones) {/**esto trae todas las zonas*/
         this.zonesdata=zones;
