@@ -11,8 +11,8 @@ public class responseSetZones {
     @SerializedName("message")
     @Expose
     private String message;
-    public responseSetZones(int responseCode,String message)
-    {
+
+    public responseSetZones(int responseCode,String message) {
         this.responseCode=responseCode;
         this.message=message;
 

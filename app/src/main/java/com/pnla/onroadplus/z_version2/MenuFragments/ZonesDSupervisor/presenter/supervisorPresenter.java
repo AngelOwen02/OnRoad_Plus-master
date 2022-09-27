@@ -13,4 +13,6 @@ public interface supervisorPresenter {
 
 
     void restartView();
+
+    void auditTrail(String name);
 }

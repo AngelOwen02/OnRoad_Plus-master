@@ -125,8 +125,7 @@ public class zoneSupervisorAsignment extends AppCompatActivity implements superv
                         }
                     }
             }
-        }else
-        {
+        } else {
             Log.e("zonesnames&colors15","S value: "+supervisorName);
             buttonErase.setVisibility(View.GONE);
             buttonsafechanges2.setVisibility(View.GONE);
@@ -231,47 +230,55 @@ public class zoneSupervisorAsignment extends AppCompatActivity implements superv
                 // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
                 break;
+
             case R.id.buttonGuardarcambiosSupervisor:
                 Log.e("supervisorlog","Guadar :  "+zoneName+"  "+supervisorName+"  "+supervisorCVE);//presenter.safenewdfata
-                if(supervisorName.equals(""))
-                {
+                if(supervisorName.equals("")) {
                     Log.e("supervisorlog","no hacer nada y toast");
                     Toast.makeText(context, "Debes seleccionar un supervisor", Toast.LENGTH_SHORT).show();
                 }
-                else
-                {
+                else {
+                    //AuditTrail
+                    //presenter.auditTrail("Zonas: "+"Asignacion de supervisor: "+zonecveLayer+newCveEmploye);
+                    presenter.auditTrail("Zona: "+zoneName+"|"+zonecveLayer+" Asignacion de supervisor: "+supervisorName+" Codigo Supervisor: "+newCveEmploye);
+
                     presenter.setZones(zonecveLayer,newCveEmploye);
                     buttonErase.setVisibility(View.VISIBLE);
                     buttonsafechanges2.setVisibility(View.VISIBLE);
                     buttonsafechanges.setVisibility(View.GONE);
                     Log.e("supervisorlog","ejecuta lo demas");
                 }
-              
-                
                 break;
+
             case R.id.buttonGuardarcambiosSupervisor2:
                 Log.e("supervisorlog","Guadar2 :  "+zoneName+"  "+supervisorName+"  "+supervisorCVE);//presenter.safenewdfata
                 presenter.setZones(zonecveLayer,newCveEmploye);
                 break;
+
             case R.id.delete:
+                String supervisorName2 = supervisorName;
                 zonesAdapter.supervisorName="";
                 supervisorName="";
+
+                //Esto es para mandar los datos al AuditTrail
+                presenter.auditTrail("Zona: "+zoneName+"|"+zonecveLayer+" Eliminar supervisor: "+supervisorName2+"|"+supervisorName+" Codigo Supervisor: "+newCveEmploye);
+
                 presenter.setZones(zonecveLayer,0);
                 supervisors.setSelection(0);
                 buttonErase.setVisibility(View.GONE);
                 buttonsafechanges2.setVisibility(View.GONE);
                 buttonsafechanges.setVisibility(View.VISIBLE);
                 break;
+
             case R.id. searchnameVehicles:
                 if(supervisorAutocomplete.getVisibility()==View.GONE) {
                     supervisorAutocomplete.setVisibility(View.VISIBLE);
                     supervisors.setVisibility(View.GONE);
-                }else{
+                } else {
                     supervisorAutocomplete.setVisibility(View.GONE);
                     supervisors.setVisibility(View.VISIBLE);
                 }
                 break;
         }
-
     }
 }

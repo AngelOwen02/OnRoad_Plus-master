@@ -13,8 +13,7 @@ public class supervisorPresenterImpl implements  supervisorPresenter {
     private supervisorInteractor interactor;
     private Context context;
 
-    public supervisorPresenterImpl(supervisorView view,Context context)
-    {
+    public supervisorPresenterImpl(supervisorView view,Context context) {
         this.view=view;
         this.context=context;
         this.interactor=new supervisorInteractorImpl(this,context);
@@ -36,8 +35,7 @@ public class supervisorPresenterImpl implements  supervisorPresenter {
     }
     @Override
     public void getDriversCatalog(List<String> tripulantesdata) {
-        if(view!=null)
-        {
+        if(view!=null) {
             view.setEmployes(tripulantesdata);
         }
     }
@@ -65,6 +63,13 @@ public class supervisorPresenterImpl implements  supervisorPresenter {
         if(view!=null)
         {
             view.restarView();
+        }
+    }
+
+    @Override
+    public void auditTrail(String name) {
+        if(view!=null){
+            interactor.newsetAuditTrail(name);
         }
     }
 }

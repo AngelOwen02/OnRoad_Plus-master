@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.AuditTrail;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDSupervisor.model.Zone;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDSupervisor.model.responseSetZones;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDSupervisor.model.setZone;
@@ -15,7 +16,9 @@ import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDrivers.model.drivers.r
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDrivers.model.drivers.responsDrivers;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitClientV2;
+import com.pnla.onroadplus.z_version2.retrofit.RetrofitEndPointsV2;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitValidationsV2;
+import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -171,4 +174,56 @@ public class supervisorInteractorImpl implements supervisorInteractor {
         }
     }
     //endregion setZonesResp
+
+    //region newsetAuditTrail
+    @Override
+    public void newsetAuditTrail(String log) {
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        if(token!=null) {
+            myauditTrail(log, token);
+        }
+    }
+    //endregion newsetAuditTrail
+
+    //region myauditTrail
+    private void myauditTrail(String log, String token) {
+        AuditTrail mynewAuditTrail = new AuditTrail("Onroad-Asignaciones", "Agregar supervisor", ""+log);
+        setAuditTrail request = new setAuditTrail(mynewAuditTrail, token);
+        service.auditTrail(request).enqueue(new Callback<responseAuditTrail>() {
+            @Override
+            public void onResponse(Call<responseAuditTrail> call, Response<responseAuditTrail> response) {
+                validateCodeauditTrail(response,context);
+            }
+
+            @Override
+            public void onFailure(Call<responseAuditTrail> call, Throwable t) {
+                Toast.makeText(context, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+    //endregion myauditTrail
+
+    //region validateCodeauditTrail
+    private void validateCodeauditTrail(Response<responseAuditTrail> response, Context context) {
+        if(RetrofitValidationsV2.checkSuccessCode(response.code())){
+            responseSetAuditTrail(response,context);
+        } else {
+            Toast.makeText(context,response.code(),Toast.LENGTH_SHORT).show();
+        }
+    }
+    //endregion validateCodeauditTrail
+
+    //region validateCodeauditTrail
+    private void responseSetAuditTrail(Response<responseAuditTrail> response, Context context) {
+        responseAuditTrail auditResponse = response.body();
+        if(auditResponse!=null){
+            int responseCode = auditResponse.getResponseCode();
+            String message = auditResponse.getMessage();
+            if(responseCode==GeneralConstantsV2.RESPONSE_CODE_OK){
+                //NADAAAAAAAAAA
+            }
+        }
+    }
+    //endregion validateCodeauditTrail
 }
