@@ -82,6 +82,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     private TextView titlefileds;
     private int checklistN,Checkl;
     private boolean aproved;
+    private String emailaprovador;
     public static  List<dataChecklist> fulChecklist= new ArrayList<>();
 
     //camera
@@ -105,6 +106,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
             checklistN= bundle.getInt("cveTripMgmSection");
             Checkl= bundle.getInt("Section");
             aproved=bundle.getBoolean("aprobador");
+            emailaprovador= bundle.getString("emailaprobador");
         }
         initContactView(view);
 
@@ -338,7 +340,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttongochecklist:
-                presenter.sendfullchecklist(Checkl,aproved);
+                presenter.sendfullchecklist(Checkl,aproved,emailaprovador);
                // Toast.makeText(getContext(), "mandar Valor de preguntas", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.historic_checks:

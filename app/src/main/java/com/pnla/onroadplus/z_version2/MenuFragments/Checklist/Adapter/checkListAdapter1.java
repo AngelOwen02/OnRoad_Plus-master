@@ -62,7 +62,7 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
                       //  myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position);
                     } else {
 
-                      myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position,data.get(position).isAprobador());
+                      myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position,data.get(position).isAprobador(),data.get(position).getEmail());
                         //Toast.makeText(context, data.get(position).getDescTripMgmSection(), Toast.LENGTH_SHORT).show();
                     }
             }
