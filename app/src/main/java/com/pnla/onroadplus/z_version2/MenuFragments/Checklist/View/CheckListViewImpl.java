@@ -70,6 +70,7 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
         View view = inflater.inflate(R.layout.fragment_checklist, container, false);
 
         initContactView(view);
+        //updateS();
 
         return view;
     }
@@ -118,6 +119,7 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
 
         //Para persistir el color
         if(vehicleName!=null) {
+            //Toast.makeText(getContext(), "Si tiene vehiculo", Toast.LENGTH_SHORT).show();
             vehicle_checklist.setColorFilter(ContextCompat.getColor(getContext(), R.color.blueCarChecklist), android.graphics.PorterDuff.Mode.SRC_IN);
         } else {
             vehicle_checklist.setColorFilter(ContextCompat.getColor(getContext(), R.color.grayUI), android.graphics.PorterDuff.Mode.SRC_IN);
@@ -127,16 +129,21 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
         vehicle_checklist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Toast.makeText(getContext(), "Si funciona", Toast.LENGTH_SHORT).show();
                 FragmentManager fm = getFragmentManager();
                 DialogsViewImpl externalGPSDialog = new DialogsViewImpl();
 
                 externalGPSDialog.show(getActivity().getSupportFragmentManager(), DialogsViewImpl.TAG);
                 fm.executePendingTransactions();
 
+
+                //traficDialog trafigAlert = new traficDialog();
+                //trafigAlert.show(getActivity().getSupportFragmentManager(), traficDialog.TAG);
+                //fm.executePendingTransactions();
                 externalGPSDialog.getDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
-                        
+
                     }
                 });
             }
@@ -174,22 +181,12 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
         transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
     }
 
-<<<<<<< HEAD
-    //Para ir al cuestionario
-    public void goquestionaryFragment(Integer cveTripMgmSection, Integer tripMgmSection, boolean aprobador) {
-        questionFragment(cveTripMgmSection, tripMgmSection,aprobador);
-    }
-
-    //Transaction del Fragment
-    private void questionFragment(Integer tripMgmSection, Integer cveTripMgmSection, boolean aprobador) {
-=======
     public void goquestionaryFragment(Integer cveTripMgmSection, Integer tripMgmSection, boolean aprobador,String email) {
         //Toast.makeText(getContext(), "ir al cuestionario", Toast.LENGTH_SHORT).show();
         questionFragment(cveTripMgmSection, tripMgmSection,aprobador,email);
     }
 
     private void questionFragment(Integer tripMgmSection, Integer cveTripMgmSection, boolean aprobador,String email) {
->>>>>>> 0dbd9fe96fa40c7a424cd425156033d56aa7aa75
         Bundle bundle = new Bundle();
         bundle.putInt("cveTripMgmSection",cveTripMgmSection); // Put anything what you want
         bundle.putInt("Section",tripMgmSection);
@@ -258,6 +255,7 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
                 break;
 
             case R.id.search_checkList:
+                //Toast.makeText(getContext(), "Si sirve", Toast.LENGTH_SHORT).show();
                 if(searchViewContainer.getVisibility()==View.VISIBLE) {
                     searchViewContainer.setVisibility(View.GONE);
                 }

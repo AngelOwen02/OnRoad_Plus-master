@@ -48,33 +48,26 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
 
         holder.textView11.setText(data.get(position).getDescTripMgmSection());
 
-        //Para la imagen del Aprobador
         if(data.get(position).isAprobador() == true){
             holder.userChecklist.setVisibility(View.VISIBLE);
         } else {
             holder.userChecklist.setVisibility(View.GONE);
         }
 
-        //al dar clic en el carro
         holder.buttonquestions.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick (View v){
-                    if (menuViewImpl.selectedVehicle == false) {
-                     Toast.makeText(context, "Debes seleccionar un vehículo ", Toast.LENGTH_SHORT).show();
-                      //  myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position);
-                    } else {
-<<<<<<< HEAD
-                      myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position,data.get(position).isAprobador());
-=======
+            @Override
+            public void onClick (View v){
+                if (menuViewImpl.selectedVehicle == false) {
+                    Toast.makeText(context, "Debes seleccionar un vehículo ", Toast.LENGTH_SHORT).show();
+                    //  myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position);
+                } else {
 
-                      myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position,data.get(position).isAprobador(),data.get(position).getEmail());
->>>>>>> 0dbd9fe96fa40c7a424cd425156033d56aa7aa75
-                        //Toast.makeText(context, data.get(position).getDescTripMgmSection(), Toast.LENGTH_SHORT).show();
-                    }
+                    myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position,data.get(position).isAprobador(),data.get(position).getEmail());
+                    //Toast.makeText(context, data.get(position).getDescTripMgmSection(), Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
-        //Al dar clic en el icono del Aprobador
         holder.userChecklist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,12 +80,16 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
         String vehicleCve = preferences.getString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, null);
 
         if(vehicleName!=null) {
+            //Toast.makeText(context, "Vehiculo guardado: " + vehicleName, Toast.LENGTH_SHORT).show();
+            //myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position,data.get(position).isAprobador());
             menuViewImpl.selectedVehicle = true;
+            //SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, vehicleName);
             editor.putString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, vehicleCve);
 
             editor.commit();
+            //myview.closeDialog();
         } else {
 
         }
