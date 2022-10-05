@@ -418,6 +418,7 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                             //auditTrail
                         } else {
                             myview.safeData(position,nombre, myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
+                            //nombre="Selecciona un conductor";
                             //Esto es para cuando modificamos el campo de Conductor
                             //getVehicleName ya trae el nuevo conductor
                             //auditTrail
@@ -435,7 +436,7 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                             if(nombre.equals("")){
                                 Log.e("descripcion",""+nombre2+" "+ vehiculo+"  vn: "+ myAsignments.get(position).getVehicleName());
                                 //TODO SE CAMBIO
-                                myview.safeData(position, nombre, myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
+                                myview.safeData(position, nombre2, myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
                             } else {
                                 Log.e("descripcion",""+nombre+" "+ vehiculo+"  vn: "+ myAsignments.get(position).getVehicleName());
                                 //TODO SE CAMBIO
@@ -508,10 +509,20 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                             //sinTripulantes2 = newTripulantes;
 
                             //Mandamos a la vista con el nuevo Array
-                            Log.e("datosPruebaM", " " + vehiculo +"  "+ nombre + " data 0 filter  "+ myAsignments.get(position).getDriverName());
+                            Log.e("datosPruebaM", " " + vehiculo +"  "+ nombre + " data 0 filter  "+ myAsignments.get(position).getDriverName()+" "+newTripulantes+" "+ nombre2);
                             if(isFilter==false){
-                                myview.safeData(position, myAsignments.get(position).getDriverName(), vehiculo, newTripulantes, isnew);
+                                if(nombre.equals("Selecciona un conductor")){
+                                    myview.safeData(position, myAsignments.get(position).getDriverName(), vehiculo, newTripulantes, isnew);
+                                } else {
+                                    //AQUI ESTAMOS MANDANDO NULLO CUANDO METEMOS UN NUEVO VEHICULO
+                                    //myview.safeData(position, nombre2, vehiculo, newTripulantes, isnew);
+                                    if (nombre2 == null) {
+                                        nombre2="Selecciona un conductor";
+                                    }
+                                    myview.safeData(position, nombre2, vehiculo, newTripulantes, isnew);
+                                }
                             } else {
+                                isFilter=false;
                                 myview.safeData(position, nombre, vehiculo, newTripulantes, isnew);
                             }
 

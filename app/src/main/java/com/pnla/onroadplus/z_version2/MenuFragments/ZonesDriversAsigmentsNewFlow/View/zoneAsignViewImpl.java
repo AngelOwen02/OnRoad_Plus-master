@@ -154,7 +154,9 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
             @Override
             public boolean onQueryTextChange(String newText) {
                 List<String> newTripulantes=filterTripulantes(mydrivers,newText);
-                adaterTripulacion.setFilter(newTripulantes);
+                if(newTripulantes!=null && adaterTripulacion!=null){
+                    adaterTripulacion.setFilter(newTripulantes);
+                }
                 return false;
             }
         });
