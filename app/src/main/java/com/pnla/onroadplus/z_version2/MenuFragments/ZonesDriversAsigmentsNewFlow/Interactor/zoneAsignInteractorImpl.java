@@ -433,7 +433,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             else if(responseCode == 900)
             {
                 presenter.hideDialog();
-                Toast.makeText(context, "" + resp.getMessage(), Toast.LENGTH_SHORT).show();
+                presenter.auditTrail("System Error, el vehículo ya estaba asignado." + response.message());
+                //Toast.makeText(context, "" + resp.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context,"Se intento asignar un vehículo ya existente.", Toast.LENGTH_SHORT).show();
             }
             else if(responseCode == 500)
             {

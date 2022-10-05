@@ -40,7 +40,7 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
     private int tripulantesPosition;
     private List<String> newTripulantes;
     private List<String> sinTripulantes;
-    private String nombre,vehiculo;
+    private String nombre,vehiculo, nombre2;
     private boolean isnew=false;
     private  String tripulantes = "";
     public adapterAsignmentsEdit(zoneAsignViewImpl myview, List<VehicleDriver> myAsignments,List<String> autos,List<String> conductores,Context context)
@@ -117,11 +117,14 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                 holder.spinerName.setSelection(pos);
 
             }
+            //TODO AQUI ESTA EL FART
             nombre = String.valueOf(myAsignments.get(position).getDriverName());
             if(nombre.equals(""))
             {
                 Log.e("tripuFlow11","nombre vacio");
                 holder.name.setText("Sin conductor");
+            } else {
+                Log.e("descripcion", "nombre: " + nombre + "  ");
             }
             Log.e("tripuFlow11", "return to  V" + vehiculo  +" N"+ nombre+ "  tripulantes " + isnew);
         }
@@ -329,6 +332,8 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                 else
                 {
                     Log.e("tripuFlow7","IF 2  else N "+nombre);
+                    nombre2 = nombre;
+                    Log.e("tripuFlow7","IF 2  else N "+nombre2);
                 }
             } else
             {   Log.e("tripuFlow7","ELSE 1 N");
@@ -400,8 +405,13 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                     Log.e("tripuFlow7","isnew ==false    V= "+ myAsignments.get(position).getVehicleName()+"     "+vehiculo);
                     if(myAsignments.get(position).getVehicleName().equals(vehiculo)) {
                         if( myAsignments.get(position).getDriverName().equals(nombre)) {
-                            Log.e("tripulanteValue"," value:" +newTripulantes);
-                            myview.safeData(position, myAsignments.get(position).getDriverName(), myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
+                            Log.e("tripulanteValue"," value:" +newTripulantes+" "+nombre);
+                            if(nombre.equals("")){
+                                myview.safeData(position, nombre2, myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
+                            } else {
+                                myview.safeData(position, nombre, myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
+                            }
+
                             //Esto es para cuando se modifica el campo de tripulantes
                             //auditTrail
                         } else {
@@ -418,8 +428,18 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                             //Esto reinicia la pantalla para que se borren los datos
                             myview.restartActivity();
                         } else if( myAsignments.get(position).getDriverName().equals(nombre)) {
-                            Log.e("descripcion",""+myAsignments.get(position).getDriverName()+ vehiculo);
-                            myview.safeData(position, myAsignments.get(position).getDriverName(), vehiculo, newTripulantes, isnew);
+                            String nombreVehiculo2 = myAsignments.get(position).getDriverName();
+                            Log.e("descripcion2","ff "+nombre2+" "+ vehiculo+"  vn: "+ myAsignments.get(position).getVehicleName());
+                            if(nombre.equals("")){
+                                Log.e("descripcion",""+nombre2+" "+ vehiculo+"  vn: "+ myAsignments.get(position).getVehicleName());
+                                //TODO SE CAMBIO
+                                myview.safeData(position, nombre, myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
+                            } else {
+                                Log.e("descripcion",""+nombre+" "+ vehiculo+"  vn: "+ myAsignments.get(position).getVehicleName());
+                                //TODO SE CAMBIO
+                                myview.safeData(position, nombre2, myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
+                            }
+
                             //Esto es para cuando modificamos el campo de vehiculo
                             //AuditTrail
                         } else {
@@ -430,12 +450,19 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                            //Esto es para que solo se actualice el campo del nombre del vehiculo
                             if(!vehiculo.equals(myAsignments.get(position).getVehicleName())) {
                                 //vehiculo=myAsignments.get(position).getVehicleName();
-                                String vehiculo2;
-                                String nombre2;
-                                vehiculo2 = vehiculo;
-                                nombre2= nombre;
+                                //String vehiculo2;
+                                //String nombre2;
+                                //vehiculo2 = vehiculo;
+                                //nombre2= nombre;
 
-                                myview.safeData(position, myAsignments.get(position).getDriverName(), myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
+                                Log.e("descripcion2", "asigno vehiculo" + nombre + "  " + nombre2 + "  ");
+                                if(nombre.equals("")){
+                                    myview.safeData(position, nombre, myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
+                                } else {
+                                    myview.safeData(position, nombre2, myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
+                                }
+                                Log.e("descripcion2","ff "+nombre2+" " +myAsignments.get(position).getDriverName()+" "+ myAsignments.get(position).getVehicleName() );
+
                                 //myview.safeData(position,myAsignments.get(position).getDriverName(),vehiculo2,newTripulantes,isnew);
                                 //myview.safeData(position,myAsignments.get(position).getDriverName(), vehiculo, newTripulantes, isnew);
                             } else {
@@ -446,7 +473,8 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
 
                     }
                     //myview.safeData(position, myAsignments.get(position).getDriverName(), myAsignments.get(position).getVehicleName(), newTripulantes, isnew);/** colocar el valor de vehiculo nombre y de tripulantes*/
-                } else {
+                }
+                else {
                     Log.e("tripuFlow7","isnew ==true");
 
                     //Esto es para cuando no tengan seleccionado un vehiculo
@@ -461,11 +489,12 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
 
                         //Esto es para cuando los tripulantes vayan en null
                         if (newTripulantes != null) {
+                            Log.e("datosPruebaM", " " + vehiculo +"  "+ nombre);
                             myview.safeData(position, nombre, vehiculo, newTripulantes, isnew);
                         } else {
                             //Aqui tendria que ir el nuevo array pero no queda
                             //sinTripulantes = new ArrayList<>();
-                            List<String> sinTripulantes2 = new ArrayList<>();
+                            //List<String> sinTripulantes2 = new ArrayList<>();
                             //ArrayList<String> sinTripulantes = new ArrayList<>();
                             //Tripulante agregatripulante = new Tripulante(0, "Sin Tripulantes");
                             //sinTripulantes2.add(String.valueOf(agregatripulante));
@@ -477,8 +506,9 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                             //sinTripulantes2 = newTripulantes;
 
                             //Mandamos a la vista con el nuevo Array
-                            //myview.safeData(position, nombre, vehiculo, newTripulantes, isnew);
-                            myview.safeData(position, nombre, vehiculo, sinTripulantes2, isnew);
+                            Log.e("datosPruebaM", " " + vehiculo +"  "+ nombre + "   "+ myAsignments.get(position).getDriverName());
+                            myview.safeData(position, myAsignments.get(position).getDriverName(), vehiculo, newTripulantes, isnew);
+                            //myview.safeData(position, nombre, vehiculo, sinTripulantes2, isnew);
                         }
                         //AuditTrail para cuando es nuevo/se agrego
                         //position = el lugar donde se agrego, nombre = nombre del conductor, vehiculo = nombre del vehiculo, newTripulantes = tamaño y nombre,
