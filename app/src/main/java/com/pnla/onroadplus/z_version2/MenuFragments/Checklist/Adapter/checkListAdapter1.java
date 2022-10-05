@@ -63,7 +63,12 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
                      Toast.makeText(context, "Debes seleccionar un vehículo ", Toast.LENGTH_SHORT).show();
                       //  myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position);
                     } else {
+<<<<<<< HEAD
                       myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position,data.get(position).isAprobador());
+=======
+
+                      myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position,data.get(position).isAprobador(),data.get(position).getEmail());
+>>>>>>> 0dbd9fe96fa40c7a424cd425156033d56aa7aa75
                         //Toast.makeText(context, data.get(position).getDescTripMgmSection(), Toast.LENGTH_SHORT).show();
                     }
             }

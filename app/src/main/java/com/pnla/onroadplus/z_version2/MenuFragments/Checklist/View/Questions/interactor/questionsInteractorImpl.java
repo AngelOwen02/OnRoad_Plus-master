@@ -125,9 +125,9 @@ public class questionsInteractorImpl  implements questionsInteractor{
     }
 
     @Override
-    public void sendfullCheckList(int cve_checklist, boolean aproved) {
+    public void sendfullCheckList(int cve_checklist, boolean aproved, String emailaprovador) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-        String email = preferences.getString(GeneralConstantsV2.EMAIL_PREFERENCES, null);
+        String email = emailaprovador;
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         String cveV=preferences.getString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, null);
         String NAMEVE=preferences.getString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE,null);

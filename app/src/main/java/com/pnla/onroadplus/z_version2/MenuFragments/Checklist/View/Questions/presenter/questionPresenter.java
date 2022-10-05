@@ -15,7 +15,7 @@ public interface questionPresenter {
     void showpDialog();
     void hidepDialog();
 
-    void sendfullchecklist(int checkl, boolean aproved);
+    void sendfullchecklist(int checkl, boolean aproved, String emailaprovador);
 
     void gotoChecklistAgain(String valueSemaforo,int finalscore,boolean aprobacionR);
 }
