@@ -43,6 +43,8 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
     private String nombre,vehiculo, nombre2;
     private boolean isnew=false;
     private  String tripulantes = "";
+    private boolean isFilter = false;
+
     public adapterAsignmentsEdit(zoneAsignViewImpl myview, List<VehicleDriver> myAsignments,List<String> autos,List<String> conductores,Context context)
     {
         this.myview=myview;
@@ -506,8 +508,13 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                             //sinTripulantes2 = newTripulantes;
 
                             //Mandamos a la vista con el nuevo Array
-                            Log.e("datosPruebaM", " " + vehiculo +"  "+ nombre + "   "+ myAsignments.get(position).getDriverName());
-                            myview.safeData(position, myAsignments.get(position).getDriverName(), vehiculo, newTripulantes, isnew);
+                            Log.e("datosPruebaM", " " + vehiculo +"  "+ nombre + " data 0 filter  "+ myAsignments.get(position).getDriverName());
+                            if(isFilter==false){
+                                myview.safeData(position, myAsignments.get(position).getDriverName(), vehiculo, newTripulantes, isnew);
+                            } else {
+                                myview.safeData(position, nombre, vehiculo, newTripulantes, isnew);
+                            }
+
                             //myview.safeData(position, nombre, vehiculo, sinTripulantes2, isnew);
                         }
                         //AuditTrail para cuando es nuevo/se agrego
@@ -605,6 +612,7 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                     {
                         spinerName.setVisibility(View.GONE);
                         autoCompleteTextView.setVisibility(View.VISIBLE);
+                        isFilter=true;
                     }else
                     {
                         spinerName.setVisibility(View.VISIBLE);
