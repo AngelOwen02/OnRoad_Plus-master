@@ -392,13 +392,13 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
 
 
                 if(myAsignments.get(position).getDriverName().equals("Selecciona un conductor")||myAsignments.get(position).getDriverName().equals("")){
-                    presenter.auditTrail("Zona: "+cveLayerName+"Vehículo: "+myAsignments.get(position).getVehicleName()+"|"
-                            +"Conductor: "+myAsignments.get(position).getCveVehicle()+" Sin conductor ");
+                    presenter.auditTrail3("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(position).getVehicleName()+"|"
+                            +"("+myAsignments.get(position).getCveVehicle()+")"+ " Conductor: "+ "Sin conductor ");
                 }else
                 {
-                    presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(position).getVehicleName()+
-                            "|"+myAsignments.get(position).getCveVehicle()+" Conductor: "+myAsignments.get(position).getDriverName()+
-                            "|"+myAsignments.get(position).getCveDriver());
+                    presenter.auditTrail3("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(position).getVehicleName()+
+                            "|"+"("+myAsignments.get(position).getCveVehicle()+")"+ " Conductor: "+myAsignments.get(position).getDriverName()+
+                            "|"+"("+myAsignments.get(position).getCveDriver()+")");
                 }
                 newmyasignments.remove(position);
                 //Log.e("tripulantesnewFLOW","tripulantesnewFLOW"+newmyasignments);
@@ -496,12 +496,13 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                     //Presenter para Agregar
 
                     if(myAsignments.get(posdata).getDriverName().equals("Selecciona un conductor")||myAsignments.get(posdata).getDriverName().equals("")){
-                        presenter.auditTrail2("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"
-                                +myAsignments.get(posdata).getCveVehicle()+" Sin conductor ");
+                        presenter.auditTrail2("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()+"|"
+                                +"("+myAsignments.get(posdata).getCveVehicle()+")"+ " Conductor: " + "Sin conductor ");
                     }else
                     {
-                        presenter.auditTrail2("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"
-                                +myAsignments.get(posdata).getCveVehicle()+" Conductor: "+myAsignments.get(posdata).getDriverName()+"|"+myAsignments.get(posdata).getCveDriver());
+                        presenter.auditTrail2("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()+"|"
+                                +"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+myAsignments.get(posdata).getDriverName()+"|"
+                                +"("+myAsignments.get(posdata).getCveDriver()+")");
                     }
 
                     presenter.updateAsignments(myAsignments);
@@ -595,10 +596,13 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                     }*/
 
                     if(myAsignments.get(posdata).getDriverName().equals("Selecciona un conductor")||myAsignments.get(posdata).getDriverName().equals("")){
-                        presenter.auditTrail2("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle()+" Sin conductor ");
+                        presenter.auditTrail2("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()+"|"
+                                +"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+" Sin conductor ");
                     }else
                     {
-                        presenter.auditTrail2("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle()+" Conductor: "+myAsignments.get(posdata).getDriverName()+"|"+myAsignments.get(posdata).getCveDriver());
+                        presenter.auditTrail2("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()+
+                                "|"+"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+myAsignments.get(posdata).getDriverName()+
+                                "|"+"("+myAsignments.get(posdata).getCveDriver()+")");
                     }
                     presenter.updateAsignments(myAsignments);
                     restartActivity();
@@ -670,10 +674,13 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
 
                 //Esto es por si el conductor no tiene nombre
                 if(myAsignments.get(posdata).getDriverName().equals("Selecciona un conductor")||myAsignments.get(posdata).getDriverName().equals("")){
-                    presenter.auditTrail("Zona: "+cveLayerName+" Edito el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle()+" Sin conductor ");
+                    presenter.auditTrail("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()+"|"
+                            +"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+"Sin conductor ");
                 }else
                 {
-                    presenter.auditTrail("Zona: "+cveLayerName+" Edito el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle()+" Conductor: "+myAsignments.get(posdata).getDriverName()+"|"+myAsignments.get(posdata).getCveDriver());
+                    presenter.auditTrail("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()
+                            +"|"+"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+myAsignments.get(posdata).getDriverName()
+                            +"|"+"("+myAsignments.get(posdata).getCveDriver()+")");
                 }
 
                 presenter.updateAsignments(myAsignments);
@@ -773,10 +780,13 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
 
 
                 if(myAsignments.get(posdata).getDriverName().equals("Selecciona un conductor")||myAsignments.get(posdata).getDriverName().equals("")){
-                    presenter.auditTrail("Zona: "+cveLayerName+" Edito el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle()+" Sin conductor ");
+                    presenter.auditTrail("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()+"|"
+                            +"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+"Sin conductor ");
                 }else
                 {
-                    presenter.auditTrail("Zona: "+cveLayerName+" Edito el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle()+" Conductor: "+myAsignments.get(posdata).getDriverName()+"|"+myAsignments.get(posdata).getCveDriver());
+                    presenter.auditTrail("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()
+                            +"|"+"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+myAsignments.get(posdata).getDriverName()
+                            +"|"+"("+myAsignments.get(posdata).getCveDriver()+")");
                 }
 
                 presenter.updateAsignments(myAsignments);
