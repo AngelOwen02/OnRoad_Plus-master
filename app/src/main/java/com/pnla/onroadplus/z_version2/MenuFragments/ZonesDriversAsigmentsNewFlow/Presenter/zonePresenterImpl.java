@@ -15,8 +15,7 @@ public class zonePresenterImpl implements  zonePresenter {
     private Context context;
     private zonesAsignInteractor interactor;
 
-    public  zonePresenterImpl (zoneAsignView view ,Context context)
-    {
+    public  zonePresenterImpl (zoneAsignView view ,Context context) {
         this.view=view;
         this.context=context;
         this.interactor=new zoneAsignInteractorImpl(this,context);
@@ -49,12 +48,42 @@ public class zonePresenterImpl implements  zonePresenter {
             interactor.updateFData(zones);
         }
     }
+
     @Override
     public void auditTrail(String name) {
         if (view != null) {
             interactor.newsetAuditTrail(name);
         }
     }
+
+    @Override
+    public void auditTrail2(String name) {
+        if(view!=null) {
+            interactor.newsetAuditTrail2(name);
+        }
+    }
+
+    @Override
+    public void auditTrail3(String name) {
+        if(view!=null) {
+            interactor.newsetAuditTrail3(name);
+        }
+    }
+
+    @Override
+    public void auditTrail4(String name) {
+        if(view!=null) {
+            interactor.newsetAuditTrail4(name);
+        }
+    }
+
+    @Override
+    public void auditTrail5(String name) {
+        if(view!=null) {
+            interactor.newsetAuditTrail5(name);
+        }
+    }
+
     @Override
     public void setAsignments(List<VehicleDriver> myAsignments) {
         if(view!=null) {
@@ -117,6 +146,7 @@ public class zonePresenterImpl implements  zonePresenter {
             view.restartAfterUpdate();
         }
     }
+
     @Override
     public void setMessageToView(String message) {
         if (view != null) {

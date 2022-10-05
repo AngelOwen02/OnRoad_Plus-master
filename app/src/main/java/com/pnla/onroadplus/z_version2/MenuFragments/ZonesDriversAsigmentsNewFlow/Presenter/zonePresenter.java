@@ -23,6 +23,16 @@ public interface zonePresenter {
     void setMessageToView(String message);
     void showDialog();
     void hideDialog();
-    void auditTrail(String name);
     void restartAfterUpdate();
+
+    //Editar 1
+    void auditTrail(String name);
+    //Agregar 2
+    void auditTrail2(String name);
+    //Eliminar 3
+    void auditTrail3(String name);
+    //Cuando se modifican datos del icono Volante
+    void auditTrail4(String name);
+    //cuando se modifican los tripulantes
+    void auditTrail5(String name);
 }

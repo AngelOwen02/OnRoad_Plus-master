@@ -250,9 +250,12 @@ public class zoneSupervisorAsignment extends AppCompatActivity implements superv
                 }
                 break;
 
+                //Guardar cuando ya existe un supervisor
             case R.id.buttonGuardarcambiosSupervisor2:
                 Log.e("supervisorlog","Guadar2 :  "+zoneName+"  "+supervisorName+"  "+supervisorCVE);//presenter.safenewdfata
                 presenter.setZones(zonecveLayer,newCveEmploye);
+                //Aqui va el auditTrail de modificacion de Supervisor
+                presenter.auditTrail3("Zona: "+zoneName+"|"+zonecveLayer+" "+"Supervisor nuevo: "+supervisorName+" Codigo de supervisor: "+newCveEmploye);
                 break;
 
             case R.id.delete:
@@ -261,7 +264,8 @@ public class zoneSupervisorAsignment extends AppCompatActivity implements superv
                 supervisorName="";
 
                 //Esto es para mandar los datos al AuditTrail
-                presenter.auditTrail("Zona: "+zoneName+"|"+zonecveLayer+" Eliminar supervisor: "+supervisorName2+"|"+supervisorName+" Codigo Supervisor: "+newCveEmploye);
+                //presenter.auditTrail("Zona: "+zoneName+"|"+zonecveLayer+" Eliminar supervisor: "+supervisorName2+"|"+supervisorName+" Codigo Supervisor: "+newCveEmploye);
+                presenter.auditTrail2("Zona: "+zoneName+"|"+zonecveLayer+" Eliminar supervisor: "+supervisorName2+"|"+supervisorName+" Codigo Supervisor: "+newCveEmploye);
 
                 presenter.setZones(zonecveLayer,0);
                 supervisors.setSelection(0);

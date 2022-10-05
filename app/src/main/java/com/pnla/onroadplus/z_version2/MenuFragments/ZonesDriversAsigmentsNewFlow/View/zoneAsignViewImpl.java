@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -137,7 +138,9 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
             @Override
             public boolean onQueryTextChange(String newText) {
                 List<VehicleDriver> newAsig=filteredAsignments(myAsignments,newText);
-                adapter.setFilter(newAsig);
+                if (newAsig != null) {
+                    adapter.setFilter(newAsig);
+                }
                 return false;
             }
         });
@@ -375,23 +378,65 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                     orderErase();
                 }
 **/
-                Log.e("tripulantesnewFLOW","tripulantesnewFLOW"+position);
+
+                //Log.e("tripulantesnewFLOW","tripulantesnewFLOW"+position);
                 List<VehicleDriver> newmyasignments=new ArrayList<>();
                 newmyasignments=myAsignments;
 
                 //Esta es la sentencia original
-                //presenter.auditTrail("Zona: "+cveLayerName+" removio el vehiculo: "+newmyasignments.get(position).getVehicleName()+"|"+newmyasignments.get(position).getCveVehicle());
-                presenter.auditTrail("Zona: "+cveLayerName+" removio el vehiculo: "+newmyasignments.get(position).getVehicleName()+"|"+newmyasignments.get(position).getCveVehicle()
-                +" Conductor: "+newmyasignments.get(position).getDriverName()+" Tripulantes: "+newmyasignments.get(position).getTripulantes());
-                newmyasignments.remove(position);
+                //presenter.auditTrail("Zona: "+cveLayerName+" removio el vehiculo: "+newmyasignments.get(position).getVehicleName()+
+                //"|"+newmyasignments.get(position).getCveVehicle());
 
-                Log.e("tripulantesnewFLOW","tripulantesnewFLOW"+newmyasignments);
+                //Presenter para que el texto sea que elimino
+                //Por si no tiene conductor le asignamos "Sin Conductor"
+                if(newmyasignments.get(position).getDriverName().equals("")){
+                    String DriverName2 = "Sin conductor";
+                    if(myAsignments.get(position).getTripulantes().size()!=0) {
+                        /**presenter.auditTrail3("Zona: " + cveLayerName + " removio el vehiculo: " + newmyasignments.get(position).getVehicleName() + "|"
+                                + newmyasignments.get(position).getCveVehicle() + " Conductor: " + DriverName2
+                                + " Tripulantes: " + newmyasignments.get(position).getTripulantes().get(position).getTripulanteName());*/
+
+                        presenter.auditTrail3("Zona: " + cveLayerName + " removio el vehiculo: " + newmyasignments.get(position).getVehicleName() + "|"
+                                + newmyasignments.get(position).getCveVehicle() + " Conductor: " + DriverName2);
+                        //Este es el metodo para borrar
+                    } else {
+                        /**presenter.auditTrail3("Zona: " + cveLayerName + " removio el vehiculo: " + newmyasignments.get(position).getVehicleName() + "|"
+                                + newmyasignments.get(position).getCveVehicle() + " Conductor: " + DriverName2
+                                + " Tripulantes: " + "Sin Tripulantes");*/
+
+                        presenter.auditTrail3("Zona: " + cveLayerName + " removio el vehiculo: " + newmyasignments.get(position).getVehicleName() + "|"
+                                + newmyasignments.get(position).getCveVehicle() + " Conductor: " + DriverName2);
+                    }
+                    newmyasignments.remove(position);
+                }
+
+                //Si tiene conductor, le dejamos el nombre
+                else {
+                    if(myAsignments.get(position).getTripulantes().size()!=0) {
+                        /**presenter.auditTrail3("Zona: " + cveLayerName + " removio el vehiculo: " + newmyasignments.get(position).getVehicleName() + "|"
+                                + newmyasignments.get(position).getCveVehicle() + " Conductor: " + newmyasignments.get(position).getDriverName()
+                                + " Tripulantes: " + "Sin Tripulantes"/**+newmyasignments.get(position).getTripulantes().get(position).getTripulanteName()*//**);*/
+
+                        presenter.auditTrail3("Zona: " + cveLayerName + " removio el vehiculo: " + newmyasignments.get(position).getVehicleName() + "|"
+                                + newmyasignments.get(position).getCveVehicle() + " Conductor: " + newmyasignments.get(position).getDriverName());
+                        //Este es el metodo para borrar
+                    } else {
+                        /**presenter.auditTrail3("Zona: " + cveLayerName + " removio el vehiculo: " + newmyasignments.get(position).getVehicleName() + "|"
+                                + newmyasignments.get(position).getCveVehicle() + " Conductor: " + newmyasignments.get(position).getDriverName()
+                                + " Tripulantes: " + "Sin Tripulantes");*/
+
+                        presenter.auditTrail3("Zona: " + cveLayerName + " removio el vehiculo: " + newmyasignments.get(position).getVehicleName() + "|"
+                                + newmyasignments.get(position).getCveVehicle() + " Conductor: " + newmyasignments.get(position).getDriverName());
+                    }
+                    newmyasignments.remove(position);
+                }
+
+                //Log.e("tripulantesnewFLOW","tripulantesnewFLOW"+newmyasignments);
                 //Log.e("tripuFlow4",""+newmyasignments.size()+newmyasignments.get(0)); este log solo fue para verificar si elimina la data
                 presenter.updateAsignments(newmyasignments);
 
-                dialog.dismiss();
-               // restartActivity();
-
+                //dialog.dismiss();
+                //restartActivity();
             }
         });
         builder.setNegativeButton("cancelar", new DialogInterface.OnClickListener() {
@@ -403,12 +448,9 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
         builder.create();
         builder.show();
     }
-
-
     //endregion
 
     public void restartActivity() {
-
 
         Intent intent = new Intent(zoneAsignViewImpl.this,zoneAsignViewImpl.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -416,10 +458,8 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
         startActivity(intent);
     }
 
-    public void safeData(int posdata,String nombre,String vehiculo,List<String> tripulantes,boolean isnew)
-    {
-        if(isnew==true)
-        {//region newitem
+    public void safeData(int posdata,String nombre,String vehiculo,List<String> tripulantes,boolean isnew) {
+        if(isnew==true) {//region newitem
 //            Log.e("tripuFlow8", "validar si es nuevo N" + isnew+"   Datos nuevos N "+nombre+"  V "+vehiculo+"   T  " +tripulantes.size()+ " actual size"+myAsignments.size() );//tripulantes.size()); tripulantes size dio 0 revisar
 
                 int dimensionArray = myAsignments.size() - 1;
@@ -482,10 +522,19 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
 
                     //Esta es la sentencia original
                     //presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle());
-                    presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle()
-                    +" Conductor: "+myAsignments.get(posdata).getDriverName()+" Tripulantes: "+myAsignments.get(posdata).getTripulantes());
-                    presenter.updateAsignments(myAsignments);
 
+                    //Presenter para Agregar
+                    if(myAsignments.get(posdata).getTripulantes().size()!=0) {
+                        presenter.auditTrail2("Zona: "+cveLayerName+" Agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"
+                                +myAsignments.get(posdata).getCveVehicle()+" Conductor: "+setvehicle.getDriverName()
+                                +" Tripulantes: "+setvehicle.getTripulantes().get(posdata).getTripulanteName());
+                    } else {
+                        presenter.auditTrail2("Zona: "+cveLayerName+" Agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"
+                                +myAsignments.get(posdata).getCveVehicle()+" Conductor: "+setvehicle.getDriverName()
+                                +" Tripulantes: "+ " Sin Tripulantes");
+                    }
+
+                    presenter.updateAsignments(myAsignments);
 
                     restartActivity();
     } else/**revisar data**/ {
@@ -531,24 +580,47 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                             Log.e("tripuFlow5", "esta aqui verifica que salio mal  ve: " + vehiculo + "  parts " + parts[1]);
                         }
                     }
-                    Log.e("tripuFlow3", "cveVehicle: " + cveV + " cveDriver: " + cveD + "  tripulantes " + nuevetripulacion.size() + "   vehiculo: " + vehiculo + "  nombre: " + nombre);//esto tiene que ser un set de la posicion
+                    //Log.e("tripuFlow3", "cveVehicle: " + cveV + " cveDriver: " + cveD + "  tripulantes " + nuevetripulacion.size() + "   vehiculo: " + vehiculo + "  nombre: " + nombre);//esto tiene que ser un set de la posicion
                     /**la variable que hace update es diferente a la que hace get*/
                     // List<VehicleDriver> fullArrayD=new ArrayList<>();
                     //fullArrayD.clear();
-                    Log.e("tripuFlow6", "nueva tripulacion N: " + nuevetripulacion.size() + " nueva tripulacion " + nuevetripulacion.get(0).getTripulanteName());
-                    VehicleDriver setvehicle = new VehicleDriver(cveV, cveD, nuevetripulacion, vehiculo, nombre);
+                    //Log.e("tripuFlow6", "nueva tripulacion N: " + nuevetripulacion.size() + " nueva tripulacion " + nuevetripulacion.get(0).getTripulanteName());
+
+                    //Pasa por aqui cuando no tiene conductor
+                    //VehicleDriver setvehicle = new VehicleDriver(cveV, cveD, nuevetripulacion, vehiculo, nombre);
+
+                    //Por si viene vacio el conductor se cambie a Sin Conductor
+                    if(nombre=="Selecciona un conductor") {
+                        String nombre2 = "Sin Conductor";
+                        VehicleDriver setvehicle = new VehicleDriver(cveV, cveD, nuevetripulacion, vehiculo, nombre2);
+                        myAsignments.set(posdata, setvehicle);//se tiene que reconstruir el modelo de myasigments a tipi de valor correspondient
+                    } else {
+                        VehicleDriver setvehicle = new VehicleDriver(cveV, cveD, nuevetripulacion, vehiculo, nombre);
+                        myAsignments.set(posdata, setvehicle);//se tiene que reconstruir el modelo de myasigments a tipi de valor correspondient
+                    }
                     //  nuevetripulacion.clear();
 
 
-                    myAsignments.set(posdata, setvehicle);//se tiene que reconstruir el modelo de myasigments a tipi de valor correspondient
+                    //myAsignments.set(posdata, setvehicle);//se tiene que reconstruir el modelo de myasigments a tipi de valor correspondient
 
                     for (int i = 0; i < myAsignments.size(); i++) {
-                        Log.e("tripuFlow6", "" + myAsignments.get(i).getTripulantes().size());
+                    //    Log.e("tripuFlow6", "" + myAsignments.get(i).getTripulantes().size());
                     }
                     //Esta es la sentencia original
                     //presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle());
-                    presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle()
-                    +" Conductor: "+myAsignments.get(posdata).getDriverName()+" Tripulantes: "+myAsignments.get(posdata).getTripulantes());
+                    //presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle()
+                    //+" Conductor: "+myAsignments.get(posdata).getDriverName()+" Tripulantes: "+myAsignments.get(posdata).getTripulantes());
+
+                    if(myAsignments.get(posdata).getTripulantes().size()!=0) {
+                        int postData2 = myAsignments.get(posdata).getTripulantes().size();
+                        presenter.auditTrail2("Zona: "+cveLayerName+" Agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"
+                                +myAsignments.get(posdata).getCveVehicle() +" Conductor: "+myAsignments.get(posdata).getDriverName()+" Tripulantes: "
+                                +myAsignments.get(posdata).getTripulantes().get(postData2-1).getTripulanteName());
+                    } else {
+                        String Driver2 = "Sin Tripulantes";
+                        presenter.auditTrail2("Zona: "+cveLayerName+" Agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"
+                                +myAsignments.get(posdata).getCveVehicle() +" Conductor: "+myAsignments.get(posdata).getDriverName()+" Tripulantes: "+ "Sin Tripulantes");
+                    }
                     presenter.updateAsignments(myAsignments);
                     restartActivity();
                 }
@@ -614,9 +686,40 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
 
                 myAsignments.set(posdata, setvehicle);//se tiene que reconstruir el modelo de myasigments a tipi de valor correspondient
 
+                //AQUI VA EL IF PARA MANDARLO INDIVIDUAL
+
+                //Esto es por si el conductor no tiene nombre
+                if(myAsignments.get(posdata).getDriverName().equals("Selecciona un conductor")) {
+                    String Driver2 = "Sin Conductor";
+                    if(myAsignments.get(posdata).getTripulantes().size()!=0) {
+                        presenter.auditTrail4("Zona: "+ cveLayerName+" Se modificaron los campos: "+" Vehiculo: "+myAsignments.get(posdata).getVehicleName()
+                                +" Conductor: "+ Driver2 +"Tripulantes: "+myAsignments.get(posdata).getTripulantes().get(posdata).getTripulanteName());
+                    } else {
+                        presenter.auditTrail4("Zona: "+ cveLayerName+" Se modificaron los campos: "+" Vehiculo: "+myAsignments.get(posdata).getVehicleName()
+                                +" Conductor: "+ Driver2 +"Tripulantes: "+ "Sin Tripulantes");
+                    }
+                }
+                //Si tiene nombre de conductor, le dejamos ese nombre
+                else {
+                    if(myAsignments.get(posdata).getTripulantes().size()!=0) {
+                        int postData2 = myAsignments.get(posdata).getTripulantes().size();
+                        presenter.auditTrail4("Zona: "+ cveLayerName+" Se modificaron los campos: "+" Vehiculo: "+myAsignments.get(posdata).getVehicleName()
+                                +" Conductor: "+ myAsignments.get(posdata).getDriverName() +"Tripulantes: "
+                                +myAsignments.get(posdata).getTripulantes().get(postData2-1).getTripulanteName());
+                    } else {
+                        presenter.auditTrail4("Zona: "+ cveLayerName+" Se modificaron los campos: "+" Vehiculo: "+myAsignments.get(posdata).getVehicleName()
+                                +" Conductor: "+ myAsignments.get(posdata).getDriverName() +"Tripulantes: "
+                                +"Sin Tripulantes");
+                    }
+                }
 
                 presenter.updateAsignments(myAsignments);
+                //Aqui es para la modificacion del vehiculo
+                /**presenter.auditTrail2("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle()
+                        +" Conductor: "+myAsignments.get(posdata).getDriverName()+" Tripulantes: "+myAsignments.get(posdata).getTripulantes().get(posdata).getTripulanteName());*/
 
+                /**presenter.auditTrail4("Zona: "+ cveLayerName+" Se modificaron los campos: "+" Vehiculo: "+myAsignments.get(posdata).getVehicleName()+" Conductor: "+
+                        myAsignments.get(posdata).getDriverName());*/
 
                 restartActivity();
             } else/**revisar data**/ {
@@ -685,6 +788,7 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                     {
                         Tripulante agregatripulante = new Tripulante(0, "string");
                         myAsignments.get(i).getTripulantes().add(agregatripulante);
+
                         Log.e("tripuFlow23","tripulante vacio "+myAsignments.get(i).getTripulantes()+" cve "+myAsignments.get(i).getTripulantes().get(0).getCveTripulante()+" N:"+myAsignments.get(i).getTripulantes().get(0).getTripulanteName());
                     }
                     else
@@ -696,12 +800,37 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                     }
                 }
 
+                //Aqui es para cuando se modifican los tripulantes
+                Log.e("errorAudit", "zona "+cveLayerName);
+
+                //Aqui es para cuando no tenga datos en Tripulantes
+                //int postData2 = myAsignments.get(posdata).getTripulantes().size();
+                //if(setvehicle.getTripulantes().get(posdata).getTripulanteName().equals("string")) {
+
+
+                    if (myAsignments.get(posdata).getTripulantes().get(posdata).getTripulanteName().equals("string")) {
+                        //Por si no lleva datos en tripulantes, le damos "Sin Tripulantes"
+                        String TripulanteName2 = "Sin Tripulantes";
+
+                        /**presenter.auditTrail5("Zona: "+ cveLayerName+" Se modificaron los campos: "+ "Tripulantes: "
+                         +TripulanteName2);*/
+                        presenter.auditTrail4("Zona: " + cveLayerName + " Se modificaron los campos: " + " Vehiculo: " + myAsignments.get(posdata).getVehicleName()
+                                + " Conductor: " + myAsignments.get(posdata).getDriverName() + "Tripulantes: "
+                                + TripulanteName2);
+                    } else {
+                        /**presenter.auditTrail5("Zona: "+ cveLayerName+" Se modificaron los campos: "+ "Tripulantes: "
+                         +setvehicle.getTripulantes().get(posdata).getTripulanteName());*/
+
+                        presenter.auditTrail4("Zona: " + cveLayerName + " Se modificaron los campos: " + " Vehiculo: " + myAsignments.get(posdata).getVehicleName()
+                                + " Conductor: " + myAsignments.get(posdata).getDriverName() + "Tripulantes: "
+                                + setvehicle.getTripulantes().get(0).getTripulanteName());
+                    }
+
                 presenter.updateAsignments(myAsignments);
-
-
             }
         }
     }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -826,6 +955,11 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
 
     }
 
+    //Ocultar el icono de (+) cuando pulsemos en Editar
+    public void gonePlusButton(){
+        addAsignment.setVisibility(View.GONE);
+    }
+
 @Override
 public void onClick(View v) {
     switch (v.getId()) {
@@ -885,11 +1019,13 @@ public void onClick(View v) {
             tripulantes.clear();
             if(myAsignments!=null)
             {
+                addAsignment.setVisibility(View.GONE);
                 Log.e("tripuFlow9","not null");
                 myAsignments.add(new VehicleDriver(cveVehicle,cveDriver,tripulantes,"Selecciona un vehículo","Selecciona un conductor"));
                 fillAdapter();
                 rv.smoothScrollToPosition(myAsignments.size() - 1);}
             else{
+                addAsignment.setVisibility(View.GONE);
                 Log.e("tripuFlow9","null");
                 List<VehicleDriver> newAsigment=new ArrayList<>();
                 myAsignments=newAsigment;

@@ -327,8 +327,8 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
     public void updateFData(List<VehicleDriver> asigments) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-        Log.e("tripulantesnewFLOW"," requestUpdateAsigments :  "+Mcvelayer);
-        Log.e("tripulantesnewFLOW"," requestUpdateAsigments :  "+token);
+        //Log.e("tripulantesnewFLOW"," requestUpdateAsigments :  "+Mcvelayer);
+        //Log.e("tripulantesnewFLOW"," requestUpdateAsigments :  "+token);
         for(int i=0;i<asigments.size();i++)
         {
             Log.e("tripulantesnewFLOW"," data request :   cve "+asigments.get(i).getCveVehicle()+" ve  "+
@@ -352,8 +352,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             {
                 //Log.e("tripuFlow4",""+asigments.get(i).)      esto contienecampos que no existen maldicion xD
                 VehicleDriver2 vnewdata=new VehicleDriver2(asigments.get(i).getCveVehicle(),asigments.get(i).getCveDriver(),asigments.get(i).getTripulantes());
-                Log.e("tripuFlow23","Last I: "+i+"   V " +asigments.get(i).getCveVehicle()+"  D: "+asigments.get(i).getCveDriver()+" T: "+asigments.get(i).getTripulantes().size());
+                //Log.e("tripuFlow23","Last I: "+i+"   V " +asigments.get(i).getCveVehicle()+"  D: "+asigments.get(i).getCveDriver()+" T: "+asigments.get(i).getTripulantes().size());
                 newdata.add(vnewdata);
+                //Log.e("newdatainfo", "si " +vnewdata.getCveVehicle() + "CVE " +vnewdata.getCveDriver() +" TRIP: " +vnewdata.getTripulantes().get(i).getCveTripulante());
             }
         }
 
@@ -364,12 +365,12 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             @Override
             public void onResponse(Call<responseUpdate> call, Response<responseUpdate> response) {
                 validateCodeUpdate(response,context);
-                Log.e("tripuFlow23","rf "+response.message()+"  "+response.body().getMessage()+"   "+response.errorBody());
+                //Log.e("tripuFlow23","rf "+response.message()+"  "+response.body().getMessage()+"   "+response.errorBody());
             }
 
             @Override
             public void onFailure(Call<responseUpdate> call, Throwable throwable) {
-                Log.e("tripuFlow23","E"+ throwable.getMessage());
+                //Log.e("tripuFlow23","E"+ throwable.getMessage());
                 Toast.makeText(context, "" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -448,12 +449,47 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
     public void newsetAuditTrail(String name) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-        if(token!=null)
-        {
+        if(token!=null) {
             myauditTrail(name,token);
         }
     }
     //endregion newsetAuditTrail
+
+    @Override
+    public void newsetAuditTrail2(String name) {
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        if(token!=null) {
+            myauditTrail2(name,token);
+        }
+    }
+
+    @Override
+    public void newsetAuditTrail3(String name) {
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        if(token!=null) {
+            myauditTrail3(name,token);
+        }
+    }
+
+    @Override
+    public void newsetAuditTrail4(String name) {
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        if(token!=null) {
+            myauditTrail4(name,token);
+        }
+    }
+
+    @Override
+    public void newsetAuditTrail5(String name) {
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        if(token!=null) {
+            myauditTrail5(name,token);
+        }
+    }
 
     //region myauditTrail
     private void myauditTrail(String name ,String token)
@@ -473,6 +509,70 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
         });
     }
     //endregion myauditTrail
+
+    private void myauditTrail2(String name, String token) {
+        AuditTrail mynewAuditTrail = new AuditTrail("Onroad_Asignaciones", "Agregar asignaciones",""+name);
+        setAuditTrail request = new setAuditTrail(mynewAuditTrail,token);
+        service.auditTrail(request).enqueue(new Callback<responseAuditTrail>() {
+            @Override
+            public void onResponse(Call<responseAuditTrail> call, Response<responseAuditTrail> response) {
+                validateCodeauditTrail(response,context);
+            }
+
+            @Override
+            public void onFailure(Call<responseAuditTrail> call, Throwable t) {
+                presenter.setMessageToView(RetrofitValidationsV2.getOnFailureResponse(t,context));
+            }
+        });
+    }
+
+    private void myauditTrail3(String name, String token) {
+        AuditTrail mynewAuditTrail = new AuditTrail("Onroad_Asignaciones", "Eliminar asignaciones",""+name);
+        setAuditTrail request = new setAuditTrail(mynewAuditTrail,token);
+        service.auditTrail(request).enqueue(new Callback<responseAuditTrail>() {
+            @Override
+            public void onResponse(Call<responseAuditTrail> call, Response<responseAuditTrail> response) {
+                validateCodeauditTrail(response,context);
+            }
+
+            @Override
+            public void onFailure(Call<responseAuditTrail> call, Throwable t) {
+                presenter.setMessageToView(RetrofitValidationsV2.getOnFailureResponse(t,context));
+            }
+        });
+    }
+
+    private void myauditTrail4(String name, String token) {
+        AuditTrail mynewAuditTrail = new AuditTrail("Onroad_Asignaciones", "Edito datos asignaciones",""+name);
+        setAuditTrail request = new setAuditTrail(mynewAuditTrail,token);
+        service.auditTrail(request).enqueue(new Callback<responseAuditTrail>() {
+            @Override
+            public void onResponse(Call<responseAuditTrail> call, Response<responseAuditTrail> response) {
+                validateCodeauditTrail(response,context);
+            }
+
+            @Override
+            public void onFailure(Call<responseAuditTrail> call, Throwable t) {
+                presenter.setMessageToView(RetrofitValidationsV2.getOnFailureResponse(t,context));
+            }
+        });
+    }
+
+    private void myauditTrail5(String name, String token) {
+        AuditTrail mynewAuditTrail = new AuditTrail("Onroad_Asignaciones", "Edito datos Tripulantes",""+name);
+        setAuditTrail request = new setAuditTrail(mynewAuditTrail,token);
+        service.auditTrail(request).enqueue(new Callback<responseAuditTrail>() {
+            @Override
+            public void onResponse(Call<responseAuditTrail> call, Response<responseAuditTrail> response) {
+                validateCodeauditTrail(response,context);
+            }
+
+            @Override
+            public void onFailure(Call<responseAuditTrail> call, Throwable t) {
+                presenter.setMessageToView(RetrofitValidationsV2.getOnFailureResponse(t,context));
+            }
+        });
+    }
 
     //region validateCodeauditTrail
     private  void  validateCodeauditTrail(Response<responseAuditTrail> response,Context context)

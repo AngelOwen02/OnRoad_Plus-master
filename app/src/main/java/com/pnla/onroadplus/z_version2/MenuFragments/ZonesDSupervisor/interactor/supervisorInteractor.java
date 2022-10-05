@@ -5,4 +5,6 @@ public interface supervisorInteractor {
     void setZones(int zonecveLayer, int newCveEmploye);
 
     void newsetAuditTrail(String descripcion);
+    void newsetAuditTrail2(String descripcion);
+    void newsetAuditTrail3(String descripcion);
 }

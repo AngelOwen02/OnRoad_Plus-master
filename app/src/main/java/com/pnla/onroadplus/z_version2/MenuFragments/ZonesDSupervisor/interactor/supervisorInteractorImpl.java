@@ -186,9 +186,25 @@ public class supervisorInteractorImpl implements supervisorInteractor {
     }
     //endregion newsetAuditTrail
 
+    public void newsetAuditTrail2(String log) {
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        if(token!=null) {
+            myauditTrail2(log, token);
+        }
+    }
+
+    public void newsetAuditTrail3(String log) {
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        if(token!=null) {
+            myauditTrail3(log, token);
+        }
+    }
+
     //region myauditTrail
     private void myauditTrail(String log, String token) {
-        AuditTrail mynewAuditTrail = new AuditTrail("Onroad-Asignaciones", "Agregar supervisor", ""+log);
+        AuditTrail mynewAuditTrail = new AuditTrail("Onroad_Asignaciones", "Agregar supervisor", ""+log);
         setAuditTrail request = new setAuditTrail(mynewAuditTrail, token);
         service.auditTrail(request).enqueue(new Callback<responseAuditTrail>() {
             @Override
@@ -203,6 +219,38 @@ public class supervisorInteractorImpl implements supervisorInteractor {
         });
     }
     //endregion myauditTrail
+
+    private void myauditTrail2(String log, String token) {
+        AuditTrail mynewAuditTrail = new AuditTrail("Onroad_Asignaciones", "Eliminar supervisor", ""+log);
+        setAuditTrail request = new setAuditTrail(mynewAuditTrail, token);
+        service.auditTrail(request).enqueue(new Callback<responseAuditTrail>() {
+            @Override
+            public void onResponse(Call<responseAuditTrail> call, Response<responseAuditTrail> response) {
+                validateCodeauditTrail(response,context);
+            }
+
+            @Override
+            public void onFailure(Call<responseAuditTrail> call, Throwable t) {
+                Toast.makeText(context, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void myauditTrail3(String log, String token) {
+        AuditTrail mynewAuditTrail = new AuditTrail("Onroad_Asignaciones", "Editar supervisor", ""+log);
+        setAuditTrail request = new setAuditTrail(mynewAuditTrail, token);
+        service.auditTrail(request).enqueue(new Callback<responseAuditTrail>() {
+            @Override
+            public void onResponse(Call<responseAuditTrail> call, Response<responseAuditTrail> response) {
+                validateCodeauditTrail(response,context);
+            }
+
+            @Override
+            public void onFailure(Call<responseAuditTrail> call, Throwable t) {
+                Toast.makeText(context, t.getMessage().toString(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     //region validateCodeauditTrail
     private void validateCodeauditTrail(Response<responseAuditTrail> response, Context context) {

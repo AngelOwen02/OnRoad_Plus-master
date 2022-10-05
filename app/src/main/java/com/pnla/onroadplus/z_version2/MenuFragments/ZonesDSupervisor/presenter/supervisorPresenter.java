@@ -15,4 +15,6 @@ public interface supervisorPresenter {
     void restartView();
 
     void auditTrail(String name);
+    void auditTrail2(String name);
+    void auditTrail3(String name);
 }

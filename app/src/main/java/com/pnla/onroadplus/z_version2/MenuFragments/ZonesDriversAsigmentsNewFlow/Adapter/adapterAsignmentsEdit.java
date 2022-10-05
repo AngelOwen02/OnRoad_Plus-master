@@ -13,6 +13,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -21,9 +22,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDriversAsigmentsNewFlow.Interactor.zoneAsignInteractorImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDriversAsigmentsNewFlow.Model.Tripulante;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDriversAsigmentsNewFlow.Model.VehicleDriver;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDriversAsigmentsNewFlow.View.zoneAsignViewImpl;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +39,7 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
     private List<String> myDrivers;
     private int tripulantesPosition;
     private List<String> newTripulantes;
+    private List<String> sinTripulantes;
     private String nombre,vehiculo;
     private boolean isnew=false;
     private  String tripulantes = "";
@@ -219,6 +223,9 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                 holder.fakespinner.setVisibility(View.GONE);
                 nombre=myAsignments.get(position).getDriverName();
                 vehiculo= myAsignments.get(position).getVehicleName();
+
+                //Para ocultar el icono de (+)
+                myview.gonePlusButton();
             }
         });
         holder.fakeErase.setOnClickListener(new View.OnClickListener() {
@@ -386,49 +393,96 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
 //                holder.constrainRequest.setVisibility(View.GONE);
                 Log.e("tripuFlow7"," data de tripulantes a guardar   nombre: "+ nombre+"       vehiculo "+vehiculo+"  tripulantes"+newTripulantes+" real vehicle "+myAsignments.get(position).getVehicleName());
 
+                Log.e("datovehiculo", "el vehiculo nuevo: "+vehiculo + " el que van a suplir: " + myAsignments.get(position).getVehicleName()+ "   ");
+
+                //TODO ESTO ES EL PROCESO EN GENERAL
                 if(isnew==false) {
                     Log.e("tripuFlow7","isnew ==false    V= "+ myAsignments.get(position).getVehicleName()+"     "+vehiculo);
-                    if(myAsignments.get(position).getVehicleName().equals(vehiculo))
-                    {
-                        if( myAsignments.get(position).getDriverName().equals(nombre))
-                        {
+                    if(myAsignments.get(position).getVehicleName().equals(vehiculo)) {
+                        if( myAsignments.get(position).getDriverName().equals(nombre)) {
                             Log.e("tripulanteValue"," value:" +newTripulantes);
                             myview.safeData(position, myAsignments.get(position).getDriverName(), myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
-                        }else
-                        {
+                            //Esto es para cuando se modifica el campo de tripulantes
+                            //auditTrail
+                        } else {
                             myview.safeData(position,nombre, myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
+                            //Esto es para cuando modificamos el campo de Conductor
+                            //getVehicleName ya trae el nuevo conductor
+                            //auditTrail
                         }
-
-
-                    }else
-                    {
-                        if( myAsignments.get(position).getDriverName().equals(nombre))
-                        {
+                    } else {
+                        //AQUIIIIIIII
+                        if(vehiculo.equals("Selecciona un vehículo")) {
+                            //Mandamos aviso y se reinicia para que borre los campos
+                            Toast.makeText(context, " Por favor, selecciona un vehículo.", Toast.LENGTH_SHORT).show();
+                            //Esto reinicia la pantalla para que se borren los datos
+                            myview.restartActivity();
+                        } else if( myAsignments.get(position).getDriverName().equals(nombre)) {
+                            Log.e("descripcion",""+myAsignments.get(position).getDriverName()+ vehiculo);
                             myview.safeData(position, myAsignments.get(position).getDriverName(), vehiculo, newTripulantes, isnew);
-                        }else
-                        {
-                           if( isnew==true)
-                           {
+                            //Esto es para cuando modificamos el campo de vehiculo
+                            //AuditTrail
+                        } else {
+                           if( isnew==true) {
 
                            }
-                            if(!vehiculo.equals(myAsignments.get(position).getVehicleName()))
-                            {
-                                vehiculo=myAsignments.get(position).getVehicleName();
+
+                           //Esto es para que solo se actualice el campo del nombre del vehiculo
+                            if(!vehiculo.equals(myAsignments.get(position).getVehicleName())) {
+                                //vehiculo=myAsignments.get(position).getVehicleName();
+                                String vehiculo2;
+                                String nombre2;
+                                vehiculo2 = vehiculo;
+                                nombre2= nombre;
+
+                                myview.safeData(position, myAsignments.get(position).getDriverName(), myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
+                                //myview.safeData(position,myAsignments.get(position).getDriverName(),vehiculo2,newTripulantes,isnew);
+                                //myview.safeData(position,myAsignments.get(position).getDriverName(), vehiculo, newTripulantes, isnew);
+                            } else {
+                                myview.safeData(position,myAsignments.get(position).getDriverName(), vehiculo, newTripulantes, isnew);
                             }
-                            myview.safeData(position,myAsignments.get(position).getDriverName(), vehiculo, newTripulantes, isnew);
+                            //myview.safeData(position,myAsignments.get(position).getDriverName(), vehiculo, newTripulantes, isnew);
                         }
 
                     }
                     //myview.safeData(position, myAsignments.get(position).getDriverName(), myAsignments.get(position).getVehicleName(), newTripulantes, isnew);/** colocar el valor de vehiculo nombre y de tripulantes*/
-                }else
-                { Log.e("tripuFlow7","isnew ==true");
-                    if(vehiculo.equals("Selecciona un vehículo"))
-                    {
+                } else {
+                    Log.e("tripuFlow7","isnew ==true");
+
+                    //Esto es para cuando no tengan seleccionado un vehiculo
+                    if(vehiculo.equals("Selecciona un vehículo")) {
                         Log.e("tripuFlow7","ESTO REINICIA TODO");
+                        //Mandamos aviso y se reinicia para que borre los campos
+                        Toast.makeText(context, " Por favor, selecciona un vehículo.", Toast.LENGTH_SHORT).show();
+                        //Esto reinicia la pantalla para que se borren los datos
                         myview.restartActivity();
-                    }else {
+                    } else {
                         Log.e("tripuFlow7","nuevo item");
-                        myview.safeData(position, nombre, vehiculo, newTripulantes, isnew);
+
+                        //Esto es para cuando los tripulantes vayan en null
+                        if (newTripulantes != null) {
+                            myview.safeData(position, nombre, vehiculo, newTripulantes, isnew);
+                        } else {
+                            //Aqui tendria que ir el nuevo array pero no queda
+                            //sinTripulantes = new ArrayList<>();
+                            List<String> sinTripulantes2 = new ArrayList<>();
+                            //ArrayList<String> sinTripulantes = new ArrayList<>();
+                            //Tripulante agregatripulante = new Tripulante(0, "Sin Tripulantes");
+                            //sinTripulantes2.add(String.valueOf(agregatripulante));
+
+                            //newTripulantes.add(0, "Sin-Tripulantes");
+                            //sinTripulantes.add(0,"Sin-Tripulantes");
+                            //newTripulantes = sinTripulantes;
+
+                            //sinTripulantes2 = newTripulantes;
+
+                            //Mandamos a la vista con el nuevo Array
+                            //myview.safeData(position, nombre, vehiculo, newTripulantes, isnew);
+                            myview.safeData(position, nombre, vehiculo, sinTripulantes2, isnew);
+                        }
+                        //AuditTrail para cuando es nuevo/se agrego
+                        //position = el lugar donde se agrego, nombre = nombre del conductor, vehiculo = nombre del vehiculo, newTripulantes = tamaño y nombre,
+                        // isnew = booleano (true, false)
                     }
                 }
                 isnew=false;

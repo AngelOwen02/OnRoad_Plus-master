@@ -72,4 +72,18 @@ public class supervisorPresenterImpl implements  supervisorPresenter {
             interactor.newsetAuditTrail(name);
         }
     }
+
+    @Override
+    public void auditTrail2(String name) {
+        if (view != null) {
+            interactor.newsetAuditTrail2(name);
+        }
+    }
+
+    @Override
+    public void auditTrail3(String name) {
+        if(view!=null) {
+            interactor.newsetAuditTrail3(name);
+        }
+    }
 }
