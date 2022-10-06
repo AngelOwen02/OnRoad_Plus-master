@@ -385,23 +385,45 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                 List<VehicleDriver> newmyasignments=new ArrayList<>();
                 newmyasignments=myAsignments;
 
+                List<Tripulante> tripulantesN = new ArrayList<>();
+                tripulantesN = myAsignments.get(position).getTripulantes();
+
+                Log.e("Tripulantessssssss","lista: "+ tripulantesN + " ");
+
                 //Esta es la sentencia original
                 //presenter.auditTrail("Zona: "+cveLayerName+" removio el vehiculo: "+newmyasignments.get(position).getVehicleName()+
                 //"|"+newmyasignments.get(position).getCveVehicle());
 
-                //Presenter para que el texto sea que elimino
-                //Por si no tiene conductor le asignamos "Sin Conductor"
-
-
+                //Compara que venga sin conductor y all lo demas
+                //Si viene sin Conductor
                 if(myAsignments.get(position).getDriverName().equals("Selecciona un conductor")||myAsignments.get(position).getDriverName().equals("")){
-                    presenter.auditTrail3("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(position).getVehicleName()+"|"
-                            +"("+myAsignments.get(position).getCveVehicle()+")"+ " Conductor: "+ "Sin conductor ");
-                }else
-                {
-                    presenter.auditTrail3("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(position).getVehicleName()+
-                            "|"+"("+myAsignments.get(position).getCveVehicle()+")"+ " Conductor: "+myAsignments.get(position).getDriverName()+
-                            "|"+"("+myAsignments.get(position).getCveDriver()+")");
+                    //Si viene sin Tripulantes
+                    if(myAsignments.get(position).getTripulantes().size()==0){
+                        //Si viene solo con Vehiculo
+                        presenter.auditTrail3("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(position).getVehicleName()+"|"
+                                +"("+myAsignments.get(position).getCveVehicle()+")"+ " Conductor: "+ "Sin conductor " + " Tripulantes: " + "Sin Tripulantes");
+                    } else {
+                        //Si viene Vehiculo, Sin conductor y Con Tripulantes
+                        presenter.auditTrail3("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(position).getVehicleName()+"|"
+                                +"("+myAsignments.get(position).getCveVehicle()+")"+ " Conductor: "+ "Sin conductor "
+                                +" Tripulantes: " + "Con Tripulantes "+ tripulantesN.toString());
+                    }
+                }else {
+                    //Revisa si tenga Tripulantes en el arreglo comparando el tamaño
+                    if(myAsignments.get(position).getTripulantes().size() > 0){
+                        //Si tiene Tripulantes
+                        presenter.auditTrail3("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(position).getVehicleName()+
+                                "|"+"("+myAsignments.get(position).getCveVehicle()+")"+ " Conductor: "+myAsignments.get(position).getDriverName()+
+                                "|"+"("+myAsignments.get(position).getCveDriver()+")"
+                                + " Tripulantes: "+" Con Tripulantes " + tripulantesN.toString());
+                    } else {
+                        //Si no tiene tripulantes
+                        presenter.auditTrail3("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(position).getVehicleName()+
+                                "|"+"("+myAsignments.get(position).getCveVehicle()+")"+ " Conductor: "+myAsignments.get(position).getDriverName()+
+                                "|"+"("+myAsignments.get(position).getCveDriver()+")" + " Tripulantes: " + "Sin Tripulantes");
+                    }
                 }
+
                 newmyasignments.remove(position);
                 //Log.e("tripulantesnewFLOW","tripulantesnewFLOW"+newmyasignments);
                 //Log.e("tripuFlow4",""+newmyasignments.size()+newmyasignments.get(0)); este log solo fue para verificar si elimina la data
@@ -497,14 +519,16 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
 
                     //Presenter para Agregar
 
+                    //Por aqui pasa cuando va vacio, solo con vehiculo
+                    //Por aqui pasa cuando no lleva Tripulantes
                     if(myAsignments.get(posdata).getDriverName().equals("Selecciona un conductor")||myAsignments.get(posdata).getDriverName().equals("")){
                         presenter.auditTrail2("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()+"|"
-                                +"("+myAsignments.get(posdata).getCveVehicle()+")"+ " Conductor: " + "Sin conductor ");
+                                +"("+myAsignments.get(posdata).getCveVehicle()+")"+ " Conductor: " + "Sin conductor " + " Tripulantes: " + "Sin Tripulantes");
                     }else
                     {
                         presenter.auditTrail2("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()+"|"
                                 +"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+myAsignments.get(posdata).getDriverName()+"|"
-                                +"("+myAsignments.get(posdata).getCveDriver()+")");
+                                +"("+myAsignments.get(posdata).getCveDriver()+")" + " Tripulantes: " + "Sin Tripulantes");
                     }
 
                     presenter.updateAsignments(myAsignments);
@@ -597,15 +621,18 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                                 +myAsignments.get(posdata).getCveVehicle() +" Conductor: "+myAsignments.get(posdata).getDriverName()+" Tripulantes: "+ "Sin Tripulantes");
                     }*/
 
+                    //Esto es para cuando lleva todos los datos
+                    //Por aqui tambien pasa si no lleva conductor
                     if(myAsignments.get(posdata).getDriverName().equals("Selecciona un conductor")||myAsignments.get(posdata).getDriverName().equals("")){
                         presenter.auditTrail2("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()+"|"
-                                +"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+" Sin conductor ");
+                                +"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+" Sin conductor " + "Tripulantes: " + tripulantes.toString());
                     }else
                     {
                         presenter.auditTrail2("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()+
                                 "|"+"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+myAsignments.get(posdata).getDriverName()+
-                                "|"+"("+myAsignments.get(posdata).getCveDriver()+")");
+                                "|"+"("+myAsignments.get(posdata).getCveDriver()+")"+ " Tripulantes: "+ tripulantes.toString());
                     }
+
                     presenter.updateAsignments(myAsignments);
                     restartActivity();
                 }
@@ -781,14 +808,15 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                 //if(setvehicle.getTripulantes().get(posdata).getTripulanteName().equals("string")) {
 
 
+                //por aqui pasa cuando modificamos los datos Conductor y Tripulantes
                 if(myAsignments.get(posdata).getDriverName().equals("Selecciona un conductor")||myAsignments.get(posdata).getDriverName().equals("")){
                     presenter.auditTrail("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()+"|"
-                            +"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+"Sin conductor ");
+                            +"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+"Sin conductor " + " Tripulantes: " + tripulantes.toString());
                 }else
                 {
                     presenter.auditTrail("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()
                             +"|"+"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+myAsignments.get(posdata).getDriverName()
-                            +"|"+"("+myAsignments.get(posdata).getCveDriver()+")");
+                            +"|"+"("+myAsignments.get(posdata).getCveDriver()+")"+ " Tripulantes: " + tripulantes.toString());
                 }
 
                 presenter.updateAsignments(myAsignments);

@@ -119,7 +119,7 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                 holder.spinerName.setSelection(pos);
 
             }
-            //TODO AQUI ESTA EL FART
+            //TODO AQUI ESTA
             nombre = String.valueOf(myAsignments.get(position).getDriverName());
             if(nombre.equals(""))
             {
@@ -401,6 +401,10 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                 Log.e("tripuFlow7"," data de tripulantes a guardar   nombre: "+ nombre+"       vehiculo "+vehiculo+"  tripulantes"+newTripulantes+" real vehicle "+myAsignments.get(position).getVehicleName());
 
                 Log.e("datovehiculo", "el vehiculo nuevo: "+vehiculo + " el que van a suplir: " + myAsignments.get(position).getVehicleName()+ "   ");
+
+                //Log.e("datosTripulantesss", "Tripulantes: " + newTripulantes + " Tamaño: " + newTripulantes.size() + " ");
+
+                //Toast.makeText(context, newTripulantes.toString(), Toast.LENGTH_SHORT).show();
 
                 //TODO ESTO ES EL PROCESO EN GENERAL
                 if(isnew==false) {
