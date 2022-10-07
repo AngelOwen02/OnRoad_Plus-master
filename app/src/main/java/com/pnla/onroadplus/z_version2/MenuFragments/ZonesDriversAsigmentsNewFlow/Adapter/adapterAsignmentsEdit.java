@@ -238,7 +238,10 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
             public void onClick(View v) {/*** esto es el dialog eliminar*/
                 holder.fakespinner.setVisibility(View.GONE);
                 Log.e("editEraseB",""+position);
-                myview.deleteAlertDialog(position);
+
+                //Log.e("tripulantesErase" , "Tripulantes: " + position+ nombre2+ myAsignments.get(position).getVehicleName()+ tripulantes.toString()+ isnew + " ");
+
+                myview.deleteAlertDialog(position, tripulantes);
             }
         });
 

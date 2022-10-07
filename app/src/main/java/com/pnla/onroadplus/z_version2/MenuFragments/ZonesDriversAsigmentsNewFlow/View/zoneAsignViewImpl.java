@@ -8,7 +8,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -351,7 +350,7 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
     }
 
     //region eraseDialog este bloque despliega la alerta en la view para eliminar la tarjeta pos posicion
-    public void deleteAlertDialog(final int position)
+    public void deleteAlertDialog(final int position, final String tripulantesN)
     {
         indexToErase.clear();
         Log.e("editEraseB","asingmentdatasize : "+ myvehicles.size());
@@ -385,9 +384,6 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                 List<VehicleDriver> newmyasignments=new ArrayList<>();
                 newmyasignments=myAsignments;
 
-                List<Tripulante> tripulantesN = new ArrayList<>();
-                tripulantesN = myAsignments.get(position).getTripulantes();
-
                 Log.e("Tripulantessssssss","lista: "+ tripulantesN + " ");
 
                 //Esta es la sentencia original
@@ -401,12 +397,12 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                     if(myAsignments.get(position).getTripulantes().size()==0){
                         //Si viene solo con Vehiculo
                         presenter.auditTrail3("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(position).getVehicleName()+"|"
-                                +"("+myAsignments.get(position).getCveVehicle()+")"+ " Conductor: "+ "Sin conductor " + " Tripulantes: " + "Sin Tripulantes");
+                                +"("+myAsignments.get(position).getCveVehicle()+")"+ " Conductor: "+ "Sin conductor" + " Tripulantes: " + "Sin Tripulantes");
                     } else {
                         //Si viene Vehiculo, Sin conductor y Con Tripulantes
                         presenter.auditTrail3("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(position).getVehicleName()+"|"
-                                +"("+myAsignments.get(position).getCveVehicle()+")"+ " Conductor: "+ "Sin conductor "
-                                +" Tripulantes: " + "Con Tripulantes "+ tripulantesN.toString());
+                                +"("+myAsignments.get(position).getCveVehicle()+")"+ " Conductor: "+ "Sin conductor"
+                                +" Tripulantes: "+ tripulantesN.toString());
                     }
                 }else {
                     //Revisa si tenga Tripulantes en el arreglo comparando el tamaño
@@ -415,7 +411,7 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                         presenter.auditTrail3("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(position).getVehicleName()+
                                 "|"+"("+myAsignments.get(position).getCveVehicle()+")"+ " Conductor: "+myAsignments.get(position).getDriverName()+
                                 "|"+"("+myAsignments.get(position).getCveDriver()+")"
-                                + " Tripulantes: "+" Con Tripulantes " + tripulantesN.toString());
+                                + " Tripulantes: "+ tripulantesN.toString());
                     } else {
                         //Si no tiene tripulantes
                         presenter.auditTrail3("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(position).getVehicleName()+
@@ -518,7 +514,6 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                     //presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle());
 
                     //Presenter para Agregar
-
                     //Por aqui pasa cuando va vacio, solo con vehiculo
                     //Por aqui pasa cuando no lleva Tripulantes
                     if(myAsignments.get(posdata).getDriverName().equals("Selecciona un conductor")||myAsignments.get(posdata).getDriverName().equals("")){
@@ -608,18 +603,6 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                     //presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle());
                     //presenter.auditTrail("Zona: "+cveLayerName+" agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"+myAsignments.get(posdata).getCveVehicle()
                     //+" Conductor: "+myAsignments.get(posdata).getDriverName()+" Tripulantes: "+myAsignments.get(posdata).getTripulantes());
-
-                    //Esto es de los tripulantes
-                    /**if(myAsignments.get(posdata).getTripulantes().size()!=0) {
-                        int postData2 = myAsignments.get(posdata).getTripulantes().size();
-                        presenter.auditTrail2("Zona: "+cveLayerName+" Agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"
-                                +myAsignments.get(posdata).getCveVehicle() +" Conductor: "+myAsignments.get(posdata).getDriverName()+" Tripulantes: "
-                                +myAsignments.get(posdata).getTripulantes().get(postData2-1).getTripulanteName());
-                    } else {
-                        String Driver2 = "Sin Tripulantes";
-                        presenter.auditTrail2("Zona: "+cveLayerName+" Agrego el vehiculo: "+myAsignments.get(posdata).getVehicleName()+"|"
-                                +myAsignments.get(posdata).getCveVehicle() +" Conductor: "+myAsignments.get(posdata).getDriverName()+" Tripulantes: "+ "Sin Tripulantes");
-                    }*/
 
                     //Esto es para cuando lleva todos los datos
                     //Por aqui tambien pasa si no lleva conductor
