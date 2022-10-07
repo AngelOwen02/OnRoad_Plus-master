@@ -459,11 +459,6 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
 
                            //Esto es para que solo se actualice el campo del nombre del vehiculo
                             if(!vehiculo.equals(myAsignments.get(position).getVehicleName())) {
-                                //vehiculo=myAsignments.get(position).getVehicleName();
-                                //String vehiculo2;
-                                //String nombre2;
-                                //vehiculo2 = vehiculo;
-                                //nombre2= nombre;
 
                                 Log.e("descripcion2", "asigno vehiculo" + nombre + "  " + nombre2 + "  ");
                                 if(nombre.equals("")){
@@ -502,19 +497,6 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                             Log.e("datosPruebaM", " " + vehiculo +"  "+ nombre);
                             myview.safeData(position, nombre, vehiculo, newTripulantes, isnew);
                         } else {
-                            //Aqui tendria que ir el nuevo array pero no queda
-                            //sinTripulantes = new ArrayList<>();
-                            //List<String> sinTripulantes2 = new ArrayList<>();
-                            //ArrayList<String> sinTripulantes = new ArrayList<>();
-                            //Tripulante agregatripulante = new Tripulante(0, "Sin Tripulantes");
-                            //sinTripulantes2.add(String.valueOf(agregatripulante));
-
-                            //newTripulantes.add(0, "Sin-Tripulantes");
-                            //sinTripulantes.add(0,"Sin-Tripulantes");
-                            //newTripulantes = sinTripulantes;
-
-                            //sinTripulantes2 = newTripulantes;
-
                             //Mandamos a la vista con el nuevo Array
                             Log.e("datosPruebaM", " " + vehiculo +"  "+ nombre + " data 0 filter  "+ myAsignments.get(position).getDriverName()+" "+newTripulantes+" "+ nombre2);
                             if(isFilter==false){
