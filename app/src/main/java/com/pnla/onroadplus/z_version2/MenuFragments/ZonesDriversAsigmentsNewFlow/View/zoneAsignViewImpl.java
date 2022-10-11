@@ -802,14 +802,20 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
 
 
                 //por aqui pasa cuando modificamos los datos Conductor y Tripulantes
+                //Tambien validar que tenga tripulantes
                 if(myAsignments.get(posdata).getDriverName().equals("Selecciona un conductor")||myAsignments.get(posdata).getDriverName().equals("")){
                     presenter.auditTrail("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()+"|"
                             +"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+"Sin conductor " + " Tripulantes: " + tripulantes.toString());
-                }else
-                {
-                    presenter.auditTrail("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()
-                            +"|"+"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+myAsignments.get(posdata).getDriverName()
-                            +"|"+"("+myAsignments.get(posdata).getCveDriver()+")"+ " Tripulantes: " + tripulantes.toString());
+                }else {
+                    if(tripulantes.toString().equals("[]")){
+                        presenter.auditTrail("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()
+                                +"|"+"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+myAsignments.get(posdata).getDriverName()
+                                +"|"+"("+myAsignments.get(posdata).getCveDriver()+")"+ " Tripulantes: " + "Sin Tripulantes");
+                    } else {
+                        presenter.auditTrail("Zona: "+cveLayerName+" Vehículo: "+myAsignments.get(posdata).getVehicleName()
+                                +"|"+"("+myAsignments.get(posdata).getCveVehicle()+")"+" Conductor: "+myAsignments.get(posdata).getDriverName()
+                                +"|"+"("+myAsignments.get(posdata).getCveDriver()+")"+ " Tripulantes: " + tripulantes.toString());
+                    }
                 }
 
                 presenter.updateAsignments(myAsignments);

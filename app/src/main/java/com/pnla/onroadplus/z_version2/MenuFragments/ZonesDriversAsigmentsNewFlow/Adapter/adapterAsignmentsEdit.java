@@ -408,7 +408,7 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
 //                holder.constrainRequest.setVisibility(View.GONE);
                 Log.e("tripuFlow7"," data de tripulantes a guardar   nombre: "+ nombre+"       vehiculo "+vehiculo+"  tripulantes"+newTripulantes+" real vehicle "+myAsignments.get(position).getVehicleName());
 
-                Log.e("datovehiculo", "el vehiculo nuevo: "+vehiculo + " el que van a suplir: " + myAsignments.get(position).getVehicleName()+ "   ");
+                Log.e("datovehiculo", "el vehiculo nuevo: "+vehiculo + " el que van a suplir: " + myAsignments.get(position).getVehicleName()+ "   " + myAsignments.get(position).getDriverName() + "");
 
                 //Log.e("datosTripulantesss", "Tripulantes: " + newTripulantes + " Tamaño: " + newTripulantes.size() + " ");
 
@@ -434,7 +434,7 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
 //                            holder.txtVeditTrip.setText(tripulantes);
                             if(holder.tripulantes.getText()!=null|| !holder.tripulantes.getText().equals("")) {
                                 //newTripulantes= holder.tripulantes.getText();
-                                if(newTripulantes==null && tripulantes!=null && myAsignments.get(position).getTripulantes().size()!=0){
+                                if(newTripulantes==null && tripulantes!=null && myAsignments.get(position).getTripulantes().size()!=0 && tripulantes!="Sin tripulantes"){
                                     //newTripulantes= holder.tripulantes.getText();
                                     Log.e("TripulantesVacios" , "tripulantes: " + tripulantes + " ");
                                     tripulantes.substring(1);
@@ -445,7 +445,16 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                                     List<String> newTripulacionFinal = Arrays.asList(tripulantes.split("\\s*,\\s*"));
                                     myview.safeData(position,nombre, myAsignments.get(position).getVehicleName() , newTripulacionFinal, isnew);
                                 } else {
-                                    myview.safeData(position,nombre, myAsignments.get(position).getVehicleName() , newTripulantes, isnew);
+                                    if(myAsignments.get(position).getTripulantes().size()!=0) {
+                                        List<String> newTripulacionFinal = new ArrayList<>();
+                                        newTripulacionFinal.clear();
+                                        for(int i = 0; i<myAsignments.get(position).getTripulantes().size(); i++) {
+                                            newTripulacionFinal.add(myAsignments.get(position).getTripulantes().get(i).getTripulanteName());
+                                        }
+                                        myview.safeData(position,nombre, myAsignments.get(position).getVehicleName() , newTripulacionFinal, isnew);
+                                    } else {
+                                        myview.safeData(position,nombre, myAsignments.get(position).getVehicleName() , newTripulantes, isnew);
+                                    }
                                 }
                                 //Log.e("tripulantesVacios" , "Tripulantes: " + holder.tripulantes.getText() + " ");
                             }
@@ -490,7 +499,7 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                             if(!vehiculo.equals(myAsignments.get(position).getVehicleName())) {
 
                                 Log.e("descripcion2", "asigno vehiculo" + nombre + "  " + nombre2 + "  ");
-                                if(nombre.equals("")){
+                                if(nombre.equals("") && myAsignments.get(position).getDriverName().equals("")){
                                     myview.safeData(position, nombre, myAsignments.get(position).getVehicleName(), newTripulantes, isnew);
                                 } else {
                                     if(nombre2==null) {
