@@ -64,6 +64,13 @@ public class UnitAssignSupportPresenterImpl implements UnitAssignSupportPresente
     }
 
     @Override
+    public void goBackMap() {
+        if (view != null){
+            view.returnToMap();
+        }
+    }
+
+    @Override
     public void failureResponse(String message) {
         view.failureResponse(message);
     }

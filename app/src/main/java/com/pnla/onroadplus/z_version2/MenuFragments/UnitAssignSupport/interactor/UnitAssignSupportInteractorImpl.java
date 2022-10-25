@@ -133,6 +133,11 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
             if (responseCode == GeneralConstantsV2.RESPONSE_CODE_OK) {
                 List<SupportUnitData> data = supportUnitResponse.getData();
                 presenter.setSoportes(data);
+            }else
+            {
+                presenter.hideProgressDialog();
+                presenter.goBackMap();
+                Toast.makeText(context, "Sin zonas asignadas" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
             }
         } else {
             presenter.hideProgressDialog();

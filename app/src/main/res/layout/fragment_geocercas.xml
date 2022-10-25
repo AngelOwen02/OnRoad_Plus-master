@@ -106,7 +106,7 @@
 
     </LinearLayout>
 
-    <ProgressBar
+    <!--<ProgressBar
         android:id="@+id/units_view_progress_bar"
         android:layout_width="60dp"
         android:layout_height="60dp"
@@ -115,7 +115,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/toolbar_units" />
-
+-->
     <androidx.cardview.widget.CardView
         android:id="@+id/tracking_search_view_container"
         android:layout_width="match_parent"

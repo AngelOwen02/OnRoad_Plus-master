@@ -19,4 +19,6 @@ public interface UnitAssignSupportPresenter {
     void failureResponse(String message);
     void showProgressDialog();
     void hideProgressDialog();
+
+    void goBackMap();
 }

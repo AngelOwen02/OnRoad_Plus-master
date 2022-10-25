@@ -143,6 +143,10 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
     }
 
     @Override
+    public void returnToMap() {
+
+    }
+    @Override
     public void onBackPressed() {
         goBackintomenu();
     }
@@ -166,4 +170,5 @@ public class UnitAssignSupportContainer extends AppCompatActivity implements Uni
     public void hideProgressDialog() {
 
     }
+
 }

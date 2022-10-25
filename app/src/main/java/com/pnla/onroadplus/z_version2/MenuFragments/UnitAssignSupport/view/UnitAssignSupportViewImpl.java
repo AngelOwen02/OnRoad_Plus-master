@@ -61,6 +61,8 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
     private ProgressDialog progressDialog;
     final Handler handler = new Handler();
     private Runnable runnable;
+    final Handler handler1 = new Handler();
+    private Runnable runnable1;
     private UnitAssignSupportPresenter presenter;
     int position;
     private List<String> asingmentdata2;
@@ -231,6 +233,18 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
     }
 
     @Override
+    public void returnToMap() {
+      handler1.postDelayed(runnable1 = new Runnable() {
+            @Override
+            public void run() {
+
+                onBackPressed();
+            }
+        },2000);
+
+    }
+
+    @Override
     public void showProgressDialog(){
         progressDialog.setMessage("Cargando Unidades");
         progressDialog.setCancelable(false);
@@ -239,7 +253,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
 
     @Override
     public void onBackPressed() {
-        goBackintomenu();
+        super.onBackPressed();
     }
 
     private void goBackintomenu()
@@ -258,6 +272,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
     public void onPause() {
         super.onPause();
         handler.removeCallbacks(runnable);
+        handler1.removeCallbacks(runnable1);
 
     }
 
@@ -268,12 +283,13 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
 
         // Toast.makeText(getContext(), "no me fui limpio", Toast.LENGTH_SHORT).show();
         handler.postDelayed(runnable,200);
-
+        handler1.removeCallbacks(runnable1);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
         handler.removeCallbacks(runnable);
+        handler1.removeCallbacks(runnable1);
     }
 }

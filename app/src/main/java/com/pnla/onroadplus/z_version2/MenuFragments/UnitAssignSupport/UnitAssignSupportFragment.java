@@ -140,7 +140,7 @@ public class UnitAssignSupportFragment extends AppCompatActivity implements View
     }
     @Override
     public void onBackPressed() {
-        goBackintomenu();
+
     }
 
     private void goBackintomenu()

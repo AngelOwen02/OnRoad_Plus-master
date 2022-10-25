@@ -14,4 +14,5 @@ public interface UnitAssignSupportView {
     void showProgressDialog();
     void hideProgressDialog();
 
+    void returnToMap();
 }
