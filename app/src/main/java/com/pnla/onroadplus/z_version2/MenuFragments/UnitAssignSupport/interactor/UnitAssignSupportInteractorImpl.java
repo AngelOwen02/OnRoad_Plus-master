@@ -137,7 +137,7 @@ public class UnitAssignSupportInteractorImpl implements UnitAssignSupportInterac
             {
                 presenter.hideProgressDialog();
                 presenter.goBackMap();
-                Toast.makeText(context, "Sin zonas asignadas" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Sin zonas asignadas" , Toast.LENGTH_SHORT).show();
             }
         } else {
             presenter.hideProgressDialog();
