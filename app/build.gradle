@@ -18,13 +18,13 @@ android {
         // but continue the build even when errors are found:
         abortOnError false
     }
-    compileSdkVersion 30
+    compileSdkVersion 31
     defaultConfig {
         applicationId "com.pnla.onroadplus"
         minSdkVersion 17
-        targetSdkVersion 30
-        versionCode 22
-        versionName "2.0.74"
+        targetSdkVersion 31
+        versionCode 23
+        versionName "2.0.75"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

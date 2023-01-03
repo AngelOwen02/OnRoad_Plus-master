@@ -66,6 +66,7 @@ import java.util.List;
     private List<Integer> cvesalternos=new ArrayList<>();
     private List<String> itemgeosList;
     private boolean isMorethan20=false;
+    private boolean isfirstOnthisScreen=true;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_units_impl, container, false);
@@ -131,9 +132,9 @@ import java.util.List;
                 unitsInteractor.getAllVehiclesFromAPI(isMorethan20);
                 presenter.hideProgressDialog();
                 searchViewContainer.setVisibility(View.GONE);
-                handler.postDelayed(this,30000);
+                handler.postDelayed(this,60000);
             }
-        },30000);
+        },60000);
 
     }
 
@@ -161,12 +162,18 @@ import java.util.List;
         List<Integer> allcves=new ArrayList<>();
         if(vehicles!=null)
         {
-            if(vehicles.size()<20){
+            if(vehicles.size()<30){
                 isMorethan20=true;
 
                 unitAdapter = new UnitAdapter(vehicles,isMorethan20,getContext());
                 rvUnits.setAdapter(unitAdapter);
                 hideProgressDialog();
+                if(isfirstOnthisScreen)
+                {
+           //         firstPullUp();
+                    presenter.getFullVehicles(isMorethan20);
+                    isfirstOnthisScreen=false;
+                }
 
             }else
             {

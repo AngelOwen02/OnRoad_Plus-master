@@ -151,7 +151,7 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
             MarkerOptions markerOptions = new MarkerOptions();
 
             markerOptions.position(new LatLng(lat, lng));
-            markerOptions.infoWindowAnchor(2, 2);
+            markerOptions.infoWindowAnchor(.5f, .4f);
             markerOptions.anchor(0.5f, 0.5f);
             markerOptions.icon(vehicleIcon);
 

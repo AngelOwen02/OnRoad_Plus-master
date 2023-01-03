@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.pnla.onroadplus">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,6 +20,8 @@
     <!-- todo answer https://stackoverflow.com/questions/62535856/intent-resolveactivity-returns-null-in-api-30/64204646#64204646 -->
     <queries>
         <!-- Browser -->
+        <package android:name="com.google.android.apps.maps" />
+        <package android:name="com.waze" />
         <intent>
             <action android:name="android.intent.action.VIEW" />
             <data android:scheme="http" />
@@ -87,7 +90,8 @@
             android:screenOrientation="portrait" />
 
         <activity android:name=".z_version2.MenuFragments.Checklist.View.history.historicChecklist"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="Instantiatable" />
 
         <uses-library
             android:name="org.apache.http.legacy"
@@ -103,7 +107,7 @@
         <activity android:name="com.pnla.onroadplus.z_version2.activities.login.view.ActivityLoginV2"
             android:screenOrientation="portrait"/>
 
-        <service android:name="org.eclipse.paho.android.service.MqttService" />
+        <!--<service android:name="org.eclipse.paho.android.service.MqttService" />-->
 
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -117,7 +121,8 @@
 
         <activity
             android:name="com.pnla.onroadplus.z_version2.SplashScreenActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
