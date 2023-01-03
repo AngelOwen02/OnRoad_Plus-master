@@ -13,7 +13,7 @@ public interface UnitsPresenter {
 
     //void setView2(UnitAssignSupportViewImpl view);
 
-    void getFullVehicles();
+    void getFullVehicles(boolean ismorethan20);
   //  void getvehiclesINgroups();
     void georeferenceformAPI(List<Integer> values) throws IOException;
     void setVehiclesListToView(List<Unit> unitList) throws IOException;

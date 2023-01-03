@@ -97,7 +97,7 @@ public class UnitsInteractorImpl implements UnitsInteractor {
 
     //region getAllVehiclesFromAPI
     @Override
-    public void getAllVehiclesFromAPI() {
+    public void getAllVehiclesFromAPI(boolean ismorethan20) {
         List<Integer> noCves = new ArrayList<>();
         //
         //  firstime=true;
@@ -143,7 +143,7 @@ public class UnitsInteractorImpl implements UnitsInteractor {
         {
             noCves.add(0);
         }
-        startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context);
+        startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context,ismorethan20);
 
 //        Log.e("UnitDB", UnitDB.getUnitList().toString());
 //        Log.e("FinalUnitDB", FinalUnitDB.getUnitList().toString());
@@ -234,35 +234,57 @@ public class UnitsInteractorImpl implements UnitsInteractor {
     //endregion getGeoreferencefromAPI
 
     //region startVehiclesRequest
-    private void startVehiclesRequest(int typeRequest, List<Integer> vehiclesCves, final Context context) {
+    private void startVehiclesRequest(int typeRequest, List<Integer> vehiclesCves, final Context context, boolean ismorethan20) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-        if(token!=null)
-        {
+        if (token != null) {
             UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);
-            Log.e("token",""+token);
-           // Log.e("checkinguser",token+"  "+typeRequest+"  "+vehiclesCves);
+            Log.e("token", "" + token);
+            // Log.e("checkinguser",token+"  "+typeRequest+"  "+vehiclesCves);
             presenter.showProgressDialog();
-            unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
-                @Override
-                public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
-                    try {
-                        validateCode(response, context);
-                    } catch (IOException e) {
-                        e.printStackTrace();
+            if (ismorethan20) {
+                unitService.getFullVehiclesGEO(request).enqueue(new Callback<UnitResponse>() {
+                    @Override
+                    public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
+                        try {
+                            validateCode(response, context);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<UnitResponse> call, Throwable t) {
-                    // Log.e("onFailure",t.getLocalizedMessage());
-                    Toast.makeText(context,  "sesion expirada", Toast.LENGTH_LONG).show();
+                    @Override
+                    public void onFailure(Call<UnitResponse> call, Throwable t) {
+                        // Log.e("onFailure",t.getLocalizedMessage());
+                        Toast.makeText(context, "sesion expirada", Toast.LENGTH_LONG).show();
 
-                }
-            });
+                    }
+                });
+
+            } else {
+                unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
+                    @Override
+                    public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
+                        try {
+                            validateCode(response, context);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<UnitResponse> call, Throwable t) {
+                        // Log.e("onFailure",t.getLocalizedMessage());
+                        Toast.makeText(context, "sesion expirada", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+            }
         }
-
     }
+
+
+
     //endregion startVehiclesRequest
 
     //region validateCode

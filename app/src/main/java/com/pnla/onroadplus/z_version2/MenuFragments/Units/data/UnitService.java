@@ -22,6 +22,9 @@ public interface UnitService {
     Call<UnitResponse> getFullVehicles(@Body UnitRequest request);
 
     @POST(RetrofitEndPointsV2.GET_FULL_GEOREFERENCE)
+    Call<UnitResponse> getFullVehiclesGEO(@Body UnitRequest request);
+
+    @POST(RetrofitEndPointsV2.GET_FULL_GEOREFERENCE)
     Call<GeoreferenceResponse> getFullGeoReference(@Body GeoreferenceRequest request);
 
     @POST(RetrofitEndPointsV2.GET_VEHICLE_DESCRIPTION)
@@ -38,6 +41,8 @@ public interface UnitService {
 
     @POST(RetrofitEndPointsV2.GET_MENUOBJECT)
     Call<geoCercasResponse> hideShowgeoCercas(@Body gecercasRequest request);
+
+
 
     //Todo mover a util de Assignment
 }

@@ -24,10 +24,10 @@ public class UnitsPresenterImpl implements UnitsPresenter {
     }
 
     @Override
-    public void getFullVehicles() {
+    public void getFullVehicles(boolean ismorethan20) {
         if (view != null){
 
-            interactor.getAllVehiclesFromAPI();
+            interactor.getAllVehiclesFromAPI(ismorethan20);
         }
     }
 

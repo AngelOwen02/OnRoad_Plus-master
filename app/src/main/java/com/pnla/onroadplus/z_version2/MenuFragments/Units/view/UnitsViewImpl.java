@@ -65,7 +65,7 @@ import java.util.List;
     private List<String> directions;
     private List<Integer> cvesalternos=new ArrayList<>();
     private List<String> itemgeosList;
-
+    private boolean isMorethan20=false;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_units_impl, container, false);
@@ -111,7 +111,7 @@ import java.util.List;
 
 //        DTXAction processUnits= Dynatrace.enterAction("processUnits");//
 //        processUnits.getRequestTag();
-        presenter.getFullVehicles();
+        presenter.  getFullVehicles(isMorethan20);
    //     processUnits.leaveAction();
 
         // presenter.getvehiclesINgroups();
@@ -128,12 +128,12 @@ import java.util.List;
             public void run() {
                 //presenter.getFullVehicles();
                 UnitsInteractor unitsInteractor = new UnitsInteractorImpl(presenter,getContext());
-                unitsInteractor.getAllVehiclesFromAPI();
+                unitsInteractor.getAllVehiclesFromAPI(isMorethan20);
                 presenter.hideProgressDialog();
                 searchViewContainer.setVisibility(View.GONE);
-                handler.postDelayed(this,60000);
+                handler.postDelayed(this,30000);
             }
-        },60000);
+        },30000);
 
     }
 
@@ -154,16 +154,110 @@ import java.util.List;
         List<Unit> activeUnitsList = UnitDB.getUnitListActive();
         List<Group> activeGroupslist = GroupDB.getActiveGroupList();
         this.vehicles = unitList;
+
       //  Log.e("partsrequestvehicles",""+vehicles.size());
         final LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         rvUnits.setLayoutManager(linearLayoutManager);
         List<Integer> allcves=new ArrayList<>();
         if(vehicles!=null)
         {
-            for(int y=0;y<vehicles.size();y++)
+            if(vehicles.size()<20){
+                isMorethan20=true;
+
+                unitAdapter = new UnitAdapter(vehicles,isMorethan20,getContext());
+                rvUnits.setAdapter(unitAdapter);
+                hideProgressDialog();
+
+            }else
             {
-                allcves.add(vehicles.get(y).getCveVehicle());
+                isMorethan20=false;
+                for(int y=0;y<vehicles.size();y++)
+                {
+                    allcves.add(vehicles.get(y).getCveVehicle());
+                }
+
+                unitAdapter = new UnitAdapter(vehicles,isMorethan20,getContext());
+                rvUnits.setAdapter(unitAdapter);
+                hideProgressDialog();
+                unitAdapter.notifyDataSetChanged();
+                if( vehicles.size()!=0)
+                {
+                    //directions.get(0).contains(String.valueOf( vehicles.get(0).getCveVehicle()));
+
+                    cvesalternos.clear();
+                    // Log.e("bloquesdeunides2","------"+ unitAdapter.getadapterviewsize());
+                    // Log.e("bloquesdeunides2","------"+ unitAdapter.getItemCount());
+                    //if(vehicles.size()>12){
+
+                    if(unitAdapter.getItemCount()<7)
+                    {
+                        for(int k=0;k<vehicles.size();k++)
+                        {
+                            cvesalternos.add( vehicles.get(k).getCveVehicle());
+                        }
+                    }
+                    else
+                    {
+                        for(int k=0;k<6;k++)
+                        {
+
+                            cvesalternos.add( vehicles.get(k).getCveVehicle());
+                        }
+                    }
+
+
+                    // Log.e("bloquesdeunides2","cve ::: "+cvesalternos.get(0));
+                    //}
+                    position=cvesalternos.size();
+                    presenter.georeferenceformAPI(cvesalternos);
+
+                    unitAdapter.getAdress(directions);
+                    unitAdapter.notifyDataSetChanged();
+
+                }
+                rvUnits.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                    @Override
+                    public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                        super.onScrollStateChanged(recyclerView, newState);
+                        //    Log.e("filterlog",""+cvesalternos);
+                        //    Log.e("bloquesdeunides11",""+allcves);
+
+                        if (position < unitAdapter.getadapterviewsize()) {
+                            if ( searchViewContainer.getVisibility()==View.GONE)
+                            {
+                                cvesalternos.clear();
+                                for (int k = 0; k < unitAdapter.getadapterviewsize(); k++) {
+
+                                    cvesalternos.add(vehicles.get(k).getCveVehicle());
+                                }
+
+                                //}
+
+                                try {
+                                    presenter.georeferenceformAPI(cvesalternos);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                                unitAdapter.getAdress(directions);
+                            }
+                        }
+                        unitAdapter.notifyDataSetChanged();
+                        //Log.e("bloquesdeunides8", "///////" + directions.size());
+                        //Log.e("bloquesdeunides8", "///////" + directions);
+                    }
+                });
+
+                //rvUnits.getChildLayoutPosition(rvUnits.getFocusedChild());
+                // Log.e("bloquesdeunides2",""+ rvUnits.getChildLayoutPosition(rvUnits.getFocusedChild()));
+                //  unitAdapter.notifyDataSetChanged();
+                // Log.e("bloquesdeunides2",""+ rvUnits.getLayoutManager().getChildCount());//+holder.getLayoutPosition()+"  ");
+                // unitAdapter.getadapterviewsize();
+                // Log.e("unitsthaticansaw2"," : "+UnitsInteractorImpl.dataofvehiclesgroupscve);
+     /*   if(!UnitsInteractorImpl.dataofvehiclesgroupscve.isEmpty())
+        {            // Log.e("unitsthaticansaw2"," data is here ");            if(doitonce==false)            {                interactorbridge();            }            else            {            }        }        else        {            // Log.e("unitsthaticansaw2"," mepty ");            // Log.e("unitsthaticansaw2"," : "+UnitsInteractorImpl.dataofvehiclesgroupscve);        }*/
+                unitAdapter.notifyDataSetChanged();
             }
+
         }
 
      //   Log.e("bloquesdeunides11",""+allcves);
@@ -183,85 +277,6 @@ import java.util.List;
         //rvUnits.setOnFlingListener(null);
         //snapHelper.attachToRecyclerView(rvUnits);
 
-        unitAdapter = new UnitAdapter(vehicles,getContext());
-        rvUnits.setAdapter(unitAdapter);
-        hideProgressDialog();
-        if( vehicles.size()!=0)
-        {
-            //directions.get(0).contains(String.valueOf( vehicles.get(0).getCveVehicle()));
-
-            cvesalternos.clear();
-           // Log.e("bloquesdeunides2","------"+ unitAdapter.getadapterviewsize());
-           // Log.e("bloquesdeunides2","------"+ unitAdapter.getItemCount());
-            //if(vehicles.size()>12){
-
-            if(unitAdapter.getItemCount()<7)
-            {
-                for(int k=0;k<vehicles.size();k++)
-                {
-                    cvesalternos.add( vehicles.get(k).getCveVehicle());
-                }
-            }
-            else
-            {
-                for(int k=0;k<6;k++)
-                {
-
-                    cvesalternos.add( vehicles.get(k).getCveVehicle());
-                }
-            }
-
-
-            // Log.e("bloquesdeunides2","cve ::: "+cvesalternos.get(0));
-            //}
-            position=cvesalternos.size();
-            presenter.georeferenceformAPI(cvesalternos);
-
-            unitAdapter.getAdress(directions);
-            unitAdapter.notifyDataSetChanged();
-
-        }
-        rvUnits.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                super.onScrollStateChanged(recyclerView, newState);
-            //    Log.e("filterlog",""+cvesalternos);
-            //    Log.e("bloquesdeunides11",""+allcves);
-
-                if (position < unitAdapter.getadapterviewsize()) {
-                    if ( searchViewContainer.getVisibility()==View.GONE)
-                    {
-                        cvesalternos.clear();
-                    for (int k = 0; k < unitAdapter.getadapterviewsize(); k++) {
-
-                        cvesalternos.add(vehicles.get(k).getCveVehicle());
-                    }
-
-                    //}
-
-                        try {
-                            presenter.georeferenceformAPI(cvesalternos);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        unitAdapter.getAdress(directions);
-                }
-                }
-                unitAdapter.notifyDataSetChanged();
-                //Log.e("bloquesdeunides8", "///////" + directions.size());
-                //Log.e("bloquesdeunides8", "///////" + directions);
-            }
-        });
-
-        //rvUnits.getChildLayoutPosition(rvUnits.getFocusedChild());
-        // Log.e("bloquesdeunides2",""+ rvUnits.getChildLayoutPosition(rvUnits.getFocusedChild()));
-        //  unitAdapter.notifyDataSetChanged();
-        // Log.e("bloquesdeunides2",""+ rvUnits.getLayoutManager().getChildCount());//+holder.getLayoutPosition()+"  ");
-        // unitAdapter.getadapterviewsize();
-        // Log.e("unitsthaticansaw2"," : "+UnitsInteractorImpl.dataofvehiclesgroupscve);
-     /*   if(!UnitsInteractorImpl.dataofvehiclesgroupscve.isEmpty())
-        {            // Log.e("unitsthaticansaw2"," data is here ");            if(doitonce==false)            {                interactorbridge();            }            else            {            }        }        else        {            // Log.e("unitsthaticansaw2"," mepty ");            // Log.e("unitsthaticansaw2"," : "+UnitsInteractorImpl.dataofvehiclesgroupscve);        }*/
-        unitAdapter.notifyDataSetChanged();
     }
 
     @Override

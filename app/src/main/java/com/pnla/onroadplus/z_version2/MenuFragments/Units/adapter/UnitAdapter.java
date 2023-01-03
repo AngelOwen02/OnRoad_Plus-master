@@ -40,11 +40,13 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
     private Handler handler;
     public static  int lastitem;
     public List<String> textaddres= new ArrayList<>();
+    private boolean isMorerthan20;
 
 
-    public UnitAdapter(List<Unit> unitList, Context context) {
+    public UnitAdapter(List<Unit> unitList, boolean isMorethan20, Context context) {
         this.context = context;
         this.unitList = unitList;
+        this.isMorerthan20=isMorethan20;
     }
 
     @NonNull
@@ -160,22 +162,19 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
         } else {
             holder.txtHour.setText("--");
         }
+        //region ismorethan20
+        if(isMorerthan20==false) {
+            if (textaddres != null) {
+                // Log.e("bloquesdeunides","list String :   "+textaddres.get(position));
 
-        if(textaddres!=null)
-        {
-           // Log.e("bloquesdeunides","list String :   "+textaddres.get(position));
-
-          //  if(textaddres.get(position).equals(""))
-         //   {
-           //     holder.txtUnitGeoReference.setText("---- ---- ---- ----");
-         //   }
-     //       else{
-            //    holder.txtUnitGeoReference.setText();
-                for(String name:textaddres )
-                {
-                 if(name.contains(unitList.get(position).getVehicleName()))
-
-                    {
+                //  if(textaddres.get(position).equals(""))
+                //   {
+                //     holder.txtUnitGeoReference.setText("---- ---- ---- ----");
+                //   }
+                //       else{
+                //    holder.txtUnitGeoReference.setText();
+                for (String name : textaddres) {
+                    if (name.contains(unitList.get(position).getVehicleName())) {
                         String[] parts1 = name.split(":::");
                         String part1 = parts1[0];
                         String part2 = parts1[1];
@@ -183,11 +182,16 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
                     }
                 }
 
-          //  }
+                //  }
+            } else {
+                holder.txtUnitGeoReference.setText("---- ---- ---- ----");
+            }
         }else
         {
-            holder.txtUnitGeoReference.setText("---- ---- ---- ----");
+            holder.txtUnitGeoReference.setText(unitList.get(position).getGeoreference());
         }
+        //endregion
+        //todo aqui va el valor de bool true false para menos de 20 vehiculos
     /*    if (unitList.get(position).getGeoreference() != null){
             if (unitList.get(position).getGeoreference().equals("")){
                 holder.txtUnitGeoReference.setText("---- ---- ---- ----");
