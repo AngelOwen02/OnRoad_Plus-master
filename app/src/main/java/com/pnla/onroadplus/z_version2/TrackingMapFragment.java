@@ -357,6 +357,11 @@ public class TrackingMapFragment extends Fragment implements OnMapReadyCallback,
                         if(isdraw==false)
                         {
                             geoCercasData();
+
+                        }else{
+                            if(currentZoom>14){
+                                initagain();
+                            }
                         }
                     }
                 }
@@ -409,7 +414,7 @@ public class TrackingMapFragment extends Fragment implements OnMapReadyCallback,
                 {
                     Thread.currentThread().interrupt();
                 }
-                Log.e("requestdeunitsagain","presentador iniciado");
+                Log.e("zoomzoom","presentador iniciado");
                 readytorefreh=true;
                 initPresenter();
                 starproces();
@@ -464,7 +469,8 @@ public class TrackingMapFragment extends Fragment implements OnMapReadyCallback,
     public void onResume() {
         super.onResume();
         mView.onResume();
-        handler.postDelayed(runnable,10000);
+
+        //handler.postDelayed(runnable,10000);
         Log.e("onResume", "OK");
 
 
