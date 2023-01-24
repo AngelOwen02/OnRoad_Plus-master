@@ -101,57 +101,24 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //List<String> newAsig = filteredUnits(asingmentdata2, newText);
                 List<SupportUnitData> filterUnitList = filteredUnits(soportes, newText);
                 unitAssignSupportAdapter.setFilter(filterUnitList);
-                //Toast.makeText(getApplicationContext(), "Si funciona", Toast.LENGTH_SHORT).show();
                 return false;
             }
         });
-
-//        Dynatrace.applyUserPrivacyOptions(UserPrivacyOptions.builder()
-//                .withDataCollectionLevel(DataCollectionLevel.USER_BEHAVIOR)
-//                .withCrashReportingOptedIn(true)
-//                .build());
-
-        SharedPreferences preferences = getApplicationContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-        String userName = preferences.getString(GeneralConstantsV2.USER_PREFERENCES, null);
-        // String test="TestDynatraceusername";
-        //Dynatrace.identifyUser( userName);
-        Log.e("dynatracelog", "units user dynatrace   " + userName);
     }
 
     private void initPresenter() {
         presenter = new UnitAssignSupportPresenterImpl(getApplicationContext());
         presenter.setView(this);
-
-//        DTXAction processUnits= Dynatrace.enterAction("processUnits");//
-//        processUnits.getRequestTag();
-        //presenter.getFullVehicles();
-        //     processUnits.leaveAction();
-
-        // presenter.getvehiclesINgroups();
-
-
     }
 
     private void update(){
-        //final UnitsPresenter presenter = new UnitsPresenterImpl(getContext());
-        //  presenter.setView(this);
-
         handler.postDelayed(runnable = new Runnable() {
             @Override
             public void run() {
-                progressDialog.show();
-                //presenter.getFullVehicles();
-                //UnitsInteractor unitsInteractor = new UnitsInteractorImpl(presenter,getContext());
-                UnitAssignSupportInteractor unitAssignSupportInteractor = new UnitAssignSupportInteractorImpl(presenter,getBaseContext());
-                //unitsInteractor.getAllVehiclesFromAPI();
-                //unitAssignSupportInteractor.getGeoreferencefromAPI();
-                unitAssignSupportInteractor.requestSoportes();
-                //presenter.hideProgressDialog();
-                //searchViewContainer.setVisibility(View.GONE);
-                handler.postDelayed(this,60000);
+               presenter.requestVehicles();
+               handler.postDelayed(this,60000);
             }
         },60000);
     }
@@ -163,18 +130,9 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
 
     @Override
     public void setSoportes(List<SupportUnitData> data) {
+        this.soportes = data;
+        fillSoportes(soportes);
 
-        if(soportes!=null){
-            if (soportes==data){
-            } else {
-                this.soportes = data;
-                unitAssignSupportAdapter.notifyDataSetChanged();
-            }
-        } else {
-            this.soportes = data;
-            fillSoportes(soportes);
-        }
-        progressDialog.dismiss();
     }
 
     private void fillSoportes(List<SupportUnitData> soportes){
@@ -184,7 +142,6 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         rvVehicles.setAdapter(unitAssignSupportAdapter);
     }
 
-    //Aqui hace el filtrado de vehiculos por DescLayer
     private List<SupportUnitData> filteredUnits(List<SupportUnitData> data, String text) {
 
         List<SupportUnitData> filteredList = new ArrayList<>();
@@ -207,25 +164,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.back:
-                goBackintomenu();
-                break;
 
-            case R.id.search_toolbar_item_us:
-                //Toast.makeText(this, "Si funciona", Toast.LENGTH_SHORT).show();
-                //searchView.setVisibility(View.VISIBLE);
-                if(searchViewContainer.getVisibility()==View.VISIBLE) {
-                    searchViewContainer.setVisibility(View.GONE);
-                }
-                else{
-                    searchViewContainer.setVisibility(View.VISIBLE);
-                }
-                break;
-        }
-    }
 
     @Override
     public void hideProgressDialog(){
@@ -280,9 +219,6 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
     public void onResume() {
         super.onResume();
         initPresenter();
-
-        // Toast.makeText(getContext(), "no me fui limpio", Toast.LENGTH_SHORT).show();
-        handler.postDelayed(runnable,200);
         handler1.removeCallbacks(runnable1);
     }
 
@@ -291,5 +227,22 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
         super.onDestroy();
         handler.removeCallbacks(runnable);
         handler1.removeCallbacks(runnable1);
+    }
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.back:
+                goBackintomenu();
+                break;
+
+            case R.id.search_toolbar_item_us:
+                if(searchViewContainer.getVisibility()==View.VISIBLE) {
+                    searchViewContainer.setVisibility(View.GONE);
+                }
+                else{
+                    searchViewContainer.setVisibility(View.VISIBLE);
+                }
+                break;
+        }
     }
 }

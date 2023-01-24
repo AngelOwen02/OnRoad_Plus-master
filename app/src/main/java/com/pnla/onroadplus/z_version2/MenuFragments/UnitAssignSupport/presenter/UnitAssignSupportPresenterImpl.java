@@ -31,7 +31,6 @@ public class UnitAssignSupportPresenterImpl implements UnitAssignSupportPresente
     @Override
     public void setView(UnitAssignSupportView view) {
         this.view = view;
-        view.showProgressDialog();
     }
 
     @Override

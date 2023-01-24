@@ -3,7 +3,7 @@ package com.pnla.onroadplus.z_version2.retrofit;
 public class RetrofitEndPointsV2 {
     //esta es la chida
     public static final String URL_SERVER = "http://35.194.83.10/WS-phoenixApiPROD/";
-    public static final String URL_SERVER_TEST = "http://192.168.1.39:8080/WS-phoenixApiPROD/";
+    public static final String URL_SERVER_TEST = "http://192.168.1.13:8080/WS-phoenixApiPROD/";
 
     //public static final String URL_SERVER = "https://cerberusenlinea.com/WS-phoenixApiPROD/";
     public static final String URL_MAP_API="http://newlandapps.com/";
