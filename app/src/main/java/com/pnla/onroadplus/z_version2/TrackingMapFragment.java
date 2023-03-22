@@ -125,7 +125,7 @@ public class TrackingMapFragment extends Fragment implements OnMapReadyCallback,
     // Create a stroke pattern of a dot followed by a gap, a dash, and another gap.
     private static final List<PatternItem> PATTERN_POLYGON_BETA =
             Arrays.asList(DOT, GAP, DASH, GAP);
-
+    private boolean isprocesStarted=false;
     /***/
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -360,7 +360,26 @@ public class TrackingMapFragment extends Fragment implements OnMapReadyCallback,
 
                         }else{
                             if(currentZoom>14){
-                                initagain();
+                                if(isprocesStarted==false) {
+                                    initagain();
+                                }else
+                                {
+                                    new Handler().postDelayed(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            isprocesStarted=false;
+                                            if(isprocesStarted==false){
+                                               initagain();
+                                            }
+                                        }
+                                    },10000);
+
+                                    //Log.e("requestdeunitsagain1",""+isprocesStarted);
+                                }
+                            }else{
+                               if(handler!=null) {
+                                    handler.removeCallbacks(runnable);
+                                }
                             }
                         }
                     }
@@ -396,7 +415,8 @@ public class TrackingMapFragment extends Fragment implements OnMapReadyCallback,
     }
     private void initagain()
     {
-
+        isprocesStarted=true;
+        Log.e("requestdeunitsagain1","initmethod"+isprocesStarted);
         handler.postDelayed(runnable = new Runnable() {
             @Override
             public void run() {
@@ -433,9 +453,13 @@ public class TrackingMapFragment extends Fragment implements OnMapReadyCallback,
                 }
                 //  presenter.getFullVehicles();
 
-                handler.postDelayed(this, 30000);
+                //handler.postDelayed(this, 30000);
+                isprocesStarted=false;
+                Log.e("requestdeunitsagain1","endmethod"+isprocesStarted);
             }
-        }, 30000);
+        }, 10000);
+
+
     }
 
 

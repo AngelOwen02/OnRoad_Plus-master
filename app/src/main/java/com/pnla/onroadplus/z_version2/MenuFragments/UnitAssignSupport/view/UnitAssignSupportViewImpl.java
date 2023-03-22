@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
@@ -69,6 +70,9 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
     private List<Integer> cvesalternos=new ArrayList<>();
     private CardView searchViewContainer;
     private SearchView searchViewa;
+    private static final String RECYCLER_VIEW_POSITION = "recycler_view_position";
+    private int RVPos;
+    private  LinearLayoutManager layoutManager;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -106,6 +110,7 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
                 return false;
             }
         });
+
     }
 
     private void initPresenter() {
@@ -130,16 +135,19 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
 
     @Override
     public void setSoportes(List<SupportUnitData> data) {
+
         this.soportes = data;
         fillSoportes(soportes);
-
+        rvVehicles.scrollToPosition(RVPos);
     }
 
     private void fillSoportes(List<SupportUnitData> soportes){
-        unitAssignSupportAdapter = new UnitAssignSupportAdapter(soportes,getApplicationContext());
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        unitAssignSupportAdapter = new UnitAssignSupportAdapter(this,soportes,getApplicationContext());
+        layoutManager = new LinearLayoutManager(getApplicationContext());
         rvVehicles.setLayoutManager(layoutManager);
         rvVehicles.setAdapter(unitAssignSupportAdapter);
+
+
     }
 
     private List<SupportUnitData> filteredUnits(List<SupportUnitData> data, String text) {
@@ -244,5 +252,17 @@ public class UnitAssignSupportViewImpl extends AppCompatActivity implements Unit
                 }
                 break;
         }
+    }
+
+    public void savePositionRV(final int position) {
+        rvVehicles.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                RVPos= layoutManager.findFirstCompletelyVisibleItemPosition();
+                Log.e("posRV",RVPos+"  pos2: "+position);
+            }
+
+        });
     }
 }

@@ -57,10 +57,12 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
     private Context context;
     public List<String> textaddres= new ArrayList<>();
     private List<String> data2;
+    private UnitAssignSupportViewImpl mview;
 
-    public UnitAssignSupportAdapter(List<SupportUnitData> data, Context context) {
+    public UnitAssignSupportAdapter(UnitAssignSupportViewImpl mview, List<SupportUnitData> data, Context context) {
         this.data = data;
         this.context = context;
+        this.mview=mview;
     }
 
     @NonNull
@@ -73,7 +75,7 @@ public class UnitAssignSupportAdapter extends RecyclerView.Adapter<UnitAssignSup
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
             /**SetData*/
-
+            mview.savePositionRV(position);
             //Esto es del nombre del vehiculo
             if (data.get(position).getVehicle_Name() != null){
                 if (data.get(position).getVehicle_Name().equals("")){

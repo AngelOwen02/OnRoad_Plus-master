@@ -112,7 +112,7 @@ import java.util.List;
 
 //        DTXAction processUnits= Dynatrace.enterAction("processUnits");//
 //        processUnits.getRequestTag();
-        presenter.  getFullVehicles(isMorethan20);
+        presenter.getFullVehicles(isMorethan20);
    //     processUnits.leaveAction();
 
         // presenter.getvehiclesINgroups();
