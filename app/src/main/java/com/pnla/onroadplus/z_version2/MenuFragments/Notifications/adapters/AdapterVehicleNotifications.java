@@ -1,5 +1,6 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Notifications.adapters;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -49,7 +50,7 @@ public class AdapterVehicleNotifications extends RecyclerView.Adapter<AdapterVeh
     }
 
     @Override///tamaños de fuente click
-    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 
         holder.txvVehicleName.setText(vehicles.get(position).getVehicleName());
         String currentVehicleName = holder.txvVehicleName.getText().toString();

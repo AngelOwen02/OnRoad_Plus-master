@@ -560,6 +560,12 @@ public class UnitMapViewImpl extends Fragment implements UnitMapView, GoogleMap.
         //Log.e("lastswitch",""+lastSwitch);
         String lastKm = data.getVehicle_km();
         String lastSpeed = data.getVehicle_speed();
+        if(lastKm==null){
+         lastKm="0.0";
+        }
+        if(lastSpeed==null){
+            lastSpeed="0.0";
+        }
         double d = Double.parseDouble(lastKm);
         double d1 = Double.parseDouble(lastSpeed);
         String lastkm = decimalFormat.format(d);
