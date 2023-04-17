@@ -481,14 +481,21 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
                                 String[] parts1=lislats.split(",");
                                 String[] parts2=listLongs.split(",");
                                 String[] parts3=calles.split("::");
+                                int sizeRepaetlats=lislats.split(",").length-1;
+                                int sizeRepaetlongs=listLongs.split(",").length-1;
+                                int sizeRepaetCalles=calles.split("::").length-1;
                                 for(int i=0;i<lislats.split(",").length; i=i+idslat)
                                 {
                                     String partlat=parts1[i];
                                     String parlong=parts2[i];
-                                    String calless=parts3[i];
-                                    //latlong.add("lat/lng: ("+parlong+","+partlat+")");///formato de output de latitudes y longitudes
+                                    //String calless=parts3[i];  esto se puso en el for de abajo
+
                                     latitudeList.add(parlong);
                                     longitudeList.add(partlat);
+                                    //calles1.add(calless);esto se puso en el for de abajo
+                                }
+                                for(int i=0;i<calles.split("::").length; i++){
+                                    String calless=parts3[i];
                                     calles1.add(calless);
                                 }
                                 // latitudeList.add(parts1[ (lislats.split(",").length]);
@@ -516,10 +523,14 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
                                 {
                                     String partlat=parts1[i];
                                     String parlong=parts2[i];
-                                    String calless=parts3[i];
+                                 //   String calless=parts3[i];
                                     //latlong.add("lat/lng: ("+parlong+","+partlat+")");///formato de output de latitudes y longitudes
                                     latitudeList.add(parlong);
                                     longitudeList.add(partlat);
+                                 //   calles1.add(calless);
+                                }
+                                for(int i=0;i<calles.split("::").length; i++){
+                                    String calless=parts3[i];
                                     calles1.add(calless);
                                 }
                                 // latitudeList.add(parts1[ (lislats.split(",").length]);
