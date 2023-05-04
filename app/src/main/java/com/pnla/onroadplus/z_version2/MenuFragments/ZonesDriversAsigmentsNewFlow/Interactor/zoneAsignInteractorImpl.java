@@ -405,9 +405,7 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
                 Log.e("tripulantesnewFLOW23","updatedata succesfull "+ responseCode+" "+message );
                 presenter.hideDialog();
                 presenter.restartAfterUpdate();
-            }
-
-            else if (responseCode == GeneralConstantsV2.RESPONSE_CODE_SESSION_EXPIRED) {
+            }else if (responseCode == GeneralConstantsV2.RESPONSE_CODE_SESSION_EXPIRED) {
 
             UnitDB.deleteDB();
             GroupDB.deleteDB();
@@ -434,12 +432,14 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             {
                 presenter.hideDialog();
                 presenter.auditTrail("System Error, el vehículo ya estaba asignado." + response.message());
+                presenter.restartAfterUpdate();
                 //Toast.makeText(context, "" + resp.getMessage(), Toast.LENGTH_SHORT).show();
                 Toast.makeText(context,"Se intento asignar un vehículo ya existente.", Toast.LENGTH_SHORT).show();
             }
             else if(responseCode == 500)
             {
                 presenter.hideDialog();
+                presenter.restartAfterUpdate();
                 Toast.makeText(context, "" + resp.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }

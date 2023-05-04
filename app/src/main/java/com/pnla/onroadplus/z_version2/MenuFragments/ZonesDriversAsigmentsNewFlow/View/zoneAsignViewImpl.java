@@ -528,7 +528,7 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
 
                     presenter.updateAsignments(myAsignments);
 
-                    restartActivity();
+                   // restartActivity();
                     }
                 else/**revisar data**/ {
                     Log.e("tripuFlow5", "tripúlantes no null");
