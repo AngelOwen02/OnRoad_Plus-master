@@ -528,8 +528,10 @@ public class adapterAsignmentsEdit  extends RecyclerView.Adapter<adapterAsignmen
                     //Esto es para cuando no tengan seleccionado un vehiculo
                     if(vehiculo.equals("Selecciona un vehículo")) {
                         Log.e("tripuFlow7","ESTO REINICIA TODO");
+
                         //Mandamos aviso y se reinicia para que borre los campos
                         Toast.makeText(context, " Por favor, selecciona un vehículo.", Toast.LENGTH_SHORT).show();
+//asdas
                         //Esto reinicia la pantalla para que se borren los datos
                         myview.restartActivity();
                     } else {
