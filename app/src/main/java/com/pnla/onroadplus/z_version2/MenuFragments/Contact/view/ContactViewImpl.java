@@ -79,7 +79,7 @@ public class ContactViewImpl extends Fragment implements ContactView, CardView.O
         edtxtEmailSupport.setEnabled(false);
         edtxtCopy.setEnabled(false);
         toolbarTitle = view.findViewById(R.id.default_toolbar_title);
-        toolbarTitle.setText("Contacto");
+        toolbarTitle.setText("Asistencia técnica");
 
         presenter = new ContactPresenterImpl(getContext());
         presenter.setView(this);
@@ -182,7 +182,7 @@ public class ContactViewImpl extends Fragment implements ContactView, CardView.O
     @Override
     public void onClick(View v) {
        // presenter.validateUserDataToSend(edtxtEmailSupport.getText().toString(), edtxtSubject.getText().toString(), edtxtMessageEmail.getText().toString(), getContext());
-        String url = "https://api.whatsapp.com/send?phone=525617224632&text="+"*De*:%20"+edtxtCopy.getText().toString()+"%0A"+"*Asunto*:%20"+ edtxtSubject.getText().toString().toUpperCase()+"%0A"+"%0A"+
+        String url = "https://api.whatsapp.com/send?phone=5218124691084&text="+"*De*:%20"+edtxtCopy.getText().toString()+"%0A"+"*Asunto*:%20"+ edtxtSubject.getText().toString().toUpperCase()+"%0A"+"%0A"+
                 edtxtMessageEmail.getText().toString();//5218124691084
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
