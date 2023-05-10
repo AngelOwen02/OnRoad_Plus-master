@@ -3,11 +3,15 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Contact.view;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +23,7 @@ import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.Containers.LoginContainer.view.LoginContainerActivity;
 import com.pnla.onroadplus.z_version2.MenuFragments.Contact.presenter.ContactPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Contact.presenter.ContactPresenterImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.Profile.view.ProfileViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.UnitDB;
 import com.pnla.onroadplus.z_version2.fragments.contactV2.interfaces.FragmentContactV2Data;
@@ -119,6 +124,30 @@ public class ContactViewImpl extends Fragment implements ContactView, CardView.O
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+
+                    FragmentManager manager = getActivity().getSupportFragmentManager();
+                    FragmentTransaction transaction = manager.beginTransaction();
+                    ProfileViewImpl profile = new ProfileViewImpl();//transaction.addToBackStack(UnitsViewImpl.TAG);
+                    transaction.replace(R.id.conteinerMainFragments, profile, ProfileViewImpl.TAG).commit();
+                    transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
+                    return true;
+                }
+                return false;
+            }
+        });
+    }
+
+    @Override
     public void successContactService() {
         presenter.sendEmail();
         edtxtSubject.getText().clear();
@@ -152,7 +181,12 @@ public class ContactViewImpl extends Fragment implements ContactView, CardView.O
 
     @Override
     public void onClick(View v) {
-        presenter.validateUserDataToSend(edtxtEmailSupport.getText().toString(), edtxtSubject.getText().toString(), edtxtMessageEmail.getText().toString(), getContext());
+       // presenter.validateUserDataToSend(edtxtEmailSupport.getText().toString(), edtxtSubject.getText().toString(), edtxtMessageEmail.getText().toString(), getContext());
+        String url = "https://api.whatsapp.com/send?phone=525617224632&text="+"*De*:%20"+edtxtCopy.getText().toString()+"%0A"+"*Asunto*:%20"+ edtxtSubject.getText().toString().toUpperCase()+"%0A"+"%0A"+
+                edtxtMessageEmail.getText().toString();//5218124691084
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
 
     }
 }

@@ -240,6 +240,7 @@
     <string name="profile_email">nombre_usuario@correo.com</string>
     <string name="profile_notifications_off">Habilitar notificaciones</string>
     <string name="profile_notifications_on">Deshabilitar notificaciones</string>
+    <string name="profile_contact">Contacto</string>
     <string name="profile_help">Ayuda</string>
     <string name="profile_logout">Cerrar sesión</string>
 

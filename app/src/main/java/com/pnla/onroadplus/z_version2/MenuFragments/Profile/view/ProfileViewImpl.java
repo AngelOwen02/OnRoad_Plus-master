@@ -13,13 +13,18 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
 //import com.dynatrace.android.agent.Dynatrace;
 import com.pnla.onroadplus.BuildConfig;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.Containers.LoginContainer.view.LoginContainerActivity;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListViewImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.Contact.view.ContactViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Profile.presenter.ProfilePresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Profile.presenter.ProfilePresenterImpl;
 import com.pnla.onroadplus.z_version2.activities.HelpContainerActivity;
@@ -55,9 +60,9 @@ public class ProfileViewImpl extends Fragment implements ProfileView, CompoundBu
     // UI Profile //
 
     private void initProfileView(View view) {
-
-        LinearLayout llLogout = view.findViewById(R.id.ll_logout_button_container);
-        LinearLayout llHelp = view.findViewById(R.id.ll_help_button_container);
+        ConstraintLayout contact = view.findViewById(R.id.ll_help_button_container1);
+        ConstraintLayout llLogout = view.findViewById(R.id.ll_logout_button_container);
+        ConstraintLayout llHelp = view.findViewById(R.id.ll_help_button_container);
         imgUser = view.findViewById(R.id.img_pi);
         txtUsername = view.findViewById(R.id.txt_pi_names);
         txtEmail = view.findViewById(R.id.txt_pi_email);
@@ -71,6 +76,7 @@ public class ProfileViewImpl extends Fragment implements ProfileView, CompoundBu
         toolbarTitle.setText("Perfil");
         versionCode.setText(vName);
         switchNotifications.setOnCheckedChangeListener(this);
+        contact.setOnClickListener(this);
         llLogout.setOnClickListener(this);
         llHelp.setOnClickListener(this);
 
@@ -149,6 +155,15 @@ public class ProfileViewImpl extends Fragment implements ProfileView, CompoundBu
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.ll_help_button_container1:
+
+                FragmentManager manager = getActivity().getSupportFragmentManager();
+                FragmentTransaction transaction = manager.beginTransaction();
+                ContactViewImpl contacto = new ContactViewImpl();
+                transaction.replace(R.id.conteinerMainFragments, contacto, ContactViewImpl.TAG).commit();
+                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+
+                break;
             case R.id.ll_help_button_container:
                 presenter.showHelpScreen();
 

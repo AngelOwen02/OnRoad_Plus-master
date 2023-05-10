@@ -4,7 +4,6 @@ public class RetrofitEndPointsV2 {
     //esta es la chida
     public static final String URL_SERVER = "http://35.194.83.10/WS-phoenixApiPROD/";
     public static final String URL_SERVER_TEST = "http://192.168.1.16:8080/WS-phoenixApiPROD/";
-
     //public static final String URL_SERVER = "https://cerberusenlinea.com/WS-phoenixApiPROD/";
     public static final String URL_MAP_API="http://newlandapps.com/";
     public static final String URL_MAP_API_ROUTE="route";
