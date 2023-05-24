@@ -50,6 +50,14 @@ public class LoginPresenterImpl implements  LoginPresenter{
             interactor.newsetAuditTrail(name);
         }
     }
+
+    @Override
+    public void getOrigin(String user, String password) {
+        if (view != null) {
+
+            interactor.reqOrigin(user, password);
+        }
+    }
     @Override
     public void successLogin(String name) {
         if (view != null) {
@@ -87,6 +95,7 @@ public class LoginPresenterImpl implements  LoginPresenter{
     public void setErrorMessage(String message) {
 
     }
+
 
 
 }

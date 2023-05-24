@@ -8,6 +8,8 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsIntera
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsView;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitsV3.model.unitV3.dataRequest;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitsV3.model.unitV3.dataresponseUnitsV3;
 
 import java.io.IOException;
 import java.util.List;
@@ -59,6 +61,19 @@ public class UnitsPresenterImpl implements UnitsPresenter {
         }
     }
 
+    @Override
+    public void askgeofences(List<dataRequest> askgeofences) {
+        if (view != null){
+            interactor.askgeofences(askgeofences);
+        }
+    }
+
+    @Override
+    public void setVehiclesGeos(List<dataresponseUnitsV3> data) {
+        if (view != null){
+            view.setGeos(data);
+        }
+    }
 
 
     @Override

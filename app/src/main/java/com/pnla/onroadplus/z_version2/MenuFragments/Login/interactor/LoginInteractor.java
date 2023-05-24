@@ -5,4 +5,6 @@ public interface LoginInteractor {
     void validateData(String user, String password);
 
     void newsetAuditTrail(String name);
+
+    void reqOrigin(String user, String password);
 }

@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Handler;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -1339,6 +1340,24 @@ public class UnitMapViewImpl extends Fragment implements UnitMapView, GoogleMap.
     public void onResume() {
         super.onResume();
         handler.postDelayed(runnable,12000);
+        if(getView() == null){
+            return;
+        }
+
+        getView().setFocusableInTouchMode(true);
+        getView().requestFocus();
+        getView().setOnKeyListener(new View.OnKeyListener() {
+            @Override
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+
+                if (event.getAction() == KeyEvent.ACTION_UP && keyCode == KeyEvent.KEYCODE_BACK){
+
+                    goToMainMenuContainer();
+                    return true;
+                }
+                return false;
+            }
+        });
     }
 
     @Override

@@ -4,10 +4,13 @@ public class RetrofitEndPointsV2 {
     //esta es la chida
     public static final String URL_SERVER = "http://35.194.83.10/WS-phoenixApiPROD/";
     public static final String URL_SERVER_TEST = "http://192.168.1.16:8080/WS-phoenixApiPROD/";
+    public static final String URL_SERVER_V3 = "http://avocado-cloud.com:9877/";
     //public static final String URL_SERVER = "https://cerberusenlinea.com/WS-phoenixApiPROD/";
+    public static final String URL_SERVER_V4 = "https://avocado-cloud.com/";
     public static final String URL_MAP_API="http://newlandapps.com/";
     public static final String URL_MAP_API_ROUTE="route";
     public static final String LOGIN = "login/loginApp";
+    public static final String LOGINV3 = "avocado-api/users/login";
     public static final String GET_MENUOBJECT="login/menuAppbar";/**itemobject*/
     public static final String CLOSE_SESSION = "login/closeSession";
     public static final String GET_ALL_VEHICLES = "vehicles/getAllVehicleList";
@@ -26,6 +29,7 @@ public class RetrofitEndPointsV2 {
     public static final String GET_VEHICLE_DESCRIPTION_INSIRANCE = "vehicles/getVehicledescriptionInsurance";
     public static final String GET_VEHICLE_COMMANDS = "routines/getAllRoutinesList";
     public static final String GET_FULL_VEHICLES = "vehicles/getFullAllVehiclesNogeo";
+    public static final String UNITSV3 = "location";
     public static final String GET_FULL_GEOREFERENCE = "vehicles/getFullAllVehicles";
     public static final String GET_VEHICLE_TRIP = "dashboard/getTripDetails";
     public static final String SEND_COMMAND = "routines/sendCommand";
@@ -59,4 +63,7 @@ public class RetrofitEndPointsV2 {
     public static final String GET_QUESTIONS = "logistic/getListSectionfull";//_tmp";//TODO "logistic/getListQuestions";
     public static final String SET_QUESTIONS = "dashboard/sendChecklist";
     public static final String GET_UNIT = "catalog/getUnit";
+
+
+
 }

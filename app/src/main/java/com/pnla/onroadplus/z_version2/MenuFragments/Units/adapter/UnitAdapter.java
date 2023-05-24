@@ -162,7 +162,7 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
         } else {
             holder.txtHour.setText("--");
         }
-        //region ismorethan20
+     /*   //region ismorethan20
         if(isMorerthan20==false) {
             if (textaddres != null) {
                 // Log.e("bloquesdeunides","list String :   "+textaddres.get(position));
@@ -178,7 +178,7 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
                         String[] parts1 = name.split(":::");
                         String part1 = parts1[0];
                         String part2 = parts1[1];
-                        holder.txtUnitGeoReference.setText(part2);      /**puedes vrificar que las direcciones coincidan con los items introduciendo part 1 en el campo part2*/
+                        holder.txtUnitGeoReference.setText(part2);      //puedes vrificar que las direcciones coincidan con los items introduciendo part 1 en el campo part2/
                     }
                 }
 
@@ -190,7 +190,7 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
         {
             holder.txtUnitGeoReference.setText(unitList.get(position).getGeoreference());
         }
-        //endregion
+        //endregion*/
         //todo aqui va el valor de bool true false para menos de 20 vehiculos
     /*    if (unitList.get(position).getGeoreference() != null){
             if (unitList.get(position).getGeoreference().equals("")){
@@ -201,6 +201,15 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
         }else {
             holder.txtUnitGeoReference.setText("---- ---- ---- ----");
         }*/
+        if (unitList.get(position).getGeoreference() != null){
+            if (unitList.get(position).getGeoreference().equals("")||unitList.get(position).getGeoreference().equals("Sin datos")){
+                holder.txtUnitGeoReference.setText("");
+            } else {
+                holder.txtUnitGeoReference.setText(unitList.get(position).getGeoreference());
+            }
+        }else {
+            holder.txtUnitGeoReference.setText("");
+        }
 
         DecimalFormat decimalFormat = new DecimalFormat("###,###.00");
         decimalFormat.format(unitList.get(position).getKmTravel());
@@ -306,6 +315,16 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
 
     public void setOnClickVehiclesMapListener(UnitAdapter.OnClickVehiclesMapListener onClickVehiclesMapListener) {
         this.listener = onClickVehiclesMapListener;
+    }
+
+    public void UpdateGeos(List<Unit> vehicles) {
+        notifyDataSetChanged();
+    }
+
+    public void UpdateVehicles(List<Unit> vehicles) {
+        this.unitList = new ArrayList<>();
+        this.unitList.addAll(vehicles);
+        notifyDataSetChanged();
     }
 
     public interface OnClickVehiclesMapListener {

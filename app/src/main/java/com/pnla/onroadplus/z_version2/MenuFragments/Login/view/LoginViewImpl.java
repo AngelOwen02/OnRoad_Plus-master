@@ -145,8 +145,8 @@ public class LoginViewImpl extends Fragment implements LoginView, View.OnClickLi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_login:
-
-                presenter.validateDataToStartLoginRequest(edtUserOrEmail.getText().toString(), edtPassword.getText().toString());
+                presenter.getOrigin(edtUserOrEmail.getText().toString(), edtPassword.getText().toString());
+                //presenter.validateDataToStartLoginRequest(edtUserOrEmail.getText().toString(), edtPassword.getText().toString());
                 break;
             case R.id.txvForgetPassword:
                 showFragmentRestorePassword();

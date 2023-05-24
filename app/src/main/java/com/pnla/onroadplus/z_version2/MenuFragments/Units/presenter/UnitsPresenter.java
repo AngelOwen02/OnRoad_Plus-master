@@ -3,6 +3,8 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Units.presenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitsV3.model.unitV3.dataRequest;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitsV3.model.unitV3.dataresponseUnitsV3;
 
 import java.io.IOException;
 import java.util.List;
@@ -25,7 +27,7 @@ public interface UnitsPresenter {
     void hideProgressDialog();
 
 
+    void askgeofences(List<dataRequest> askgeofences);
 
-
-
+    void setVehiclesGeos(List<dataresponseUnitsV3> data);
 }

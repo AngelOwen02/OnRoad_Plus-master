@@ -28,4 +28,5 @@ public interface LoginPresenter {
     void setErrorMessage(String message);
 
 
+    void getOrigin(String user, String password);
 }

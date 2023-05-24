@@ -40,10 +40,16 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.UnitService;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.georeference;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.presenter.UnitsPresenter;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitsV3.model.unitV3.dataRequest;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitsV3.model.unitV3.dataresponseUnitsV3;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitsV3.model.unitV3.requestUnitsmodelV3;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitsV3.model.unitV3.responseUnitsV3;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitsV3.util.serviceUnitsV3;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.interfaces.MapV2Services;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 import com.pnla.onroadplus.z_version2.realmOnRoad.RealmUserData;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitClientV2;
+import com.pnla.onroadplus.z_version2.retrofit.RetrofitClientV3;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitValidationsV2;
 
 import java.io.IOException;
@@ -62,6 +68,7 @@ public class UnitsInteractorImpl implements UnitsInteractor {
 
     private UnitsPresenter presenter;
     private MapV2Services services;
+    private serviceUnitsV3 service;
     private UnitService unitService;
     private Context context;
     public static List<String> dataofvehicles=new ArrayList<>();
@@ -70,7 +77,7 @@ public class UnitsInteractorImpl implements UnitsInteractor {
     public static  List<String> dataofvehiclesgroupsnames=new ArrayList<>();
     private List<String> gruposdata = new ArrayList<>();
     private List<GroupvehicleInsideData> groupvehicleInsideData;
-    private Retrofit retrofitClient;
+    private Retrofit retrofitClient,retrofitClient2;
 
     public static List<String> dataphotoofvehicles=new ArrayList<>();
     public static int cveofgroup;
@@ -90,8 +97,10 @@ public class UnitsInteractorImpl implements UnitsInteractor {
 
     //region initRetrofit
     private void initRetrofit() {
-      retrofitClient = RetrofitClientV2.getRetrofitInstance();
+        retrofitClient = RetrofitClientV2.getRetrofitInstance();
+        retrofitClient2 = RetrofitClientV3.getRetrofitInstance();
         unitService = retrofitClient.create(UnitService.class);
+        service=retrofitClient2.create(serviceUnitsV3.class);
     }
     //endregion initRetrofit
 
@@ -229,6 +238,41 @@ public class UnitsInteractorImpl implements UnitsInteractor {
                 }
             });
     //processUnits.leaveAction();
+        }
+    }
+    @Override
+    public void askgeofences(List<dataRequest> askgeofences) {
+        requestUnitsmodelV3 request= new requestUnitsmodelV3(askgeofences);
+        Call<responseUnitsV3> call= service.getUnitsV3(request);
+        call.enqueue(new Callback<responseUnitsV3>() {
+            @Override
+            public void onResponse(Call<responseUnitsV3> call, Response<responseUnitsV3> response) {
+                getUnitsV3(response, context);//todo no usamo nuestra validacion comun ya que no esta estructurado igual este endpoint REVISAR MODEL de response
+            }
+
+            @Override
+            public void onFailure(Call<responseUnitsV3> call, Throwable t) {
+                Toast.makeText(context, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void getUnitsV3(Response<responseUnitsV3> response, Context context) {
+        responseUnitsV3 resp=response.body();
+        if(resp!=null){
+            if(resp.getFound()!=null){
+                List<dataresponseUnitsV3> data=resp.getFound();
+                if(data!=null){
+                    presenter.setVehiclesGeos(data);
+                }else {
+                    Toast.makeText(context, "respuesta sin datos", Toast.LENGTH_SHORT).show();
+                }
+            }else{
+                Toast.makeText(context, "respuesta vacia", Toast.LENGTH_SHORT).show();
+            }
+
+        }else{
+            Toast.makeText(context, ""+response.message(), Toast.LENGTH_SHORT).show();
         }
     }
     //endregion getGeoreferencefromAPI
