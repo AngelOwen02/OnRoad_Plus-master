@@ -152,7 +152,7 @@ public class UnitsInteractorImpl implements UnitsInteractor {
         {
             noCves.add(0);
         }
-        startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context,1);
+        startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context,true);
 
 //        Log.e("UnitDB", UnitDB.getUnitList().toString());
 //        Log.e("FinalUnitDB", FinalUnitDB.getUnitList().toString());

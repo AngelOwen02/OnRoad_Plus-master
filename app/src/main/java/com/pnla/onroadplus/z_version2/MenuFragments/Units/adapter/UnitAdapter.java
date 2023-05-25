@@ -318,6 +318,8 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
     }
 
     public void UpdateGeos(List<Unit> vehicles) {
+        this.unitList=new ArrayList<>();
+        this.unitList.addAll(vehicles);
         notifyDataSetChanged();
     }
 
