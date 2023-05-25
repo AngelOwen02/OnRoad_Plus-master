@@ -152,7 +152,7 @@ public class UnitsInteractorImpl implements UnitsInteractor {
         {
             noCves.add(0);
         }
-        startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context,ismorethan20);
+        startVehiclesRequest(GeneralConstantsV2.REQUEST_ALL_VEHICLES, noCves, context,1);
 
 //        Log.e("UnitDB", UnitDB.getUnitList().toString());
 //        Log.e("FinalUnitDB", FinalUnitDB.getUnitList().toString());
@@ -282,11 +282,11 @@ public class UnitsInteractorImpl implements UnitsInteractor {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         if (token != null) {
-            UnitRequest request = new UnitRequest(token, typeRequest, vehiclesCves);
+            UnitRequest request = new UnitRequest(token, 1, vehiclesCves);
             Log.e("token", "" + token);
             // Log.e("checkinguser",token+"  "+typeRequest+"  "+vehiclesCves);
             presenter.showProgressDialog();
-            if (ismorethan20) {
+          /*  if (ismorethan20) {
                 unitService.getFullVehiclesGEO(request).enqueue(new Callback<UnitResponse>() {
                     @Override
                     public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
@@ -305,7 +305,7 @@ public class UnitsInteractorImpl implements UnitsInteractor {
                     }
                 });
 
-            } else {
+            } else {*/
                 unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
                     @Override
                     public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
@@ -324,7 +324,7 @@ public class UnitsInteractorImpl implements UnitsInteractor {
                     }
                 });
             }
-        }
+      //  }
     }
 
 

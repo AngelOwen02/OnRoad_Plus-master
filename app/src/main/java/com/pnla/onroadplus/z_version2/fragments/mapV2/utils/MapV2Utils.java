@@ -123,7 +123,7 @@ public class MapV2Utils {
         String result = "";
         String input = dateToConvert + "T00:00:00Z";
 
-        TimeZone utc = TimeZone.getTimeZone("GMT-5");
+        TimeZone utc = TimeZone.getTimeZone("GMT-6");
         SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy'T'HH:mm:ss'Z'");
         f.setTimeZone(utc);
         GregorianCalendar cal9 = new GregorianCalendar(utc);
@@ -153,7 +153,7 @@ public class MapV2Utils {
         String result = "";
         String inputEnd = dateToConvert + "T24:00:00Z";
 
-        TimeZone utc = TimeZone.getTimeZone("GMT-5");
+        TimeZone utc = TimeZone.getTimeZone("GMT-6");
         SimpleDateFormat f = new SimpleDateFormat("dd/MM/yyyy'T'HH:mm:ss'Z'");
         f.setTimeZone(utc);
         GregorianCalendar cal9 = new GregorianCalendar(utc);

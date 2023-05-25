@@ -82,9 +82,9 @@ public class LoginInteractorImpl implements LoginInteractor {
     public void validateData(String user, String password) {
         String resultValidation = LoginV2Validations.validateUserAndPassword(user, password);
 
-        if(UserDataDB.getUserData()!=null) {
-            Log.e("checkinguser", "info conparativa   " + UserDataDB.getUserData().getUser_cve() );
-        }
+//        if(UserDataDB.getUserData()!=null) {
+//            Log.e("checkinguser", "info conparativa   " + UserDataDB.getUserData().getUser_cve() );
+//        }
         if (resultValidation.equals(GeneralConstantsV2.SUCCESS)) {
             startLoginRequest(user, password);
             //Dynatrace.identifyUser( String.valueOf(user));
@@ -240,7 +240,7 @@ public class LoginInteractorImpl implements LoginInteractor {
                     Log.e("dynatracelog", "info conparativa   " + nameuser);
                     //Dynatrace.identifyUser( nameuser);
                     Log.e("checkinguser", "info conparativa   " + user+":"+nameuser );
-                  if(UserDataDB.getUserData()!=null) {
+                 /* if(UserDataDB.getUserData()!=null) {
 
 
                       if (UserDataDB.getUserData().getUser_cve().equals(nameuser)) {
@@ -264,12 +264,12 @@ public class LoginInteractorImpl implements LoginInteractor {
 
 
 
-                    boolean isFirstLogin = userData.getFirstLogin();
+
                     String email = userData.getEmail();
                     String token = userData.getToken();
 
-                    String name = userData.getEmployeeName();
-
+                    String name = userData.getEmployeeName();*/
+                    boolean isFirstLogin = userData.getFirstLogin();
                     SharedPreferences prefs = context.getSharedPreferences("Haha",Context.MODE_PRIVATE);
 
                     SharedPreferences.Editor editor = prefs.edit();
@@ -280,8 +280,8 @@ public class LoginInteractorImpl implements LoginInteractor {
 
                     if (isFirstLogin) {
                         Bundle bndl = new Bundle();
-                        bndl.putString("newEmail", email);
-                        bndl.putString("newToken", token);
+                        bndl.putString("newEmail", userData.getEmail());
+                        bndl.putString("newToken", userData.getToken());
                         presenter.showFragmentChangePasswordV2(bndl);
                     } else {
                         String urlUserImage = userData.getUserImage();
@@ -289,15 +289,10 @@ public class LoginInteractorImpl implements LoginInteractor {
                         if (urlUserImage == null || urlUserImage.length() == 0) {
                             urlUserImage = GeneralConstantsV2.NO_IMAGE;
                         }
-                        /**
-                         *      Si el usuario no esta registrado en la db del telefono entonces lo guardamos en db
-                         *      Y luego en SharePreferences, esto se realiza para la validación del fragment del mapa
-                         *      donde se muestra solo las 30 primeras unidades
-                         */
-                        if (!RealmUserData.existUser(user)) {
+                       /* if (!RealmUserData.existUser(user)) {
                             RealmUserData.saveUser(user, email, password, GeneralConstantsV2.IS_FIRST_TIME);
-                        }
-                        UtilsLoginV2.saveUserDataSharedPreferences(urlUserImage, user, token, email, password, employeeName, context);
+                        }*/
+                        UtilsLoginV2.saveUserDataSharedPreferences(urlUserImage, user, userData.getToken(), userData.getEmail(), password, employeeName, context);
                         presenter.successLogin(user);
                     }
                 } else {

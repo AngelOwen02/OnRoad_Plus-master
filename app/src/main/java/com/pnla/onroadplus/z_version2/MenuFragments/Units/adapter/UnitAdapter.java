@@ -118,7 +118,7 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
                         }
                     } else {
                         if (dayResult >= -1) {
-                            holder.txtLastSendTime.setText(dayResult + " día");
+                            holder.txtLastSendTime.setText(dayResult + " días");
                         } else {
                             holder.txtLastSendTime.setText(dayResult + " días");
                         }
@@ -322,9 +322,7 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
     }
 
     public void UpdateVehicles(List<Unit> vehicles) {
-        this.unitList = new ArrayList<>();
-        this.unitList.addAll(vehicles);
-        notifyDataSetChanged();
+
     }
 
     public interface OnClickVehiclesMapListener {

@@ -1333,11 +1333,13 @@ public class UnitMapViewImpl extends Fragment implements UnitMapView, GoogleMap.
     @Override
     public void onPause() {
         super.onPause();
+        mapView.onPause();
         handler.removeCallbacks(runnable);
     }
 
     @Override
     public void onResume() {
+        mapView.onResume();
         super.onResume();
         handler.postDelayed(runnable,12000);
         if(getView() == null){
@@ -1361,8 +1363,15 @@ public class UnitMapViewImpl extends Fragment implements UnitMapView, GoogleMap.
     }
 
     @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+        mapView.onLowMemory();
+    }
+
+    @Override
     public void onDestroy() {
         super.onDestroy();
+        mapView.onDestroy();
         handler.removeCallbacks(runnable);
     }
     private void shotimer1() {

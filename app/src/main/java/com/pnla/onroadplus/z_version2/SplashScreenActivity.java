@@ -1,14 +1,18 @@
 package com.pnla.onroadplus.z_version2;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.Containers.LoginContainer.view.LoginContainerActivity;
@@ -21,6 +25,7 @@ import com.pnla.onroadplus.z_version2.realmOnRoad.RealmConfig;
 import java.util.List;
 
 public class SplashScreenActivity extends AppCompatActivity {
+    private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1001;
     /**ESTE ES EL SPLASH CORRECTO*/
     public static List<Unit> datapersistance;
 
@@ -28,28 +33,44 @@ public class SplashScreenActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        RequestPermissions();
         initSplashScreenActivity();
 
     }
- 
+
+    private void RequestPermissions() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            // Request the permission
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    MY_PERMISSIONS_REQUEST_LOCATION);
+        } else {
+            // Permission has already been granted
+            // Access the location data
+            // ...
+        }
+    }
+
     private void initSplashScreenActivity() {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, +WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 
         //Log.e("checkinguser","splash"+UserDataDB.getUserData().getEmployee_name());
         RealmConfig.initRealm(getApplicationContext());
-                    Log.e("checkinguser","splash              "+UnitDB.getUnitList());
-
+        //Log.e("checkinguser","splash              "+UnitDB.getUnitList());
+        SharedPreferences preferences = getApplicationContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String status = preferences.getString(GeneralConstantsV2.CLOSE_SESSION_PREFERENCES, null);
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (UserDataDB.isEmpty()){
+                if (status==null){
                     Log.e("checkinguser","go to login  ");
                     goToLoginContainer();
                 }else {
-                    SharedPreferences preferences = getApplicationContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-                    String status = preferences.getString(GeneralConstantsV2.CLOSE_SESSION_PREFERENCES, null);
-                    Log.e("checkinguser","go to units menu "+"  st "+status+" "+UnitDB.getUnitListActive());
+
+                    //Log.e("checkinguser","go to units menu "+"  st "+status+" "+UnitDB.getUnitListActive());
                     if(status.equals("YES"))
                     {
                         goToLoginContainer();
@@ -73,7 +94,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         finish();
     }
 
-    private void goToMenu(){
+    private void  goToMenu(){
         Bundle bundle = new Bundle();
         bundle.putString("nav","UNITS");
         Intent intent = new Intent(SplashScreenActivity.this,  menuViewImpl.class);// menuViewImpl.class);//MainMenuContainerActivity
