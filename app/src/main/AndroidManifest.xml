@@ -60,6 +60,7 @@
         <activity android:name="com.pnla.onroadplus.z_version2.Containers.CommandsContainerActivity"
             android:screenOrientation="portrait"/>
         <activity android:name="com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.UnitMapContainer"
+
             android:screenOrientation="portrait"/>
         <activity android:name="com.pnla.onroadplus.z_version2.Containers.LoginContainer.view.LoginContainerActivity"
             android:screenOrientation="portrait"/>

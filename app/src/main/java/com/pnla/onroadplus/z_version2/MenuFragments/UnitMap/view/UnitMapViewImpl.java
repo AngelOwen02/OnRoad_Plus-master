@@ -195,7 +195,7 @@ public class UnitMapViewImpl extends Fragment implements UnitMapView, GoogleMap.
     private double mylat,mylong;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_map_view_impl, container, false);
+        View view = inflater.inflate(R.layout.fragment_unit_map, container, false);
         initView(view);
         return view;
     }
@@ -218,7 +218,7 @@ public class UnitMapViewImpl extends Fragment implements UnitMapView, GoogleMap.
         presenter.zoomVehicleInMap(vehicleLat, vehicleLng);
         presenter.getDates();
         //  presenter.getTripsByDay(vehicleCve,vehicleSendTime,getContext());
-        presenter.getTripsByTime(vehicleCve,datealternative+" "+timeStart,datealternative+" "+timeEnd,getContext());
+        //presenter.getTripsByTime(vehicleCve,datealternative+" "+timeStart,datealternative+" "+timeEnd,getContext());
         presenter.getCurrentDateTrip();
         presenter.getVehicleDescription(vehicleCve, getContext());
         fillDatesInMap();
