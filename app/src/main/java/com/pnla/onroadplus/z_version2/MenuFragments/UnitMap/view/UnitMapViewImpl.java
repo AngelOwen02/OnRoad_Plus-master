@@ -219,9 +219,12 @@ public class UnitMapViewImpl extends Fragment implements UnitMapView, GoogleMap.
         presenter.getDates();
         //  presenter.getTripsByDay(vehicleCve,vehicleSendTime,getContext());
         //presenter.getTripsByTime(vehicleCve,datealternative+" "+timeStart,datealternative+" "+timeEnd,getContext());
-        presenter.getCurrentDateTrip();
-        presenter.getVehicleDescription(vehicleCve, getContext());
-        fillDatesInMap();
+        if(vehicle_switch!=0 ||vehicle_switch!=4) {
+            presenter.getCurrentDateTrip();
+            presenter.getVehicleDescription(vehicleCve, getContext());
+            fillDatesInMap();
+        }
+
     }
     @Override
     public void onMapReady(GoogleMap googleMap) {
@@ -434,7 +437,12 @@ public class UnitMapViewImpl extends Fragment implements UnitMapView, GoogleMap.
         this.mylasmarkerpos=markerOptions;
 
         mainIconMarker= mMap.addMarker(markerOptions);
-        makeNewposition();
+        if(vehicle_switch!=0 ||vehicle_switch!=4) {
+            makeNewposition();
+        }else
+        {
+            handler.removeCallbacks(runnable);
+        }
     }
 
     @Override
@@ -982,7 +990,9 @@ public class UnitMapViewImpl extends Fragment implements UnitMapView, GoogleMap.
         if (tripAdapter != null && tripAdapter.getItemCount() > 0) {
             tripAdapter.clearRecyclerView();
         }
-        presenter.getTripsByDate(vehicleCve, date, getContext());
+        if(vehicle_switch!=0 ||vehicle_switch!=4) {
+            presenter.getTripsByDate(vehicleCve, date, getContext());
+        }
 
     }
 
@@ -1295,7 +1305,7 @@ public class UnitMapViewImpl extends Fragment implements UnitMapView, GoogleMap.
             //  Log.e("mydaytrips",""+tripsBDy.size()+" "+tripsBDy.get(tripsBDy.size()-1));
             //   presenter.getTripsByDay(vehicleCve,vehicleSendTime,getContext());
             presenter.getTripsByTime(vehicleCve,datealternative+" "+timeStart,datealternative+" "+timeEnd,getContext());
-            Log.e("dataclocks","vehiclesentime getfrominteractor:"+vehicleSendTime);
+            //Log.e("dataclocks","vehiclesentime getfrominteractor:"+vehicleSendTime);
 
         } else {
             Toast.makeText(getContext(), "La unidad no cuenta con viajes del día.", Toast.LENGTH_SHORT).show();

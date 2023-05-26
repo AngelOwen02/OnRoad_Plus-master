@@ -117,24 +117,27 @@ public class ComponentVehicleHeader extends ConstraintLayout implements View.OnC
         txtUnitName.setText(name);
         //txtLastSendTime.setText("No se que pedo");
 
-        Log.e("mvehicleSendTime",""+vehicleCurrentSpeed);
-        if(vehicleCurrentSpeed.equals(".00"))
-        {
+        //  Log.e("mvehicleSendTime",""+vehicleCurrentSpeed);
+        if (vehicleCurrentSpeed!=null){
+            if (vehicleCurrentSpeed.equals(".00")) {
             txtUnitMaxSpeed.setText("0.0" + "km/h");
-        }
-        else if(vehicleCurrentSpeed.equals("0.0"))
-        {
-            txtUnitMaxSpeed.setText("0.0" + "km/h");
-        }else {
-            txtUnitMaxSpeed.setText(vehicleCurrentSpeed + "km/h");
-        }
-        if (txtHour.equals("")) {
-            txtHour.setText("----");
-        } else {
-            txtHour.setText(vehicleTimeTravel);
+            } else if (vehicleCurrentSpeed.equals("0.0")) {
+                txtUnitMaxSpeed.setText("0.0" + "km/h");
+            } else {
+                txtUnitMaxSpeed.setText(vehicleCurrentSpeed + "km/h");
+            }
+       }
+        if(txtHour!=null) {
+            if (txtHour.equals("")) {
+                txtHour.setText("----");
+            } else {
+                txtHour.setText(vehicleTimeTravel);
 
+            }
         }
-        txtUnitKmTravel.setText(vehicleKmTravel + "km");
+        if(txtUnitKmTravel!=null) {
+            txtUnitKmTravel.setText(vehicleKmTravel + "km");
+        }
         if (adress.equals("")||adress==null){
             txtUnitGeoReference.setText("---- ---- ---- ----");
 

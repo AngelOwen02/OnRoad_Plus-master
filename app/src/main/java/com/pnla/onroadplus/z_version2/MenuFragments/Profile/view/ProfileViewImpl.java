@@ -27,6 +27,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListView
 import com.pnla.onroadplus.z_version2.MenuFragments.Contact.view.ContactViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Profile.presenter.ProfilePresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Profile.presenter.ProfilePresenterImpl;
+import com.pnla.onroadplus.z_version2.SplashScreenActivity;
 import com.pnla.onroadplus.z_version2.activities.HelpContainerActivity;
 import com.pnla.onroadplus.z_version2.retrofit.PersistenceUtilities;
 
@@ -189,7 +190,7 @@ public class ProfileViewImpl extends Fragment implements ProfileView, CompoundBu
     public void goToLoginScreen() {
      //   UnitDB.deleteDB();        //pending effects to check
 
-        Intent intent = new Intent(getContext(), LoginContainerActivity.class);
+        Intent intent = new Intent(getContext(), SplashScreenActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_CLEAR_TOP);//
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         Bundle bndl = new Bundle();

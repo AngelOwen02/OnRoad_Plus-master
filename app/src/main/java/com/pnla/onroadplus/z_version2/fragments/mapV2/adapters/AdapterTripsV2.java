@@ -75,7 +75,7 @@ public class AdapterTripsV2 extends RecyclerView.Adapter<AdapterTripsV2.ViewHold
             Date hourEnd = simpleDateFormat.parse(endTripDateString);
             simpleDateFormat.applyPattern("hh:mm:ss");
             String hourEndTrip = simpleDateFormat.format(hourEnd);
-
+            if (trips!=null){
             if (trips.size() > 1) {
                 if (position == trips.size() - 1) {
                     //SUPERIOR
@@ -96,12 +96,14 @@ public class AdapterTripsV2 extends RecyclerView.Adapter<AdapterTripsV2.ViewHold
                     realTime = MapV2Utils.getTimeValue(trips.get(position).getEndTrip(), trips.get(position + 1).getStartTrip());
                     holder.txvHourDescriptionTrip.setText(hourEndTrip + "     " + hourStartTrip2 + "     ( " + realTime + " )");
                 }
+
             } else {
                 //SUPERIOR
                 String realTime = MapV2Utils.getTimeValue(trips.get(position).getStartTrip(), trips.get(position).getEndTrip());
                 holder.txvTripTimeEnd.setText(hourEndTrip + "    ( " + realTime + " )");
                 //INFERIOR
                 holder.txvHourDescriptionTrip.setText(hourEndTrip + "");
+            }
             }
         } catch (ParseException e) {
             e.printStackTrace();

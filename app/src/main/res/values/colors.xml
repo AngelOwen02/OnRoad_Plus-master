@@ -5,6 +5,7 @@
     <color name="colorAccent">#DADADA</color>
     <color name="transparent">#97000000</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="alfa">#00FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorBackgroundMenu">#333741</color>
     <color name="colorRed">#fa0000</color>
