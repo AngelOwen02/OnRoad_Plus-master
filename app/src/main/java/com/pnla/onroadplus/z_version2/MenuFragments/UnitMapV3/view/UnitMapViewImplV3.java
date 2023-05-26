@@ -7,6 +7,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -112,7 +113,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     private Marker startMaker;
     private Marker endMarker;
     private Marker mainIconMarker;
-    private static BitmapDescriptor vehicleIcon;
+//    private static BitmapDescriptor vehicleIcon;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map_view_impl, container, false);
@@ -145,7 +146,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         uiSettings.setZoomControlsEnabled(true);
 
         LatLng latLng = new LatLng(vehicleLat, vehicleLng);
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
+      //  mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
         startMainiconMarker();
 
@@ -154,7 +155,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     private void startMainiconMarker() {
         MarkerOptions markerOptions = new MarkerOptions();
 
-        Bitmap bitmapMarker = getBitmapFromURL(vehicleImageURL);
+       /* Bitmap bitmapMarker = getBitmapFromURL(vehicleImageURL);
         if (bitmapMarker != null) {
             Bitmap bitmap = Bitmap.createScaledBitmap(bitmapMarker, 80, 80, false);
             View marker = ((LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.unit_marker, null);
@@ -163,17 +164,19 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
             Bitmap bitmap = BitmapFactory.decodeResource(getContext().getResources(), R.drawable.sedan);
             Bitmap resized = Bitmap.createScaledBitmap(bitmap, 160, 160, true);
             vehicleIcon = BitmapDescriptorFactory.fromBitmap(resized);
-        }
-
+        }*/
+        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.bluedot);
+        Bitmap b = bitmapdraw.getBitmap();
+        Bitmap vehicleIcon = Bitmap.createScaledBitmap(b, 50, 50, false);
         markerOptions.position(new LatLng(vehicleLat, vehicleLng));
         markerOptions.infoWindowAnchor(.5f, .4f);
         markerOptions.anchor(0.5f, 0.5f);
-        markerOptions.icon(vehicleIcon);
-
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(vehicleIcon));
+//assss
 
         mainIconMarker=mMap.addMarker(markerOptions);
     }
-    private Bitmap createBitmapFromView(@NonNull View view, int width, int height, Bitmap resource, String name, int vehicleSwitch) {
+  /*  private Bitmap createBitmapFromView(@NonNull View view, int width, int height, Bitmap resource, String name, int vehicleSwitch) {
 
         CircleImageView circleImageView = view.findViewById(R.id.unit_marker_img);
         TextView vehicleName = view.findViewById(R.id.unit_marker_title);
@@ -230,7 +233,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
             e.printStackTrace();
             return null;
         }
-    }
+    }*/
     private void initView(View view) {
         initViewID(view);
         initPresenter();
@@ -440,7 +443,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
             String reportDate = df.format(cal.getTime());
             dates.add(new DateV2(reportDate));
         }
-        fillDatesInMap();
+      //  fillDatesInMap();
 
     }
     @Override
