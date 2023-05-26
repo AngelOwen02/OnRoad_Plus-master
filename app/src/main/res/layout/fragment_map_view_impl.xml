@@ -17,25 +17,17 @@
         <include
             android:id="@+id/toolbar_maps"
             layout="@layout/map_toolbar"
-            app:layout_constraintBottom_toTopOf="@id/map"
+            app:layout_constraintBottom_toTopOf="@id/map1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ProgressBar
-            android:id="@+id/unit_map_view_progress_bar"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/toolbar_maps" />
 
 
 
 
             <com.google.android.gms.maps.MapView
-                android:id="@+id/map"
+                android:id="@+id/map1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginBottom="120dp"
