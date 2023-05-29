@@ -5,6 +5,9 @@ import android.content.Context;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.interactor.unitMapInteractorV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.interactor.unitMapInteractorV3Impl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.view.unitMapViewV3;
+import com.pnla.onroadplus.z_version2.fragments.mapV2.models.trips.TripV2;
+
+import java.util.List;
 
 public class unitViewpresenterV3Impl implements unitViewpresenterV3{
     private Context context;
@@ -26,4 +29,49 @@ public class unitViewpresenterV3Impl implements unitViewpresenterV3{
     public void setDataetVehicleDescripcion() {
 
     }
+
+    @Override
+    public void AsyncTaskOne(int vehicleCve, String sendime, String sendime1, Context context) {
+        if(view!=null) {
+            interactor.AsyncTaskOne(vehicleCve,sendime,sendime1,context);
+        }
+
+    }
+
+    @Override
+    public void getTripsByTime(int vehicleCve, String sendime, String sendime1, Context context) {
+        if(view!=null) {
+
+            interactor.getTripsbyTime(vehicleCve,sendime,sendime1,context);
+        }
+    }
+
+    @Override
+    public void getEvents(int vehicleCve, String currentDate, Context context) {
+        if(view!=null) {
+            interactor.reqEvents(vehicleCve,currentDate,context);
+        }
+    }
+
+    @Override
+    public void setEvents(List<TripV2> trips) {
+        if(view!=null) {
+            view.setEvents(trips);
+        }
+    }
+
+    @Override
+    public void showDialog() {
+        if(view!=null) {
+            view.showProgressDialog();
+        }
+    }
+
+    @Override
+    public void hideDialog() {
+        if(view!=null) {
+            view.hideProgressDialog();
+        }
+    }
+
 }

@@ -1,15 +1,18 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.view;
 
+import static android.content.Context.LOCATION_SERVICE;
 import static com.pranavpandey.android.dynamic.utils.DynamicBitmapUtils.createBitmapFromView;
 
+import android.Manifest;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -18,19 +21,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -39,9 +41,9 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
-import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -49,20 +51,16 @@ import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.Containers.CommandsContainerActivity;
 import com.pnla.onroadplus.z_version2.MenuFragments.ExternalGPSApp.view.ExternalGPSDialog;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.adapter.TripAdapter;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.view.UnitMapViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter.AdapterDatesV3;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter.TripAdapterV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter.adapterHeader;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.presenter.unitViewpresenterV3Impl;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.components.ComponentVehicleCustomFields;
-import com.pnla.onroadplus.z_version2.fragments.mapV2.components.ComponentVehicleHeader;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.models.datesList.DateV2;
-import com.pranavpandey.android.dynamic.utils.DynamicUnitUtils;
+import com.pnla.onroadplus.z_version2.fragments.mapV2.models.trips.TripV2;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -70,11 +68,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapReadyCallback ,
                                                            GoogleMap.InfoWindowAdapter,GoogleMap.OnInfoWindowClickListener,
-                                                           GoogleMap.OnMarkerClickListener,View.OnClickListener ,AdapterDatesV3.OnDateClickListener{
+                                                           GoogleMap.OnMarkerClickListener,View.OnClickListener ,AdapterDatesV3.OnDateClickListener
+                                                           ,TripAdapterV3.OnClickTripListener{
 
     //Map
     private MapView mapView;
@@ -85,16 +82,16 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     private ImageView itemBack, itemRefresh,itemNavigation,itemShowtrips,checkBytime,timer1,timer2,itemhd,itemselflocation,itemTerminal;
     private ConstraintLayout linearLayoutBSheet,timers,btnTrips,btnInfo;
 
+    private double mylat,mylong;
+
     private boolean locationP=false;//boleano para la ubicacion del telefono
     private boolean HDP=false; //boleano para uso del HD
+    private boolean tripByDay=false;
 
-    //progres
-    private ProgressBar progressBar;
-    private ProgressDialog progressDialog;
 
     //rv fechas
     private RecyclerView rvDates,rvTripsV2;
-    private TripAdapter tripAdapter;
+    private TripAdapterV3 tripAdapter;
 
     private LinearLayout btnTripContainer;
     private TextView btnTripTitle,mytextimer1,mytextimer2,btnInfoTitle;
@@ -105,7 +102,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     private BottomSheetBehavior bottomSheetBehavior;
     private boolean isClickedDrawTrip=false;
     private boolean tripsAndInfo=false;
-
+    private List<TripV2> mtrips;//TODO viajes del dial en bottom sheet
 
     //Vehicle Data//
     private String vehicleName;
@@ -129,8 +126,8 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     private Double vehicleKmTravel,vehicleCurrentSpeed;
 
     //Modulo de informacion de endpoint /vehicles/getVehicleDescripcion
-    //private ComponentVehicleCustomFields componentVehicleCustomFields;//se remplazo este modulo por el include en bottm_sheet_map_view.xml linea 233
-     private ConstraintLayout informacionContrain; //TODO llenar los campos nuevode debajo de esto asignar en init view y asignar datos de modulo
+    private ComponentVehicleCustomFields componentVehicleCustomFields;//se remplazo este modulo por el include en bottm_sheet_map_view.xml linea 233
+     //private ConstraintLayout informacionContrain; //TODO llenar los campos nuevode debajo de esto asignar en init view y asignar datos de modulo
                                                    //TODO  setDataetVehicleDescripcion  LUIS encazo de venir nulos los campos poner ""
 
         private TextView txvLastMessageResponse,txvVehicleAddressResponse,txvVehicleAddressResponse1,txvVehicleAltitudeResponse,txvOdometerResponse
@@ -151,6 +148,12 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     private Marker endMarker;
     private Marker mainIconMarker,secondaryIconMarker;
 //    private static BitmapDescriptor vehicleIcon;
+
+
+    //presentador
+    private unitViewpresenterV3Impl presenter;
+    private ProgressDialog progressDialog;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map_view_impl, container, false);
@@ -252,13 +255,13 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
     private void initView(View view) {
         initViewID(view);
-        initPresenter();  //
         getDates();       // obtiene las fechas para solicitar minimapas
         initOnClickListeners(); //inicializa
-        fillVehicleDataHeader();
-        bottomSheetSettings();
-        buttonRefresh();
+        fillVehicleDataHeader();//setea el encabezado
+        bottomSheetSettings();  //configura el bottomsheet
+       // buttonRefresh();       //no deberia soliciar la peticion hasta que se terminen de setear los datos iniciales
         fillDatainHeader(vehicleName,vehicleImageURL,String.valueOf(vehicleCurrentSpeed),vehicleTimeTravel,String.valueOf(vehicleKmTravel),vehicleGeoreference);
+        initPresenter();
     }
 
 
@@ -295,8 +298,8 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
         btnInfoContainer = view.findViewById(R.id.btn_info_container);
         btnInfoTitle = view.findViewById(R.id.btn_info_title);
-       // componentVehicleCustomFields = view.findViewById(R.id.componentVehicleCustomFields);//TODO LUIS
-        informacionContrain.setVisibility(View.GONE);
+        componentVehicleCustomFields = view.findViewById(R.id.componentVehicleCustomFields);//TODO LUIS
+        //informacionContrain.setVisibility(View.GONE);
         separator = view.findViewById(R.id.view123);
 
         //componentVehicHeader
@@ -464,14 +467,18 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     }
 
     private void initPresenter() {
-        //presenter = new UnitMapPresenterImpl(this, getContext());
+        progressDialog = new ProgressDialog(getActivity());
+        presenter = new unitViewpresenterV3Impl(this, getContext());
+        tripToday();//aqui deberia consultarse el header una vez
     }
 
 
-    public void getCurrentDate() {//este es para obtener trips by date del dia
+    public void tripToday() {//este es para obtener trips by date del dia
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Calendar cal = Calendar.getInstance();
         String currentDate = df.format(cal.getTime());
+        presenter.getEvents(vehicleCve, currentDate, getContext());// este podria ir en el retorno de as
+
         // presenter.getTripsByDate(vehicleCve, currentDate, getContext());
 
     }
@@ -494,7 +501,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         if (tripAdapter != null && tripAdapter.getItemCount() > 0) {
             tripAdapter.clearRecyclerView();
         }
-     //   presenter.getTripsByDate(vehicleCve, date, getContext());
+      presenter.getEvents(vehicleCve, date, getContext());
     }
     private void fillDatesInMap(List<DateV2> mdates) {
         rvDates.setNestedScrollingEnabled(false);
@@ -505,11 +512,36 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         rvDates.setAdapter(adapterDatesV3);
     }
 
-    private void showMyOwnLocation() {//muestra la ubicacion del usuario
-        mMap.clear();//limpia el mapa
-        startMainiconMarker(vehicleLat,vehicleLng);//pinta el marcador del vehiculo donde sea que este
-        //de beria pintar un marcador de la ubicacion del dispositivo y hacer un zoom entre ambas
+
+    //region llenado de minimapas
+    @Override
+    public void setEvents(List<TripV2> trips) {
+        this.mtrips=trips;
+        fillTripsInMap();
+
     }
+
+    private void fillTripsInMap() {
+        rvTripsV2.setNestedScrollingEnabled(false);
+        tripAdapter = new TripAdapterV3(vehicleName, mtrips, getContext());
+        tripAdapter.setOnClickTripListener(UnitMapViewImplV3.this);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        rvTripsV2.setLayoutManager(layoutManager);
+        rvTripsV2.setAdapter(tripAdapter);
+    }
+    @Override
+    public void onClickGoogleImage(View view, int position) {
+
+    }
+
+    @Override
+    public void onClickFinalPosition(View view, int position) {
+
+    }
+    //endregion
+
+
+
 
     public void buttonRefresh(){
 //        presenter.getTripsByTime(vehicleCve,datealternative+" "+timeStart,datealternative+" "+timeEnd,getContext());
@@ -531,8 +563,93 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 //        },1500);
 
     }
+        //region myLocation
+    private void showMyOwnLocation() {//muestra la ubicacion del usuario
+        mMap.clear();//limpia el mapa
+        startMainiconMarker(vehicleLat,vehicleLng);//pinta el marcador del vehiculo donde sea que este
+        checkmylocation();
+        //de beria pintar un marcador de la ubicacion del dispositivo y hacer un zoom entre ambas
+    }
+
+    private void checkmylocation() {
+        LocationManager locationManager = (LocationManager) getContext().getSystemService(LOCATION_SERVICE);
+
+        boolean isGPSEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        boolean isNetworkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+        if (isGPSEnabled) {
+            Location location = null;
+            if (location == null) {
+                //check the network permission
+                if (ActivityCompat.checkSelfPermission(this.getContext(),
+                        Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions((this.getActivity()), new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION}, 101);
+                }
+
+                // LocationListener locationListenerGPS = null;
+                locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,0,5,locationListenerGPS );
+
+                Log.d("GPS Enabled", "GPS Enabled");
+                if (locationManager != null) {
+                    location = locationManager
+                            .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+
+                    if (location != null) {
+                        double latitude = location.getLatitude();
+                        double longitude = location.getLongitude();
+                        Log.e("findlocation","  Lat:"+latitude+"   Long: "+ longitude);
+                        // mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 16.5f));
+                        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.bluedot);
+                        Bitmap b = bitmapdraw.getBitmap();
+                        Bitmap smallMarker = Bitmap.createScaledBitmap(b, 60, 60, false);
+                        LatLng point = new LatLng(latitude, longitude);
+                        mMap.addMarker(new MarkerOptions().position(point).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+                        //startMaker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title("").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).snippet(String.valueOf(calles.get(0))));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(latitude, longitude), 16.5f));
+                        mylat=latitude;
+                        mylong=longitude;
+                        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+                        LatLng dot = new LatLng(latitude, longitude);
+                        builder.include(dot);
+                        LatLng dot2=new LatLng(vehicleLat,vehicleLng);
+                        builder.include(dot2);
+
+                        LatLngBounds bounds = builder.build();
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounds, 100));
 
 
+                    }
+                }
+            }
+        }
+
+    }
+
+    LocationListener locationListenerGPS=new LocationListener() {
+        @Override
+        public void onLocationChanged(android.location.Location location) {
+            double latitude=location.getLatitude();
+            double longitude=location.getLongitude();
+            String msg="New Latitude: "+latitude + "New Longitude: "+longitude;
+            // Toast.makeText(getContext(),msg,Toast.LENGTH_LONG).show();
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
+    };
+    //endregionmyLocation
     //region metodos del selector del buton sheet
     private void infoButtonInit() {
         btnTripContainer.setBackgroundColor(getResources().getColor(R.color.colorWhite));
@@ -542,7 +659,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
         separator.setVisibility(View.GONE);
         //.setVisibility(View.VISIBLE);
-        informacionContrain.setVisibility(View.VISIBLE);
+        //informacionContrain.setVisibility(View.VISIBLE);
         rvDates.setVisibility(View.GONE);
         rvTripsV2.setVisibility(View.GONE);
     }
@@ -554,7 +671,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
         separator.setVisibility(View.VISIBLE);
         //componentVehicleCustomFields.setVisibility(View.GONE);
-        informacionContrain.setVisibility(View.GONE);
+        //informacionContrain.setVisibility(View.GONE);
         rvDates.setVisibility(View.VISIBLE);
         rvTripsV2.setVisibility(View.VISIBLE);
     }
@@ -578,6 +695,29 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     public boolean onMarkerClick(Marker marker) {
         return false;
     }
+    //region dialogs
+    @Override
+    public void showProgressDialog() {
+        progressDialog.setMessage("Cargando Detalles");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
+    }
+
+    @Override
+    public void hideProgressDialog() {
+        progressDialog.dismiss();
+    }
+
+
+    //endregion
+    private void getTripsByday() {//este metodo deberia trabajar en vackground
+       presenter.AsyncTaskOne(vehicleCve,datealternative+" "+timeStart,datealternative+" "+timeEnd,getContext());
+    }
+
+    @Override
+    public void settripsByDay() {
+
+    }
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -588,16 +728,20 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
                     locationP=true;
                     mMap.clear();
                     startMainiconMarker(vehicleLat,vehicleLng);
+                    LatLng mainzoom=new LatLng(vehicleLat,vehicleLng);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(mainzoom, 14));
                     //hacer map clear pintar el marker de location y pintar el marker del telefono y hacer update camera entre los dos puntos
                 }else {
                     itemselflocation.setImageResource(R.drawable.ic_miubicacionon);
                     locationP=false;
-
                     showMyOwnLocation();
                 }
                 break;
             case R.id.map_toolbar_item_refresh:// update completo
                 buttonRefresh();
+                break;
+            case R.id.map_toolbar_item_tripsbyday:
+                getTripsByday();
                 break;
             case R.id.hdicon://boton de hdeste es el refresh del mapa debe limpiar el mapa y actualizar los datos del modulo HD
                 if(HDP==false)
@@ -647,10 +791,14 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
                 infoButtonInit();
                 timers.setVisibility(View.GONE);
             break;
-
+            case R.id.map_toolbar_item_back:
+                goToMainMenuContainer();
+                break;
             //endregion
         }
     }
+
+
 
 
 }

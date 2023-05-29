@@ -96,7 +96,7 @@ public class UnitMapContainer extends AppCompatActivity {
         bndlMap.putDouble("vehicleKmTravel", vehicleKmTravel);
         bndlMap.putDouble("vehicleCurrentSpeed", vehicleCurrentSpeed);
         bndlMap.putDouble("vehicleMaxSpeed", vehicleMaxSpeed);
-        showFragment(new UnitMapViewImplV3(), bndlMap);
+        showFragment(new UnitMapViewImpl(), bndlMap);
 
     }
 

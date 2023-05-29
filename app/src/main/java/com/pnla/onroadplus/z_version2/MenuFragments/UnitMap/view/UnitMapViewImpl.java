@@ -252,6 +252,7 @@ public class UnitMapViewImpl extends Fragment implements UnitMapView, GoogleMap.
         fillVehicleDataHeader();
         bottomSheetSettings();
         buttonRefresh();
+
     }
     private void makeNewposition()
     {
@@ -1006,8 +1007,6 @@ public class UnitMapViewImpl extends Fragment implements UnitMapView, GoogleMap.
         componentVehicleCustomFields.setVisibility(View.GONE);
         rvDates.setVisibility(View.VISIBLE);
         rvTripsV2.setVisibility(View.VISIBLE);
-
-
     }
 
     private void infoButtonInit() {
