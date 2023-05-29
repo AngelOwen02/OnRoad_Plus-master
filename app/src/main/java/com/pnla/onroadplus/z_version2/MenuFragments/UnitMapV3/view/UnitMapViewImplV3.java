@@ -55,6 +55,10 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.view.UnitMapViewImpl
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter.AdapterDatesV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter.TripAdapterV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter.adapterHeader;
+<<<<<<< HEAD
+=======
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.presenter.unitViewpresenterV3;
+>>>>>>> 2881a57b5c1602b01222a7427cac33a6b81b399f
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.presenter.unitViewpresenterV3Impl;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.components.ComponentVehicleCustomFields;
@@ -102,7 +106,13 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     private BottomSheetBehavior bottomSheetBehavior;
     private boolean isClickedDrawTrip=false;
     private boolean tripsAndInfo=false;
+<<<<<<< HEAD
     private List<TripV2> mtrips;//TODO viajes del dial en bottom sheet
+=======
+
+    //Presenter
+    private unitViewpresenterV3 presenter;
+>>>>>>> 2881a57b5c1602b01222a7427cac33a6b81b399f
 
     //Vehicle Data//
     private String vehicleName;
@@ -126,8 +136,13 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     private Double vehicleKmTravel,vehicleCurrentSpeed;
 
     //Modulo de informacion de endpoint /vehicles/getVehicleDescripcion
+<<<<<<< HEAD
     private ComponentVehicleCustomFields componentVehicleCustomFields;//se remplazo este modulo por el include en bottm_sheet_map_view.xml linea 233
      //private ConstraintLayout informacionContrain; //TODO llenar los campos nuevode debajo de esto asignar en init view y asignar datos de modulo
+=======
+ private ComponentVehicleCustomFields componentVehicleCustomFields;//se remplazo este modulo por el include en bottm_sheet_map_view.xml linea 233
+     private ConstraintLayout informacionContrain; //TODO llenar los campos nuevode debajo de esto asignar en init view y asignar datos de modulo
+>>>>>>> 2881a57b5c1602b01222a7427cac33a6b81b399f
                                                    //TODO  setDataetVehicleDescripcion  LUIS encazo de venir nulos los campos poner ""
 
         private TextView txvLastMessageResponse,txvVehicleAddressResponse,txvVehicleAddressResponse1,txvVehicleAltitudeResponse,txvOdometerResponse
@@ -261,7 +276,11 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         bottomSheetSettings();  //configura el bottomsheet
        // buttonRefresh();       //no deberia soliciar la peticion hasta que se terminen de setear los datos iniciales
         fillDatainHeader(vehicleName,vehicleImageURL,String.valueOf(vehicleCurrentSpeed),vehicleTimeTravel,String.valueOf(vehicleKmTravel),vehicleGeoreference);
+<<<<<<< HEAD
         initPresenter();
+=======
+        getVehicleDescription();
+>>>>>>> 2881a57b5c1602b01222a7427cac33a6b81b399f
     }
 
 
@@ -371,6 +390,10 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         rvHeader.setAdapter(adapterH);
     }
 
+    private void getVehicleDescription() {
+        int vehicleCveS = vehicleCve;
+        presenter.setDataetVehicleDescripcion(vehicleCveS);
+    }
 
 
     public void setMainIconMarker(Marker marker){
@@ -467,9 +490,13 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     }
 
     private void initPresenter() {
+<<<<<<< HEAD
         progressDialog = new ProgressDialog(getActivity());
         presenter = new unitViewpresenterV3Impl(this, getContext());
         tripToday();//aqui deberia consultarse el header una vez
+=======
+        presenter = new unitViewpresenterV3Impl(this, getContext());
+>>>>>>> 2881a57b5c1602b01222a7427cac33a6b81b399f
     }
 
 
@@ -695,6 +722,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     public boolean onMarkerClick(Marker marker) {
         return false;
     }
+<<<<<<< HEAD
     //region dialogs
     @Override
     public void showProgressDialog() {
@@ -718,6 +746,9 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     public void settripsByDay() {
 
     }
+=======
+
+>>>>>>> 2881a57b5c1602b01222a7427cac33a6b81b399f
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -799,6 +830,13 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     }
 
 
+<<<<<<< HEAD
 
 
+=======
+    @Override
+    public void VehicleDescriptionSucess() {
+
+    }
+>>>>>>> 2881a57b5c1602b01222a7427cac33a6b81b399f
 }

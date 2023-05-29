@@ -4,8 +4,11 @@ import android.content.Context;
 
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.interactor.unitMapInteractorV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.interactor.unitMapInteractorV3Impl;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.dataVehicleDescV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.view.unitMapViewV3;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.models.trips.TripV2;
+
+import java.util.List;
 
 import java.util.List;
 
@@ -26,8 +29,17 @@ public class unitViewpresenterV3Impl implements unitViewpresenterV3{
     }
 
     @Override
-    public void setDataetVehicleDescripcion() {
+    public void setDataetVehicleDescripcion(int vehicleCve) {
+        if(view!=null) {
+            interactor.getVehicleDescription(vehicleCve);
+        }
+    }
 
+    @Override
+    public void setDataVehicleDescripcion(dataVehicleDescV3 data) {
+        if(view!=null) {
+            view.VehicleDescriptionSucess();
+        }
     }
 
     @Override
