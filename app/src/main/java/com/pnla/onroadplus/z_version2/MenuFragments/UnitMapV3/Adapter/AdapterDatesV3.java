@@ -63,7 +63,7 @@ public void onClick(View v) {
 
 @Override
 public int getItemCount()    {
-        return 1;
+        return dates.size();
         }
 
 public void setPosition1Clicked() {//TODO obtine la primera fecha

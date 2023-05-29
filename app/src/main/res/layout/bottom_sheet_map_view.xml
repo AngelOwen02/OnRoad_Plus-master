@@ -51,21 +51,17 @@
         android:id="@+id/constraintMainHeader"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="#FFFFFF"
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.pnla.onroadplus.z_version2.fragments.mapV2.components.ComponentVehicleHeader
-            android:id="@+id/vehicleDataHeader"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvheader"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp"
-            app:layout_constraintEnd_toStartOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
@@ -78,7 +74,7 @@
             android:background="@color/textLightColor"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/vehicleDataHeader" />
+            app:layout_constraintTop_toBottomOf="@+id/rvheader" />
 
         <LinearLayout
             android:id="@+id/ll_main_container_notifications"
@@ -221,7 +217,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rvDates">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
@@ -233,6 +229,11 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <include
+                layout="@layout/component_vehicle_custom_fields"
+                android:visibility="gone"
+                />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvEvents"
