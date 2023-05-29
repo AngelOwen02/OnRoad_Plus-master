@@ -21,9 +21,9 @@ public class dataVehicleDescV3 {
     @SerializedName("vehicle_plate")
     private String vehiclePlate;
     @SerializedName("policy_number")
-    private Object policyNumber;
+    private String policyNumber;
     @SerializedName("insurance_name")
-    private Object insuranceName;
+    private String insuranceName;
     @SerializedName("telephone")
     private String telephone;
     @SerializedName("last_message")
@@ -43,9 +43,9 @@ public class dataVehicleDescV3 {
     @SerializedName("vehicle_switch")
     private Integer vehicleSwitch;
     @SerializedName("km_travel")
-    private Integer kmTravel;
+    private Float kmTravel;
 
-    public dataVehicleDescV3(Integer cveVehicle, String vehicleName, String vehicleImage, String descBrand, String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, Object policyNumber, Object insuranceName, String telephone, String lastMessage, String address, Integer satelites, Float altitude, Float latitude, Float longitude, Integer currentSpeed, Integer vehicleSwitch, Integer kmTravel) {
+    public dataVehicleDescV3(Integer cveVehicle, String vehicleName, String vehicleImage, String descBrand, String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, String policyNumber, String insuranceName, String telephone, String lastMessage, String address, Integer satelites, Float altitude, Float latitude, Float longitude, Integer currentSpeed, Integer vehicleSwitch, Float kmTravel) {
         super();
         this.cveVehicle = cveVehicle;
         this.vehicleName = vehicleName;
@@ -133,19 +133,19 @@ public class dataVehicleDescV3 {
         this.vehiclePlate = vehiclePlate;
     }
 
-    public Object getPolicyNumber() {
+    public String getPolicyNumber() {
         return policyNumber;
     }
 
-    public void setPolicyNumber(Object policyNumber) {
+    public void setPolicyNumber(String policyNumber) {
         this.policyNumber = policyNumber;
     }
 
-    public Object getInsuranceName() {
+    public String getInsuranceName() {
         return insuranceName;
     }
 
-    public void setInsuranceName(Object insuranceName) {
+    public void setInsuranceName(String insuranceName) {
         this.insuranceName = insuranceName;
     }
 
@@ -221,11 +221,11 @@ public class dataVehicleDescV3 {
         this.vehicleSwitch = vehicleSwitch;
     }
 
-    public Integer getKmTravel() {
+    public Float getKmTravel() {
         return kmTravel;
     }
 
-    public void setKmTravel(Integer kmTravel) {
+    public void setKmTravel(Float kmTravel) {
         this.kmTravel = kmTravel;
     }
 }

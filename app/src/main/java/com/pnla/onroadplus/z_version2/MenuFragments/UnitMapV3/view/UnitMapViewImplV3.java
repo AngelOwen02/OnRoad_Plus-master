@@ -51,6 +51,8 @@ import com.pnla.onroadplus.z_version2.MenuFragments.ExternalGPSApp.view.External
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.adapter.TripAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter.AdapterDatesV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter.adapterHeader;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.presenter.unitViewpresenterV3;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.presenter.unitViewpresenterV3Impl;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.components.ComponentVehicleCustomFields;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.components.ComponentVehicleHeader;
@@ -106,6 +108,8 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     private boolean isClickedDrawTrip=false;
     private boolean tripsAndInfo=false;
 
+    //Presenter
+    private unitViewpresenterV3 presenter;
 
     //Vehicle Data//
     private String vehicleName;
@@ -129,7 +133,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     private Double vehicleKmTravel,vehicleCurrentSpeed;
 
     //Modulo de informacion de endpoint /vehicles/getVehicleDescripcion
-    //private ComponentVehicleCustomFields componentVehicleCustomFields;//se remplazo este modulo por el include en bottm_sheet_map_view.xml linea 233
+ private ComponentVehicleCustomFields componentVehicleCustomFields;//se remplazo este modulo por el include en bottm_sheet_map_view.xml linea 233
      private ConstraintLayout informacionContrain; //TODO llenar los campos nuevode debajo de esto asignar en init view y asignar datos de modulo
                                                    //TODO  setDataetVehicleDescripcion  LUIS encazo de venir nulos los campos poner ""
 
@@ -259,6 +263,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         bottomSheetSettings();
         buttonRefresh();
         fillDatainHeader(vehicleName,vehicleImageURL,String.valueOf(vehicleCurrentSpeed),vehicleTimeTravel,String.valueOf(vehicleKmTravel),vehicleGeoreference);
+        getVehicleDescription();
     }
 
 
@@ -295,8 +300,8 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
         btnInfoContainer = view.findViewById(R.id.btn_info_container);
         btnInfoTitle = view.findViewById(R.id.btn_info_title);
-       // componentVehicleCustomFields = view.findViewById(R.id.componentVehicleCustomFields);//TODO LUIS
-        informacionContrain.setVisibility(View.GONE);
+        componentVehicleCustomFields = view.findViewById(R.id.componentVehicleCustomFields);//TODO LUIS
+        //informacionContrain.setVisibility(View.GONE);
         separator = view.findViewById(R.id.view123);
 
         //componentVehicHeader
@@ -368,6 +373,10 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         rvHeader.setAdapter(adapterH);
     }
 
+    private void getVehicleDescription() {
+        int vehicleCveS = vehicleCve;
+        presenter.setDataetVehicleDescripcion(vehicleCveS);
+    }
 
 
     public void setMainIconMarker(Marker marker){
@@ -464,7 +473,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     }
 
     private void initPresenter() {
-        //presenter = new UnitMapPresenterImpl(this, getContext());
+        presenter = new unitViewpresenterV3Impl(this, getContext());
     }
 
 
@@ -542,7 +551,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
         separator.setVisibility(View.GONE);
         //.setVisibility(View.VISIBLE);
-        informacionContrain.setVisibility(View.VISIBLE);
+        //informacionContrain.setVisibility(View.VISIBLE);
         rvDates.setVisibility(View.GONE);
         rvTripsV2.setVisibility(View.GONE);
     }
@@ -554,7 +563,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
         separator.setVisibility(View.VISIBLE);
         //componentVehicleCustomFields.setVisibility(View.GONE);
-        informacionContrain.setVisibility(View.GONE);
+        //informacionContrain.setVisibility(View.GONE);
         rvDates.setVisibility(View.VISIBLE);
         rvTripsV2.setVisibility(View.VISIBLE);
     }
@@ -578,6 +587,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     public boolean onMarkerClick(Marker marker) {
         return false;
     }
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -653,4 +663,8 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     }
 
 
+    @Override
+    public void VehicleDescriptionSucess() {
+
+    }
 }
