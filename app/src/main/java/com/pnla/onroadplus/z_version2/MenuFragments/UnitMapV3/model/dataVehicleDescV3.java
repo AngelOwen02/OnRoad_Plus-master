@@ -45,7 +45,12 @@ public class dataVehicleDescV3 {
     @SerializedName("km_travel")
     private Double kmTravel;
 
-    public dataVehicleDescV3(Integer cveVehicle, String vehicleName, String vehicleImage, String descBrand, String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, String policyNumber, String insuranceName, String telephone, String lastMessage, String address, Integer satelites, Double altitude, Double latitude, Double longitude, Double currentSpeed, Integer vehicleSwitch, Double kmTravel) {
+    public dataVehicleDescV3(Integer cveVehicle, String vehicleName, String vehicleImage,
+                             String descBrand, String descModel, String vehicleYear, String vehicleVin,
+                             String vehiclePlate, String policyNumber, String insuranceName,
+                             String telephone, String lastMessage, String address, Integer satelites,
+                             Double altitude, Double latitude, Double longitude, Double currentSpeed,
+                             Integer vehicleSwitch, Double kmTravel) {
         super();
         this.cveVehicle = cveVehicle;
         this.vehicleName = vehicleName;
@@ -134,7 +139,7 @@ public class dataVehicleDescV3 {
     }
 
     public String getPolicyNumber() {
-        return policyNumber != null ? policyNumber : ""; // Return an empty string if policyNumber is null
+        return policyNumber != null ? policyNumber : "-- --"; // Return an empty string if policyNumber is null
     }
 
     public void setPolicyNumber(String policyNumber) {
@@ -142,7 +147,7 @@ public class dataVehicleDescV3 {
     }
 
     public String getInsuranceName() {
-        return insuranceName != null ? insuranceName : ""; // Return an empty string if insuranceName is null
+        return insuranceName != null ? insuranceName : "-- --"; // Return an empty string if insuranceName is null
     }
 
     public void setInsuranceName(String insuranceName) {
@@ -190,7 +195,7 @@ public class dataVehicleDescV3 {
     }
 
     public Double getLatitude() {
-        return latitude !=null ? 0.0 : latitude; // Return 0.0 if latitude is null
+        return latitude; // Return 0.0 if latitude is null
     }
 
     public void setLatitude(Double latitude) {
@@ -198,7 +203,7 @@ public class dataVehicleDescV3 {
     }
 
     public Double getLongitude() {
-        return longitude != null ? longitude : 0.0; // Return 0.0 if longitude is null
+        return longitude ; // Return 0.0 if longitude is null
     }
 
     public void setLongitude(Double longitude) {

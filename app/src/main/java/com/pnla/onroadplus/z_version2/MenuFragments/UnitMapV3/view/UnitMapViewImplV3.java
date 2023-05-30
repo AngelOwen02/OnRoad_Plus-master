@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -37,6 +38,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapView;
@@ -48,6 +50,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.Containers.CommandsContainerActivity;
@@ -63,7 +67,9 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.presenter.unitView
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.components.ComponentVehicleCustomFields;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.models.datesList.DateV2;
+import com.pnla.onroadplus.z_version2.fragments.mapV2.models.trips.PositionV2;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.models.trips.TripV2;
+import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
@@ -80,6 +86,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     //Map
     private MapView mapView;
     private GoogleMap mMap;
+
 
     //Header
     //private ComponentVehicleHeader componentVehicleHeader;
@@ -147,6 +154,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     private adapterHeader adapterH;
 
     //markers y mapas
+    private Polyline polylineTrip;
     private Marker startMaker;
     private Marker endMarker;
     private Marker mainIconMarker,secondaryIconMarker;
@@ -160,6 +168,8 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     final Handler handler = new Handler();
     private Runnable runnable;
     private ProgressBar progressBar;
+    private int mvehicleSwitch;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map_view_impl, container, false);
@@ -226,6 +236,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
                 });
     }
     private void setImageBorderColor(int vehicleSwitch, Double lat, Double longt) {
+        this.mvehicleSwitch=vehicleSwitch;
         MarkerOptions markerOptions = new MarkerOptions();
         BitmapDrawable bitmapdraw ;
         if (vehicleSwitch == 1) {
@@ -250,13 +261,42 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
             //circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGray));
         }
         Bitmap b = bitmapdraw.getBitmap();
-        Bitmap vehicleIcon = Bitmap.createScaledBitmap(b, 120, 120, false);
+        Bitmap vehicleBorder = Bitmap.createScaledBitmap(b, 120, 120, false);
         markerOptions.position(new LatLng(lat, longt));
         markerOptions.infoWindowAnchor(.5f, .4f);
         markerOptions.anchor(0.5f, 0.5f);
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(vehicleIcon));
+        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(vehicleBorder));
         secondaryIconMarker=mMap.addMarker(markerOptions);
         secondaryIconMarker.setTag("border");
+    }
+    private void  setSecondaryIcon(int vehicleSwitch){
+
+        BitmapDrawable bitmapdraw ;
+        if (vehicleSwitch == 1) {
+            // circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGreen));
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_green);
+        } else if (vehicleSwitch == 2) {
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_orange);
+            //circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarOrange));
+        } else if (vehicleSwitch == 3) {
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_red);
+            // circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarRed));
+        }else if (vehicleSwitch == 4) {
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_black);
+            //circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBlack));
+        }
+        else if (vehicleSwitch == 0) {
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_gray);
+            //circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGray));
+        }
+        else {
+            Toast.makeText(getContext(), "semaforo nulo", Toast.LENGTH_SHORT).show();
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_gray);
+            //circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGray));
+        }
+        Bitmap b = bitmapdraw.getBitmap();
+        Bitmap vehicleBorder = Bitmap.createScaledBitmap(b, 120, 120, false);
+        secondaryIconMarker.setIcon(BitmapDescriptorFactory.fromBitmap(vehicleBorder));
     }
 
     private void initView(View view) {
@@ -266,7 +306,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         fillVehicleDataHeader();//setea el encabezado
         bottomSheetSettings();  //configura el bottomsheet
        // buttonRefresh();       //no deberia soliciar la peticion hasta que se terminen de setear los datos iniciales
-        fillDatainHeader(vehicleName,vehicleImageURL,String.valueOf(vehicleCurrentSpeed),vehicleTimeTravel,String.valueOf(vehicleKmTravel),vehicleGeoreference);
+        fillDatainHeader(vehicleName,vehicleImageURL,String.valueOf(vehicleCurrentSpeed),vehicleTimeTravel,String.valueOf(vehicleKmTravel),vehicleGeoreference,vehicleSwitch);
         initPresenter();
     }
 
@@ -390,8 +430,8 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         Log.e("mvehicleSendTime",""+sVehicleCurrentSpeed);
     }
 
-    private void fillDatainHeader(String vehicleName,String vehicleImage,String vehicleCurrentSpeed,String vehicleTimeTravel,String vehicleKmTravel,String vehicleGeoreference) {
-        adapterH = new adapterHeader(vehicleName,vehicleImage,vehicleCurrentSpeed,vehicleTimeTravel,vehicleKmTravel,vehicleGeoreference, getContext());
+    private void fillDatainHeader(String vehicleName, String vehicleImage, String vehicleCurrentSpeed, String vehicleTimeTravel, String vehicleKmTravel, String vehicleGeoreference, int vehicleSwitch) {
+        adapterH = new adapterHeader(vehicleName,vehicleImage,vehicleCurrentSpeed,vehicleTimeTravel,vehicleKmTravel,vehicleGeoreference,vehicleSwitch, getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rvHeader.setLayoutManager(layoutManager);
         rvHeader.setAdapter(adapterH);
@@ -513,9 +553,23 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     @Override
     public void VehicleDescriptionSucess(dataVehicleDescV3 data) {
         this.datadesc=data;
-        //setTextFieldsInfoAndHeader(datadesc);
-        LatLng newlat=new LatLng(datadesc.getLatitude(),datadesc.getLongitude());
+        setTextFieldsInfoAndHeader(datadesc);
+        if (adapterH!=null){
+            adapterH.setSwitch(datadesc.getVehicleSwitch());
+        }
+        Log.e("updateFields","Switch: "+data.getVehicleSwitch());
+        Log.e("updateFields","Lat: "+vehicleLat+"  Long: "+vehicleLng);
+        Log.e("updateFields","Lat: "+datadesc.getLatitude()+"  Long: "+datadesc.getLongitude());
+        if(datadesc.getLatitude()!=0||datadesc.getLongitude()!=0)
+        {
+            this.vehicleLat=datadesc.getLatitude();
+            this.vehicleLng=datadesc.getLongitude();
+
+        }
+
+        LatLng newlat=new LatLng(vehicleLat,vehicleLng);
         secondaryIconMarker.setPosition(newlat);
+        setSecondaryIcon(data.getVehicleSwitch());
         mainIconMarker.setPosition(newlat);
 
 
@@ -598,13 +652,111 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     }
     @Override
     public void onClickGoogleImage(View view, int position) {
+        List<PositionV2> positionsToDraw = mtrips.get(position).getPositions();
+       // actualpositionImagemap=position;
+        //Toast.makeText(getContext(), "clicka="+actualpositionImagemap, Toast.LENGTH_LONG).show();
+        isClickedDrawTrip = true;
+        if (positionsToDraw != null) {
 
+            drawTrip(positionsToDraw);
+        } else {
+            Toast.makeText(getContext(), getString(R.string.textNotFoundTrip), Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override
     public void onClickFinalPosition(View view, int position) {
+        int height = 40;
+        int width = 40;
 
+        mMap.clear();
+        startMainiconMarker(vehicleLat,vehicleLng);
+        double latitude = mtrips.get(position).getPositions().get(mtrips.get(position).getPositions().size() - 1).getLatitude();
+        double longitude = mtrips.get(position).getPositions().get(mtrips.get(position).getPositions().size() - 1).getLongitude();
+        LatLng notificationPosition = new LatLng(latitude, longitude);
+        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.end_marker);
+        Bitmap b = bitmapdraw.getBitmap();
+        Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        startMaker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title("").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+        //zoomToVehicle(latitude, longitude, GeneralConstantsV2.VEHICLE_FINAL_POSITION);
+
+        //presenter.putVehicleMarkerInMap(vehicleLat, vehicleLng, vehicleName, vehicleImageURL, vehicleSwitch);
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
+
+    private void drawTrip(List<PositionV2> positions) {
+        //Log.e("postrips",""+positions.size());
+
+        mMap.clear();
+        startMainiconMarker(vehicleLat,vehicleLng);
+        //presenter.putVehicleMarkerInMap(vehicleLat, vehicleLng, vehicleName, vehicleImageURL, vehicleSwitch);
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        PolylineOptions options = new PolylineOptions().width(8).color(Color.BLACK).geodesic(true);
+        Log.e("externalApimaps",""+positions.size());
+        for (int z = 0; z < positions.size(); z++) {
+            LatLng point = new LatLng(positions.get(z).getLatitude(), positions.get(z).getLongitude());
+            builder.include(point);
+            options.add(point);
+        }
+
+        LatLngBounds bounds = builder.build();
+        int padding = 50;
+        final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        mMap.animateCamera(cu);
+        polylineTrip = mMap.addPolyline(options);
+
+        int height = 20;
+        int width = 20;
+        LatLng notificationPosition = new LatLng(positions.get(0).getLatitude(), positions.get(0).getLongitude());
+        //Log.e("mydaytrips",""+positions.get(0).getLatitude()+" "+positions.get(0).getLongitude());
+        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.start_marker);
+        Bitmap b = bitmapdraw.getBitmap();
+        Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        startMaker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title("").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+
+      /* for(int i=0;i<positions.size();i++)
+        {
+            if(i==0){
+
+            }
+            else if(i==positions.size())
+            {
+
+            }
+            else
+            {
+                height = 18;
+                width = 18;
+                notificationPosition = new LatLng(positions.get(i).getLatitude(), positions.get(i).getLongitude());
+             //   trips.get(i).getDescriptionTrip();
+                //Log.e("mydaytrips",""+positions.get(0).getLatitude()+" "+positions.get(0).getLongitude());
+               bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.start_marker);
+                 b = bitmapdraw.getBitmap();
+                smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+                startMaker = mMap.addMarker(new MarkerOptions().position(notificationPosition)//.title(vehicleName)//.icon(BitmapDescriptorFactory.fromBitmap(smallMarker))
+             //   .anchor(.5f,.5f).snippet(String.valueOf(positions.get(i).getLatitude()+"\t"+","+positions.get(i).getLongitude()+","
+              //  +positions.get(i).getSend_time()/*+trips.get(actualpositionImagemap).getHourTrip())).infoWindowAnchor(.5f,.5f));
+              //  startMaker.showInfoWindow();
+
+               // positionfordateontime=i;
+            }
+            positionsdatetime.clear();
+            positionsdatetime.add(positions.get(i).getSend_time());
+            Log.e("datapointspositions",""+positions.get(i).getSend_time());
+        }/*/
+
+        height = 30;
+        width = 30;
+        notificationPosition = new LatLng(positions.get(positions.size() - 1).getLatitude(), positions.get(positions.size() - 1).getLongitude());
+        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.end_marker);
+        b = bitmapdraw.getBitmap();
+        smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        endMarker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title("").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+        // Toast.makeText(getContext(),""+(trips.size()),Toast.LENGTH_SHORT);
+        //Log.e("poliline","ahita la raya");
+        bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
+    }
+
     //endregion
 
 
@@ -772,6 +924,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
     //endregion
     private void getTripsByday() {//este metodo deberia trabajar en vackground
+        Log.e("updateFieldsTripsBd","tripbyDay: "+vehicleCve+"  dateStart: "+datealternative+" "+timeStart+" dataEnt: "+datealternative+" "+timeEnd);
        presenter.AsyncTaskOne(vehicleCve,datealternative+" "+timeStart,datealternative+" "+timeEnd,getContext());
     }
 
@@ -805,6 +958,11 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
                 break;
             case R.id.map_toolbar_item_tripsbyday:
                 getTripsByday();
+                if(timers.getVisibility()==View.GONE) {
+                    timers.setVisibility(View.VISIBLE);
+                }else {
+                    timers.setVisibility(View.GONE);
+                }
                 break;
             case R.id.hdicon://boton de hdeste es el refresh del mapa debe limpiar el mapa y actualizar los datos del modulo HD
                 if(HDP==false)

@@ -22,5 +22,11 @@ public interface unitViewpresenterV3 {
 
     void AsyncTaskOne(int vehicleCve, String s, String s1, Context context);
 
-    void getTripsByTime(int vehicleCve, String s, String s1, Context context);
+    void getTripsByTime(int vehicleCve, String startTime, String endTime, Context context);
+
+    void setcalles(List<String> calles1);
+
+    void setdatafromlistDayLats(List<String> latitudeList);
+
+    void setdatafromlistDayLongs(List<String> longitudeList);
 }

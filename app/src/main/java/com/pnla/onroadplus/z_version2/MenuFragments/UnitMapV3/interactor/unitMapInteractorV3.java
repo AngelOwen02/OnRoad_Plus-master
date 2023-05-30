@@ -7,7 +7,7 @@ public interface unitMapInteractorV3 {
 
     void reqEvents(int vehicleCve, String currentDate, Context context);
 
-    void AsyncTaskOne(int vehicleCve, String sendime, String sendime1, Context context);
+    void AsyncTaskOne(int vehicleCve, String timeStart, String timeEnd, Context context);
 
-    void getTripsbyTime(int vehicleCve, String sendime, String sendime1, Context context);
+    void getTripsbyTime(int vehicleCve, String timeStart, String timeEnd, Context context);
 }

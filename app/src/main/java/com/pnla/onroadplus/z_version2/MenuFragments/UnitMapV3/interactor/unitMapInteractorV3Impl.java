@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.Containers.LoginContainer.view.LoginContainerActivity;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.models.tripsBytimeData;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.models.tripsbyTimeRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.models.tripsbyTimeResponse;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.utils.ExternalApiSerice;
@@ -30,6 +31,7 @@ import com.pnla.onroadplus.z_version2.retrofit.RetrofitClientV2;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitExternalApi;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitValidationsV2;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -67,6 +69,7 @@ public class unitMapInteractorV3Impl implements unitMapInteractorV3{
 
     private void requestVehicleDescription(int vehicleCve,String token) {
         final requestVehicleDescV3 request = new requestVehicleDescV3(vehicleCve, token);
+        Log.e("updateFields"," request: "+vehicleCve+" "+token);
         presenter.showProgressBar();
         services.getVehicleDescription(request).enqueue(new Callback<responseVehicleDescV3>() {
             @Override
@@ -133,18 +136,18 @@ public class unitMapInteractorV3Impl implements unitMapInteractorV3{
     }
 
     @Override
-    public void AsyncTaskOne(int vehicleCve, String datealternative, String timeStart, Context context) {
-        presenter.getTripsByTime(vehicleCve,datealternative,timeStart,context);
+    public void AsyncTaskOne(int vehicleCve, String timeStart, String timeEnd, Context context) {
+        presenter.getTripsByTime(vehicleCve,timeStart,timeEnd,context);
     }
 
-    @Override
-    public void getTripsbyTime(int vehicleCve, String startTimer, String endtime, Context context) {
+    @Override//TODO viajes de todo el dia
+    public void getTripsbyTime(int vehicleCve, String startTimer, String timeEnd, Context context) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
         if (token != null){
-            String validation = MapV2Utils.validategettripbytinetoRequest(vehicleCve,endtime,startTimer,token);
+            String validation = MapV2Utils.validategettripbytinetoRequest(vehicleCve,startTimer,timeEnd,token);
             if (validation.equals(GeneralConstantsV2.SUCCESS)) {
-                startvehicleTripbytime(vehicleCve,startTimer,endtime,token,context);
+                startvehicleTripbytime(vehicleCve,startTimer,timeEnd,token,context);
             }
             else{
                 Toast.makeText(context, ""+validation, Toast.LENGTH_SHORT).show();
@@ -182,6 +185,142 @@ public class unitMapInteractorV3Impl implements unitMapInteractorV3{
     }
 
     private void getTipsByTimeData(Response<tripsbyTimeResponse> response, Context context) {//TODO en este metodo deberia llegar al set de tripsByday
+
+            tripsbyTimeResponse tripbytimeResponse=response.body();
+
+            if(tripbytimeResponse!=null) {
+                int responseCode=tripbytimeResponse.getResponseCode();
+
+                if(responseCode==GeneralConstantsV2.RESPONSE_CODE_OK){
+                    tripsBytimeData data=tripbytimeResponse.getData();
+
+                    if(data!=null)
+                    {
+                        if (!data.getLatitude().isEmpty()){
+
+                            Log.e("dataclocks5",""+data.getGeoreference());
+                            String lislats= data.getLatitude();
+                            String listLongs=data.getLongitude();
+                            String calles=data.getGeoreference();
+                            String sendstimes=data.getSendtime();
+                            List<String> latitudeList=new ArrayList<>();
+                            List<String> longitudeList=new ArrayList<>();
+                            List<String> calles1=new ArrayList<>();
+                            ////falta agregar punto inicial y punto final
+                            if(lislats.split(",").length>50&&lislats.split(",").length==listLongs.split(",").length) {
+                                int idslat= lislats.split(",").length/lislats.split(",").length;
+                                int idslong= lislats.split(",").length/50;
+                                // Log.e("mydaytrips",""+ids);
+
+                                String[] parts1=lislats.split(",");
+                                String[] parts2=listLongs.split(",");
+                                String[] parts3=calles.split("::");
+                                int sizeRepaetlats=lislats.split(",").length-1;
+                                int sizeRepaetlongs=listLongs.split(",").length-1;
+                                int sizeRepaetCalles=calles.split("::").length-1;
+                                for(int i=0;i<lislats.split(",").length; i=i+idslat)
+                                {
+                                    String partlat=parts1[i];
+                                    String parlong=parts2[i];
+                                    //String calless=parts3[i];  esto se puso en el for de abajo
+
+                                    latitudeList.add(parlong);
+                                    longitudeList.add(partlat);
+                                    //calles1.add(calless);esto se puso en el for de abajo
+                                }
+                                for(int i=0;i<calles.split("::").length; i++){
+                                    String calless=parts3[i];
+                                    calles1.add(calless);
+                                }
+                                // latitudeList.add(parts1[ (lislats.split(",").length]);
+                                // String[] parts2=listLongs.split(",");
+                    /*  for(int j=0;j<listLongs.split(",").length; j=j+idslong)
+                      {
+                          String parlong=parts2[j];
+                          longitudeList.add(parlong);
+                      }*/
+                                //longitudeList.add(parts2[listLongs.split(",").length]);
+                                //Log.e("mydaytrips",""+latitudeList.size()+" "+latitudeList.get(latitudeList.size()-1));
+                                presenter.setcalles(calles1);
+                                presenter.setdatafromlistDayLats(latitudeList);
+                                presenter.setdatafromlistDayLongs(longitudeList);
+                            }else
+                            {
+                                int idslat= lislats.split(",").length/lislats.split(",").length;
+                                int idslong= lislats.split(",").length/50;
+                                // Log.e("mydaytrips",""+ids);
+
+                                String[] parts1=lislats.split(",");
+                                String[] parts2=listLongs.split(",");
+                                String[] parts3=calles.split("::");
+                                for(int i=0;i<lislats.split(",").length; i=i+idslat)
+                                {
+                                    String partlat=parts1[i];
+                                    String parlong=parts2[i];
+                                    //   String calless=parts3[i];
+                                    //latlong.add("lat/lng: ("+parlong+","+partlat+")");///formato de output de latitudes y longitudes
+                                    latitudeList.add(parlong);
+                                    longitudeList.add(partlat);
+                                    //   calles1.add(calless);
+                                }
+                                for(int i=0;i<calles.split("::").length; i++){
+                                    String calless=parts3[i];
+                                    calles1.add(calless);
+                                }
+                                // latitudeList.add(parts1[ (lislats.split(",").length]);
+                                // String[] parts2=listLongs.split(",");
+                    /*  for(int j=0;j<listLongs.split(",").length; j=j+idslong)
+                      {
+                          String parlong=parts2[j];
+                          longitudeList.add(parlong);
+                      }*/
+                                //longitudeList.add(parts2[listLongs.split(",").length]);
+                                //  Log.e("mydaytrips",""+latitudeList+" "+longitudeList);
+                                //  Log.e("mydaytrips",""+latitudeList.size()+" "+latitudeList.get(latitudeList.size()-1));
+                                presenter.setcalles(calles1);
+                                presenter.setdatafromlistDayLats(latitudeList);
+                                presenter.setdatafromlistDayLongs(longitudeList);
+                                // presenter.setErrorMessage("la informacion del sevidor es erronea");
+                            }
+
+
+                            // presenter.setdatafromlistDay(lislats);
+                    /* if(daytrips!=null)
+                       {*/
+
+                            // presenter.setTripsBydayToView(daytrips);
+                            //}else{   presenter.setErrorMessage(context.getString(R.string.textEmptyTrips));
+                            // }*/
+                        }else {
+                            //presenter.setErrorMessage(context.getString(R.string.textEmptyTrips));
+                        }
+                    }else{
+                        Toast.makeText(context, ""+context.getString(R.string.textEmptyTrips), Toast.LENGTH_SHORT).show();
+
+                    }
+                }else if (responseCode == GeneralConstantsV2.RESPONSE_CODE_SESSION_EXPIRED) {
+                    Toast.makeText(context, ""+context.getString(R.string.textSessionExpired), Toast.LENGTH_SHORT).show();
+
+                    UnitDB.deleteDB();
+                    GroupDB.deleteDB();
+                    RealmUserData.deleteDB();
+
+                    Bundle bndl = new Bundle();
+                    bndl.putBoolean("HelpStatus", true);
+
+
+
+
+
+                } else {
+                    Toast.makeText(context, ""+tripbytimeResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+                }
+            }else {
+                Toast.makeText(context, ""+context.getString(R.string.textErrorDataEmptyMap), Toast.LENGTH_SHORT).show();
+
+            }
+
     }
 
     private void startTripsRequest(String token, int cveVehicle, String startDate, String endDate, Context context) {

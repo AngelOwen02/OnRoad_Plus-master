@@ -37,20 +37,21 @@ public class unitViewpresenterV3Impl implements unitViewpresenterV3{
 
 
     @Override
-    public void AsyncTaskOne(int vehicleCve, String sendime, String sendime1, Context context) {
+    public void AsyncTaskOne(int vehicleCve, String timeStart, String timeEnd, Context context) {
         if(view!=null) {
-            interactor.AsyncTaskOne(vehicleCve,sendime,sendime1,context);
+            interactor.AsyncTaskOne(vehicleCve,timeStart,timeEnd,context);
         }
 
     }
 
     @Override
-    public void getTripsByTime(int vehicleCve, String sendime, String sendime1, Context context) {
+    public void getTripsByTime(int vehicleCve, String timeStart, String timeEnd, Context context) {
         if(view!=null) {
 
-            interactor.getTripsbyTime(vehicleCve,sendime,sendime1,context);
+            interactor.getTripsbyTime(vehicleCve,timeStart,timeEnd,context);
         }
     }
+
 
     @Override
     public void getEvents(int vehicleCve, String currentDate, Context context) {
@@ -94,4 +95,22 @@ public class unitViewpresenterV3Impl implements unitViewpresenterV3{
         }
     }
 
+    ///region drawTrip
+
+    @Override
+    public void setcalles(List<String> calles1) {
+
+    }
+
+    @Override
+    public void setdatafromlistDayLats(List<String> latitudeList) {
+
+    }
+
+    @Override
+    public void setdatafromlistDayLongs(List<String> longitudeList) {
+
+    }
+
+    //endregion
 }

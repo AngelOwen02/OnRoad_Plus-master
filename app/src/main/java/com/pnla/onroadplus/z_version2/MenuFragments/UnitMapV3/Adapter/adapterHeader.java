@@ -3,6 +3,8 @@ package com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,15 +21,17 @@ import com.pnla.onroadplus.R;
 public class adapterHeader  extends RecyclerView.Adapter<adapterHeader.ViewHolder> {
 
     private String vehicleName,vehicleImageURL,vehicleCurrentSpeed,vehicleTimeTravel,vehicleKmTravel,vehicleGeoreference;
+    private Integer vehicleSwitch;
     private Context context;
 
-    public adapterHeader(String vehicleName, String vehicleImageURL, String vehicleCurrentSpeed, String vehicleTimeTravel, String vehicleKmTravel, String vehicleGeoreference, Context context) {
+    public adapterHeader(String vehicleName, String vehicleImageURL, String vehicleCurrentSpeed, String vehicleTimeTravel, String vehicleKmTravel, String vehicleGeoreference, int vehicleSwitch, Context context) {
     this.vehicleName=vehicleName;
     this.vehicleImageURL=vehicleImageURL;
     this.vehicleCurrentSpeed=vehicleCurrentSpeed;
     this.vehicleTimeTravel=vehicleTimeTravel;
     this.vehicleKmTravel=vehicleKmTravel;
     this.vehicleGeoreference=vehicleGeoreference;
+    this.vehicleSwitch=vehicleSwitch;
     this.context=context;
     }
 
@@ -53,6 +57,33 @@ public class adapterHeader  extends RecyclerView.Adapter<adapterHeader.ViewHolde
                     .into(holder.vheader);
         }
 
+        if(vehicleSwitch!=null) {
+            if (vehicleSwitch == 1) {
+                Drawable draw = context.getResources().getDrawable(R.drawable.shape_circle_gren);
+                holder.semaforo.setImageDrawable(draw);
+            } else if (vehicleSwitch == 2) {
+                Drawable draw = context.getResources().getDrawable(R.drawable.shape_circle_orange);
+                holder.semaforo.setImageDrawable(draw);
+            } else if (vehicleSwitch == 3) {
+                Drawable draw = context.getResources().getDrawable(R.drawable.shape_circle_red);
+                holder.semaforo.setImageDrawable(draw);
+            } else if (vehicleSwitch == 4) {
+                Drawable draw = context.getResources().getDrawable(R.drawable.shape_circle_black);
+                holder.semaforo.setImageDrawable(draw);
+            } else if (vehicleSwitch == 0) {
+                Drawable draw = context.getResources().getDrawable(R.drawable.shape_circle_gray);
+                holder.semaforo.setImageDrawable(draw);
+            } else {
+                Drawable draw = context.getResources().getDrawable(R.drawable.shape_circle_white);
+                holder.semaforo.setImageDrawable(draw);
+            }
+        }
+
+    }
+
+    public void setSwitch(Integer nvehicleSwitch) {
+        this.vehicleSwitch=nvehicleSwitch;
+        notifyDataSetChanged();
     }
 
     @Override
