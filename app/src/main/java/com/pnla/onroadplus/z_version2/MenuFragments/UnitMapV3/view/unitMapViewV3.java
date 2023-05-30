@@ -14,4 +14,14 @@ public interface unitMapViewV3 {
     void settripsByDay();
 
     void VehicleDescriptionSucess(dataVehicleDescV3 data);
+
+    
+    void fillStringcalles(List<String> calles);
+    void fillStringTipsbyDaylat(List<String> data);
+
+    void fillStringTipsbyDaylong(List<String> data);
+
+    void drawtripdbxbdy(List<String> xdots, List<String> ydots);
+
+    void drawResumeDots(List<List<Float>> resumeDots);
 }

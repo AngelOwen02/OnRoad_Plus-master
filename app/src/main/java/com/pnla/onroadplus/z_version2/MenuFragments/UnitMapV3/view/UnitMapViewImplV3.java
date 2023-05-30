@@ -31,6 +31,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -53,6 +54,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.maps.android.SphericalUtil;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.Containers.CommandsContainerActivity;
 import com.pnla.onroadplus.z_version2.MenuFragments.ExternalGPSApp.view.ExternalGPSDialog;
@@ -79,7 +81,7 @@ import java.util.Calendar;
 import java.util.List;
 
 public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapReadyCallback ,
-                                                           GoogleMap.InfoWindowAdapter,GoogleMap.OnInfoWindowClickListener,
+                                                           GoogleMap.InfoWindowAdapter,GoogleMap.OnInfoWindowClickListener,GoogleMap.OnMapClickListener,GoogleMap.OnMapLongClickListener,
                                                            GoogleMap.OnMarkerClickListener,View.OnClickListener ,AdapterDatesV3.OnDateClickListener
                                                            ,TripAdapterV3.OnClickTripListener{
 
@@ -168,7 +170,19 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     final Handler handler = new Handler();
     private Runnable runnable;
     private ProgressBar progressBar;
+
     private int mvehicleSwitch;
+    private List<String> calles,tripsBDx,tripsBDy;
+    private List<List<Double>> HDdoublelist=new ArrayList<>();
+    private List<Double> HDlatlongHDRoute=new ArrayList<>();
+    private List<String> listangles;
+    private double HeadingRotation;
+
+    private boolean HDAvailable=false;
+    private List<List<Float>> resumeDotsfromInteractor=new ArrayList<>();
+
+    private List<String> tripsBDx2;
+    private List<String> tripsBDy2;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -194,6 +208,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnMapLongClickListener(this);
         mMap.setOnInfoWindowClickListener(this);
         mMap.setOnMarkerClickListener(this);
         mMap.setInfoWindowAdapter(this);
@@ -307,8 +322,10 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         bottomSheetSettings();  //configura el bottomsheet
        // buttonRefresh();       //no deberia soliciar la peticion hasta que se terminen de setear los datos iniciales
         fillDatainHeader(vehicleName,vehicleImageURL,String.valueOf(vehicleCurrentSpeed),vehicleTimeTravel,String.valueOf(vehicleKmTravel),vehicleGeoreference,vehicleSwitch,valudatebundle);
+
         initPresenter();
     }
+
 
 
     private void initViewID(View view) {
@@ -319,6 +336,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         itemBack = view.findViewById(R.id.map_toolbar_item_back);
         itemNavigation = view.findViewById(R.id.map_toolbar_item_navigation);
         itemShowtrips= view.findViewById(R.id.map_toolbar_item_tripsbyday);
+        itemShowtrips.setColorFilter(ContextCompat.getColor(getContext(), R.color.alfashadow));
         itemhd=view.findViewById(R.id.hdicon);
         itemhd.setImageResource(R.drawable.hd_1);
         itemselflocation=view.findViewById(R.id.selflocationgps);
@@ -555,7 +573,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         this.datadesc=data;
         setTextFieldsInfoAndHeader(datadesc);
         if (adapterH!=null){
-            adapterH.setSwitch(datadesc.getVehicleSwitch());
+            adapterH.setSwitch(datadesc.getVehicleSwitch(),datadesc.getCurrentSpeed(),vehicleTimeTravel,datadesc.getKmTravel(),datadesc.getAddress());
         }
         Log.e("updateFields","Switch: "+data.getVehicleSwitch());
         Log.e("updateFields","Lat: "+vehicleLat+"  Long: "+vehicleLng);
@@ -576,6 +594,8 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
 
     }
+
+
 
     private void setTextFieldsInfoAndHeader(dataVehicleDescV3 datadesc) {
         txvLastMessageResponse.setText(datadesc.getLastMessage());
@@ -957,26 +977,51 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
                 buttonRefresh();
                 break;
             case R.id.map_toolbar_item_tripsbyday:
-                getTripsByday();
                 if(timers.getVisibility()==View.GONE) {
+                    itemShowtrips.setColorFilter(ContextCompat.getColor(getContext(), R.color.blackUI));
                     timers.setVisibility(View.VISIBLE);
-                }else {
-                    timers.setVisibility(View.GONE);
-                }
-                break;
-            case R.id.hdicon://boton de hdeste es el refresh del mapa debe limpiar el mapa y actualizar los datos del modulo HD
-                if(HDP==false)
-                {
-                    itemhd.setImageResource(R.drawable.ic_hd);
-                    HDP=true;
-                }else
-                {
+
+                    HDAvailable=true;
+                    HDP=false;
                     itemhd.setImageResource(R.drawable.hd_1);
                     mMap.clear();
                     startMainiconMarker(vehicleLat,vehicleLng);
+                    getTripsByday();
+                }else {
+                    itemShowtrips.setColorFilter(ContextCompat.getColor(getContext(), R.color.alfashadow));
+                    timers.setVisibility(View.GONE);
                     HDP=false;
+                    itemhd.setImageResource(R.drawable.hd_1);
+                    HDAvailable=false;
+                    mMap.clear();
+                    startMainiconMarker(vehicleLat,vehicleLng);
+                }
+                break;
+            case R.id.hdicon://boton de hdeste es el refresh del mapa debe limpiar el mapa y actualizar los datos del modulo HD
+                if(HDAvailable==true){
+                        if(HDP==false)
+                        {
+                            HDP=true;
+                            itemhd.setImageResource(R.drawable.ic_hd);
+                            itemShowtrips.setColorFilter(ContextCompat.getColor(getContext(), R.color.alfashadow));
+                            mMap.clear();
+                            startMainiconMarker(vehicleLat,vehicleLng);
+                            timers.setVisibility(View.GONE);
+                            requestHD();
+                        }else
+                        {
+                            HDP=false;
+                            itemhd.setImageResource(R.drawable.hd_1);
+                            HDAvailable=false;
+                            mMap.clear();
+                            startMainiconMarker(vehicleLat,vehicleLng);
 
 
+
+                        }
+                }else{
+                    Toast.makeText(getContext(), "necestitas habilitar los viajes del dia", Toast.LENGTH_SHORT).show();
+                    HDAvailable=false;
                 }
                 break;
             case R.id.map_toolbar_item_navigation://boton de redireccion aq gps TODO TERMINADO
@@ -1019,7 +1064,291 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         }
     }
 
+    private void requestHD() {
+        presenter.getexternalAPI(HDdoublelist);
+    }
+
+
+    @Override
+    public void onMapClick(LatLng latLng) {
 
 
 
+
+    }
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+        // Creating a marker
+        MarkerOptions markerOptions = new MarkerOptions();
+
+        // Setting the position for the marker
+        markerOptions.position(latLng);
+
+        // Setting the title for the marker.
+        // This will be displayed on taping the marker
+        markerOptions.title(latLng.latitude + " : " + latLng.longitude);
+
+        // Clears the previously touched position
+        //.clear();
+
+        // Animating to the touched position
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+
+        // Placing a marker on the touched position
+       // mMap.addMarker(markerOptions);
+    }
+    @Override
+    public void fillStringcalles(List<String> calles) {
+        this.calles=calles;
+    }
+
+    @Override
+    public void fillStringTipsbyDaylat(List<String> lats) {
+        this.tripsBDx=lats;
+    }
+
+    @Override
+    public void fillStringTipsbyDaylong(List<String> longs) {
+        this.tripsBDy=longs;
+        mMap.clear();
+        startMainiconMarker(vehicleLat,vehicleLng);
+        readtripsonView();
+    }
+
+    @Override
+    public void drawtripdbxbdy(List<String> xdots, List<String> ydots) {
+        this.tripsBDx2=ydots;
+        this.tripsBDy2=xdots;
+        //snapedExternalapidots();
+    }
+
+    @Override
+    public void drawResumeDots(List<List<Float>> resumeDots) {
+        resumeDotsfromInteractor=resumeDots;
+        HDdots();
+    }
+
+    private void HDdots() {
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        PolylineOptions options = new PolylineOptions().width(8).color(Color.BLACK).geodesic(true);
+
+        for (int z = 0; z < resumeDotsfromInteractor.size(); z++) {
+
+            // String[] parts=resumeDotsfromInteractor.get(0).contains(",");
+            String[] parts=String .valueOf(resumeDotsfromInteractor.get(z)).split(",");
+            String[] partlongitude=parts[0].split("\\[");
+            String[] partlatitude=parts[1].split("\\]");
+            Double dx = Double.parseDouble(partlatitude[0]);
+            Double dy = Double.parseDouble(partlongitude[1]);
+            LatLng point = new LatLng(dx, dy);
+            builder.include(point);
+            options.add(point);
+            //  Log.e("externalApimaps","drawdata sublist0  "+partlatitude[0]+"   "+ partlongitude[1]);
+            //  Log.e("externalApimaps","drawdata sublist "+resumeDotsfromInteractor.get(z));
+        }
+        LatLngBounds bounds = builder.build();
+        int padding = 50;
+        final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        mMap.animateCamera(cu);
+        polylineTrip = mMap.addPolyline(options);
+        Log.e("externalApimaps","normal dots size "+tripsBDx.size()+ "   "+tripsBDx.get(0));
+
+        //snapedExternalapidots();
+    }
+
+    private void snapedExternalapidots() {//este metodo sirve para llenar de puntos a hdots
+        int height = 20;
+        int width = 20;
+        String initialposx = tripsBDy2.get(0);
+        String initialposy = tripsBDx2.get(0);
+        Double iPx = Double.parseDouble(initialposx);
+        Double iPy = Double.parseDouble(initialposy);
+        LatLng notificationPosition = new LatLng(iPx, iPy);
+        //Log.e("mydaytrips",""+positions.get(0).getLatitude()+" "+positions.get(0).getLongitude());
+        BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.green_dot);
+        Bitmap b = bitmapdraw.getBitmap();
+        Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        startMaker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title("").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).snippet(String.valueOf(calles.get(0))));
+        listangles=new ArrayList<>();
+        for(int j=0;j<tripsBDx2.size();j++)
+
+        {
+
+            if(j==0){
+
+            }
+            else if(j==tripsBDx2.size())
+            {
+
+            }
+            else
+            {
+                height = 1;
+                width = 1;
+                String x = tripsBDy2.get(j);
+                Double dx = Double.parseDouble(x);
+                String y = tripsBDx2.get(j);
+                Double dy = Double.parseDouble(y);
+                notificationPosition= new LatLng(dx, dy);
+                HeadingRotation= SphericalUtil.computeHeading(new LatLng(Double.parseDouble(tripsBDy2.get(j-1)),Double.parseDouble(tripsBDx2.get(j-1))),new LatLng(Double.parseDouble(tripsBDy2.get(j)),Double.parseDouble(tripsBDx2.get(j))) );
+                listangles.add(String.valueOf(HeadingRotation));
+                bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.start_marker);//.start_marker);arrowe
+                b = bitmapdraw.getBitmap();
+                smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+                startMaker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title(vehicleName).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).rotation(Float.valueOf(listangles.get(j-1))-90f)
+                        .anchor(.5f,.5f).snippet(String.valueOf(calles.get(j))));//+","
+
+            }
+
+        }
+        Log.e("datafroangles" +"",""+listangles);
+        height = 30;
+        width = 30;
+        String initialposxf = tripsBDy2.get(tripsBDy2.size() - 1);
+        String initialposyf = tripsBDx2.get(tripsBDx2.size() - 1);
+        Double iPxf = Double.parseDouble(initialposxf);
+        Double iPyf = Double.parseDouble(initialposyf);
+        notificationPosition = new LatLng(iPxf, iPyf);
+        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.end_marker);
+        b = bitmapdraw.getBitmap();
+        smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+        endMarker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title("").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+
+    }
+
+    private void readtripsonView() {
+
+        //  Log.e("mydaytrips",""+tripsBDx);
+        //Log.e("mydaytrips1",""+tripsBDy);
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
+        PolylineOptions options = new PolylineOptions().width(8).color(Color.BLACK).geodesic(true);
+        HDdoublelist.clear();
+        if ( !tripsBDx.isEmpty() && !tripsBDy.isEmpty()) {
+            //deletePolylineAndTripMarkers();
+            //Log.e("tripsbdx",String.valueOf(tripsBDx));
+            //Log.e("tripbdy",String.valueOf(tripsBDy));
+            for (int z = 0; z < tripsBDx.size(); z++) {
+                String x = tripsBDy.get(z);
+                Double dx = Double.parseDouble(x);
+                String y = tripsBDx.get(z);
+                Double dy = Double.parseDouble(y);
+                HDlatlongHDRoute =new ArrayList<>();
+                HDlatlongHDRoute.add(dy);
+                HDlatlongHDRoute.add(dx);
+
+                HDdoublelist.add(HDlatlongHDRoute);
+
+                LatLng point = new LatLng(dx, dy);
+                builder.include(point);
+                options.add(point);
+            }
+            Log.e(" externalApimaps",""+tripsBDx.size()+ "  "+tripsBDx);
+
+            LatLngBounds bounds = builder.build();
+            int padding = 50;
+            final CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+            mMap.animateCamera(cu);
+            polylineTrip = mMap.addPolyline(options);
+            int height = 20;
+            int width = 20;
+            String initialposx = tripsBDy.get(0);
+            String initialposy = tripsBDx.get(0);
+            Double iPx = Double.parseDouble(initialposx);
+            Double iPy = Double.parseDouble(initialposy);
+            LatLng notificationPosition = new LatLng(iPx, iPy);
+            //Log.e("mydaytrips",""+positions.get(0).getLatitude()+" "+positions.get(0).getLongitude());
+            BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.green_dot);
+            Bitmap b = bitmapdraw.getBitmap();
+            Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+            startMaker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title("").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).snippet(String.valueOf(calles.get(0))));
+            listangles=new ArrayList<>();
+            for(int j=0;j<tripsBDx.size();j++)
+
+            {
+
+                if(j==0){
+
+                }
+                else if(j==tripsBDx.size())
+                {
+
+                }
+                else
+                {
+                    height = 1;
+                    width = 1;
+                    String x = tripsBDy.get(j);
+                    Double dx = Double.parseDouble(x);
+                    String y = tripsBDx.get(j);
+                    Double dy = Double.parseDouble(y);
+                    notificationPosition= new LatLng(dx, dy);
+                    HeadingRotation= SphericalUtil.computeHeading(new LatLng(Double.parseDouble(tripsBDy.get(j-1)),Double.parseDouble(tripsBDx.get(j-1))),new LatLng(Double.parseDouble(tripsBDy.get(j)),Double.parseDouble(tripsBDx.get(j))) );
+
+                    listangles.add(String.valueOf(HeadingRotation));
+
+                    // notificationPosition = new LatLng(tripsBDx.get(j).getLatitude(), positions.get(i).getLongitude());
+                    //   trips.get(i).getDescriptionTrip();
+                    //Log.e("mydaytrips",""+positions.get(0).getLatitude()+" "+positions.get(0).getLongitude());
+
+                 /*   if ((listangles.get(j - 1) >= 0 && listangles.get(j - 1) < 22.5) || (listangles.get(j - 1) >= 337.5 && listangles.get(j - 1) <= 359)) {
+                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arrowe);
+
+                    } else if ( listangles.get(j - 1) >= 22.5 && listangles.get(j - 1) < 67.5) {
+                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arrowne);
+                    } else if (listangles.get(j - 1) >= 67.5 && listangles.get(j - 1) < 112.5) {
+                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arrown);
+                    } else if (listangles.get(j - 1) >= 112.5 && listangles.get(j - 1) < 157.5) {
+                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arrownw);
+                    } else if (listangles.get(j - 1) >= 157.5 && listangles.get(j - 1) < 202.5) {
+                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arroww);
+                    } else if (listangles.get(j - 1) >= 202.5 && listangles.get(j - 1) < 247.5) {
+                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arrowsw);
+                    } else if (listangles.get(j - 1) >= 247.5 && listangles.get(j - 1) < 292.5) {
+                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arrows);
+                    } else if (listangles.get(j - 1) >= 292.5 && listangles.get(j - 1) < 337.5) {
+                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arrowse);
+                    }
+                    else
+                    {
+                       // height = 18;
+                      //  width = 18;
+                       // bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.start_marker);
+                    }*/
+
+                    bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.start_marker);//.start_marker);arrowe
+                    b = bitmapdraw.getBitmap();
+                    smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+                    startMaker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title(vehicleName).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).rotation(Float.valueOf(listangles.get(j-1))-90f)
+                            .anchor(.5f,.5f).snippet(String.valueOf(calles.get(j))));//+","
+                    //   +positions.get(i).getSend_time()/+trips.get(actualpositionImagemap).getHourTrip()/)).infoWindowAnchor(.5f,.5f));
+                    //  startMaker.showInfoWindow();
+
+                    // positionfordateontime=i;
+                }
+
+
+                // positionsdatetime.clear();
+                // positionsdatetime.add(positions.get(i).getSend_time());
+                // Log.e("datapointspositions",""+positions.get(i).getSend_time());
+
+            }
+            Log.e("datafroangles" +"",""+listangles);
+            height = 30;
+            width = 30;
+            String initialposxf = tripsBDy.get(tripsBDy.size() - 1);
+            String initialposyf = tripsBDx.get(tripsBDx.size() - 1);
+            Double iPxf = Double.parseDouble(initialposxf);
+            Double iPyf = Double.parseDouble(initialposyf);
+            notificationPosition = new LatLng(iPxf, iPyf);
+            bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.end_marker);
+            b = bitmapdraw.getBitmap();
+            smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
+            endMarker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title("").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
+
+
+        }else {
+            Toast.makeText(getContext(), "No cuentas con viajes del día.", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

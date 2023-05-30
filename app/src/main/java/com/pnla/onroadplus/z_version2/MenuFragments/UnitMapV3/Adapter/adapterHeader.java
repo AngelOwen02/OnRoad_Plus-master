@@ -50,9 +50,9 @@ public class adapterHeader  extends RecyclerView.Adapter<adapterHeader.ViewHolde
     public void onBindViewHolder(@NonNull adapterHeader.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         holder.vehicleName.setText(vehicleName);
 
-        holder.vehicleCurrentSpeed.setText(vehicleCurrentSpeed);
+        holder.vehicleCurrentSpeed.setText(vehicleCurrentSpeed+ " km/hr");
         holder.vehicleTimeTravel.setText(vehicleTimeTravel);
-        holder.vehicleKmTravel.setText(vehicleKmTravel);
+        holder.vehicleKmTravel.setText(vehicleKmTravel+" km");
         holder.vehicleGeoreference.setText(vehicleGeoreference);
 
         if (vehicleImageURL != null ) {
@@ -92,8 +92,12 @@ public class adapterHeader  extends RecyclerView.Adapter<adapterHeader.ViewHolde
         sentimeCalulate(holder,sendTime);
     }
 
-    public void setSwitch(Integer nvehicleSwitch) {
+    public void setSwitch(Integer nvehicleSwitch, Double speed, String vehicleTimeTravel, Double getKmTravel, String address) {
         this.vehicleSwitch=nvehicleSwitch;
+        this.vehicleCurrentSpeed= String.valueOf( speed);
+        this.vehicleTimeTravel=vehicleTimeTravel;
+        this.vehicleKmTravel=String.valueOf(getKmTravel);
+        this.vehicleGeoreference=address;
         notifyDataSetChanged();
     }
 

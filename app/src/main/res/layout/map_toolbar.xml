@@ -51,6 +51,7 @@
         android:layout_marginEnd="12dp"
         android:layout_marginBottom="10dp"
         android:src="@drawable/ic_item_unit_distance"
+        android:tint="@color/alfashadow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/hdicon"
         app:layout_constraintTop_toTopOf="parent" />

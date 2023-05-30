@@ -264,10 +264,148 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
         String validation = MapV2Utils.validategettripbydatetoRequest(vehicleCve,sendime,token);
         presenter.showProgressDialog();
         if (validation.equals(GeneralConstantsV2.SUCCESS)) {
-            startvehicleTripbyDayRequest(vehicleCve,sendime,token,context);
+            //startvehicleTripbyDayRequest(vehicleCve,sendime,token,context);
         }
         else{
             presenter.setErrorMessage(validation);
+        }
+    }
+    private void startvehicleTripbyDayRequest(int vehicleCve,String sendtime,String token,final Context context) {
+        tripsbydayRequest request=new tripsbydayRequest(vehicleCve,sendtime,token);
+        services.gettripsbyday(request).enqueue(new Callback<TripByDayResponse>() {
+            @Override
+            public void onResponse(Call<TripByDayResponse> call, Response<TripByDayResponse> response) {
+                //validateTripsbyDayCode(response,context);
+            }
+
+            @Override
+            public void onFailure(Call<TripByDayResponse> call, Throwable t) {
+
+            }
+        });
+    }
+    //region validateTripsbyDayCode
+    private  void validateTripsbyDayCode(Response<TripByDayResponse> response, Context context)
+    {
+        if(RetrofitValidationsV2.checkSuccessCode(response.code())){
+            //getTipsByDayData(response,context);
+        }
+        else{
+            presenter.setErrorMessage(RetrofitValidationsV2.getErrorByStatus(response.code(),context));
+        }
+    }
+    //endregion validateTripsbyDayCode
+    private void getTipsByDayData(Response<TripByDayResponse> response,Context context)
+    {
+        TripByDayResponse tripbydayResponse=response.body();
+
+        if(tripbydayResponse!=null) {
+            int responseCode=tripbydayResponse.getResponseCode();
+
+            if(responseCode==GeneralConstantsV2.RESPONSE_CODE_OK){
+                TripsbyDayData data=tripbydayResponse.getData();
+
+                if(data!=null)
+                {
+                    if (!data.getLatitude().isEmpty()){
+
+
+                        String lislats= data.getLatitude();
+                        String listLongs=data.getLongitude();
+                        List<String> latitudeList=new ArrayList<>();
+                        List<String> longitudeList=new ArrayList<>();
+                        List<String> latlong=new ArrayList<>();
+                        ////falta agregar punto inicial y punto final
+                        if(lislats.split(",").length>50&&lislats.split(",").length==listLongs.split(",").length) {
+                            int idslat= lislats.split(",").length/lislats.split(",").length;
+                            int idslong= lislats.split(",").length/50;
+                            // Log.e("mydaytrips",""+ids);
+
+                            String[] parts1=lislats.split(",");
+                            String[] parts2=listLongs.split(",");
+                            for(int i=0;i<lislats.split(",").length; i=i+idslat)
+                            {
+                                String partlat=parts1[i];
+                                String parlong=parts2[i];
+                                //latlong.add("lat/lng: ("+parlong+","+partlat+")");///formato de output de latitudes y longitudes
+                                latitudeList.add(partlat);
+                                longitudeList.add(parlong);
+                            }
+                            // latitudeList.add(parts1[ (lislats.split(",").length]);
+                            // String[] parts2=listLongs.split(",");
+                    /*  for(int j=0;j<listLongs.split(",").length; j=j+idslong)
+                      {
+                          String parlong=parts2[j];
+                          longitudeList.add(parlong);
+                      }*/
+                            //longitudeList.add(parts2[listLongs.split(",").length]);
+                            //Log.e("mydaytrips",""+latitudeList.size()+" "+latitudeList.get(latitudeList.size()-1));
+                            presenter.setdatafromlistDayLats(latitudeList);
+                            presenter.setdatafromlistDayLongs(longitudeList);
+                        }else
+                        {
+                            int idslat= lislats.split(",").length/lislats.split(",").length;
+                            int idslong= lislats.split(",").length/50;
+                            // Log.e("mydaytrips",""+ids);
+
+                            String[] parts1=lislats.split(",");
+                            String[] parts2=listLongs.split(",");
+                            for(int i=0;i<lislats.split(",").length; i=i+idslat)
+                            {
+                                String partlat=parts1[i];
+                                String parlong=parts2[i];
+                                //latlong.add("lat/lng: ("+parlong+","+partlat+")");///formato de output de latitudes y longitudes
+                                latitudeList.add(partlat);
+                                longitudeList.add(parlong);
+                            }
+                            // latitudeList.add(parts1[ (lislats.split(",").length]);
+                            // String[] parts2=listLongs.split(",");
+                    /*  for(int j=0;j<listLongs.split(",").length; j=j+idslong)
+                      {
+                          String parlong=parts2[j];
+                          longitudeList.add(parlong);
+                      }*/
+                            //longitudeList.add(parts2[listLongs.split(",").length]);
+                            //  Log.e("mydaytrips",""+latitudeList+" "+longitudeList);
+                            //  Log.e("mydaytrips",""+latitudeList.size()+" "+latitudeList.get(latitudeList.size()-1));
+                            presenter.setdatafromlistDayLats(latitudeList);
+                            presenter.setdatafromlistDayLongs(longitudeList);
+                            // presenter.setErrorMessage("la informacion del sevidor es erronea");
+                        }
+
+
+                        // presenter.setdatafromlistDay(lislats);
+                    /* if(daytrips!=null)
+                       {*/
+
+                        // presenter.setTripsBydayToView(daytrips);
+                        //}else{   presenter.setErrorMessage(context.getString(R.string.textEmptyTrips));
+                        // }*/
+                    }else {
+                        //presenter.setErrorMessage(context.getString(R.string.textEmptyTrips));
+                    }
+                }else{   presenter.setErrorMessage(context.getString(R.string.textEmptyTrips));
+                }
+            }else if (responseCode == GeneralConstantsV2.RESPONSE_CODE_SESSION_EXPIRED) {
+
+                presenter.setErrorMessage(context.getString(R.string.textSessionExpired));
+                UnitDB.deleteDB();
+                GroupDB.deleteDB();
+                //RealmUserData.deleteDB();
+
+                Bundle bndl = new Bundle();
+                bndl.putBoolean("HelpStatus", true);
+
+                Intent intent = new Intent(context, LoginContainerActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtras(bndl);
+                context.startActivity(intent);
+
+            } else {
+                presenter.setErrorMessage(tripbydayResponse.getMessage());
+            }
+        }else {
+            presenter.setErrorMessage(context.getString(R.string.textErrorDataEmptyMap));
         }
     }
     //endregion getTripbyDay
@@ -407,20 +545,7 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
     //endregion startvehicleTripbytimeRequest
 
     //region startvehicleTripbyDayRequest
-    private void startvehicleTripbyDayRequest(int vehicleCve,String sendtime,String token,final Context context) {
-        tripsbydayRequest request=new tripsbydayRequest(vehicleCve,sendtime,token);
-        services.gettripsbyday(request).enqueue(new Callback<TripByDayResponse>() {
-            @Override
-            public void onResponse(Call<TripByDayResponse> call, Response<TripByDayResponse> response) {
-                validateTripsbyDayCode(response,context);
-            }
 
-            @Override
-            public void onFailure(Call<TripByDayResponse> call, Throwable t) {
-
-            }
-        });
-    }
     //endregion startvehicleTripbyDayRequest
 
     //region validateTripsbyTimeCode
@@ -435,17 +560,7 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
     }
     //endregion validateTripsbyTimeCode
 
-    //region validateTripsbyDayCode
-    private  void validateTripsbyDayCode(Response<TripByDayResponse> response, Context context)
-    {
-        if(RetrofitValidationsV2.checkSuccessCode(response.code())){
-            getTipsByDayData(response,context);
-        }
-        else{
-            presenter.setErrorMessage(RetrofitValidationsV2.getErrorByStatus(response.code(),context));
-        }
-    }
-    //endregion validateTripsbyDayCode
+
 // endregion testdata
 
     //region getTipsByTimeData
@@ -587,119 +702,7 @@ public class UnitMapInteractorImpl implements UnitMapInteractor {
     //endregion getTipsByTimeData
 
     //region getTipsByTimeData
-    private void getTipsByDayData(Response<TripByDayResponse> response,Context context)
-    {
-        TripByDayResponse tripbydayResponse=response.body();
 
-        if(tripbydayResponse!=null) {
-            int responseCode=tripbydayResponse.getResponseCode();
-
-            if(responseCode==GeneralConstantsV2.RESPONSE_CODE_OK){
-                TripsbyDayData data=tripbydayResponse.getData();
-
-                if(data!=null)
-                {
-                    if (!data.getLatitude().isEmpty()){
-
-
-                        String lislats= data.getLatitude();
-                        String listLongs=data.getLongitude();
-                        List<String> latitudeList=new ArrayList<>();
-                        List<String> longitudeList=new ArrayList<>();
-                        List<String> latlong=new ArrayList<>();
-                        ////falta agregar punto inicial y punto final
-                        if(lislats.split(",").length>50&&lislats.split(",").length==listLongs.split(",").length) {
-                            int idslat= lislats.split(",").length/lislats.split(",").length;
-                            int idslong= lislats.split(",").length/50;
-                            // Log.e("mydaytrips",""+ids);
-
-                            String[] parts1=lislats.split(",");
-                            String[] parts2=listLongs.split(",");
-                            for(int i=0;i<lislats.split(",").length; i=i+idslat)
-                            {
-                                String partlat=parts1[i];
-                                String parlong=parts2[i];
-                                //latlong.add("lat/lng: ("+parlong+","+partlat+")");///formato de output de latitudes y longitudes
-                                latitudeList.add(partlat);
-                                longitudeList.add(parlong);
-                            }
-                            // latitudeList.add(parts1[ (lislats.split(",").length]);
-                            // String[] parts2=listLongs.split(",");
-                    /*  for(int j=0;j<listLongs.split(",").length; j=j+idslong)
-                      {
-                          String parlong=parts2[j];
-                          longitudeList.add(parlong);
-                      }*/
-                            //longitudeList.add(parts2[listLongs.split(",").length]);
-                            //Log.e("mydaytrips",""+latitudeList.size()+" "+latitudeList.get(latitudeList.size()-1));
-                            presenter.setdatafromlistDayLats(latitudeList);
-                            presenter.setdatafromlistDayLongs(longitudeList);
-                        }else
-                        {
-                            int idslat= lislats.split(",").length/lislats.split(",").length;
-                            int idslong= lislats.split(",").length/50;
-                            // Log.e("mydaytrips",""+ids);
-
-                            String[] parts1=lislats.split(",");
-                            String[] parts2=listLongs.split(",");
-                            for(int i=0;i<lislats.split(",").length; i=i+idslat)
-                            {
-                                String partlat=parts1[i];
-                                String parlong=parts2[i];
-                                //latlong.add("lat/lng: ("+parlong+","+partlat+")");///formato de output de latitudes y longitudes
-                                latitudeList.add(partlat);
-                                longitudeList.add(parlong);
-                            }
-                            // latitudeList.add(parts1[ (lislats.split(",").length]);
-                            // String[] parts2=listLongs.split(",");
-                    /*  for(int j=0;j<listLongs.split(",").length; j=j+idslong)
-                      {
-                          String parlong=parts2[j];
-                          longitudeList.add(parlong);
-                      }*/
-                            //longitudeList.add(parts2[listLongs.split(",").length]);
-                            //  Log.e("mydaytrips",""+latitudeList+" "+longitudeList);
-                            //  Log.e("mydaytrips",""+latitudeList.size()+" "+latitudeList.get(latitudeList.size()-1));
-                            presenter.setdatafromlistDayLats(latitudeList);
-                            presenter.setdatafromlistDayLongs(longitudeList);
-                            // presenter.setErrorMessage("la informacion del sevidor es erronea");
-                        }
-
-
-                        // presenter.setdatafromlistDay(lislats);
-                    /* if(daytrips!=null)
-                       {*/
-
-                        // presenter.setTripsBydayToView(daytrips);
-                        //}else{   presenter.setErrorMessage(context.getString(R.string.textEmptyTrips));
-                        // }*/
-                    }else {
-                        //presenter.setErrorMessage(context.getString(R.string.textEmptyTrips));
-                    }
-                }else{   presenter.setErrorMessage(context.getString(R.string.textEmptyTrips));
-                }
-            }else if (responseCode == GeneralConstantsV2.RESPONSE_CODE_SESSION_EXPIRED) {
-
-                presenter.setErrorMessage(context.getString(R.string.textSessionExpired));
-                UnitDB.deleteDB();
-                GroupDB.deleteDB();
-                //RealmUserData.deleteDB();
-
-                Bundle bndl = new Bundle();
-                bndl.putBoolean("HelpStatus", true);
-
-                Intent intent = new Intent(context, LoginContainerActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                intent.putExtras(bndl);
-                context.startActivity(intent);
-
-            } else {
-                presenter.setErrorMessage(tripbydayResponse.getMessage());
-            }
-        }else {
-            presenter.setErrorMessage(context.getString(R.string.textErrorDataEmptyMap));
-        }
-    }
     //endregion getTipsByTimeData
 
     //region getVehicleDescription

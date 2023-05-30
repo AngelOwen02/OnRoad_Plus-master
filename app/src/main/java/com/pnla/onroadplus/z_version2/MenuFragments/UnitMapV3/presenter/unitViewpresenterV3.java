@@ -24,9 +24,14 @@ public interface unitViewpresenterV3 {
 
     void getTripsByTime(int vehicleCve, String startTime, String endTime, Context context);
 
+    //region setdata TripsbyTime
     void setcalles(List<String> calles1);
-
     void setdatafromlistDayLats(List<String> latitudeList);
-
     void setdatafromlistDayLongs(List<String> longitudeList);
+    //endregion
+    //region HD
+    void getexternalAPI(List<List<Double>> hDdoublelist);
+    void tripsBDx2tripsBDy2(List<String> xdots, List<String> ydots);
+    void drawHDdots(List<List<Float>> resumeDots);
+    //endregion
 }

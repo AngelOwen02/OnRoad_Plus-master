@@ -59,6 +59,13 @@ public class unitViewpresenterV3Impl implements unitViewpresenterV3{
             interactor.reqEvents(vehicleCve,currentDate,context);
         }
     }
+    @Override
+    public void getexternalAPI(List<List<Double>> correctedDots) {
+        if (view != null) {
+            interactor.dataExteralAPI( correctedDots);
+        }
+    }
+
 
     @Override
     public void setEvents(List<TripV2> trips) {
@@ -95,22 +102,42 @@ public class unitViewpresenterV3Impl implements unitViewpresenterV3{
         }
     }
 
-    ///region drawTrip
+    ///region drawTripByTime
 
     @Override
-    public void setcalles(List<String> calles1) {
-
+    public void setcalles(List<String> calles) {
+        if (view != null) {
+            view.fillStringcalles(calles);
+        }
     }
 
     @Override
-    public void setdatafromlistDayLats(List<String> latitudeList) {
-
+    public void setdatafromlistDayLats(List<String> data) {
+        if (view != null) {
+            view.fillStringTipsbyDaylat(data);
+        }
     }
 
     @Override
-    public void setdatafromlistDayLongs(List<String> longitudeList) {
-
+    public void setdatafromlistDayLongs(List<String> data) {
+        if (view != null) {
+            view.fillStringTipsbyDaylong(data);
+        }
     }
-
     //endregion
+
+
+    @Override
+    public void tripsBDx2tripsBDy2(List<String> xdots, List<String> ydots) {
+        if (view != null) {
+            view.drawtripdbxbdy(xdots,ydots);
+        }
+    }
+
+    @Override
+    public void drawHDdots(List<List<Float>> resumeDots) {
+        if (view != null) {
+            view.drawResumeDots(resumeDots);
+        }
+    }
 }
