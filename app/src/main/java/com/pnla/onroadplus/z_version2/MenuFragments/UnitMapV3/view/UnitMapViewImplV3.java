@@ -106,7 +106,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     private BottomSheetBehavior bottomSheetBehavior;
     private boolean isClickedDrawTrip=false;
     private boolean tripsAndInfo=false;
-    private List<TripV2> mtrips;//TODO viajes del dial en bottom sheet
+    private List<TripV2> mtrips;
 
     //Vehicle Data//
     private String vehicleName;
@@ -131,10 +131,9 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
     //Modulo de informacion de endpoint /vehicles/getVehicleDescripcion
   //  private ComponentVehicleCustomFields componentVehicleCustomFields;//se remplazo este modulo por el include en bottm_sheet_map_view.xml linea 233
-     private ConstraintLayout informacionContrain; //TODO llenar los campos nuevode debajo de esto asignar en init view y asignar datos de modulo
-                                                   //TODO  setDataetVehicleDescripcion  LUIS encazo de venir nulos los campos poner ""
+     private ConstraintLayout informacionContrain;
 
-        private TextView txvLastMessageResponse,txvVehicleAddressResponse,txvVehicleAddressResponse1,txvVehicleAltitudeResponse,txvOdometerResponse
+        private TextView txvLastMessageResponse,txvVehicleAddressResponse,txvSatelitesResponse,txvVehicleAddressResponse1,txvVehicleAltitudeResponse,txvOdometerResponse
                         ,txvHorometerResponse,txvVehicleMarkResponse,txvVehicleDescriptionResponse,txvVehicleModelResponse,txvVehiclePlateResponse,txvVehicleSerieResponse,
                         txvVehicleInsuranceResponse,txvVehiclePolicyResponse;
     private dataVehicleDescV3 datadesc;
@@ -323,7 +322,26 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
         //todo LUIS colocar aqui los campos del xml component_vehicle_custom_fileds.xml
         progressBar= view.findViewById(R.id.unit_map_view_progress_bar);
+        setInforTab(view);
     }
+
+    private void setInforTab(View view) {
+        txvLastMessageResponse=view.findViewById(R.id.txvLastMessageResponse) ;
+        txvVehicleAddressResponse=view.findViewById(R.id.txvVehicleAddressResponse);
+        txvSatelitesResponse=view.findViewById(R.id.txvSatelitesResponse);
+        txvVehicleAltitudeResponse=view.findViewById(R.id.txvVehicleAltitudeResponse);
+        txvOdometerResponse=view.findViewById(R.id. txvOdometerResponse);
+        txvHorometerResponse=view.findViewById(R.id. txvHorometerResponse);
+
+        txvVehicleMarkResponse=view.findViewById(R.id.txvVehicleMarkResponse);
+        txvVehicleDescriptionResponse =view.findViewById(R.id.txvVehicleDescriptionResponse);
+        txvVehicleModelResponse =view.findViewById(R.id.txvVehicleModelResponse);
+        txvVehiclePlateResponse =view.findViewById(R.id.txvVehiclePlateResponse);
+        txvVehicleSerieResponse  =view.findViewById(R.id.txvVehicleSerieResponse);
+        txvVehicleInsuranceResponse =view.findViewById(R.id.txvVehicleInsuranceResponse);
+        txvVehiclePolicyResponse=view.findViewById(R.id. txvVehiclePolicyResponse);
+    }
+
     private void initOnClickListeners() {
         btnTrips.setOnClickListener(this);
         btnInfo.setOnClickListener(this);
@@ -495,12 +513,33 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     @Override
     public void VehicleDescriptionSucess(dataVehicleDescV3 data) {
         this.datadesc=data;
+        //setTextFieldsInfoAndHeader(datadesc);
         LatLng newlat=new LatLng(datadesc.getLatitude(),datadesc.getLongitude());
         secondaryIconMarker.setPosition(newlat);
         mainIconMarker.setPosition(newlat);
 
 
+
+
     }
+
+    private void setTextFieldsInfoAndHeader(dataVehicleDescV3 datadesc) {
+        txvLastMessageResponse.setText(datadesc.getLastMessage());
+        txvVehicleAddressResponse.setText(datadesc.getAddress());
+        txvSatelitesResponse.setText(""+datadesc.getSatelites());
+        txvVehicleAltitudeResponse.setText(String.valueOf( datadesc.getAltitude()));
+        txvOdometerResponse.setText("-- --");
+        txvHorometerResponse.setText("-- --");
+
+        txvVehicleMarkResponse.setText(datadesc.getDescBrand());
+        txvVehicleDescriptionResponse .setText(datadesc.getDescModel());
+        txvVehicleModelResponse.setText(datadesc.getVehicleYear());
+        txvVehiclePlateResponse.setText(datadesc.getVehiclePlate());
+        txvVehicleSerieResponse.setText(datadesc.getVehicleVin());
+        txvVehicleInsuranceResponse.setText(datadesc.getInsuranceName());
+        txvVehiclePolicyResponse.setText(datadesc.getPolicyNumber());
+    }
+
     public void tripToday() {//este es para obtener trips by date del dia
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Calendar cal = Calendar.getInstance();

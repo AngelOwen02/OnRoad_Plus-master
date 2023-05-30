@@ -70,7 +70,7 @@ public class dataVehicleDescV3 {
     }
 
     public Integer getCveVehicle() {
-        return cveVehicle;
+        return cveVehicle != null ? cveVehicle : 0; // Return 0 if cveVehicle is null
     }
 
     public void setCveVehicle(Integer cveVehicle) {
@@ -78,7 +78,7 @@ public class dataVehicleDescV3 {
     }
 
     public String getVehicleName() {
-        return vehicleName;
+        return vehicleName != null ? vehicleName : ""; // Return an empty string if vehicleName is null
     }
 
     public void setVehicleName(String vehicleName) {
@@ -86,7 +86,7 @@ public class dataVehicleDescV3 {
     }
 
     public String getVehicleImage() {
-        return vehicleImage;
+        return vehicleImage != null ? vehicleImage : ""; // Return an empty string if vehicleImage is null
     }
 
     public void setVehicleImage(String vehicleImage) {
@@ -94,7 +94,7 @@ public class dataVehicleDescV3 {
     }
 
     public String getDescBrand() {
-        return descBrand;
+        return descBrand != null ? descBrand : ""; // Return an empty string if descBrand is null
     }
 
     public void setDescBrand(String descBrand) {
@@ -102,7 +102,7 @@ public class dataVehicleDescV3 {
     }
 
     public String getDescModel() {
-        return descModel;
+        return descModel != null ? descModel : ""; // Return an empty string if descModel is null
     }
 
     public void setDescModel(String descModel) {
@@ -110,7 +110,7 @@ public class dataVehicleDescV3 {
     }
 
     public String getVehicleYear() {
-        return vehicleYear;
+        return vehicleYear != null ? vehicleYear : ""; // Return an empty string if vehicleYear is null
     }
 
     public void setVehicleYear(String vehicleYear) {
@@ -118,7 +118,7 @@ public class dataVehicleDescV3 {
     }
 
     public String getVehicleVin() {
-        return vehicleVin;
+        return vehicleVin != null ? vehicleVin : ""; // Return an empty string if vehicleVin is null
     }
 
     public void setVehicleVin(String vehicleVin) {
@@ -126,7 +126,7 @@ public class dataVehicleDescV3 {
     }
 
     public String getVehiclePlate() {
-        return vehiclePlate;
+        return vehiclePlate != null ? vehiclePlate : ""; // Return an empty string if vehiclePlate is null
     }
 
     public void setVehiclePlate(String vehiclePlate) {
@@ -134,7 +134,7 @@ public class dataVehicleDescV3 {
     }
 
     public String getPolicyNumber() {
-        return policyNumber;
+        return policyNumber != null ? policyNumber : ""; // Return an empty string if policyNumber is null
     }
 
     public void setPolicyNumber(String policyNumber) {
@@ -142,7 +142,7 @@ public class dataVehicleDescV3 {
     }
 
     public String getInsuranceName() {
-        return insuranceName;
+        return insuranceName != null ? insuranceName : ""; // Return an empty string if insuranceName is null
     }
 
     public void setInsuranceName(String insuranceName) {
@@ -150,7 +150,7 @@ public class dataVehicleDescV3 {
     }
 
     public String getTelephone() {
-        return telephone;
+        return telephone != null ? telephone : ""; // Return an empty string if telephone is null
     }
 
     public void setTelephone(String telephone) {
@@ -158,7 +158,7 @@ public class dataVehicleDescV3 {
     }
 
     public String getLastMessage() {
-        return lastMessage;
+        return lastMessage != null ? lastMessage : ""; // Return an empty string if lastMessage is null
     }
 
     public void setLastMessage(String lastMessage) {
@@ -166,7 +166,7 @@ public class dataVehicleDescV3 {
     }
 
     public String getAddress() {
-        return address;
+        return address != null ? address : ""; // Return an empty string if address is null
     }
 
     public void setAddress(String address) {
@@ -174,7 +174,7 @@ public class dataVehicleDescV3 {
     }
 
     public Integer getSatelites() {
-        return satelites;
+        return satelites != null ? satelites : 0; // Return 0 if satelites is null
     }
 
     public void setSatelites(Integer satelites) {
@@ -182,7 +182,7 @@ public class dataVehicleDescV3 {
     }
 
     public Double getAltitude() {
-        return altitude;
+        return altitude != null ? altitude : 0.0; // Return 0.0 if altitude is null
     }
 
     public void setAltitude(Double altitude) {
@@ -190,7 +190,7 @@ public class dataVehicleDescV3 {
     }
 
     public Double getLatitude() {
-        return latitude;
+        return latitude !=null ? 0.0 : latitude; // Return 0.0 if latitude is null
     }
 
     public void setLatitude(Double latitude) {
@@ -198,7 +198,7 @@ public class dataVehicleDescV3 {
     }
 
     public Double getLongitude() {
-        return longitude;
+        return longitude != null ? longitude : 0.0; // Return 0.0 if longitude is null
     }
 
     public void setLongitude(Double longitude) {
@@ -206,7 +206,7 @@ public class dataVehicleDescV3 {
     }
 
     public Double getCurrentSpeed() {
-        return currentSpeed;
+        return currentSpeed != null ? currentSpeed : 0.0; // Return 0.0 if currentSpeed is null
     }
 
     public void setCurrentSpeed(Double currentSpeed) {
@@ -214,7 +214,7 @@ public class dataVehicleDescV3 {
     }
 
     public Integer getVehicleSwitch() {
-        return vehicleSwitch;
+        return vehicleSwitch != null ? vehicleSwitch : 0; // Return 0 if vehicleSwitch is null
     }
 
     public void setVehicleSwitch(Integer vehicleSwitch) {
@@ -222,7 +222,7 @@ public class dataVehicleDescV3 {
     }
 
     public Double getKmTravel() {
-        return kmTravel;
+        return kmTravel != null ? kmTravel : 0.0; // Return 0.0 if kmTravel is null
     }
 
     public void setKmTravel(Double kmTravel) {
