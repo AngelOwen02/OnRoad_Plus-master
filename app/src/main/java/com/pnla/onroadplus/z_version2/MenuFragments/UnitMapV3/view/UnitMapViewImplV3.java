@@ -306,7 +306,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         fillVehicleDataHeader();//setea el encabezado
         bottomSheetSettings();  //configura el bottomsheet
        // buttonRefresh();       //no deberia soliciar la peticion hasta que se terminen de setear los datos iniciales
-        fillDatainHeader(vehicleName,vehicleImageURL,String.valueOf(vehicleCurrentSpeed),vehicleTimeTravel,String.valueOf(vehicleKmTravel),vehicleGeoreference,vehicleSwitch);
+        fillDatainHeader(vehicleName,vehicleImageURL,String.valueOf(vehicleCurrentSpeed),vehicleTimeTravel,String.valueOf(vehicleKmTravel),vehicleGeoreference,vehicleSwitch,valudatebundle);
         initPresenter();
     }
 
@@ -430,8 +430,8 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         Log.e("mvehicleSendTime",""+sVehicleCurrentSpeed);
     }
 
-    private void fillDatainHeader(String vehicleName, String vehicleImage, String vehicleCurrentSpeed, String vehicleTimeTravel, String vehicleKmTravel, String vehicleGeoreference, int vehicleSwitch) {
-        adapterH = new adapterHeader(vehicleName,vehicleImage,vehicleCurrentSpeed,vehicleTimeTravel,vehicleKmTravel,vehicleGeoreference,vehicleSwitch, getContext());
+    private void fillDatainHeader(String vehicleName, String vehicleImage, String vehicleCurrentSpeed, String vehicleTimeTravel, String vehicleKmTravel, String vehicleGeoreference, int vehicleSwitch, String sendTime) {
+        adapterH = new adapterHeader(vehicleName,vehicleImage,vehicleCurrentSpeed,vehicleTimeTravel,vehicleKmTravel,vehicleGeoreference,vehicleSwitch,sendTime, getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rvHeader.setLayoutManager(layoutManager);
         rvHeader.setAdapter(adapterH);
