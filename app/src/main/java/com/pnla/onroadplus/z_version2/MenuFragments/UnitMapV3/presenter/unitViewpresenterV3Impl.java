@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.interactor.unitMapInteractorV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.interactor.unitMapInteractorV3Impl;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.dataVehicleDescV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.view.unitMapViewV3;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.models.trips.TripV2;
 
@@ -21,14 +22,19 @@ public class unitViewpresenterV3Impl implements unitViewpresenterV3{
     }
 
     @Override
-    public void getDataetVehicleDescripcion() {
-
+    public void setDataetVehicleDescripcion(int vehicleCve) {
+        if(view!=null) {
+            interactor.getVehicleDescription(vehicleCve);
+        }
     }
 
     @Override
-    public void setDataetVehicleDescripcion() {
-
+    public void setDataVehicleDescripcion(dataVehicleDescV3 data) {
+        if(view!=null) {
+            view.VehicleDescriptionSucess(data);
+        }
     }
+
 
     @Override
     public void AsyncTaskOne(int vehicleCve, String sendime, String sendime1, Context context) {
@@ -71,6 +77,20 @@ public class unitViewpresenterV3Impl implements unitViewpresenterV3{
     public void hideDialog() {
         if(view!=null) {
             view.hideProgressDialog();
+        }
+    }
+
+    @Override
+    public void showProgressBar() {
+        if(view!=null) {
+            view.showProgressBar();
+        }
+    }
+
+    @Override
+    public void hideProgressBar() {
+        if(view!=null) {
+            view.hideProgressBar();
         }
     }
 

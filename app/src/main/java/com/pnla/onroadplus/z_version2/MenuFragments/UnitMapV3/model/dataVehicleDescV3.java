@@ -21,9 +21,9 @@ public class dataVehicleDescV3 {
     @SerializedName("vehicle_plate")
     private String vehiclePlate;
     @SerializedName("policy_number")
-    private Object policyNumber;
+    private String policyNumber;
     @SerializedName("insurance_name")
-    private Object insuranceName;
+    private String insuranceName;
     @SerializedName("telephone")
     private String telephone;
     @SerializedName("last_message")
@@ -33,19 +33,19 @@ public class dataVehicleDescV3 {
     @SerializedName("satelites")
     private Integer satelites;
     @SerializedName("altitude")
-    private Float altitude;
+    private Double altitude;
     @SerializedName("latitude")
-    private Float latitude;
+    private Double latitude;
     @SerializedName("longitude")
-    private Float longitude;
+    private Double longitude;
     @SerializedName("current_speed")
-    private Integer currentSpeed;
+    private Double currentSpeed;
     @SerializedName("vehicle_switch")
     private Integer vehicleSwitch;
     @SerializedName("km_travel")
-    private Integer kmTravel;
+    private Double kmTravel;
 
-    public dataVehicleDescV3(Integer cveVehicle, String vehicleName, String vehicleImage, String descBrand, String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, Object policyNumber, Object insuranceName, String telephone, String lastMessage, String address, Integer satelites, Float altitude, Float latitude, Float longitude, Integer currentSpeed, Integer vehicleSwitch, Integer kmTravel) {
+    public dataVehicleDescV3(Integer cveVehicle, String vehicleName, String vehicleImage, String descBrand, String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, String policyNumber, String insuranceName, String telephone, String lastMessage, String address, Integer satelites, Double altitude, Double latitude, Double longitude, Double currentSpeed, Integer vehicleSwitch, Double kmTravel) {
         super();
         this.cveVehicle = cveVehicle;
         this.vehicleName = vehicleName;
@@ -133,19 +133,19 @@ public class dataVehicleDescV3 {
         this.vehiclePlate = vehiclePlate;
     }
 
-    public Object getPolicyNumber() {
+    public String getPolicyNumber() {
         return policyNumber;
     }
 
-    public void setPolicyNumber(Object policyNumber) {
+    public void setPolicyNumber(String policyNumber) {
         this.policyNumber = policyNumber;
     }
 
-    public Object getInsuranceName() {
+    public String getInsuranceName() {
         return insuranceName;
     }
 
-    public void setInsuranceName(Object insuranceName) {
+    public void setInsuranceName(String insuranceName) {
         this.insuranceName = insuranceName;
     }
 
@@ -181,35 +181,35 @@ public class dataVehicleDescV3 {
         this.satelites = satelites;
     }
 
-    public Float getAltitude() {
+    public Double getAltitude() {
         return altitude;
     }
 
-    public void setAltitude(Float altitude) {
+    public void setAltitude(Double altitude) {
         this.altitude = altitude;
     }
 
-    public Float getLatitude() {
+    public Double getLatitude() {
         return latitude;
     }
 
-    public void setLatitude(Float latitude) {
+    public void setLatitude(Double latitude) {
         this.latitude = latitude;
     }
 
-    public Float getLongitude() {
+    public Double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(Float longitude) {
+    public void setLongitude(Double longitude) {
         this.longitude = longitude;
     }
 
-    public Integer getCurrentSpeed() {
+    public Double getCurrentSpeed() {
         return currentSpeed;
     }
 
-    public void setCurrentSpeed(Integer currentSpeed) {
+    public void setCurrentSpeed(Double currentSpeed) {
         this.currentSpeed = currentSpeed;
     }
 
@@ -221,11 +221,11 @@ public class dataVehicleDescV3 {
         this.vehicleSwitch = vehicleSwitch;
     }
 
-    public Integer getKmTravel() {
+    public Double getKmTravel() {
         return kmTravel;
     }
 
-    public void setKmTravel(Integer kmTravel) {
+    public void setKmTravel(Double kmTravel) {
         this.kmTravel = kmTravel;
     }
 }

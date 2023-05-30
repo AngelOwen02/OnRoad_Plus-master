@@ -11,6 +11,16 @@
     app:layout_behavior="@string/bottom_sheet_behavior">
 
     <!--Lista de vehiculos-->
+    <View
+        android:layout_width="100dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="2dp"
+        android:background="#000000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </View>
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollViewVehiclesList"
         android:layout_width="0dp"
@@ -221,19 +231,21 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.pnla.onroadplus.z_version2.fragments.mapV2.components.ComponentVehicleCustomFields
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/componentVehicleCustomFields"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    app:layout_constraintTop_toTopOf="parent" >
+                    <include
+                        layout="@layout/component_vehicle_custom_fields"
 
-                <include
-                layout="@layout/component_vehicle_custom_fields"
-                android:visibility="gone"
-                />
+                        />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvEvents"

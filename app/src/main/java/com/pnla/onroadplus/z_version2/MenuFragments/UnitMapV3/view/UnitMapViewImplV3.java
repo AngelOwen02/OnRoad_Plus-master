@@ -14,6 +14,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -21,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,6 +57,8 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.view.UnitMapViewImpl
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter.AdapterDatesV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter.TripAdapterV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter.adapterHeader;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.dataVehicleDescV3;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.presenter.unitViewpresenterV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.presenter.unitViewpresenterV3Impl;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.components.ComponentVehicleCustomFields;
@@ -126,14 +130,14 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     private Double vehicleKmTravel,vehicleCurrentSpeed;
 
     //Modulo de informacion de endpoint /vehicles/getVehicleDescripcion
-    private ComponentVehicleCustomFields componentVehicleCustomFields;//se remplazo este modulo por el include en bottm_sheet_map_view.xml linea 233
-     //private ConstraintLayout informacionContrain; //TODO llenar los campos nuevode debajo de esto asignar en init view y asignar datos de modulo
+  //  private ComponentVehicleCustomFields componentVehicleCustomFields;//se remplazo este modulo por el include en bottm_sheet_map_view.xml linea 233
+     private ConstraintLayout informacionContrain; //TODO llenar los campos nuevode debajo de esto asignar en init view y asignar datos de modulo
                                                    //TODO  setDataetVehicleDescripcion  LUIS encazo de venir nulos los campos poner ""
 
         private TextView txvLastMessageResponse,txvVehicleAddressResponse,txvVehicleAddressResponse1,txvVehicleAltitudeResponse,txvOdometerResponse
                         ,txvHorometerResponse,txvVehicleMarkResponse,txvVehicleDescriptionResponse,txvVehicleModelResponse,txvVehiclePlateResponse,txvVehicleSerieResponse,
                         txvVehicleInsuranceResponse,txvVehiclePolicyResponse;
-
+    private dataVehicleDescV3 datadesc;
 
     private List<DateV2> mdates=new ArrayList<>();
 
@@ -151,9 +155,12 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
 
     //presentador
-    private unitViewpresenterV3Impl presenter;
+    private unitViewpresenterV3 presenter;
     private ProgressDialog progressDialog;
 
+    final Handler handler = new Handler();
+    private Runnable runnable;
+    private ProgressBar progressBar;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map_view_impl, container, false);
@@ -205,7 +212,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         //imageView.setImageBitmap(resource);
                         Bitmap b =resource;
-                        Bitmap vehicleIcon = Bitmap.createScaledBitmap(b, 150, 150, false);
+                        Bitmap vehicleIcon = Bitmap.createScaledBitmap(b, 110, 110, false);
                         markerOptions.position(new LatLng(lat, longt));
                         markerOptions.infoWindowAnchor(.5f, .4f);
                         markerOptions.anchor(0.5f, 0.5f);
@@ -244,7 +251,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
             //circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGray));
         }
         Bitmap b = bitmapdraw.getBitmap();
-        Bitmap vehicleIcon = Bitmap.createScaledBitmap(b, 160, 160, false);
+        Bitmap vehicleIcon = Bitmap.createScaledBitmap(b, 120, 120, false);
         markerOptions.position(new LatLng(lat, longt));
         markerOptions.infoWindowAnchor(.5f, .4f);
         markerOptions.anchor(0.5f, 0.5f);
@@ -287,7 +294,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
         rvDates = view.findViewById(R.id.rvDates);
         rvTripsV2 = view.findViewById(R.id.rvEvents);
-        rvHeader=view.findViewById(R.id.vehicleDataHeader);
+        rvHeader=view.findViewById(R.id.rvheader);
 
         btnTripContainer = view.findViewById(R.id.btn_trip_container);
         btnTripTitle = view.findViewById(R.id.btn_trip_title);
@@ -298,8 +305,9 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
         btnInfoContainer = view.findViewById(R.id.btn_info_container);
         btnInfoTitle = view.findViewById(R.id.btn_info_title);
-        componentVehicleCustomFields = view.findViewById(R.id.componentVehicleCustomFields);//TODO LUIS
-        //informacionContrain.setVisibility(View.GONE);
+        //componentVehicleCustomFields = view.findViewById(R.id.componentVehicleCustomFields);//TODO LUIS
+        informacionContrain=view.findViewById(R.id.componentVehicleCustomFields);
+        informacionContrain.setVisibility(View.GONE);
         separator = view.findViewById(R.id.view123);
 
         //componentVehicHeader
@@ -314,7 +322,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
 
         //todo LUIS colocar aqui los campos del xml component_vehicle_custom_fileds.xml
-
+        progressBar= view.findViewById(R.id.unit_map_view_progress_bar);
     }
     private void initOnClickListeners() {
         btnTrips.setOnClickListener(this);
@@ -410,12 +418,14 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     public void onLowMemory() {
         mapView.onLowMemory();
         super.onLowMemory();
+        handler.removeCallbacks(runnable);
 
     }
     @Override
     public void onPause() {
         mapView.onPause();
         super.onPause();
+        handler.removeCallbacks(runnable);
 
     }
 
@@ -423,6 +433,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     public void onDestroy() {
         mapView.onDestroy();
         super.onDestroy();
+        handler.removeCallbacks(runnable);
     }
     //endregion
     private void goToMainMenuContainer() {
@@ -469,10 +480,27 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     private void initPresenter() {
         progressDialog = new ProgressDialog(getActivity());
         presenter = new unitViewpresenterV3Impl(this, getContext());
+
         tripToday();//aqui deberia consultarse el header una vez
+        handler.postDelayed(runnable = new Runnable() {
+            @Override
+            public void run() {
+                presenter.setDataetVehicleDescripcion(vehicleCve);
+                handler.postDelayed(this,7000);
+            }
+        },7000);
     }
 
 
+    @Override
+    public void VehicleDescriptionSucess(dataVehicleDescV3 data) {
+        this.datadesc=data;
+        LatLng newlat=new LatLng(datadesc.getLatitude(),datadesc.getLongitude());
+        secondaryIconMarker.setPosition(newlat);
+        mainIconMarker.setPosition(newlat);
+
+
+    }
     public void tripToday() {//este es para obtener trips by date del dia
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         Calendar cal = Calendar.getInstance();
@@ -544,23 +572,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
 
     public void buttonRefresh(){
-//        presenter.getTripsByTime(vehicleCve,datealternative+" "+timeStart,datealternative+" "+timeEnd,getContext());
-//        updateVehicleDataHeader();
-//        Log.e("dataclocks","vehiclesentime update:"+vehicleSendTime);
-//
-//        if (tripsBDx!=null && tripsBDy!=null){
-//            String x = tripsBDy.get(tripsBDy.size()-1);
-//            Double dx = Double.parseDouble(x);
-//            String y = tripsBDx.get(tripsBDx.size()-1);
-//            Double dy = Double.parseDouble(y);
-//            mainIconMarker.setPosition(new LatLng(dx,dy));
-//        }
-//        new Handler().postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                progressDialog.dismiss();
-//            }
-//        },1500);
+        presenter.setDataetVehicleDescripcion(vehicleCve);
 
     }
         //region myLocation
@@ -659,7 +671,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
         separator.setVisibility(View.GONE);
         //.setVisibility(View.VISIBLE);
-        //informacionContrain.setVisibility(View.VISIBLE);
+        informacionContrain.setVisibility(View.VISIBLE);
         rvDates.setVisibility(View.GONE);
         rvTripsV2.setVisibility(View.GONE);
     }
@@ -671,7 +683,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
         separator.setVisibility(View.VISIBLE);
         //componentVehicleCustomFields.setVisibility(View.GONE);
-        //informacionContrain.setVisibility(View.GONE);
+        informacionContrain.setVisibility(View.GONE);
         rvDates.setVisibility(View.VISIBLE);
         rvTripsV2.setVisibility(View.VISIBLE);
     }
@@ -708,6 +720,16 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         progressDialog.dismiss();
     }
 
+    @Override
+    public void showProgressBar() {
+        progressBar.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void hideProgressBar() {
+        progressBar.setVisibility(View.GONE);
+    }
+
 
     //endregion
     private void getTripsByday() {//este metodo deberia trabajar en vackground
@@ -718,6 +740,8 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     public void settripsByDay() {
 
     }
+
+
     @Override
     public void onClick(View v) {
         switch (v.getId()) {

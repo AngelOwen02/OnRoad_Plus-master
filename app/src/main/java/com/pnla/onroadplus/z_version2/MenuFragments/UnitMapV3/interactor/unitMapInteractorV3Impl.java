@@ -12,6 +12,9 @@ import com.pnla.onroadplus.z_version2.Containers.LoginContainer.view.LoginContai
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.models.tripsbyTimeRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.models.tripsbyTimeResponse;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.utils.ExternalApiSerice;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.dataVehicleDescV3;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.requestVehicleDescV3;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.responseVehicleDescV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.presenter.unitViewpresenterV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.util.serviceVehicleDescription;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
@@ -53,10 +56,67 @@ public class unitMapInteractorV3Impl implements unitMapInteractorV3{
     }
 
     @Override
-    public void getVehicleDescription() {
-        //todo LUIS en esta clase hereda el token del user y el cve comprobando antes el token
-        //todo llegar hasta el consumo del endpoint y colocar el metodo setDataDescriptionVehicle en la View
+    public void getVehicleDescription(int vehicleCve) {
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        if (token!=null) {
+            //Metodo
+            requestVehicleDescription(vehicleCve, token);
+        }
     }
+
+    private void requestVehicleDescription(int vehicleCve,String token) {
+        final requestVehicleDescV3 request = new requestVehicleDescV3(vehicleCve, token);
+        presenter.showProgressBar();
+        services.getVehicleDescription(request).enqueue(new Callback<responseVehicleDescV3>() {
+            @Override
+            public void onResponse(Call<responseVehicleDescV3> call, Response<responseVehicleDescV3> response) {
+                //Validar
+                validateCodeVehicleDescription(response, context);
+            }
+
+            @Override
+            public void onFailure(Call<responseVehicleDescV3> call, Throwable t) {
+                Toast.makeText(context, t.toString(), Toast.LENGTH_SHORT).show();
+                presenter.hideProgressBar();
+            }
+        });
+    }
+
+    private void validateCodeVehicleDescription(Response<responseVehicleDescV3> response, Context context) {
+        if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
+            getVehicleData(response, context);
+        } else {
+            Toast.makeText(context, "sesion expirada", Toast.LENGTH_SHORT).show();
+            presenter.hideProgressBar();
+        }
+    }
+
+    private void getVehicleData(Response<responseVehicleDescV3> response, Context context) {
+        responseVehicleDescV3 vehicleDescResponse = response.body();
+        if (vehicleDescResponse != null) {
+            int responseCode = vehicleDescResponse.getResponseCode();
+            if(responseCode == GeneralConstantsV2.RESPONSE_CODE_OK) {
+                dataVehicleDescV3 data = vehicleDescResponse.getData();
+                if(data!=null) {
+                    presenter.setDataVehicleDescripcion(data);
+                    presenter.hideProgressBar();
+                } else {
+                    //Error
+                    presenter.hideProgressBar();
+                }
+            } else {
+                //Error
+                presenter.hideProgressBar();
+            }
+        } else {
+            //Error
+            Toast.makeText(context, "" + response.body().getMessage(), Toast.LENGTH_SHORT).show();
+            presenter.hideProgressBar();
+        }
+    }
+
+
 
     @Override
     public void reqEvents(int cveVehicle, String date, Context context) {

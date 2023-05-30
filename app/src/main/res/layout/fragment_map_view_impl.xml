@@ -23,18 +23,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/map1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="120dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_maps" />
 
-
-
-            <com.google.android.gms.maps.MapView
-                android:id="@+id/map1"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginBottom="120dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/toolbar_maps" />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout4"
             android:layout_width="0dp"
@@ -138,6 +137,16 @@
             </TextView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <ProgressBar
+            android:id="@+id/unit_map_view_progress_bar"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="20dp"
+            android:progressTint="#000000"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -150,9 +159,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/toolbar_maps" />-->
-
     <include
-        layout="@layout/bottom_sheet_map"
+        layout="@layout/bottom_sheet_map_view"
         android:visibility="visible" />
 
 
