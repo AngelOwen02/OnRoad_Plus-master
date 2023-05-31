@@ -464,7 +464,6 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
     }
     //region ciclo de vida
-    
     @Override
     public void onResume() {
         mapView.onResume();
