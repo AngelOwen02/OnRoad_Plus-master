@@ -673,7 +673,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     @Override
     public void onClickGoogleImage(View view, int position) {
         mMap.clear();
-        Log.e("unitMapV3miniTrip "," "+vehicleSwitch);
+            Log.e("unitMapV3miniTrip "," "+vehicleSwitch);
         startMainiconMarker(vehicleLat,vehicleLng);
         List<PositionV2> positionsToDraw = mtrips.get(position).getPositions();
         isClickedDrawTrip = true;
@@ -700,7 +700,8 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         startMaker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title("").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
-
+    //endregion minimapas
+    //region trip full day
     private void drawTrip(List<PositionV2> positions) {
         //Log.e("postrips",""+positions.size());
 
