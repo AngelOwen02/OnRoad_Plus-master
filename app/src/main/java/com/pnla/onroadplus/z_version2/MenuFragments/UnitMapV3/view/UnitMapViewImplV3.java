@@ -672,9 +672,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     }
     @Override
     public void onClickGoogleImage(View view, int position) {
-        mMap.clear();
-            Log.e("unitMapV3miniTrip "," "+vehicleSwitch);
-        startMainiconMarker(vehicleLat,vehicleLng);
+    //todo aqui no implrementer starmarikericon WARNING
         List<PositionV2> positionsToDraw = mtrips.get(position).getPositions();
         isClickedDrawTrip = true;
         if (positionsToDraw != null) {
@@ -690,7 +688,9 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         int height = 40;
         int width = 40;
 
-
+        mMap.clear();
+        Log.e("unitMapV3miniTrip "," "+vehicleSwitch);
+        startMainiconMarker(vehicleLat,vehicleLng);
         double latitude = mtrips.get(position).getPositions().get(mtrips.get(position).getPositions().size() - 1).getLatitude();
         double longitude = mtrips.get(position).getPositions().get(mtrips.get(position).getPositions().size() - 1).getLongitude();
         LatLng notificationPosition = new LatLng(latitude, longitude);
