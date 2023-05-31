@@ -233,6 +233,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         Bitmap vehicleIcon = null;
         Glide.with(this)
                 .asBitmap()
+                .error(R.drawable.sedan)
                 .load(vehicleImageURL)
                 .into(new CustomTarget<Bitmap>() {
                     @Override
@@ -951,14 +952,6 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
     }
     private void shotimer1() {
-        /*Calendar calendar = Calendar.getInstance();
-        int hour = calendar.get(Calendar.HOUR);
-        int minute = calendar.get(Calendar.MINUTE);
-      //  boolean day = calendar.get(Calendar.AM_PM);
-        TimePickerDialog datePickerDialog = new TimePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth ,mDateSetListenr, hour, minute, android.text.format.DateFormat.is24HourFormat(getContext()));
-        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        datePickerDialog.show();
-        mytextimer1.setText(hour+":"+minute);*/
         TimePickerDialog mTimePicker;
 
         final Calendar c = Calendar.getInstance();
@@ -995,14 +988,6 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
     }
     private void shotimer2() {
-        /*Calendar calendar = Calendar.getInstance();
-        int hour = calendar.get(Calendar.HOUR);
-        int minute = calendar.get(Calendar.MINUTE);
-        //  boolean day = calendar.get(Calendar.AM_PM);
-        TimePickerDialog datePickerDialog = new TimePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth ,mDateSetListenr2, hour, minute, android.text.format.DateFormat.is24HourFormat(getContext()));
-        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        datePickerDialog.show();
-        mytextimer2.setText(hour+":"+minute);*/
         TimePickerDialog mTimePicker;
 
         final Calendar c = Calendar.getInstance();
@@ -1076,6 +1061,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
                 mMap.clear();
                 startMainiconMarker(vehicleLat,vehicleLng);
                 showtripsByday2();
+                timers.setVisibility(View.GONE);
                 break;
             case R.id.map_toolbar_item_tripsbyday:
                 if(timers.getVisibility()==View.GONE) {
@@ -1358,7 +1344,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
             Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
             startMaker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title("").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).snippet(String.valueOf(calles.get(0))));
             listangles=new ArrayList<>();
-         /*   for(int j=0;j<tripsBDx.size();j++)
+        for(int j=0;j<tripsBDx.size();j++)
 
             {
 
@@ -1387,7 +1373,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
                             .anchor(.5f,.5f).snippet(String.valueOf(calles.get(j))));//+","
 
                 }
-            }*/
+            }
             Log.e("datafroangles" +"",""+listangles);
             height = 30;
             width = 30;

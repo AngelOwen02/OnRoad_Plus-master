@@ -59,6 +59,10 @@ public class adapterHeader  extends RecyclerView.Adapter<adapterHeader.ViewHolde
             Glide.with(context)
                     .load(vehicleImageURL)
                     .into(holder.vheader);
+        }else{
+            Glide.with(context)
+                    .load(R.drawable.sedan)
+                    .into(holder.vheader);
         }
 
         if(vehicleSwitch!=null) {
