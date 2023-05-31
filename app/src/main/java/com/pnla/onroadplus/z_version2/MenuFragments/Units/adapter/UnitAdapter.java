@@ -323,9 +323,7 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
         notifyDataSetChanged();
     }
 
-    public void UpdateVehicles(List<Unit> vehicles) {
 
-    }
 
     public interface OnClickVehiclesMapListener {
         void onClickVehiclesMap(int position);
@@ -368,7 +366,11 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
 
         }
     }
-
+    public void UpdateVehicles(List<Unit> vehicles) {
+        this.unitList = new ArrayList<>();
+        this.unitList.addAll(vehicles);
+        notifyDataSetChanged();
+    }
     public void setFilter(List<Unit> unitList) {
         this.unitList = new ArrayList<>();
         this.unitList.addAll(unitList);

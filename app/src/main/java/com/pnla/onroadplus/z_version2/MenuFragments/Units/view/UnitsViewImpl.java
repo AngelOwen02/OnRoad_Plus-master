@@ -165,13 +165,7 @@ import java.util.List;
 
     }
 
-     private void filterBySearch() {
-         if(inputTextIndicator!=null){
-             if(!inputTextIndicator.equals("")){
-                 onQueryTextChange(inputTextIndicator);
-             }
-         }
-     }
+
 
      private void fillAdapter(List<Unit> vehicles) {
          if(unitAdapter==null) {
@@ -183,7 +177,13 @@ import java.util.List;
              unitAdapter.UpdateVehicles(vehicles);
          }
      }
-
+     private void filterBySearch() {
+         if(inputTextIndicator!=null){
+             if(!inputTextIndicator.equals("")){
+                 onQueryTextChange(inputTextIndicator);
+             }
+         }
+     }
      private void callGeofencesnewEndpoint(List<Unit> vehicles) {
          List<dataRequest> askgeofences=new ArrayList<>();
          askgeofences.clear();
@@ -261,6 +261,8 @@ import java.util.List;
 
          }
          unitAdapter.UpdateGeos(vehicles);
+         fillAdapter(vehicles);
+         filterBySearch();
      }
 
      @Override
@@ -274,17 +276,17 @@ import java.util.List;
         inputTextIndicator = newText;
         if (vehicles!=null){
             unitAdapter.setFilter(filterUnitList);
-            if(filterUnitList!=null)
-            {
+            if(filterUnitList!=null) {
                 List<String> names2=new ArrayList<>();
                 List<Integer> names=new ArrayList<>();
                 names.clear();
                 names2.clear();
-                for(int ñ=0;ñ<filterUnitList.size();ñ++)
-                {
+
+                for(int ñ=0;ñ<filterUnitList.size();ñ++) {
                     names.add(filterUnitList.get(ñ).getCveVehicle());
                     names2.add(filterUnitList.get(ñ).getVehicleName());
                 }
+
 
                 /***/
                 cvesalternos.clear();
@@ -297,11 +299,12 @@ import java.util.List;
                     } else {*/
 
 
-                        for (int k = 0; k < names.size(); k++) //  for(int k=0;k<names.size();k++)
-                        {
-                            cvesalternos.add(names.get(k));
-                        }
-                   // }
+                    for (int k = 0; k < names.size(); k++) //  for(int k=0;k<names.size();k++)
+                    {
+
+                        cvesalternos.add(names.get(k));
+                    }
+                    // }
 
                     try {
                         presenter.georeferenceformAPI(cvesalternos);
@@ -309,7 +312,7 @@ import java.util.List;
                         e.printStackTrace();
                     }
                     //  Log.e("filterlog", "estoy filtrando" + names);
-                  //  Log.e("filterlog", "estoy filtrando" + names2);
+                    //  Log.e("filterlog", "estoy filtrando" + names2);
                     unitAdapter.getAdress(directions);
                     unitAdapter.notifyDataSetChanged();
                 }
@@ -317,8 +320,7 @@ import java.util.List;
 
 
             }
-        }
-        return true;
+        } return true;
     }
 
     private List<Unit> filterUnits(List<Unit> vehicles, String text) {
