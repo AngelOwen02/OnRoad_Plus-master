@@ -306,25 +306,14 @@ public class unitMapInteractorV3Impl implements unitMapInteractorV3{
                                 {
                                     String partlat=parts1[i];
                                     String parlong=parts2[i];
-                                    //String calless=parts3[i];  esto se puso en el for de abajo
 
                                     latitudeList.add(parlong);
                                     longitudeList.add(partlat);
-                                    //calles1.add(calless);esto se puso en el for de abajo
                                 }
                                 for(int i=0;i<calles.split("::").length; i++){
                                     String calless=parts3[i];
                                     calles1.add(calless);
                                 }
-                                // latitudeList.add(parts1[ (lislats.split(",").length]);
-                                // String[] parts2=listLongs.split(",");
-                    /*  for(int j=0;j<listLongs.split(",").length; j=j+idslong)
-                      {
-                          String parlong=parts2[j];
-                          longitudeList.add(parlong);
-                      }*/
-                                //longitudeList.add(parts2[listLongs.split(",").length]);
-                                //Log.e("mydaytrips",""+latitudeList.size()+" "+latitudeList.get(latitudeList.size()-1));
                                 presenter.setcalles(calles1);
                                 presenter.setdatafromlistDayLats(latitudeList);
                                 presenter.setdatafromlistDayLongs(longitudeList);
@@ -333,7 +322,6 @@ public class unitMapInteractorV3Impl implements unitMapInteractorV3{
                             {
                                 int idslat= lislats.split(",").length/lislats.split(",").length;
                                 int idslong= lislats.split(",").length/50;
-                                // Log.e("mydaytrips",""+ids);
 
                                 String[] parts1=lislats.split(",");
                                 String[] parts2=listLongs.split(",");
@@ -342,43 +330,19 @@ public class unitMapInteractorV3Impl implements unitMapInteractorV3{
                                 {
                                     String partlat=parts1[i];
                                     String parlong=parts2[i];
-                                    //   String calless=parts3[i];
-                                    //latlong.add("lat/lng: ("+parlong+","+partlat+")");///formato de output de latitudes y longitudes
                                     latitudeList.add(parlong);
                                     longitudeList.add(partlat);
-                                    //   calles1.add(calless);
                                 }
                                 for(int i=0;i<calles.split("::").length; i++){
                                     String calless=parts3[i];
                                     calles1.add(calless);
                                 }
-                                // latitudeList.add(parts1[ (lislats.split(",").length]);
-                                // String[] parts2=listLongs.split(",");
-                    /*  for(int j=0;j<listLongs.split(",").length; j=j+idslong)
-                      {
-                          String parlong=parts2[j];
-                          longitudeList.add(parlong);
-                      }*/
-                                //longitudeList.add(parts2[listLongs.split(",").length]);
-                                //  Log.e("mydaytrips",""+latitudeList+" "+longitudeList);
-                                //  Log.e("mydaytrips",""+latitudeList.size()+" "+latitudeList.get(latitudeList.size()-1));
                                 presenter.setcalles(calles1);
                                 presenter.setdatafromlistDayLats(latitudeList);
                                 presenter.setdatafromlistDayLongs(longitudeList);
                                 presenter.hideDialog();
-                                // presenter.setErrorMessage("la informacion del sevidor es erronea");
                             }
-
-
-                            // presenter.setdatafromlistDay(lislats);
-                    /* if(daytrips!=null)
-                       {*/
-
-                            // presenter.setTripsBydayToView(daytrips);
-                            //}else{   presenter.setErrorMessage(context.getString(R.string.textEmptyTrips));
-                            // }*/
                         }else {
-                            //presenter.setErrorMessage(context.getString(R.string.textEmptyTrips));
                             presenter.hideDialog();
                         }
                     }else{
@@ -395,10 +359,6 @@ public class unitMapInteractorV3Impl implements unitMapInteractorV3{
                     Bundle bndl = new Bundle();
                     bndl.putBoolean("HelpStatus", true);
                     presenter.hideDialog();
-
-
-
-
                 } else {
                     Toast.makeText(context, ""+tripbytimeResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     presenter.hideDialog();

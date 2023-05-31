@@ -464,10 +464,12 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
     }
     //region ciclo de vida
+    
     @Override
     public void onResume() {
         mapView.onResume();
         super.onResume();
+
         if(getView() == null){
             return;
         }
@@ -584,14 +586,10 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
             this.vehicleLng=datadesc.getLongitude();
 
         }
-
         LatLng newlat=new LatLng(vehicleLat,vehicleLng);
         secondaryIconMarker.setPosition(newlat);
         setSecondaryIcon(data.getVehicleSwitch());
         mainIconMarker.setPosition(newlat);
-
-
-
 
     }
 
@@ -1218,16 +1216,10 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     }
 
     private void readtripsonView() {
-
-        //  Log.e("mydaytrips",""+tripsBDx);
-        //Log.e("mydaytrips1",""+tripsBDy);
         LatLngBounds.Builder builder = new LatLngBounds.Builder();
         PolylineOptions options = new PolylineOptions().width(8).color(Color.BLACK).geodesic(true);
         HDdoublelist.clear();
         if ( !tripsBDx.isEmpty() && !tripsBDy.isEmpty()) {
-            //deletePolylineAndTripMarkers();
-            //Log.e("tripsbdx",String.valueOf(tripsBDx));
-            //Log.e("tripbdy",String.valueOf(tripsBDy));
             for (int z = 0; z < tripsBDx.size(); z++) {
                 String x = tripsBDy.get(z);
                 Double dx = Double.parseDouble(x);
@@ -1263,7 +1255,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
             Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
             startMaker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title("").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).snippet(String.valueOf(calles.get(0))));
             listangles=new ArrayList<>();
-            for(int j=0;j<tripsBDx.size();j++)
+         /*   for(int j=0;j<tripsBDx.size();j++)
 
             {
 
@@ -1284,55 +1276,15 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
                     Double dy = Double.parseDouble(y);
                     notificationPosition= new LatLng(dx, dy);
                     HeadingRotation= SphericalUtil.computeHeading(new LatLng(Double.parseDouble(tripsBDy.get(j-1)),Double.parseDouble(tripsBDx.get(j-1))),new LatLng(Double.parseDouble(tripsBDy.get(j)),Double.parseDouble(tripsBDx.get(j))) );
-
                     listangles.add(String.valueOf(HeadingRotation));
-
-                    // notificationPosition = new LatLng(tripsBDx.get(j).getLatitude(), positions.get(i).getLongitude());
-                    //   trips.get(i).getDescriptionTrip();
-                    //Log.e("mydaytrips",""+positions.get(0).getLatitude()+" "+positions.get(0).getLongitude());
-
-                 /*   if ((listangles.get(j - 1) >= 0 && listangles.get(j - 1) < 22.5) || (listangles.get(j - 1) >= 337.5 && listangles.get(j - 1) <= 359)) {
-                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arrowe);
-
-                    } else if ( listangles.get(j - 1) >= 22.5 && listangles.get(j - 1) < 67.5) {
-                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arrowne);
-                    } else if (listangles.get(j - 1) >= 67.5 && listangles.get(j - 1) < 112.5) {
-                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arrown);
-                    } else if (listangles.get(j - 1) >= 112.5 && listangles.get(j - 1) < 157.5) {
-                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arrownw);
-                    } else if (listangles.get(j - 1) >= 157.5 && listangles.get(j - 1) < 202.5) {
-                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arroww);
-                    } else if (listangles.get(j - 1) >= 202.5 && listangles.get(j - 1) < 247.5) {
-                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arrowsw);
-                    } else if (listangles.get(j - 1) >= 247.5 && listangles.get(j - 1) < 292.5) {
-                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arrows);
-                    } else if (listangles.get(j - 1) >= 292.5 && listangles.get(j - 1) < 337.5) {
-                        bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.arrowse);
-                    }
-                    else
-                    {
-                       // height = 18;
-                      //  width = 18;
-                       // bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.start_marker);
-                    }*/
-
                     bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.start_marker);//.start_marker);arrowe
                     b = bitmapdraw.getBitmap();
                     smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
                     startMaker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title(vehicleName).icon(BitmapDescriptorFactory.fromBitmap(smallMarker)).rotation(Float.valueOf(listangles.get(j-1))-90f)
                             .anchor(.5f,.5f).snippet(String.valueOf(calles.get(j))));//+","
-                    //   +positions.get(i).getSend_time()/+trips.get(actualpositionImagemap).getHourTrip()/)).infoWindowAnchor(.5f,.5f));
-                    //  startMaker.showInfoWindow();
 
-                    // positionfordateontime=i;
                 }
-
-
-                // positionsdatetime.clear();
-                // positionsdatetime.add(positions.get(i).getSend_time());
-                // Log.e("datapointspositions",""+positions.get(i).getSend_time());
-
-            }
+            }*/
             Log.e("datafroangles" +"",""+listangles);
             height = 30;
             width = 30;
@@ -1345,8 +1297,6 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
             b = bitmapdraw.getBitmap();
             smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
             endMarker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title("").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
-
-
         }else {
             Toast.makeText(getContext(), "No cuentas con viajes del día.", Toast.LENGTH_SHORT).show();
         }
