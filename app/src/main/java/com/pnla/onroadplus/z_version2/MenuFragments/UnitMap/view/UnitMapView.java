@@ -33,7 +33,7 @@ public interface UnitMapView {
     void showCommandScreen();
 
     void showProgressDialog();
- void stopallhandlers();
+    void stopallhandlers();
     void hideProgressDialog();
 
     void setErrorMessage(String message);

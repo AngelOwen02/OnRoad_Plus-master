@@ -5,11 +5,13 @@ import static com.pranavpandey.android.dynamic.utils.DynamicBitmapUtils.createBi
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.location.LocationListener;
@@ -25,6 +27,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -75,9 +78,11 @@ import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapReadyCallback ,
@@ -220,9 +225,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
       //  mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 10));
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 14));
         startMainiconMarker(vehicleLat,vehicleLng);
-
     }
-
     private void startMainiconMarker(Double lat, Double longt) {
         MarkerOptions markerOptions = new MarkerOptions();
         setImageBorderColor(vehicleSwitch,lat,  longt);
@@ -669,9 +672,10 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     }
     @Override
     public void onClickGoogleImage(View view, int position) {
+        mMap.clear();
+        Log.e("unitMapV3miniTrip "," "+vehicleSwitch);
+        startMainiconMarker(vehicleLat,vehicleLng);
         List<PositionV2> positionsToDraw = mtrips.get(position).getPositions();
-       // actualpositionImagemap=position;
-        //Toast.makeText(getContext(), "clicka="+actualpositionImagemap, Toast.LENGTH_LONG).show();
         isClickedDrawTrip = true;
         if (positionsToDraw != null) {
 
@@ -686,8 +690,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         int height = 40;
         int width = 40;
 
-        mMap.clear();
-        startMainiconMarker(vehicleLat,vehicleLng);
+
         double latitude = mtrips.get(position).getPositions().get(mtrips.get(position).getPositions().size() - 1).getLatitude();
         double longitude = mtrips.get(position).getPositions().get(mtrips.get(position).getPositions().size() - 1).getLongitude();
         LatLng notificationPosition = new LatLng(latitude, longitude);
@@ -695,9 +698,6 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         Bitmap b = bitmapdraw.getBitmap();
         Bitmap smallMarker = Bitmap.createScaledBitmap(b, width, height, false);
         startMaker = mMap.addMarker(new MarkerOptions().position(notificationPosition).title("").icon(BitmapDescriptorFactory.fromBitmap(smallMarker)));
-        //zoomToVehicle(latitude, longitude, GeneralConstantsV2.VEHICLE_FINAL_POSITION);
-
-        //presenter.putVehicleMarkerInMap(vehicleLat, vehicleLng, vehicleName, vehicleImageURL, vehicleSwitch);
         bottomSheetBehavior.setState(BottomSheetBehavior.STATE_COLLAPSED);
     }
 
@@ -946,10 +946,102 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     }
 
     @Override
-    public void settripsByDay() {
+    public void settripsByDay() {///este metodo no se usa pero deberia remplazar a los anteriores
 
     }
+    private void shotimer1() {
+        /*Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR);
+        int minute = calendar.get(Calendar.MINUTE);
+      //  boolean day = calendar.get(Calendar.AM_PM);
+        TimePickerDialog datePickerDialog = new TimePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth ,mDateSetListenr, hour, minute, android.text.format.DateFormat.is24HourFormat(getContext()));
+        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        datePickerDialog.show();
+        mytextimer1.setText(hour+":"+minute);*/
+        TimePickerDialog mTimePicker;
 
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR);
+        int minute = c.get(Calendar.MINUTE);
+
+        mTimePicker = new TimePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth , new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+
+
+                String time = selectedHour + ":" + selectedMinute;
+
+                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm");
+                Date date = null;
+                try {
+                    date = fmt.parse(time);
+                } catch (ParseException e) {
+
+                    e.printStackTrace();
+                }
+
+                SimpleDateFormat fmtOut = new SimpleDateFormat("HH:mm:ss");
+
+                String formattedTime = fmtOut.format(date);
+                timeStart=formattedTime;
+                //setTimers();
+                mytextimer1.setText(formattedTime);
+            }
+        }, hour, minute,true);//No 24 hour time
+        mTimePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        mTimePicker.setTitle("Selecciona un horario");
+        mTimePicker.show();
+
+    }
+    private void shotimer2() {
+        /*Calendar calendar = Calendar.getInstance();
+        int hour = calendar.get(Calendar.HOUR);
+        int minute = calendar.get(Calendar.MINUTE);
+        //  boolean day = calendar.get(Calendar.AM_PM);
+        TimePickerDialog datePickerDialog = new TimePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth ,mDateSetListenr2, hour, minute, android.text.format.DateFormat.is24HourFormat(getContext()));
+        datePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        datePickerDialog.show();
+        mytextimer2.setText(hour+":"+minute);*/
+        TimePickerDialog mTimePicker;
+
+        final Calendar c = Calendar.getInstance();
+        int hour = c.get(Calendar.HOUR_OF_DAY);
+        int minute = c.get(Calendar.MINUTE);
+
+        mTimePicker = new TimePickerDialog(getContext(), android.R.style.Theme_Holo_Light_Dialog_MinWidth , new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker timePicker, int selectedHour, int selectedMinute) {
+
+
+                String time = selectedHour + ":" + selectedMinute;
+
+                SimpleDateFormat fmt = new SimpleDateFormat("HH:mm");
+                Date date = null;
+                try {
+                    date = fmt.parse(time);
+                } catch (ParseException e) {
+
+                    e.printStackTrace();
+                }
+
+                SimpleDateFormat fmtOut = new SimpleDateFormat("HH:mm:ss");
+
+                String formattedTime = fmtOut.format(date);
+                timeEnd=formattedTime;
+                //setTimers();
+                mytextimer2.setText(formattedTime);
+            }
+        }, hour, minute,true);//No 24 hour time
+        mTimePicker.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        mTimePicker.setTitle("Selecciona un horario");
+        mTimePicker.show();  //  mytextimer2.setText(hour+":"+minute);
+    }
+    private void showtripsByday2()//boton de viajes por dia
+    {
+       // Log.e("updateFieldsTripsBd","tripbyDay: "+vehicleCve+"  dateStart: "+datealternative+" "+timeStart+" dataEnt: "+datealternative+" "+timeEnd);
+        presenter.AsyncTaskOne(vehicleCve,datealternative+" "+timeStart,datealternative+" "+timeEnd,getContext());
+
+    }
 
     @Override
     public void onClick(View v) {
@@ -972,6 +1064,17 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
                 break;
             case R.id.map_toolbar_item_refresh:// update completo
                 buttonRefresh();
+                break;
+            case R.id.clockone:
+                shotimer1();
+                break;
+            case R.id.clocktwo:
+                shotimer2();
+                break;
+            case R.id.consultarButton:
+                mMap.clear();
+                startMainiconMarker(vehicleLat,vehicleLng);
+                showtripsByday2();
                 break;
             case R.id.map_toolbar_item_tripsbyday:
                 if(timers.getVisibility()==View.GONE) {
