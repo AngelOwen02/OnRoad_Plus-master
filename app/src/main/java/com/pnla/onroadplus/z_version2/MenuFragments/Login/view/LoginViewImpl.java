@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.material.textfield.TextInputLayout;
+import com.pnla.onroadplus.BuildConfig;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.ChangePassword.view.ChangePasswordViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Login.presenter.LoginPresenter;
@@ -41,7 +42,8 @@ public class LoginViewImpl extends Fragment implements LoginView, View.OnClickLi
     private EditText edtUserOrEmail, edtPassword;
     private TextInputLayout textInputLayoutUser;
     private TextInputLayout textInputLayoutPass;
-
+    private TextView versionCode;
+    private String vName = BuildConfig.VERSION_NAME;
     private LoginPresenter presenter;
     public static boolean showedLoginView = false;
 
@@ -66,7 +68,9 @@ public class LoginViewImpl extends Fragment implements LoginView, View.OnClickLi
 
         btnLogin.setOnClickListener(this);
         txvForgetPassword.setOnClickListener(this);
+        versionCode = view.findViewById(R.id.versionCode);
 
+        versionCode.setText("V: "+vName);
         presenter = new LoginPresenterImpl(getContext());
         presenter.setView(this);
 

@@ -292,7 +292,7 @@ public class LoginInteractorImpl implements LoginInteractor {
                        /* if (!RealmUserData.existUser(user)) {
                             RealmUserData.saveUser(user, email, password, GeneralConstantsV2.IS_FIRST_TIME);
                         }*/
-                        UtilsLoginV2.saveUserDataSharedPreferences(urlUserImage, user, userData.getToken(), userData.getEmail(), password, employeeName, context);
+                        UtilsLoginV2.saveUserDataSharedPreferences(urlUserImage, user, userData.getToken(), userData.getEmail(), password, employeeName,String.valueOf(userData.getOrigin()), context);
                         presenter.successLogin(user);
                     }
                 } else {

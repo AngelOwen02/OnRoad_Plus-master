@@ -21,10 +21,10 @@ android {
     compileSdkVersion 31
     defaultConfig {
         applicationId "com.pnla.onroadplus"
-        minSdkVersion 23//17
+        minSdkVersion 17
         targetSdkVersion 31
-        versionCode 37
-        versionName "2.0.89"
+        versionCode 38
+        versionName "2.0.90"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }

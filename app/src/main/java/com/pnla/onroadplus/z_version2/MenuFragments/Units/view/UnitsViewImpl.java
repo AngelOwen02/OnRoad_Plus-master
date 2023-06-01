@@ -217,7 +217,7 @@ import java.util.List;
          SharedPreferences preferences = getContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
          String userName = preferences.getString(GeneralConstantsV2.USER_PREFERENCES, null);
          origin = preferences.getString(GeneralConstantsV2.ORIGIN, null);
-         Log.e("origin", origin);
+         //Log.e("origin", origin);
      }
     @Override
     public void failureResponse(String message) {

@@ -1,7 +1,11 @@
 package com.pnla.onroadplus.z_version2.fragments.loginV2.models;
 
+import android.content.Context;
+
 public class UserDataV2 {
 
+
+    public Integer origin;
     private String employee_name;
     private Boolean firstLogin;
     private String userImage;
@@ -16,7 +20,7 @@ public class UserDataV2 {
      * @param firstLogin
      * @param employee_name
      */
-    public UserDataV2(String employee_name, Boolean firstLogin, String userImage, String token, String email,String user_cve) {
+    public UserDataV2(String employee_name, Boolean firstLogin, String userImage, String token, String email,String user_cve,Integer origin) {
         super();
         this.employee_name = employee_name;
         this.firstLogin = firstLogin;
@@ -24,6 +28,7 @@ public class UserDataV2 {
         this.token = token;
         this.email = email;
         this.user_cve=user_cve;
+        this.origin=origin;
 
     }
 
@@ -76,4 +81,12 @@ public class UserDataV2 {
         this.user_cve = user_cve;
     }
 
+
+    public Integer getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(Integer origin) {
+        this.origin = origin;
+    }
 }

@@ -95,7 +95,7 @@ public class ChangePasswordInteractorImpl implements ChangePasswordInteractor {
         if (changePasswordV2Response != null) {
             int responseCode = changePasswordV2Response.getResponseCode();
             if (responseCode == 105) {
-                UtilsLoginV2.saveUserDataSharedPreferences(null, null, null, null, null, null, context);
+                UtilsLoginV2.saveUserDataSharedPreferences(null, null, null, null, null, null, "1", context);
                 presenter.successChangePassword();
             } else {
                 presenter.setMessageToView(changePasswordV2Response.getMessage());

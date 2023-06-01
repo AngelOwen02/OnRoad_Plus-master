@@ -9,7 +9,7 @@ public class RetrofitEndPointsV2 {
     public static final String URL_SERVER_V4 = "https://avocado-cloud.com/";
     public static final String URL_MAP_API="http://newlandapps.com/";
     public static final String URL_MAP_API_ROUTE="route";
-    public static final String LOGIN = "login/loginApp";
+    public static final String LOGIN = "login/loginApp_v2";
     public static final String LOGINV3 = "avocado-api/users/login";
     public static final String GET_MENUOBJECT="login/menuAppbar";/**itemobject*/
     public static final String CLOSE_SESSION = "login/closeSession";

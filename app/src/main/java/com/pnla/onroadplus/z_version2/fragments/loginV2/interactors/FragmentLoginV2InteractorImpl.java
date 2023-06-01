@@ -127,7 +127,7 @@ public class FragmentLoginV2InteractorImpl implements FragmentLoginV2Interactor 
                         Bundle bundle = new Bundle();
                         bundle.putString(GeneralConstantsV2.EMAIL, email);
                         bundle.putString(GeneralConstantsV2.TOKEN, token);
-                        UtilsLoginV2.saveUserDataSharedPreferences(null, null, null, null, null, null, context);
+                        UtilsLoginV2.saveUserDataSharedPreferences(null, null, null, null, null, null, "1", context);
                         presenter.showFragmentChangePasswordV2(bundle);
                     } else {
                         String urlUserImage = userData.getUserImage();
@@ -143,7 +143,7 @@ public class FragmentLoginV2InteractorImpl implements FragmentLoginV2Interactor 
                         if (!RealmUserData.existUser(user)) {
                             RealmUserData.saveUser(user, email, password, GeneralConstantsV2.IS_FIRST_TIME);
                         }
-                        UtilsLoginV2.saveUserDataSharedPreferences(urlUserImage, user, token, email, password, employeeName, context);
+                        UtilsLoginV2.saveUserDataSharedPreferences(urlUserImage, user, token, email, password, employeeName, "1", context);
                         presenter.successLogin();
                     }
                 } else {
