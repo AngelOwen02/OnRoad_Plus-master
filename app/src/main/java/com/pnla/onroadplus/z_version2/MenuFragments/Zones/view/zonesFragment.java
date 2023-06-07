@@ -52,7 +52,7 @@ public class zonesFragment  extends Fragment implements OnMapReadyCallback,zones
     private MapView mView;
     private GoogleMap mMap;
     private ProgressDialog progressDialog;
-    public static List<String> geocercas=new ArrayList<>();
+
     private Handler handler = new Handler();
     private Runnable runnable;
     private zonesPresenter presenter;
@@ -64,6 +64,8 @@ public class zonesFragment  extends Fragment implements OnMapReadyCallback,zones
     private boolean isdraw=false;
     public static List<String>  pointInZone=new ArrayList<>();
     public static List<Integer> fullZones= new ArrayList<>();
+
+    public static List<String> geocercas=new ArrayList<>();
     private List<LatLng> redDots;
     private List<String> allDots=new ArrayList<>();
     private List<List<String>> greenDots=new ArrayList<>();

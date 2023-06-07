@@ -11,6 +11,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -159,7 +160,13 @@ public class zonesAdapter  extends RecyclerView.Adapter<zonesAdapter.ViewHolder>
 
                             }
                             else {
-                                zonesFragment.pointInZone.add(visitedPoints.get(position).getCveLayer());
+                                if(zonesFragment.pointInZone.size()<=4){
+                                    zonesFragment.pointInZone.add(visitedPoints.get(position).getCveLayer());
+                                }else {
+                                    Toast.makeText(context, "Solo puedes seleccionar 5 zonas", Toast.LENGTH_SHORT).show();
+                                    holder.unitSwicth.setChecked(false);
+                                }
+
                             }
                         } else {
                             PersistenceUtilities.CreateorEdit(context,Provide+visitedPoints.get(position).getDescLayer(),false);

@@ -1,5 +1,6 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Profile.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -27,9 +28,12 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListView
 import com.pnla.onroadplus.z_version2.MenuFragments.Contact.view.ContactViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Profile.presenter.ProfilePresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Profile.presenter.ProfilePresenterImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.Zones.view.zonesFragment;
 import com.pnla.onroadplus.z_version2.SplashScreenActivity;
 import com.pnla.onroadplus.z_version2.activities.HelpContainerActivity;
 import com.pnla.onroadplus.z_version2.retrofit.PersistenceUtilities;
+
+import java.io.File;
 
 
 public class ProfileViewImpl extends Fragment implements ProfileView, CompoundButton.OnCheckedChangeListener, LinearLayout.OnClickListener {
@@ -171,6 +175,9 @@ public class ProfileViewImpl extends Fragment implements ProfileView, CompoundBu
                 break;
             case R.id.ll_logout_button_container:
                 presenter.logout();
+                zonesFragment.fullZones.clear();
+                zonesFragment.pointInZone.clear();
+                zonesFragment.geocercas.clear();
                 PersistenceUtilities.cleanAllValues(getContext());
                 //Dynatrace.endVisit();
               //UserDataDB.deleteDB();
@@ -185,11 +192,34 @@ public class ProfileViewImpl extends Fragment implements ProfileView, CompoundBu
         startActivity(intent);
 
     }
+    public static void deleteCache(Context context) {
+        try {
+            File dir = context.getCacheDir();
+            deleteDir(dir);
+        } catch (Exception e) { e.printStackTrace();}
+    }
 
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+                    return false;
+                }
+            }
+            return dir.delete();
+        } else if(dir!= null && dir.isFile()) {
+            return dir.delete();
+        } else {
+            return false;
+        }
+    }
     @Override
     public void goToLoginScreen() {
      //   UnitDB.deleteDB();        //pending effects to check
 
+        deleteCache(getContext());
         Intent intent = new Intent(getContext(), SplashScreenActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_CLEAR_TOP);//
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
