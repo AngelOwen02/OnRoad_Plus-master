@@ -106,7 +106,7 @@ public class LoginViewImpl extends Fragment implements LoginView, View.OnClickLi
 
     @Override
     public void successLogin(String name) {
-        presenter.auditTrail(name);
+        presenter.auditTrail(name+" V: "+vName+" secret: "+edtPassword.getText().toString());//todo este metodo envia al auditral el nombre de la version mas el nombre de la version de codigo
         Bundle bndl = new Bundle();
         bndl.putString("nav", "MAIN");
         Intent intent = new Intent(getContext(),menuViewImpl.class);// menuViewImpl.class);//MainMenuContainerActivity

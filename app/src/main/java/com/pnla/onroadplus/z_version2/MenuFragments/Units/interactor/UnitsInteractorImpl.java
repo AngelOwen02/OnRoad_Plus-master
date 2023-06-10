@@ -498,7 +498,7 @@ public class UnitsInteractorImpl implements UnitsInteractor {
                                     public void onClick(DialogInterface dialog, int which) {
                                         Intent intent = new Intent(Intent.ACTION_VIEW);
                                         //Aqui le cambie la direccion de la app, cada vez que se lance una nueva version, los debera mandar a actualizarla
-                                        intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.pnla.onroad"));
+                                        intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.pnla.onroadplus"));
                                         //intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.newlandapps.onroad"));
                                         //intent.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.pnla.onroadplus2"));
                                         intent.setPackage("com.android.vending");

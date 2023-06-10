@@ -158,7 +158,7 @@ public class LoginInteractorImpl implements LoginInteractor {
     //region myauditTrail
     private void myauditTrail(String name ,String token)
     {
-        AuditTrail mynewAuditTrail=new AuditTrail("Onroad_Login","Login","login con "+name);
+        AuditTrail mynewAuditTrail=new AuditTrail("Onroad+","Login","login con: "+name);
         setAuditTrail request=new setAuditTrail(mynewAuditTrail,token);
         services.auditTrail(request).enqueue(new Callback<responseAuditTrail>() {
             @Override
@@ -293,7 +293,7 @@ public class LoginInteractorImpl implements LoginInteractor {
                             RealmUserData.saveUser(user, email, password, GeneralConstantsV2.IS_FIRST_TIME);
                         }*/
                         UtilsLoginV2.saveUserDataSharedPreferences(urlUserImage, user, userData.getToken(), userData.getEmail(), password, employeeName,String.valueOf(userData.getOrigin()), context);
-                        presenter.successLogin(user);
+                        presenter.successLogin(nameuser);
                     }
                 } else {
                     presenter.setMessageToView(context.getString(R.string.textEmptyDataResponse));

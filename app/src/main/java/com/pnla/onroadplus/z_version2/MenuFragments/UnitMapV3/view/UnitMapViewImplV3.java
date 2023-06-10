@@ -590,10 +590,11 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
         }
         LatLng newlat=new LatLng(vehicleLat,vehicleLng);
+        if(newlat!=null){
         secondaryIconMarker.setPosition(newlat);
         setSecondaryIcon(data.getVehicleSwitch());
         mainIconMarker.setPosition(newlat);
-
+        }
     }
 
 
