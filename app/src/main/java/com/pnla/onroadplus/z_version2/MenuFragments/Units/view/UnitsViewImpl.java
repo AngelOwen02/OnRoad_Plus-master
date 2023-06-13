@@ -223,6 +223,7 @@ import java.util.List;
     public void failureResponse(String message) {
         if(message!=null) {
             Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+            presenter.hideProgressDialog();
         }
     }
 

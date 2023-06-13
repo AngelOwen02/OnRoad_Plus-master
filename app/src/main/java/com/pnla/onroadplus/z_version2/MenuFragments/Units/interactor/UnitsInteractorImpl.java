@@ -13,6 +13,8 @@ import androidx.appcompat.app.AlertDialog;
 
 /**import com.dynatrace.android.agent.DTXAction;
 import com.dynatrace.android.agent.Dynatrace;*/
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.pnla.onroadplus.BuildConfig;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.Containers.LoginContainer.view.LoginContainerActivity;
@@ -20,6 +22,9 @@ import com.pnla.onroadplus.z_version2.Containers.ModelVersion.Version;
 import com.pnla.onroadplus.z_version2.Containers.ModelVersion.VersionRequest;
 import com.pnla.onroadplus.z_version2.Containers.ModelVersion.VersionResponse;
 import com.pnla.onroadplus.z_version2.Containers.ModelVersion.VersionService;
+import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.AuditTrail;
+import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.responseAuditTrail;
+import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.setAuditTrail;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.UnitTrackingAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.FinalUnitDB;
@@ -53,6 +58,7 @@ import com.pnla.onroadplus.z_version2.retrofit.RetrofitClientV3;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitValidationsV2;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
@@ -257,6 +263,47 @@ public class UnitsInteractorImpl implements UnitsInteractor {
         });
     }
 
+    @Override
+    public void auditTrail(String s) {
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        AuditTrail mynewAuditTrail=new AuditTrail("Onroad+","Units","Error "+s);
+        setAuditTrail request=new setAuditTrail(mynewAuditTrail,token);
+        unitService.auditTrail(request).enqueue(new Callback<responseAuditTrail>() {
+            @Override
+            public void onResponse(Call<responseAuditTrail> call, Response<responseAuditTrail> response) {
+                validateCodeauditTrail(response,context);
+            }
+
+            @Override
+            public void onFailure(Call<responseAuditTrail> call, Throwable t) {
+                Toast.makeText(context, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+
+            }
+        });
+    }
+
+    private void validateCodeauditTrail(Response<responseAuditTrail> response, Context context) {
+        if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
+            responseSetAuditTrial(response,context);
+        } else {
+            Toast.makeText(context, ""+RetrofitValidationsV2.getErrorByStatus(response.code(), context), Toast.LENGTH_SHORT).show();
+
+        }
+    }
+    private void responseSetAuditTrial(Response<responseAuditTrail> response,Context context) {
+        responseAuditTrail auditResponse=response.body();
+        if(auditResponse!=null)
+        {
+            int responseCode=auditResponse.getResponseCode();
+            String message=auditResponse.getMessage();
+            if(responseCode==GeneralConstantsV2.RESPONSE_CODE_OK)
+            {
+
+            }
+        }
+    }
+
     private void getUnitsV3(Response<responseUnitsV3> response, Context context) {
         responseUnitsV3 resp=response.body();
         if(resp!=null){
@@ -281,19 +328,30 @@ public class UnitsInteractorImpl implements UnitsInteractor {
     private void startVehiclesRequest(int typeRequest, List<Integer> vehiclesCves, final Context context, boolean ismorethan20) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
-        if (token != null) {
+        String nameuser = preferences.getString(GeneralConstantsV2.USER_PREFERENCES, null);
+        if (token != null&&vehiclesCves!=null) {
             UnitRequest request = new UnitRequest(token, 1, vehiclesCves);
             Log.e("token", "" + token);
-            // Log.e("checkinguser",token+"  "+typeRequest+"  "+vehiclesCves);
             presenter.showProgressDialog();
-          /*  if (ismorethan20) {
-                unitService.getFullVehiclesGEO(request).enqueue(new Callback<UnitResponse>() {
+
+            List<Integer> stringList = new ArrayList<>();
+            stringList.clear();
+            for (Integer obj : vehiclesCves) {
+                Integer str = obj; // Replace toString() with the appropriate method to convert dataRequest to String
+                stringList.add(str);
+            }
+            Type requestListType = new TypeToken<List<Integer>>(){}.getType();
+            List<String> deserializedStringList = new Gson().fromJson(new Gson().toJson(stringList), requestListType);
+            unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
                     @Override
                     public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
                         try {
-                            validateCode(response, context);
+                            validateCode(response, context,nameuser,deserializedStringList);
+                           // presenter.auditTrail("reqUnits ok "+nameuser+" "+deserializedStringList);
                         } catch (IOException e) {
                             e.printStackTrace();
+                            presenter.hideProgressDialog();
+                            presenter.auditTrail("reqUnits wrong "+nameuser+" "+e+" "+deserializedStringList);
                         }
                     }
 
@@ -301,26 +359,8 @@ public class UnitsInteractorImpl implements UnitsInteractor {
                     public void onFailure(Call<UnitResponse> call, Throwable t) {
                         // Log.e("onFailure",t.getLocalizedMessage());
                         Toast.makeText(context, "sesion expirada", Toast.LENGTH_LONG).show();
-
-                    }
-                });
-
-            } else {*/
-                unitService.getFullVehicles(request).enqueue(new Callback<UnitResponse>() {
-                    @Override
-                    public void onResponse(Call<UnitResponse> call, Response<UnitResponse> response) {
-                        try {
-                            validateCode(response, context);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<UnitResponse> call, Throwable t) {
-                        // Log.e("onFailure",t.getLocalizedMessage());
-                        Toast.makeText(context, "sesion expirada", Toast.LENGTH_LONG).show();
-
+                        presenter.hideProgressDialog();
+                        presenter.auditTrail("reqUnits wrong "+nameuser+" "+t.getMessage()+" "+deserializedStringList);
                     }
                 });
             }
@@ -332,13 +372,15 @@ public class UnitsInteractorImpl implements UnitsInteractor {
     //endregion startVehiclesRequest
 
     //region validateCode
-    private void validateCode(Response<UnitResponse> response, Context context) throws IOException {
+    private void validateCode(Response<UnitResponse> response, Context context, String nameuser, List<String> deserializedStringList) throws IOException {
       //  Log.e("LAPRINCESS", String.valueOf(response.body().getResponseCode()));
         if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
             getVehiclesData(response, context);
         } else {
            // presenter.failureResponse(RetrofitValidationsV2.getErrorByStatus(response.code(), context));
-            Toast.makeText(context,  "sesion expirada", Toast.LENGTH_LONG).show();
+            Toast.makeText(context,  response.message(), Toast.LENGTH_LONG).show();
+            presenter.auditTrail("reqUnits wrong "+nameuser+" "+response.message()+" "+response.code()+" "+deserializedStringList);
+            presenter.hideProgressDialog();
         }
     }
     //endregion validateCode

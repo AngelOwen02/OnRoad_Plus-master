@@ -12,4 +12,5 @@ public interface UnitsInteractor {
     void getGeoreferencefromAPI(List<Integer> cves) throws IOException;
 
     void askgeofences(List<dataRequest> askgeofences);
+    void auditTrail(String s);
 }

@@ -111,11 +111,12 @@ public class Unit extends RealmObject {
     }
 
     public String getVehicleName() {
-        return vehicleName;
+        return (vehicleName != null )? vehicleName : "";
     }
 
     public void setVehicleName(String vehicleName) {
-        this.vehicleName = vehicleName;
+        this.vehicleName = vehicleName != null ? vehicleName : "";
+
     }
 
     public String getVehicleImage() {

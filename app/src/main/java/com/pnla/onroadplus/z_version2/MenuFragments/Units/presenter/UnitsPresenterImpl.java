@@ -2,7 +2,6 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Units.presenter;
 
 import android.content.Context;
 
-import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.interactor.UnitsInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
@@ -57,7 +56,14 @@ public class UnitsPresenterImpl implements UnitsPresenter {
     @Override
     public void hideProgressDialog() {
         if (view != null){
-         //   view.hideProgressDialog();
+          view.hideProgressDialog();
+        }
+    }
+
+    @Override
+    public void auditTrail(String s) {
+        if (view != null){
+            interactor.auditTrail(s);
         }
     }
 

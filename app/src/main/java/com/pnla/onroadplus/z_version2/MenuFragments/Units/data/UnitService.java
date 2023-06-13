@@ -1,5 +1,7 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Units.data;
 
+import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.responseAuditTrail;
+import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.setAuditTrail;
 import com.pnla.onroadplus.z_version2.MenuFragments.TrackingV2.model.gecercasRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.TrackingV2.model.geoCercasResponse;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupportAsigments.Models.DeleteUnitAssignRequest;
@@ -42,6 +44,8 @@ public interface UnitService {
     @POST(RetrofitEndPointsV2.GET_MENUOBJECT)
     Call<geoCercasResponse> hideShowgeoCercas(@Body gecercasRequest request);
 
+    @POST(RetrofitEndPointsV2.POST_AUDIT_TRAIL)
+    Call<responseAuditTrail> auditTrail(@Body setAuditTrail auditrequest);
 
 
     //Todo mover a util de Assignment

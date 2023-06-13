@@ -1,6 +1,5 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Units.presenter;
 
-import com.pnla.onroadplus.z_version2.MenuFragments.UnitAssignSupport.view.UnitAssignSupportViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.view.UnitsViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitsV3.model.unitV3.dataRequest;
@@ -25,7 +24,7 @@ public interface UnitsPresenter {
     void showProgressDialog();
 
     void hideProgressDialog();
-
+    void auditTrail(String s);
 
     void askgeofences(List<dataRequest> askgeofences);
 
