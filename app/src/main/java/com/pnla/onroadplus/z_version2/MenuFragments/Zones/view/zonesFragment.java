@@ -99,8 +99,12 @@ public class zonesFragment  extends Fragment implements OnMapReadyCallback,zones
         toolbar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(zonesdata!=null){
                 geoZonasViewImpl();
                 positionGreenDots.clear();
+                }else{
+                    Toast.makeText(getContext(), "No cuentas con zonas", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
@@ -259,42 +263,44 @@ public class zonesFragment  extends Fragment implements OnMapReadyCallback,zones
         }
         else
         {
+           if( zonesdata!=null) {
+                        final List <Integer> aloneZones=new ArrayList<>();
+                       for(int i=0;i<pointInZone.size();i++)
+                        {
+                            aloneZones.add(Integer.valueOf( pointInZone.get(i)));
+                        }
+                        presenter.requestZonePoints(aloneZones);
+                        handler.postDelayed(runnable = new Runnable() {
+                        @Override
+                        public void run() {
+                            //Log.e("requestdeunitsagain","zoom: "+mMap.getCameraPosition().zoom);
 
-            final List <Integer> aloneZones=new ArrayList<>();
-           for(int i=0;i<pointInZone.size();i++)
-            {
-                aloneZones.add(Integer.valueOf( pointInZone.get(i)));
-            }
-            presenter.requestZonePoints(aloneZones);
-            handler.postDelayed(runnable = new Runnable() {
-            @Override
-            public void run() {
-                //Log.e("requestdeunitsagain","zoom: "+mMap.getCameraPosition().zoom);
-
-                presenter.requestvisitedPoints(aloneZones);
-                mMap.clear();
-                positionGreenDots.clear();
-                drawAllZones(lats, longs, Colors);
-                drawRedDots(redDots);
-                drawGreenDots(pointsGreenDouble);
-                requestHandlerGreenDots();
-                handlerStatus();
-                handler.postDelayed(this, handlertime);
-            }
-        }, handlertime);
-          if(zonesdata!=null)
-          {
-              Log.e("allcveZones", "list integer zones NULL OR EMPTY :" + zonesdata.length);
-              if(zonesdata.length>0)
-              {
-                  for(int i=0;i<zonesdata.length;i++)
-                  {
-                      fullZones.add(zonesdata[i].getCveLayer());
-                  }
-              }
-          }
-            Log.e("allcveZones", "list integer zones NULL OR EMPTY :" + fullZones);
-
+                            presenter.requestvisitedPoints(aloneZones);
+                            mMap.clear();
+                            positionGreenDots.clear();
+                            drawAllZones(lats, longs, Colors);
+                            drawRedDots(redDots);
+                            drawGreenDots(pointsGreenDouble);
+                            requestHandlerGreenDots();
+                            handlerStatus();
+                            handler.postDelayed(this, handlertime);
+                        }
+                    }, handlertime);
+                      if(zonesdata!=null)
+                      {
+                          Log.e("allcveZones", "list integer zones NULL OR EMPTY :" + zonesdata.length);
+                          if(zonesdata.length>0)
+                          {
+                              for(int i=0;i<zonesdata.length;i++)
+                              {
+                                  fullZones.add(zonesdata[i].getCveLayer());
+                              }
+                          }
+                      }
+                        Log.e("allcveZones", "list integer zones NULL OR EMPTY :" + fullZones);
+            }else{
+               Toast.makeText(getContext(), "Sin zonas", Toast.LENGTH_SHORT).show();
+           }
         }
     }
 

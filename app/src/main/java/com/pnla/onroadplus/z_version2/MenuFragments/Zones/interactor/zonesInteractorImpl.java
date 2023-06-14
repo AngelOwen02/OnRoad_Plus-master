@@ -162,7 +162,7 @@ public class zonesInteractorImpl implements  zonesInteractor {
                 }
             } else {
                 presenter.hideProgressDialog();
-                Toast.makeText(context, "" + responseinfo.getMessage() + responseinfo.getResponseCode() , Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Sin zonas"  , Toast.LENGTH_SHORT).show();//+ responseinfo.getMessage() + responseinfo.getResponseCode()
             }
         }
 
