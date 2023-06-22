@@ -103,7 +103,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/optionanswer"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -218,6 +218,130 @@
         <androidx.constraintlayout.widget.Guideline
 
             android:id="@+id/guidelinequestion1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.82">
+
+        </androidx.constraintlayout.widget.Guideline>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/openanswer"
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textopenquestion1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/roboto_black"
+            android:gravity="center"
+            android:text="Placas visibles y frontal trasera"
+            android:textAlignment="textStart"
+            android:textSize="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout131"
+            app:layout_constraintEnd_toStartOf="@+id/guidelinequestion11"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="RtlCompat">
+
+        </TextView>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout131"
+            android:layout_width="0dp"
+            android:layout_height="52dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guidelinequestion2121">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cardView41"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="11dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="15dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/shape_checklist_cardview"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/inputText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:spinnerMode="dialog"
+                    />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+
+            android:visibility="gone"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_menu_gallery"
+            android:backgroundTint="@color/colorOrangeYellow"
+            app:layout_constraintBottom_toTopOf="@+id/guidelinequestion2121"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textopenquestion1"
+            app:layout_constraintTop_toTopOf="parent">
+        </ImageView>
+        <ImageView
+
+            android:id="@+id/imagephoto1"
+            android:layout_width="30dp"
+            android:visibility="visible"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_menu_camera"
+            android:backgroundTint="@color/grayUI"
+            app:layout_constraintBottom_toTopOf="@+id/guidelinequestion2121"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textopenquestion1"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+        <!--<View
+            android:id="@+id/view72"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginBottom="1dp"
+            android:background="@color/textLightColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints">
+
+        </View>-->
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelinequestion211"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.65">
+
+        </androidx.constraintlayout.widget.Guideline>
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guidelinequestion2121"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.45">
+
+        </androidx.constraintlayout.widget.Guideline>
+
+        <androidx.constraintlayout.widget.Guideline
+
+            android:id="@+id/guidelinequestion11"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

@@ -13,10 +13,15 @@ public class mfQuestion {
     @Expose
     private Integer cveTripMgmAnswer;
 
-    public mfQuestion(Integer cveTripMgmQuestion, Integer cveTripMgmAnswer) {
+
+
+    @SerializedName("desc_trip_mgm_answer")
+    private String openanswer=null;
+    public mfQuestion(Integer cveTripMgmQuestion, Integer cveTripMgmAnswer,String openanswer) {
         super();
         this.cveTripMgmQuestion = cveTripMgmQuestion;
         this.cveTripMgmAnswer = cveTripMgmAnswer;
+        this.openanswer=openanswer;
     }
 
     public Integer getCveTripMgmQuestion() {
@@ -34,5 +39,11 @@ public class mfQuestion {
     public void setCveTripMgmAnswer(Integer cveTripMgmAnswer) {
         this.cveTripMgmAnswer = cveTripMgmAnswer;
     }
+    public String openanswer() {
+        return openanswer;
+    }
 
+    public void openanswer(String desc_trip_mgm_answer) {
+        this.openanswer = desc_trip_mgm_answer;
+    }
 }

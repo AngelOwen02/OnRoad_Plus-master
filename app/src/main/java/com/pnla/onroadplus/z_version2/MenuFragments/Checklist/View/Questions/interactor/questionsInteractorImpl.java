@@ -176,8 +176,9 @@ public class questionsInteractorImpl  implements questionsInteractor{
 
         for(int i=0;i<Questions.fulChecklist.size();i++)
         {
+
             finalscoore=finalscoore+Questions.fulChecklist.get(i).getScore();
-            finalQ.add(new mfQuestion(Questions.fulChecklist.get(i).getCveTripMgmQuestion(),Questions.fulChecklist.get(i).getCveTripMgmAnswer()));
+            finalQ.add(new mfQuestion(Questions.fulChecklist.get(i).getCveTripMgmQuestion(),Questions.fulChecklist.get(i).getCveTripMgmAnswer(),Questions.fulChecklist.get(i).getDesc_trip_mgm_answer()));
         }
 
         //requestFullCheckList request=new requestFullCheckList("","","","","","","","","","");

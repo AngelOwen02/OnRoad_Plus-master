@@ -3,6 +3,8 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,9 +21,11 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Model.dataChecklist;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListViewImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.Answer;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.dataQuestions;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.view.Questions;
 
@@ -54,9 +58,10 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     public void onBindViewHolder(@NonNull final QuestionsAdapter.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         if(data!=null) {
             if (data.getQuestions().get(position).getAnswers()!=null){
-                if (data.getQuestions().get(position).getAnswers().get(0).getObjectType() == 2) {//esto es un spiner
+                if (data.getQuestions().get(position).getAnswers().get(0).getObjectType() == 3) {//esto es un spiner
                     Log.e("multianswerType", " : " + position);
                     holder.optionanswer.setVisibility(View.VISIBLE);
+                    holder.openanswer.setVisibility(View.GONE);
                     holder.switchanswer.setVisibility(View.GONE);
                     holder.description1.setText(data.getQuestions().get(position).getDescTripMgmQuestion());
                     List<String> arrayAdapter = new ArrayList<>();
@@ -105,10 +110,10 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                                     Log.e("finalCheckdata7",""+adapterView.getPositionForView(view));
                                     Log.e("finalCheckdata7",""+adapterView.getPositionForView(view));
                                     if (i == 0) {
-                                        myview.safeValues(position, false, i, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), 0, null);
+                                        myview.safeValues(position, false, i, 3, data.getQuestions().get(position).getCveTripMgmQuestion(), 0, null,null);
 
                                     } else {
-                                        myview.safeValues(position, false, i, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(i - 1).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(i - 1).getCveTripMgmAnswer());
+                                        myview.safeValues(position, false, i, 3, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(i - 1).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(i - 1).getCveTripMgmAnswer(),null);
                                     }
 
 
@@ -121,8 +126,9 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             });
                         }
                     });
-                } else {                                                         //switches
+                } else if (data.getQuestions().get(position).getAnswers().get(0).getObjectType() == 2) {                                                         //switches
                     holder.optionanswer.setVisibility(View.GONE);
+                    holder.openanswer.setVisibility(View.GONE);
                     holder.switchanswer.setVisibility(View.VISIBLE);
                     holder.description2.setText(data.getQuestions().get(position).getDescTripMgmQuestion());
 
@@ -135,7 +141,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                                 // Log.e("finalCheckdata6"," "+Questions.fulChecklist.get(i).getAnswerPos());
                                 if (Questions.fulChecklist.get(i).getAnswerPos() == 0) {
                                     holder.switchquestionary.setChecked(false);
-                                    myview.safeValues(position, false, 0, 1, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(1).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(1).getCveTripMgmAnswer());
+                                    myview.safeValues(position, false, 0, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(1).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(1).getCveTripMgmAnswer(),null);
                                 } else {
                                     holder.switchquestionary.setChecked(true);
                                 }
@@ -152,12 +158,42 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                                     " answer: " + b);
                             //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1  switch 2  multiple
                             if (b == false) {
-                                myview.safeValues(position, b, 0, 1, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(1).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(1).getCveTripMgmAnswer());
+                                myview.safeValues(position, b, 0, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(1).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(1).getCveTripMgmAnswer(),null);
                             } else {
-                                myview.safeValues(position, b, 1, 1, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer());
+                                myview.safeValues(position, b, 1, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer(),null);
                             }
                         }
                     });
+
+                }else if (data.getQuestions().get(position).getAnswers().get(0).getObjectType() == 1){
+                    holder.inputText.addTextChangedListener(new TextWatcher() {
+                        @Override
+                        public void beforeTextChanged(CharSequence textWatcher, int i, int i1, int i2) {
+                            Log.e("textWatcher","beforeTextChanged: "+textWatcher);
+                         }
+
+                        @Override
+                        public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                            Log.e("textWatcher","onTextChanged: "+charSequence);
+                        }
+
+                        @Override
+                        public void afterTextChanged(Editable editable) {
+                            Log.e("textWatcher","afterTextChanged: "+editable.toString());
+
+                            //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1 ~ switch 2 ~ multiple / cveTripMgmQuestion / score /cveTripMgmAnswer
+                           /* List<Answer> answers=new ArrayList<>();
+                            answers.clear();
+                            Answer answer0=new Answer(data.getOriginAdm(),data.getQuestions().get(position).getCveTripMgmSection(),data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer(),editable.toString(),data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue(),1);
+                            answers.add(answer0);
+                            data.getQuestions().get(position).setAnswers(answers);*/
+                            myview.safeValues(position,false,1,1,data.getQuestions().get(position).getCveTripMgmQuestion(),0,data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer(),editable.toString());
+                            /**spinner*/     //  myview.safeValues(position, false, i, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), 0, null);
+                            /**switch*/      //  myview.safeValues(position, b, 1, 1, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer());
+
+                        }
+                    });
+                }else{
 
                 }
             }else
@@ -176,6 +212,13 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                 }
             });
             holder.imagephoto.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    myview.takePick(data.getQuestions().get(position).getCveTripMgmQuestion());
+                    Log.e("photoFlow", "take pic");
+                }
+            });
+            holder.imagephoto1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     myview.takePick(data.getQuestions().get(position).getCveTripMgmQuestion());
@@ -204,18 +247,22 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        ConstraintLayout switchanswer,optionanswer;
+        ConstraintLayout switchanswer,optionanswer,openanswer;
         TextView description1,description2;
         Spinner spinnerquestionary;
         Switch switchquestionary;
-        private ImageView imagephoto,imagephoto2;
+        private ImageView imagephoto,imagephoto2,imagephoto1;
+        private TextInputEditText inputText;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imagephoto2=itemView.findViewById(R.id.imagephoto2);
             imagephoto=itemView.findViewById(R.id.imagephoto);
+            imagephoto1=itemView.findViewById(R.id.imagephoto1);
             switchquestionary=itemView.findViewById(R.id.switchquestionary);
             switchanswer=itemView.findViewById(R.id.switchanswer);
             optionanswer=itemView.findViewById(R.id.optionanswer);
+            openanswer=itemView.findViewById(R.id.openanswer);
+            inputText=itemView.findViewById(R.id.inputText);
             description1=itemView.findViewById(R.id.textopenquestion); //open
             description2=itemView.findViewById(R.id.textbooleanonly);  //bool
             spinnerquestionary=itemView.findViewById(R.id.spinnerquestionary);

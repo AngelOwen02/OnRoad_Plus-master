@@ -12,7 +12,11 @@ public class dataChecklist  implements Serializable {
     private Integer score;
     private Integer cveTripMgmAnswer;
 
-    public dataChecklist(int origin, int questioId, int section, int answerPos, String foto,Integer cveTripMgmQuestion,Integer score,Integer cveTripMgmAnswer) {
+
+
+    private String desc_trip_mgm_answer=null;
+
+    public dataChecklist(int origin, int questioId, int section, int answerPos, String foto,Integer cveTripMgmQuestion,Integer score,Integer cveTripMgmAnswer,String desc_trip_mgm_answer) {
         this.origin = origin;
         this.questioId = questioId;
         this.section = section;
@@ -21,6 +25,7 @@ public class dataChecklist  implements Serializable {
         this.cveTripMgmQuestion=cveTripMgmQuestion;
         this.score=score;
         this.cveTripMgmAnswer=cveTripMgmAnswer;
+        this.desc_trip_mgm_answer=desc_trip_mgm_answer;
     }
 
     public int getOrigin() {
@@ -85,5 +90,12 @@ public class dataChecklist  implements Serializable {
 
     public void setCveTripMgmAnswer(Integer cveTripMgmAnswer) {
         this.cveTripMgmAnswer = cveTripMgmAnswer;
+    }
+    public String getDesc_trip_mgm_answer() {
+        return desc_trip_mgm_answer;
+    }
+
+    public void setDesc_trip_mgm_answer(String desc_trip_mgm_answer) {
+        this.desc_trip_mgm_answer = desc_trip_mgm_answer;
     }
 }

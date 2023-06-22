@@ -270,7 +270,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
 
         }
     }
-    public void safeValues(int position, boolean b, int value, int i, Integer cveTripMgmQuestion, Integer score, Integer cveTripMgmAnswer)
+    public void safeValues(int position, boolean b, int value, int i, Integer cveTripMgmQuestion, Integer score, Integer cveTripMgmAnswer,String openAnswer)
     {
         Log.e("finalCheckdata3"," "+position+" "+b+" "+value+" "+i); //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1 ~ switch 2 ~ multiple
         String h = null;
@@ -289,6 +289,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         fulChecklist.get(iterator).setAnswerPos(value);
         fulChecklist.get(iterator).setScore(score);
         fulChecklist.get(iterator).setCveTripMgmAnswer(cveTripMgmAnswer);
+        fulChecklist.get(iterator).setDesc_trip_mgm_answer(openAnswer);
         Log.e("finalCheckdata4","index "+fulChecklist.get(iterator).getAnswerPos());
     }
 
@@ -313,7 +314,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
             if(mquestion!=null) {
                 for (int j=0;j< mquestion.size();j++)
                 {
-                    fulChecklist.add(new dataChecklist(mquestion.get(j).getOriginAdm(),mquestion.get(j).getCveTripMgmQuestion(),mquestion.get(j).getCveTripMgmSection(),0,"",mquestion.get(j).getCveTripMgmQuestion(),0,0));
+                    fulChecklist.add(new dataChecklist(mquestion.get(j).getOriginAdm(),mquestion.get(j).getCveTripMgmQuestion(),mquestion.get(j).getCveTripMgmSection(),0,"",mquestion.get(j).getCveTripMgmQuestion(),0,0,""));
                 }
             }
             Log.e("finalChecklistdata", " T fulChecklist" +fulChecklist.size());
