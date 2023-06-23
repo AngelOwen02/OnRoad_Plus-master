@@ -68,6 +68,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
             @Override
             public void onFailure(Call<responseSections> call, Throwable t) {
                 Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                presenter.hidepDialog();
             }
         });
 
@@ -79,6 +80,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
                 getSectionsdata(response, context);
             } else {
                 Toast.makeText(context, "" + RetrofitValidationsV2.getErrorByStatus(response.code(), context), Toast.LENGTH_SHORT).show();
+                presenter.hidepDialog();
             }
         }
     }
@@ -272,6 +274,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
             @Override
             public void onFailure(Call<responsemQuestions> call, Throwable t) {
                 Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+                presenter.hidepDialog();
             }
         });
     }
@@ -283,6 +286,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
                 getQuestionsdata(response, context);
             } else {
                 Toast.makeText(context, "" + RetrofitValidationsV2.getErrorByStatus(response.code(), context), Toast.LENGTH_SHORT).show();
+                presenter.hidepDialog();
             }
         }
     }
