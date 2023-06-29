@@ -2,6 +2,7 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Profile.view;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Base64;
@@ -31,6 +32,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Profile.presenter.ProfilePre
 import com.pnla.onroadplus.z_version2.MenuFragments.Zones.view.zonesFragment;
 import com.pnla.onroadplus.z_version2.SplashScreenActivity;
 import com.pnla.onroadplus.z_version2.activities.HelpContainerActivity;
+import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 import com.pnla.onroadplus.z_version2.retrofit.PersistenceUtilities;
 
 import java.io.File;
@@ -179,6 +181,10 @@ public class ProfileViewImpl extends Fragment implements ProfileView, CompoundBu
                 zonesFragment.pointInZone.clear();
                 zonesFragment.geocercas.clear();
                 PersistenceUtilities.cleanAllValues(getContext());
+                SharedPreferences preferences = getContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor=preferences.edit();
+                editor.clear();
+                editor.apply();
                 //Dynatrace.endVisit();
               //UserDataDB.deleteDB();
                 break;

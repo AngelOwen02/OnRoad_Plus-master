@@ -23,8 +23,8 @@ android {
         applicationId "com.pnla.onroadplus"
         minSdkVersion 17
         targetSdkVersion 31
-        versionCode 46
-        versionName "2.0.98"
+        versionCode 47
+        versionName "2.0.99"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
