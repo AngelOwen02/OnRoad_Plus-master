@@ -29,7 +29,9 @@ public class menuViewImpl extends AppCompatActivity {
         showFragmentNavigationButtons();
         showFragmentDashboard();
     }
-
+    public static void clearStaticValues(){
+        selectedVehicle=false;
+    }
     private void showFragmentDashboard() {
         manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();

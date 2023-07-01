@@ -30,6 +30,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Contact.view.ContactViewImpl
 import com.pnla.onroadplus.z_version2.MenuFragments.Profile.presenter.ProfilePresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Profile.presenter.ProfilePresenterImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Zones.view.zonesFragment;
+import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 import com.pnla.onroadplus.z_version2.SplashScreenActivity;
 import com.pnla.onroadplus.z_version2.activities.HelpContainerActivity;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
@@ -224,11 +225,12 @@ public class ProfileViewImpl extends Fragment implements ProfileView, CompoundBu
     @Override
     public void goToLoginScreen() {
      //   UnitDB.deleteDB();        //pending effects to check
-
+        menuViewImpl.clearStaticValues();
         deleteCache(getContext());
         Intent intent = new Intent(getContext(), SplashScreenActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_CLEAR_TOP);//
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        //intent.setFlags(0);
         Bundle bndl = new Bundle();
         bndl.putBoolean("HelpStatus", false);
 
