@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -30,6 +31,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -95,11 +97,14 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     Bitmap rotatedBitmap = null;
     private Integer cvetemp;
     private String start;
+    private View mainView;
+    private List<mquestions> mquestion;
     @SuppressLint("NewApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_questions, container, false);
+        mainView=view;
         Bundle bundle = this.getArguments();
 
         if(bundle != null){
@@ -306,7 +311,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         if(dataQuestions1!=null)
         {
            Log.e("finalChecklistdata","inpect questions: "+dataQuestions1.size()+"   fulChecklist: "+fulChecklist.size());//+"  "+dataSections.get(1).getDescTripMgmSection() // movedots(0);
-            List<mquestions> mquestion=new ArrayList<>();
+            mquestion=new ArrayList<>();
             mquestion.clear();
             for(int i=0;i<dataQuestions1.size();i++) {
                for(int k=0;k<dataQuestions1.get(i).getQuestions().size();k++)
@@ -571,6 +576,26 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
 
 
     public void showTooltipi(Integer cveTripMgmQuestion) {
-        Toast.makeText(getContext(), "tootip", Toast.LENGTH_SHORT).show();
+
+    for(mquestions q:mquestion)
+    {
+        if(q.getCveTripMgmQuestion()==cveTripMgmQuestion)
+        {
+            if(!q.getInstructions().equals("")&&q.getInstructions()!=null&&!q.getInstructions().isEmpty()&&!q.getInstructions().equals(" ")) {
+                Toast.makeText(getContext(), "" + q.getInstructions(), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+    //todo hacer un toad¿s flotante para cada boton que corresponda con las cordenadas de la pantalla principal
+
+//        LayoutInflater layoutInflater = LayoutInflater.from(getContext());
+//        View inflatedView = layoutInflater.inflate(R.layout.item_floating_toast, null, false);
+//
+//        ImageView imageView = inflatedView.findViewById(R.id.imageView5);
+//        imageView.setX(10f);
+//        imageView.setY(80f);
+
+
+
     }
 }

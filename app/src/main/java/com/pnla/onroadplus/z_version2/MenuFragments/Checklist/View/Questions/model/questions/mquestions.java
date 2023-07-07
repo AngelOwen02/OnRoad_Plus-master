@@ -22,14 +22,19 @@ public class mquestions {
     @SerializedName("answers")
 
     private List<Answer> answers = null;
-
-    public mquestions(Integer originAdm, Integer cveTripMgmSection, Integer cveTripMgmQuestion, String descTripMgmQuestion, List<Answer> answers) {
+    @SerializedName("instructions")
+    private String instructions;
+    @SerializedName("required_evidence")
+    private boolean required_evidence;
+    public mquestions(Integer originAdm, Integer cveTripMgmSection, Integer cveTripMgmQuestion, String descTripMgmQuestion, List<Answer> answers,String instructions,boolean required_evidence) {
         super();
         this.originAdm = originAdm;
         this.cveTripMgmSection = cveTripMgmSection;
         this.cveTripMgmQuestion = cveTripMgmQuestion;
         this.descTripMgmQuestion = descTripMgmQuestion;
         this.answers = answers;
+        this.instructions=instructions;
+        this.required_evidence=required_evidence;
     }
 
     public Integer getOriginAdm() {
@@ -70,5 +75,21 @@ public class mquestions {
 
     public void setAnswers(List<Answer> answers) {
         this.answers = answers;
+    }
+
+    public String getInstructions() {
+        return instructions;
+    }
+
+    public void setInstructions(String instructions) {
+        this.instructions = instructions;
+    }
+
+    public boolean isRequired_evidence() {
+        return required_evidence;
+    }
+
+    public void setRequired_evidence(boolean required_evidence) {
+        this.required_evidence = required_evidence;
     }
 }

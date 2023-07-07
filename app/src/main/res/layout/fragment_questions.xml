@@ -83,7 +83,6 @@
             android:text="Evaluacion de riesgo"
             android:textColor="@color/colorBlackTwo"
             android:textSize="17sp"
-
             tools:ignore="RtlCompat"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" >

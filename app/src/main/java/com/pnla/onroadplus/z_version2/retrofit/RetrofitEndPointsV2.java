@@ -61,7 +61,7 @@ public class RetrofitEndPointsV2 {
     public static final String GET_HISTORIC ="dashboard/getHistoricTrips" ;
     public static final String GET_SECTIONS = "logistic/getListSectionfull";
     public static final String GET_QUESTIONS = "logistic/getListSectionfull";//_tmp";//TODO "logistic/getListQuestions";
-    public static final String SET_QUESTIONS = "dashboard/sendChecklist";
+    public static final String SET_QUESTIONS = "dashboard/sendChecklist_v2";
     public static final String GET_UNIT = "catalog/getUnit";
 
 

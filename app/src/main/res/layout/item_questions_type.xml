@@ -14,7 +14,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout16"
             android:layout_width="1dp"
             android:layout_height="70dp"
             tools:ignore="MissingConstraints" />
@@ -23,46 +25,48 @@
             android:id="@+id/textbooleanonly"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
             android:fontFamily="@font/roboto_black"
             android:gravity="center"
             android:text="Placas visibles y frontal trasera"
             android:textAlignment="textStart"
             android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline19"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/guideline28a"
+            app:layout_constraintStart_toEndOf="@+id/switchquestionary"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="RtlCompat">
 
         </TextView>
 
         <ImageView
-            android:visibility="visible"
             android:id="@+id/imagephoto2"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/ic_menu_camera"
             android:backgroundTint="@color/grayUI"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline28"
-            app:layout_constraintStart_toStartOf="@+id/guideline19"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
         </ImageView>
+
         <ImageView
             android:id="@+id/info2"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="2dp"
             android:background="@drawable/info_tooltip"
             app:layout_constraintBottom_toBottomOf="@+id/imagephoto2"
-            app:layout_constraintEnd_toStartOf="@+id/imagephoto2"
+            app:layout_constraintStart_toStartOf="@+id/guideline28a"
             app:layout_constraintTop_toTopOf="@+id/imagephoto2" />
+
         <Switch
             android:id="@+id/switchquestionary"
-            android:layout_width="0dp"
+            android:layout_width="60dp"
             android:layout_height="0dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="13dp"
             android:layout_marginBottom="17dp"
             android:layout_weight="0"
@@ -71,8 +75,7 @@
             android:thumb="@drawable/round_switch"
             android:track="@drawable/round_track"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/guideline28"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
         </Switch>
@@ -190,28 +193,30 @@
             app:layout_constraintStart_toEndOf="@+id/textopenquestion"
             app:layout_constraintTop_toTopOf="parent">
         </ImageView>
+
         <ImageView
 
             android:id="@+id/imagephoto"
             android:layout_width="30dp"
-            android:visibility="visible"
             android:layout_height="30dp"
+            android:layout_marginEnd="15dp"
             android:background="@drawable/ic_menu_camera"
             android:backgroundTint="@color/grayUI"
+            android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@+id/guidelinequestion212"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textopenquestion"
             app:layout_constraintTop_toTopOf="parent">
 
         </ImageView>
+
         <ImageView
             android:id="@+id/info3"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="2dp"
             android:background="@drawable/info_tooltip"
             app:layout_constraintBottom_toBottomOf="@+id/imagephoto"
-            app:layout_constraintEnd_toStartOf="@+id/imagephoto"
+            app:layout_constraintStart_toStartOf="@+id/guideline28b"
             app:layout_constraintTop_toTopOf="@+id/imagephoto" />
         <!--<View
             android:id="@+id/view72"
@@ -352,10 +357,10 @@
             android:id="@+id/info1"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="5dp"
+            android:layout_marginStart="2dp"
             android:background="@drawable/info_tooltip"
             app:layout_constraintBottom_toBottomOf="@+id/imagephoto1"
-            app:layout_constraintEnd_toStartOf="@+id/imagephoto1"
+            app:layout_constraintStart_toStartOf="@+id/guideline28c"
             app:layout_constraintTop_toTopOf="@+id/imagephoto1" />
         <!--<View
             android:id="@+id/view72"
