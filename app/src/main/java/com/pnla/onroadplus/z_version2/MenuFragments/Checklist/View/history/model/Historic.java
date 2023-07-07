@@ -39,8 +39,9 @@ public class Historic {
     }
 
     public String getVehicleName() {
-        return vehicleName;
+        return vehicleName != null ? vehicleName : " ";
     }
+
 
     public void setVehicleName(String vehicleName) {
         this.vehicleName = vehicleName;

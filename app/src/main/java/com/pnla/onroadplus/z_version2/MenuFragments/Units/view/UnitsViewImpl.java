@@ -117,15 +117,11 @@ import java.util.List;
     private void initPresenter() {
         presenter = new UnitsPresenterImpl(getContext());
         presenter.setView(this);
-
 //        DTXAction processUnits= Dynatrace.enterAction("processUnits");//
 //        processUnits.getRequestTag();
         presenter.getFullVehicles(isMorethan20);
    //     processUnits.leaveAction();
-
         // presenter.getvehiclesINgroups();
-
-
     }
 
     private void update(){

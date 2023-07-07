@@ -22,7 +22,10 @@ import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitClientV2;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitValidationsV2;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.jsonforsender.mfQuestion;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -127,7 +130,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
     }
 
     @Override
-    public void sendfullCheckList(int cve_checklist, boolean aproved, String emailaprovador) {
+    public void sendfullCheckList(int cve_checklist, boolean aproved, String emailaprovador, String startdate) {
         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String email = emailaprovador;
         String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
@@ -136,11 +139,11 @@ public class questionsInteractorImpl  implements questionsInteractor{
         aprobacionR=aproved;
         if(token!=null)
         {
-            requestSendFullChckelist(aproved,cve_checklist,cveV,token,email);
+            requestSendFullChckelist(aproved,cve_checklist,cveV,token,email,startdate);
         }
     }
 
-    private void requestSendFullChckelist(boolean aproved, int cve_checklist, String cveV, String token, String email) {
+    private void requestSendFullChckelist(boolean aproved, int cve_checklist, String cveV, String token, String email, String startdate) {
 
         //todo aqui caen los campos
         //region checklist
@@ -203,7 +206,14 @@ public class questionsInteractorImpl  implements questionsInteractor{
         {
             image.add(new Image(Questions.fulChecklist.get(j).getCveTripMgmQuestion(),Questions.fulChecklist.get(j).getFoto()));
         }
-        requestFullCheckList request=new requestFullCheckList(aproved,cve_checklist, Integer.valueOf(cveV),0,email,image,mfjson,Questions.fulChecklist.get(0).getOrigin(),finalscoore,token);
+        Date currentDate = new Date();
+
+        // Define the desired date format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        // Format the current date and time
+        String formattedDateTime = dateFormat.format(currentDate);
+        requestFullCheckList request=new requestFullCheckList(aproved,cve_checklist, Integer.valueOf(cveV),0,email,image,mfjson,Questions.fulChecklist.get(0).getOrigin(),finalscoore,token,startdate,formattedDateTime);
        //  ejemplo      requestFullCheckList request=new requestFullCheckList(true,28,13756,0,"efren@newlandapps.com",image,json,1,2,token);
         presenter.showpDialog();
         Call<responseFullCheckList> call=service.setQuestions(request);

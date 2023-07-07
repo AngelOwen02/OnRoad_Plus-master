@@ -50,7 +50,7 @@ public class UnitTrackingAdapter extends RecyclerView.Adapter<UnitTrackingAdapte
         //Log.e("unitsthaticansaw3",""+ UnitDB.getUnitListActive());
         //Log.e("unitsthaticansaw3",""+ integerList);
         if(!UnitDB.getUnitListActive().isEmpty()) {
-            Log.e("unitsfirstscreen","size db"+ UnitDB.getUnitListActive().size());
+            //Log.e("unitsfirstscreen","size db"+ UnitDB.getUnitListActive().size());
             for(int i=0;i<UnitDB.getUnitListActive().size();i++)
             {
 
@@ -116,7 +116,7 @@ public class UnitTrackingAdapter extends RecyclerView.Adapter<UnitTrackingAdapte
 
 
                     Log.e("groupsitems","iL   "+integerList);
-                    Log.e("groupsitems","cveActive  "+ UnitDB.getUnitListActive());
+                   // Log.e("groupsitems","cveActive  "+ UnitDB.getUnitListActive());
                     //integerList.remove(vehicle.getCveVehicle());
                 }
             }

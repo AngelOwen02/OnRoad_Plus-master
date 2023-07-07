@@ -211,7 +211,7 @@ public class UnitTrackingInteractorImpl implements UnitTrackingInteractor {
                         Log.e("itemsnew", "datainteractor add  " + UnitTrackingAdapter.integerList);
                         GroupTrackingAdapter.intforrequest = 0;
                         Log.e("unitsfirstscreen",""+UnitTrackingAdapter.integerList);
-                        Log.e("unitsfirstscreen",""+ UnitDB.getUnitListActive());
+                 //       Log.e("unitsfirstscreen",""+ UnitDB.getUnitListActive());
                     }
 
                     else
@@ -250,7 +250,7 @@ public class UnitTrackingInteractorImpl implements UnitTrackingInteractor {
                             //  UnitDB.updateCheckedStatus(namesvehicles.get(j),true);
                         }*/
                          Log.e("unitsfirstscreen",""+GroupDB.getActiveGroupList());
-                          Log.e("unitsfirstscreen",""+ UnitDB.getUnitListActive());
+                         // Log.e("unitsfirstscreen",""+ UnitDB.getUnitListActive());
 
                         Log.e("itemsnew", "itemsin integerlist " + UnitTrackingAdapter.integerList);
                         GroupTrackingAdapter.intforrequest = 0;

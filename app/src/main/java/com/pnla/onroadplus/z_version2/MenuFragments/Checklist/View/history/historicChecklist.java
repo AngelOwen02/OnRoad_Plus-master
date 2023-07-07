@@ -40,7 +40,7 @@ public class historicChecklist extends Fragment implements View.OnClickListener,
     private FragmentTransaction transaction;
     private CardView searchViewContainer;
     private SearchView searchViewa;
-    private List<Historic> soportes;
+    private List<Historic> soportes=new ArrayList<>();
     private HistoricCheckListPresenter presenter;
 
     @Override
@@ -49,7 +49,7 @@ public class historicChecklist extends Fragment implements View.OnClickListener,
         View view = inflater.inflate(R.layout.fragment_historicchecklist, container, false);
 
         initView(view);
-        initPresenter();
+
 
         return view;
     }
@@ -65,20 +65,8 @@ public class historicChecklist extends Fragment implements View.OnClickListener,
         search_checkList.setOnClickListener(this);
         searchViewContainer = view.findViewById(R.id.units_search_view_container_us);
         searchViewa = (SearchView) view.findViewById(R.id.search_view_units_us);
-        searchViewa.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
+        initPresenter();
 
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                List<Historic> filterUnitList = filteredUnits(soportes, newText);
-                adapter.setFilter(filterUnitList);
-                return false;
-            }
-        });
 
     }
 
@@ -93,6 +81,20 @@ public class historicChecklist extends Fragment implements View.OnClickListener,
         this.soportes = data;
         if(soportes!=null) {
             fillAdapter(soportes);
+            searchViewa.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+
+                    return false;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    List<Historic> filterUnitList = filteredUnits(soportes, newText);
+                    adapter.setFilter(filterUnitList);
+                    return false;
+                }
+            });
         }
     }
 
@@ -102,9 +104,11 @@ public class historicChecklist extends Fragment implements View.OnClickListener,
         text = text.toLowerCase();
         if(data!=null) {
             for(Historic vehicle : data) {
-                String vehicleName = vehicle.getVehicleName().toLowerCase();
-                if(vehicleName.contains(text)) {
-                    filteredList.add(vehicle);
+                if(vehicle!=null) {
+                    String vehicleName = vehicle.getVehicleName().toLowerCase();
+                    if (vehicleName.contains(text)) {
+                        filteredList.add(vehicle);
+                    }
                 }
             }
         }

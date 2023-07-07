@@ -94,7 +94,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     ImageView imageViewP;
     Bitmap rotatedBitmap = null;
     private Integer cvetemp;
-    
+    private String start;
     @SuppressLint("NewApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -131,7 +131,13 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         presenter=new questionsPresenterImpl(this,getContext());
         presenter.getpSections(Checkl);
 
+        Date currentDate = new Date();
 
+        // Define the desired date format
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        // Format the current date and time
+        start = dateFormat.format(currentDate);
     }
 
     void filldataAdapter()/// modulo de secciones adpater
@@ -341,7 +347,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.buttongochecklist:
-                presenter.sendfullchecklist(Checkl,aproved,emailaprovador);
+                presenter.sendfullchecklist(Checkl,aproved,emailaprovador,start);
                // Toast.makeText(getContext(), "mandar Valor de preguntas", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.historic_checks:
@@ -564,4 +570,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     }
 
 
+    public void showTooltipi(Integer cveTripMgmQuestion) {
+        Toast.makeText(getContext(), "tootip", Toast.LENGTH_SHORT).show();
+    }
 }

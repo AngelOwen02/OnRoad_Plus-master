@@ -88,7 +88,7 @@ public class TrackingMapInteractorImpl implements TrackingMapInteractor {
         List<Unit> activeUnitsList = UnitDB.getUnitListActive();
         List<Group> activeGroupslist = GroupDB.getActiveGroupList();
 
-        Log.e("unitsfirstscreen","uDB   "+UnitDB.getUnitListActive());
+        //Log.e("unitsfirstscreen","uDB   "+UnitDB.getUnitListActive());
         Log.e("unitsfirstscreen","iL    "+UnitTrackingAdapter.integerList);
 
       /*  if(UnitDB.getUnitListActive().isEmpty())

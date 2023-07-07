@@ -4,5 +4,5 @@ public interface questionsInteractor {
     void getiSections(Integer checklistN);
     void getQuestions(Integer dataSections);
 
-    void sendfullCheckList(int checkl, boolean aproved, String emailaprovador);
+    void sendfullCheckList(int checkl, boolean aproved, String emailaprovador, String startdate);
 }

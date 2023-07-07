@@ -37,9 +37,15 @@ public class requestFullCheckList {
     @SerializedName("token")
     @Expose
     private String token;
+    @SerializedName("date_begin")
+    @Expose
+    private String date_begin;
+    @SerializedName("date_end")
+    @Expose
+    private String date_end;
 
-
-    public requestFullCheckList(Boolean approvement, Integer cveTripMgmChecklist, Integer cveVehicle, Integer destinationTrip, String email, List<Image> image, String jsonAnswer, Integer originTrip, Integer score, String token) {
+    public requestFullCheckList(Boolean approvement, Integer cveTripMgmChecklist, Integer cveVehicle, Integer destinationTrip, String email,
+                                List<Image> image, String jsonAnswer, Integer originTrip, Integer score, String token,String date_begin,String date_end) {
         super();
         this.approvement = approvement;
         this.cveTripMgmChecklist = cveTripMgmChecklist;
@@ -51,6 +57,8 @@ public class requestFullCheckList {
         this.originTrip = originTrip;
         this.score = score;
         this.token = token;
+        this.date_begin=date_begin;
+        this.date_end=date_end;
     }
 
     public Boolean getApprovement() {

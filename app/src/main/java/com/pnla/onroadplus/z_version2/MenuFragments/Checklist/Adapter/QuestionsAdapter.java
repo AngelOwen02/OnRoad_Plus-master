@@ -166,6 +166,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                     });
 
                 }else if (data.getQuestions().get(position).getAnswers().get(0).getObjectType() == 1){
+                    holder.textopenquestion1.setText(data.getQuestions().get(position).getDescTripMgmQuestion());
                     holder.inputText.addTextChangedListener(new TextWatcher() {
                         @Override
                         public void beforeTextChanged(CharSequence textWatcher, int i, int i1, int i2) {
@@ -231,6 +232,24 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
             holder.imagephoto2.setVisibility(View.GONE);
             //myview.errorpic();
         }
+        holder.info1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myview.showTooltipi(data.getQuestions().get(position).getCveTripMgmQuestion());
+            }
+        });
+        holder.info2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myview.showTooltipi(data.getQuestions().get(position).getCveTripMgmQuestion());
+            }
+        });
+        holder.info3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myview.showTooltipi(data.getQuestions().get(position).getCveTripMgmQuestion());
+            }
+        });
     }
 
 
@@ -248,10 +267,10 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ConstraintLayout switchanswer,optionanswer,openanswer;
-        TextView description1,description2;
+        TextView description1,description2,textopenquestion1;
         Spinner spinnerquestionary;
         Switch switchquestionary;
-        private ImageView imagephoto,imagephoto2,imagephoto1;
+        private ImageView imagephoto,imagephoto2,imagephoto1,info1,info2,info3;
         private TextInputEditText inputText;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -262,11 +281,14 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
             switchanswer=itemView.findViewById(R.id.switchanswer);
             optionanswer=itemView.findViewById(R.id.optionanswer);
             openanswer=itemView.findViewById(R.id.openanswer);
+            textopenquestion1 =itemView.findViewById(R.id.textopenquestion1);
             inputText=itemView.findViewById(R.id.inputText);
             description1=itemView.findViewById(R.id.textopenquestion); //open
             description2=itemView.findViewById(R.id.textbooleanonly);  //bool
             spinnerquestionary=itemView.findViewById(R.id.spinnerquestionary);
-
+            info1=itemView.findViewById(R.id.info1);
+            info2=itemView.findViewById(R.id.info2);
+            info3=itemView.findViewById(R.id.info3);
 
         }
     }
