@@ -82,7 +82,7 @@ public class mquestions {
     }
 
     public void setInstructions(String instructions) {
-        this.instructions = instructions;
+        this.instructions = (instructions != null) ? instructions : "";
     }
 
     public boolean isRequired_evidence() {

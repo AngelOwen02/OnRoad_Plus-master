@@ -202,15 +202,24 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                 myview.showerrormistakeanswers();
             }
         }
-        if(data.getQuestions().get(position).getInstructions().equals(""))
-        {
+        if(data.getQuestions().get(position).getInstructions()!=null){
+            if(data.getQuestions().get(position).getInstructions().equals(""))
+            {
+                holder.info1.setVisibility(View.GONE);
+                holder.info2.setVisibility(View.GONE);
+                holder.info3.setVisibility(View.GONE);
+            }else {
+                holder.info1.setVisibility(View.VISIBLE);
+                holder.info2.setVisibility(View.VISIBLE);
+                holder.info3.setVisibility(View.VISIBLE);
+            }
             holder.info1.setVisibility(View.GONE);
             holder.info2.setVisibility(View.GONE);
             holder.info3.setVisibility(View.GONE);
         }else {
-            holder.info1.setVisibility(View.VISIBLE);
-            holder.info2.setVisibility(View.VISIBLE);
-            holder.info3.setVisibility(View.VISIBLE);
+            holder.info1.setVisibility(View.GONE);
+            holder.info2.setVisibility(View.GONE);
+            holder.info3.setVisibility(View.GONE);
         }
         if(data.getQuestions().get(position).isRequired_evidence()==false)
         {
