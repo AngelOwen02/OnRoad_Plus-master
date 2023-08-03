@@ -29,9 +29,11 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListView
 import com.pnla.onroadplus.z_version2.MenuFragments.Contact.view.ContactViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Profile.presenter.ProfilePresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Profile.presenter.ProfilePresenterImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.UnitDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Zones.view.zonesFragment;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 import com.pnla.onroadplus.z_version2.SplashScreenActivity;
+import com.pnla.onroadplus.z_version2.UserDataDB;
 import com.pnla.onroadplus.z_version2.activities.HelpContainerActivity;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 import com.pnla.onroadplus.z_version2.retrofit.PersistenceUtilities;
@@ -186,8 +188,9 @@ public class ProfileViewImpl extends Fragment implements ProfileView, CompoundBu
                 SharedPreferences.Editor editor=preferences.edit();
                 editor.clear();
                 editor.apply();
+                UnitDB.deleteDB();
                 //Dynatrace.endVisit();
-              //UserDataDB.deleteDB();
+                //UserDataDB.deleteDB();
                 break;
         }
     }

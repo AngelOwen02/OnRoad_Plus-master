@@ -213,9 +213,6 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                 holder.info2.setVisibility(View.VISIBLE);
                 holder.info3.setVisibility(View.VISIBLE);
             }
-            holder.info1.setVisibility(View.GONE);
-            holder.info2.setVisibility(View.GONE);
-            holder.info3.setVisibility(View.GONE);
         }else {
             holder.info1.setVisibility(View.GONE);
             holder.info2.setVisibility(View.GONE);
