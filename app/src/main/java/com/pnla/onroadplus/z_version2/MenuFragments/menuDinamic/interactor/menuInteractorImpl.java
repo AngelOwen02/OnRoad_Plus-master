@@ -24,6 +24,8 @@ import com.pnla.onroadplus.z_version2.retrofit.RetrofitClientV2;
 import com.pnla.onroadplus.z_version2.retrofit.RetrofitValidationsV2;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 import retrofit2.Call;
@@ -180,11 +182,39 @@ public class menuInteractorImpl implements menuInteractor {
                 menudata=menuresponse.getData();
                 if (menudata != null) {
                     valuesmenues.clear();
-                    for(int i=0;i<menudata.size(); i++)
-                    {
-                        Log.e("datalistmenus",""+menudata.get(i).getObj_name()+": "+menudata.get(i).isAccess_flag());
-                        valuesmenues.add(menudata.get(i).getObj_name()+":"+menudata.get(i).isAccess_flag());
+
+                    // Define the desired order
+                    List<String> desiredOrder = Arrays.asList("Unidades", "Rastreo", "Notificaciones", "Geozonas", "Checklist","Perfil");
+
+                    // Filter out objects with access_flag = false
+                    List<MenuData> filteredAndOrdered = new ArrayList<>();
+                    for (MenuData menuData : menudata) {
+                        if (menuData.isAccess_flag()) {
+                            filteredAndOrdered.add(menuData);
+                        }
                     }
+
+                    // Sort based on custom comparator
+                    Comparator<MenuData> customComparator = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                        customComparator = Comparator.comparingInt(obj -> desiredOrder.indexOf(obj.getObj_name()));
+                        filteredAndOrdered.sort(customComparator);
+                    }
+
+
+                    valuesmenues.clear();
+                    for (String itemName : desiredOrder) {
+                        MenuData menuData = findMenuDataByName(filteredAndOrdered, itemName);
+
+                        // If menuData is not found, treat it as access_flag = false
+                        boolean accessFlag = menuData != null && menuData.isAccess_flag();
+
+                        Log.e("datalistmenus", itemName + ": " + accessFlag);
+                        valuesmenues.add(itemName + ":" + accessFlag);
+                    }
+                    Log.e("menuvalues", "" + valuesmenues);
+
+
                     presenter.nameslistitems(valuesmenues);
                     //List<String> asd=menudata.get(0).isAccess_flag();
                 }
@@ -205,6 +235,14 @@ public class menuInteractorImpl implements menuInteractor {
             presenter.setErrorToView(  context.getString(R.string.errorEmptyLogoutResponse));
 
         }
+    }
+    private MenuData findMenuDataByName(List<MenuData> menuDataList, String itemName) {
+        for (MenuData menuData : menuDataList) {
+            if (menuData.getObj_name().equals(itemName)) {
+                return menuData;
+            }
+        }
+        return null;
     }
     //endregion getMenuSucces
 }
