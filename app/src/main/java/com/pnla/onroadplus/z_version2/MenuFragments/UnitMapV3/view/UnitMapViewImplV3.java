@@ -252,6 +252,20 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
                     @Override
                     public void onLoadCleared(@Nullable Drawable placeholder) {
                     }
+
+                    @Override
+                    public void onLoadFailed(@Nullable Drawable errorDrawable) {
+                        // This method is called when loading the image fails
+                        // You can handle the error scenario here, e.g., by using a default marker icon
+                        markerOptions.position(new LatLng(lat, longt));
+                        markerOptions.infoWindowAnchor(.5f, .4f);
+                        markerOptions.anchor(0.5f, 0.5f);
+                        markerOptions.icon(BitmapDescriptorFactory.fromResource(R.drawable.sedantwo)); // Use a default icon
+                        if(mainIconMarker==null) {
+                            mainIconMarker = mMap.addMarker(markerOptions);
+                            mainIconMarker.setTag("mainMarker");
+                        }
+                    }
                 });
     }
     private void setImageBorderColor(int vehicleSwitch, Double lat, Double longt) {
@@ -285,8 +299,11 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         markerOptions.infoWindowAnchor(.5f, .4f);
         markerOptions.anchor(0.5f, 0.5f);
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(vehicleBorder));
-        secondaryIconMarker=mMap.addMarker(markerOptions);
-        secondaryIconMarker.setTag("border");
+        if(secondaryIconMarker==null) {
+            secondaryIconMarker = mMap.addMarker(markerOptions);
+            secondaryIconMarker.setTag("border");
+        }
+
     }
     private void  setSecondaryIcon(int vehicleSwitch){
 
@@ -591,9 +608,15 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         }
         LatLng newlat=new LatLng(vehicleLat,vehicleLng);
         if(newlat!=null){
+        startMainiconMarker(vehicleLat,vehicleLng);
         secondaryIconMarker.setPosition(newlat);
         setSecondaryIcon(data.getVehicleSwitch());
+        if(mainIconMarker!=null){
         mainIconMarker.setPosition(newlat);
+        }else{
+            startMainiconMarker(vehicleLat,vehicleLng);
+        }
+
         }
     }
 

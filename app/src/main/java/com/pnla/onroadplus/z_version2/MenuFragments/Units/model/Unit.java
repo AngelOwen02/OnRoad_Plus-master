@@ -48,7 +48,7 @@ public class Unit extends RealmObject {
 
     @SerializedName("desc_layer")
     private String desc_layer;
-
+    private String driver = null;
     public Unit()
     {
 
@@ -56,7 +56,7 @@ public class Unit extends RealmObject {
 
     public Unit(boolean vehicleStatus, int cveVehicle, int vehicleSwitch, String vehicleName, String vehicleImage, String sendTime, String descBrand,
                 String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, String georeference, String timeTravel, String timeElapsed,
-                double latitude, double longitude, double mileage, double kmTravel, double currentSpeed, double maxSpeed, String desc_layer) {
+                double latitude, double longitude, double mileage, double kmTravel, double currentSpeed, double maxSpeed, String desc_layer,String driver) {
         this.id = BaseRealmApplication.UNIT_ID.incrementAndGet();
         this.vehicleStatus = vehicleStatus;
         this.cveVehicle = cveVehicle;
@@ -79,6 +79,7 @@ public class Unit extends RealmObject {
         this.currentSpeed = currentSpeed;
         this.maxSpeed = maxSpeed;
         this.desc_layer = desc_layer;
+        this.driver= driver;
     }
 
 
@@ -111,7 +112,7 @@ public class Unit extends RealmObject {
     }
 
     public String getVehicleName() {
-        return (vehicleName != null )? vehicleName : "";
+        return vehicleName != null ? vehicleName : "";
     }
 
     public void setVehicleName(String vehicleName) {
@@ -253,5 +254,20 @@ public class Unit extends RealmObject {
 
     public void setDesc_layer(String desc_layer){
         this.desc_layer = desc_layer;
+    }
+    public String getDriver() {
+        if (driver == null || driver.equals("driver not found dk:null")) {
+            return "";
+        } else {
+            return driver;
+        }
+    }
+
+    public void setDriver(String driver) {
+        if (driver == null || driver.equals("driver not found dk:null")) {
+            this.driver = "";
+        } else {
+            this.driver = driver;
+        }
     }
 }

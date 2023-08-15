@@ -19,11 +19,11 @@ public class UnitDB {
     public static void createNewUnit(boolean vehicleStatus, int cveVehicle, int vehicleSwitch, String vehicleName, String vehicleImage, String sendTime,
                                      String descBrand, String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, String georeference,
                                      String timeTravel, String timeElapsed, double latitude, double longitude, double mileage, double kmTravel,
-                                     double currentSpeed, double maxSpeed, String desc_layer) {
+                                     double currentSpeed, double maxSpeed, String desc_layer,String driver) {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         Unit unit = new Unit(vehicleStatus, cveVehicle, vehicleSwitch, vehicleName, vehicleImage, sendTime, descBrand, descModel, vehicleYear, vehicleVin,
-                vehiclePlate, georeference, timeTravel, timeElapsed, latitude, longitude, mileage, kmTravel, currentSpeed, maxSpeed, desc_layer);
+                vehiclePlate, georeference, timeTravel, timeElapsed, latitude, longitude, mileage, kmTravel, currentSpeed, maxSpeed, desc_layer,driver);
         List<Unit> unitList = new ArrayList<>();
         unitList.add(unit);
         realm.copyToRealm(unitList);

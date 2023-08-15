@@ -247,11 +247,18 @@ import java.util.List;
              Integer cves=newgeos.getOutCveVehicle();
              for(Unit vehiculos:vehicles)
              {
+               //  if(vehiculos.get)
                  if(vehiculos.getCveVehicle()==cves){
                      if(newgeos.getLocation()!=null) {
                          vehiculos.setGeoreference(newgeos.getLocation());
                      }else{
                          vehiculos.setGeoreference("");
+                     }
+                     if(newgeos.getDriver()!=null){
+                         vehiculos.setDriver(newgeos.getDriver());
+                     }
+                     else {
+                         vehiculos.setDriver("");
                      }
                  }
              }

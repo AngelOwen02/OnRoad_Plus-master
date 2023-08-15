@@ -15,6 +15,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
@@ -59,6 +60,15 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
 //        holder.itemView.findFocus().getScrollBarSize();
+        if(unitList.get(position).getDriver().equals("")||unitList.get(position).getDriver().contains("driver not found"))
+        {
+            holder.textView14.setVisibility(View.GONE);
+            holder.driverN.setVisibility(View.GONE);
+        }else {
+            holder.textView14.setVisibility(View.VISIBLE);
+            holder.driverN.setVisibility(View.VISIBLE);
+            holder.driverN.setText(unitList.get(position).getDriver());
+        }
         String sendTime = unitList.get(position).getSendTime();
            // Log.e("bloquesdeunides",""+holder.getAdapterPosition() +"   LP "+unitList.get(position).getCveVehicle());//+holder.getLayoutPosition()+"  ");
         lastitem=holder.getAdapterPosition();
@@ -219,29 +229,30 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
         /**Status*/
         if (unitList.get(position).getVehicleSwitch() == 1) {
             holder.cardViewUnitContainer.setCardBackgroundColor(context.getResources().getColor(R.color.colorBorderCarGreen));
-            holder.imgUnitCircle.setBorderColor(context.getResources().getColor(R.color.colorBorderCarGreen));
+            holder.imgUnitCircle.setBackground(context.getResources().getDrawable(R.drawable.shape_circle_gren));
         } else if (unitList.get(position).getVehicleSwitch() == 2) {
             holder.cardViewUnitContainer.setCardBackgroundColor(context.getResources().getColor(R.color.colorBorderCarOrange));
-            holder.imgUnitCircle.setBorderColor(context.getResources().getColor(R.color.colorBorderCarOrange));
+            holder.imgUnitCircle.setBackground(context.getResources().getDrawable(R.drawable.shape_circle_orange));
         } else if (unitList.get(position).getVehicleSwitch() == 3) {
             holder.cardViewUnitContainer.setCardBackgroundColor(context.getResources().getColor(R.color.colorBorderCarRed));
-            holder.imgUnitCircle.setBorderColor(context.getResources().getColor(R.color.colorBorderCarRed));
+            holder.imgUnitCircle.setBackground(context.getResources().getDrawable(R.drawable.shape_circle_red));
         }else if (unitList.get(position).getVehicleSwitch() == 4) {
             holder.cardViewUnitContainer.setCardBackgroundColor(context.getResources().getColor(R.color.colorBlack));
-            holder.imgUnitCircle.setBorderColor(context.getResources().getColor(R.color.colorBlack));
+            holder.imgUnitCircle.setBackground(context.getResources().getDrawable(R.drawable.shape_circle_black));
         } else if (unitList.get(position).getVehicleSwitch()== 0){
             holder.cardViewUnitContainer.setCardBackgroundColor(context.getResources().getColor(R.color.colorBorderCarGray));
-            holder.imgUnitCircle.setBorderColor(context.getResources().getColor(R.color.colorBorderCarGray));
+            holder.imgUnitCircle.setBackground(context.getResources().getDrawable(R.drawable.shape_circle_gray));
         }
 
         if (unitList.get(position).getVehicleImage() == null) {
-            Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.imgUnitCircle);
+            Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.img_unitI);
         } else if (unitList.get(position).getVehicleImage().equals("string")) {
-            Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.imgUnitCircle);
+            Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.img_unitI);
         } else if (unitList.get(position).getVehicleImage().equals(GeneralConstantsV2.NO_IMAGE)) {
-            Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.imgUnitCircle);
+            Glide.with(context).load(R.drawable.sedan).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.img_unitI);
         } else {
-            Glide.with(context).load(unitList.get(position).getVehicleImage()) .thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.imgUnitCircle);
+            Glide.with(context).load(R.drawable.sedantwo).thumbnail(/*sizeMultiplier=*/ 0.05f).into(holder.img_unitI);
+            Glide.with(context).load(unitList.get(position).getVehicleImage()).error(R.drawable.sedantwo).into(holder.img_unitI);//.error(R.drawable.sedan)
         }
 
 
@@ -331,9 +342,10 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        CircleImageView imgUnitCircle;
+        CardView imgUnitCircle;
+        ImageView img_unitI,img_unitI2,textView14;
         CardView cardViewUnitContainer;
-        TextView txtUnitName;
+        TextView txtUnitName,driverN;
         TextView txtUnitMaxSpeed;
         TextView txtUnitGeoReference;
         TextView txtUnitKmTravel;
@@ -342,7 +354,7 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
         ImageView imgMaxSpeed;
         ImageView imgShape;
         ImageView imgDistance;
-        LinearLayout llMainContainer;
+        ConstraintLayout llMainContainer;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -350,6 +362,10 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
 
             llMainContainer = itemView.findViewById(R.id.ll_main_unit_item_container);
             imgUnitCircle = itemView.findViewById(R.id.img_unit);
+            img_unitI= itemView.findViewById(R.id.img_unitI);
+            img_unitI2= itemView.findViewById(R.id.img_unitI2);
+            textView14= itemView.findViewById(R.id. textView14);
+            driverN= itemView.findViewById(R.id.driverN);
             cardViewUnitContainer = itemView.findViewById(R.id.cardview_unit_container);
 
             txtUnitName = itemView.findViewById(R.id.txt_unit_name);
@@ -363,7 +379,7 @@ public class UnitAdapter extends RecyclerView.Adapter<UnitAdapter.ViewHolder> {
             imgMaxSpeed = itemView.findViewById(R.id.img_unit_item_max_speed);
             imgShape = itemView.findViewById(R.id.img_unit_item_shape);
             imgDistance = itemView.findViewById(R.id.img_unit_item_distance);
-
+            Glide.with(context).load(R.drawable.sedantwo).into(img_unitI);
         }
     }
     public void UpdateVehicles(List<Unit> vehicles) {

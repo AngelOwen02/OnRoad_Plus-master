@@ -47,8 +47,13 @@ public class dataresponseUnitsV3 {
     private String outHourMeterCount;
     @SerializedName("maintenance")
     private String maintenance;
-
-    public dataresponseUnitsV3(String outVehiclePlate, String outHeading, String outNickName, Integer outOriginAdmEmployee, String outVehicleImage, Integer outCveVehicle, Integer outCveEmployee, String outVehicleName, String outSendTime, List<Object> outTailPositions, Float outLongitude, String outVehicleDriverMode, Integer outVehicleStatus, String outMsgType, Double outMileage, Float outLatitude, String location, String outSpeed, Integer outOriginAdm, String outHourMeterCount, String maintenance) {
+    @SerializedName("out_employee_name")
+    private String driver = null;
+    public dataresponseUnitsV3(String outVehiclePlate, String outHeading, String outNickName, Integer outOriginAdmEmployee,
+                               String outVehicleImage, Integer outCveVehicle, Integer outCveEmployee, String outVehicleName,
+                               String outSendTime, List<Object> outTailPositions, Float outLongitude, String outVehicleDriverMode,
+                               Integer outVehicleStatus, String outMsgType, Double outMileage, Float outLatitude, String location,
+                               String outSpeed, Integer outOriginAdm, String outHourMeterCount, String maintenance,String driver) {
         super();
         this.outVehiclePlate = outVehiclePlate;
         this.outHeading = outHeading;
@@ -71,6 +76,7 @@ public class dataresponseUnitsV3 {
         this.outOriginAdm = outOriginAdm;
         this.outHourMeterCount = outHourMeterCount;
         this.maintenance = maintenance;
+        this.driver= driver;
     }
 
     public String getOutVehiclePlate() {
@@ -239,5 +245,22 @@ public class dataresponseUnitsV3 {
 
     public void setMaintenance(String maintenance) {
         this.maintenance = maintenance;
+    }
+    // return vehicleName != null ? vehicleName : "";
+
+    public String getDriver() {
+        if (driver == null || driver.equals("driver not found dk:null")) {
+            return "";
+        } else {
+            return driver;
+        }
+    }
+
+    public void setDriver(String driver) {
+        if (driver == null || driver.equals("driver not found dk:null")) {
+            this.driver = "";
+        } else {
+            this.driver = driver;
+        }
     }
 }
