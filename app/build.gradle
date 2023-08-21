@@ -18,13 +18,13 @@ android {
         // but continue the build even when errors are found:
         abortOnError false
     }
-    compileSdkVersion 31
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.pnla.onroadplus"
-        minSdkVersion 17
-        targetSdkVersion 31
-        versionCode 55
-        versionName "2.0.107"
+        minSdkVersion 23
+        targetSdkVersion 33
+        versionCode 59
+        versionName "2.0.110"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
     }
@@ -64,7 +64,7 @@ repositories {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
 
-    implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+    implementation 'androidx.appcompat:appcompat:1.1.0+'
     implementation 'com.google.android.material:material:1.1.0-alpha07'
 
     //noinspection GradleCompatible

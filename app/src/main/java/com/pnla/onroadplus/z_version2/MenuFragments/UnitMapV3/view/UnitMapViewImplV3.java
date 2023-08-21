@@ -309,30 +309,43 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
         BitmapDrawable bitmapdraw ;
         if (vehicleSwitch == 1) {
-            // circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGreen));
             bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_green);
         } else if (vehicleSwitch == 2) {
             bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_orange);
-            //circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarOrange));
         } else if (vehicleSwitch == 3) {
             bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_red);
-            // circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarRed));
         }else if (vehicleSwitch == 4) {
             bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_black);
-            //circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBlack));
         }
         else if (vehicleSwitch == 0) {
             bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_gray);
-            //circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGray));
         }
         else {
             Toast.makeText(getContext(), "semaforo nulo", Toast.LENGTH_SHORT).show();
             bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_gray);
-            //circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGray));
         }
         Bitmap b = bitmapdraw.getBitmap();
         Bitmap vehicleBorder = Bitmap.createScaledBitmap(b, 120, 120, false);
         secondaryIconMarker.setIcon(BitmapDescriptorFactory.fromBitmap(vehicleBorder));
+        //TODO remplazar por las lineas de abajo
+        //Bitmap b;
+        //if (vehicleSwitch == 1) {
+        //    b = BitmapFactory.decodeResource(getResources(), R.drawable.circle_green);
+        //} else if (vehicleSwitch == 2) {
+        //    b = BitmapFactory.decodeResource(getResources(), R.drawable.circle_orange);
+        //} else if (vehicleSwitch == 3) {
+        //    b = BitmapFactory.decodeResource(getResources(), R.drawable.circle_red);
+        //} else if (vehicleSwitch == 4) {
+        //    b = BitmapFactory.decodeResource(getResources(), R.drawable.circle_black);
+        //} else if (vehicleSwitch == 0) {
+        //    b = BitmapFactory.decodeResource(getResources(), R.drawable.circle_gray);
+        //} else {
+        //    Toast.makeText(getContext(), "semaforo nulo", Toast.LENGTH_SHORT).show();
+        //    b = BitmapFactory.decodeResource(getResources(), R.drawable.circle_gray);
+        //}
+        //
+        //Bitmap vehicleBorder = Bitmap.createScaledBitmap(b, 120, 120, false);
+        //secondaryIconMarker.setIcon(BitmapDescriptorFactory.fromBitmap(vehicleBorder));
     }
 
     private void initView(View view) {
