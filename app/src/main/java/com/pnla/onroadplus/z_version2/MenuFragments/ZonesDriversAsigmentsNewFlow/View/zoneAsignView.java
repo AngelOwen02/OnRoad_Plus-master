@@ -16,8 +16,10 @@ public interface zoneAsignView {
     void setD(List<String> d);
 
    void setV(List<String> v);
-
+    void setT(List<String> t);
     void restartAfterUpdate();
 
     void showMessage(String message);
+
+
 }

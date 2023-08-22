@@ -335,7 +335,7 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
                 namesDrivers2.add(0,"Selecciona un conductor");
                 mynamesDrivers2=namesDrivers2;
                 // presenter.hideDialog();
-//                presenter.setD(d);
+               presenter.setT(d);
 //                presenter.setDrivers(namesDrivers);
                 presenter.setDriversNodefaulValue(tripulantesdata);
                 //Log.e("tripulantes","  data names  "+namesDrivers);
@@ -406,8 +406,8 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
         //Log.e("tripulantesnewFLOW"," requestUpdateAsigments :  "+token);
         for(int i=0;i<asigments.size();i++)
         {
-            Log.e("tripulantesnewFLOW"," data request :   cve "+asigments.get(i).getCveVehicle()+" ve  "+
-                    asigments.get(i).getCveDriver()+"    T: "+asigments.get(i).getTripulantes());
+        //    Log.e("tripulantesnewFLOW"," data request :   cve "+asigments.get(i).getCveVehicle()+" ve  "+
+        //            asigments.get(i).getCveDriver()+"    T: "+asigments.get(i).getTripulantes());
         }
         if(token!=null)
         {
@@ -418,7 +418,7 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
 
     //region requestUpdateAsignments
     private void requestUpdateAsignments(int mcvelayer, String token, List<VehicleDriver> asigments) {
-        Log.e("tripuFlow23","cvelayer: "+mcvelayer+" token: "+token+"    "+asigments);
+     //   Log.e("tripuFlow23","cvelayer: "+mcvelayer+" token: "+token+"    "+asigments);
         List<VehicleDriver2> newdata=new ArrayList<>();
 
         if(asigments!=null)

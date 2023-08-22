@@ -128,6 +128,13 @@ public class zonePresenterImpl implements  zonePresenter {
     }
 
     @Override
+    public void setT(List<String> T) {
+        if(view!=null) {
+            view.setT(T);
+        }
+    }
+
+    @Override
     public void setDriversNodefaulValue(List<String> d2) {
         if(view!=null) {
             view.setDrivers2(d2);

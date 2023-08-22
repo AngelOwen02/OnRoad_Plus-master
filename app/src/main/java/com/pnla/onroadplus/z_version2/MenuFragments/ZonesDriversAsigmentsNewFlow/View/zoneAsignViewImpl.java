@@ -67,6 +67,7 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
     private List<String> newtripulantesList;
 
     private List<String> D=new ArrayList<>();
+    private List<String> T=new ArrayList<>();
     private List<String> V=new ArrayList<>();
     private String cveLayerName;
 
@@ -152,7 +153,7 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                List<String> newTripulantes=filterTripulantes(mydrivers,newText);
+                List<String> newTripulantes=filterTripulantes(myd2,newText);
                 if(newTripulantes!=null && adaterTripulacion!=null){
                     adaterTripulacion.setFilter(newTripulantes);
                 }
@@ -256,6 +257,11 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
     }
 
     @Override
+    public void setT(List<String> t) {
+        this.T=t;
+    }
+
+    @Override
     public void restartAfterUpdate() {
 
         Intent intent = new Intent(zoneAsignViewImpl.this,zoneAsignViewImpl.class);
@@ -299,6 +305,8 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
     }
     private void fillDataDialogTripulantes(List<String> trip)
     {
+        Log.e("tripRole",""+trip);
+        Log.e("tripRole",""+myd2);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext(),LinearLayoutManager.VERTICAL,false);
         rvDialog.setLayoutManager(layoutManager);
 
@@ -335,10 +343,10 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
         text=text;
         if(mydriversC!=null)
         {
-            if(mydrivers!=null){
-                for(int i=0;i<mydrivers.size();i++)
+            if(myd2!=null){
+                for(int i=0;i<myd2.size();i++)
                 {
-                    String v=mydrivers.get(i);
+                    String v=myd2.get(i);
                     if(v.contains(text))
                     {
                         tripulantes.add(v);
@@ -552,9 +560,23 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                             cveD = Integer.valueOf(parts[1]);//
                         }
 
+
+                    }
+                    for (int i = 0; i < T.size(); i++)//itero sobre todos los nombres de conductores
+                    {
+                        String[] parts = T.get(i).split("/");//parts[0] => nombre part[1]=>cve
+
+
                         for (int l = 0; l < tripulantes.size(); l++)// para cada iteracion por conductor verifico si el tripulante existe para agregar el cve a la lista tripulantesListEndpointu
                         {
-                            if (parts[0].equals(tripulantes.get(l))) {
+                            String valueTripulantes=tripulantes.get(l);
+                            if (valueTripulantes.contains("[")) {
+                                valueTripulantes = valueTripulantes.replace("[", "");
+                            }
+                            if (valueTripulantes.contains("]")) {
+                                valueTripulantes = valueTripulantes.replace("]", "");
+                            }
+                            if (parts[0].equals(valueTripulantes)) {
                                 Log.e("tripuFlow6", " " + parts[1] + "," + tripulantes.get(l));
                                 Tripulante agregatripulante = new Tripulante(Integer.valueOf(parts[1]), tripulantes.get(l));
                                 tripulantesListEndpointu.add(Integer.valueOf(parts[1]));
@@ -623,7 +645,8 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
 
           //endregion
             /**FIN NEW ITEM**/
-        }else if(isnew==false) {
+        }
+        else if(isnew==false) {
             /**SE EDITA*/
             int dimensionArray = myAsignments.size() - 1;
             Log.e("tripuFlow7", "validar si es nuevo F" + isnew);
@@ -726,8 +749,8 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                 int cveD = 0;
                 int cveV = 0;
                 /**considerar en el item 0 y en un nuevo item*/
-                Log.e("tripuFlow3", "calcula la data  posicion de item " + posdata + " Nombre " + nombre + "  Vehiculo " + vehiculo + " Tripulantes " + tripulantes);
-                Log.e("tripuFlow6", "data de tripulantes despued de editar " + tripulantes + "   " + tripulantes.size());
+                Log.e("tripuFlowt", "calcula la data  posicion de item " + posdata + " Nombre " + nombre + "  Vehiculo " + vehiculo + " Tripulantes " + tripulantes);
+                Log.e("tripuFlowt", "data de tripulantes despued de editar " + tripulantes + "   " + tripulantes.size());
                 for (int i = 0; i < D.size(); i++)//itero sobre todos los nombres de conductores
                 {
                     String[] parts = D.get(i).split("/");//parts[0] => nombre part[1]=>cve
@@ -737,16 +760,27 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                         cveD = Integer.valueOf(parts[1]);//
                     }
 
+                }
+                for (int i = 0; i < T.size(); i++)//itero sobre todos los nombres de conductores
+                {
+                    String[] parts = T.get(i).split("/");//parts[0] => nombre part[1]=>cve
+
+
                     for (int l = 0; l < tripulantes.size(); l++)// para cada iteracion por conductor verifico si el tripulante existe para agregar el cve a la lista tripulantesListEndpointu
                     {
-                        if (parts[0].equals(tripulantes.get(l))) {
-
-                            Log.e("tripuFlow23", " " + parts[1] + "," + tripulantes.get(l));
-
+                        Log.e("tripuFlowt",tripulantes.get(l));
+                        String valueTripulantes=tripulantes.get(l);
+                        if (valueTripulantes.contains("[")) {
+                            valueTripulantes = valueTripulantes.replace("[", "");
+                        }
+                        if (valueTripulantes.contains("]")) {
+                            valueTripulantes = valueTripulantes.replace("]", "");
+                        }
+                        if (parts[0].equals(valueTripulantes)) {
+                            Log.e("tripuFlowt", " " + parts[1] + "," + tripulantes.get(l));
                             Tripulante agregatripulante = new Tripulante(Integer.valueOf(parts[1]), tripulantes.get(l));
                             tripulantesListEndpointu.add(Integer.valueOf(parts[1]));
                             nuevetripulacion.add(agregatripulante);
-
                         }
                     }
                 }
@@ -762,7 +796,7 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
                         Log.e("tripuFlow23", "esta aqui verifica que salio mal  ve: " + vehiculo + "  parts " + parts[1]);
                     }
                 }
-                Log.e("descripcion", "cveVehicle: " + cveV + " cveDriver: " + cveD + "  tripulantes " + nuevetripulacion.size() + "   vehiculo: " + vehiculo + "  nombre: " + nombre);//esto tiene que ser un set de la posicion
+                Log.e("tripuFlowt", "cveVehicle: " + cveV + " cveDriver: " + cveD + "  tripulantes " + nuevetripulacion.size() + "   vehiculo: " + vehiculo + "  nombre: " + nombre);//esto tiene que ser un set de la posicion
                 /**la variable que hace update es diferente a la que hace get*/
                 // List<VehicleDriver> fullArrayD=new ArrayList<>();
                 //fullArrayD.clear();
@@ -974,12 +1008,16 @@ public void onClick(View v) {
             }
             break;
         case R.id.constrintohide:        /** constrain obscuro que oculta el  constrain de tripulantes*/
+            searchViewT.setQuery("", false);
+            searchViewT.clearFocus();
             DialogAdaptertripulantes.setVisibility(View.GONE);
             break;
         case R.id.textViewTODO:
             adaterTripulacion.selectAll();
             break;
         case R.id.txtViewClean:
+            searchViewT.setQuery("", false);
+            searchViewT.clearFocus();
             adaterTripulacion.unselectall();
             break;
         case R.id.guardarDialogTripulantes:
@@ -988,6 +1026,8 @@ public void onClick(View v) {
 
                 Log.e("tripuFlow6", " numero de tripulantes " + newtripulantesList.size());
             }
+            searchViewT.setQuery("", false);
+            searchViewT.clearFocus();
             DialogAdaptertripulantes.setVisibility(View.GONE);
             adapter.setDataholdertripulantes(dialogtripulantes,newtripulantesList);
             DialogAdaptertripulantes.setVisibility(View.GONE);

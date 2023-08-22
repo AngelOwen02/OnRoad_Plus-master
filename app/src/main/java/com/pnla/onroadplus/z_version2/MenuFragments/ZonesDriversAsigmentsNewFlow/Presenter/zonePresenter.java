@@ -18,7 +18,7 @@ public interface zonePresenter {
 
     void setV(List<String> V);
     void setD(List<String> D);
-
+    void setT(List<String> T);
     void setDriversNodefaulValue(List<String> d2);
     void setMessageToView(String message);
     void showDialog();
@@ -37,4 +37,6 @@ public interface zonePresenter {
     void auditTrail5(String name);
 
     void requestTripulantesCatalog();
+
+
 }
