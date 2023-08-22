@@ -46,6 +46,7 @@ public class RetrofitEndPointsV2 {
     public static final String GET_ASIGNMENTSNEW= "geofences/getVehiclesAndDriver";
     public static final String GET_UNITS="catalog/getUnit";
     public static final String GET_DRIVERS="catalog/getEmployees";
+    public static final String GET_DRIVERSBYPOSTION="catalog/getEmployees_by_position";
     public static final String POST_ASIGNMENTS="geofences/setVehiclesAndDriver";
     public static final String POST_ASIGNMENTSNEW="geofences/setVehiclesAndDriverNew";
     public static final String POST_AUDIT_TRAIL="login/setAuditTrail";

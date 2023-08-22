@@ -2,6 +2,7 @@ package com.pnla.onroadplus.z_version2.MenuFragments.ZonesDSupervisor.utils;
 
 import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.responseAuditTrail;
 import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.setAuditTrail;
+import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDSupervisor.model.requestDriversBypos;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDSupervisor.model.responseSetZones;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDSupervisor.model.setZone;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDrivers.model.drivers.requestDrivers;
@@ -13,8 +14,8 @@ import retrofit2.http.Body;
 import retrofit2.http.POST;
 
 public interface service {
-    @POST(RetrofitEndPointsV2.GET_DRIVERS)
-    Call<responsDrivers> getDriversCatalog(@Body requestDrivers request);
+    @POST(RetrofitEndPointsV2.GET_DRIVERSBYPOSTION)
+    Call<responsDrivers> getDriversCatalog(@Body requestDriversBypos request);
     @POST(RetrofitEndPointsV2.POST_SETZONES)
     Call<responseSetZones> setZonez(@Body setZone request);
 

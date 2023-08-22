@@ -7,6 +7,7 @@ import android.widget.Toast;
 
 import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.AuditTrail;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDSupervisor.model.Zone;
+import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDSupervisor.model.requestDriversBypos;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDSupervisor.model.responseSetZones;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDSupervisor.model.setZone;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDSupervisor.presenter.supervisorPresenter;
@@ -56,7 +57,7 @@ public class supervisorInteractorImpl implements supervisorInteractor {
 
     //region setDriversVehicles
     private void setDriversVehicles(String token) {
-        requestDrivers request = new requestDrivers(true, token);
+        requestDriversBypos request = new requestDriversBypos(true, token,1);
         presenter.showDialog();
         Call<responsDrivers> call = service.getDriversCatalog(request);
         call.enqueue(new Callback<responsDrivers>() {

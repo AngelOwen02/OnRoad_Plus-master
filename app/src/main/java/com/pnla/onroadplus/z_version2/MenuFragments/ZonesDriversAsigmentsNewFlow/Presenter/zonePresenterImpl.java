@@ -41,6 +41,12 @@ public class zonePresenterImpl implements  zonePresenter {
         interactor.getFDrivers();
         }
     }
+    @Override
+    public void requestTripulantesCatalog() {
+        if(view!=null) {
+            interactor.getFDriversT();
+        }
+    }
 
     @Override
     public void updateAsignments(List<VehicleDriver> zones) {
@@ -83,6 +89,8 @@ public class zonePresenterImpl implements  zonePresenter {
             interactor.newsetAuditTrail5(name);
         }
     }
+
+
 
     @Override
     public void setAsignments(List<VehicleDriver> myAsignments) {

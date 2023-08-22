@@ -35,4 +35,6 @@ public interface zonePresenter {
     void auditTrail4(String name);
     //cuando se modifican los tripulantes
     void auditTrail5(String name);
+
+    void requestTripulantesCatalog();
 }

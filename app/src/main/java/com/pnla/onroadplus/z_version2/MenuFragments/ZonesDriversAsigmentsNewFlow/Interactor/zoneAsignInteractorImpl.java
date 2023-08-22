@@ -13,6 +13,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.responseAuditTra
 import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.setAuditTrail;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.UnitDB;
+import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDSupervisor.model.requestDriversBypos;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDrivers.model.drivers.driversNames;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDrivers.model.drivers.requestDrivers;
 import com.pnla.onroadplus.z_version2.MenuFragments.ZonesDrivers.model.drivers.responsDrivers;
@@ -50,7 +51,9 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
     private asignmentService service;
     public List<String> Vehicles=new ArrayList<>();
     public List<String> namesDrivers=new ArrayList<>();
+    public List<String> namesDrivers2=new ArrayList<>();
     public static List<String> mynamesDrivers=new ArrayList<>();
+    public static List<String> mynamesDrivers2=new ArrayList<>();
     public static List<String> mynamesVehicles=new ArrayList<>();
     private  int Mcvelayer;
 
@@ -249,11 +252,21 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             catolgDrivers(token);
         }
     }
+
+    @Override
+    public void getFDriversT() {
+        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        String token = preferences.getString(GeneralConstantsV2.TOKEN_PREFERENCES, null);
+        if(token!=null)
+        {
+            catolgDrivers2(token);
+        }
+    }
     //endregion getFDrivers
 
     //region catolgDrivers
     private void catolgDrivers(String token) {
-        requestDrivers request= new requestDrivers(true,token);
+        requestDriversBypos request= new requestDriversBypos(true,token,2);
         presenter.showDialog();
         Call<responsDrivers> call=service.getDriversCatalog(request);
         call.enqueue(new Callback<responsDrivers>() {
@@ -268,6 +281,68 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
             }
         });
 
+    }
+    private void catolgDrivers2(String token) {
+        requestDriversBypos request= new requestDriversBypos(true,token,3);
+        presenter.showDialog();
+        Call<responsDrivers> call=service.getDriversCatalog(request);
+        call.enqueue(new Callback<responsDrivers>() {
+            @Override
+            public void onResponse(Call<responsDrivers> call, Response<responsDrivers> response) {
+                validateCodeDrivers2(response,context);
+            }
+
+            @Override
+            public void onFailure(Call<responsDrivers> call, Throwable t) {
+                Toast.makeText(context, "" + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void validateCodeDrivers2(Response<responsDrivers> response, Context context) {
+        if (response != null) {
+
+            if (RetrofitValidationsV2.checkSuccessCode(response.code())) {
+                catalogDrivers2(response, context);
+            } else {
+                Toast.makeText(context, "" + RetrofitValidationsV2.getErrorByStatus(response.code(), context), Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
+    private void catalogDrivers2(Response<responsDrivers> response, Context context) {
+        responsDrivers responsD=response.body();
+        if(responsD!=null)
+        {
+            int code=responsD.getResponseCode();
+            String message=responsD.getMessage();
+            List<String> tripulantesdata=new ArrayList<>();
+            tripulantesdata.clear();
+            if(code==GeneralConstantsV2.RESPONSE_CODE_OK)
+            {
+                List<driversNames> data=responsD.getData();
+                List<String> d=new ArrayList<>();
+                d.clear();
+                namesDrivers2.clear();
+                for (int i=0;i<data.size();i++)
+                {
+                    namesDrivers2.add(data.get(i).getEmployeeName());
+                    Log.e("catalogD",""+data.get(i).getEmployeeName()+"/"+data.get(i).getCveEmployee());
+                    tripulantesdata.add(data.get(i).getEmployeeName());
+                    d.add(data.get(i).getEmployeeName()+"/"+data.get(i).getCveEmployee());
+                }
+                namesDrivers2.add(0,"Selecciona un conductor");
+                mynamesDrivers2=namesDrivers2;
+                // presenter.hideDialog();
+//                presenter.setD(d);
+//                presenter.setDrivers(namesDrivers);
+                presenter.setDriversNodefaulValue(tripulantesdata);
+                //Log.e("tripulantes","  data names  "+namesDrivers);
+                //presenter.hideDialog();
+            }
+
+        }
     }
     //endregion catolgDrivers
 
@@ -311,7 +386,7 @@ public class zoneAsignInteractorImpl implements  zonesAsignInteractor{
                // presenter.hideDialog();
                 presenter.setD(d);
                 presenter.setDrivers(namesDrivers);
-                presenter.setDriversNodefaulValue(tripulantesdata);
+              //  presenter.setDriversNodefaulValue(tripulantesdata);
                 //Log.e("tripulantes","  data names  "+namesDrivers);
                 //presenter.hideDialog();
             }

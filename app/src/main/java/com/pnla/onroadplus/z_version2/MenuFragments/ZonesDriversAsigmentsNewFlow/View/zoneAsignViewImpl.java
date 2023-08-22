@@ -180,6 +180,7 @@ public class zoneAsignViewImpl extends AppCompatActivity implements View.OnClick
         presenter.requestAsignment(cvelayer);
         presenter.requestUnitsCatalog();
         presenter.requesDriverCatalog();
+        presenter.requestTripulantesCatalog();
         //endregion
 
 

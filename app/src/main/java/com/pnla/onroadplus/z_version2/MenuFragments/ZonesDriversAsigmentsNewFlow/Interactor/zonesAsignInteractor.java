@@ -8,6 +8,7 @@ public interface zonesAsignInteractor {
     void getAsignments(String cveLayer);
     void getFUnits();
     void getFDrivers();
+    void getFDriversT();
     void updateFData(List<VehicleDriver> zones);
 
     void newsetAuditTrail(String descripcion);
@@ -15,4 +16,6 @@ public interface zonesAsignInteractor {
     void newsetAuditTrail3(String descripcion);
     void newsetAuditTrail4(String descipcion);
     void newsetAuditTrail5(String descripcion);
+
+
 }

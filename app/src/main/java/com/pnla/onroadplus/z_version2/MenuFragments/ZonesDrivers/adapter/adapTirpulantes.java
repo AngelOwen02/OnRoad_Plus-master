@@ -1,5 +1,6 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.ZonesDrivers.adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -63,7 +64,7 @@ public class adapTirpulantes extends RecyclerView.Adapter<adapTirpulantes.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull adapTirpulantes.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull adapTirpulantes.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         if(tripulantes.get(position).contains("/")) {
             String[] parts=tripulantes.get(position).split("/");
             holder.nameTripulante.setText(parts[0]);
