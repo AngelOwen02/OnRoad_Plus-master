@@ -115,7 +115,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                                     } else {
                                         myview.safeValues(position, false, i, 3, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(i - 1).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(i - 1).getCveTripMgmAnswer(),null);
                                     }
-
+                                  //  Log.e("dapterv3Q","Q: "+data.getQuestions().get(position).getCveTripMgmQuestion()+" selected: "+ data.getQuestions().get(position).getAnswers().get(i - 1).getCveTripMgmAnswer());
 
                                 }
 
