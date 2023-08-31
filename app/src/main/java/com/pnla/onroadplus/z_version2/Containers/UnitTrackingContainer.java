@@ -232,12 +232,21 @@ public class UnitTrackingContainer extends AppCompatActivity implements UnitTrac
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.toolbar_unit_tracking_img_back:
+                Log.e("UnitTrackingAdapter",""+UnitTrackingAdapter.integerList);
               /*  SharedPreferences userDetails = getApplicationContext().getSharedPreferences("Haha", MODE_PRIVATE);
                 SharedPreferences.Editor edit = userDetails.edit();
                 edit.clear();
                 edit.putBoolean("Refresh",true);
                 edit.apply();
                 super.onBackPressed();*/
+                unitButton.performClick();
+                rvVehicles.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        // Call smooth scroll
+                        rvVehicles.smoothScrollToPosition(adapterVehicles.getItemCount() - 1);
+                    }
+                });
               showTrackingMap();
                 // getActivity().onBackPressed();
                 break;
