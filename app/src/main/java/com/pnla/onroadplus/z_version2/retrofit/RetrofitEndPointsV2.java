@@ -35,6 +35,7 @@ public class RetrofitEndPointsV2 {
     public static final String SEND_COMMAND = "routines/sendCommand";
     public static final String GET_TRIPSBYDAY= "dashboard/getTripByDay";
     public static final String GET_TRIPSBYTIME= "dashboard/getTripByHour";
+    public static final String GET_TRIPSBYTIME3= "dashboard/getTripByHour_v2";
     public static final String  GET_LASPOSITIOMITEM="vehicles/getLastPositionFullVehicles";
     public static final String GET_VERSION="login/VersionControl";
     public static final String GET_GEOCERCAS="geofences/getGeofences";

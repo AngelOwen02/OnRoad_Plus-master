@@ -66,6 +66,8 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.view.UnitMapViewImpl
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter.AdapterDatesV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter.TripAdapterV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.Adapter.adapterHeader;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.TripsByTimeV3.Datapos;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.TripsByTimeV3.PositionV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.dataVehicleDescV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.presenter.unitViewpresenterV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.presenter.unitViewpresenterV3Impl;
@@ -188,7 +190,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
     private List<String> tripsBDx2;
     private List<String> tripsBDy2;
-
+    private Datapos mDatapos;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map_view_impl, container, false);
@@ -1238,6 +1240,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         // Placing a marker on the touched position
        // mMap.addMarker(markerOptions);
     }
+    //region old trips
     @Override
     public void fillStringcalles(List<String> calles) {
         this.calles=calles;
@@ -1255,19 +1258,57 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         startMainiconMarker(vehicleLat,vehicleLng);
         readtripsonView();
     }
-
+//endregion
     @Override
     public void drawtripdbxbdy(List<String> xdots, List<String> ydots) {
         this.tripsBDx2=ydots;
         this.tripsBDy2=xdots;
         //snapedExternalapidots();
     }
+    @Override
+    public void setDataTripsByTimeV3(Datapos data) {
+        this.mDatapos=data;
+        Log.e("TripsByTimeV3a",""+mDatapos);
+        Toast.makeText(getContext(), "ok doki", Toast.LENGTH_SHORT).show();
+        if (mDatapos != null)
+        {
+            List<String> xdots=new ArrayList<>();
+            List<String> ydots=new ArrayList<>();
+            List<String> streets=new ArrayList<>();
+            xdots.clear();
+            ydots.clear();
+            streets.clear();
 
+                List<PositionV3> posv3=new ArrayList<>();
+                posv3.clear();
+                posv3= mDatapos.getPosition();
+                for(PositionV3 fpos:posv3){
+
+                    fpos.getLatitude();
+                    fpos.getLongitude();
+                    fpos.getGeoreference();
+                    xdots.add(String.valueOf( fpos.getLatitude()));
+                    ydots.add(String.valueOf( fpos.getLongitude()));
+                    streets.add(String.valueOf( fpos.getGeoreference()));
+                }
+
+            tripsBDy2=xdots;
+            tripsBDx2=ydots;
+            tripsBDy=xdots;
+            tripsBDx=ydots;
+            calles=streets;
+            mMap.clear();
+            startMainiconMarker(vehicleLat,vehicleLng);
+            readtripsonView();
+        }
+    }
     @Override
     public void drawResumeDots(List<List<Float>> resumeDots) {
         resumeDotsfromInteractor=resumeDots;
         HDdots();
     }
+
+
 
     private void HDdots() {
         LatLngBounds.Builder builder = new LatLngBounds.Builder();

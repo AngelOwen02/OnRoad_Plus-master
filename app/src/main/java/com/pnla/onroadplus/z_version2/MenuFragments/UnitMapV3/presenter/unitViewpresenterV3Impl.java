@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.interactor.unitMapInteractorV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.interactor.unitMapInteractorV3Impl;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.TripsByTimeV3.Datapos;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.dataVehicleDescV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.view.unitMapViewV3;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.models.trips.TripV2;
@@ -138,6 +139,13 @@ public class unitViewpresenterV3Impl implements unitViewpresenterV3{
     public void drawHDdots(List<List<Float>> resumeDots) {
         if (view != null) {
             view.drawResumeDots(resumeDots);
+        }
+    }
+
+    @Override
+    public void setDataTripsByTimeV3(Datapos data) {
+        if (view != null) {
+            view.setDataTripsByTimeV3(data);
         }
     }
 }

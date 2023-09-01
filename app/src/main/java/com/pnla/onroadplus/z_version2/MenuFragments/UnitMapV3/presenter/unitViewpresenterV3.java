@@ -2,6 +2,7 @@ package com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.presenter;
 
 import android.content.Context;
 
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.TripsByTimeV3.Datapos;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.dataVehicleDescV3;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.models.trips.TripV2;
 
@@ -33,5 +34,7 @@ public interface unitViewpresenterV3 {
     void getexternalAPI(List<List<Double>> hDdoublelist);
     void tripsBDx2tripsBDy2(List<String> xdots, List<String> ydots);
     void drawHDdots(List<List<Float>> resumeDots);
+
+    void setDataTripsByTimeV3(Datapos data);
     //endregion
 }

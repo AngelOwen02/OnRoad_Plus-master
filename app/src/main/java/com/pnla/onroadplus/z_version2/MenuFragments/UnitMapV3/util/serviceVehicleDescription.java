@@ -4,6 +4,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.models.RequestAPIMAP
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.models.ResponseAPIMAP;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.models.tripsbyTimeRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.models.tripsbyTimeResponse;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.TripsByTimeV3.tripsbyTimeResponse3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.requestVehicleDescV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.responseVehicleDescV3;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.models.trips.TripsV2Request;
@@ -22,4 +23,6 @@ public interface serviceVehicleDescription {
     Call<TripsV2Response> getTrips(@Body TripsV2Request request);
     @POST(RetrofitEndPointsV2.GET_TRIPSBYTIME)
     Call<tripsbyTimeResponse>gettripsbytime(@Body tripsbyTimeRequest request);
+    @POST(RetrofitEndPointsV2.GET_TRIPSBYTIME3)
+    Call<tripsbyTimeResponse3>gettripsbytime3(@Body tripsbyTimeRequest request);
 }

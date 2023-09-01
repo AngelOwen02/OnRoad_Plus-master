@@ -16,6 +16,8 @@ import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.models.tripsBytimeDa
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.models.tripsbyTimeRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.models.tripsbyTimeResponse;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMap.utils.ExternalApiSerice;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.TripsByTimeV3.Datapos;
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.TripsByTimeV3.tripsbyTimeResponse3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.dataVehicleDescV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.requestVehicleDescV3;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.responseVehicleDescV3;
@@ -232,7 +234,7 @@ public class unitMapInteractorV3Impl implements unitMapInteractorV3{
         if (token != null){
             String validation = MapV2Utils.validategettripbytinetoRequest(vehicleCve,startTimer,timeEnd,token);
             if (validation.equals(GeneralConstantsV2.SUCCESS)) {
-                startvehicleTripbytime(vehicleCve,startTimer,timeEnd,token,context);
+                startvehicleTripbytime3(vehicleCve,startTimer,timeEnd,token,context);
             }
             else{
                 Toast.makeText(context, ""+validation, Toast.LENGTH_SHORT).show();
@@ -240,6 +242,68 @@ public class unitMapInteractorV3Impl implements unitMapInteractorV3{
         }
     }
 
+    private void startvehicleTripbytime3(int vehicleCve, String startTimer, String timeEnd, String token, Context context) {
+        tripsbyTimeRequest request = new tripsbyTimeRequest(vehicleCve, timeEnd, startTimer, token);//el endpoint esta alrevez
+        presenter.showDialog();
+        services.gettripsbytime3(request).enqueue(new Callback<tripsbyTimeResponse3>() {
+            @Override
+            public void onResponse(Call<tripsbyTimeResponse3> call, Response<tripsbyTimeResponse3> response) {
+                validateTripsbyTimeCodev3(response,context);
+            }
+
+            @Override
+            public void onFailure(Call<tripsbyTimeResponse3> call, Throwable t) {
+                Toast.makeText(context, ""+t.getMessage(), Toast.LENGTH_SHORT).show();
+                presenter.hideDialog();
+            }
+        });
+    }
+
+    private void validateTripsbyTimeCodev3(Response<tripsbyTimeResponse3> response, Context context) {
+        if(RetrofitValidationsV2.checkSuccessCode(response.code())){
+            getTipsByTimeDatav3(response,context);
+        }
+        else{
+            Toast.makeText(context, ""+response.message(), Toast.LENGTH_SHORT).show();
+            presenter.hideDialog();
+        }
+    }
+
+    private void getTipsByTimeDatav3(Response<tripsbyTimeResponse3> response, Context context) {
+
+        tripsbyTimeResponse3 tripbytimeResponse=response.body();
+
+        if(tripbytimeResponse!=null) {
+            int responseCode = tripbytimeResponse.getResponseCode();
+
+            if (responseCode == GeneralConstantsV2.RESPONSE_CODE_OK) {
+                Datapos data = tripbytimeResponse.getData();
+
+                if (data != null) {
+                presenter.setDataTripsByTimeV3(data);
+                presenter.hideDialog();
+                }
+            }else if (responseCode == GeneralConstantsV2.RESPONSE_CODE_SESSION_EXPIRED) {
+                Toast.makeText(context, ""+context.getString(R.string.textSessionExpired), Toast.LENGTH_SHORT).show();
+
+                UnitDB.deleteDB();
+                GroupDB.deleteDB();
+                RealmUserData.deleteDB();
+
+                Bundle bndl = new Bundle();
+                bndl.putBoolean("HelpStatus", true);
+                presenter.hideDialog();
+            } else {
+                Toast.makeText(context, ""+tripbytimeResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                presenter.hideDialog();
+            }
+        }else {
+            Toast.makeText(context, ""+context.getString(R.string.textErrorDataEmptyMap), Toast.LENGTH_SHORT).show();
+            presenter.hideDialog();
+        }
+    }
+
+    //region trip by time v1
 
     private void startvehicleTripbytime(int vehicleCve, String startTimer, String endtime, String token, Context context) {
         tripsbyTimeRequest request=new tripsbyTimeRequest(vehicleCve,endtime,startTimer,token);//el endpoint esta alrevez
@@ -369,6 +433,7 @@ public class unitMapInteractorV3Impl implements unitMapInteractorV3{
             }
 
     }
+    //endregion
 
     //region externalAPI
     @Override

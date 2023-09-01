@@ -1,5 +1,6 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.view;
 
+import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.TripsByTimeV3.Datapos;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitMapV3.model.dataVehicleDescV3;
 import com.pnla.onroadplus.z_version2.fragments.mapV2.models.trips.TripV2;
 
@@ -24,4 +25,6 @@ public interface unitMapViewV3 {
     void drawtripdbxbdy(List<String> xdots, List<String> ydots);
 
     void drawResumeDots(List<List<Float>> resumeDots);
+
+    void setDataTripsByTimeV3(Datapos data);
 }
