@@ -227,6 +227,9 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         startMainiconMarker(vehicleLat,vehicleLng);
     }
     private void startMainiconMarker(Double lat, Double longt) {
+        if (mainIconMarker != null) {
+            mainIconMarker.remove();
+        }
         MarkerOptions markerOptions = new MarkerOptions();
         setImageBorderColor(vehicleSwitch,lat,  longt);
         BitmapDrawable bitmapdraw = (BitmapDrawable) getResources().getDrawable(R.drawable.car);
@@ -239,14 +242,16 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
                     @Override
                     public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
                         //imageView.setImageBitmap(resource);
-                        Bitmap b =resource;
-                        Bitmap vehicleIcon = Bitmap.createScaledBitmap(b, 110, 110, false);
-                        markerOptions.position(new LatLng(lat, longt));
-                        markerOptions.infoWindowAnchor(.5f, .4f);
-                        markerOptions.anchor(0.5f, 0.5f);
-                        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(vehicleIcon));
-                        mainIconMarker=mMap.addMarker(markerOptions);
-                        mainIconMarker.setTag("mainMarker");
+
+                            Bitmap b = resource;
+                            Bitmap vehicleIcon = Bitmap.createScaledBitmap(b, 110, 110, false);
+                            markerOptions.position(new LatLng(lat, longt));
+                            markerOptions.infoWindowAnchor(.5f, .4f);
+                            markerOptions.anchor(0.5f, 0.5f);
+                            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(vehicleIcon));
+                            mainIconMarker = mMap.addMarker(markerOptions);
+                            mainIconMarker.setTag("mainMarker");
+
                     }
 
                     @Override
@@ -264,12 +269,19 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
                         if(mainIconMarker==null) {
                             mainIconMarker = mMap.addMarker(markerOptions);
                             mainIconMarker.setTag("mainMarker");
+                        }else {
+                            mainIconMarker.setPosition(new LatLng(lat, longt));
+                            Log.e("markertag","onLoadFailed else");
+
                         }
                     }
                 });
     }
     private void setImageBorderColor(int vehicleSwitch, Double lat, Double longt) {
         this.mvehicleSwitch=vehicleSwitch;
+        if (secondaryIconMarker != null) {
+            secondaryIconMarker.remove();
+        }
         MarkerOptions markerOptions = new MarkerOptions();
         BitmapDrawable bitmapdraw ;
         if (vehicleSwitch == 1) {
@@ -299,10 +311,10 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         markerOptions.infoWindowAnchor(.5f, .4f);
         markerOptions.anchor(0.5f, 0.5f);
         markerOptions.icon(BitmapDescriptorFactory.fromBitmap(vehicleBorder));
-        if(secondaryIconMarker==null) {
+     // if(secondaryIconMarker==null) {
             secondaryIconMarker = mMap.addMarker(markerOptions);
             secondaryIconMarker.setTag("border");
-        }
+     //   }
 
     }
     private void  setSecondaryIcon(int vehicleSwitch){
@@ -955,6 +967,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+        Log.e("markertag",""+marker.getTag());
         return false;
     }
     //region dialogs
