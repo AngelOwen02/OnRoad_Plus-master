@@ -1268,10 +1268,11 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
     @Override
     public void setDataTripsByTimeV3(Datapos data) {
         this.mDatapos=data;
-        Log.e("TripsByTimeV3a",""+mDatapos);
-        Toast.makeText(getContext(), "ok doki", Toast.LENGTH_SHORT).show();
+
+      //  Toast.makeText(getContext(), "ok doki", Toast.LENGTH_SHORT).show();
         if (mDatapos != null)
         {
+            //  Log.e("TripsByTimeV3a",""+mDatapos);
             List<String> xdots=new ArrayList<>();
             List<String> ydots=new ArrayList<>();
             List<String> streets=new ArrayList<>();
