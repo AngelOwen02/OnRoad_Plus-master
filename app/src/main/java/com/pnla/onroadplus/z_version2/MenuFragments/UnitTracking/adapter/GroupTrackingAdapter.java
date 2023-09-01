@@ -135,6 +135,7 @@ public class GroupTrackingAdapter extends RecyclerView.Adapter<GroupTrackingAdap
                         request=false;
                         if(!UnitTrackingAdapter.integerList.isEmpty())
                         {
+                            UnitTrackingAdapter.integerList.clear();
                             intforrequest=(groupTrackings.get(position).getCve_vehicle_group());
                             Log.e("itemsnew","QUITAR              "+ intforrequest);
                         }

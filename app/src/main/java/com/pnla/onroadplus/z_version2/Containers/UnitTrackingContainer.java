@@ -257,6 +257,7 @@ public class UnitTrackingContainer extends AppCompatActivity implements UnitTrac
                 IlluminateUnits();
                 onClickUnitButton();
                 handler.removeCallbacks(runnable);
+                
                 break;
             case R.id.container_btn_unit_tracking_groups:
                 IlluminateGroup();

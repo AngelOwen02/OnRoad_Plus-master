@@ -47,6 +47,7 @@ public class UnitTrackingAdapter extends RecyclerView.Adapter<UnitTrackingAdapte
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
         final Unit vehicle = vehicleList.get(position);
+        List<Integer> vehiclesInList = new ArrayList<>();
         //Log.e("unitsthaticansaw3",""+ UnitDB.getUnitListActive());
         //Log.e("unitsthaticansaw3",""+ integerList);
         if(!UnitDB.getUnitListActive().isEmpty()) {
@@ -57,6 +58,8 @@ public class UnitTrackingAdapter extends RecyclerView.Adapter<UnitTrackingAdapte
                 Log.e("unitsfirstscreen",""+ i);
                 integerList.add(UnitDB.getUnitListActive().get(i).getCveVehicle());// integerList.add(UnitDB.getUnitListActive().get(i).getCveVehicle());
             }
+
+            vehiclesInList = integerList;
             SplashScreenActivity.datapersistance=UnitDB.getUnitListActive();
         }
         if (integerList.contains(Integer.valueOf( vehicle.getCveVehicle()))) {
