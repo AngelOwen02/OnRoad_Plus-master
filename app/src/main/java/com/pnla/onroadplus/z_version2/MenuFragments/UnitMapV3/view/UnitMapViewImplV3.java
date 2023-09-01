@@ -274,23 +274,23 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         BitmapDrawable bitmapdraw ;
         if (vehicleSwitch == 1) {
            // circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGreen));
-            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_green);
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle__green);
         } else if (vehicleSwitch == 2) {
-           bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_orange);
+           bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle__orange);
             //circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarOrange));
         } else if (vehicleSwitch == 3) {
-            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_red);
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle__red);
            // circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarRed));
         }else if (vehicleSwitch == 4) {
-            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_black);
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle__black);
             //circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBlack));
         }
         else if (vehicleSwitch == 0) {
-            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_gray);
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle__gray);
             //circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGray));
         }
         else {
-             bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_gray);
+             bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle__gray);
             //circleImageView.setBorderColor(getContext().getResources().getColor(R.color.colorBorderCarGray));
         }
         Bitmap b = bitmapdraw.getBitmap();
@@ -309,24 +309,27 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
 
         BitmapDrawable bitmapdraw ;
         if (vehicleSwitch == 1) {
-            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_green);
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle__green);
         } else if (vehicleSwitch == 2) {
-            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_orange);
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle__orange);
         } else if (vehicleSwitch == 3) {
-            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_red);
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle__red);
         }else if (vehicleSwitch == 4) {
-            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_black);
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle__black);
         }
         else if (vehicleSwitch == 0) {
-            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_gray);
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle__gray);
         }
         else {
             Toast.makeText(getContext(), "semaforo nulo", Toast.LENGTH_SHORT).show();
-            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle_gray);
+            bitmapdraw = (BitmapDrawable) getContext().getDrawable(R.drawable.circle__gray);
         }
         Bitmap b = bitmapdraw.getBitmap();
         Bitmap vehicleBorder = Bitmap.createScaledBitmap(b, 120, 120, false);
-        secondaryIconMarker.setIcon(BitmapDescriptorFactory.fromBitmap(vehicleBorder));
+        if(secondaryIconMarker!=null){
+            secondaryIconMarker.setIcon(BitmapDescriptorFactory.fromBitmap(vehicleBorder));
+        }
+
         //TODO remplazar por las lineas de abajo
         //Bitmap b;
         //if (vehicleSwitch == 1) {
@@ -623,7 +626,7 @@ public class UnitMapViewImplV3 extends Fragment implements unitMapViewV3, OnMapR
         if(newlat!=null){
         startMainiconMarker(vehicleLat,vehicleLng);
         secondaryIconMarker.setPosition(newlat);
-        setSecondaryIcon(data.getVehicleSwitch());
+       // setSecondaryIcon(data.getVehicleSwitch());
         if(mainIconMarker!=null){
         mainIconMarker.setPosition(newlat);
         }else{
