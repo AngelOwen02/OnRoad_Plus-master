@@ -749,21 +749,6 @@ public class UnitsInteractorImpl implements UnitsInteractor {
                         dataofvehiclesgroupscve.add(dataÑ);
                     }
 
-
-                //    Log.e("groupsizes",""+dataofvehiclesgroups);
-                    /*if(!dataofvehiclesgroupscve.isEmpty())
-
-                    {
-                        //Log.e("unitsthaticansaw",""+dataofvehiclesgroupscve);
-
-                       for(int i=0 ;i <dataofvehiclesgroupscve.size();i++)
-                        {
-                            cveofgroup=Integer.parseInt(dataofvehiclesgroupscve.get(i));
-
-                        }
-                        getGroupsVehicles();
-                    }*/
-
                     if (groups != null && groups.size() > 0) {
                         RealmList groupRealmList = new RealmList();
                         groupRealmList.addAll(groups);

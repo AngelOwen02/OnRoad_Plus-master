@@ -5,8 +5,8 @@ import io.realm.RealmObject;
 public class UnitGroup extends RealmObject {
 
     private int cve_vehicle;
-    private double latitude;
-    private double longitude;
+    private Double latitude = null;
+    private Double longitude = null;
     private String vehicle_image;
     private String vehicle_name;
     private int vehicle_switch;
@@ -33,11 +33,13 @@ public class UnitGroup extends RealmObject {
     }
 
     public double getLatitude() {
-        return latitude;
+        return latitude != null ? latitude : 0.0;
+        //return latitude;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude != null ? latitude : 0.0;
+        //this.latitude = latitude;
     }
 
     public double getLongitude() {
