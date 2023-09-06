@@ -107,9 +107,11 @@ public class UnitDB {
         Realm realm = Realm.getDefaultInstance();
         realm.beginTransaction();
         Unit unit = realm.where(Unit.class).equalTo("vehicleName", vehicleName).findFirst();
-        unit.setVehicleStatus(isChecked);
-        realm.copyToRealm(unit);
-        realm.commitTransaction();
+        if (unit !=null) {
+            unit.setVehicleStatus(isChecked);
+            realm.copyToRealm(unit);
+            realm.commitTransaction();
+        }
     }
 
     public static boolean todasneg() {

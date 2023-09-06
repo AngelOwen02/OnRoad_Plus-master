@@ -36,8 +36,8 @@ public class Unit extends RealmObject {
     private String timeTravel;
     @SerializedName("time_elapsed")
     private String timeElapsed;
-    private double latitude;
-    private double longitude;
+    private Double latitude = null;
+    private Double longitude = null;
     private double mileage;
     @SerializedName("km_travel")
     private double kmTravel;
