@@ -28,6 +28,7 @@ public class UnitDB {
         unitList.add(unit);
         realm.copyToRealm(unitList);
         realm.commitTransaction();
+        realm.close();
     }
 
     public static List<Unit> getUnitList() {
@@ -92,6 +93,7 @@ public class UnitDB {
             units.setDesc_layer(desc_layer);
         }
         realm.commitTransaction();
+        realm.close();
     }
 
     public static void deleteDB() {
@@ -100,17 +102,19 @@ public class UnitDB {
         RealmResults<Unit> unitRealmResults = realm.where(Unit.class).findAll();
         unitRealmResults.deleteAllFromRealm();
         realm.commitTransaction();
+        realm.close();
     }
 
 
     public static void updateCheckedStatus(String vehicleName, boolean isChecked) {
-        Realm realm = Realm.getDefaultInstance();
-        realm.beginTransaction();
-        Unit unit = realm.where(Unit.class).equalTo("vehicleName", vehicleName).findFirst();
-        if (unit !=null) {
+        if (vehicleName != null) {
+            Realm realm = Realm.getDefaultInstance();
+            realm.beginTransaction();
+            Unit unit = realm.where(Unit.class).equalTo("vehicleName", vehicleName).findFirst();
             unit.setVehicleStatus(isChecked);
             realm.copyToRealm(unit);
             realm.commitTransaction();
+            realm.close();
         }
     }
 
@@ -132,7 +136,7 @@ public class UnitDB {
         Unit unit = realm.where(Unit.class).equalTo("id", id).findFirst();
         unit.setVehicleName(name);
         realm.commitTransaction();
-
+        realm.close();
     }
 
     public static void updateSendTime(int id, String name) {
@@ -141,6 +145,7 @@ public class UnitDB {
         Unit unit = realm.where(Unit.class).equalTo("id", id).findFirst();
         unit.setSendTime(name);
         realm.commitTransaction();
+        realm.close();
     }
 
 
@@ -167,5 +172,6 @@ public class UnitDB {
         unitData.setCurrentSpeed(unit.getCurrentSpeed());
         unitData.setMaxSpeed(unit.getMaxSpeed());*/
         realm.commitTransaction();
+        realm.close();
     }
 }

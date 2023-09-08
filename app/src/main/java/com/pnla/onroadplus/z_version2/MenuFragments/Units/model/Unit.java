@@ -10,7 +10,7 @@ public class Unit extends RealmObject {
 
     @PrimaryKey
     private int id;
-    private boolean vehicleStatus;
+    private Boolean vehicleStatus = false;
     @SerializedName("cve_vehicle")
     private int cveVehicle;
     @SerializedName("vehicle_switch")
@@ -54,9 +54,9 @@ public class Unit extends RealmObject {
 
     }
 
-    public Unit(boolean vehicleStatus, int cveVehicle, int vehicleSwitch, String vehicleName, String vehicleImage, String sendTime, String descBrand,
+    public Unit(Boolean vehicleStatus, int cveVehicle, int vehicleSwitch, String vehicleName, String vehicleImage, String sendTime, String descBrand,
                 String descModel, String vehicleYear, String vehicleVin, String vehiclePlate, String georeference, String timeTravel, String timeElapsed,
-                double latitude, double longitude, double mileage, double kmTravel, double currentSpeed, double maxSpeed, String desc_layer,String driver) {
+                Double latitude, Double longitude, double mileage, double kmTravel, double currentSpeed, double maxSpeed, String desc_layer,String driver) {
         this.id = BaseRealmApplication.UNIT_ID.incrementAndGet();
         this.vehicleStatus = vehicleStatus;
         this.cveVehicle = cveVehicle;
@@ -87,12 +87,12 @@ public class Unit extends RealmObject {
         return id;
     }
 
-    public boolean isVehicleStatus() {
-        return vehicleStatus;
+    public Boolean isVehicleStatus() {
+        return vehicleStatus != null ? vehicleStatus : false;
     }
 
-    public void setVehicleStatus(boolean vehicleStatus) {
-        this.vehicleStatus = vehicleStatus;
+    public void setVehicleStatus(Boolean vehicleStatus) {
+        this.vehicleStatus = vehicleStatus != null ? this.vehicleStatus : false;
     }
 
     public int getCveVehicle() {
@@ -200,12 +200,12 @@ public class Unit extends RealmObject {
         this.timeElapsed = timeElapsed;
     }
 
-    public double getLatitude() {
-        return latitude;
+    public Double getLatitude() {
+        return latitude != null ? latitude : 0.0;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude != null ? latitude : 0.0;
     }
 
     public double getLongitude() {

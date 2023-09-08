@@ -66,9 +66,10 @@ public class UnitTrackingAdapter extends RecyclerView.Adapter<UnitTrackingAdapte
             holder.unitSwicth.setChecked(true);
             UnitDB.updateCheckedStatus(vehicle.getVehicleName(),true);
         } else {
-            holder.unitSwicth.setChecked(false);
-            UnitDB.updateCheckedStatus(vehicle.getVehicleName(),false);
-
+            if (holder.unitSwicth!=null) {
+                holder.unitSwicth.setChecked(false);
+                UnitDB.updateCheckedStatus(vehicle.getVehicleName(),false);
+            }
         }
 
 

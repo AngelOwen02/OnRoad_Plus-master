@@ -13,6 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 
 /**import com.dynatrace.android.agent.DTXAction;
 import com.dynatrace.android.agent.Dynatrace;*/
+import com.google.android.gms.common.util.ArrayUtils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.pnla.onroadplus.BuildConfig;
@@ -25,6 +26,7 @@ import com.pnla.onroadplus.z_version2.Containers.ModelVersion.VersionService;
 import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.AuditTrail;
 import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.responseAuditTrail;
 import com.pnla.onroadplus.z_version2.MenuFragments.Login.model.setAuditTrail;
+import com.pnla.onroadplus.z_version2.MenuFragments.Notifications.utils.clases.Groups;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.adapter.UnitTrackingAdapter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.FinalUnitDB;
@@ -44,6 +46,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.UnitResponse;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.UnitService;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.georeference;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.Unit;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.UnitGroup;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.presenter.UnitsPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitsV3.model.unitV3.dataRequest;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitsV3.model.unitV3.dataresponseUnitsV3;
@@ -742,19 +745,67 @@ public class UnitsInteractorImpl implements UnitsInteractor {
 
                     for(int i=0;i <groups.size();i++) {
 
+                        String borra;
+                        int valorGrupo;
+
                         dataN= String.valueOf( groups.get(i).getVehicle_group());
                         dataÑ=String.valueOf( groups.get(i).getCve_vehicle_group());
+                        valorGrupo = groups.get(i).getVehicles().size();
+                        Log.e("valorGrupo: ", String.valueOf(valorGrupo));
+
+
+
                         //dataM.add(String.valueOf(unitList.get(i).getVehicleName()));
                         dataofvehiclesgroups.add(dataN);
                         dataofvehiclesgroupscve.add(dataÑ);
                     }
 
-                    if (groups != null && groups.size() > 0) {
+                    RealmList<UnitGroup> vehicle;
+                    List<Group> gf = new ArrayList<>();
+                    gf.clear();
+                    for (Group gt: groups){
+                        RealmList<UnitGroup> vehicles = new RealmList<UnitGroup>();
+                        for(int j=0;j < gt.getVehicles().size(); j++) {
+
+
+
+                            vehicle = gt.getVehicles();
+                            Log.e("valorGrupo: ", gt.getVehicles().get(j).getVehicle_name());
+                            //Log.e("valorGrupo: ", vehicle);
+
+                            if (vehicle.get(j).getLatitude() == 0.0 && vehicle.get(j).getLatitude() != null) {
+                                //Log.e("valorGrupo: ", vehicle);
+                                //groups.remove(groups);
+
+                            } else {
+                                vehicles.add(vehicle.get(j));
+                                Log.e("valorGrupo: ", String.valueOf(vehicles));
+                            }
+                        }
+
+                        gt.setVehicles(vehicles);
+                        gf.add(gt);
+                        Log.e("valorGrupo: ", gf.toString());
+                    }
+                    groups.clear();
+                    groups = gf;
+                    /*List<Unit> unitList = data.getUnitList();
+                    for (Unit unit: unitList){
+                        if (unit.getLatitude() == 0 && unit.getLongitude() == 0){
+
+                        }else {
+
+                            //unitRealmList.add(unit);
+                        }
+                    }*/
+
+
+                    if (gf != null && gf.size() > 0) {
                         RealmList groupRealmList = new RealmList();
-                        groupRealmList.addAll(groups);
+                        groupRealmList.addAll(gf);
                         if (groupDBIsEmpty()) {
-                            changeGroupStatusToFalse(groups);
-                            createGroupListDB(groups);
+                            changeGroupStatusToFalse(gf);
+                            createGroupListDB(gf);
                         }
 
                     } else {

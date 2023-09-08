@@ -236,6 +236,7 @@ public class UnitTrackingInteractorImpl implements UnitTrackingInteractor {
                         for (int i=0;i<groupsdataInteger.size();i++)                                   /** */
                         {
                             UnitTrackingAdapter.integerList.remove(UnitTrackingInteractorImpl.groupsdataInteger.get(i));
+                            Log.e("vehiculo: ", "" + groupvehicleInsideData.get(i).getVehicle_name());
                            UnitDB.updateCheckedStatus(groupvehicleInsideData.get(i).getVehicle_name(),false);
                             if(namesvehicles.contains(groupvehicleInsideData.get(i).getVehicle_name()))
                             {

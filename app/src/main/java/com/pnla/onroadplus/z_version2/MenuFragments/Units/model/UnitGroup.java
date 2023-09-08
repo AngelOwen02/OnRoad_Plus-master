@@ -10,11 +10,11 @@ public class UnitGroup extends RealmObject {
     private String vehicle_image;
     private String vehicle_name;
     private int vehicle_switch;
-    private boolean vehicle_status;
+    private Boolean vehicle_status = false;
 
     public UnitGroup(){}
 
-    public UnitGroup(int cve_vehicle, double latitude, double longitude, String vehicle_image, String vehicle_name, int vehicle_switch, boolean vehicle_status) {
+    public UnitGroup(int cve_vehicle, double latitude, double longitude, String vehicle_image, String vehicle_name, int vehicle_switch, Boolean vehicle_status) {
         this.cve_vehicle = cve_vehicle;
         this.latitude = latitude;
         this.longitude = longitude;
@@ -32,7 +32,7 @@ public class UnitGroup extends RealmObject {
         this.cve_vehicle = cve_vehicle;
     }
 
-    public double getLatitude() {
+    public Double getLatitude() {
         return latitude != null ? latitude : 0.0;
         //return latitude;
     }
@@ -74,11 +74,11 @@ public class UnitGroup extends RealmObject {
         this.vehicle_switch = vehicle_switch;
     }
 
-    public boolean isVehicle_status() {
+    public Boolean isVehicle_status() {
         return vehicle_status;
     }
 
-    public void setVehicle_status(boolean vehicle_status) {
+    public void setVehicle_status(Boolean vehicle_status) {
         this.vehicle_status = vehicle_status;
     }
 }
