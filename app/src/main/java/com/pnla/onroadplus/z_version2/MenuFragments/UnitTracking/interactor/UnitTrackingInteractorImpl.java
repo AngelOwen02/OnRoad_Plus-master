@@ -199,6 +199,7 @@ public class UnitTrackingInteractorImpl implements UnitTrackingInteractor {
                                 if(!gruposdata.isEmpty()) {
                                     gruposdata.add(String.valueOf(groupvehicleInsideData.get(i).getCve_vehicle()));
                                     //  Log.e("dothetogles",""+i);
+                                    
                                     groupsdataInteger.add(Integer.parseInt(groupvehicleInsideData.get(i).getCve_vehicle().trim()));
                                     UnitTrackingAdapter.integerList.add(Integer.parseInt(groupvehicleInsideData.get(i).getCve_vehicle().trim()));
                                     UnitDB.updateCheckedStatus(groupvehicleInsideData.get(i).getVehicle_name(), true);
