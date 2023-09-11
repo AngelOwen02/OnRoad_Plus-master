@@ -5,12 +5,15 @@ public class GroupvehicleInsideData {
 
     private String cve_vehicle;
     private String vehicle_name;
-
-    public GroupvehicleInsideData (String cve_vehicle,String vehicle_name)
+    private Double latitude=null;
+    private Double longitude=null;
+    public GroupvehicleInsideData (String cve_vehicle,String vehicle_name,Double latitude,Double longitude)
     {
         super();
         this.cve_vehicle=cve_vehicle;
         this.vehicle_name=vehicle_name;
+        this.latitude=latitude;
+        this.longitude=longitude;
     }
 
 
@@ -31,5 +34,19 @@ public class GroupvehicleInsideData {
         this.vehicle_name = vehicle_name;
     }
 
+    public Double getLatitude() {
+        return latitude != null ? latitude : 0.0;
+    }
 
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude != null ? latitude : 0.0;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
+    }
 }

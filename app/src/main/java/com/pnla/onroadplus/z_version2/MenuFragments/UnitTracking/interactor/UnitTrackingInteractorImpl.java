@@ -193,16 +193,18 @@ public class UnitTrackingInteractorImpl implements UnitTrackingInteractor {
                                 {
 
                                 }else
-                                {
-                                    UnitTrackingAdapter.integerList.add(Integer.valueOf(  groupvehicleInsideData.get(i).getCve_vehicle()));
+                                {   if(groupvehicleInsideData.get(i).getLatitude()!=null&&groupvehicleInsideData.get(i).getLatitude()!=0.0) {
+                                    UnitTrackingAdapter.integerList.add(Integer.valueOf(groupvehicleInsideData.get(i).getCve_vehicle()));
+                                    }
                                 }
                                 if(!gruposdata.isEmpty()) {
-                                    gruposdata.add(String.valueOf(groupvehicleInsideData.get(i).getCve_vehicle()));
-                                    //  Log.e("dothetogles",""+i);
-                                    
-                                    groupsdataInteger.add(Integer.parseInt(groupvehicleInsideData.get(i).getCve_vehicle().trim()));
-                                    UnitTrackingAdapter.integerList.add(Integer.parseInt(groupvehicleInsideData.get(i).getCve_vehicle().trim()));
-                                    UnitDB.updateCheckedStatus(groupvehicleInsideData.get(i).getVehicle_name(), true);
+                                    if(groupvehicleInsideData.get(i).getLatitude()!=null&&groupvehicleInsideData.get(i).getLatitude()!=0.0) {
+                                        gruposdata.add(String.valueOf(groupvehicleInsideData.get(i).getCve_vehicle()));
+                                        //  Log.e("dothetogles",""+i);
+                                        groupsdataInteger.add(Integer.parseInt(groupvehicleInsideData.get(i).getCve_vehicle().trim()));
+                                        UnitTrackingAdapter.integerList.add(Integer.parseInt(groupvehicleInsideData.get(i).getCve_vehicle().trim()));
+                                        UnitDB.updateCheckedStatus(groupvehicleInsideData.get(i).getVehicle_name(), true);
+                                    }
                                 }
                             }
                         }
@@ -226,8 +228,10 @@ public class UnitTrackingInteractorImpl implements UnitTrackingInteractor {
 
                             }
 
+                            if(groupvehicleInsideData.get(i).getLatitude()!=null&&groupvehicleInsideData.get(i).getLatitude()!=0.0) {
                                 groupsdataInteger.add(Integer.parseInt(groupvehicleInsideData.get(i).getCve_vehicle().trim()));   /**esto hace el recuest de los items en false*/
                                 namesvehicles.add(groupvehicleInsideData.get(i).getVehicle_name());
+                            }
 
 
                          //   UnitTrackingAdapter.integerList.add(Integer.parseInt(groupvehicleInsideData.get(i).getCve_vehicle().trim()));

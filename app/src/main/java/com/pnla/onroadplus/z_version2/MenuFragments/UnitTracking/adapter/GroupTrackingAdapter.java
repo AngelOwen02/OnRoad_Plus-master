@@ -19,11 +19,14 @@ import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.interactor.UnitTrackingInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.UnitTracking.presenter.UnitTrackingPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Group.GroupDB;
+import com.pnla.onroadplus.z_version2.MenuFragments.Units.Database.Unit.UnitDB;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.data.Group;
 import com.pnla.onroadplus.z_version2.MenuFragments.Units.model.UnitGroup;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import io.realm.RealmList;
 
 public class GroupTrackingAdapter extends RecyclerView.Adapter<GroupTrackingAdapter.ViewHolder> {
 
@@ -86,8 +89,19 @@ public class GroupTrackingAdapter extends RecyclerView.Adapter<GroupTrackingAdap
 
                    GroupDB.updateCheckedStatus(vehicle.getCve_vehicle_group(),true);                 /**     esto deberia corresponder a la base que queda en true */
                  //   Log.e("dothetogles","listapor - "+ UnitDB.getUnitListActive());
-
                  //   Log.e("dothetogles",": "+  vehicle.getVehicles().toString());
+                 /*   for(Group gf: groupTrackings){
+                        RealmList<UnitGroup> unitsG = new RealmList<>();
+                        unitsG.clear();
+                        unitsG.addAll(gf.getVehicles());
+
+                        for(UnitGroup uf:unitsG){
+                            if(uf.getLatitude()!=null&&uf.getLatitude()!=0.0)
+                            {
+                                UnitDB.updateCheckedStatus(uf.getVehicle_name(),true);
+                            }
+                        }
+                    }*/
                     if (groupTrackings.size() == togglesList1.size()){
 
 

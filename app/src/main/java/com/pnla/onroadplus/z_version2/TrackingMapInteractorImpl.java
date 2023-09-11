@@ -46,7 +46,9 @@ import com.pnla.onroadplus.z_version2.retrofit.RetrofitValidationsV2;
 import com.pranavpandey.android.dynamic.utils.DynamicUnitUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 import io.realm.RealmList;
@@ -106,7 +108,7 @@ public class TrackingMapInteractorImpl implements TrackingMapInteractor {
        } else {
             Log.e("groupsitems"," request units/groups ");
             clusterTrackingBuilder(activeUnits);
-            clusterTrackingBuilder(activeGroups);
+            //clusterTrackingBuilder(activeGroups);
         }
     }
 
@@ -128,8 +130,24 @@ public class TrackingMapInteractorImpl implements TrackingMapInteractor {
         else {
         Log.e("requestdeunitsagain","dab 1 else"+allUnitsList.toString());
         }
+        if(requestType==2) {
+            Set<Integer> uniqueSet = new HashSet<>(UnitTrackingAdapter.integerList);
+            List<Integer> uniqueList = new ArrayList<>(uniqueSet);
+
+            if (uniqueList != null && !uniqueList.isEmpty() && allUnitsList != null && !allUnitsList.isEmpty()) {
+                for (Unit unitrue : allUnitsList) {
+                    if (uniqueList.contains(unitrue.getCveVehicle())) {
+                        UnitDB.updateCheckedStatus(unitrue.getVehicleName(), true);
+                    }
+                }
+            }
+        }
         List<Unit> activeUnitsList = UnitDB.getUnitListActive();
         List<Group> activeGroupslist = GroupDB.getActiveGroupList();
+        if(activeUnitsList.isEmpty())
+        {
+            requestType=1;
+        }
        // Log.e("requestdeunitsagain","cluster:"+ UnitDB.getUnitList()+ allUnitsLista );
         switch (requestType) {
             case 1: // All Units
