@@ -38,6 +38,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.vie
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.historicChecklist;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.interactor.DialogsInteractor;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.interactor.DialogsInteractorImpl;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.view.DialogVehiclesinGroups;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
 import com.pnla.onroadplus.z_version2.fragments.contactV2.view.FragmentContactV2;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
@@ -129,23 +130,11 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
         vehicle_checklist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(getContext(), "Si funciona", Toast.LENGTH_SHORT).show();
                 FragmentManager fm = getFragmentManager();
-                DialogsViewImpl externalGPSDialog = new DialogsViewImpl();
-
-                externalGPSDialog.show(getActivity().getSupportFragmentManager(), DialogsViewImpl.TAG);
+                DialogVehiclesinGroups externalGPSDialog = new DialogVehiclesinGroups();
+                externalGPSDialog.show(getActivity().getSupportFragmentManager(), DialogVehiclesinGroups.TAG);
                 fm.executePendingTransactions();
 
-
-                //traficDialog trafigAlert = new traficDialog();
-                //trafigAlert.show(getActivity().getSupportFragmentManager(), traficDialog.TAG);
-                //fm.executePendingTransactions();
-                externalGPSDialog.getDialog().setOnDismissListener(new DialogInterface.OnDismissListener() {
-                    @Override
-                    public void onDismiss(DialogInterface dialog) {
-
-                    }
-                });
             }
         });
 
