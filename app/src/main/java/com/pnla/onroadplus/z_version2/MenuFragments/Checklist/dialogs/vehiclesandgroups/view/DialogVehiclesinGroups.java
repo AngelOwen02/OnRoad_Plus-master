@@ -5,7 +5,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +25,9 @@ import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.model.DialogsData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.adapter.adapterVehiclesinGroups;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.model.DataGroups;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.model.VehicleGroupv2;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.presenter.presenterVehicleInGroups;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.presenter.presenterVehicleInGroupsImpl;
 
 import java.util.ArrayList;
@@ -34,9 +40,12 @@ public class DialogVehiclesinGroups extends DialogFragment implements View.OnCli
     private RecyclerView rv;
     private adapterVehiclesinGroups adapter;
     private List<DialogsData> dialogData;
+    private DataGroups data;
     private presenterVehicleInGroupsImpl presenter;
     private CardView searchViewContainer;
     private SearchView searchViewa;
+    private Spinner spinnerGroups;
+    private List<VehicleGroupv2> vehicleGroupsList=new ArrayList<>();
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +65,9 @@ public class DialogVehiclesinGroups extends DialogFragment implements View.OnCli
     private void initDialog(View view) {
 
         rv = view.findViewById(R.id.recycler_checkList_dialog);
-     //   presenter = new DialogsPresenterImpl(this, getContext());
-        //
-     //   presenter.requestVehicles();
-
+        presenter = new presenterVehicleInGroups(this, getContext());
+        presenter.requestGroups();
+        spinnerGroups=view.findViewById(R.id.spinnerGroups);
         externalconstraint = view.findViewById(R.id.externalconstraint);
         externalconstraint.setOnClickListener(this);
 
@@ -158,8 +166,40 @@ public class DialogVehiclesinGroups extends DialogFragment implements View.OnCli
     }
 
     @Override
-    public void setVehiclesGroups() {
+    public void setVehiclesGroups(DataGroups mdata) {
+        this.data=mdata;
+        if(data!=null){
+            vehicleGroupsList.clear();
+            vehicleGroupsList= data.getVehicleGroups();
+            List<String> descVehicleGroups = new ArrayList<>();
+            descVehicleGroups.clear();
+            for (VehicleGroupv2 group : vehicleGroupsList) {
+                descVehicleGroups.add(group.getDescVehicleGroup());
+            }
+            String selected="";
+            spinnerGroups.setPrompt("Pick One");
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_dropdown_item,descVehicleGroups);
+          //  spinnerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, arrayAdapter);
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            spinnerGroups.setAdapter(adapter);
+            spinnerGroups.setSelection(0, false);
+            spinnerGroups.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
+                @Override
+                public void onItemSelected(AdapterView<?> arg0, View arg1,
+                                           int arg2, long arg3) {
+
+                    selected = spinnerGroups.getSelectedItem().toString();
+                    spinnerGroups.getTooltipText(selected);
+                    spinnerGroups.setSelection(0);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+        }
     }
 
     @Override

@@ -8,6 +8,7 @@ public class VehicleGroupv2 {
     @SerializedName("cve_vehicle_group")
     private Integer cveVehicleGroup;
     @SerializedName("vehicle_group")
+
     private String vehicleGroup;
     @SerializedName("desc_vehicle_group")
     private String descVehicleGroup;
