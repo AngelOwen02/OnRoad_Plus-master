@@ -15,7 +15,7 @@ public class menuViewImpl extends AppCompatActivity {
     public static float a,b,c,d,e,f;
     private FragmentManager manager;
     private FragmentTransaction transaction;
-    public static boolean selectedVehicle = false;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +29,7 @@ public class menuViewImpl extends AppCompatActivity {
         showFragmentNavigationButtons();
         showFragmentDashboard();
     }
-    public static void clearStaticValues(){
-        selectedVehicle=false;
-    }
+
     private void showFragmentDashboard() {
         manager = getSupportFragmentManager();
         transaction = manager.beginTransaction();

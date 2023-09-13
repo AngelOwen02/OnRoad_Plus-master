@@ -750,9 +750,10 @@ public class UnitsInteractorImpl implements UnitsInteractor {
 
                         dataN= String.valueOf( groups.get(i).getVehicle_group());
                         dataÑ=String.valueOf( groups.get(i).getCve_vehicle_group());
-                        valorGrupo = groups.get(i).getVehicles().size();
-                        Log.e("valorGrupo: ", String.valueOf(valorGrupo));
-
+                        if(groups.get(i).getVehicles()!=null&&!groups.get(i).getVehicles().isEmpty()) {
+                            valorGrupo = groups.get(i).getVehicles().size();
+                            Log.e("valorGrupo: ", String.valueOf(valorGrupo));
+                        }
 
 
                         //dataM.add(String.valueOf(unitList.get(i).getVehicleName()));
@@ -765,27 +766,28 @@ public class UnitsInteractorImpl implements UnitsInteractor {
                     gf.clear();
                     for (Group gt: groups){
                         RealmList<UnitGroup> vehicles = new RealmList<UnitGroup>();
-                        for(int j=0;j < gt.getVehicles().size(); j++) {
+                        if(gt.getVehicles()!=null&&!gt.getVehicles().isEmpty()) {
+                            for (int j = 0; j < gt.getVehicles().size(); j++) {
 
 
-
-                            vehicle = gt.getVehicles();
-                            Log.e("valorGrupo: ", gt.getVehicles().get(j).getVehicle_name());
-                            //Log.e("valorGrupo: ", vehicle);
-
-                            if (vehicle.get(j).getLatitude() == 0.0 && vehicle.get(j).getLatitude() != null) {
+                                vehicle = gt.getVehicles();
+                                Log.e("valorGrupo: ", gt.getVehicles().get(j).getVehicle_name());
                                 //Log.e("valorGrupo: ", vehicle);
-                                //groups.remove(groups);
 
-                            } else {
-                                vehicles.add(vehicle.get(j));
-                                Log.e("valorGrupo: ", String.valueOf(vehicles));
+                                if (vehicle.get(j).getLatitude() == 0.0 && vehicle.get(j).getLatitude() != null) {
+                                    //Log.e("valorGrupo: ", vehicle);
+                                    //groups.remove(groups);
+
+                                } else {
+                                    vehicles.add(vehicle.get(j));
+                                    Log.e("valorGrupo: ", String.valueOf(vehicles));
+                                }
                             }
-                        }
 
-                        gt.setVehicles(vehicles);
-                        gf.add(gt);
-                        Log.e("valorGrupo: ", gf.toString());
+                            gt.setVehicles(vehicles);
+                            gf.add(gt);
+                            Log.e("valorGrupo: ", gf.toString());
+                        }
                     }
                     groups.clear();
                     groups = gf;

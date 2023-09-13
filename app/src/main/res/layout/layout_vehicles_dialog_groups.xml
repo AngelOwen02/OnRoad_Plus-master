@@ -94,13 +94,18 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_checkList_dialog"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+
+            android:layout_marginBottom="10dp"
             android:clipToPadding="false"
             android:paddingBottom="60dp"
-
             app:layout_constraintBottom_toTopOf="@+id/constrain_bottons_dialog"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cheklist_search_view_container_us" />
 
 
@@ -124,6 +129,7 @@
                     android:id="@+id/externalconstraint"
                     android:layout_width="match_parent"
                     android:layout_height="53dp"
+                    android:backgroundTint="#FFFFFF"
                     android:text="Cancelar" />
 
             </LinearLayout>
@@ -147,6 +153,7 @@
                     android:id="@+id/btn_accept_dialog"
                     android:layout_width="match_parent"
                     android:layout_height="53dp"
+                    android:backgroundTint="#FFFFFF"
                     android:text="Aceptar" />
             </LinearLayout>
 

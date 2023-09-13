@@ -19,6 +19,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Model.checkListdat
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListViewImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.geocercas.adapter.adapterGeocercas;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
+import com.pnla.onroadplus.z_version2.SplashScreenActivity;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 import java.util.ArrayList;
@@ -57,7 +58,7 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
         holder.buttonquestions.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View v){
-                if (menuViewImpl.selectedVehicle == false) {
+                if (SplashScreenActivity.selectedVehicle == false) {
                     Toast.makeText(context, "Debes seleccionar un vehículo ", Toast.LENGTH_SHORT).show();
                     //  myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position);
                 } else {
@@ -82,7 +83,7 @@ public class checkListAdapter1 extends RecyclerView.Adapter<checkListAdapter1.Vi
         if(vehicleName!=null) {
             //Toast.makeText(context, "Vehiculo guardado: " + vehicleName, Toast.LENGTH_SHORT).show();
             //myview.goquestionaryFragment(data.get(position).getCveTripMgmSection(), position,data.get(position).isAprobador());
-            menuViewImpl.selectedVehicle = true;
+            SplashScreenActivity.selectedVehicle = true;
             //SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = preferences.edit();
             editor.putString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, vehicleName);

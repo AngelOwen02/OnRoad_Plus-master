@@ -23,6 +23,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.i
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.view.*;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.model.*;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
+import com.pnla.onroadplus.z_version2.SplashScreenActivity;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 import androidx.annotation.NonNull;
@@ -57,7 +58,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
         //Nombre del Vehiculo
         holder.txtUnitDialog.setText(data.get(position).getVehicleName());
 
-        if(menuViewImpl.selectedVehicle == false) {
+        if(SplashScreenActivity.selectedVehicle == false) {
             holder.checkBoxDialog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                 @Override
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -66,7 +67,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
                         String cveVehicle = data.get(position).getCveVehicle().toString();
                         //Toast.makeText(context, cveVehicle, Toast.LENGTH_SHORT).show();
 
-                        menuViewImpl.selectedVehicle = true;
+                        SplashScreenActivity.selectedVehicle = true;
                         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, data.get(position).getVehicleName().toString());
@@ -83,7 +84,7 @@ public class DialogsAdapter extends RecyclerView.Adapter<DialogsAdapter.ViewHold
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked==true) {
                         Toast.makeText(context, "Vehiculo: "+data.get(position).getVehicleName() +" selecionado", Toast.LENGTH_SHORT).show();
-                        menuViewImpl.selectedVehicle = true;
+                        SplashScreenActivity.selectedVehicle = true;
                         SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, data.get(position).getVehicleName().toString());

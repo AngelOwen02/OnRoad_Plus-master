@@ -232,7 +232,7 @@ public class ProfileViewImpl extends Fragment implements ProfileView, CompoundBu
     @Override
     public void goToLoginScreen() {
      //   UnitDB.deleteDB();        //pending effects to check
-        menuViewImpl.clearStaticValues();
+        SplashScreenActivity.clearStaticValues();
         deleteCache(getContext());
         Intent intent = new Intent(getContext(), SplashScreenActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK| Intent.FLAG_ACTIVITY_CLEAR_TOP);//

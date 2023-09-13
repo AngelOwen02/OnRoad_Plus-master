@@ -14,14 +14,16 @@ public class Vehiclec2 {
     private Double longitude;
     @SerializedName("latitude")
     private Double latitude;
+    private Boolean isChecked=false;
 
-    public Vehiclec2(Integer cveVehicle, String vehicleName, String vehicleImage, Double longitude, Double latitude) {
+    public Vehiclec2(Integer cveVehicle, String vehicleName, String vehicleImage, Double longitude, Double latitude,Boolean isChecked) {
         super();
         this.cveVehicle = cveVehicle;
         this.vehicleName = vehicleName;
         this.vehicleImage = vehicleImage;
         this.longitude = longitude;
         this.latitude = latitude;
+        this.isChecked=isChecked;
     }
 
     public Integer getCveVehicle() {
@@ -64,4 +66,18 @@ public class Vehiclec2 {
         this.latitude = latitude;
     }
 
+    public Boolean getChecked() {
+        if (isChecked == null) {
+            isChecked = false;
+        }
+        return isChecked;
+    }
+
+    public void setChecked(Boolean checked) {
+        if (checked == null) {
+            isChecked = false;
+        } else {
+            isChecked = checked;
+        }
+    }
 }

@@ -1,7 +1,10 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.view;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,15 +31,17 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.m
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.adapter.adapterVehiclesinGroups;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.model.DataGroups;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.model.VehicleGroupv2;
+import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.model.Vehiclec2;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.presenter.presenterVehicleInGroups;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.presenter.presenterVehicleInGroupsImpl;
+import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DialogVehiclesinGroups extends DialogFragment implements View.OnClickListener,dialogViewGroups, DialogInterface.OnDismissListener {
     public static final String TAG = DialogVehiclesinGroups.class.getSimpleName();
-    private Button externalconstraint;
+    private Button externalconstraint,btn_accept_dialog;
     private ConstraintLayout externalconstraint2;
     private RecyclerView rv;
     private adapterVehiclesinGroups adapter;
@@ -46,10 +52,19 @@ public class DialogVehiclesinGroups extends DialogFragment implements View.OnCli
     private SearchView searchViewa;
     private Spinner spinnerGroups;
     private List<VehicleGroupv2> vehicleGroupsList=new ArrayList<>();
+    List<Vehiclec2> mvehicles=new ArrayList<>();
+    private String value=null;
+    private String newVehicle=null;
+    private Integer newCVEVehicle=null;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NO_TITLE, android.R.style.Theme_DeviceDefault_Light_NoActionBar);
+        Bundle args = getArguments();
+        if (args != null) {
+           value = args.getString("nameAsigment");
+            // Use the retrieved value as needed
+        }
     }
 
     @Nullable
@@ -70,7 +85,8 @@ public class DialogVehiclesinGroups extends DialogFragment implements View.OnCli
         spinnerGroups=view.findViewById(R.id.spinnerGroups);
         externalconstraint = view.findViewById(R.id.externalconstraint);
         externalconstraint.setOnClickListener(this);
-
+        btn_accept_dialog= view.findViewById(R.id.btn_accept_dialog);
+        btn_accept_dialog.setOnClickListener(this);
         externalconstraint2 = view.findViewById(R.id.externalconstraint2);
         externalconstraint2.setOnClickListener(this);
 
@@ -85,26 +101,30 @@ public class DialogVehiclesinGroups extends DialogFragment implements View.OnCli
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                List<DialogsData> filterDialogList = filteredDialogList(dialogData, newText);
-                adapter.setFilter(filterDialogList);
+                List<Vehiclec2> filterDialogList = filteredDialogList(mvehicles, newText);
+                if(mvehicles!=null&&!mvehicles.isEmpty()) {
+                    adapter.setFilter(filterDialogList);
+                }else {
+                    Toast.makeText(getContext(), "Este grupo no contiene unidades", Toast.LENGTH_SHORT).show();
+                }
                 return false;
             }
         });
     }
 
-    private void fillAdapter(List<DialogsData> data) {
-        adapter = new adapterVehiclesinGroups(data, this, getContext());
+    private void fillAdapter(List<Vehiclec2>  data,String value) {
+        adapter = new adapterVehiclesinGroups(data,value, this, getContext());
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(adapter);
     }
 
-    private List<DialogsData> filteredDialogList(List<DialogsData> data, String text) {
+    private List<Vehiclec2> filteredDialogList(List<Vehiclec2> data, String text) {
 
-        List<DialogsData> filteredList = new ArrayList<>();
+        List<Vehiclec2> filteredList = new ArrayList<>();
         text = text.toLowerCase();
         if(data!=null) {
-            for(DialogsData vehicle : data) {
+            for(Vehiclec2 vehicle : data) {
                 String dialogsName = vehicle.getVehicleName().toLowerCase();
                 if(dialogsName.contains(text)) {
                     filteredList.add(vehicle);
@@ -114,29 +134,18 @@ public class DialogVehiclesinGroups extends DialogFragment implements View.OnCli
         return filteredList;
     }
 
- /*   @Override
-    public void setVehicles(List<DialogsData> data) {
-        this.dialogData = data;
-        if(dialogData!=null){
-
-            fillAdapter(dialogData);
-        }
-    }*/
-
- /*   @Override
-    public void showDialog() {
-
-    }
-
-    @Override
-    public void hideProgressDialog() {
-
-    }*/
 
     public void closeDialog() {
         onDismiss();
         this.dismiss();
 
+    }
+
+    @Override
+    public void newValue(Vehiclec2 vehiclec2) {
+        this.newVehicle=vehiclec2.getVehicleName();
+        this.newCVEVehicle=vehiclec2.getCveVehicle();
+        adapter.mnotify(mvehicles,newVehicle);
     }
 
     public void onDismiss() {
@@ -150,9 +159,15 @@ public class DialogVehiclesinGroups extends DialogFragment implements View.OnCli
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-//            case R.id.externalconstraint2:
-//                closeDialog();
-//                break;
+            case R.id.btn_accept_dialog:
+                SharedPreferences preferences = getContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, newVehicle);
+                editor.putString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, String.valueOf(newCVEVehicle));
+                editor.commit();
+                value=newVehicle;
+                closeDialog();
+                break;
 
             case R.id.externalconstraint:
                 closeDialog();
@@ -174,24 +189,43 @@ public class DialogVehiclesinGroups extends DialogFragment implements View.OnCli
             List<String> descVehicleGroups = new ArrayList<>();
             descVehicleGroups.clear();
             for (VehicleGroupv2 group : vehicleGroupsList) {
-                descVehicleGroups.add(group.getDescVehicleGroup());
+                    descVehicleGroups.add(group.getVehicleGroup());
             }
             String selected="";
-            spinnerGroups.setPrompt("Pick One");
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_dropdown_item,descVehicleGroups);
-          //  spinnerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, arrayAdapter);
+            //  spinnerGroups.setPrompt("Pick One");
+            descVehicleGroups.add(0, "Selecciona una opción");
+            ArrayAdapter<String> adapter = new ArrayAdapter<String>(getContext(),android.R.layout.simple_spinner_item,descVehicleGroups);
+            //  spinnerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, arrayAdapter);
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
             spinnerGroups.setAdapter(adapter);
             spinnerGroups.setSelection(0, false);
             spinnerGroups.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                 @Override
-                public void onItemSelected(AdapterView<?> arg0, View arg1,
-                                           int arg2, long arg3) {
-
-                    selected = spinnerGroups.getSelectedItem().toString();
-                    spinnerGroups.getTooltipText(selected);
-                    spinnerGroups.setSelection(0);
+                public void onItemSelected(AdapterView<?> adapterView, View view,int i, long l) {
+                    String choice=adapterView.getItemAtPosition(i).toString();
+                    if(i!=0) {
+                        Log.e("spinnerPosition", "item: " + i);
+                        List<Vehiclec2> vehicles = new ArrayList<>();
+                        vehicles.clear();
+                        vehicles.addAll(data.getVehicleGroups().get(i-1).getVehicles());//se usa i-1 ya que el arreglo esta desfazado en 1 debido a que se agrega para que contenga texto
+                        if(vehicles!=null&&!vehicles.isEmpty()) {
+                            mvehicles=vehicles;
+                            for (Vehiclec2 vf : vehicles) {
+                                Log.e("spinnerPosition", "item: " + vf.getVehicleName());
+                            }
+                            fillAdapter(vehicles,value);
+                        }else {
+                            List<Vehiclec2> vehicles2 = new ArrayList<>();
+                            vehicles2.clear();
+                            fillAdapter(vehicles2,value);
+                            Toast.makeText(getContext(), "Este grupo no contiene unidades", Toast.LENGTH_SHORT).show();
+                        }
+                    }else {
+                        List<Vehiclec2> vehicles = new ArrayList<>();
+                        vehicles.clear();
+                        fillAdapter(vehicles,value);
+                    }
                 }
 
                 @Override

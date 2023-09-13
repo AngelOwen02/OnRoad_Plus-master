@@ -2,6 +2,7 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesa
 
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleGroupv2 {
@@ -48,11 +49,18 @@ public class VehicleGroupv2 {
     }
 
     public List<Vehiclec2> getVehicles() {
+        if (vehicles == null) {
+            vehicles = new ArrayList<>();
+        }
         return vehicles;
     }
 
     public void setVehicles(List<Vehiclec2> vehicles) {
-        this.vehicles = vehicles;
+        if (vehicles == null) {
+            this.vehicles = new ArrayList<>();
+        } else {
+            this.vehicles = vehicles;
+        }
     }
 
 }

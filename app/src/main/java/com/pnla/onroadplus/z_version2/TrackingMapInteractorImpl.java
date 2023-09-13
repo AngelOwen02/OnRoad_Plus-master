@@ -99,7 +99,7 @@ public class TrackingMapInteractorImpl implements TrackingMapInteractor {
         boolean isFirstLogin = prefs.getBoolean("isFirst", true);
         Log.e("First Login?", String.valueOf(isFirstLogin));
 
-        if (activeUnitsList.isEmpty() && activeGroupslist.isEmpty()) {
+       if (activeUnitsList.isEmpty() && activeGroupslist.isEmpty()) {
             clusterTrackingBuilder(allUnits);
             Log.e("groupsitems"," request units ");
 
@@ -120,10 +120,11 @@ public class TrackingMapInteractorImpl implements TrackingMapInteractor {
 
 
     private void clusterTrackingBuilder(int requestType) {
+        //TODO GROUPS
         if(UnitDB.getUnitList().isEmpty()==false)
             {
            allUnitsList=UnitDB.getUnitList();
-                Log.e("requestdeunitsagain","dab 1 if"+allUnitsLista.toString());
+       //         Log.e("requestdeunitsagain","dab 1 if"+allUnitsLista.toString());
             }
         else {
         Log.e("requestdeunitsagain","dab 1 else"+allUnitsList.toString());

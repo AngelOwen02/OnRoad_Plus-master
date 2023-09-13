@@ -28,7 +28,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     private static final int MY_PERMISSIONS_REQUEST_LOCATION = 1001;
     /**ESTE ES EL SPLASH CORRECTO*/
     public static List<Unit> datapersistance;
-
+    public static boolean selectedVehicle = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +37,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         initSplashScreenActivity();
 
     }
-
+    public static void clearStaticValues(){
+        selectedVehicle=false;
+    }
     private void RequestPermissions() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -62,6 +64,13 @@ public class SplashScreenActivity extends AppCompatActivity {
         //Log.e("checkinguser","splash              "+UnitDB.getUnitList());
         SharedPreferences preferences = getApplicationContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         String status = preferences.getString(GeneralConstantsV2.CLOSE_SESSION_PREFERENCES, null);
+        String vehicleChecklistName=preferences.getString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE,null);
+        String vehicleChecklistCve=preferences.getString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE,null);
+        if(vehicleChecklistName!=null&&vehicleChecklistCve!=null){
+
+        }else {
+            selectedVehicle=true;
+        }
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

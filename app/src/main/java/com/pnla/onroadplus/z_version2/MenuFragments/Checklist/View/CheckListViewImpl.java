@@ -40,6 +40,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.i
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.interactor.DialogsInteractorImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.view.DialogVehiclesinGroups;
 import com.pnla.onroadplus.z_version2.MenuFragments.menuDinamic.view.menuViewImpl;
+import com.pnla.onroadplus.z_version2.SplashScreenActivity;
 import com.pnla.onroadplus.z_version2.fragments.contactV2.view.FragmentContactV2;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.view.*;
@@ -109,7 +110,7 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
         vehicle_checklist = view.findViewById(R.id.ic_vehicle_checklist_rv);
 
         //Cambiar color del carro
-        if(menuViewImpl.selectedVehicle == false) {
+       if(SplashScreenActivity.selectedVehicle == false) {
             vehicle_checklist.setColorFilter(ContextCompat.getColor(getContext(), R.color.grayUI), android.graphics.PorterDuff.Mode.SRC_IN);
         } else {
             vehicle_checklist.setColorFilter(ContextCompat.getColor(getContext(), R.color.blueCarChecklist), android.graphics.PorterDuff.Mode.SRC_IN);
@@ -130,8 +131,12 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
         vehicle_checklist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Toast.makeText(getContext(), "Vehiculo actual: "+vehicleName, Toast.LENGTH_SHORT).show();
                 FragmentManager fm = getFragmentManager();
                 DialogVehiclesinGroups externalGPSDialog = new DialogVehiclesinGroups();
+                Bundle args = new Bundle();
+                args.putString("nameAsigment",vehicleName);
+                externalGPSDialog.setArguments(args);
                 externalGPSDialog.show(getActivity().getSupportFragmentManager(), DialogVehiclesinGroups.TAG);
                 fm.executePendingTransactions();
 
