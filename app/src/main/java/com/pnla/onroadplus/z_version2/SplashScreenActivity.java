@@ -67,9 +67,9 @@ public class SplashScreenActivity extends AppCompatActivity {
         String vehicleChecklistName=preferences.getString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE,null);
         String vehicleChecklistCve=preferences.getString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE,null);
         if(vehicleChecklistName!=null&&vehicleChecklistCve!=null){
-
-        }else {
             selectedVehicle=true;
+        }else {
+            selectedVehicle=false;
         }
         new Handler().postDelayed(new Runnable() {
             @Override

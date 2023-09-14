@@ -131,7 +131,7 @@ public class CheckListViewImpl extends Fragment implements View.OnClickListener,
         vehicle_checklist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(), "Vehiculo actual: "+vehicleName, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Vehiculo actual: "+vehicleName, Toast.LENGTH_SHORT).show();
                 FragmentManager fm = getFragmentManager();
                 DialogVehiclesinGroups externalGPSDialog = new DialogVehiclesinGroups();
                 Bundle args = new Bundle();

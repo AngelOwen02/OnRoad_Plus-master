@@ -1,6 +1,8 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.trafic_light.view;
 
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -23,6 +25,8 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.histo
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.model.DialogsData;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.view.DialogsView;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehicles.view.DialogsViewImpl;
+import com.pnla.onroadplus.z_version2.SplashScreenActivity;
+import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 import java.util.List;
 
@@ -129,6 +133,13 @@ public class traficDialog extends DialogFragment implements View.OnClickListener
 
     public void closeDialog() {
         this.dismiss();
+
+        SharedPreferences preferences = getContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, null);
+        editor.putString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, String.valueOf(null));
+        editor.commit();
+        SplashScreenActivity.clearStaticValues();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.conteinerMainFragments, new historicChecklist(), historicChecklist.TAG).commit();
         getActivity().getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
 
