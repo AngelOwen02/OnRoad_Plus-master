@@ -71,7 +71,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                     }
 
                     arrayAdapter.add(0, "Selecciona una opción");
-                    spinnerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, arrayAdapter);
+                    spinnerArrayAdapter = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, arrayAdapter);//simple_spinner_item ::   simple_spinner_dropdown_item
                     spinnerArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     holder.spinnerquestionary.setAdapter(spinnerArrayAdapter);
                     holder.spinnerquestionary.setSelection(0, false);
@@ -167,10 +167,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
                 }else if (data.getQuestions().get(position).getAnswers().get(0).getObjectType() == 1){
                     holder.textopenquestion1.setText(data.getQuestions().get(position).getDescTripMgmQuestion());
+                    myview.safeValues(position,false,1,1,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue(),data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer(),"");
                     holder.inputText.addTextChangedListener(new TextWatcher() {
                         @Override
                         public void beforeTextChanged(CharSequence textWatcher, int i, int i1, int i2) {
                             Log.e("textWatcher","beforeTextChanged: "+textWatcher);
+
                          }
 
                         @Override
@@ -188,7 +190,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             Answer answer0=new Answer(data.getOriginAdm(),data.getQuestions().get(position).getCveTripMgmSection(),data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer(),editable.toString(),data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue(),1);
                             answers.add(answer0);
                             data.getQuestions().get(position).setAnswers(answers);*/
-                            myview.safeValues(position,false,1,1,data.getQuestions().get(position).getCveTripMgmQuestion(),0,data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer(),editable.toString());
+                            myview.safeValues(position,false,1,1,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue(),data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer(),editable.toString());
                             /**spinner*/     //  myview.safeValues(position, false, i, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), 0, null);
                             /**switch*/      //  myview.safeValues(position, b, 1, 1, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer());
 

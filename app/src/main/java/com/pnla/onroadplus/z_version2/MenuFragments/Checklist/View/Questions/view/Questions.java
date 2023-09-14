@@ -299,6 +299,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         //After
         fulChecklist.get(iterator).setAnswerPos(value);
         fulChecklist.get(iterator).setScore(score);
+        Log.e("checklistAnserScore",""+score);
         fulChecklist.get(iterator).setCveTripMgmAnswer(cveTripMgmAnswer);
         fulChecklist.get(iterator).setDesc_trip_mgm_answer(openAnswer);
         Log.e("finalCheckdata4","index "+fulChecklist.get(iterator).getAnswerPos());

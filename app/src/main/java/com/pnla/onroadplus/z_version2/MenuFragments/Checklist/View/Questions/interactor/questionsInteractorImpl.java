@@ -39,7 +39,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
    private Context context;
  private Retrofit retrofitClient;
  private serviceQuestions service;
- private int finalscoore;
+ private int finalscoore=0;
  private boolean aprobacionR=false;
     public questionsInteractorImpl(questionsPresenterImpl presenter, Context context) {
         this.presenter=presenter;
@@ -187,6 +187,7 @@ public class questionsInteractorImpl  implements questionsInteractor{
         }
 
         //requestFullCheckList request=new requestFullCheckList("","","","","","","","","","");
+        Log.e("checklistAnserScore","fS: "+finalscoore);
         String imagabase64=
                 //region imagebase64
                 "AA=";
