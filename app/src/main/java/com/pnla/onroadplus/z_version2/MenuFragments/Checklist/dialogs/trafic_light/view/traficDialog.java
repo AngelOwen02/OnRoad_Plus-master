@@ -137,7 +137,7 @@ public class traficDialog extends DialogFragment implements View.OnClickListener
         SharedPreferences preferences = getContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, null);
-        editor.putString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, String.valueOf(null));
+        editor.putString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, null);
         editor.commit();
         SplashScreenActivity.clearStaticValues();
         getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.conteinerMainFragments, new historicChecklist(), historicChecklist.TAG).commit();

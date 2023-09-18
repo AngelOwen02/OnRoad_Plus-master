@@ -1,6 +1,8 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -24,6 +26,8 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListView
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.model.Historic;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.presenter.HistoricCheckListPresenter;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.presenter.HistoricCheckListPresenterImpl;
+import com.pnla.onroadplus.z_version2.SplashScreenActivity;
+import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +53,7 @@ public class historicChecklist extends Fragment implements View.OnClickListener,
         View view = inflater.inflate(R.layout.fragment_historicchecklist, container, false);
 
         initView(view);
+
 
 
         return view;

@@ -145,7 +145,14 @@ public class DialogVehiclesinGroups extends DialogFragment implements View.OnCli
     public void newValue(Vehiclec2 vehiclec2) {
         this.newVehicle=vehiclec2.getVehicleName();
         this.newCVEVehicle=vehiclec2.getCveVehicle();
-        adapter.mnotify(mvehicles,newVehicle);
+        rv.post(new Runnable()
+        {
+            @Override
+            public void run() {
+                adapter.mnotify(mvehicles,newVehicle);
+            }
+        });
+
     }
 
     public void onDismiss() {

@@ -79,17 +79,11 @@ public class adapterVehiclesinGroups  extends RecyclerView.Adapter<adapterVehicl
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                     if(isChecked==true) {                                                            //if es checado
                         Toast.makeText(context, "Vehiculo: "+data.get(position).getVehicleName() +" selecionado", Toast.LENGTH_SHORT).show();
-                        String cveVehicle = data.get(position).getCveVehicle().toString();
-                        //Toast.makeText(context, cveVehicle, Toast.LENGTH_SHORT).show();
+                        SplashScreenActivity.selectedVehicle = true;
 
-                        SplashScreenActivity.selectedVehicle = true;                                          //pon en true la bandera de chekeado
-                        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-                        SharedPreferences.Editor editor = preferences.edit();
-                        editor.putString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, data.get(position).getVehicleName().toString());
-                        editor.putString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, data.get(position).getCveVehicle().toString());
-                        editor.commit();
                         data.get(position).setChecked(true);//guarda ese valor en los shared
-                        myview.newValue(data.get(position));                                                         //manda el nuevo valor por la vista
+                        myview.newValue(data.get(position));
+                        valueSelected=data.get(position).getVehicleName();                                                   //manda el nuevo valor por la vista
                     }
                 }
             });
