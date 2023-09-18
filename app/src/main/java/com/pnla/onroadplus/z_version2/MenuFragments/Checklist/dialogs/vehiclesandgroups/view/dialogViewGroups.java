@@ -10,5 +10,6 @@ public interface dialogViewGroups {
 
     void closeDialog();
 
-    void newValue(Vehiclec2 vehiclec2);
+    void newValue(String vehicleName, Integer cveVehicle);
+
 }

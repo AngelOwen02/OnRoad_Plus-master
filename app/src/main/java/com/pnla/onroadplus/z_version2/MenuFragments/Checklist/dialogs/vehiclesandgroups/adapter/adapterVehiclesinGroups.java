@@ -49,71 +49,42 @@ public class adapterVehiclesinGroups  extends RecyclerView.Adapter<adapterVehicl
 
     @Override
     public void onBindViewHolder(@NonNull final adapterVehiclesinGroups.ViewHolder holder, @SuppressLint("RecyclerView") final int position) {
-
-//        //Nombre del Vehiculo
+        // Nombre del Vehiculo
         holder.txtUnitDialog.setText(data.get(position).getVehicleName());
-//        SharedPreferences preferences = context.getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-//        String vehicleName = preferences.getString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, null);
 
-        //Para que aparezca el checkbox seleccionado o vacio
-        if(data.get(position).getVehicleName().equals(valueSelected))
-        {
+        // Si el vehículo actual está seleccionado, marca la casilla de verificación
+        if (data.get(position).getVehicleName().equals(valueSelected)) {
             holder.checkBoxDialog.setVisibility(View.VISIBLE);
             holder.checkBoxDialog.setChecked(true);
-        }else
-        {
+        } else {
             holder.checkBoxDialog.setChecked(false);
         }
-        /*if(data.get(position).getVehicleName().equals(vehicleName)){
-            holder.checkBoxDialog.setVisibility(View.GONE);
-            holder.checkBoxDialog2.setVisibility(View.VISIBLE);
-        } else {
-            //Solo quitamos en Dialog2
-            holder.checkBoxDialog.setVisibility(View.VISIBLE);
-            holder.checkBoxDialog2.setVisibility(View.GONE);
-        }*/
 
-        if(SplashScreenActivity.selectedVehicle == false) {//si el valor estatico esta en false
-            holder.checkBoxDialog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {//agrega el listener de checkbox
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked==true) {                                                            //if es checado
-                        Toast.makeText(context, "Vehiculo: "+data.get(position).getVehicleName() +" selecionado", Toast.LENGTH_SHORT).show();
-                        SplashScreenActivity.selectedVehicle = true;
-
-                        data.get(position).setChecked(true);//guarda ese valor en los shared
-                        myview.newValue(data.get(position));
-                        valueSelected=data.get(position).getVehicleName();                                                   //manda el nuevo valor por la vista
-                    }
-                }
-            });
-        } else {
-            holder.checkBoxDialog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                    if(isChecked==true) {
-                        Toast.makeText(context, "Vehiculo: "+data.get(position).getVehicleName() +" selecionado", Toast.LENGTH_SHORT).show();
-                        SplashScreenActivity.selectedVehicle = true;
-
-                        data.get(position).setChecked(true);//guarda ese valor en los shared
-                        myview.newValue(data.get(position));
-                        valueSelected=data.get(position).getVehicleName();
-                    }
-                }
-            });
+        // Aquí deselecciona todas las demás casillas de verificación
+        for (int i = 0; i < getItemCount(); i++) {
+            if (i != position) {
+                data.get(i).setChecked(false);
+            }
         }
 
-
+        holder.checkBoxDialog.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    Toast.makeText(context, "Vehiculo: " + data.get(position).getVehicleName() + " seleccionado", Toast.LENGTH_SHORT).show();
+                    SplashScreenActivity.selectedVehicle = true;
+                    data.get(position).setChecked(true); // Guarda ese valor en los shared
+                    valueSelected = data.get(position).getVehicleName();
+                    myview.newValue(data.get(position).getVehicleName(), data.get(position).getCveVehicle());
+                }
+            }
+        });
     }
-
     @Override
     public int getItemCount() {
         return data.size();
     }
-    public void mnotify(List<Vehiclec2> dialogData,String newVehicle) {
-        this.valueSelected=newVehicle;
-        this.data = new ArrayList<>();
-        this.data.addAll(dialogData);
+    public void mnotify() {
         notifyDataSetChanged();
     }
     public void setFilter(List<Vehiclec2> dialogData) {

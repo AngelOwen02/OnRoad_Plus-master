@@ -34,6 +34,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesan
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.model.Vehiclec2;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.presenter.presenterVehicleInGroups;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.vehiclesandgroups.presenter.presenterVehicleInGroupsImpl;
+import com.pnla.onroadplus.z_version2.SplashScreenActivity;
 import com.pnla.onroadplus.z_version2.generalUtils.GeneralConstantsV2;
 
 import java.util.ArrayList;
@@ -85,8 +86,8 @@ public class DialogVehiclesinGroups extends DialogFragment implements View.OnCli
         spinnerGroups=view.findViewById(R.id.spinnerGroups);
         externalconstraint = view.findViewById(R.id.externalconstraint);
         externalconstraint.setOnClickListener(this);
-        btn_accept_dialog= view.findViewById(R.id.btn_accept_dialog);
-        btn_accept_dialog.setOnClickListener(this);
+//        btn_accept_dialog= view.findViewById(R.id.btn_accept_dialog);
+//        btn_accept_dialog.setOnClickListener(this);
         externalconstraint2 = view.findViewById(R.id.externalconstraint2);
         externalconstraint2.setOnClickListener(this);
 
@@ -142,16 +143,23 @@ public class DialogVehiclesinGroups extends DialogFragment implements View.OnCli
     }
 
     @Override
-    public void newValue(Vehiclec2 vehiclec2) {
-        this.newVehicle=vehiclec2.getVehicleName();
-        this.newCVEVehicle=vehiclec2.getCveVehicle();
-        rv.post(new Runnable()
-        {
-            @Override
-            public void run() {
-                adapter.mnotify(mvehicles,newVehicle);
-            }
-        });
+    public void newValue(String vehicleName, Integer cveVehicle) {
+        this.newVehicle=vehicleName;
+        this.newCVEVehicle=cveVehicle;
+        SharedPreferences preferences = getContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, newVehicle);
+        editor.putString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, String.valueOf(newCVEVehicle));
+        editor.commit();
+        value=newVehicle;
+        closeDialog();
+//        rv.post(new Runnable()
+//        {
+//            @Override
+//            public void run() {
+//            //    adapter.mnotify();
+//            }
+//        });
 
     }
 
@@ -166,15 +174,9 @@ public class DialogVehiclesinGroups extends DialogFragment implements View.OnCli
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_accept_dialog:
-                SharedPreferences preferences = getContext().getSharedPreferences(GeneralConstantsV2.CREDENTIALS_PREFERENCES, Context.MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-                editor.putString(GeneralConstantsV2.NAME_CHECKLIST_VEHICLE, newVehicle);
-                editor.putString(GeneralConstantsV2.CVE_CHECKLIST_VEHICLE, String.valueOf(newCVEVehicle));
-                editor.commit();
-                value=newVehicle;
-                closeDialog();
-                break;
+//            case R.id.btn_accept_dialog:
+//
+//                break;
 
             case R.id.externalconstraint:
                 closeDialog();
