@@ -54,6 +54,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.pre
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.presenter.questionsPresenterImpl;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.history.historicChecklist;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.dialogs.trafic_light.view.traficDialog;
+import com.pnla.onroadplus.z_version2.SplashScreenActivity;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -354,6 +355,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         switch (v.getId()){
             case R.id.buttongochecklist:
                 presenter.sendfullchecklist(Checkl,aproved,emailaprovador,start);
+                SplashScreenActivity.selectedVehicle = false;
                // Toast.makeText(getContext(), "mandar Valor de preguntas", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.historic_checks:
