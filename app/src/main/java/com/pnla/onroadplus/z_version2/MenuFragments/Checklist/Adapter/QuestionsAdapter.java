@@ -166,10 +166,10 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                     });
 
                 }else if (data.getQuestions().get(position).getAnswers().get(0).getObjectType() == 1){
-
+                    holder.textopenquestion1.setText(data.getQuestions().get(position).getDescTripMgmQuestion());
                     if(Questions.fulChecklist != null&&!Questions.fulChecklist.equals(""))
                     {
-                        holder.textopenquestion1.setText(data.getQuestions().get(position).getDescTripMgmQuestion());
+
                         for (int i = 0; i < Questions.fulChecklist.size(); i++) {
 
                             if (Questions.fulChecklist.get(i).getCveTripMgmQuestion() == data.getQuestions().get(position).getCveTripMgmQuestion()) {
