@@ -284,8 +284,11 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     }
     public void safeValues(int position, boolean b, int value, int i, Integer cveTripMgmQuestion, Integer score, Integer cveTripMgmAnswer,String openAnswer)
     {
-        Log.e("finalCheckdata3"," "+position+" "+b+" "+value+" "+i); //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1 ~ switch 2 ~ multiple
+        List<dataChecklist> fulChecklist2 = new ArrayList<>();
+        fulChecklist2.clear();
+        fulChecklist2=fulChecklist;
         String h = null;
+
         for(int v=0;v<fulChecklist.size();v++)
         {
             if(fulChecklist.get(v).getAnswerId()==cveTripMgmQuestion)
@@ -293,17 +296,17 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
                 h= String.valueOf( v);
             }
         }
-        Log.e("finalCheckdata4","index "+h+"  Answerpos: "+value);
         int iterator=Integer.valueOf( h);
         //Before
-        Log.e("finalCheckdata4","index "+fulChecklist.get(iterator).getAnswerPos());
         //After
-        fulChecklist.get(iterator).setAnswerPos(value);
-        fulChecklist.get(iterator).setScore(score);
-        Log.e("checklistAnserScore",""+score);
-        fulChecklist.get(iterator).setCveTripMgmAnswer(cveTripMgmAnswer);
-        fulChecklist.get(iterator).setDesc_trip_mgm_answer(openAnswer);
-        Log.e("finalCheckdata4","index "+fulChecklist.get(iterator).getAnswerPos());
+
+
+        fulChecklist2.get(iterator).setAnswerPos(value);
+        fulChecklist2.get(iterator).setScore(score);
+
+        fulChecklist2.get(iterator).setCveTripMgmAnswer(cveTripMgmAnswer);
+        fulChecklist2.get(iterator).setDesc_trip_mgm_answer(openAnswer);
+        fulChecklist=fulChecklist2;
     }
 
     @SuppressLint("NewApi")   /** ESTE METODO SALVA LA INFORMACION DE TODAS LAS PREGUNTAS EN SHARED PREFERENCES*/

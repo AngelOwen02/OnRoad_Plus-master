@@ -101,7 +101,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
                                 @Override
                                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                                    Log.e("finalCheckdata5", " " + Questions.fulChecklist.size());
+                                 //   Log.e("finalCheckdata5", " " + Questions.fulChecklist.size());
 
                                     //todo  posiciondepregunta | switchboolean | valueAnswerpos | type: 1,2   1  switch 2  multiple
                                     Log.e("finalCheckdata7", " sectionP :  " + data.getQuestions().get(position).getCveTripMgmSection() +
@@ -166,8 +166,23 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                     });
 
                 }else if (data.getQuestions().get(position).getAnswers().get(0).getObjectType() == 1){
-                    holder.textopenquestion1.setText(data.getQuestions().get(position).getDescTripMgmQuestion());
-                    myview.safeValues(position,false,1,1,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue(),data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer(),"");
+
+                    if(Questions.fulChecklist != null&&!Questions.fulChecklist.equals(""))
+                    {
+                        holder.textopenquestion1.setText(data.getQuestions().get(position).getDescTripMgmQuestion());
+                        for (int i = 0; i < Questions.fulChecklist.size(); i++) {
+
+                            if (Questions.fulChecklist.get(i).getCveTripMgmQuestion() == data.getQuestions().get(position).getCveTripMgmQuestion()) {
+                                myview.safeValues(position,false,1,1,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue(),data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer(),Questions.fulChecklist.get(i).getDesc_trip_mgm_answer());
+                                holder.inputText.setText(Questions.fulChecklist.get(i).getDesc_trip_mgm_answer());
+                            }
+                        }
+
+                    }else
+                    {
+                        myview.safeValues(position,false,1,1,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue(),data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer(),"");
+                    }
+
                     holder.inputText.addTextChangedListener(new TextWatcher() {
                         @Override
                         public void beforeTextChanged(CharSequence textWatcher, int i, int i1, int i2) {
@@ -178,6 +193,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                         @Override
                         public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                             Log.e("textWatcher","onTextChanged: "+charSequence);
+                           // myview.safeValues(position,false,1,1,data.getQuestions().get(position).getCveTripMgmQuestion(),data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue(),data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer(),charSequence.toString());
                         }
 
                         @Override
