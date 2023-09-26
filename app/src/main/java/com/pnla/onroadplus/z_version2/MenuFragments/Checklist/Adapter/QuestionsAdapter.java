@@ -176,13 +176,16 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                         public void onClick(View v) {
                             Toast.makeText(context, "observaciontest switch", Toast.LENGTH_SHORT).show();
                             holder.spinerdots1.setVisibility(View.VISIBLE);
-                            List<String> arrayAdapter = new ArrayList<>();
-                            arrayAdapter.add("Evidencia");
-                            arrayAdapter.add("Observaciones");
-                            ArrayAdapter<String> spinerOpt;
-                            spinerOpt = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, arrayAdapter);//simple_spinner_item ::   simple_spinner_dropdown_item
-                            spinerOpt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            holder.spinerdots1.setAdapter(spinerOpt);
+                      
+
+
+                            ArrayList<AlgorithmItem> algorithmItems = new ArrayList<>();
+                            algorithmItems.add(new AlgorithmItem("Quick Sort"));
+                            algorithmItems.add(new AlgorithmItem("Merge Sort"));
+
+                            AlgorithmAdapter adapter = new AlgorithmAdapter(context, algorithmItems);
+                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            holder.spinerdots1.setAdapter(adapter);
                             holder.spinerdots1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                                 @Override
@@ -379,7 +382,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
             dotsDialog=itemView.findViewById(R.id.dotsDialog);
             dotsDialog2=itemView.findViewById(R.id.dotsDialog2);
-            dotsDialog3=itemView.findViewById(R.id.dotsDialog3);
+            dotsDialog3=itemView.findViewById(R.id.dotsDialog3);//dots del switch
 
             spinerdots1=itemView.findViewById(R.id.spinerdots1);
 
