@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="9dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -120,7 +120,7 @@
 
         </androidx.constraintlayout.widget.Guideline>
 
-        <Spinner
+         <!-- <Spinner
             android:id="@+id/spinerdots1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -133,23 +133,50 @@
             app:layout_constraintTop_toTopOf="@+id/switchquestionary"
             app:layout_constraintVertical_bias="1.0"
             style="@style/SpinnerTheme"
-            app:srcCompat="@drawable/ic_icn_masopciones" />
+            app:srcCompat="@drawable/ic_icn_masopciones" />-->
 
         <ImageView
 
             android:id="@+id/dotsDialog3"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:elevation="6dp"
             android:tint="#BFBFBF"
+            android:elevation="4dp"
             app:layout_constraintBottom_toBottomOf="@+id/switchquestionary"
             app:layout_constraintStart_toEndOf="@+id/switchquestionary"
             app:layout_constraintTop_toTopOf="@+id/switchquestionary"
             app:srcCompat="@drawable/ic_icn_masopciones" />
+
+        <androidx.cardview.widget.CardView
+
+            android:id="@+id/fakespinner1"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:elevation="6dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/switchquestionary"
+            app:layout_constraintTop_toTopOf="parent" >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/optionanswer"
-        android:visibility="gone"
+        android:visibility="visible"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -216,8 +243,38 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_icn_masopciones" />
 
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.cardview.widget.CardView
+
+            android:id="@+id/fakespinner2"
+            android:layout_width="130dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="1dp"
+            android:elevation="6dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/constraintLayout13">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerSpinner2"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
         <ImageView
 
             android:visibility="gone"
@@ -372,6 +429,8 @@
                 app:layout_constraintStart_toEndOf="@+id/cardView41"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_icn_masopciones" />
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
@@ -387,6 +446,34 @@
             app:layout_constraintStart_toEndOf="@+id/textopenquestion1"
             app:layout_constraintTop_toTopOf="parent"></ImageView>
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/fakespinner3"
+            android:layout_width="130dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginBottom="10dp"
+            android:elevation="6dp"
+            android:visibility="gone"
+            app:cardBackgroundColor="#FFFFFF"
+            app:cardElevation="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerSpinner3"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
         <ImageView
 
             android:id="@+id/imagephoto1"

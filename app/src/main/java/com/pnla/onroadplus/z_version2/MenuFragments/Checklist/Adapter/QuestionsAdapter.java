@@ -19,7 +19,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.textfield.TextInputEditText;
@@ -171,36 +173,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             }
                         }
                     });
-                    holder.dotsDialog3.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(context, "observaciontest switch", Toast.LENGTH_SHORT).show();
-                            holder.spinerdots1.setVisibility(View.VISIBLE);
-                      
 
-
-                            ArrayList<AlgorithmItem> algorithmItems = new ArrayList<>();
-                            algorithmItems.add(new AlgorithmItem("Quick Sort"));
-                            algorithmItems.add(new AlgorithmItem("Merge Sort"));
-
-                            AlgorithmAdapter adapter = new AlgorithmAdapter(context, algorithmItems);
-                            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                            holder.spinerdots1.setAdapter(adapter);
-                            holder.spinerdots1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                                @Override
-                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                                    holder.spinerdots1.setVisibility(View.GONE);
-                                }
-
-                                @Override
-                                public void onNothingSelected(AdapterView<?> parent) {
-                                }
-                            });
-                            holder.spinerdots1.performClick();
-                            holder.spinerdots1.performClick();
-                        }
-                    });
 
                 }else if (data.getQuestions().get(position).getAnswers().get(0).getObjectType() == 1){
                     holder.textopenquestion1.setText(data.getQuestions().get(position).getDescTripMgmQuestion());
@@ -320,6 +293,56 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
             holder.imagephoto2.setVisibility(View.GONE);
             //myview.errorpic();
         }
+
+        //region FAKE SPINNER CARDVIEWS
+        holder.dotsDialog3.setOnClickListener(new View.OnClickListener() {//SWITCH
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "observaciontest switch", Toast.LENGTH_SHORT).show();
+                if(holder.fakespinner1.getVisibility()==View.VISIBLE){
+                    holder.fakespinner1.setVisibility(View.GONE);
+                }else {
+                    holder.fakespinner1.setVisibility(View.VISIBLE);
+                                adapterRecyclerSpinner adapterSpinner = new adapterRecyclerSpinner(context);
+                                LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+                                holder.recyclerSpinner.setLayoutManager(layoutManager);
+                                holder.recyclerSpinner.setAdapter(adapterSpinner);
+                }
+            }
+        });
+        holder.dotsDialog2.setOnClickListener(new View.OnClickListener() {//Spinner
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "observaciontest switch", Toast.LENGTH_SHORT).show();
+                if(holder.fakespinner2.getVisibility()==View.VISIBLE){
+                    holder.fakespinner2.setVisibility(View.GONE);
+                }else {
+                    holder.fakespinner2.setVisibility(View.VISIBLE);
+                    adapterRecyclerSpinner adapterSpinner = new adapterRecyclerSpinner(context);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+                    holder.recyclerSpinner2.setLayoutManager(layoutManager);
+                    holder.recyclerSpinner2.setAdapter(adapterSpinner);
+                }
+            }
+        });
+        holder.dotsDialog.setOnClickListener(new View.OnClickListener() {//OPEN
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "observaciontest switch", Toast.LENGTH_SHORT).show();
+                if(holder.fakespinner3.getVisibility()==View.VISIBLE){
+                    holder.fakespinner3.setVisibility(View.GONE);
+                }else {
+                    holder.fakespinner3.setVisibility(View.VISIBLE);
+                    adapterRecyclerSpinner adapterSpinner = new adapterRecyclerSpinner(context);
+                    LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
+                    holder.recyclerSpinner3.setLayoutManager(layoutManager);
+                    holder.recyclerSpinner3.setAdapter(adapterSpinner);
+                }
+            }
+        });
+
+        //endregion
+
         holder.info1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -359,9 +382,11 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         Spinner spinnerquestionary;
         Switch switchquestionary;
         ImageView dotsDialog3,dotsDialog2,dotsDialog;
-        Spinner spinerdots1;
+       // Spinner spinerdots1;
+        private CardView fakespinner1,fakespinner2,fakespinner3;
         private ImageView imagephoto,imagephoto2,imagephoto1,info1,info2,info3;
         private TextInputEditText inputText;
+        private RecyclerView recyclerSpinner,recyclerSpinner2,recyclerSpinner3;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             imagephoto2=itemView.findViewById(R.id.imagephoto2);
@@ -380,12 +405,20 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
             info2=itemView.findViewById(R.id.info2);
             info3=itemView.findViewById(R.id.info3);
 
-            dotsDialog=itemView.findViewById(R.id.dotsDialog);
-            dotsDialog2=itemView.findViewById(R.id.dotsDialog2);
+            dotsDialog=itemView.findViewById(R.id.dotsDialog);  //open
+            dotsDialog2=itemView.findViewById(R.id.dotsDialog2);//spinner
             dotsDialog3=itemView.findViewById(R.id.dotsDialog3);//dots del switch
 
-            spinerdots1=itemView.findViewById(R.id.spinerdots1);
+           // spinerdots1=itemView.findViewById(R.id.spinerdots1);
+            fakespinner1=itemView.findViewById(R.id.fakespinner1);//switch
+            recyclerSpinner=itemView.findViewById(R.id.recyclerSpinner);
 
+
+            fakespinner2=itemView.findViewById(R.id.fakespinner2);   //spinner main
+            recyclerSpinner2=itemView.findViewById(R.id.recyclerSpinner2);
+
+            fakespinner3=itemView.findViewById(R.id.fakespinner3);   //open answer
+            recyclerSpinner3=itemView.findViewById(R.id.recyclerSpinner3);
         }
     }
 }
