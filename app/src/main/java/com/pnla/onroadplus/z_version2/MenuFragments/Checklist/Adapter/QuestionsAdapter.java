@@ -16,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -126,6 +127,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             });
                         }
                     });
+                    holder.dotsDialog2.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(context, "observaciontest spinner", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 } else if (data.getQuestions().get(position).getAnswers().get(0).getObjectType() == 2) {                                                         //switches
                     holder.optionanswer.setVisibility(View.GONE);
                     holder.openanswer.setVisibility(View.GONE);
@@ -162,6 +169,33 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             } else {
                                 myview.safeValues(position, b, 1, 2, data.getQuestions().get(position).getCveTripMgmQuestion(), data.getQuestions().get(position).getAnswers().get(0).getTripMgmAnswerValue(), data.getQuestions().get(position).getAnswers().get(0).getCveTripMgmAnswer(),null);
                             }
+                        }
+                    });
+                    holder.dotsDialog3.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(context, "observaciontest switch", Toast.LENGTH_SHORT).show();
+                            holder.spinerdots1.setVisibility(View.VISIBLE);
+                            List<String> arrayAdapter = new ArrayList<>();
+                            arrayAdapter.add("Evidencia");
+                            arrayAdapter.add("Observaciones");
+                            ArrayAdapter<String> spinerOpt;
+                            spinerOpt = new ArrayAdapter<String>(context, android.R.layout.simple_spinner_dropdown_item, arrayAdapter);//simple_spinner_item ::   simple_spinner_dropdown_item
+                            spinerOpt.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                            holder.spinerdots1.setAdapter(spinerOpt);
+                            holder.spinerdots1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                                @Override
+                                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                                    holder.spinerdots1.setVisibility(View.GONE);
+                                }
+
+                                @Override
+                                public void onNothingSelected(AdapterView<?> parent) {
+                                }
+                            });
+                            holder.spinerdots1.performClick();
+                            holder.spinerdots1.performClick();
                         }
                     });
 
@@ -212,6 +246,14 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
 
                         }
                     });
+
+                    holder.dotsDialog.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(context, "observaciontest", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
                 }else{
 
                 }
@@ -313,6 +355,8 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         TextView description1,description2,textopenquestion1;
         Spinner spinnerquestionary;
         Switch switchquestionary;
+        ImageView dotsDialog3,dotsDialog2,dotsDialog;
+        Spinner spinerdots1;
         private ImageView imagephoto,imagephoto2,imagephoto1,info1,info2,info3;
         private TextInputEditText inputText;
         public ViewHolder(@NonNull View itemView) {
@@ -332,6 +376,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
             info1=itemView.findViewById(R.id.info1);
             info2=itemView.findViewById(R.id.info2);
             info3=itemView.findViewById(R.id.info3);
+
+            dotsDialog=itemView.findViewById(R.id.dotsDialog);
+            dotsDialog2=itemView.findViewById(R.id.dotsDialog2);
+            dotsDialog3=itemView.findViewById(R.id.dotsDialog3);
+
+            spinerdots1=itemView.findViewById(R.id.spinerdots1);
 
         }
     }

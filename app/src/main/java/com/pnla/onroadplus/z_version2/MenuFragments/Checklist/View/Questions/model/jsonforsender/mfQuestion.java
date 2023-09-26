@@ -17,11 +17,14 @@ public class mfQuestion {
 
     @SerializedName("desc_trip_mgm_answer")
     private String openanswer=null;
-    public mfQuestion(Integer cveTripMgmQuestion, Integer cveTripMgmAnswer,String openanswer) {
+    @SerializedName("observation")
+    private String comments;
+    public mfQuestion(Integer cveTripMgmQuestion, Integer cveTripMgmAnswer,String openanswer,String comments) {
         super();
         this.cveTripMgmQuestion = cveTripMgmQuestion;
         this.cveTripMgmAnswer = cveTripMgmAnswer;
         this.openanswer=openanswer;
+        this.comments=comments;
     }
 
     public Integer getCveTripMgmQuestion() {
@@ -45,5 +48,13 @@ public class mfQuestion {
 
     public void openanswer(String desc_trip_mgm_answer) {
         this.openanswer = desc_trip_mgm_answer;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 }

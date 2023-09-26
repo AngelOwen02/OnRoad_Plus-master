@@ -10,7 +10,8 @@
         android:id="@+id/switchanswer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:layout_marginStart="9dp"
+        android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -25,14 +26,15 @@
             android:id="@+id/textbooleanonly"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="1dp"
             android:fontFamily="@font/roboto_black"
             android:gravity="center"
             android:text="Placas visibles y frontal trasera"
             android:textAlignment="textStart"
             android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline28a"
-            app:layout_constraintStart_toEndOf="@+id/switchquestionary"
+            app:layout_constraintEnd_toStartOf="@+id/guideline28"
+            app:layout_constraintStart_toEndOf="@+id/info2"
             app:layout_constraintTop_toTopOf="parent"
             tools:ignore="RtlCompat">
 
@@ -42,11 +44,10 @@
             android:id="@+id/imagephoto2"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginEnd="15dp"
+            android:layout_marginEnd="152dp"
             android:background="@drawable/ic_menu_camera"
             android:backgroundTint="@color/grayUI"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -56,27 +57,25 @@
             android:id="@+id/info2"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:layout_marginStart="2dp"
             android:background="@drawable/info_tooltip"
-            app:layout_constraintBottom_toBottomOf="@+id/imagephoto2"
-            app:layout_constraintStart_toStartOf="@+id/guideline28a"
-            app:layout_constraintTop_toTopOf="@+id/imagephoto2" />
+            android:scaleX=".8"
+            android:scaleY=".8"
+            app:layout_constraintBottom_toBottomOf="@+id/textbooleanonly"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textbooleanonly" />
 
         <Switch
             android:id="@+id/switchquestionary"
             android:layout_width="60dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="15dp"
-            android:layout_marginTop="13dp"
-            android:layout_marginBottom="17dp"
+            android:layout_height="wrap_content"
             android:layout_weight="0"
             android:focusable="false"
             android:padding="10dp"
             android:thumb="@drawable/round_switch"
             android:track="@drawable/round_track"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintBottom_toBottomOf="@+id/textbooleanonly"
+            app:layout_constraintEnd_toStartOf="@+id/guideline28a"
+            app:layout_constraintTop_toTopOf="@+id/textbooleanonly">
 
         </Switch>
 
@@ -90,7 +89,6 @@
                tools:ignore="MissingConstraints">
 
            </View>-->
-
 
 
         <androidx.constraintlayout.widget.Guideline
@@ -111,15 +109,43 @@
             app:layout_constraintGuide_percent="0.75">
 
         </androidx.constraintlayout.widget.Guideline>
+
         <androidx.constraintlayout.widget.Guideline
 
             android:id="@+id/guideline28a"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.80">
+            app:layout_constraintGuide_percent="0.9">
 
         </androidx.constraintlayout.widget.Guideline>
+
+        <Spinner
+            android:id="@+id/spinerdots1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:visibility="gone"
+            android:background="@color/white"
+            android:tint="#BFBFBF"
+            app:layout_constraintBottom_toBottomOf="@+id/switchquestionary"
+            app:layout_constraintEnd_toEndOf="@+id/dotsDialog3"
+            app:layout_constraintTop_toTopOf="@+id/switchquestionary"
+            app:layout_constraintVertical_bias="1.0"
+            style="@style/SpinnerTheme"
+            app:srcCompat="@drawable/ic_icn_masopciones" />
+
+        <ImageView
+
+            android:id="@+id/dotsDialog3"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:elevation="6dp"
+            android:tint="#BFBFBF"
+            app:layout_constraintBottom_toBottomOf="@+id/switchquestionary"
+            app:layout_constraintStart_toEndOf="@+id/switchquestionary"
+            app:layout_constraintTop_toTopOf="@+id/switchquestionary"
+            app:srcCompat="@drawable/ic_icn_masopciones" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/optionanswer"
@@ -163,21 +189,32 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="11dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginEnd="60dp"
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/shape_checklist_cardview"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
                 <Spinner
                     android:id="@+id/spinnerquestionary"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:spinnerMode="dialog"
-                    />
+                    android:spinnerMode="dialog" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <ImageView
+
+                android:id="@+id/dotsDialog2"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:tint="#BFBFBF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardView4"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_icn_masopciones" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -213,6 +250,8 @@
             android:id="@+id/info3"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:scaleX=".8"
+            android:scaleY=".8"
             android:layout_marginStart="2dp"
             android:background="@drawable/info_tooltip"
             app:layout_constraintBottom_toBottomOf="@+id/imagephoto"
@@ -267,7 +306,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/openanswer"
-        android:visibility="visible"
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -307,22 +346,32 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="11dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="15dp"
+                android:layout_marginEnd="60dp"
                 android:layout_marginBottom="4dp"
                 android:background="@drawable/shape_checklist_cardview"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/inputText"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:spinnerMode="dialog"
-                    />
+                    android:spinnerMode="dialog" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
+            <ImageView
 
+                android:id="@+id/dotsDialog"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:tint="#BFBFBF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/cardView41"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_icn_masopciones" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <ImageView
@@ -357,6 +406,8 @@
             android:id="@+id/info1"
             android:layout_width="30dp"
             android:layout_height="30dp"
+            android:scaleX=".8"
+            android:scaleY=".8"
             android:layout_marginStart="2dp"
             android:background="@drawable/info_tooltip"
             app:layout_constraintBottom_toBottomOf="@+id/imagephoto1"
