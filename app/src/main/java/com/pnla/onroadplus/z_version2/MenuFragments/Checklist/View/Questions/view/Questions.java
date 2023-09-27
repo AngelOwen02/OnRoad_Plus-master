@@ -23,6 +23,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -42,6 +43,7 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.google.android.material.textfield.TextInputEditText;
 import com.pnla.onroadplus.BuildConfig;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter.sectionsAdapter;
@@ -100,6 +102,9 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     private String start;
     private View mainView;
     private List<mquestions> mquestion;
+    private ConstraintLayout dialog_observatiosn;
+    private EditText editextObservations;
+    private Button dismissObservations,saveObservation;
     @SuppressLint("NewApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -133,6 +138,13 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
         buttongochecklist.setOnClickListener(this);
         historic_checks=view.findViewById(R.id.historic_checks);
         historic_checks.setOnClickListener(this);
+        dialog_observatiosn=view.findViewById(R.id.dialog_observatiosn);
+        dialog_observatiosn.setOnClickListener(this);
+        dismissObservations=view.findViewById(R.id.dismissObservations);
+        dismissObservations.setOnClickListener(this);
+        saveObservation=view.findViewById(R.id.saveObservation);
+        saveObservation.setOnClickListener(this);
+        editextObservations=view.findViewById(R.id.editextObservations);
         progressDialog = new ProgressDialog(getActivity());
         presenter=new questionsPresenterImpl(this,getContext());
         presenter.getpSections(Checkl);
@@ -364,6 +376,18 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
             case R.id.historic_checks:
                 menutransition();
                 break;
+            case  R.id.dismissObservations:
+                editextObservations.setText("");
+                dialog_observatiosn.setVisibility(View.GONE);
+                break;
+            case R.id.saveObservation:
+                //todo fullchecklist agregar el parametro
+                Toast.makeText(getContext(), "Salvar parametro", Toast.LENGTH_SHORT).show();
+                break;
+            case  R.id.dialog_observatiosn:
+                editextObservations.setText(" ");
+                dialog_observatiosn.setVisibility(View.GONE);
+                break;
         }
     }
 
@@ -542,6 +566,9 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     public void errorpic() {
         Toast.makeText(getContext(), "Dispositivo no compatible con la funcionalidad", Toast.LENGTH_SHORT).show();
     }
+    public void showObservations(Integer cveTripMgmQuestion) {
+        dialog_observatiosn.setVisibility(View.VISIBLE);
+    }
     public void takePick(Integer cveTripMgmQuestion) {
         this.cvetemp=cveTripMgmQuestion;
         Log.e("takepic",""+cveTripMgmQuestion);
@@ -604,4 +631,6 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
 
 
     }
+
+
 }

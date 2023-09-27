@@ -27,8 +27,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Model.dataChecklist;
-import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.CheckListViewImpl;
-import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.Answer;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.model.questions.dataQuestions;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.view.Questions;
 
@@ -44,6 +42,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
     private List<dataChecklist> saved=new ArrayList<>();
     private int currentSection;
     private boolean firstspinner=false;
+    private Integer sizefakeSpinner=0;
     public QuestionsAdapter(dataQuestions dataQuestions, Questions mview, Context context) {
         this.myview=mview;
         this.context=context;
@@ -129,12 +128,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                             });
                         }
                     });
-                    holder.dotsDialog2.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(context, "observaciontest spinner", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+
                 } else if (data.getQuestions().get(position).getAnswers().get(0).getObjectType() == 2) {                                                         //switches
                     holder.optionanswer.setVisibility(View.GONE);
                     holder.openanswer.setVisibility(View.GONE);
@@ -223,12 +217,7 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                         }
                     });
 
-                    holder.dotsDialog.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            Toast.makeText(context, "observaciontest", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+
 
                 }else{
 
@@ -260,10 +249,17 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
             holder.imagephoto1.setVisibility(View.GONE);
             holder.imagephoto2.setVisibility(View.GONE);
         }else{
-            holder.imagephoto.setVisibility(View.VISIBLE);
-            holder.imagephoto1.setVisibility(View.VISIBLE);
-            holder.imagephoto2.setVisibility(View.VISIBLE);
+            holder.imagephoto.setVisibility(View.GONE);
+            holder.imagephoto1.setVisibility(View.GONE);
+            holder.imagephoto2.setVisibility(View.GONE);
         }
+        if(data.getQuestions().get(position).getRequired_observations()==false)
+        {
+
+        }
+
+
+
         if (Build.VERSION.SDK_INT>= Build.VERSION_CODES.Q) {
 
             holder.imagephoto2.setOnClickListener(new View.OnClickListener() {
@@ -295,15 +291,30 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         }
 
         //region FAKE SPINNER CARDVIEWS
+
+        int observations=0;
+        int evidence=0;
+        if(data.getQuestions().get(position).getRequired_observations()==true){
+            observations=1;
+        }
+        if(data.getQuestions().get(position).isRequired_evidence()==true){
+            evidence=1;
+        }
+        this.sizefakeSpinner=observations+evidence;
+        if(sizefakeSpinner==0) {
+            holder.dotsDialog.setVisibility(View.GONE);
+            holder.dotsDialog2.setVisibility(View.GONE);
+            holder.dotsDialog3.setVisibility(View.GONE);
+        }
         holder.dotsDialog3.setOnClickListener(new View.OnClickListener() {//SWITCH
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "observaciontest switch", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "observaciontest switch", Toast.LENGTH_SHORT).show();
                 if(holder.fakespinner1.getVisibility()==View.VISIBLE){
                     holder.fakespinner1.setVisibility(View.GONE);
                 }else {
                     holder.fakespinner1.setVisibility(View.VISIBLE);
-                                adapterRecyclerSpinner adapterSpinner = new adapterRecyclerSpinner(context);
+                                adapterRecyclerSpinner adapterSpinner = new adapterRecyclerSpinner(myview,data.getQuestions().get(position).getRequired_observations(),data.getQuestions().get(position).isRequired_evidence(),data.getQuestions().get(position).getCveTripMgmQuestion(),context);
                                 LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
                                 holder.recyclerSpinner.setLayoutManager(layoutManager);
                                 holder.recyclerSpinner.setAdapter(adapterSpinner);
@@ -313,12 +324,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         holder.dotsDialog2.setOnClickListener(new View.OnClickListener() {//Spinner
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "observaciontest switch", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "observaciontest switch", Toast.LENGTH_SHORT).show();
                 if(holder.fakespinner2.getVisibility()==View.VISIBLE){
                     holder.fakespinner2.setVisibility(View.GONE);
                 }else {
                     holder.fakespinner2.setVisibility(View.VISIBLE);
-                    adapterRecyclerSpinner adapterSpinner = new adapterRecyclerSpinner(context);
+                    adapterRecyclerSpinner adapterSpinner = new adapterRecyclerSpinner(myview, data.getQuestions().get(position).getRequired_observations(), data.getQuestions().get(position).isRequired_evidence(), data.getQuestions().get(position).getCveTripMgmQuestion(), context);
                     LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
                     holder.recyclerSpinner2.setLayoutManager(layoutManager);
                     holder.recyclerSpinner2.setAdapter(adapterSpinner);
@@ -328,12 +339,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         holder.dotsDialog.setOnClickListener(new View.OnClickListener() {//OPEN
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "observaciontest switch", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "observaciontest switch", Toast.LENGTH_SHORT).show();
                 if(holder.fakespinner3.getVisibility()==View.VISIBLE){
                     holder.fakespinner3.setVisibility(View.GONE);
                 }else {
                     holder.fakespinner3.setVisibility(View.VISIBLE);
-                    adapterRecyclerSpinner adapterSpinner = new adapterRecyclerSpinner(context);
+                    adapterRecyclerSpinner adapterSpinner = new adapterRecyclerSpinner(myview, data.getQuestions().get(position).getRequired_observations(), data.getQuestions().get(position).isRequired_evidence(), data.getQuestions().get(position).getCveTripMgmQuestion(), context);
                     LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
                     holder.recyclerSpinner3.setLayoutManager(layoutManager);
                     holder.recyclerSpinner3.setAdapter(adapterSpinner);

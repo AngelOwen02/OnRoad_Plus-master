@@ -6,13 +6,15 @@
                 android:angle="270"
                 android:endColor="@color/white"
                 android:startColor="#FFFFFF" />
-            <corners android:radius="25dp" />
+            <corners android:radius="8dp" />
             <padding
                 android:bottom="2.5dp"
                 android:left=".35dp"
                 android:right=".35dp"
                 android:top="0dp" />
-
+            <stroke
+                android:width="2dp"
+                android:color="#BA808080" />
         </shape>
     </item>
 </layer-list>
