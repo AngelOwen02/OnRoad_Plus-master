@@ -20,11 +20,15 @@ public class adapterRecyclerSpinner extends RecyclerView.Adapter<adapterRecycler
     private Integer size=0;
     private Questions myview;
     private  Integer cveTripMgmQuestion;
+    private Boolean required_evidence;
+    private Boolean requiredObservations;
     public adapterRecyclerSpinner(Questions myview, Boolean requiredObservations, Boolean required_evidence, Integer cveTripMgmQuestion, Context context)
     {
         this.cveTripMgmQuestion=cveTripMgmQuestion;
         this.myview=myview;
         this.context=context;
+        this.required_evidence=required_evidence;
+        this.requiredObservations=requiredObservations;
         int observations=0;
         int evidence=0;
         if(requiredObservations==true){
@@ -49,12 +53,25 @@ public class adapterRecyclerSpinner extends RecyclerView.Adapter<adapterRecycler
 
         if(i==0)
         {
-            holder.contrainItemdots.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    myview.takePick(cveTripMgmQuestion);
-                }
-            });
+            if(required_evidence==true) {
+                holder.contrainItemdots.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        myview.takePick(cveTripMgmQuestion);
+
+                    }
+                });
+            }else{
+                Glide.with(context).load(R.drawable.observation_evidence).into( holder.image_view);
+                holder.text_view.setText("Observaciones");
+                holder.contrainItemdots.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        myview.showObservations(cveTripMgmQuestion);
+                    }
+                });
+            }
 
         }else {
             Glide.with(context).load(R.drawable.observation_evidence).into( holder.image_view);

@@ -105,6 +105,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     private ConstraintLayout dialog_observatiosn;
     private EditText editextObservations;
     private Button dismissObservations,saveObservation;
+    private  Integer cveObservations;
     @SuppressLint("NewApi")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -342,7 +343,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
             if(mquestion!=null) {
                 for (int j=0;j< mquestion.size();j++)
                 {
-                    fulChecklist.add(new dataChecklist(mquestion.get(j).getOriginAdm(),mquestion.get(j).getCveTripMgmQuestion(),mquestion.get(j).getCveTripMgmSection(),0,"",mquestion.get(j).getCveTripMgmQuestion(),0,0,""));
+                    fulChecklist.add(new dataChecklist(mquestion.get(j).getOriginAdm(),mquestion.get(j).getCveTripMgmQuestion(),mquestion.get(j).getCveTripMgmSection(),0,"",mquestion.get(j).getCveTripMgmQuestion(),0,0,"",""));
                 }
             }
             Log.e("finalChecklistdata", " T fulChecklist" +fulChecklist.size());
@@ -383,6 +384,19 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
             case R.id.saveObservation:
                 //todo fullchecklist agregar el parametro
                 Toast.makeText(getContext(), "Salvar parametro", Toast.LENGTH_SHORT).show();
+                if(!editextObservations.getText().equals("")){
+                    List<dataChecklist> saveObservations=new ArrayList<>();
+                    saveObservations.clear();
+                    for(dataChecklist q:fulChecklist){
+                        if(q.getCveTripMgmQuestion()==cveObservations)
+                        {
+                            q.setComments(editextObservations.getText().toString());
+                        }
+                        saveObservations.add(q);
+                    }
+                    fulChecklist.clear();
+                    fulChecklist=saveObservations;
+                }
                 editextObservations.setText("");
                 dialog_observatiosn.setVisibility(View.GONE);
                 break;
@@ -569,7 +583,8 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
     public void errorpic() {
         Toast.makeText(getContext(), "Dispositivo no compatible con la funcionalidad", Toast.LENGTH_SHORT).show();
     }
-    public void showObservations(Integer cveTripMgmQuestion) {
+    public void showObservations(Integer mcveObservations) {
+        this.cveObservations=mcveObservations;
         dialog_observatiosn.setVisibility(View.VISIBLE);
     }
     public void takePick(Integer cveTripMgmQuestion) {

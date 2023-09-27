@@ -1,5 +1,7 @@
 package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Model;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.io.Serializable;
 
 public class dataChecklist  implements Serializable {
@@ -15,8 +17,9 @@ public class dataChecklist  implements Serializable {
 
 
     private String desc_trip_mgm_answer=null;
-
-    public dataChecklist(int origin, int questioId, int section, int answerPos, String foto,Integer cveTripMgmQuestion,Integer score,Integer cveTripMgmAnswer,String desc_trip_mgm_answer) {
+    @SerializedName("observation")
+    private String comments;
+    public dataChecklist(int origin, int questioId, int section, int answerPos, String foto,Integer cveTripMgmQuestion,Integer score,Integer cveTripMgmAnswer,String desc_trip_mgm_answer,String comments) {
         this.origin = origin;
         this.questioId = questioId;
         this.section = section;
@@ -26,6 +29,7 @@ public class dataChecklist  implements Serializable {
         this.score=score;
         this.cveTripMgmAnswer=cveTripMgmAnswer;
         this.desc_trip_mgm_answer=desc_trip_mgm_answer;
+        this.comments=comments;
     }
 
     public int getOrigin() {
@@ -97,5 +101,12 @@ public class dataChecklist  implements Serializable {
 
     public void setDesc_trip_mgm_answer(String desc_trip_mgm_answer) {
         this.desc_trip_mgm_answer = desc_trip_mgm_answer;
+    }
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
     }
 }
