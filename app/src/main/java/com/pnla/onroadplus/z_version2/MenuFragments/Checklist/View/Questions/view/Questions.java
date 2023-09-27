@@ -383,7 +383,7 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
                 break;
             case R.id.saveObservation:
                 //todo fullchecklist agregar el parametro
-                Toast.makeText(getContext(), "Salvar parametro", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getContext(), "Salvar parametro", Toast.LENGTH_SHORT).show();
                 if(!editextObservations.getText().equals("")){
                     List<dataChecklist> saveObservations=new ArrayList<>();
                     saveObservations.clear();

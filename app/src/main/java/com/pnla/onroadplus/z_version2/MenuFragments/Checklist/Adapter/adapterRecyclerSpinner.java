@@ -22,7 +22,7 @@ public class adapterRecyclerSpinner extends RecyclerView.Adapter<adapterRecycler
     private  Integer cveTripMgmQuestion;
     private Boolean required_evidence;
     private Boolean requiredObservations;
-    public adapterRecyclerSpinner(Questions myview, Boolean requiredObservations, Boolean required_evidence, Integer cveTripMgmQuestion, Context context)
+    public adapterRecyclerSpinner( Questions myview, Boolean requiredObservations, Boolean required_evidence, Integer cveTripMgmQuestion, Context context)
     {
         this.cveTripMgmQuestion=cveTripMgmQuestion;
         this.myview=myview;
@@ -40,6 +40,7 @@ public class adapterRecyclerSpinner extends RecyclerView.Adapter<adapterRecycler
         this.size=observations+evidence;
 
     }
+
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
@@ -69,6 +70,7 @@ public class adapterRecyclerSpinner extends RecyclerView.Adapter<adapterRecycler
                     @Override
                     public void onClick(View v) {
                         myview.showObservations(cveTripMgmQuestion);
+
                     }
                 });
             }
@@ -80,6 +82,7 @@ public class adapterRecyclerSpinner extends RecyclerView.Adapter<adapterRecycler
                 @Override
                 public void onClick(View v) {
                     myview.showObservations(cveTripMgmQuestion);
+
                 }
             });
         }

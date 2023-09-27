@@ -3,6 +3,7 @@ package com.pnla.onroadplus.z_version2.MenuFragments.Checklist.Adapter;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Build;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -16,7 +17,6 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
@@ -33,7 +33,7 @@ import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.vie
 import java.util.ArrayList;
 import java.util.List;
 
-public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder>{
+public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.ViewHolder> {
     private Questions myview;
     private Context context;
     private dataQuestions data;
@@ -314,10 +314,16 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                     holder.fakespinner1.setVisibility(View.GONE);
                 }else {
                     holder.fakespinner1.setVisibility(View.VISIBLE);
-                                adapterRecyclerSpinner adapterSpinner = new adapterRecyclerSpinner(myview,data.getQuestions().get(position).getRequired_observations(),data.getQuestions().get(position).isRequired_evidence(),data.getQuestions().get(position).getCveTripMgmQuestion(),context);
+                                adapterRecyclerSpinner adapterSpinner = new adapterRecyclerSpinner( myview,data.getQuestions().get(position).getRequired_observations(),data.getQuestions().get(position).isRequired_evidence(),data.getQuestions().get(position).getCveTripMgmQuestion(),context);
                                 LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
                                 holder.recyclerSpinner.setLayoutManager(layoutManager);
                                 holder.recyclerSpinner.setAdapter(adapterSpinner);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            holder.dotsDialog3.performClick();
+                        }
+                    }, 2000);
                 }
             }
         });
@@ -329,10 +335,16 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                     holder.fakespinner2.setVisibility(View.GONE);
                 }else {
                     holder.fakespinner2.setVisibility(View.VISIBLE);
-                    adapterRecyclerSpinner adapterSpinner = new adapterRecyclerSpinner(myview, data.getQuestions().get(position).getRequired_observations(), data.getQuestions().get(position).isRequired_evidence(), data.getQuestions().get(position).getCveTripMgmQuestion(), context);
+                    adapterRecyclerSpinner adapterSpinner = new adapterRecyclerSpinner( myview, data.getQuestions().get(position).getRequired_observations(), data.getQuestions().get(position).isRequired_evidence(), data.getQuestions().get(position).getCveTripMgmQuestion(), context);
                     LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
                     holder.recyclerSpinner2.setLayoutManager(layoutManager);
                     holder.recyclerSpinner2.setAdapter(adapterSpinner);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            holder.dotsDialog2.performClick();
+                        }
+                    }, 2000);
                 }
             }
         });
@@ -348,6 +360,12 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
                     LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false);
                     holder.recyclerSpinner3.setLayoutManager(layoutManager);
                     holder.recyclerSpinner3.setAdapter(adapterSpinner);
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            holder.dotsDialog.performClick();
+                        }
+                    }, 2000);
                 }
             }
         });
@@ -384,7 +402,6 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.View
         this.data=ndata;
 
     }
-
 
 
     public class ViewHolder extends RecyclerView.ViewHolder {
