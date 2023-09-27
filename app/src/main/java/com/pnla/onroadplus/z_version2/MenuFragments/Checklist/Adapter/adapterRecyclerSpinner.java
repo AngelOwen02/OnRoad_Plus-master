@@ -4,11 +4,14 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.pnla.onroadplus.R;
 import com.pnla.onroadplus.z_version2.MenuFragments.Checklist.View.Questions.view.Questions;
 
@@ -54,6 +57,8 @@ public class adapterRecyclerSpinner extends RecyclerView.Adapter<adapterRecycler
             });
 
         }else {
+            Glide.with(context).load(R.drawable.observation_evidence).into( holder.image_view);
+            holder.text_view.setText("Observaciones");
             holder.contrainItemdots.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -70,9 +75,13 @@ public class adapterRecyclerSpinner extends RecyclerView.Adapter<adapterRecycler
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ConstraintLayout contrainItemdots;
+        private ImageView image_view;
+        private TextView text_view;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             contrainItemdots=itemView.findViewById(R.id.contrainItemdots);
+            image_view=itemView.findViewById(R.id.image_view);
+            text_view=itemView.findViewById(R.id.text_view);
         }
     }
 }

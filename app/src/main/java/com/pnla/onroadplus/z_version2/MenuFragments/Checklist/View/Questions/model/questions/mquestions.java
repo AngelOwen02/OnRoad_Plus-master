@@ -97,7 +97,7 @@ public class mquestions {
     }
 
     public Boolean getRequired_observations() {
-        return required_observations != null ? required_observations : true;
+        return required_observations != null ? required_observations : false;
     }
 
     public void setRequired_observations(Boolean required_observations) {

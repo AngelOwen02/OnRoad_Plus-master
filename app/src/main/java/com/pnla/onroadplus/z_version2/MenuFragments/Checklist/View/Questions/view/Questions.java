@@ -383,9 +383,12 @@ public class Questions  extends Fragment implements View.OnClickListener ,questi
             case R.id.saveObservation:
                 //todo fullchecklist agregar el parametro
                 Toast.makeText(getContext(), "Salvar parametro", Toast.LENGTH_SHORT).show();
+                editextObservations.setText("");
+                dialog_observatiosn.setVisibility(View.GONE);
                 break;
             case  R.id.dialog_observatiosn:
                 editextObservations.setText(" ");
+                editextObservations.setText("");
                 dialog_observatiosn.setVisibility(View.GONE);
                 break;
         }
